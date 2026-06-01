@@ -52,3 +52,5 @@ desktop.ini
 
 # Patch temp files
 temp.md
+
+/temp/*
