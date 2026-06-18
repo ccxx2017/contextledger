@@ -1,0 +1,21 @@
+block-beta
+columns 1
+block:contextWindow["上下文窗口（200K tokens）"]
+  columns 3
+  fixed["固定开销\nSystem Prompt\n+ 工具 Schema"]
+  variable["可变开销\n消息历史\n工具调用/结果\nThinking blocks"]
+  net["净空间\n输出预留\n20K"]
+end
+
+fixed --> f_label["← 不可压缩 →"]
+variable --> v_label["← 可压缩，是主战场 →"]
+net --> n_label["← 不可碰 →"]
+
+classDef container fill:#f0f4f8,stroke:#4a5568,stroke-width:2px,color:#2d3748;
+classDef block fill:#ffffff,stroke:#718096,stroke-width:2px,color:#2d3748,text-align:center,font-weight:500;
+classDef label fill:none,stroke:none,color:#718096,font-size:14px;
+
+class contextWindow container
+class fixed,variable,net block
+class f_label,v_label,n_label label
+linkStyle default stroke:none;

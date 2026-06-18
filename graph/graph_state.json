@@ -1,0 +1,409 @@
+{
+  "task_id": "task_0001",
+  "turn_counter": 3,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "从策略发现到数字组织演进，实现量化研究的知识积累循环",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0002": {
+      "node_id": "n_0002",
+      "type": "Fact",
+      "content": "当前真实状态：量化研究主线有4条有效策略入库、schema验证、复合条件编译修复，但Strategy Research Agent未真正跑起来，知识积累循环未启动",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0003": {
+      "node_id": "n_0003",
+      "type": "Fact",
+      "content": "风险1：基础设施惯性——项目持续在基建层打转，未进入知识积累循环",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0004": {
+      "node_id": "n_0004",
+      "type": "Fact",
+      "content": "风险2：身份混淆——既是量化研究者又是AOS架构师，AOS成为目的而非手段",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0005": {
+      "node_id": "n_0005",
+      "type": "Fact",
+      "content": "风险3：Strategy Research Agent半成品税——搁置越久，上下文重建成本越高，可能被推倒重来",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0006": {
+      "node_id": "n_0006",
+      "type": "OpenTask",
+      "content": "阶段0：duty_reporter维稳（本周，0.5天），包含v0.5降级为后台任务以验证LLM基础设施，冻结Wiki Agent/指挥舱UI等。后续需升级v0.6以集成策略研究进度汇报。",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0007": {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "阶段1：复活Strategy Research Agent（3-4周），作为AOS第一个领域employee，产出可信策略档案。成功标准包括：产出≥10入库策略、自主运行≥5次假设迭代、可信性验证、AOS-native、可复盘。技术方案含Structured Output、假设多样性、退出闸、prompt版本管理、token监控、回测测量。时间线分4周。",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0008": {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "content": "阶段2：根据阶段1产物决定下一个employee（5-8周后），可能选项包括Wiki Agent、Triage Agent、Quant Reviewer Agent、指挥舱UI",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0009": {
+      "node_id": "n_0009",
+      "type": "OpenTask",
+      "content": "阶段3：指挥舱MVP（不早于2个月后），基于已有2-3个employee稳定工作",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0010": {
+      "node_id": "n_0010",
+      "type": "OpenTask",
+      "content": "决策1：确认阶段1（Strategy Research Agent）的优先级是否认同",
+      "created_at_turn": 1,
+      "status": "resolved"
+    },
+    "n_0011": {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "决策2：决定v0.5（LLM摘要节点）是否值得做，或跳过直接到阶段1",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0012": {
+      "node_id": "n_0012",
+      "type": "OpenTask",
+      "content": "决策3：决定Strategy Research Agent采用AOS-native还是quant-native方式",
+      "created_at_turn": 1,
+      "status": "resolved"
+    },
+    "n_0013": {
+      "node_id": "n_0013",
+      "type": "OpenTask",
+      "content": "决策4：确定节奏快慢（基于每天2-4小时投入的3-4周，或按实际投入调整）",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0014": {
+      "node_id": "n_0014",
+      "type": "OpenTask",
+      "content": "整理ROADMAP_v2.md，写入aos/projects/abu_modern/，固化路线图",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0015": {
+      "node_id": "n_0015",
+      "type": "OpenTask",
+      "content": "开一张工单：TKT-2026-002 'Strategy Research Agent v1 - 阶段 1 启动'，包含顶层工单及按周拆分子工单，验收标准为阶段1五条成功定义。",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0016": {
+      "node_id": "n_0016",
+      "type": "OpenTask",
+      "content": "冻结其他诱惑：在aos/runtime/中创建_frozen_ideas.md，列出Wiki Agent/指挥舱UI等，标注阶段1完成前不启动",
+      "created_at_turn": 1,
+      "status": "active"
+    },
+    "n_0017": {
+      "node_id": "n_0017",
+      "type": "Fact",
+      "content": "阶段1成功定义五条：1)产出≥10个入库策略档案；2)自主性：Boss提工单后无需干预跑完≥5次假设迭代；3)可信性：抽查3个新档案指标自洽且IR语义正确；4)AOS-native：工单驱动，产出沉淀runtime，日报汇报进度；5)可复盘：每次迭代有完整trace",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0018": {
+      "node_id": "n_0018",
+      "type": "Fact",
+      "content": "一级风险：结构化输出稳定性、假设生成语义多样性、失败循环退出条件",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0019": {
+      "node_id": "n_0019",
+      "type": "Fact",
+      "content": "二级风险：prompt资产版本管理、token成本失控、回测耗时",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0020": {
+      "node_id": "n_0020",
+      "type": "Constraint",
+      "content": "入库标准：IR编译无静默警告；训练集和测试集均≥5笔已平仓交易；核心指标数值合法；样本内外差异合理；分析章节由LLM自动生成并标注[auto-analysis]",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0021": {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "content": "实现Structured Output改造：用Function Calling/response_format强制约束strategy_ir输出，替代自由文本解析",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0022": {
+      "node_id": "n_0022",
+      "type": "OpenTask",
+      "content": "实现假设多样性机制：注入已有策略统计摘要和排斥规则，避免重复生成相似策略",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0023": {
+      "node_id": "n_0023",
+      "type": "OpenTask",
+      "content": "实现退出条件三道闸：硬上限迭代≥10、资源闸累计token超预算、价值闸连续3次假设未通过验收",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0024": {
+      "node_id": "n_0024",
+      "type": "OpenTask",
+      "content": "建立Prompt资产管理：在prompts/下按版本号新建文件，维护CHANGELOG，使用软链接指向current",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0025": {
+      "node_id": "n_0025",
+      "type": "OpenTask",
+      "content": "实现Token监控装饰器：记录每次LLM调用的token消耗，写入runtime/metrics/llm_usage/，并集成到duty_reporter日报",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0026": {
+      "node_id": "n_0026",
+      "type": "OpenTask",
+      "content": "建立AOS目录骨架：创建org/agents/agent-strategy-researcher.md和openclaw_skills/strategy-researcher/完整结构（含SKILL.md、TOOLS.md、scripts/），而非之前建议的projects/abu_modern/aos/agents/strategy-researcher/",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0027": {
+      "node_id": "n_0027",
+      "type": "OpenTask",
+      "content": "实现工单驱动循环：解析工单意图与约束，循环生成假设、回测、分析、判断，产出归档到runs/",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0028": {
+      "node_id": "n_0028",
+      "type": "OpenTask",
+      "content": "第1周地基交付：Structured Output demo、token监控、AOS目录骨架、单次闭环脚本",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0029": {
+      "node_id": "n_0029",
+      "type": "OpenTask",
+      "content": "第2周Loop交付：完整的5+假设自主循环工单，至少1个入库策略",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0030": {
+      "node_id": "n_0030",
+      "type": "OpenTask",
+      "content": "第3周稳定性交付：连续5张不同意图工单，每张≥1入库策略，无人工干预",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0031": {
+      "node_id": "n_0031",
+      "type": "OpenTask",
+      "content": "第4周AOS闭环交付：duty_reporter完整集成研究进度，写阶段1 retrospective",
+      "created_at_turn": 2,
+      "status": "active"
+    },
+    "n_0032": {
+      "node_id": "n_0032",
+      "type": "Fact",
+      "content": "OpenClaw框架下skill的实际位置：根目录D:\\智能投顾\\量化相关\\abu_modern\\openclaw_skills，包含duty-reporter、quant_assistant等skill，每个skill有SKILL.md、TOOLS.md和scripts/目录",
+      "created_at_turn": 3,
+      "status": "active"
+    },
+    "n_0033": {
+      "node_id": "n_0033",
+      "type": "Fact",
+      "content": "data/knowledge目录已存在并包含策略档案：strategies/下有5个stg_*.md文件，以及market_insights/、index.md、log.md、piercing_report.json、piercing_report.md、schema.md、semantic_phrase_coverage.md",
+      "created_at_turn": 3,
+      "status": "active"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0009",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0006",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0013",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0014",
+      "target": "n_0001",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0015",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0016",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0017",
+      "target": "n_0007",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0018",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0019",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0020",
+      "target": "n_0007",
+      "relation": "constraint"
+    },
+    {
+      "source": "n_0021",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0022",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0023",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0024",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0025",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0026",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0027",
+      "target": "n_0007",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0028",
+      "target": "n_0007",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0029",
+      "target": "n_0007",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0030",
+      "target": "n_0007",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0031",
+      "target": "n_0007",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0032",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0033",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0033",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0032",
+      "target": "n_0026",
+      "relation": "refines"
+    }
+  ]
+}
