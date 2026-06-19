@@ -11,7 +11,7 @@ original dialog
         └─(crystallize)→ memory_pack（项目内）/ skills（方法论级，全局）
 
 - **raw** 是唯一的原始沉淀层，逐轮追加，只增不改。
-- **memory_pack** 是项目的可工作记忆，含四节（见 `_templates/memory_pack_template.md`）。
+- **memory_pack** 是项目的可工作记忆，含四节（结构权威定义见 maintenance_prompt.md「memory_pack 四节」）。
 - **skills** 是全局唯一、跨项目复用的方法论卡片集合。
 - 折叠节奏（每 N 轮触发一次）以 `_templates/maintenance_prompt.md` 为准，本文件不复制该数字。
 
@@ -25,11 +25,20 @@ original dialog
 4. `skills.md` —— 待参照的全局技能库全文，供判断是否晶化新卡并避免重复造卡。
 
 四种角色：规则(1) 指挥模型，把新料(2) 折进存量(3)，同时参照全局(4) 决定是否产出技能卡。
-注意 `_templates/` 下的文件中，只有 maintenance_prompt 会被喂给模型；memory_pack_template 仅在首场顶替空 memory_pack，README 本身不喂给模型。
+注意 maintenance_prompt.md 是唯一会喂给模型的规则文件；首场 memory_pack 不存在时由模型按其四节结构生成，无需模板文件。README 本身不喂给模型。
+
+### memory_pack 的两种读者：存储格式 ≠ 投喂格式
+
+memory_pack 是**存储格式**，不等于喂给对话 LLM 的**投喂格式**，两者隔一道只读、临时、不落盘的投影：
+
+- **折叠 LLM** 吃全四节：它要看脊柱才能往后追加锚点。
+- **对话 LLM**（日常续上下文用）吃**去锚点投影**：概览 + 长期记忆 + 开放问题原样注入；脊柱节剥掉 `raw/...#turn` 锚点（只保留脉络摘要句或整节略过）。锚点是给人与检索用的指针，对话 LLM 打不开 raw，喂进去只是噪声、白占 token、还可能诱导其编造引用。
+
+投影是消费端的一次性视图，**只读、不回写 memory_pack**，与折叠流水线完全隔离，不得在此产出"新 memory_pack"，否则又冒出第二个事实源。token 预算宽松时也可整份直喂，由模型自行忽略锚点，代价是少量浪费与偶发幻觉引用。
 
 ## 二、三条铁律
 
-**铁律1 · 单一事实源。** 每份内容只有一个家。规则与数字只住 `_templates/maintenance_prompt.md`；备忘、数据流、锚点格式只住本 README；skills 顶部、memory_pack 顶部一律不贴任何备忘。要用就去原处复制，禁止二次落地。
+**铁律1 · 单一事实源。** 每份内容只有一个家。LLM 执行规格（折叠数字、四节结构、锚点格式、执行规则）只住 maintenance_prompt.md——因为模型只能看到它；面向人的内容（目录结构、数据流、运维流程、三条铁律本身）只住本 README。两份文档互相引用时只能指路、不得复制。skills 顶部、memory_pack 顶部一律不贴任何备忘。
 
 **铁律2 · 存量逐字保留 + 行数核对。** 折叠产出 memory_pack 全文时，未涉及的节和条目必须逐字保留、不得改写。人工核对只做一个机械动作：数「长期记忆」节与「脊柱」节的行数，新行数必须 ≥ 旧行数；唯一例外是有条目被显式标 `[DEPRECATED]`。行数对不上即判定为静默丢失，打回重做。
 
@@ -37,10 +46,4 @@ original dialog
 
 ## 三、锚点格式
 
-脊柱节中引用 raw 的统一写法：
-
-    raw/raw_<起始日YYYY-MM-DD>_<topic-slug>.md#turn<NNN>
-
-示例：`raw/raw_2026-06-12_compression.md#turn003`
-
-路径相对于所在项目文件夹根，topic-slug 用小写英文加下划线，三位轮次号补零。
+权威定义在 maintenance_prompt.md 规则5,模型据此产出脊柱锚点。人工核对时去那里查,本文件不留副本。
