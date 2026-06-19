@@ -1,0 +1,249 @@
+{
+  "task_id": "task_default",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0013",
+      "type": "Fact",
+      "content": "阶段1的成功定义：1.知识库新增≥10个入库策略档案；2.Boss提研究意图工单后无需中途干预，Agent能跑完一轮≥5次假设迭代循环；3.抽查3个新档案指标自洽且IR语义正确；4.整个流程通过AOS工单驱动，产出沉淀到AOS runtime，duty_reporter正确汇报；5.每次迭代有完整trace可复盘。",
+      "entity_ref": null,
+      "state": null
+    },
+    {
+      "node_id": "n_0014",
+      "type": "OpenTask",
+      "content": "攻坚点1：LLM解析稳定性 → 用Structured Output/Function Calling替代自由文本解析，将strategy_ir的schema写成JSON Schema或Pydantic model，强制约束输出结构。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0015",
+      "type": "OpenTask",
+      "content": "攻坚点2：假设多样性 → 每次generate_hypothesis前从知识库读取已有策略的intent分布和参数范围，注入统计摘要和排斥规则（避免相似度>70%），探索其他方向。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0016",
+      "type": "OpenTask",
+      "content": "攻坚点3：退出条件 → 实现三道闸：迭代次数≥10、累计token超过预算（如500k）、连续3次假设未通过编译/回测验收。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "Prompt资产管理 → 在projects/abu_modern/aos/agents/strategy-researcher/prompts/下使用Git+编号物理多文件，每次修改新建文件不覆盖，维护CHANGELOG。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0018",
+      "type": "OpenTask",
+      "content": "Token监控 → 第一行代码就加装饰器@track_tokens，写入runtime/metrics/llm_usage/YYYY-MM-DD.jsonl，duty_reporter日报显示LLM消耗。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0019",
+      "type": "OpenTask",
+      "content": "回测加速 → 阶段1只测量不优化，每次回测记录耗时，累积20次后看P95，若>60秒则在阶段1末期单独开工单处理。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0020",
+      "type": "FileArtifact",
+      "content": "AOS目录骨架：docs/aos/org/agents/agent-strategy-researcher.md (Charter) 和 docs/aos/projects/abu_modern/aos/agents/strategy-researcher/ 下的SKILL.md, prompts/, runs/, README.md",
+      "entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "content": "实现工单驱动的完整流程：Boss在runtime/tickets/open/新建工单（含意图、约束、预算、验收标准），手动触发Agent，Agent跑完后写回执移到awaiting-review，Boss review决定close/reopen。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0022",
+      "type": "OpenTask",
+      "content": "duty_reporter升级v0.6：扫描runtime/reports/research/当日新增，在日报中增加策略研究小节，展示工单完成数、入库数、LLM消耗。",
+      "entity_ref": "duty_reporter",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0023",
+      "type": "Fact",
+      "content": "入库标准：一个策略档案需同时满足：IR编译成功无警告；训练集和测试集均≥5笔已平仓交易；核心指标合法；样本内外差异合理；分析章节由LLM自动生成并标注[auto-analysis]，覆盖意图、关键transition、表现、与已有策略关系。",
+      "entity_ref": null,
+      "state": null
+    },
+    {
+      "node_id": "n_0024",
+      "type": "OpenTask",
+      "content": "第1周目标：搭建地基。具体包括D1-D2 Structured Output改造写最小demo；D3 Token装饰器+duty_reporter v0.6集成；D4 AOS目录骨架建立；D5跑通一个最简单的手动假设→编译→回测→archive闭环。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0025",
+      "type": "OpenTask",
+      "content": "第2周目标：Agent loop跑通。实现generate_hypothesis、analyze_result、decide_next节点+三道退出闸，端到端跑通第一张正式工单，产出至少1个入库策略。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0026",
+      "type": "OpenTask",
+      "content": "第3周目标：稳定性。连续跑5张不同意图的工单，每张产出≥1个入库策略，无人工干预；迭代prompt；累计token监控。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0027",
+      "type": "OpenTask",
+      "content": "第4周目标：AOS闭环+Retrospective。完整集成duty_reporter v0.6，抽样review所有入库策略，写阶段1总结报告PHASE1_RETRO.md和下一阶段ROADMAP。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0028",
+      "type": "OpenTask",
+      "content": "今天就做的第一件事：写ROADMAP_v2.md（用自己话写）放入docs/aos/projects/abu_modern/aos/ROADMAP_v2.md。",
+      "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0029",
+      "type": "OpenTask",
+      "content": "今天就做的第二件事：开立工单TKT-2026-002，标题'Strategy Research Agent v1 - 阶段1启动'，包含验收标准、预估工期4周。",
+      "entity_ref": "TKT-2026-002",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0030",
+      "type": "OpenTask",
+      "content": "今天就做的第三件事：决定LLM选型，确定RealLLMClient接哪家API、预算约束、cron环境key可用性。",
+      "entity_ref": null,
+      "state": "open"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0006",
+      "changes": {
+        "state": "resolved"
+      },
+      "reason": "用户明确表态：认可决策1，推荐主战场是Strategy Research Agent。"
+    },
+    {
+      "node_id": "n_0008",
+      "changes": {
+        "state": "resolved"
+      },
+      "reason": "用户明确表态：阶段1的Strategy Research Agent采用AOS-native方式。"
+    },
+    {
+      "node_id": "n_0010",
+      "changes": {
+        "content": "整理ROADMAP_v2.md，写入 docs/aos/projects/abu_modern/aos/ROADMAP_v2.md，固化路线图。",
+        "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md"
+      },
+      "reason": "更新文件路径为更精确的完整路径，并明确内容为路线图文档。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0013",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0014",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0015",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0016",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0017",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0018",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0019",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0020",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0021",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0022",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0023",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0024",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0025",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0026",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0027",
+      "target": "n_0003",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0028",
+      "target": "n_0001",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0029",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0030",
+      "target": "n_0003",
+      "relation": "supports"
+    }
+  ]
+}

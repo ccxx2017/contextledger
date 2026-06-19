@@ -1,0 +1,40 @@
+{
+  "task_id": "task_default",
+  "turn_id": 1,
+  "root_goals": [],
+  "standing_constraints": [],
+  "active_open_tasks": [],
+  "recent_nodes": [],
+  "symbol_hits": [],
+  "conflict_candidates": [],
+  "recent_edges": [],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [
+      "ROADMAP_v2.md",
+      "SKILL.md",
+      "TKT-2026",
+      "TKT-2026-XXX: Resurrect Strategy Research Agent (Phase 1 of v2 roadmap)",
+      "_frozen_ideas.md",
+      "agent-strategy-researcher.md",
+      "aos/projects/abu_modern/",
+      "aos/runtime/",
+      "org/agents/agent-strategy-researcher.md",
+      "projects/abu_modern/aos/agents/strategy-researcher/",
+      "schema.md",
+      "量化系统知识体系与Agentic组织演进全记录.md"
+    ],
+    "turn_state_signals": [
+      "blocked",
+      "open"
+    ],
+    "total_nodes": 0,
+    "active_nodes": 0,
+    "selected_node_ids": []
+  },
+  "_runtime": {
+    "next_node_id": "n_0001",
+    "source_graph": "tests\\smoke\\taskgraph_contract\\graph_state.seed.json",
+    "source_turn": "original_dialogs\\turn_001.md"
+  }
+}

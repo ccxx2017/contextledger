@@ -1,0 +1,28 @@
+{
+  "task_id": "task_test",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0047",
+      "type": "Fact",
+      "content": "工单 TKT-2026-003 已部署",
+      "entity_ref": "TKT-2026-003",
+      "state": "deployed",
+      "status": "active"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0045",
+      "reason": "同一 entity_ref 的状态从 blocked 变为 deployed"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0047",
+      "target": "n_0045",
+      "relation": "invalidates"
+    }
+  ]
+}

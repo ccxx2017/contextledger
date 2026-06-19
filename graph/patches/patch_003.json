@@ -1,0 +1,163 @@
+{
+  "task_id": "task_default",
+  "turn_id": 3,
+  "new_nodes": [
+    {
+      "node_id": "n_0031",
+      "type": "Fact",
+      "content": "物理布局四层分离：组织契约层(aos/)、智能体能力层(openclaw_skills/)、领域知识层(data/knowledge/)、架构文档层(docs/)，互不重叠。",
+      "entity_ref": null,
+      "state": null
+    },
+    {
+      "node_id": "n_0032",
+      "type": "Fact",
+      "content": "data/knowledge/不应移动，它已经是正确的领域知识层位置，包含策略档案、schema.md等有生命的内容。",
+      "entity_ref": null,
+      "state": null
+    },
+    {
+      "node_id": "n_0033",
+      "type": "OpenTask",
+      "content": "决策strategy-researcher与quant_assistant的关系：A（quant_assistant为工具底座，strategy-researcher调用它）、B（并行独立）、C（quant_assistant被取代或重构）。需用户选择。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0034",
+      "type": "OpenTask",
+      "content": "用户需要提供5项信息：1)aos/org/agents/_charter-template.md全文；2)aos/org/agents/agent-duty-reporter.md全文；3)aos/runtime/tickets/_protocol.md和_template.md全文；4)openclaw_skills/duty-reporter/SKILL.md和TOOLS.md全文；5)关于quant_assistant的判断（关系A/B/C）或提供其目录内容。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0035",
+      "type": "FileArtifact",
+      "content": "创建 openclaw_skills/strategy-researcher/ 目录，包含 SKILL.md, TOOLS.md, scripts/（research_loop.py, hypothesis_gen.py, backtest_runner.py, result_analyzer.py, archive_writer.py）。",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0036",
+      "type": "FileArtifact",
+      "content": "创建 aos/runtime/research-runs/ 目录，用于存放每个工单的研究运行记录（hypotheses/, summary.md, metrics.json）。",
+      "entity_ref": "aos/runtime/research-runs",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0037",
+      "type": "FileArtifact",
+      "content": "创建 aos/reports/research/ 目录，用于存放研究相关的报告。",
+      "entity_ref": "aos/reports/research",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0038",
+      "type": "Decision",
+      "content": "strategy-researcher 的入库路径显式声明为 data/knowledge/strategies/，并遵守 schema.md 的字段格式生成 stg_<date>_<hash>.md。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0039",
+      "type": "OpenTask",
+      "content": "修正 ROADMAP_v2.md 中的物理布局描述，对齐四层分离结构（aos/, openclaw_skills/, data/knowledge/, docs/）。",
+      "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0040",
+      "type": "OpenTask",
+      "content": "更新 TKT-2026-002 的内容，反映最终的物理布局和 quant_assistant 关系决策（待用户提供信息后）。",
+      "entity_ref": "TKT-2026-002",
+      "state": "open"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0020",
+      "changes": {
+        "content": "AOS目录骨架（修订）：组织契约层包括 docs/aos/org/agents/agent-strategy-researcher.md (Charter) 和 docs/aos/projects/abu_modern/aos/agents/strategy-researcher/ 下的 SKILL.md, prompts/, runs/, README.md；但根据OpenClaw框架，SKILL.md实际位于 openclaw_skills/strategy-researcher/。四层布局：aos/（组织契约）、openclaw_skills/（智能体能力）、data/knowledge/（领域知识）、docs/（架构文档）。",
+        "entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md"
+      },
+      "reason": "根据用户补充的OpenClaw框架和物理布局，修订目录骨架以反映四层分离和SKILL.md的正确位置。"
+    },
+    {
+      "node_id": "n_0010",
+      "changes": {
+        "content": "整理ROADMAP_v2.md，写入 docs/aos/projects/abu_modern/aos/ROADMAP_v2.md，固化路线图，并需包含四层物理布局说明。",
+        "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md"
+      },
+      "reason": "明确ROADMAP_v2.md的内容需包含新的物理布局。"
+    },
+    {
+      "node_id": "n_0028",
+      "changes": {
+        "content": "今天就做的第一件事：写ROADMAP_v2.md（用自己话写）放入 docs/aos/projects/abu_modern/aos/ROADMAP_v2.md，需融入四层分离布局。",
+        "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md"
+      },
+      "reason": "任务内容更新，要求包含新物理布局。"
+    },
+    {
+      "node_id": "n_0029",
+      "changes": {
+        "content": "今天就做的第二件事：开立工单 TKT-2026-002，标题'Strategy Research Agent v1 - 阶段1启动'，包含验收标准、预估工期4周，并根据后续决策（quant_assistant关系）调整内容。",
+        "entity_ref": "TKT-2026-002"
+      },
+      "reason": "明确工单内容需等待quant_assistant关系决策。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0031",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0032",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0033",
+      "target": "n_0003",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0034",
+      "target": "n_0003",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0035",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0036",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0037",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0038",
+      "target": "n_0023",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0039",
+      "target": "n_0028",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0040",
+      "target": "n_0029",
+      "relation": "refines"
+    }
+  ]
+}

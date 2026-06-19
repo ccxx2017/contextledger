@@ -1,0 +1,9 @@
+{
+  "turn_id": 6,
+  "patch_path": "patches/patch_006_failed.json",
+  "stage": "reconcile_patch.py | graph_lint.py",
+  "errors": [],
+  "warnings": [],
+  "decision": "not_applied",
+  "reason": "failed after max retries or manual review required"
+}

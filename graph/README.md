@@ -12,8 +12,10 @@
 
 ```
 ├── 课程设计/          # 课件与课程资源
-├── context_pack_builder.py  # 上下文打包工具
-├── logic_graph_task.py      # 逻辑图任务脚本
+├── scripts/           # 脚本工具
+│   ├── apply_patch.py       # 应用 Graph Patch
+│   ├── to_mermaid.py        # 图状态转 Mermaid 文本
+│   └── ...
 ├── *.ipynb            # Jupyter Notebook 实验文件
 ├── patch*.json        # Patch 文件
 └── graph_state.json   # 图状态数据

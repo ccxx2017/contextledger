@@ -1,0 +1,354 @@
+{
+  "task_id": "task_default",
+  "turn_id": 3,
+  "nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "回归主线，AOS反哺：让AOS的下一个employee直接服务于量化主线，而不是继续服务于AOS自己。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0029",
+      "type": "OpenTask",
+      "content": "今天就做的第二件事：开立工单TKT-2026-002，标题'Strategy Research Agent v1 - 阶段1启动'，包含验收标准、预估工期4周。",
+      "entity_ref": "TKT-2026-002",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0022",
+      "type": "OpenTask",
+      "content": "duty_reporter升级v0.6：扫描runtime/reports/research/当日新增，在日报中增加策略研究小节，展示工单完成数、入库数、LLM消耗。",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0002",
+      "type": "OpenTask",
+      "content": "阶段0：duty_reporter维稳（本周0.5天）。v0.5降级为后台任务，添加LLM摘要节点验证LLM调用基础设施；不做Wiki Agent、指挥舱UI、第二个employee。",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0028",
+      "type": "OpenTask",
+      "content": "今天就做的第一件事：写ROADMAP_v2.md（用自己话写）放入docs/aos/projects/abu_modern/aos/ROADMAP_v2.md。",
+      "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "content": "实现工单驱动的完整流程：Boss在runtime/tickets/open/新建工单（含意图、约束、预算、验收标准），手动触发Agent，Agent跑完后写回执移到awaiting-review，Boss review决定close/reopen。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "Prompt资产管理 → 在projects/abu_modern/aos/agents/strategy-researcher/prompts/下使用Git+编号物理多文件，每次修改新建文件不覆盖，维护CHANGELOG。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "开立工单 TKT-2026-XXX: Resurrect Strategy Research Agent (Phase 1 of v2 roadmap)，先列调研子任务。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0030",
+      "type": "OpenTask",
+      "content": "今天就做的第三件事：决定LLM选型，确定RealLLMClient接哪家API、预算约束、cron环境key可用性。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0027",
+      "type": "OpenTask",
+      "content": "第4周目标：AOS闭环+Retrospective。完整集成duty_reporter v0.6，抽样review所有入库策略，写阶段1总结报告PHASE1_RETRO.md和下一阶段ROADMAP。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0026",
+      "type": "OpenTask",
+      "content": "第3周目标：稳定性。连续跑5张不同意图的工单，每张产出≥1个入库策略，无人工干预；迭代prompt；累计token监控。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0025",
+      "type": "OpenTask",
+      "content": "第2周目标：Agent loop跑通。实现generate_hypothesis、analyze_result、decide_next节点+三道退出闸，端到端跑通第一张正式工单，产出至少1个入库策略。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0024",
+      "type": "OpenTask",
+      "content": "第1周目标：搭建地基。具体包括D1-D2 Structured Output改造写最小demo；D3 Token装饰器+duty_reporter v0.6集成；D4 AOS目录骨架建立；D5跑通一个最简单的手动假设→编译→回测→archive闭环。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0023",
+      "type": "Fact",
+      "content": "入库标准：一个策略档案需同时满足：IR编译成功无警告；训练集和测试集均≥5笔已平仓交易；核心指标合法；样本内外差异合理；分析章节由LLM自动生成并标注[auto-analysis]，覆盖意图、关键transition、表现、与已有策略关系。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0020",
+      "type": "FileArtifact",
+      "content": "AOS目录骨架：docs/aos/org/agents/agent-strategy-researcher.md (Charter) 和 docs/aos/projects/abu_modern/aos/agents/strategy-researcher/ 下的SKILL.md, prompts/, runs/, README.md",
+      "entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0019",
+      "type": "OpenTask",
+      "content": "回测加速 → 阶段1只测量不优化，每次回测记录耗时，累积20次后看P95，若>60秒则在阶段1末期单独开工单处理。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0018",
+      "type": "OpenTask",
+      "content": "Token监控 → 第一行代码就加装饰器@track_tokens，写入runtime/metrics/llm_usage/YYYY-MM-DD.jsonl，duty_reporter日报显示LLM消耗。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0016",
+      "type": "OpenTask",
+      "content": "攻坚点3：退出条件 → 实现三道闸：迭代次数≥10、累计token超过预算（如500k）、连续3次假设未通过编译/回测验收。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0015",
+      "type": "OpenTask",
+      "content": "攻坚点2：假设多样性 → 每次generate_hypothesis前从知识库读取已有策略的intent分布和参数范围，注入统计摘要和排斥规则（避免相似度>70%），探索其他方向。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0010",
+      "type": "FileArtifact",
+      "content": "整理ROADMAP_v2.md，写入 docs/aos/projects/abu_modern/aos/ROADMAP_v2.md，固化路线图。",
+      "entity_ref": "docs/aos/projects/abu_modern/aos/ROADMAP_v2.md",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0012",
+      "type": "FileArtifact",
+      "content": "冻结其他诱惑：在 aos/runtime/ 创建 _frozen_ideas.md，列出Wiki Agent/指挥舱UI等，标注“阶段1完成前不启动”。",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open",
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [
+      "n_0001"
+    ],
+    "standing_constraints": [],
+    "active_open_tasks": [
+      "n_0029",
+      "n_0022",
+      "n_0002",
+      "n_0028",
+      "n_0021",
+      "n_0017",
+      "n_0011",
+      "n_0030",
+      "n_0027",
+      "n_0026",
+      "n_0025",
+      "n_0024"
+    ],
+    "recent_nodes": [
+      "n_0030",
+      "n_0029",
+      "n_0028",
+      "n_0027",
+      "n_0026",
+      "n_0025",
+      "n_0024",
+      "n_0023",
+      "n_0022",
+      "n_0021",
+      "n_0020",
+      "n_0019",
+      "n_0018",
+      "n_0017",
+      "n_0016",
+      "n_0015"
+    ],
+    "symbol_hits": [
+      "n_0029",
+      "n_0022",
+      "n_0002",
+      "n_0020",
+      "n_0028",
+      "n_0010",
+      "n_0012",
+      "n_0021",
+      "n_0017",
+      "n_0011"
+    ],
+    "conflict_candidates": [
+      "n_0029",
+      "n_0022",
+      "n_0002",
+      "n_0020",
+      "n_0028",
+      "n_0010",
+      "n_0012",
+      "n_0021",
+      "n_0017",
+      "n_0011"
+    ]
+  },
+  "recent_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0001",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0028",
+      "target": "n_0001",
+      "relation": "implements"
+    }
+  ],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [
+      "DEC-2026",
+      "DEC-2026-001-strategy-researcher-charter.md",
+      "README.md",
+      "SKILL.md",
+      "TKT-2026",
+      "TKT-2026-002-strategy-researcher-phase1.md",
+      "TKT-2026-003-research-...md",
+      "TOOLS.md",
+      "_charter-template.md",
+      "_protocol.md",
+      "_template.md",
+      "agent-duty-reporter.md",
+      "agent-strategy-researcher.md",
+      "aos/",
+      "aos/org/agents/_charter-template.md",
+      "aos/org/agents/agent-duty-reporter.md",
+      "aos/runtime/tickets/_protocol.md",
+      "archive_writer.py",
+      "backtest_runner.py",
+      "builder/runner",
+      "daily_report.py",
+      "data/knowledge/",
+      "data/knowledge/strategies/",
+      "docs/",
+      "duty-reporter/SKILL.md",
+      "health_probe.py",
+      "hypothesis_gen.py",
+      "index.md",
+      "log.md",
+      "metrics.json",
+      "openclaw_skills/",
+      "openclaw_skills/duty-reporter/SKILL.md",
+      "openclaw_skills/strategy-researcher/",
+      "order_execute.py",
+      "org/agents/",
+      "piercing_report.*",
+      "piercing_report.json",
+      "piercing_report.md",
+      "quant_assistant",
+      "quant_assistant.strategy_builder",
+      "quant_assistant/",
+      "reports/project/",
+      "research_loop.py",
+      "result_analyzer.py",
+      "schema.md",
+      "semantic_phrase_coverage.md",
+      "stg_20260414_0e4bda.md",
+      "stg_20260414_1effbf.md",
+      "stg_20260414_1fef7f.md",
+      "stg_20260414_562fc6.md",
+      "stg_20260414_b251bd.md",
+      "stg_<date>_<hash>.md",
+      "strategy_builder.py",
+      "strategy_deploy.py",
+      "summary.md",
+      "ticket_scan.py",
+      "tickets/open/"
+    ],
+    "turn_state_signals": [
+      "open",
+      "resolved"
+    ],
+    "total_nodes": 30,
+    "active_nodes": 30,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0002",
+      "n_0010",
+      "n_0011",
+      "n_0012",
+      "n_0015",
+      "n_0016",
+      "n_0017",
+      "n_0018",
+      "n_0019",
+      "n_0020",
+      "n_0021",
+      "n_0022",
+      "n_0023",
+      "n_0024",
+      "n_0025",
+      "n_0026",
+      "n_0027",
+      "n_0028",
+      "n_0029",
+      "n_0030"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0031",
+    "source_graph": "graph_state.json",
+    "source_turn": "original_dialogs\\turn_003.md"
+  }
+}

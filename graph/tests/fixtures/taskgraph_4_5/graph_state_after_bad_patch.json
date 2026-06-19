@@ -1,0 +1,23 @@
+{
+  "task_id": "task_test",
+  "turn_counter": 1,
+  "nodes": {
+    "n_0045": {
+      "node_id": "n_0045",
+      "type": "OpenTask",
+      "content": "工单 TKT-2026-003 当前被阻塞",
+      "entity_ref": "TKT-2026-003",
+      "state": "blocked",
+      "status": "active"
+    },
+    "n_0047": {
+      "node_id": "n_0047",
+      "type": "Fact",
+      "content": "工单 TKT-2026-003 已部署",
+      "entity_ref": "TKT-2026-003",
+      "state": "deployed",
+      "status": "active"
+    }
+  },
+  "edges": []
+}

@@ -1,0 +1,70 @@
+{
+  "ok": false,
+  "summary": {
+    "nodes": 2,
+    "edges": 0,
+    "active_nodes": 2,
+    "active_edges": 0,
+    "errors": 3,
+    "warnings": 0
+  },
+  "relation_enum": [
+    "depends_on",
+    "derived_from",
+    "implements",
+    "invalidates",
+    "produces",
+    "refines",
+    "serves",
+    "supports"
+  ],
+  "minimal_state_enum": [
+    "blocked",
+    "cancelled",
+    "deployed",
+    "implemented",
+    "in_progress",
+    "open",
+    "resolved",
+    "unknown"
+  ],
+  "errors": [
+    {
+      "level": "error",
+      "code": "ACTIVE_ISOLATED_NODE",
+      "message": "active 节点 n_0045 是孤立节点；除根 UserGoal 外不允许 active 孤立节点。",
+      "node_id": "n_0045",
+      "node_type": "OpenTask"
+    },
+    {
+      "level": "error",
+      "code": "ACTIVE_ISOLATED_NODE",
+      "message": "active 节点 n_0047 是孤立节点；除根 UserGoal 外不允许 active 孤立节点。",
+      "node_id": "n_0047",
+      "node_type": "Fact"
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-003 下同时存在多个互斥 active state: blocked, deployed",
+      "entity_ref": "TKT-2026-003",
+      "states": {
+        "blocked": [
+          "n_0045"
+        ],
+        "deployed": [
+          "n_0047"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ]
+    }
+  ],
+  "warnings": []
+}

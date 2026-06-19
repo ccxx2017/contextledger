@@ -1,0 +1,17 @@
+{
+  "task_id": "task_test",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0047",
+      "type": "Fact",
+      "content": "工单 TKT-2026-003 已部署",
+      "entity_ref": "TKT-2026-003",
+      "state": "deployed",
+      "status": "active"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": []
+}

@@ -1,0 +1,44 @@
+{
+  "ok": false,
+  "summary": {
+    "graph_nodes": 1,
+    "active_graph_nodes": 1,
+    "new_nodes": 1,
+    "errors": 2,
+    "warnings": 0
+  },
+  "errors": [
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0047 与旧节点 n_0045 指向同一 entity_ref=TKT-2026-003，但 state 冲突：new=deployed, old=blocked；patch 缺少 superseded_nodes 对 n_0045 的声明。",
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0047 与旧节点 n_0045 指向同一 entity_ref=TKT-2026-003，但 state 冲突：new=deployed, old=blocked；patch 缺少 n_0047 invalidates n_0045。",
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    }
+  ],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    }
+  ],
+  "weak_matches": []
+}

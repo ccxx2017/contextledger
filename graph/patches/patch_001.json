@@ -1,0 +1,149 @@
+{
+  "task_id": "task_default",
+  "turn_id": 1,
+  "new_nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "回归主线，AOS反哺：让AOS的下一个employee直接服务于量化主线，而不是继续服务于AOS自己。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0002",
+      "type": "OpenTask",
+      "content": "阶段0：duty_reporter维稳（本周0.5天）。v0.5降级为后台任务，添加LLM摘要节点验证LLM调用基础设施；不做Wiki Agent、指挥舱UI、第二个employee。",
+      "entity_ref": "duty_reporter",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "阶段1：复活Strategy Research Agent（3-4周）。作为AOS第一个领域employee，产出可信策略档案，攻坚LLM解析稳定性。",
+      "entity_ref": "strategy_research_agent",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "content": "阶段2：根据阶段1产物决定下一个employee（5-8周后）。选项包括Wiki Agent、Triage Agent、Quant Reviewer Agent、指挥舱UI。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0005",
+      "type": "OpenTask",
+      "content": "阶段3：指挥舱MVP（不早于2个月后），基于OpenClaw三层架构，前提是有2-3个employee稳定工作。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0006",
+      "type": "OpenTask",
+      "content": "决策1：确认阶段1优先级（是否以Strategy Research Agent为主战场）。需用户明确表态。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "决策2：确认v0.5（LLM摘要）是否值得做。可选做或跳过直接到阶段1验证LLM infra。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "content": "决策3：确认Strategy Research Agent的实现方式——AOS-native（通过工单/Charter管理）还是quant-native（先独立实现再接入）。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0009",
+      "type": "OpenTask",
+      "content": "决策4：确认节奏快慢（每天投入2-4小时用3-4周完成阶段1，或按实际投入调整时间线）。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0010",
+      "type": "FileArtifact",
+      "content": "整理ROADMAP_v2.md，写入 aos/projects/abu_modern/，固化路线图。",
+      "entity_ref": "aos/projects/abu_modern/ROADMAP_v2.md",
+      "state": "open"
+    },
+    {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "开立工单 TKT-2026-XXX: Resurrect Strategy Research Agent (Phase 1 of v2 roadmap)，先列调研子任务。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    {
+      "node_id": "n_0012",
+      "type": "FileArtifact",
+      "content": "冻结其他诱惑：在 aos/runtime/ 创建 _frozen_ideas.md，列出Wiki Agent/指挥舱UI等，标注“阶段1完成前不启动”。",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0002",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0009",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0001",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0001",
+      "relation": "supports"
+    }
+  ]
+}

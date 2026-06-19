@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 1,
+    "active_graph_nodes": 1,
+    "new_nodes": 1,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [
+    {
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    }
+  ],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    }
+  ],
+  "weak_matches": []
+}

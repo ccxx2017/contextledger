@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "summary": {
+    "nodes": 2,
+    "edges": 1,
+    "active_nodes": 1,
+    "active_edges": 1,
+    "errors": 0,
+    "warnings": 0
+  },
+  "relation_enum": [
+    "depends_on",
+    "derived_from",
+    "implements",
+    "invalidates",
+    "produces",
+    "refines",
+    "serves",
+    "supports"
+  ],
+  "minimal_state_enum": [
+    "blocked",
+    "cancelled",
+    "deployed",
+    "implemented",
+    "in_progress",
+    "open",
+    "resolved",
+    "unknown"
+  ],
+  "errors": [],
+  "warnings": []
+}

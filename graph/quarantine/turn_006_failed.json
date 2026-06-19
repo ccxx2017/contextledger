@@ -1,0 +1,33 @@
+{
+  "turn_id": 6,
+  "patch_path": "quarantine\\turn_006_failed_patch.json",
+  "original_patch": "tests/fixtures/taskgraph_4_5/patch_missing_supersede.json",
+  "stage": "reconcile",
+  "errors": [
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0047 与旧节点 n_0045 指向同一 entity_ref=TKT-2026-003，但 state 冲突：new=deployed, old=blocked；patch 缺少 superseded_nodes 对 n_0045 的声明。",
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0047 与旧节点 n_0045 指向同一 entity_ref=TKT-2026-003，但 state 冲突：new=deployed, old=blocked；patch 缺少 n_0047 invalidates n_0045。",
+      "entity_ref": "TKT-2026-003",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "deployed",
+      "old_state": "blocked"
+    }
+  ],
+  "warnings": [],
+  "max_retries": 3,
+  "decision": "not_applied",
+  "reason": "failed after max retries or manual review required",
+  "quarantined_at": "2026-06-07T10:58:49.738422+00:00"
+}

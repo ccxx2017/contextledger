@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 1,
+    "active_graph_nodes": 1,
+    "new_nodes": 1,
+    "errors": 0,
+    "warnings": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "level": "warning",
+      "code": "WEAK_POTENTIAL_CONFLICT_NO_ENTITY_REF",
+      "message": "新节点 n_0047 没有 entity_ref，但与 active 旧节点 n_0045 存在弱匹配；该判断只作为 warning，不作为强保证。 两者 state 可能冲突：new=resolved, old=blocked。",
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "new_state": "resolved",
+      "old_state": "blocked",
+      "weak_match": {
+        "old_node_id": "n_0045",
+        "score": 0.8936,
+        "content_similarity": 0.8936,
+        "keyword_score": 0.6667,
+        "embedding_similarity": null,
+        "methods": [
+          "content_similarity",
+          "keyword_match"
+        ],
+        "old_state": "blocked"
+      }
+    }
+  ],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [],
+  "weak_matches": [
+    {
+      "new_node_id": "n_0047",
+      "old_node_id": "n_0045",
+      "score": 0.8936,
+      "content_similarity": 0.8936,
+      "keyword_score": 0.6667,
+      "embedding_similarity": null,
+      "methods": [
+        "content_similarity",
+        "keyword_match"
+      ],
+      "old_state": "blocked"
+    }
+  ]
+}
