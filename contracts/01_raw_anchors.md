@@ -26,4 +26,4 @@ graph 节点与 pack 段落都不存 raw 正文,只存指针:
 - raw 文件一旦写入即只读(append-only),不得回改;
   修正通过新增 raw + 图中的 supersedes 边表达
 
-反向指针经 nomalized 抽取时,span 必须翻译回 raw 偏移
+反向指针经 normalized 抽取时,span 必须翻译回 raw 偏移

@@ -15,3 +15,4 @@ graph/ 和 pack/ 的代码与文档只引用本目录,不重述。
 | 02_ownership.md   | 任一知识正文的唯一归属 | STABLE |
 | 03_graph_schema.md| 图节点/边/失效语义 | PROVISIONAL |
 | 04_assembly.md    | 下游装配消费契约 | PLACEHOLDER |
+|05_normalized.md | normalized 派生契约 | PROVISIONAL
