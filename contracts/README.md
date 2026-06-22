@@ -16,3 +16,4 @@ graph/ 和 pack/ 的代码与文档只引用本目录,不重述。
 | 03_graph_schema.md| 图节点/边/失效语义 | PROVISIONAL |
 | 04_assembly.md    | 下游装配消费契约 | PLACEHOLDER |
 |05_normalized.md | normalized 派生契约 | PROVISIONAL
+|06_entity_naming.md | entity_ref 命名规范 | PROVISIONAL
