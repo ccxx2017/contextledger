@@ -106,10 +106,16 @@ contextledger/
 
 TaskGraph 将任务上下文抽象为带状态的结构化图，核心机制是 **`entity_ref` + `invalidates`**，实现机械化的事实失效判定。
 
+术语对齐（重要）：
+- 规范层所说的“当前裁定态 / current adjudicated belief state”，在节点字段上由 `status` 承担。
+- `status ∈ {active, superseded}`：决定节点是否仍属于当前态集合。
+- `state ∈ {open, blocked, implemented, deployed, resolved, ...}`：描述实体在现实世界中的领域生命周期，不决定节点是否仍为当前成立态。
+- 因此，文档中若出现“当前状态 / 当前什么成立”的表述，除非特别声明为领域状态枚举，否则均指 `status` 维度而非 `state` 字段。
+
 *   **节点（Node）**：包含 `node_id`, `type`, `content`, `entity_ref`（稳定实体标识）, `state`（状态枚举）, `status`（`active`/`superseded`）。
 *   **边（Edge）**：合法关系包括 `refines` | `depends_on` | `supports` | **`invalidates`** | `implements` 等。
 *   **Patch**：每轮对话抽取的不可变事件日志，包含 `new_nodes`, `updated_nodes`, `superseded_nodes`, `new_edges`。
-* 失效形态边界声明（重要）：当前 status 为 active/superseded 二值，invalidates 为整体替换。这只能表达线性覆盖式演化（新决策整体取代旧决策）。以下形态 Phase 1 不支持，列为已知未覆盖边界：
+* 失效形态边界声明（重要）：当前裁定态由 `status=active/superseded` 二值承载，`invalidates` 为整体替换。这只能表达线性覆盖式演化（新决策整体取代旧决策）。以下形态 Phase 1 不支持，列为已知未覆盖边界：
 
 形态|含义|当前状态
 partial invalidation	|只推翻旧节点的部分子句	|未支持，schema 预留

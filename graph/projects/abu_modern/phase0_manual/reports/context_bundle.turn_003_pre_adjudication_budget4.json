@@ -1,0 +1,112 @@
+{
+  "kind": "context_bundle.phase0_mechanical.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_003_pre_adjudication",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于验证 supersede 与预算规则的装配结果。",
+  "source_graph": "graph/projects/abu_modern/phase0_manual/graph_state.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "budget4_pre_adjudication",
+    "max_nodes": 4,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0003",
+      "n_0010",
+      "n_0011"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "回归主线，AOS反哺：让 AOS 的下一个 employee 直接服务于量化主线，而不是继续服务于 AOS 自己。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0003",
+        "type": "OpenTask",
+        "content": "阶段 1：复活 Strategy Research Agent，作为 AOS 的第一个领域 employee，目标是恢复量化主线并产出可信策略档案。",
+        "priority": "must_include",
+        "entity_ref": "strategy_research_agent"
+      },
+      {
+        "node_id": "n_0010",
+        "type": "Decision",
+        "content": "决策 3 已确认：阶段 1 的 Strategy Research Agent 采用 AOS-native 路线。",
+        "priority": "must_include",
+        "entity_ref": "strategy_research_agent.implementation_mode"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0011",
+        "type": "Decision",
+        "content": "决策：在 OpenClaw 框架下，strategy-researcher 的 SKILL/TOOLS/scripts 目录应放在 openclaw_skills/strategy-researcher/，而不是代码仓内。",
+        "priority": "should_include",
+        "entity_ref": "strategy_research_agent.skill_layout"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "budget4_pre_adjudication",
+    "active_focus": [
+      "n_0003",
+      "n_0010",
+      "n_0011"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 11,
+    "bundled_node_count": 4
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase0_manual",
+    "owner": "mechanical-assembler",
+    "budget_profile": "budget4_pre_adjudication"
+  },
+  "provenance": [
+    {
+      "node_id": "n_0001",
+      "raw_id": "abu_modern/s001/0001",
+      "span": [
+        1279,
+        1377
+      ]
+    },
+    {
+      "node_id": "n_0003",
+      "raw_id": "abu_modern/s001/0001",
+      "span": [
+        1709,
+        2706
+      ]
+    },
+    {
+      "node_id": "n_0010",
+      "raw_id": "abu_modern/s001/0002",
+      "span": [
+        12,
+        118
+      ]
+    },
+    {
+      "node_id": "n_0011",
+      "raw_id": "abu_modern/s001/0003",
+      "span": [
+        1277,
+        2362
+      ]
+    }
+  ]
+}

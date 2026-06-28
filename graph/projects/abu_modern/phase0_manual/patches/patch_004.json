@@ -1,0 +1,42 @@
+{
+  "task_id": "abu_modern_phase0_manual",
+  "turn_id": 4,
+  "new_nodes": [
+    {
+      "node_id": "n_0014",
+      "type": "Decision",
+      "content": "裁定：strategy-researcher 与 quant_assistant 为平行 Agent，二者共享同一个 Windows 后端 API，但不互相调用。",
+      "entity_ref": "strategy_research_agent.quant_assistant_relationship",
+      "state": null,
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 4,
+      "source": {
+        "raw_id": "abu_modern/s001/0004",
+        "span": [
+          1834,
+          3177
+        ]
+      }
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0013",
+      "reason": "turn_004 已裁定 quant_assistant 与 strategy-researcher 为平行 Agent / 共享后端，旧的待定关系退出当前态。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0014",
+      "target": "n_0013",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0014",
+      "target": "n_0003",
+      "relation": "supports"
+    }
+  ]
+}

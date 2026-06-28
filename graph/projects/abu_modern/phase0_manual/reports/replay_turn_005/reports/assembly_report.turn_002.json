@@ -1,0 +1,83 @@
+{
+  "kind": "assembly_report.phase0_mechanical.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_002",
+  "result": "assembled",
+  "input_graph_turn_counter": 2,
+  "policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "priority_order": [
+      "must_include",
+      "should_include",
+      "optional",
+      "background"
+    ],
+    "backfill_order": "created_turn desc, node_id asc",
+    "budget_profile": "tight_budget_must_only",
+    "max_nodes": 3,
+    "overflow_rule": "never_drop_must_include"
+  },
+  "summary": {
+    "all_nodes": 10,
+    "active_nodes": 9,
+    "superseded_nodes": 1,
+    "excluded_due_to_state_nodes": 0,
+    "active_must_include_nodes": 3,
+    "selected_nodes": 3
+  },
+  "selected_node_ids": [
+    "n_0001",
+    "n_0003",
+    "n_0010"
+  ],
+  "selected_by_priority": {
+    "must_include": [
+      "n_0001",
+      "n_0003",
+      "n_0010"
+    ],
+    "should_include": [],
+    "optional": [],
+    "background": []
+  },
+  "excluded_due_to_status": [
+    {
+      "node_id": "n_0009",
+      "status": "superseded"
+    }
+  ],
+  "excluded_due_to_state": [],
+  "excluded_due_to_budget": [
+    {
+      "node_id": "n_0002",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0006",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0007",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0004",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0005",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0008",
+      "priority": "background",
+      "reason": "budget_exhausted"
+    }
+  ]
+}

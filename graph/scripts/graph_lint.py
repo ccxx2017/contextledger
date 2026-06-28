@@ -45,6 +45,11 @@ MINIMAL_STATE_ENUM = {
     "unknown",
 }
 
+STATUS_VOCAB = {
+    "active",
+    "superseded",
+}
+
 MUTUALLY_EXCLUSIVE_ACTIVE_STATES = {
     "open",
     "blocked",
@@ -133,6 +138,25 @@ def normalize_node_type(value: Any) -> str:
     return normalize_lower(value).replace("_", "").replace("-", "")
 
 
+def is_pending_open_candidate(node: dict[str, Any]) -> bool:
+    if normalize_lower(node.get("status", "active")) != "active":
+        return False
+    if normalize_state(node.get("state")) != "open":
+        return False
+    if normalize_node_type(node.get("type")) != "opentask":
+        return False
+
+    content = normalize_ws(node.get("content"))
+    signals = (
+        "待定",
+        "待裁定",
+        "待最终裁定",
+        "仍需最终裁定",
+        "当前推荐",
+    )
+    return any(signal in content for signal in signals)
+
+
 def node_id(node: dict[str, Any]) -> str:
     for key in NODE_ID_KEYS:
         value = node.get(key)
@@ -154,7 +178,10 @@ def is_active_node(node: dict[str, Any]) -> bool:
         return False
 
     status = normalize_lower(node.get("status", "active"))
-    return status == "active"
+    if status != "active":
+        return False
+
+    return not is_pending_open_candidate(node)
 
 
 def is_active_edge(edge: dict[str, Any]) -> bool:
@@ -473,8 +500,21 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
             "edges": len(edges),
             "active_nodes": 0,
             "active_edges": 0,
+            "superseded_nodes": 0,
             "errors": 0,
             "warnings": 0,
+        },
+        "adjudication_policy": {
+            "current_membership_field": "status",
+            "state_participates_in_current_membership": True,
+            "state_gate_field": "state",
+            "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+            "active_status_value": "active",
+            "superseded_status_value": "superseded",
+        },
+        "status_observations": {
+            "superseded_node_ids": [],
+            "excluded_due_to_state_node_ids": [],
         },
         "relation_enum": sorted(allowed_relations),
         "minimal_state_enum": sorted(MINIMAL_STATE_ENUM),
@@ -523,6 +563,12 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
 
         if is_active_node(node):
             active_nodes_by_id[nid] = node
+        elif is_pending_open_candidate(node):
+            report["status_observations"]["excluded_due_to_state_node_ids"].append(nid)
+
+        if is_superseded_node(node):
+            report["summary"]["superseded_nodes"] += 1
+            report["status_observations"]["superseded_node_ids"].append(nid)
 
     report["summary"]["active_nodes"] = len(active_nodes_by_id)
 
@@ -542,6 +588,22 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
                 node_id=nid,
                 state=state,
                 allowed_states=sorted(MINIMAL_STATE_ENUM),
+            )
+
+        if state in STATUS_VOCAB:
+            add_issue(
+                report,
+                "error",
+                "STATE_USES_STATUS_VOCAB",
+                (
+                    f"节点 {nid} 的 state 使用了图生命周期词 {state}。"
+                    "当前态成员资格以 status 为主，state 只允许作为 pending gate，"
+                    "不得承担 active/superseded 语义。"
+                ),
+                node_id=nid,
+                state=state,
+                status=node.get("status"),
+                forbidden_state_values=sorted(STATUS_VOCAB),
             )
 
     # 1. 不允许未知 relation

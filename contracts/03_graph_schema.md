@@ -16,6 +16,8 @@
   # status 与 state 是两个维度,不可混用:
   #   status = 这个节点在图里还算不算数(active/superseded)
   #   state  = 它描述的那个实体现在处于什么状态(open/deployed/...)
+  #   当前态集合(current adjudicated belief state)的成员资格只允许由 status 决定。
+  #   任何脚本/装配/查询若用 state 替代 status 计算"当前什么成立",均属违约。
 
 ## 边
   { from, to, relation, created_turn }
@@ -31,6 +33,13 @@
     - 相同(identical)     → no-op,不动图
     - 正交(coexist)       → 不冲突,两节点均保持 active
 - 装配只读取 status=active 的节点
+
+## 当前态裁定纪律
+- "当前什么成立"、"节点是否仍有效"、"must_include 候选集是否仍保留"——
+  这些问题一律只看 `status`
+- `state` 只用于同一 entity_ref 下的领域状态比较(如 open → resolved / blocked → deployed)
+- 被 supersede 的节点必须表现为: `status=superseded`
+- 一个节点即便 `priority=must_include`,只要 `status!=active`,也必须退出当前态集合
 
 ## state 互斥矩阵(按 node type)
 

@@ -1,0 +1,295 @@
+{
+  "task_id": "task_default",
+  "turn_counter": 3,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "回归主线，AOS反哺：让 AOS 的下一个 employee 直接服务于量化主线，而不是继续服务于 AOS 自己。",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          1279,
+          1377
+        ]
+      }
+    },
+    "n_0002": {
+      "node_id": "n_0002",
+      "type": "OpenTask",
+      "content": "阶段 0：维稳 duty_reporter；可选增加后台 LLM 摘要节点验证 LLM 基础设施；暂不启动 Wiki Agent、指挥舱 UI、第二个 employee。",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          1378,
+          1708
+        ]
+      }
+    },
+    "n_0003": {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "阶段 1：复活 Strategy Research Agent，作为 AOS 的第一个领域 employee，目标是恢复量化主线并产出可信策略档案。",
+      "entity_ref": "strategy_research_agent",
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          1709,
+          2706
+        ]
+      }
+    },
+    "n_0004": {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "content": "阶段 2：根据阶段 1 的产物决定下一个 employee，候选包括 Wiki Agent、Triage Agent、Quant Reviewer Agent、指挥舱 UI。",
+      "entity_ref": "roadmap.phase2.next_employee",
+      "state": "open",
+      "status": "active",
+      "priority": "optional",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          2707,
+          3079
+        ]
+      }
+    },
+    "n_0005": {
+      "node_id": "n_0005",
+      "type": "OpenTask",
+      "content": "阶段 3：在有 2-3 个稳定 employee 后，再做指挥舱 MVP。",
+      "entity_ref": "roadmap.phase3.cockpit_mvp",
+      "state": "open",
+      "status": "active",
+      "priority": "optional",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          3080,
+          3226
+        ]
+      }
+    },
+    "n_0006": {
+      "node_id": "n_0006",
+      "type": "FileArtifact",
+      "content": "整理 ROADMAP_v2.md，落盘到 aos/projects/abu_modern/，用于固化路线图。",
+      "entity_ref": "aos/projects/abu_modern/ROADMAP_v2.md",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          4094,
+          4202
+        ]
+      }
+    },
+    "n_0007": {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "开立一张阶段 1 研究工单，用于启动 Strategy Research Agent 的调研与实施。",
+      "entity_ref": "strategy_research_agent.phase1.ticket",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          4203,
+          4344
+        ]
+      }
+    },
+    "n_0008": {
+      "node_id": "n_0008",
+      "type": "FileArtifact",
+      "content": "创建 aos/runtime/_frozen_ideas.md，冻结 Wiki Agent、指挥舱 UI、第二个 employee 等非主线想法。",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open",
+      "status": "active",
+      "priority": "background",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          4345,
+          4493
+        ]
+      }
+    },
+    "n_0009": {
+      "node_id": "n_0009",
+      "type": "Decision",
+      "content": "决策 3 待确认：阶段 1 的 Strategy Research Agent 实现方式尚未确定，候选为 AOS-native 或 quant-native。",
+      "entity_ref": "strategy_research_agent.implementation_mode",
+      "state": null,
+      "status": "superseded",
+      "priority": "must_include",
+      "created_turn": 1,
+      "source": {
+        "raw_id": "abu_modern/s001/0001",
+        "span": [
+          3573,
+          3935
+        ]
+      },
+      "_superseded_reason": "turn_002 明确确认实现方式为 AOS-native，旧的待确认决策退出当前态。"
+    },
+    "n_0010": {
+      "node_id": "n_0010",
+      "type": "Decision",
+      "content": "决策 3 已确认：阶段 1 的 Strategy Research Agent 采用 AOS-native 路线。",
+      "entity_ref": "strategy_research_agent.implementation_mode",
+      "state": null,
+      "status": "active",
+      "priority": "must_include",
+      "created_turn": 2,
+      "source": {
+        "raw_id": "abu_modern/s001/0002",
+        "span": [
+          12,
+          118
+        ]
+      }
+    },
+    "n_0011": {
+      "node_id": "n_0011",
+      "type": "Decision",
+      "content": "决策：在 OpenClaw 框架下，strategy-researcher 的 SKILL/TOOLS/scripts 目录应放在 openclaw_skills/strategy-researcher/，而不是代码仓内。",
+      "entity_ref": "strategy_research_agent.skill_layout",
+      "state": null,
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          1277,
+          2362
+        ]
+      }
+    },
+    "n_0012": {
+      "node_id": "n_0012",
+      "type": "Decision",
+      "content": "决策：data/knowledge/ 保持原地不动，strategy-researcher 的策略入库目录为 data/knowledge/strategies/，并遵守现有 schema。",
+      "entity_ref": "strategy_research_agent.archive_path",
+      "state": null,
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          2363,
+          3163
+        ]
+      }
+    },
+    "n_0013": {
+      "node_id": "n_0013",
+      "type": "OpenTask",
+      "content": "待定：strategy-researcher 与 quant_assistant 的关系仍需最终裁定；当前推荐关系 A，即由 strategy-researcher 调用 quant_assistant 作为工具底座。",
+      "entity_ref": "strategy_research_agent.quant_assistant_relationship",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          3164,
+          4121
+        ]
+      }
+    }
+  },
+  "edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0001",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0003",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0009",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0009",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0013",
+      "target": "n_0003",
+      "relation": "implements"
+    }
+  ]
+}

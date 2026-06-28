@@ -1,0 +1,128 @@
+{
+  "kind": "phase0_seal_report.v1",
+  "project_id": "abu_modern",
+  "ok": true,
+  "seed_path": "D:\\CCXXLESSON\\contextledger\\graph\\graph_state.seed.json",
+  "patch_chain": [
+    "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_001.json",
+    "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_002.json",
+    "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_003.json",
+    "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_004.json"
+  ],
+  "turn001_legacy_backup": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_001.legacy_manual.json",
+  "graph_replay": [
+    {
+      "turn_id": "turn_001",
+      "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_001.json",
+      "replay_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\run\\graph_state.turn_001.json",
+      "canonical_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\run\\graph_state.turn_001.json",
+      "semantic_equal": true,
+      "sha256_equal": true,
+      "matches_current_graph_state": null
+    },
+    {
+      "turn_id": "turn_002",
+      "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_002.json",
+      "replay_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\run\\graph_state.turn_002.json",
+      "canonical_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\run\\graph_state.turn_002.json",
+      "semantic_equal": true,
+      "sha256_equal": true,
+      "matches_current_graph_state": null
+    },
+    {
+      "turn_id": "turn_003",
+      "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_003.json",
+      "replay_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\run\\graph_state.turn_003.json",
+      "canonical_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\run\\graph_state.turn_003.json",
+      "semantic_equal": true,
+      "sha256_equal": true,
+      "matches_current_graph_state": null
+    },
+    {
+      "turn_id": "turn_004",
+      "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\patches\\patch_004.json",
+      "replay_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\run\\graph_state.turn_004.json",
+      "canonical_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\run\\graph_state.turn_004.json",
+      "semantic_equal": true,
+      "sha256_equal": true,
+      "matches_current_graph_state": true
+    }
+  ],
+  "bundle_replay": [
+    {
+      "turn_id": "turn_001",
+      "bundle": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_001.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\context_bundle.turn_001.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      },
+      "assembly_report": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\assembly_report.turn_001.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\assembly_report.turn_001.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "turn_id": "turn_002",
+      "bundle": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_002.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\context_bundle.turn_002.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      },
+      "assembly_report": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\assembly_report.turn_002.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\assembly_report.turn_002.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "turn_id": "turn_003",
+      "bundle": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_003.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\context_bundle.turn_003.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      },
+      "assembly_report": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\assembly_report.turn_003.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\assembly_report.turn_003.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "turn_id": "turn_003_pre_adjudication",
+      "bundle": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_003_pre_adjudication_budget4.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\context_bundle.turn_003_pre_adjudication_budget4.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      },
+      "assembly_report": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\assembly_report.turn_003_pre_adjudication_budget4.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\assembly_report.turn_003_pre_adjudication_budget4.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "turn_id": "turn_004",
+      "bundle": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\context_bundle.turn_004_budget4.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\context_bundle.turn_004_budget4.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      },
+      "assembly_report": {
+        "canonical_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\assembly_report.turn_004_budget4.json",
+        "replay_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\phase0_manual\\reports\\replay_turn_005\\reports\\assembly_report.turn_004_budget4.json",
+        "semantic_equal": true,
+        "sha256_equal": true
+      }
+    }
+  ]
+}
