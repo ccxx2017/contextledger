@@ -1,0 +1,50 @@
+{
+  "trajectory_id": "tr09_alias_same_service",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr09_obs01",
+      "expected_active_set": [
+        "tr09.latency_guard.on"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr09_entity",
+          "mentions": [
+            "Mercury feed"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr09.latency_guard.on"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr09_obs02",
+      "expected_active_set": [
+        "tr09.latency_guard.on",
+        "tr09.owner.market_data"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr09_entity",
+          "mentions": [
+            "Mercury feed",
+            "mercury-feed"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr09.latency_guard.on"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

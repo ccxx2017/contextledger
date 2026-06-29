@@ -1,0 +1,50 @@
+{
+  "trajectory_id": "tr10_alias_same_person",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr10_obs01",
+      "expected_active_set": [
+        "tr10.reviewer.required"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr10_person",
+          "mentions": [
+            "M. Chen"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr10.reviewer.required"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr10_obs02",
+      "expected_active_set": [
+        "tr10.reviewer.required",
+        "tr10.timezone.utc_plus_8"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr10_person",
+          "mentions": [
+            "M. Chen",
+            "Mei Chen"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr10.reviewer.required"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

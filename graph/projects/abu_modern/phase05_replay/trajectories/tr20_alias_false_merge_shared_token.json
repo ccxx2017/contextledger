@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr20_alias_false_merge_shared_token",
+  "title": "共享词导致误合并",
+  "coverage_tags": [
+    "alias_trap"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr20_obs01",
+      "observed_at": "2026-06-20T08:00:00Z",
+      "valid_from": "2026-06-20T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "naming_sheet",
+        "provenance": "naming_sheet#201"
+      },
+      "mentions": [
+        "Atlas"
+      ],
+      "payload": {
+        "statement": "Atlas is owned by infra scheduling.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr20.atlas.owner",
+            "dimension": "owner",
+            "value": "infra_scheduling",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr20_obs02",
+      "observed_at": "2026-06-20T08:03:00Z",
+      "valid_from": "2026-06-20T08:03:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "naming_sheet",
+        "provenance": "naming_sheet#202"
+      },
+      "mentions": [
+        "Atlas desk"
+      ],
+      "payload": {
+        "statement": "Atlas desk is run by the APAC desk lead.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr20.atlas_desk.owner",
+            "dimension": "owner",
+            "value": "apac_desk_lead",
+            "importance": "supporting"
+          }
+        ]
+      }
+    }
+  ]
+}

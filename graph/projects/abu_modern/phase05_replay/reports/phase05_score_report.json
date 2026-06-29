@@ -1,0 +1,5200 @@
+{
+  "validation": {
+    "ok": true,
+    "trajectory_count": 23,
+    "coverage_counts": {
+      "full": 4,
+      "partial": 2,
+      "conditional": 2,
+      "revival": 2,
+      "alias_trap": 6,
+      "provenance_conflict": 3,
+      "non_invalidation_decoy": 4,
+      "out_of_order_late": 4
+    },
+    "issues": []
+  },
+  "baselines": {
+    "phase0_current": {
+      "baseline": "phase0_current",
+      "metrics": {
+        "invalidation_precision": 0.3157894736842105,
+        "invalidation_recall": 0.5,
+        "invalidation_event_summary": {
+          "true_positive_count": 6,
+          "false_positive_count": 13,
+          "false_negative_count": 6,
+          "predicted_count": 19,
+          "gold_count": 12,
+          "precision": 0.3157894736842105,
+          "recall": 0.5
+        },
+        "active_set_set_f1": 0.8503401360544218,
+        "must_include_recall": 0.826530612244898,
+        "entity_resolution_false_merge_rate": 0.0,
+        "entity_resolution_false_split_rate": 1.0,
+        "valid_time_adjudication_accuracy": 0.5,
+        "valid_time_breakdown": {
+          "observed_at_present_correct": 0,
+          "observed_at_present_total": 4,
+          "observed_at_present_accuracy": 0.0,
+          "observed_at_absent_fallback_correct": 4,
+          "observed_at_absent_fallback_total": 4,
+          "observed_at_absent_fallback_accuracy": 1.0
+        },
+        "counts": {
+          "steps": 49,
+          "gold_invalidations": 12,
+          "predicted_invalidations": 19,
+          "valid_time_targets": 8,
+          "entity_gold_same_pairs": 4,
+          "entity_gold_diff_pairs": 4
+        }
+      },
+      "invalidation_by_tag": {
+        "full": {
+          "true_positive_count": 4,
+          "false_positive_count": 0,
+          "false_negative_count": 0,
+          "predicted_count": 4,
+          "gold_count": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "trajectory_ids": [
+            "tr01_full_leverage_flip",
+            "tr02_full_vendor_switch",
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [
+            "tr01_full_leverage_flip",
+            "tr02_full_vendor_switch",
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_negative_trajectory_ids": []
+        },
+        "partial": {
+          "true_positive_count": 0,
+          "false_positive_count": 2,
+          "false_negative_count": 2,
+          "predicted_count": 2,
+          "gold_count": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr03_partial_policy_clause",
+            "tr04_partial_checklist_clause"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr03_partial_policy_clause",
+            "tr04_partial_checklist_clause"
+          ],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr03_partial_policy_clause",
+            "tr04_partial_checklist_clause"
+          ]
+        },
+        "conditional": {
+          "true_positive_count": 0,
+          "false_positive_count": 2,
+          "false_negative_count": 2,
+          "predicted_count": 2,
+          "gold_count": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr05_conditional_region_exception",
+            "tr06_conditional_window_exception"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr05_conditional_region_exception",
+            "tr06_conditional_window_exception"
+          ],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr05_conditional_region_exception",
+            "tr06_conditional_window_exception"
+          ]
+        },
+        "revival": {
+          "true_positive_count": 2,
+          "false_positive_count": 2,
+          "false_negative_count": 2,
+          "predicted_count": 4,
+          "gold_count": 4,
+          "precision": 0.5,
+          "recall": 0.5,
+          "trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ],
+          "true_positive_trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ],
+          "false_negative_trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ]
+        },
+        "alias_trap": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 0,
+          "predicted_count": 0,
+          "gold_count": 0,
+          "precision": 1.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr09_alias_same_service",
+            "tr10_alias_same_person",
+            "tr16_alias_false_merge_trap",
+            "tr19_alias_abbreviation_split_trap",
+            "tr20_alias_false_merge_shared_token",
+            "tr21_alias_mixed_cost_profile"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "provenance_conflict": {
+          "true_positive_count": 0,
+          "false_positive_count": 3,
+          "false_negative_count": 0,
+          "predicted_count": 3,
+          "gold_count": 0,
+          "precision": 0.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr11_provenance_conflict",
+            "tr17_provenance_conflict_probe_wins",
+            "tr18_provenance_conflict_policy_wins"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr11_provenance_conflict",
+            "tr17_provenance_conflict_probe_wins",
+            "tr18_provenance_conflict_policy_wins"
+          ],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "non_invalidation_decoy": {
+          "true_positive_count": 0,
+          "false_positive_count": 2,
+          "false_negative_count": 0,
+          "predicted_count": 2,
+          "gold_count": 0,
+          "precision": 0.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr12_non_invalidation_parallel_targets",
+            "tr13_non_invalidation_parallel_modes",
+            "tr16_alias_false_merge_trap",
+            "tr21_alias_mixed_cost_profile"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr12_non_invalidation_parallel_targets",
+            "tr13_non_invalidation_parallel_modes"
+          ],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "out_of_order_late": {
+          "true_positive_count": 2,
+          "false_positive_count": 2,
+          "false_negative_count": 0,
+          "predicted_count": 4,
+          "gold_count": 2,
+          "precision": 0.5,
+          "recall": 1.0,
+          "trajectory_ids": [
+            "tr14_out_of_order_with_observed_at",
+            "tr15_missing_observed_at_fallback",
+            "tr22_out_of_order_price_band_present",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_positive_trajectory_ids": [
+            "tr14_out_of_order_with_observed_at",
+            "tr22_out_of_order_price_band_present"
+          ],
+          "true_positive_trajectory_ids": [
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_negative_trajectory_ids": []
+        }
+      },
+      "per_trajectory": {
+        "tr01_full_leverage_flip": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr01_obs01",
+              "gold_active_set": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "predicted_active_set": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "predicted_must_include": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "leverage_cap",
+                  "winner_obs_id": "tr01_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "overnight_rule",
+                  "winner_obs_id": "tr01_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr01_obs02",
+              "gold_active_set": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "predicted_active_set": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "predicted_must_include": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr01_obs02",
+                  "target_obs_id": "tr01_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr01.leverage_cap.2x",
+                    "tr01.overnight.forbidden"
+                  ],
+                  "replacement_claims": [
+                    "tr01.leverage_cap.4x",
+                    "tr01.overnight.hedged_only"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr01_obs02",
+                  "target_obs_id": "tr01_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr01.leverage_cap.2x",
+                    "tr01.overnight.forbidden"
+                  ],
+                  "replacement_claims": [
+                    "tr01.leverage_cap.4x",
+                    "tr01.overnight.hedged_only"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "leverage_cap",
+                  "winner_obs_id": "tr01_obs02",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "overnight_rule",
+                  "winner_obs_id": "tr01_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 1,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr02_full_vendor_switch": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr02_obs01",
+              "gold_active_set": [
+                "tr02.bus.kafka"
+              ],
+              "predicted_active_set": [
+                "tr02.bus.kafka"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr02.bus.kafka"
+              ],
+              "predicted_must_include": [
+                "tr02.bus.kafka"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "execution bus",
+                  "dimension": "bus_choice",
+                  "winner_obs_id": "tr02_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr02_obs02",
+              "gold_active_set": [
+                "tr02.bus.redis_streams"
+              ],
+              "predicted_active_set": [
+                "tr02.bus.redis_streams"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr02.bus.redis_streams"
+              ],
+              "predicted_must_include": [
+                "tr02.bus.redis_streams"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr02_obs02",
+                  "target_obs_id": "tr02_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr02.bus.kafka"
+                  ],
+                  "replacement_claims": [
+                    "tr02.bus.redis_streams"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr02_obs02",
+                  "target_obs_id": "tr02_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr02.bus.kafka"
+                  ],
+                  "replacement_claims": [
+                    "tr02.bus.redis_streams"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "execution bus",
+                  "dimension": "bus_choice",
+                  "winner_obs_id": "tr02_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 1,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr03_partial_policy_clause": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr03_obs01",
+              "gold_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "predicted_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "predicted_must_include": [
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "audit_logging",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "retries",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "timeout",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr03_obs02",
+              "gold_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.4",
+                "tr03.timeout.30s"
+              ],
+              "predicted_active_set": [
+                "tr03.retries.4"
+              ],
+              "active_set_f1": 0.5,
+              "gold_must_include": [
+                "tr03.retries.4",
+                "tr03.timeout.30s"
+              ],
+              "predicted_must_include": [
+                "tr03.retries.4"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr03_obs02",
+                  "target_obs_id": "tr03_obs01",
+                  "kind": "partial",
+                  "dropped_claims": [
+                    "tr03.retries.2"
+                  ],
+                  "replacement_claims": [
+                    "tr03.retries.4"
+                  ],
+                  "kept_claims": [
+                    "tr03.timeout.30s",
+                    "tr03.audit.required"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr03_obs02",
+                  "target_obs_id": "tr03_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr03.audit.required",
+                    "tr03.retries.2",
+                    "tr03.timeout.30s"
+                  ],
+                  "replacement_claims": [
+                    "tr03.retries.4"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "audit_logging",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "retries",
+                  "winner_obs_id": "tr03_obs02",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "timeout",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr04_partial_checklist_clause": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr04_obs01",
+              "gold_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.required"
+              ],
+              "predicted_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.required"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "predicted_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "backtest",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "paper_trade",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "slippage_report",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr04_obs02",
+              "gold_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.not_required"
+              ],
+              "predicted_active_set": [
+                "tr04.slippage_report.not_required"
+              ],
+              "active_set_f1": 0.5,
+              "gold_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "predicted_must_include": [],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr04_obs02",
+                  "target_obs_id": "tr04_obs01",
+                  "kind": "partial",
+                  "dropped_claims": [
+                    "tr04.slippage_report.required"
+                  ],
+                  "replacement_claims": [
+                    "tr04.slippage_report.not_required"
+                  ],
+                  "kept_claims": [
+                    "tr04.backtest.required",
+                    "tr04.paper_trade.required"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr04_obs02",
+                  "target_obs_id": "tr04_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr04.backtest.required",
+                    "tr04.paper_trade.required",
+                    "tr04.slippage_report.required"
+                  ],
+                  "replacement_claims": [
+                    "tr04.slippage_report.not_required"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "backtest",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "paper_trade",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "slippage_report",
+                  "winner_obs_id": "tr04_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr05_conditional_region_exception": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr05_obs01",
+              "gold_active_set": [
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_active_set": [
+                "tr05.trading.blocked.global"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_must_include": [
+                "tr05.trading.blocked.global"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment rule",
+                  "dimension": "trade_permission",
+                  "winner_obs_id": "tr05_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr05_obs02",
+              "gold_active_set": [
+                "tr05.trading.allowed.tokyo_sim",
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_active_set": [
+                "tr05.trading.allowed.tokyo_sim"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr05.trading.allowed.tokyo_sim",
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_must_include": [
+                "tr05.trading.allowed.tokyo_sim"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr05_obs02",
+                  "target_obs_id": "tr05_obs01",
+                  "kind": "conditional",
+                  "dropped_claims": [],
+                  "replacement_claims": [
+                    "tr05.trading.allowed.tokyo_sim"
+                  ],
+                  "kept_claims": [
+                    "tr05.trading.blocked.global"
+                  ],
+                  "carve_out": "desk=Tokyo AND mode=simulation"
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr05_obs02",
+                  "target_obs_id": "tr05_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr05.trading.blocked.global"
+                  ],
+                  "replacement_claims": [
+                    "tr05.trading.allowed.tokyo_sim"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment rule",
+                  "dimension": "trade_permission",
+                  "winner_obs_id": "tr05_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "deployment rule",
+                  "dimension": "trade_permission_exception",
+                  "winner_obs_id": "tr05_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr06_conditional_window_exception": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr06_obs01",
+              "gold_active_set": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_active_set": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_must_include": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk gate",
+                  "dimension": "rebalance_window",
+                  "winner_obs_id": "tr06_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr06_obs02",
+              "gold_active_set": [
+                "tr06.rebalance.allowed.close_auction",
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_active_set": [
+                "tr06.rebalance.allowed.close_auction"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr06.rebalance.allowed.close_auction",
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_must_include": [
+                "tr06.rebalance.allowed.close_auction"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr06_obs02",
+                  "target_obs_id": "tr06_obs01",
+                  "kind": "conditional",
+                  "dropped_claims": [],
+                  "replacement_claims": [
+                    "tr06.rebalance.allowed.close_auction"
+                  ],
+                  "kept_claims": [
+                    "tr06.rebalance.blocked.all_day"
+                  ],
+                  "carve_out": "time_window=15:00-15:30"
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr06_obs02",
+                  "target_obs_id": "tr06_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr06.rebalance.blocked.all_day"
+                  ],
+                  "replacement_claims": [
+                    "tr06.rebalance.allowed.close_auction"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk gate",
+                  "dimension": "rebalance_window",
+                  "winner_obs_id": "tr06_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "risk gate",
+                  "dimension": "rebalance_window_exception",
+                  "winner_obs_id": "tr06_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr07_revival_feature_flag": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr07_obs01",
+              "gold_active_set": [
+                "tr07.feature.enabled.v1"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.enabled.v1"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.enabled.v1"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.enabled.v1"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr07_obs02",
+              "gold_active_set": [
+                "tr07.feature.disabled"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.disabled"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.disabled"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.disabled"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs02",
+                  "target_obs_id": "tr07_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr07.feature.enabled.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.disabled"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs02",
+                  "target_obs_id": "tr07_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr07.feature.enabled.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.disabled"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr07_obs03",
+              "gold_active_set": [
+                "tr07.feature.enabled.v2"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.enabled.v2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.enabled.v2"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.enabled.v2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs03",
+                  "target_obs_id": "tr07_obs02",
+                  "kind": "revival",
+                  "dropped_claims": [
+                    "tr07.feature.disabled"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.enabled.v2"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs03",
+                  "target_obs_id": "tr07_obs02",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr07.feature.disabled"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.enabled.v2"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs03",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 2,
+            "gold_count": 2,
+            "true_positive_count": 1,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr08_revival_research_stream": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr08_obs01",
+              "gold_active_set": [
+                "tr08.stream.active.v1"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.active.v1"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.active.v1"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.active.v1"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr08_obs02",
+              "gold_active_set": [
+                "tr08.stream.paused"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.paused"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.paused"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.paused"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs02",
+                  "target_obs_id": "tr08_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr08.stream.active.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.paused"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs02",
+                  "target_obs_id": "tr08_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr08.stream.active.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.paused"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr08_obs03",
+              "gold_active_set": [
+                "tr08.stream.active.v2"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.active.v2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.active.v2"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.active.v2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs03",
+                  "target_obs_id": "tr08_obs02",
+                  "kind": "revival",
+                  "dropped_claims": [
+                    "tr08.stream.paused"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.active.v2"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs03",
+                  "target_obs_id": "tr08_obs02",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr08.stream.paused"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.active.v2"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs03",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 2,
+            "gold_count": 2,
+            "true_positive_count": 1,
+            "false_positive_count": 1,
+            "false_negative_count": 1
+          }
+        },
+        "tr09_alias_same_service": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr09_obs01",
+              "gold_active_set": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_active_set": [
+                "tr09.latency_guard.on"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "mercury feed",
+                  "dimension": "latency_guard",
+                  "winner_obs_id": "tr09_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr09_obs02",
+              "gold_active_set": [
+                "tr09.latency_guard.on",
+                "tr09.owner.market_data"
+              ],
+              "predicted_active_set": [
+                "tr09.latency_guard.on",
+                "tr09.owner.market_data"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "mercury feed",
+                  "dimension": "latency_guard",
+                  "winner_obs_id": "tr09_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "mercury-feed",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr09_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr10_alias_same_person": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr10_obs01",
+              "gold_active_set": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_active_set": [
+                "tr10.reviewer.required"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "m. chen",
+                  "dimension": "review_gate",
+                  "winner_obs_id": "tr10_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr10_obs02",
+              "gold_active_set": [
+                "tr10.reviewer.required",
+                "tr10.timezone.utc_plus_8"
+              ],
+              "predicted_active_set": [
+                "tr10.reviewer.required",
+                "tr10.timezone.utc_plus_8"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "m. chen",
+                  "dimension": "review_gate",
+                  "winner_obs_id": "tr10_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "mei chen",
+                  "dimension": "timezone",
+                  "winner_obs_id": "tr10_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr11_provenance_conflict": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr11_obs01",
+              "gold_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter",
+                  "dimension": "prod_readiness",
+                  "winner_obs_id": "tr11_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr11_obs02",
+              "gold_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_active_set": [
+                "tr11.prod_ready.true"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_must_include": [
+                "tr11.prod_ready.true"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr11_obs02",
+                  "target_obs_id": "tr11_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr11.prod_ready.false"
+                  ],
+                  "replacement_claims": [
+                    "tr11.prod_ready.true"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter",
+                  "dimension": "prod_readiness",
+                  "winner_obs_id": "tr11_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr12_non_invalidation_parallel_targets": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr12_obs01",
+              "gold_active_set": [
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_active_set": [
+                "tr12.target.staging.allowed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_must_include": [
+                "tr12.target.staging.allowed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment allow-list",
+                  "dimension": "allowed_targets",
+                  "winner_obs_id": "tr12_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr12_obs02",
+              "gold_active_set": [
+                "tr12.target.canary.allowed",
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_active_set": [
+                "tr12.target.canary.allowed"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr12.target.canary.allowed",
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_must_include": [
+                "tr12.target.canary.allowed"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr12_obs02",
+                  "target_obs_id": "tr12_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr12.target.staging.allowed"
+                  ],
+                  "replacement_claims": [
+                    "tr12.target.canary.allowed"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment allow-list",
+                  "dimension": "allowed_targets",
+                  "winner_obs_id": "tr12_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr13_non_invalidation_parallel_modes": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr13_obs01",
+              "gold_active_set": [
+                "tr13.mode.paper.allowed"
+              ],
+              "predicted_active_set": [
+                "tr13.mode.paper.allowed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr13.mode.paper.allowed"
+              ],
+              "predicted_must_include": [
+                "tr13.mode.paper.allowed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "allowed modes",
+                  "dimension": "allowed_modes",
+                  "winner_obs_id": "tr13_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr13_obs02",
+              "gold_active_set": [
+                "tr13.mode.paper.allowed",
+                "tr13.mode.simulation.allowed"
+              ],
+              "predicted_active_set": [
+                "tr13.mode.simulation.allowed"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr13.mode.paper.allowed",
+                "tr13.mode.simulation.allowed"
+              ],
+              "predicted_must_include": [
+                "tr13.mode.simulation.allowed"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr13_obs02",
+                  "target_obs_id": "tr13_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr13.mode.paper.allowed"
+                  ],
+                  "replacement_claims": [
+                    "tr13.mode.simulation.allowed"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "allowed modes",
+                  "dimension": "allowed_modes",
+                  "winner_obs_id": "tr13_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr14_out_of_order_with_observed_at": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr14_obs01",
+              "gold_active_set": [
+                "tr14.inventory.10"
+              ],
+              "predicted_active_set": [
+                "tr14.inventory.10"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr14.inventory.10"
+              ],
+              "predicted_must_include": [
+                "tr14.inventory.10"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr14_entity",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "inventory snapshot",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr14_obs02",
+              "gold_active_set": [
+                "tr14.inventory.10"
+              ],
+              "predicted_active_set": [
+                "tr14.inventory.0"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr14.inventory.10"
+              ],
+              "predicted_must_include": [
+                "tr14.inventory.0"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr14_obs02",
+                  "target_obs_id": "tr14_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr14.inventory.10"
+                  ],
+                  "replacement_claims": [
+                    "tr14.inventory.0"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr14_entity",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "inventory snapshot",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr15_missing_observed_at_fallback": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr15_obs01",
+              "gold_active_set": [
+                "tr15.queue_depth.8"
+              ],
+              "predicted_active_set": [
+                "tr15.queue_depth.8"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr15.queue_depth.8"
+              ],
+              "predicted_must_include": [
+                "tr15.queue_depth.8"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr15_entity",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs01",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "queue depth",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr15_obs02",
+              "gold_active_set": [
+                "tr15.queue_depth.20"
+              ],
+              "predicted_active_set": [
+                "tr15.queue_depth.20"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr15.queue_depth.20"
+              ],
+              "predicted_must_include": [
+                "tr15.queue_depth.20"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr15_obs02",
+                  "target_obs_id": "tr15_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr15.queue_depth.8"
+                  ],
+                  "replacement_claims": [
+                    "tr15.queue_depth.20"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr15_obs02",
+                  "target_obs_id": "tr15_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr15.queue_depth.8"
+                  ],
+                  "replacement_claims": [
+                    "tr15.queue_depth.20"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr15_entity",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs02",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "queue depth",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 1,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr16_alias_false_merge_trap": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr16_obs01",
+              "gold_active_set": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_active_set": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "phoenix",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr16_obs02",
+              "gold_active_set": [
+                "tr16.phoenix_desk.owner",
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_active_set": [
+                "tr16.phoenix_desk.owner",
+                "tr16.phoenix_infra.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "phoenix",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "phoenix desk",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 1,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr17_provenance_conflict_probe_wins": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr17_obs01",
+              "gold_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk snapshot",
+                  "dimension": "circuit_breaker",
+                  "winner_obs_id": "tr17_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr17_obs02",
+              "gold_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_active_set": [
+                "tr17.circuit_breaker.disarmed"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_must_include": [
+                "tr17.circuit_breaker.disarmed"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr17_obs02",
+                  "target_obs_id": "tr17_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr17.circuit_breaker.armed"
+                  ],
+                  "replacement_claims": [
+                    "tr17.circuit_breaker.disarmed"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk snapshot",
+                  "dimension": "circuit_breaker",
+                  "winner_obs_id": "tr17_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr18_provenance_conflict_policy_wins": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr18_obs01",
+              "gold_active_set": [
+                "tr18.retries.2"
+              ],
+              "predicted_active_set": [
+                "tr18.retries.2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr18.retries.2"
+              ],
+              "predicted_must_include": [
+                "tr18.retries.2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter retries",
+                  "dimension": "retry_cap",
+                  "winner_obs_id": "tr18_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr18_obs02",
+              "gold_active_set": [
+                "tr18.retries.2"
+              ],
+              "predicted_active_set": [
+                "tr18.retries.4"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr18.retries.2"
+              ],
+              "predicted_must_include": [
+                "tr18.retries.4"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr18_obs02",
+                  "target_obs_id": "tr18_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr18.retries.2"
+                  ],
+                  "replacement_claims": [
+                    "tr18.retries.4"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter retries",
+                  "dimension": "retry_cap",
+                  "winner_obs_id": "tr18_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr19_alias_abbreviation_split_trap": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr19_obs01",
+              "gold_active_set": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_active_set": [
+                "tr19.routing_approval.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "routing_approval_owner",
+                  "winner_obs_id": "tr19_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr19_obs02",
+              "gold_active_set": [
+                "tr19.routing_approval.owner",
+                "tr19.runtime.owner"
+              ],
+              "predicted_active_set": [
+                "tr19.routing_approval.owner",
+                "tr19.runtime.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "routing_approval_owner",
+                  "winner_obs_id": "tr19_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "runtime_owner",
+                  "winner_obs_id": "tr19_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr20_alias_false_merge_shared_token": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr20_obs01",
+              "gold_active_set": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_active_set": [
+                "tr20.atlas.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "atlas",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr20_obs02",
+              "gold_active_set": [
+                "tr20.atlas.owner",
+                "tr20.atlas_desk.owner"
+              ],
+              "predicted_active_set": [
+                "tr20.atlas.owner",
+                "tr20.atlas_desk.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "atlas",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "atlas desk",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 1,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr21_alias_mixed_cost_profile": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr21_obs01",
+              "gold_active_set": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr21_obs02",
+              "gold_active_set": [
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "platform_identity",
+                  "winner_obs_id": "tr21_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr21_obs03",
+              "gold_active_set": [
+                "tr21.oms_desk.owner",
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.oms_desk.owner",
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "oms desk",
+                  "dimension": "desk_owner",
+                  "winner_obs_id": "tr21_obs03",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "platform_identity",
+                  "winner_obs_id": "tr21_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 2,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr22_out_of_order_price_band_present": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr22_obs01",
+              "gold_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr22_entity",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "price band",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr22_obs02",
+              "gold_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_active_set": [
+                "tr22.price_band.narrow"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_must_include": [
+                "tr22.price_band.narrow"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr22_obs02",
+                  "target_obs_id": "tr22_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr22.price_band.wide"
+                  ],
+                  "replacement_claims": [
+                    "tr22.price_band.narrow"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr22_entity",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "price band",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 1,
+            "false_negative_count": 0
+          }
+        },
+        "tr23_missing_observed_at_latency_fallback": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr23_obs01",
+              "gold_active_set": [
+                "tr23.latency_threshold.50"
+              ],
+              "predicted_active_set": [
+                "tr23.latency_threshold.50"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr23.latency_threshold.50"
+              ],
+              "predicted_must_include": [
+                "tr23.latency_threshold.50"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr23_entity",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs01",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "latency threshold",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr23_obs02",
+              "gold_active_set": [
+                "tr23.latency_threshold.80"
+              ],
+              "predicted_active_set": [
+                "tr23.latency_threshold.80"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr23.latency_threshold.80"
+              ],
+              "predicted_must_include": [
+                "tr23.latency_threshold.80"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr23_obs02",
+                  "target_obs_id": "tr23_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr23.latency_threshold.50"
+                  ],
+                  "replacement_claims": [
+                    "tr23.latency_threshold.80"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [
+                {
+                  "source_obs_id": "tr23_obs02",
+                  "target_obs_id": "tr23_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr23.latency_threshold.50"
+                  ],
+                  "replacement_claims": [
+                    "tr23.latency_threshold.80"
+                  ]
+                }
+              ],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr23_entity",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs02",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "latency threshold",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 1,
+            "gold_count": 1,
+            "true_positive_count": 1,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        }
+      }
+    },
+    "flat_rag": {
+      "baseline": "flat_rag",
+      "metrics": {
+        "invalidation_precision": 0.0,
+        "invalidation_recall": 0.0,
+        "invalidation_event_summary": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 12,
+          "predicted_count": 0,
+          "gold_count": 12,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "active_set_set_f1": 0.8503401360544218,
+        "must_include_recall": 0.826530612244898,
+        "entity_resolution_false_merge_rate": 0.0,
+        "entity_resolution_false_split_rate": 1.0,
+        "valid_time_adjudication_accuracy": 0.5,
+        "valid_time_breakdown": {
+          "observed_at_present_correct": 0,
+          "observed_at_present_total": 4,
+          "observed_at_present_accuracy": 0.0,
+          "observed_at_absent_fallback_correct": 4,
+          "observed_at_absent_fallback_total": 4,
+          "observed_at_absent_fallback_accuracy": 1.0
+        },
+        "counts": {
+          "steps": 49,
+          "gold_invalidations": 12,
+          "predicted_invalidations": 0,
+          "valid_time_targets": 8,
+          "entity_gold_same_pairs": 4,
+          "entity_gold_diff_pairs": 4
+        }
+      },
+      "invalidation_by_tag": {
+        "full": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 4,
+          "predicted_count": 0,
+          "gold_count": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr01_full_leverage_flip",
+            "tr02_full_vendor_switch",
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr01_full_leverage_flip",
+            "tr02_full_vendor_switch",
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ]
+        },
+        "partial": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 2,
+          "predicted_count": 0,
+          "gold_count": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr03_partial_policy_clause",
+            "tr04_partial_checklist_clause"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr03_partial_policy_clause",
+            "tr04_partial_checklist_clause"
+          ]
+        },
+        "conditional": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 2,
+          "predicted_count": 0,
+          "gold_count": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr05_conditional_region_exception",
+            "tr06_conditional_window_exception"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr05_conditional_region_exception",
+            "tr06_conditional_window_exception"
+          ]
+        },
+        "revival": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 4,
+          "predicted_count": 0,
+          "gold_count": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr07_revival_feature_flag",
+            "tr08_revival_research_stream"
+          ]
+        },
+        "alias_trap": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 0,
+          "predicted_count": 0,
+          "gold_count": 0,
+          "precision": 1.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr09_alias_same_service",
+            "tr10_alias_same_person",
+            "tr16_alias_false_merge_trap",
+            "tr19_alias_abbreviation_split_trap",
+            "tr20_alias_false_merge_shared_token",
+            "tr21_alias_mixed_cost_profile"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "provenance_conflict": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 0,
+          "predicted_count": 0,
+          "gold_count": 0,
+          "precision": 1.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr11_provenance_conflict",
+            "tr17_provenance_conflict_probe_wins",
+            "tr18_provenance_conflict_policy_wins"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "non_invalidation_decoy": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 0,
+          "predicted_count": 0,
+          "gold_count": 0,
+          "precision": 1.0,
+          "recall": null,
+          "trajectory_ids": [
+            "tr12_non_invalidation_parallel_targets",
+            "tr13_non_invalidation_parallel_modes",
+            "tr16_alias_false_merge_trap",
+            "tr21_alias_mixed_cost_profile"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": []
+        },
+        "out_of_order_late": {
+          "true_positive_count": 0,
+          "false_positive_count": 0,
+          "false_negative_count": 2,
+          "predicted_count": 0,
+          "gold_count": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "trajectory_ids": [
+            "tr14_out_of_order_with_observed_at",
+            "tr15_missing_observed_at_fallback",
+            "tr22_out_of_order_price_band_present",
+            "tr23_missing_observed_at_latency_fallback"
+          ],
+          "false_positive_trajectory_ids": [],
+          "true_positive_trajectory_ids": [],
+          "false_negative_trajectory_ids": [
+            "tr15_missing_observed_at_fallback",
+            "tr23_missing_observed_at_latency_fallback"
+          ]
+        }
+      },
+      "per_trajectory": {
+        "tr01_full_leverage_flip": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr01_obs01",
+              "gold_active_set": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "predicted_active_set": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "predicted_must_include": [
+                "tr01.leverage_cap.2x",
+                "tr01.overnight.forbidden"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "leverage_cap",
+                  "winner_obs_id": "tr01_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "overnight_rule",
+                  "winner_obs_id": "tr01_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr01_obs02",
+              "gold_active_set": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "predicted_active_set": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "predicted_must_include": [
+                "tr01.leverage_cap.4x",
+                "tr01.overnight.hedged_only"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr01_obs02",
+                  "target_obs_id": "tr01_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr01.leverage_cap.2x",
+                    "tr01.overnight.forbidden"
+                  ],
+                  "replacement_claims": [
+                    "tr01.leverage_cap.4x",
+                    "tr01.overnight.hedged_only"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "leverage_cap",
+                  "winner_obs_id": "tr01_obs02",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "risk engine",
+                  "dimension": "overnight_rule",
+                  "winner_obs_id": "tr01_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr02_full_vendor_switch": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr02_obs01",
+              "gold_active_set": [
+                "tr02.bus.kafka"
+              ],
+              "predicted_active_set": [
+                "tr02.bus.kafka"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr02.bus.kafka"
+              ],
+              "predicted_must_include": [
+                "tr02.bus.kafka"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "execution bus",
+                  "dimension": "bus_choice",
+                  "winner_obs_id": "tr02_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr02_obs02",
+              "gold_active_set": [
+                "tr02.bus.redis_streams"
+              ],
+              "predicted_active_set": [
+                "tr02.bus.redis_streams"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr02.bus.redis_streams"
+              ],
+              "predicted_must_include": [
+                "tr02.bus.redis_streams"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr02_obs02",
+                  "target_obs_id": "tr02_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr02.bus.kafka"
+                  ],
+                  "replacement_claims": [
+                    "tr02.bus.redis_streams"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "execution bus",
+                  "dimension": "bus_choice",
+                  "winner_obs_id": "tr02_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr03_partial_policy_clause": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr03_obs01",
+              "gold_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "predicted_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "predicted_must_include": [
+                "tr03.retries.2",
+                "tr03.timeout.30s"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "audit_logging",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "retries",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "timeout",
+                  "winner_obs_id": "tr03_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr03_obs02",
+              "gold_active_set": [
+                "tr03.audit.required",
+                "tr03.retries.4",
+                "tr03.timeout.30s"
+              ],
+              "predicted_active_set": [
+                "tr03.retries.4"
+              ],
+              "active_set_f1": 0.5,
+              "gold_must_include": [
+                "tr03.retries.4",
+                "tr03.timeout.30s"
+              ],
+              "predicted_must_include": [
+                "tr03.retries.4"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr03_obs02",
+                  "target_obs_id": "tr03_obs01",
+                  "kind": "partial",
+                  "dropped_claims": [
+                    "tr03.retries.2"
+                  ],
+                  "replacement_claims": [
+                    "tr03.retries.4"
+                  ],
+                  "kept_claims": [
+                    "tr03.timeout.30s",
+                    "tr03.audit.required"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "order gateway policy",
+                  "dimension": "retries",
+                  "winner_obs_id": "tr03_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr04_partial_checklist_clause": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr04_obs01",
+              "gold_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.required"
+              ],
+              "predicted_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.required"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "predicted_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "backtest",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "paper_trade",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "slippage_report",
+                  "winner_obs_id": "tr04_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr04_obs02",
+              "gold_active_set": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required",
+                "tr04.slippage_report.not_required"
+              ],
+              "predicted_active_set": [
+                "tr04.slippage_report.not_required"
+              ],
+              "active_set_f1": 0.5,
+              "gold_must_include": [
+                "tr04.backtest.required",
+                "tr04.paper_trade.required"
+              ],
+              "predicted_must_include": [],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr04_obs02",
+                  "target_obs_id": "tr04_obs01",
+                  "kind": "partial",
+                  "dropped_claims": [
+                    "tr04.slippage_report.required"
+                  ],
+                  "replacement_claims": [
+                    "tr04.slippage_report.not_required"
+                  ],
+                  "kept_claims": [
+                    "tr04.backtest.required",
+                    "tr04.paper_trade.required"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "replay checklist",
+                  "dimension": "slippage_report",
+                  "winner_obs_id": "tr04_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr05_conditional_region_exception": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr05_obs01",
+              "gold_active_set": [
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_active_set": [
+                "tr05.trading.blocked.global"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_must_include": [
+                "tr05.trading.blocked.global"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment rule",
+                  "dimension": "trade_permission",
+                  "winner_obs_id": "tr05_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr05_obs02",
+              "gold_active_set": [
+                "tr05.trading.allowed.tokyo_sim",
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_active_set": [
+                "tr05.trading.allowed.tokyo_sim"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr05.trading.allowed.tokyo_sim",
+                "tr05.trading.blocked.global"
+              ],
+              "predicted_must_include": [
+                "tr05.trading.allowed.tokyo_sim"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr05_obs02",
+                  "target_obs_id": "tr05_obs01",
+                  "kind": "conditional",
+                  "dropped_claims": [],
+                  "replacement_claims": [
+                    "tr05.trading.allowed.tokyo_sim"
+                  ],
+                  "kept_claims": [
+                    "tr05.trading.blocked.global"
+                  ],
+                  "carve_out": "desk=Tokyo AND mode=simulation"
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment rule",
+                  "dimension": "trade_permission_exception",
+                  "winner_obs_id": "tr05_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr06_conditional_window_exception": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr06_obs01",
+              "gold_active_set": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_active_set": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_must_include": [
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk gate",
+                  "dimension": "rebalance_window",
+                  "winner_obs_id": "tr06_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr06_obs02",
+              "gold_active_set": [
+                "tr06.rebalance.allowed.close_auction",
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_active_set": [
+                "tr06.rebalance.allowed.close_auction"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr06.rebalance.allowed.close_auction",
+                "tr06.rebalance.blocked.all_day"
+              ],
+              "predicted_must_include": [
+                "tr06.rebalance.allowed.close_auction"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr06_obs02",
+                  "target_obs_id": "tr06_obs01",
+                  "kind": "conditional",
+                  "dropped_claims": [],
+                  "replacement_claims": [
+                    "tr06.rebalance.allowed.close_auction"
+                  ],
+                  "kept_claims": [
+                    "tr06.rebalance.blocked.all_day"
+                  ],
+                  "carve_out": "time_window=15:00-15:30"
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk gate",
+                  "dimension": "rebalance_window_exception",
+                  "winner_obs_id": "tr06_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr07_revival_feature_flag": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr07_obs01",
+              "gold_active_set": [
+                "tr07.feature.enabled.v1"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.enabled.v1"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.enabled.v1"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.enabled.v1"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr07_obs02",
+              "gold_active_set": [
+                "tr07.feature.disabled"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.disabled"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.disabled"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.disabled"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs02",
+                  "target_obs_id": "tr07_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr07.feature.enabled.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.disabled"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr07_obs03",
+              "gold_active_set": [
+                "tr07.feature.enabled.v2"
+              ],
+              "predicted_active_set": [
+                "tr07.feature.enabled.v2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr07.feature.enabled.v2"
+              ],
+              "predicted_must_include": [
+                "tr07.feature.enabled.v2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr07_obs03",
+                  "target_obs_id": "tr07_obs02",
+                  "kind": "revival",
+                  "dropped_claims": [
+                    "tr07.feature.disabled"
+                  ],
+                  "replacement_claims": [
+                    "tr07.feature.enabled.v2"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "alpha feature",
+                  "dimension": "feature_flag",
+                  "winner_obs_id": "tr07_obs03",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 2,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 2
+          }
+        },
+        "tr08_revival_research_stream": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr08_obs01",
+              "gold_active_set": [
+                "tr08.stream.active.v1"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.active.v1"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.active.v1"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.active.v1"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr08_obs02",
+              "gold_active_set": [
+                "tr08.stream.paused"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.paused"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.paused"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.paused"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs02",
+                  "target_obs_id": "tr08_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr08.stream.active.v1"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.paused"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr08_obs03",
+              "gold_active_set": [
+                "tr08.stream.active.v2"
+              ],
+              "predicted_active_set": [
+                "tr08.stream.active.v2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr08.stream.active.v2"
+              ],
+              "predicted_must_include": [
+                "tr08.stream.active.v2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr08_obs03",
+                  "target_obs_id": "tr08_obs02",
+                  "kind": "revival",
+                  "dropped_claims": [
+                    "tr08.stream.paused"
+                  ],
+                  "replacement_claims": [
+                    "tr08.stream.active.v2"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "research stream",
+                  "dimension": "stream_state",
+                  "winner_obs_id": "tr08_obs03",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 2,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 2
+          }
+        },
+        "tr09_alias_same_service": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr09_obs01",
+              "gold_active_set": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_active_set": [
+                "tr09.latency_guard.on"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "mercury feed",
+                  "dimension": "latency_guard",
+                  "winner_obs_id": "tr09_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr09_obs02",
+              "gold_active_set": [
+                "tr09.latency_guard.on",
+                "tr09.owner.market_data"
+              ],
+              "predicted_active_set": [
+                "tr09.latency_guard.on",
+                "tr09.owner.market_data"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "predicted_must_include": [
+                "tr09.latency_guard.on"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "mercury feed",
+                  "dimension": "latency_guard",
+                  "winner_obs_id": "tr09_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "mercury-feed",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr09_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr10_alias_same_person": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr10_obs01",
+              "gold_active_set": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_active_set": [
+                "tr10.reviewer.required"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "m. chen",
+                  "dimension": "review_gate",
+                  "winner_obs_id": "tr10_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr10_obs02",
+              "gold_active_set": [
+                "tr10.reviewer.required",
+                "tr10.timezone.utc_plus_8"
+              ],
+              "predicted_active_set": [
+                "tr10.reviewer.required",
+                "tr10.timezone.utc_plus_8"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "predicted_must_include": [
+                "tr10.reviewer.required"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "m. chen",
+                  "dimension": "review_gate",
+                  "winner_obs_id": "tr10_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "mei chen",
+                  "dimension": "timezone",
+                  "winner_obs_id": "tr10_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr11_provenance_conflict": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr11_obs01",
+              "gold_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter",
+                  "dimension": "prod_readiness",
+                  "winner_obs_id": "tr11_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr11_obs02",
+              "gold_active_set": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_active_set": [
+                "tr11.prod_ready.true"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr11.prod_ready.false"
+              ],
+              "predicted_must_include": [
+                "tr11.prod_ready.true"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter",
+                  "dimension": "prod_readiness",
+                  "winner_obs_id": "tr11_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr12_non_invalidation_parallel_targets": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr12_obs01",
+              "gold_active_set": [
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_active_set": [
+                "tr12.target.staging.allowed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_must_include": [
+                "tr12.target.staging.allowed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment allow-list",
+                  "dimension": "allowed_targets",
+                  "winner_obs_id": "tr12_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr12_obs02",
+              "gold_active_set": [
+                "tr12.target.canary.allowed",
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_active_set": [
+                "tr12.target.canary.allowed"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr12.target.canary.allowed",
+                "tr12.target.staging.allowed"
+              ],
+              "predicted_must_include": [
+                "tr12.target.canary.allowed"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "deployment allow-list",
+                  "dimension": "allowed_targets",
+                  "winner_obs_id": "tr12_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr13_non_invalidation_parallel_modes": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr13_obs01",
+              "gold_active_set": [
+                "tr13.mode.paper.allowed"
+              ],
+              "predicted_active_set": [
+                "tr13.mode.paper.allowed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr13.mode.paper.allowed"
+              ],
+              "predicted_must_include": [
+                "tr13.mode.paper.allowed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "allowed modes",
+                  "dimension": "allowed_modes",
+                  "winner_obs_id": "tr13_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr13_obs02",
+              "gold_active_set": [
+                "tr13.mode.paper.allowed",
+                "tr13.mode.simulation.allowed"
+              ],
+              "predicted_active_set": [
+                "tr13.mode.simulation.allowed"
+              ],
+              "active_set_f1": 0.6667,
+              "gold_must_include": [
+                "tr13.mode.paper.allowed",
+                "tr13.mode.simulation.allowed"
+              ],
+              "predicted_must_include": [
+                "tr13.mode.simulation.allowed"
+              ],
+              "must_include_recall": 0.5,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "allowed modes",
+                  "dimension": "allowed_modes",
+                  "winner_obs_id": "tr13_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr14_out_of_order_with_observed_at": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr14_obs01",
+              "gold_active_set": [
+                "tr14.inventory.10"
+              ],
+              "predicted_active_set": [
+                "tr14.inventory.10"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr14.inventory.10"
+              ],
+              "predicted_must_include": [
+                "tr14.inventory.10"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr14_entity",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "inventory snapshot",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr14_obs02",
+              "gold_active_set": [
+                "tr14.inventory.10"
+              ],
+              "predicted_active_set": [
+                "tr14.inventory.0"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr14.inventory.10"
+              ],
+              "predicted_must_include": [
+                "tr14.inventory.0"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr14_entity",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "inventory snapshot",
+                  "dimension": "inventory",
+                  "winner_obs_id": "tr14_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr15_missing_observed_at_fallback": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr15_obs01",
+              "gold_active_set": [
+                "tr15.queue_depth.8"
+              ],
+              "predicted_active_set": [
+                "tr15.queue_depth.8"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr15.queue_depth.8"
+              ],
+              "predicted_must_include": [
+                "tr15.queue_depth.8"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr15_entity",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs01",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "queue depth",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr15_obs02",
+              "gold_active_set": [
+                "tr15.queue_depth.20"
+              ],
+              "predicted_active_set": [
+                "tr15.queue_depth.20"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr15.queue_depth.20"
+              ],
+              "predicted_must_include": [
+                "tr15.queue_depth.20"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr15_obs02",
+                  "target_obs_id": "tr15_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr15.queue_depth.8"
+                  ],
+                  "replacement_claims": [
+                    "tr15.queue_depth.20"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr15_entity",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs02",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "queue depth",
+                  "dimension": "queue_depth",
+                  "winner_obs_id": "tr15_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        },
+        "tr16_alias_false_merge_trap": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr16_obs01",
+              "gold_active_set": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_active_set": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "phoenix",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr16_obs02",
+              "gold_active_set": [
+                "tr16.phoenix_desk.owner",
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_active_set": [
+                "tr16.phoenix_desk.owner",
+                "tr16.phoenix_infra.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "predicted_must_include": [
+                "tr16.phoenix_infra.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "phoenix",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "phoenix desk",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr16_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 1,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr17_provenance_conflict_probe_wins": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr17_obs01",
+              "gold_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk snapshot",
+                  "dimension": "circuit_breaker",
+                  "winner_obs_id": "tr17_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr17_obs02",
+              "gold_active_set": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_active_set": [
+                "tr17.circuit_breaker.disarmed"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr17.circuit_breaker.armed"
+              ],
+              "predicted_must_include": [
+                "tr17.circuit_breaker.disarmed"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "risk snapshot",
+                  "dimension": "circuit_breaker",
+                  "winner_obs_id": "tr17_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr18_provenance_conflict_policy_wins": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr18_obs01",
+              "gold_active_set": [
+                "tr18.retries.2"
+              ],
+              "predicted_active_set": [
+                "tr18.retries.2"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr18.retries.2"
+              ],
+              "predicted_must_include": [
+                "tr18.retries.2"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter retries",
+                  "dimension": "retry_cap",
+                  "winner_obs_id": "tr18_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr18_obs02",
+              "gold_active_set": [
+                "tr18.retries.2"
+              ],
+              "predicted_active_set": [
+                "tr18.retries.4"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr18.retries.2"
+              ],
+              "predicted_must_include": [
+                "tr18.retries.4"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "broker adapter retries",
+                  "dimension": "retry_cap",
+                  "winner_obs_id": "tr18_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr19_alias_abbreviation_split_trap": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr19_obs01",
+              "gold_active_set": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_active_set": [
+                "tr19.routing_approval.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "routing_approval_owner",
+                  "winner_obs_id": "tr19_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr19_obs02",
+              "gold_active_set": [
+                "tr19.routing_approval.owner",
+                "tr19.runtime.owner"
+              ],
+              "predicted_active_set": [
+                "tr19.routing_approval.owner",
+                "tr19.runtime.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "predicted_must_include": [
+                "tr19.routing_approval.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "routing_approval_owner",
+                  "winner_obs_id": "tr19_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "runtime_owner",
+                  "winner_obs_id": "tr19_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 0,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr20_alias_false_merge_shared_token": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr20_obs01",
+              "gold_active_set": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_active_set": [
+                "tr20.atlas.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "atlas",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr20_obs02",
+              "gold_active_set": [
+                "tr20.atlas.owner",
+                "tr20.atlas_desk.owner"
+              ],
+              "predicted_active_set": [
+                "tr20.atlas.owner",
+                "tr20.atlas_desk.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "predicted_must_include": [
+                "tr20.atlas.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "atlas",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "atlas desk",
+                  "dimension": "owner",
+                  "winner_obs_id": "tr20_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 1,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr21_alias_mixed_cost_profile": {
+          "step_count": 3,
+          "steps": [
+            {
+              "after_obs_id": "tr21_obs01",
+              "gold_active_set": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr21_obs02",
+              "gold_active_set": [
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "platform_identity",
+                  "winner_obs_id": "tr21_obs02",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr21_obs03",
+              "gold_active_set": [
+                "tr21.oms_desk.owner",
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "predicted_active_set": [
+                "tr21.oms_desk.owner",
+                "tr21.platform.identity",
+                "tr21.release_gate.owner"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "predicted_must_include": [
+                "tr21.release_gate.owner"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "oms",
+                  "dimension": "release_gate_owner",
+                  "winner_obs_id": "tr21_obs01",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "oms desk",
+                  "dimension": "desk_owner",
+                  "winner_obs_id": "tr21_obs03",
+                  "fallback_used": true
+                },
+                {
+                  "entity_key": "order manager",
+                  "dimension": "platform_identity",
+                  "winner_obs_id": "tr21_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 1,
+            "gold_diff_pairs": 2,
+            "false_split_count": 1,
+            "false_merge_count": 0,
+            "false_split_rate": 1.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr22_out_of_order_price_band_present": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr22_obs01",
+              "gold_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr22_entity",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "price band",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr22_obs02",
+              "gold_active_set": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_active_set": [
+                "tr22.price_band.narrow"
+              ],
+              "active_set_f1": 0.0,
+              "gold_must_include": [
+                "tr22.price_band.wide"
+              ],
+              "predicted_must_include": [
+                "tr22.price_band.narrow"
+              ],
+              "must_include_recall": 0.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr22_entity",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs01",
+                  "fallback_used": false
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "price band",
+                  "dimension": "price_band",
+                  "winner_obs_id": "tr22_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 0,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 0
+          }
+        },
+        "tr23_missing_observed_at_latency_fallback": {
+          "step_count": 2,
+          "steps": [
+            {
+              "after_obs_id": "tr23_obs01",
+              "gold_active_set": [
+                "tr23.latency_threshold.50"
+              ],
+              "predicted_active_set": [
+                "tr23.latency_threshold.50"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr23.latency_threshold.50"
+              ],
+              "predicted_must_include": [
+                "tr23.latency_threshold.50"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr23_entity",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs01",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "latency threshold",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs01",
+                  "fallback_used": true
+                }
+              ]
+            },
+            {
+              "after_obs_id": "tr23_obs02",
+              "gold_active_set": [
+                "tr23.latency_threshold.80"
+              ],
+              "predicted_active_set": [
+                "tr23.latency_threshold.80"
+              ],
+              "active_set_f1": 1.0,
+              "gold_must_include": [
+                "tr23.latency_threshold.80"
+              ],
+              "predicted_must_include": [
+                "tr23.latency_threshold.80"
+              ],
+              "must_include_recall": 1.0,
+              "gold_invalidations": [
+                {
+                  "source_obs_id": "tr23_obs02",
+                  "target_obs_id": "tr23_obs01",
+                  "kind": "full",
+                  "dropped_claims": [
+                    "tr23.latency_threshold.50"
+                  ],
+                  "replacement_claims": [
+                    "tr23.latency_threshold.80"
+                  ]
+                }
+              ],
+              "predicted_invalidations": [],
+              "gold_valid_time_targets": [
+                {
+                  "entity_cluster_id": "tr23_entity",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs02",
+                  "fallback_used": true
+                }
+              ],
+              "predicted_valid_time": [
+                {
+                  "entity_key": "latency threshold",
+                  "dimension": "latency_threshold",
+                  "winner_obs_id": "tr23_obs02",
+                  "fallback_used": true
+                }
+              ]
+            }
+          ],
+          "entity_resolution": {
+            "gold_same_pairs": 0,
+            "gold_diff_pairs": 0,
+            "false_split_count": 0,
+            "false_merge_count": 0,
+            "false_split_rate": 0.0,
+            "false_merge_rate": 0.0
+          },
+          "invalidation_event_summary": {
+            "predicted_count": 0,
+            "gold_count": 1,
+            "true_positive_count": 0,
+            "false_positive_count": 0,
+            "false_negative_count": 1
+          }
+        }
+      }
+    }
+  },
+  "alias_strategy_tradeoff": {
+    "conservative_exact_surface": {
+      "false_split_count": 4,
+      "false_merge_count": 0,
+      "gold_same_pairs": 4,
+      "gold_diff_pairs": 4,
+      "false_split_rate": 1.0,
+      "false_merge_rate": 0.0
+    },
+    "aggressive_token_overlap": {
+      "false_split_count": 2,
+      "false_merge_count": 3,
+      "gold_same_pairs": 4,
+      "gold_diff_pairs": 4,
+      "false_split_rate": 0.5,
+      "false_merge_rate": 0.75
+    },
+    "weighted_cost_profiles": {
+      "equal_cost": {
+        "false_merge_weight": 1,
+        "false_split_weight": 1,
+        "conservative_cost": 4,
+        "aggressive_cost": 5,
+        "preferred_strategy": "conservative_exact_surface"
+      },
+      "merge_is_2x": {
+        "false_merge_weight": 2,
+        "false_split_weight": 1,
+        "conservative_cost": 4,
+        "aggressive_cost": 8,
+        "preferred_strategy": "conservative_exact_surface"
+      },
+      "merge_is_5x": {
+        "false_merge_weight": 5,
+        "false_split_weight": 1,
+        "conservative_cost": 4,
+        "aggressive_cost": 17,
+        "preferred_strategy": "conservative_exact_surface"
+      },
+      "split_is_2x": {
+        "false_merge_weight": 1,
+        "false_split_weight": 2,
+        "conservative_cost": 8,
+        "aggressive_cost": 7,
+        "preferred_strategy": "aggressive_token_overlap"
+      }
+    }
+  },
+  "tag_failures": {
+    "full": {
+      "phase0_current": [],
+      "flat_rag": [
+        "tr01_full_leverage_flip",
+        "tr02_full_vendor_switch",
+        "tr15_missing_observed_at_fallback",
+        "tr23_missing_observed_at_latency_fallback"
+      ]
+    },
+    "partial": {
+      "phase0_current": [
+        "tr03_partial_policy_clause",
+        "tr04_partial_checklist_clause"
+      ],
+      "flat_rag": [
+        "tr03_partial_policy_clause",
+        "tr04_partial_checklist_clause"
+      ]
+    },
+    "conditional": {
+      "phase0_current": [
+        "tr05_conditional_region_exception",
+        "tr06_conditional_window_exception"
+      ],
+      "flat_rag": [
+        "tr05_conditional_region_exception",
+        "tr06_conditional_window_exception"
+      ]
+    },
+    "revival": {
+      "phase0_current": [
+        "tr07_revival_feature_flag",
+        "tr08_revival_research_stream"
+      ],
+      "flat_rag": [
+        "tr07_revival_feature_flag",
+        "tr08_revival_research_stream"
+      ]
+    },
+    "alias_trap": {
+      "phase0_current": [
+        "tr09_alias_same_service",
+        "tr10_alias_same_person",
+        "tr19_alias_abbreviation_split_trap",
+        "tr21_alias_mixed_cost_profile"
+      ],
+      "flat_rag": [
+        "tr09_alias_same_service",
+        "tr10_alias_same_person",
+        "tr19_alias_abbreviation_split_trap",
+        "tr21_alias_mixed_cost_profile"
+      ]
+    },
+    "provenance_conflict": {
+      "phase0_current": [
+        "tr11_provenance_conflict",
+        "tr17_provenance_conflict_probe_wins",
+        "tr18_provenance_conflict_policy_wins"
+      ],
+      "flat_rag": [
+        "tr11_provenance_conflict",
+        "tr17_provenance_conflict_probe_wins",
+        "tr18_provenance_conflict_policy_wins"
+      ]
+    },
+    "non_invalidation_decoy": {
+      "phase0_current": [
+        "tr12_non_invalidation_parallel_targets",
+        "tr13_non_invalidation_parallel_modes",
+        "tr21_alias_mixed_cost_profile"
+      ],
+      "flat_rag": [
+        "tr12_non_invalidation_parallel_targets",
+        "tr13_non_invalidation_parallel_modes",
+        "tr21_alias_mixed_cost_profile"
+      ]
+    },
+    "out_of_order_late": {
+      "phase0_current": [
+        "tr14_out_of_order_with_observed_at",
+        "tr22_out_of_order_price_band_present"
+      ],
+      "flat_rag": [
+        "tr14_out_of_order_with_observed_at",
+        "tr15_missing_observed_at_fallback",
+        "tr22_out_of_order_price_band_present",
+        "tr23_missing_observed_at_latency_fallback"
+      ]
+    }
+  }
+}

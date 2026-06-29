@@ -1,0 +1,58 @@
+{
+  "trajectory_id": "tr15_missing_observed_at_fallback",
+  "title": "缺少 observed_at 时退回到达序",
+  "coverage_tags": [
+    "full",
+    "out_of_order_late"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr15_obs01",
+      "observed_at": null,
+      "valid_from": "2026-06-15T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "queue_board",
+        "provenance": "queue_board#001"
+      },
+      "mentions": [
+        "Queue depth"
+      ],
+      "payload": {
+        "statement": "Queue depth is 8.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr15.queue_depth.8",
+            "dimension": "queue_depth",
+            "value": "8",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr15_obs02",
+      "observed_at": null,
+      "valid_from": "2026-06-15T08:01:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "queue_board",
+        "provenance": "queue_board#002"
+      },
+      "mentions": [
+        "Queue depth"
+      ],
+      "payload": {
+        "statement": "Queue depth is 20.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr15.queue_depth.20",
+            "dimension": "queue_depth",
+            "value": "20",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "trajectory_id": "tr08_revival_research_stream",
+  "title": "暂停后恢复研究流",
+  "coverage_tags": [
+    "revival"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr08_obs01",
+      "observed_at": "2026-06-08T08:00:00Z",
+      "valid_from": "2026-06-08T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "program_board",
+        "provenance": "program_board#011"
+      },
+      "mentions": [
+        "Research stream"
+      ],
+      "payload": {
+        "statement": "Research stream is active.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr08.stream.active.v1",
+            "dimension": "stream_state",
+            "value": "active",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr08_obs02",
+      "observed_at": "2026-06-08T11:00:00Z",
+      "valid_from": "2026-06-08T11:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "program_board",
+        "provenance": "program_board#012"
+      },
+      "mentions": [
+        "Research stream"
+      ],
+      "payload": {
+        "statement": "Research stream is paused to save budget.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr08.stream.paused",
+            "dimension": "stream_state",
+            "value": "paused",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr08_obs03",
+      "observed_at": "2026-06-08T15:00:00Z",
+      "valid_from": "2026-06-08T15:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "program_board",
+        "provenance": "program_board#013"
+      },
+      "mentions": [
+        "Research stream"
+      ],
+      "payload": {
+        "statement": "Research stream resumes after budget is restored.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr08.stream.active.v2",
+            "dimension": "stream_state",
+            "value": "active_again",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

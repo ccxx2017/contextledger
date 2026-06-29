@@ -1,0 +1,48 @@
+{
+  "trajectory_id": "tr17_provenance_conflict_probe_wins",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr17_obs01",
+      "expected_active_set": [
+        "tr17.circuit_breaker.armed"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr17_entity",
+          "mentions": [
+            "Risk snapshot"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr17.circuit_breaker.armed"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr17_obs02",
+      "expected_active_set": [
+        "tr17.circuit_breaker.armed"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr17_entity",
+          "mentions": [
+            "Risk snapshot"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr17.circuit_breaker.armed"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}
