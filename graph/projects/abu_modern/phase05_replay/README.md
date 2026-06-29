@@ -33,6 +33,12 @@
 - `graph/scripts/seed_phase05_replay.py`：重建 Phase 0.5 基准数据
 - `graph/scripts/score_phase05.py`：对跑基线、生成评分、封板报告与完成线文档
 
+`reports/` 文件说明：
+- `phase05_score_report.json`：机器可读的完整评分结果，包含分基线、分形态、分轨迹明细
+- `phase05_score_summary.md`：人类可读的总览摘要，用于快速查看本轮评分结论
+- `phase05_seal_report.md`：Phase 0.5 封板报告，记录封板时的核心结论与按形态 invalidation 拆分结果
+- `phase05_completion_lines.md`：Phase 1 的完成线文档，按形态记录后续验收写法
+
 纪律：
 - gold 使用“事实上应该发生什么”的语言，不复用 `status / state / supersede / OpenTask` 词汇
 - `partial / conditional / revival / valid-time` 预期会暴露缺口，不能为了通过率把它们改写成现有字段可表达的形状
