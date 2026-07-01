@@ -1,0 +1,225 @@
+{
+  "kind": "lint_delta.phase1_prep.v1",
+  "before_graph": "graph\\projects\\abu_modern\\reports\\dry_run\\phase1_prep\\graph_state.before.json",
+  "after_graph": "graph\\projects\\abu_modern\\reports\\dry_run\\phase1_prep\\graph_state.after_good.json",
+  "before_report": {
+    "ok": false,
+    "summary": {
+      "nodes": 40,
+      "edges": 39,
+      "active_nodes": 40,
+      "active_edges": 39,
+      "superseded_nodes": 0,
+      "errors": 2,
+      "warnings": 2
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [
+      {
+        "level": "error",
+        "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+        "message": "OpenTask n_0006 已是 resolved，但仍为 active；完成任务不应继续 active。",
+        "node_id": "n_0006",
+        "state": "resolved",
+        "status": null
+      },
+      {
+        "level": "error",
+        "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+        "message": "OpenTask n_0008 已是 resolved，但仍为 active；完成任务不应继续 active。",
+        "node_id": "n_0008",
+        "state": "resolved",
+        "status": null
+      }
+    ],
+    "warnings": [
+      {
+        "level": "warning",
+        "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+        "message": "节点 n_0011 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+        "node_id": "n_0011",
+        "node_type": "OpenTask",
+        "evidence": [
+          "ticket_id"
+        ]
+      },
+      {
+        "level": "warning",
+        "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+        "message": "节点 n_0018 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+        "node_id": "n_0018",
+        "node_type": "OpenTask",
+        "evidence": [
+          "file_path"
+        ]
+      }
+    ]
+  },
+  "after_report": {
+    "ok": false,
+    "summary": {
+      "nodes": 41,
+      "edges": 40,
+      "active_nodes": 41,
+      "active_edges": 40,
+      "superseded_nodes": 0,
+      "errors": 2,
+      "warnings": 2
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [
+      {
+        "level": "error",
+        "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+        "message": "OpenTask n_0006 已是 resolved，但仍为 active；完成任务不应继续 active。",
+        "node_id": "n_0006",
+        "state": "resolved",
+        "status": null
+      },
+      {
+        "level": "error",
+        "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+        "message": "OpenTask n_0008 已是 resolved，但仍为 active；完成任务不应继续 active。",
+        "node_id": "n_0008",
+        "state": "resolved",
+        "status": null
+      }
+    ],
+    "warnings": [
+      {
+        "level": "warning",
+        "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+        "message": "节点 n_0011 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+        "node_id": "n_0011",
+        "node_type": "OpenTask",
+        "evidence": [
+          "ticket_id"
+        ]
+      },
+      {
+        "level": "warning",
+        "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+        "message": "节点 n_0018 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+        "node_id": "n_0018",
+        "node_type": "OpenTask",
+        "evidence": [
+          "file_path"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "before_errors": 2,
+    "after_errors": 2,
+    "before_warnings": 2,
+    "after_warnings": 2,
+    "introduced_errors": 0,
+    "preexisting_errors": 2,
+    "introduced_warnings": 0,
+    "preexisting_warnings": 2
+  },
+  "introduced_errors": [],
+  "preexisting_errors": [
+    {
+      "level": "error",
+      "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+      "message": "OpenTask n_0006 已是 resolved，但仍为 active；完成任务不应继续 active。",
+      "node_id": "n_0006",
+      "state": "resolved",
+      "status": null
+    },
+    {
+      "level": "error",
+      "code": "RESOLVED_OPEN_TASK_STILL_ACTIVE",
+      "message": "OpenTask n_0008 已是 resolved，但仍为 active；完成任务不应继续 active。",
+      "node_id": "n_0008",
+      "state": "resolved",
+      "status": null
+    }
+  ],
+  "introduced_warnings": [],
+  "preexisting_warnings": [
+    {
+      "level": "warning",
+      "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+      "message": "节点 n_0018 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+      "node_id": "n_0018",
+      "node_type": "OpenTask",
+      "evidence": [
+        "file_path"
+      ]
+    },
+    {
+      "level": "warning",
+      "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+      "message": "节点 n_0011 类型为 OpenTask，内容中包含可识别实体线索，但缺少 entity_ref。",
+      "node_id": "n_0011",
+      "node_type": "OpenTask",
+      "evidence": [
+        "ticket_id"
+      ]
+    }
+  ]
+}

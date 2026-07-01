@@ -45,6 +45,16 @@ MINIMAL_STATE_ENUM = {
     "unknown",
 }
 
+NODE_TYPE_ALLOWED_STATES = {
+    "decision": {
+        "",
+        "open",
+        "resolved",
+        "cancelled",
+        "unknown",
+    },
+}
+
 STATUS_VOCAB = {
     "active",
     "superseded",
@@ -578,6 +588,7 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
     # 节点状态枚举 lint
     for nid, node in nodes_by_id.items():
         state = normalize_state(node.get("state"))
+        node_type = normalize_node_type(node.get("type"))
 
         if state and state not in MINIMAL_STATE_ENUM:
             add_issue(
@@ -604,6 +615,22 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
                 state=state,
                 status=node.get("status"),
                 forbidden_state_values=sorted(STATUS_VOCAB),
+            )
+
+        allowed_states_for_type = NODE_TYPE_ALLOWED_STATES.get(node_type)
+        if allowed_states_for_type is not None and state not in allowed_states_for_type:
+            add_issue(
+                report,
+                "error",
+                "STATE_NOT_ALLOWED_FOR_NODE_TYPE",
+                (
+                    f"节点 {nid} 的 type={node.get('type')} 不允许使用 state={state or 'null'}。"
+                    "该节点类型应遵守专属 state 合法集。"
+                ),
+                node_id=nid,
+                node_type=node.get("type"),
+                state=state or None,
+                allowed_states=sorted(value or "null" for value in allowed_states_for_type),
             )
 
     # 1. 不允许未知 relation

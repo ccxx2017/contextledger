@@ -2996,6 +2996,84 @@ Claude确认账平：classified=overall=13，unclassified=0，Phase 0.5封板通
 项目AI将Phase 0.5产物分为三类：**长期正式资产**（trajectories/、gold/、score/seed脚本、coverage_matrix、gap_register、completion_lines、seal_report），因其为唯一源头或决策记录；**可重生成但建议保留的快照**（score_report.json、score_summary.md），作为封板水位线供Phase 1对比；**整个目录不建议删除**，属后续基准测试资产。Claude认可此划分，核心标准为“是否SSOT”——trajectories与gold作为schema无关金标最为关键。
 
 Claude补充一项前提：score快照的可再生性取决于seed脚本是否完全确定性可复现。若seed存在随机性或外部依赖，重跑与封板版本将不一致，快照即升级为“不可再生的封板证据”，必须保留。建议让项目AI确认`seed_phase05_replay.py`的确定性，并产出README明确每个文件的SSOT属性、可再生性及“重生是否字节一致”，在进入Phase 1前彻底厘清资产边界。
+## GPT-5.5评估：采纳Development READY但需先关闭Operational Preflight
+
+### 认可项目AI核心判断
+
+GPT-5.5同意项目AI结论：当前状态为Development READY, Operational Preflight BLOCKED。Phase 0形状验证与Phase 0.5回放基准已完备，但主项目级extractor、assembler、resolver、patch replay、retry contract、L1/L2判定等仍未闭合，尚不能按runbook正式跑单轮闭环。
+
+### 要求以Preflight Closure Checklist替代简单报告
+
+GPT-5.5建议下一步不是仅生成readiness report，也不是直接进入正式Phase 1 turn，而是先执行Phase 1-prep小迭代。项目AI提出的6项不够完整，还应纳入：主项目`graph_state.json`缺`priority`字段、`contracts/README.md`文件名漂移、正式Assembler不能沿用Phase 0专用脚本、主项目`patches/`与确定性重放约定未成型。应整合为完整的Preflight Closure Checklist逐项关闭。
+
+### 三项关键补充
+
+- **turn_counter=3与raw已到turn_006的冲突为第一优先级**。须先明确Phase 1首个正式turn是backfill/replay turn_004~006、将checkpoint推进到turn_006后从turn_007开始，还是重新从turn_004跑且不污染主图。此问题不决，后续patches、turn_id、replay全盘紊乱。
+- **Entity Resolver不要求一步到位，但接口必须先行落地**。需定义输入/输出contract、`pending_merge/`目录及`match_confidence`/`merge_reason`/`non_merge_reason`/`candidate_aliases`，默认保守策略（低置信不进merge）。
+- **valid-time、partial/conditional/revival/provenance的能力提升属Phase 1实现目标，prep阶段不扩展样本、不修改Phase 0.5封板基准。**
+
+### Preflight清单共10项
+
+①明确主项目checkpoint与首个正式turn；②补extractor调用contract与`graph/env.example`；③将retry N写入contract；④建立主项目`patches/`、`pending_merge/`、`reports/`目录约定；⑤落地resolver最小接口与保守stub；⑥落地正式Assembler v1，移除phase0_manual硬编码；⑦为主图补`priority`字段迁移策略；⑧增加前后态diff/lint用于判定[L1]/[L2]；⑨修正contracts目录漂移；⑩scratch dry-run一轮验证patch→reconcile→apply→lint→quarantine路径可运行。完成后方可进入正式Phase 1单轮闭环。
+## Phase 1-prep评估：机械核已验证，但extractor链路零次真实执行是当前最高风险盲区
+
+### 对prep闭环的基本认可
+
+项目AI已按Preflight Closure Checklist完成10项准备：主项目checkpoint定于turn_004（turn_counter=3→下一轮004，逻辑自洽）；extractor调用契约与`env.example`补齐；retry N写入contract；`patches/`、`pending_merge/`、`reports/`目录约定落盘；Entity Resolver最小接口落地；Assembler v1移除phase0_manual硬编码；主图priority字段迁移并留备份；L1/L2机械判定脚本可用；contracts索引漂移修正；scratch dry-run验证了reconcile→apply→lint→quarantine路径。priority迁移留有回滚路径，L2存量问题做了识别未误记为L1引入。
+
+### 结构性盲区：extractor链路从未真实运行
+
+dry-run验证覆盖的是“手搓patch→机械核中段→落盘”路径，所用`patch_good`/`patch_bad`为人造件，`build_graph_slice`→`build_extractor_prompt`→`invoke_extractor`→`patch.json`落盘这条**上游LLM抽取链路从未真实执行过**。项目AI建议“写key，按8步顺序进turn_004”，但`apply_patch.py`会直接写主图——意味着一条零次验证的链路，首次运行产物即提交进主图。
+
+### 进turn_004前须加两道闸门
+
+**闸1：turn_004作为extractor首次冒烟测试，必须设置人工检视点。** 执行到`invoke_extractor.py`出`patch.json`后停止，人工确认patch字段、节点引用、无幻觉后再继续；`reconcile_patch.py`出报告后再停一次；确认无误方由`apply_patch.py`落主图。最佳做法是先在scratch/可回滚状态下过一遍004，确认抽取产物正常，再正式提交主图。不追求全自动pipe。
+
+**闸2：4个L2存量问题须固化为持久基线文件，不能仅写在报告里。** n_0006/n_0008的`RESOLVED_OPEN_TASK_STILL_ACTIVE`、n_0011/n_0018的缺失entity_ref，应写入`lint_baseline.json`（或追加进gap_register），使`diff_lint_reports.py`每轮以此为参照区分prep前存量与Phase 1新引入。若仅写在报告层，图演化后这些问题的分界将不可追溯，L1/L2判定会失稳。
+
+### 两项确认（不阻塞，但须回应）
+
+①`entity_resolver.py`是否确实输出`match_confidence`/`merge_reason`/`non_merge_reason`/`candidate_aliases`四件套，且低置信默认不进merge而入pending_merge？②Assembler v1的“Graph-only”是有意裁剪（仅保留query驱动子图层），还是将常驻基线push层也丢掉了？push基线不能缺失。
+
+### 总判断
+
+Operational Preflight关得真实，但最高风险的extractor链路一次未验。turn_004即是该链路的首测——必须带闸跑，不得裸跑入主图。两闸通过、两点确认后，方可正式进turn_004。
+## 两闸已通过，确认开跑turn_004 scratch版
+
+项目AI已落实两项要求：制定了`turn_004_manual_gated_scratch_plan.md`，明确patch.json与reconcile_report生成后强制停点、人工核验后方可apply、最后再决定是否提交主图；4个L2存量问题已从报告固化进`lint_baseline.json`（n_0006/n_0008的`RESOLVED_OPEN_TASK_STILL_ACTIVE`、n_0011/n_0018的`MISSING_ENTITY_REF`），`diff_lint_reports.py`已支持`--baseline`参数并输出基线匹配结果，契约已补入`07_turn_runtime.md`。
+
+两点确认回应正确：entity_resolver输出四件套，仅exact_entity_ref_match与alias_registry_match直接规范化，低置信弱候选进pending_merge不自动merge；Assembler v1的graph-only为数据来源裁剪（去Pack/Wiki），`l1_baseline`仍在bundle中，push基线未丢失。
+
+Claude确认两闸已过、两点正确，同意开跑turn_004 scratch版。提示首次核patch时重点检查三处：节点引用是否指向真实存在的节点、字段是否符合schema、有无原文未含的幻觉内容。
+## 第一闸通过，决策节点state字段用词需修正
+
+### extractor首次真实运行三项检查通过
+
+项目AI完成turn_004 scratch版extractor链路首次真实运行，产出`patch_004.raw.json`、`extractor_prompt.turn_004.json`、`extractor_raw_response.turn_004.txt`。按停点要求进行三项核验：节点引用检查——patch引用的n_0033/0034/0035/0001均真实存在于主图，新增节点ID连续递增未复用，边源/目标无悬空引用，机械核对通过；Schema检查——顶层字段齐全，未混入不应出现的字段；原文幻觉检查——各节点内容均可回溯到原文对应段落，未发现编造内容。首次运行中`invoke_extractor.py`因URL格式问题遇404，已修复为兼容根基址与完整completions URL两种写法。
+
+### 语义修正：Decision.state应从implemented改为resolved
+
+n_0041和n_0044均为Decision类型，state被抽取为`implemented`。Claude判定须改为`resolved`，理由为：Decision的state应跟踪节点自身生命周期（open→resolved），而`implemented`描述“决策是否已落地执行”，属于另一条轴。两节点均为本轮对话中拍板的架构决策，代码尚未实现，标`implemented`属过度声明，等同于宣称已建成。
+
+### 追问precedent问题：Decision的state是否schema枚举受限
+
+若state值未按type枚举约束，extractor后续每轮将继续自由发挥，`graph_lint`/`diff_lint`的机械判定无法拦截自由state值漂移。须在进reconcile前确认：Decision的合法state集合是否已枚举（如open/resolved等），让linter可机械拦截非法值。若未枚举，应在此时定下词表。此问题若本轮不定，漂移将一路带入主图。
+
+### 处理要求
+
+将n_0041、n_0044的state改为resolved并回上述precedent问题后，可继续跑`reconcile_patch.py`，在reconcile报告生成后按约定第二次停点。
+## 第二闸通过，state约束三层堵漏，reconcile全零待确认resolver是否真实触发
+
+项目AI已完成两项处理：n_0041与n_0044的state从`implemented`改为`resolved`；Decision.state此前未按节点类型收紧，仅存在全局最小枚举，现已补上三层约束——契约层（`03_graph_schema.md`明确Decision仅允许open/resolved/cancelled/unknown/null）、机械层（`graph_lint.py`新增`STATE_NOT_ALLOWED_FOR_NODE_TYPE`拦截非法state）、提示词层（`extractor_system.md`明确决策已拍板写resolved，不写implemented/deployed）。precedent漏洞已闭环，后续extractor再产出非法state将被机械拦截。
+
+第二闸reconcile结果干净：`ok: true`，errors/warnings均为0，`entity_ref_matches`与`weak_matches`均为空。
+
+Claude确认第二闸通过，但对reconcile全零提出关键质疑：本轮patch引用了n_0001/n_0033/n_0034/n_0035且更新了n_0035，entity resolver理应对这些旧节点执行匹配。matches全空有两种截然相反的可能——已通过exact_entity_ref_match或alias直接命中（不计入matches列表），或resolver路径根本未被触发。须排除“没跑”的假阴性后方可放行。
+
+确认后继续scratch版apply（不落主图），带三个停点产物：`graph_lint.py`验证本轮introduced_errors为0且4个L2存量问题被baseline正确归类；`diff_lint_reports.py --baseline`验证L1=0；`build_context_bundle.py`验证`l1_baseline`在位且graph层为query驱动子图。主图仍不动，待三样核过再决定正式提交。
 # [/COMPACTED]
+
+
+
 
 

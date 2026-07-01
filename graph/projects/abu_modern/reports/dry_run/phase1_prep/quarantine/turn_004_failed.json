@@ -1,0 +1,53 @@
+{
+  "turn_id": 4,
+  "patch_path": "graph\\projects\\abu_modern\\reports\\dry_run\\phase1_prep\\quarantine\\turn_004_failed_patch.json",
+  "original_patch": "graph\\projects\\abu_modern\\reports\\dry_run\\patch_bad.turn_004.json",
+  "stage": "reconcile",
+  "errors": [
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0042 与旧节点 n_0029 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0029 的声明。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0029",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0042 与旧节点 n_0029 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 n_0042 invalidates n_0029。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0029",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0042 与旧节点 n_0040 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0040 的声明。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0040",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0042 与旧节点 n_0040 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 n_0042 invalidates n_0040。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0040",
+      "new_state": "resolved",
+      "old_state": "open"
+    }
+  ],
+  "warnings": [],
+  "max_retries": 3,
+  "decision": "not_applied",
+  "reason": "failed after max retries or manual review required",
+  "quarantined_at": "2026-06-29T02:35:25.436866+00:00"
+}

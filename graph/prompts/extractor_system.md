@@ -46,6 +46,9 @@ new_edges:
 
 - entity_ref：用于机械判断两个节点是否同一长期实体。可填工单号 / API 路径 / 文件路径 / 脚本名 / 课程编号 / 模块名 / 节点编号。可长期追踪的节点必须尽量填写；无法确定填 null；禁止把普通描述性文本当作 entity_ref。
 - state 归一化：未完成/待实现/todo/pending→open；阻塞/卡住/依赖未完成→blocked；进行中→in_progress；已实现/代码已完成→implemented；已部署/已上线/已落盘→deployed；已完成/已验证/closed/done→resolved；取消/不做了/废弃→cancelled；有状态含义但判断不了→unknown；无状态含义→null。
+- 类型约束：
+  - `Decision.state` 只允许 `open|resolved|cancelled|unknown|null`
+  - 决策“已经拍板”应写 `resolved`，不得写 `implemented` 或 `deployed`
 - entity_ref 取值规则(按优先级):
   1. 文件/目录 → 仓库相对路径原文(如 aos/runtime/_frozen_ideas.md)
   2. 代码组件 / Agent / 脚本 → 全小写 snake_case slug(如 strategy_research_agent、duty_reporter),禁止空格和大写

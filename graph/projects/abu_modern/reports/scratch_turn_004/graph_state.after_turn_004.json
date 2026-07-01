@@ -1,6 +1,6 @@
 {
   "task_id": "task_default",
-  "turn_counter": 3,
+  "turn_counter": 4,
   "nodes": {
     "n_0001": {
       "node_id": "n_0001",
@@ -301,9 +301,10 @@
       "type": "OpenTask",
       "content": "决策strategy-researcher与quant_assistant的关系：A（quant_assistant为工具底座，strategy-researcher调用它）、B（并行独立）、C（quant_assistant被取代或重构）。需用户选择。",
       "entity_ref": null,
-      "state": "open",
+      "state": "resolved",
       "priority": "optional",
-      "_priority_migration_reason": "active_task_without_explicit_execution_anchor"
+      "_priority_migration_reason": "active_task_without_explicit_execution_anchor",
+      "_update_reason": "strategy-researcher 与 quant_assistant 的关系已决断：平行 Agent，共享后端。"
     },
     "n_0034": {
       "node_id": "n_0034",
@@ -317,11 +318,12 @@
     "n_0035": {
       "node_id": "n_0035",
       "type": "FileArtifact",
-      "content": "创建 openclaw_skills/strategy-researcher/ 目录，包含 SKILL.md, TOOLS.md, scripts/（research_loop.py, hypothesis_gen.py, backtest_runner.py, result_analyzer.py, archive_writer.py）。",
+      "content": "创建 openclaw_skills/strategy-researcher/ 目录，包含 SKILL.md, TOOLS.md, scripts/（research_loop.py, hypothesis_gen.py, kb_query.py, 可选 kb_write.py）。backtest_runner.py 和 archive_writer.py 不再需要，因为回测调用简化为 30 行内联，入库通过 function 调用而不是文件 I/O。",
       "entity_ref": "openclaw_skills/strategy-researcher",
       "state": "open",
       "priority": "should_include",
-      "_priority_migration_reason": "artifact_needed_for_execution_context"
+      "_priority_migration_reason": "artifact_needed_for_execution_context",
+      "_update_reason": "根据 schema.md 揭示的现有基础设施，精简脚本清单，删除冗余脚本。"
     },
     "n_0036": {
       "node_id": "n_0036",
@@ -367,6 +369,34 @@
       "state": "open",
       "priority": "should_include",
       "_priority_migration_reason": "active_task_with_phase1_or_entity_focus"
+    },
+    "n_0041": {
+      "node_id": "n_0041",
+      "type": "Decision",
+      "content": "strategy-researcher 与 quant_assistant 的关系：平行 Agent，共享后端，互不调用，都直接调用同一后端的 API（/strategy-builder, /backtests, /knowledge 等）。不依赖对方。",
+      "entity_ref": null,
+      "state": "resolved"
+    },
+    "n_0042": {
+      "node_id": "n_0042",
+      "type": "OpenTask",
+      "content": "确认知识库函数的暴露形式：情况 A（HTTP API）、B（本地 Python 函数）、C（后端自动调用）。需要用户提供实现 create_strategy_archive 等函数的模块路径或代码，以确定 strategy-researcher 如何访问知识库。",
+      "entity_ref": null,
+      "state": "open"
+    },
+    "n_0043": {
+      "node_id": "n_0043",
+      "type": "Fact",
+      "content": "schema.md 已经包含了研究循环的工作流定义（LLM IR → create_strategy_archive → run_backtest → append_backtest_result → 分析 phase_stats.never_triggered_transitions → 对比历史 → 更新 index）、回测产物结构（BacktestResult 包含 metrics 等）、知识库 API 函数（create_strategy_archive 等）、以及入库自检规则（Lint 清单）。",
+      "entity_ref": "data/knowledge/schema.md",
+      "state": null
+    },
+    "n_0044": {
+      "node_id": "n_0044",
+      "type": "Decision",
+      "content": "strategy-researcher 的 SKILL.md 应当基于 schema.md，作为其“执行器版本”；入库标准直接引用 schema.md 第 5 节 Lint 清单，不额外编写。",
+      "entity_ref": null,
+      "state": "resolved"
     }
   },
   "edges": [
@@ -564,6 +594,31 @@
       "source": "n_0040",
       "target": "n_0029",
       "relation": "refines"
+    },
+    {
+      "source": "n_0041",
+      "target": "n_0033",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0034",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0043",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0044",
+      "target": "n_0035",
+      "relation": "supports"
     }
   ]
 }

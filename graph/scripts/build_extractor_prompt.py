@@ -114,6 +114,80 @@ next_node_id: {next_node_id}
 """
 
 
+def resolve_prompt_components(
+    system_path: Path,
+    slice_path: Path,
+    turn_path: Path,
+    *,
+    task_id_override: str | None = None,
+    turn_id_override: int | None = None,
+    next_node_id_override: str | None = None,
+) -> dict[str, Any]:
+    system_text = system_path.read_text(encoding="utf-8")
+    raw_pack = load_json(slice_path)
+    turn_text = turn_path.read_text(encoding="utf-8")
+
+    pack, runtime = split_runtime_from_pack(raw_pack)
+
+    task_id = task_id_override or pack.get("task_id") or "task_default"
+    turn_id = turn_id_override
+    if turn_id is None:
+        turn_id = pack.get("turn_id")
+    if turn_id is None:
+        turn_id = parse_turn_id(turn_path)
+
+    if turn_id is None:
+        raise ValueError("cannot infer turn_id. Use --turn-id.")
+
+    next_node_id = (
+        next_node_id_override
+        or runtime.get("next_node_id")
+        or next_node_id_from_pack_fallback(pack)
+    )
+
+    user_message = build_user_message(
+        pack=pack,
+        turn_text=turn_text,
+        task_id=str(task_id),
+        turn_id=int(turn_id),
+        next_node_id=str(next_node_id),
+    )
+
+    return {
+        "system_text": system_text,
+        "user_message": user_message,
+        "task_id": str(task_id),
+        "turn_id": int(turn_id),
+        "next_node_id": str(next_node_id),
+        "pack": pack,
+        "runtime": runtime,
+        "turn_text": turn_text,
+    }
+
+
+def build_chat_messages(
+    system_path: Path,
+    slice_path: Path,
+    turn_path: Path,
+    *,
+    task_id_override: str | None = None,
+    turn_id_override: int | None = None,
+    next_node_id_override: str | None = None,
+) -> list[dict[str, str]]:
+    components = resolve_prompt_components(
+        system_path=system_path,
+        slice_path=slice_path,
+        turn_path=turn_path,
+        task_id_override=task_id_override,
+        turn_id_override=turn_id_override,
+        next_node_id_override=next_node_id_override,
+    )
+    return [
+        {"role": "system", "content": components["system_text"]},
+        {"role": "user", "content": components["user_message"]},
+    ]
+
+
 def main() -> None:
     script_dir = Path(__file__).parent.resolve()
     default_system = script_dir.parent / "prompts" / "extractor_system.md"
@@ -137,36 +211,21 @@ def main() -> None:
     slice_path = Path(args.slice)
     turn_path = Path(args.turn)
 
-    system_text = system_path.read_text(encoding="utf-8")
-    raw_pack = load_json(slice_path)
-    turn_text = turn_path.read_text(encoding="utf-8")
-
-    pack, runtime = split_runtime_from_pack(raw_pack)
-
-    task_id = args.task_id or pack.get("task_id") or "task_default"
-    turn_id = args.turn_id
-    if turn_id is None:
-      turn_id = pack.get("turn_id")
-    if turn_id is None:
-      turn_id = parse_turn_id(turn_path)
-
-    if turn_id is None:
-        print("ERROR: cannot infer turn_id. Use --turn-id.", file=sys.stderr)
+    try:
+        components = resolve_prompt_components(
+            system_path=system_path,
+            slice_path=slice_path,
+            turn_path=turn_path,
+            task_id_override=args.task_id,
+            turn_id_override=args.turn_id,
+            next_node_id_override=args.next_node_id,
+        )
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    next_node_id = (
-        args.next_node_id
-        or runtime.get("next_node_id")
-        or next_node_id_from_pack_fallback(pack)
-    )
-
-    user_message = build_user_message(
-        pack=pack,
-        turn_text=turn_text,
-        task_id=str(task_id),
-        turn_id=int(turn_id),
-        next_node_id=str(next_node_id),
-    )
+    system_text = components["system_text"]
+    user_message = components["user_message"]
 
     if args.mode == "user-only":
         output = user_message
@@ -183,12 +242,10 @@ def main() -> None:
 
     elif args.mode == "api-json":
         output = json.dumps(
-            {
-                "messages": [
-                    {"role": "system", "content": system_text},
-                    {"role": "user", "content": user_message},
-                ]
-            },
+            {"messages": build_chat_messages(system_path, slice_path, turn_path,
+                                             task_id_override=args.task_id,
+                                             turn_id_override=args.turn_id,
+                                             next_node_id_override=args.next_node_id)},
             ensure_ascii=False,
             indent=2,
         )

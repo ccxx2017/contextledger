@@ -4,12 +4,12 @@
 """
 build_context_bundle.py
 
-最小确定性 Assembler（Phase 0 专用）：
+正式 Assembler v1（Graph-only）：
 1. 只读取 graph_state.json，不依赖 LLM
 2. 当前态成员资格只按 status=active 判断
 3. 按 priority 分层装配：must_include -> should_include -> optional -> background
 4. 预算不足时拒绝静默丢弃 must_include
-5. 输出机械生成的 context_bundle 与 assembly_report
+5. 支持主项目按 project_id / turn_id / budget 生成 ContextBundle
 """
 
 from __future__ import annotations
@@ -45,6 +45,10 @@ def write_json(path: str | Path, obj: Any) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
         f.write("\n")
+
+
+def default_project_report_path(project_id: str, filename: str) -> Path:
+    return Path("graph") / "projects" / project_id / "reports" / filename
 
 
 def normalize_status(value: Any) -> str:
@@ -131,7 +135,7 @@ def build_rejection_report(
     must_nodes: list[dict[str, Any]],
 ) -> dict[str, Any]:
     return {
-        "kind": "assembly_report.phase0_mechanical.v1",
+        "kind": "assembly_report.graph_only.v1",
         "project_id": project_id,
         "turn_id": turn_id,
         "result": "rejected",
@@ -185,6 +189,7 @@ def build_bundle(
     turn_id: str,
     max_nodes: int,
     budget_profile: str,
+    source_graph: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     all_nodes = extract_nodes(graph_state)
     active_nodes: list[dict[str, Any]] = []
@@ -267,11 +272,11 @@ def build_bundle(
     ]
 
     bundle = {
-        "kind": "context_bundle.phase0_mechanical.v1",
+        "kind": "context_bundle.graph_only.v1",
         "project_id": project_id,
         "turn_id": turn_id,
-        "goal": "基于 graph_state 机械生成当前态上下文包，用于验证 supersede 与预算规则的装配结果。",
-        "source_graph": "graph/projects/abu_modern/phase0_manual/graph_state.json",
+        "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+        "source_graph": source_graph,
         "authority": {
             "mode": "graph_only",
             "current_state_field": "status",
@@ -307,7 +312,7 @@ def build_bundle(
         },
         "budget_policy": {
             "overflow_rule": "never_drop_must_include",
-            "phase": "phase0_manual",
+            "phase": "phase1_prep",
             "owner": "mechanical-assembler",
             "budget_profile": budget_profile,
         },
@@ -333,7 +338,7 @@ def build_bundle(
     ]
 
     report = {
-        "kind": "assembly_report.phase0_mechanical.v1",
+        "kind": "assembly_report.graph_only.v1",
         "project_id": project_id,
         "turn_id": turn_id,
         "result": "assembled",
@@ -392,16 +397,26 @@ def build_bundle(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build a deterministic context bundle from graph_state.json")
-    parser.add_argument("--graph", required=True, help="Path to graph_state.json")
+    parser.add_argument("--graph", help="Path to graph_state.json；缺省时按 project_id 推断")
     parser.add_argument("--project-id", required=True, help="Project id")
     parser.add_argument("--turn-id", required=True, help="Turn id such as turn_002")
-    parser.add_argument("--out", required=True, help="Path to output context bundle json")
-    parser.add_argument("--report-out", required=True, help="Path to output assembly report json")
+    parser.add_argument("--out", help="Path to output context bundle json")
+    parser.add_argument("--report-out", help="Path to output assembly report json")
     parser.add_argument("--max-nodes", type=int, required=True, help="Maximum nodes allowed in bundle")
-    parser.add_argument("--budget-profile", default="tight_budget_must_only", help="Budget profile label")
+    parser.add_argument("--budget-profile", default="phase1_default", help="Budget profile label")
     args = parser.parse_args()
 
-    graph_state = load_json(args.graph)
+    graph_path = Path(args.graph) if args.graph else Path("graph") / "projects" / args.project_id / "graph_state.json"
+    out_path = Path(args.out) if args.out else default_project_report_path(
+        args.project_id,
+        f"context_bundle.{args.turn_id}.json",
+    )
+    report_out_path = Path(args.report_out) if args.report_out else default_project_report_path(
+        args.project_id,
+        f"assembly_report.{args.turn_id}.json",
+    )
+
+    graph_state = load_json(graph_path)
     try:
         bundle, report = build_bundle(
             graph_state=graph_state,
@@ -409,17 +424,18 @@ def main() -> int:
             turn_id=args.turn_id,
             max_nodes=args.max_nodes,
             budget_profile=args.budget_profile,
+            source_graph=str(graph_path).replace("\\", "/"),
         )
     except AssemblyRejectedError as exc:
-        write_json(args.report_out, exc.report)
+        write_json(report_out_path, exc.report)
         print(exc)
-        print(f"Wrote rejection report: {args.report_out}")
+        print(f"Wrote rejection report: {report_out_path}")
         return 2
 
-    write_json(args.out, bundle)
-    write_json(args.report_out, report)
-    print(f"Wrote bundle: {args.out}")
-    print(f"Wrote assembly report: {args.report_out}")
+    write_json(out_path, bundle)
+    write_json(report_out_path, report)
+    print(f"Wrote bundle: {out_path}")
+    print(f"Wrote assembly report: {report_out_path}")
     return 0
 
 

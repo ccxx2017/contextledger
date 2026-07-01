@@ -1,0 +1,71 @@
+{
+  "ok": false,
+  "summary": {
+    "graph_nodes": 40,
+    "active_graph_nodes": 40,
+    "new_nodes": 1,
+    "errors": 4,
+    "warnings": 0
+  },
+  "errors": [
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0042 与旧节点 n_0029 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0029 的声明。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0029",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0042 与旧节点 n_0029 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 n_0042 invalidates n_0029。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0029",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0042 与旧节点 n_0040 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0040 的声明。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0040",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0042 与旧节点 n_0040 指向同一 entity_ref=TKT-2026-002，但 state 冲突：new=resolved, old=open；patch 缺少 n_0042 invalidates n_0040。",
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0040",
+      "new_state": "resolved",
+      "old_state": "open"
+    }
+  ],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0029",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "TKT-2026-002",
+      "new_node_id": "n_0042",
+      "old_node_id": "n_0040",
+      "new_state": "resolved",
+      "old_state": "open"
+    }
+  ],
+  "weak_matches": []
+}

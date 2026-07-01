@@ -1,0 +1,250 @@
+{
+  "kind": "priority_migration.phase1_prep.v1",
+  "summary": {
+    "changed_nodes": 40,
+    "unchanged_nodes": 0,
+    "total_nodes": 40
+  },
+  "changed_nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "priority": "must_include",
+      "reason": "root_user_goal"
+    },
+    {
+      "node_id": "n_0002",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0005",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0006",
+      "type": "OpenTask",
+      "priority": "background",
+      "reason": "resolved_items_do_not_compete_for_budget"
+    },
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "priority": "background",
+      "reason": "resolved_items_do_not_compete_for_budget"
+    },
+    {
+      "node_id": "n_0009",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0010",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0012",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0013",
+      "type": "Fact",
+      "priority": "should_include",
+      "reason": "active_fact"
+    },
+    {
+      "node_id": "n_0014",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0015",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0016",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0018",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0019",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0020",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0022",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0023",
+      "type": "Fact",
+      "priority": "should_include",
+      "reason": "active_fact"
+    },
+    {
+      "node_id": "n_0024",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0025",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0026",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0027",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0028",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0029",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0030",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0031",
+      "type": "Fact",
+      "priority": "should_include",
+      "reason": "active_fact"
+    },
+    {
+      "node_id": "n_0032",
+      "type": "Fact",
+      "priority": "should_include",
+      "reason": "active_fact"
+    },
+    {
+      "node_id": "n_0033",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0034",
+      "type": "OpenTask",
+      "priority": "optional",
+      "reason": "active_task_without_explicit_execution_anchor"
+    },
+    {
+      "node_id": "n_0035",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0036",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0037",
+      "type": "FileArtifact",
+      "priority": "should_include",
+      "reason": "artifact_needed_for_execution_context"
+    },
+    {
+      "node_id": "n_0038",
+      "type": "Decision",
+      "priority": "should_include",
+      "reason": "active_decision"
+    },
+    {
+      "node_id": "n_0039",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    },
+    {
+      "node_id": "n_0040",
+      "type": "OpenTask",
+      "priority": "should_include",
+      "reason": "active_task_with_phase1_or_entity_focus"
+    }
+  ]
+}

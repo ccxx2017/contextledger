@@ -1,0 +1,227 @@
+{
+  "kind": "assembly_report.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_004",
+  "result": "assembled",
+  "input_graph_turn_counter": 4,
+  "policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "priority_order": [
+      "must_include",
+      "should_include",
+      "optional",
+      "background"
+    ],
+    "backfill_order": "created_turn desc, node_id asc",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "overflow_rule": "never_drop_must_include"
+  },
+  "summary": {
+    "all_nodes": 44,
+    "active_nodes": 44,
+    "superseded_nodes": 0,
+    "excluded_due_to_state_nodes": 0,
+    "active_must_include_nodes": 1,
+    "selected_nodes": 12
+  },
+  "selected_node_ids": [
+    "n_0001",
+    "n_0002",
+    "n_0003",
+    "n_0004",
+    "n_0007",
+    "n_0009",
+    "n_0010",
+    "n_0012",
+    "n_0013",
+    "n_0014",
+    "n_0015",
+    "n_0016"
+  ],
+  "selected_by_priority": {
+    "must_include": [
+      "n_0001"
+    ],
+    "should_include": [
+      "n_0002",
+      "n_0003",
+      "n_0004",
+      "n_0007",
+      "n_0009",
+      "n_0010",
+      "n_0012",
+      "n_0013",
+      "n_0014",
+      "n_0015",
+      "n_0016"
+    ],
+    "optional": [],
+    "background": []
+  },
+  "excluded_due_to_status": [],
+  "excluded_due_to_state": [],
+  "excluded_due_to_budget": [
+    {
+      "node_id": "n_0019",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0020",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0022",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0023",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0027",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0028",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0029",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0031",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0032",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0035",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0036",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0037",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0038",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0039",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0040",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0005",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0011",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0017",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0018",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0021",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0024",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0025",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0026",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0030",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0033",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0034",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0041",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0042",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0043",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0044",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0006",
+      "priority": "background",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0008",
+      "priority": "background",
+      "reason": "budget_exhausted"
+    }
+  ]
+}

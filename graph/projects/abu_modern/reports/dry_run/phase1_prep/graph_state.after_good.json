@@ -1,6 +1,6 @@
 {
   "task_id": "task_default",
-  "turn_counter": 3,
+  "turn_counter": 4,
   "nodes": {
     "n_0001": {
       "node_id": "n_0001",
@@ -367,6 +367,15 @@
       "state": "open",
       "priority": "should_include",
       "_priority_migration_reason": "active_task_with_phase1_or_entity_focus"
+    },
+    "n_0041": {
+      "node_id": "n_0041",
+      "type": "OpenTask",
+      "content": "Dry-run：为 Phase 1-prep 验证 reconcile/apply/lint 流程可运行，不写回主图。",
+      "entity_ref": "dry_run.phase1_prep.turn_004.task",
+      "state": "open",
+      "status": "active",
+      "priority": "optional"
     }
   },
   "edges": [
@@ -563,6 +572,11 @@
     {
       "source": "n_0040",
       "target": "n_0029",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0041",
+      "target": "n_0003",
       "relation": "refines"
     }
   ]

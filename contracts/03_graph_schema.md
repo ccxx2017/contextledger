@@ -13,6 +13,15 @@
   entity_ref : 稳定实体标识(路径/工单/组件),无明确实体填 null
              命名规范见 entity_naming.md
 
+## 按节点类型的 state 合法集
+- `Decision` ∈ { `open`, `resolved`, `cancelled`, `unknown`, `null` }
+- `Decision` 不得使用 `implemented` / `deployed`
+- 理由：`Decision.state` 跟踪的是“决策点自身是否已裁定”，不是“该决策对应方案是否已实现”
+- 例：
+  - “是否采用方案 A，待拍板” → `open`
+  - “已决定采用方案 A” → `resolved`
+  - “该决策点作废/不再需要” → `cancelled`
+
   # status 与 state 是两个维度,不可混用:
   #   status = 这个节点在图里还算不算数(active/superseded)
   #   state  = 它描述的那个实体现在处于什么状态(open/deployed/...)
@@ -59,6 +68,7 @@
 ### Decision —— 决策点替换
   同 entity_ref 出现新决策 → supersedes(旧决策"曾被做出"但不再生效)
   例:"用 Kafka" → "改用 Redis Streams"
+  合法 state 仅允许 `open/resolved/cancelled/unknown/null`；禁止把“方案已拍板”写成 `implemented/deployed`
 
 ### Fact —— state 描述其断言的实体;矛盾与进阶必须区分(评审重点)
   下表针对同一 entity_ref 的事实,old → new:
