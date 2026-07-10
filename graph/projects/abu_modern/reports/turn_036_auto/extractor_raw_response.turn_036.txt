@@ -1,0 +1,49 @@
+{
+  "task_id": "task_default",
+  "turn_id": 36,
+  "new_nodes": [
+    {
+      "node_id": "n_0095",
+      "type": "Fact",
+      "content": "TKT-2026-005B当前状态为paused_for_boss_review，位于blocked/目录，需Boss显式确认才能恢复。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0096",
+      "type": "Fact",
+      "content": "后端异步化改造未完成（192.168.1.136:8000 backtest endpoint仍为同步），TKT-2026-005C阶段2未实施。",
+      "entity_ref": "TKT-2026-005C",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0097",
+      "type": "OpenTask",
+      "content": "待Boss决策是否在同步后端受限模式下恢复TKT-2026-005B执行。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "blocked",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0095",
+      "target": "n_0090",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0096",
+      "target": "n_0088",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0097",
+      "target": "n_0089",
+      "relation": "refines"
+    }
+  ]
+}

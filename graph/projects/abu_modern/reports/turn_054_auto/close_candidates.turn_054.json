@@ -1,0 +1,54 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_054_auto\\patch_054.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 53,
+    "open_like_nodes_scanned": 23,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 2,
+    "score_histogram": {
+      "11": 1,
+      "6": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005: 试运行工单1",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0118",
+      "type": "OpenTask",
+      "entity_ref": "005i_live_path_verification",
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "content": "TKT-2026-005I-live-path-verification: 执行live路径验证，确认compile-ir→KB archive主链路是否产出##档案元数据JSON和sanity状态。步骤：1. 确认archive是否旧档案；2. 确认后端版本和路径；3. 新建005I专用live test archive；4. 验证元数据区块；5. 输出报告。必须先完成此任务才能验收005I。",
+      "score": 6,
+      "matched_terms": [
+        "005i",
+        "archive",
+        "json",
+        "live",
+        "tkt-2026-005",
+        "档案元数据",
+        "状态"
+      ]
+    }
+  ]
+}

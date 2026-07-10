@@ -1,0 +1,27 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_003",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0025",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "strategy_research_agent",
+          "match_confidence": 0.5862,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0002",
+            "n_0008"
+          ]
+        }
+      ],
+      "match_confidence": 0.5862,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

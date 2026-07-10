@@ -1,0 +1,115 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_082",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0158",
+      "raw_entity_ref": "round6a_forbidden_runs",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round6a_polluted_runs",
+          "match_confidence": 0.6977,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0156"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_cache_remediation",
+          "match_confidence": 0.5106,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0155"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_stop_loss_7pct",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0154"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6_preflight",
+          "match_confidence": 0.4737,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0150"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_3e_verification_requirements",
+          "match_confidence": 0.4561,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0135"
+          ]
+        }
+      ],
+      "match_confidence": 0.6977,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0161",
+      "raw_entity_ref": "round6a_backend_defect_repair",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round6a_cache_remediation",
+          "match_confidence": 0.5926,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0155"
+          ]
+        },
+        {
+          "canonical_entity_ref": "quant_backend_url_default",
+          "match_confidence": 0.5556,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0053"
+          ]
+        },
+        {
+          "canonical_entity_ref": "quant_backend_kb_bridge",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0070"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_polluted_runs",
+          "match_confidence": 0.48,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0156"
+          ]
+        }
+      ],
+      "match_confidence": 0.5926,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

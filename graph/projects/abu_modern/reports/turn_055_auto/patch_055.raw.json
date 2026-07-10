@@ -1,0 +1,81 @@
+{
+  "task_id": "task_default",
+  "turn_id": 55,
+  "new_nodes": [
+    {
+      "node_id": "n_0123",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 5完成：archive ir_b15a65c4b9b4，sanity passed，但total_return=-80.92%, max_drawdown=98.89%, Sharpe=1.4921，整体亏损但信号质量改善。",
+      "entity_ref": "ir_b15a65c4b9b4",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0124",
+      "type": "Decision",
+      "content": "TKT-2026-005B Round 5 记录为 completed / sanity passed / research_negative_but_diagnostic_useful",
+      "entity_ref": "tkt-2026-005b-round5",
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0125",
+      "type": "Constraint",
+      "content": "在完成Round 5.1审计之前，禁止扩展至symbols≤20/years≤3、禁止启动231标的大回测、禁止立即进入新策略实验",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0126",
+      "type": "OpenTask",
+      "content": "Round 5.1 指标与亏损归因审计：解释total_return=-80.92%, max_drawdown=98.89%, Sharpe仍为正1.4921的矛盾，输出详细诊断报告。不要改策略，不要跑新回测。",
+      "entity_ref": "round_5_1_audit",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0114",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "Round 5研究已完成，结果为research_negative_but_diagnostic_useful"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0120",
+      "reason": "TKT-2026-005I live path verification已通过，该禁止约束被解除"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0124",
+      "target": "n_0114",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0125",
+      "target": "n_0124",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0126",
+      "target": "n_0035",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0126",
+      "target": "n_0114",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0120",
+      "relation": "invalidates"
+    }
+  ]
+}

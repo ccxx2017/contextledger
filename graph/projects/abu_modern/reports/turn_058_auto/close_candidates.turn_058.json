@@ -1,0 +1,69 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_058_auto\\patch_058.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 54,
+    "open_like_nodes_scanned": 22,
+    "updated_nodes_in_patch": 3,
+    "candidates_found": 3,
+    "score_histogram": {
+      "11": 1,
+      "6": 1,
+      "3": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005: 试运行工单1",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0113",
+      "type": "OpenTask",
+      "entity_ref": "tkt-2026-005b-magnify-validation",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。",
+      "score": 6,
+      "matched_terms": [
+        "90s",
+        "round",
+        "symbols",
+        "timeout",
+        "tkt-2026-005",
+        "years"
+      ]
+    },
+    {
+      "node_id": "n_0112",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005F",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005F: 固化工具契约——同步call_builder.py --endpoint到正式技能资产；TOOLS.md明确investigation必须用/strategy-builder/compile-ir，禁止/strategy-builder/invoke，execution-config回测必须传完整strategy_ir；research_workflow.md补充新流程；metrics.py兼容新路径；明确400/404不等于Boss guardrail。",
+      "score": 3,
+      "matched_terms": [
+        "/strategy-builder/compile-ir",
+        "tkt-2026-005",
+        "禁止"
+      ]
+    }
+  ]
+}

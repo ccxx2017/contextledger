@@ -1,0 +1,66 @@
+{
+  "task_id": "task_default",
+  "turn_id": 35,
+  "new_nodes": [
+    {
+      "node_id": "n_0092",
+      "type": "Fact",
+      "content": "P0-3完成：scripts/call_backtest.py新增资源闸（max_symbols=20, max_years=3, timeout=90s, boss override）；research_workflow.md新增§3.7资源闸条款；TOOLS.md更新超时默认值为90s",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0093",
+      "type": "FileArtifact",
+      "content": "call_backtest.py v1.1: 新增BacktestGuardrailError, _validate_request, max_symbols=20, max_years=3, timeout=90s, BOSS_OVERRIDE支持",
+      "entity_ref": "skills/strategy_researcher/scripts/call_backtest.py",
+      "state": "deployed",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0094",
+      "type": "FileArtifact",
+      "content": "research_workflow.md新增§3.7资源闸条款：universe≤20标的，时间窗≤3年；后端失败1次即paused_for_boss_review；builder交互≤2轮；大universe先smoke",
+      "entity_ref": "skills/strategy_researcher/prompts/research_workflow.md",
+      "state": "deployed",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0084",
+      "changes": {
+        "content": "TKT-2026-005B已暂停（paused_for_boss_review），移动至blocked目录；恢复条件：005C硬限制+后端异步化完成",
+        "entity_ref": "aos/runtime/tickets/blocked/TKT-2026-005B-vcp-breakout-entry.md",
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "must_include"
+      },
+      "reason": "工单状态由blocked改为paused_for_boss_review并关闭，等待恢复条件；文件路径变更"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0092",
+      "target": "n_0091",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0093",
+      "target": "n_0091",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0094",
+      "target": "n_0091",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0092",
+      "target": "n_0088",
+      "relation": "supports"
+    }
+  ]
+}

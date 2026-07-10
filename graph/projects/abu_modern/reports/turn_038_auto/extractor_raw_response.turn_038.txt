@@ -1,0 +1,47 @@
+{
+  "task_id": "task_default",
+  "turn_id": 38,
+  "new_nodes": [
+    {
+      "node_id": "n_0098",
+      "type": "Decision",
+      "content": "Boss审核结论：TKT-2026-005B smoke run未通过。builder会话异常（5轮未收敛），backtest端点返回HTTP 500。依据Boss guardrail，工单暂停至paused_for_boss_review。要求：停止执行，不重试，更新工单Worklog后commit/push，不修改策略或脚本。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "must_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0095",
+      "changes": {
+        "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）—— 执行后Boss审核未通过，已暂停至paused_for_boss_review，禁止重试。",
+        "state": "blocked"
+      },
+      "reason": "依据Boss审核结论，smoke run未通过，工单暂停至paused_for_boss_review。"
+    },
+    {
+      "node_id": "n_0096",
+      "changes": {
+        "content": "Boss已授权TKT-2026-005B受限恢复执行：禁止回测、禁止调用后端（脚本侧），仅限烟测（symbols≤5, years≤1, timeout=90s），smoke通过后最多放大到symbols≤20, years≤3，后端失败即paused_for_boss_review，禁止自动重试，禁止231标的回测，受限阶段结果不作为完整研究结论。执行结果：Phase0-2通过，Phase3 smoke未完成，builder 5轮未收敛，backtest HTTP 500，无交易产生。Boss审核后要求暂停。",
+        "entity_ref": "TKT-2026-005B"
+      },
+      "reason": "追加实际执行结果信息。"
+    },
+    {
+      "node_id": "n_0097",
+      "changes": {
+        "content": "TKT-2026-005B工单文件（已移至open目录，status=ready_for_limited_resume，包含Worklog Boss授权记录及smoke run执行记录，Boss暂停指示）"
+      },
+      "reason": "工单文件已更新Worklog，包含smoke run执行记录及Boss暂停指示。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0098",
+      "target": "n_0095",
+      "relation": "refines"
+    }
+  ]
+}

@@ -66,6 +66,62 @@ def normalize_priority(value: Any) -> str:
     return text
 
 
+def parse_turn_number(value: Any) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        pass
+
+    text = str(value or "").strip().lower()
+    if text.startswith("turn_"):
+        text = text.split("_", 1)[1]
+    try:
+        return int(text)
+    except (TypeError, ValueError):
+        return None
+
+
+def require_expected_turn(graph_state: dict[str, Any], turn_id: str, *, source_graph: str) -> int:
+    expected = parse_turn_number(turn_id)
+    if expected is None:
+        raise ValueError(f"无法解析 turn_id: {turn_id!r}")
+
+    actual = parse_turn_number(graph_state.get("turn_counter"))
+    if actual is None:
+        raise ValueError(f"{source_graph} 缺少可解析的 turn_counter，无法确认装配输入是否为 {turn_id}。")
+
+    if actual != expected:
+        raise ValueError(
+            f"{source_graph} 的 turn_counter={actual}，与请求装配的 {turn_id} 不一致。"
+            "为避免误读旧快照，本次装配已拒绝执行。"
+        )
+    return actual
+
+
+def require_newer_than(target_path: Path, reference_path: str | Path, *, role: str) -> None:
+    reference = Path(reference_path)
+    if not reference.exists():
+        raise ValueError(f"{role} 参考文件不存在: {reference}")
+
+    if target_path.stat().st_mtime_ns <= reference.stat().st_mtime_ns:
+        raise ValueError(
+            f"{target_path} 的修改时间不晚于 {reference}。"
+            f"为避免装配时误读旧快照，{role} 已拒绝执行；请先重新生成本轮 graph_state 快照。"
+        )
+
+
+def effective_priority(node: dict[str, Any], current_turn: int | None) -> str:
+    raw_priority = node.get("priority")
+    normalized = normalize_priority(raw_priority)
+    if raw_priority is not None:
+        return normalized
+
+    created_turn = parse_turn_number(node.get("created_turn"))
+    if current_turn is not None and created_turn == current_turn:
+        return "should_include"
+    return normalized
+
+
 def normalize_state(value: Any) -> str:
     if value is None:
         return ""
@@ -191,6 +247,7 @@ def build_bundle(
     budget_profile: str,
     source_graph: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    current_turn = parse_turn_number(turn_id)
     all_nodes = extract_nodes(graph_state)
     active_nodes: list[dict[str, Any]] = []
     superseded_nodes: list[dict[str, Any]] = []
@@ -214,7 +271,7 @@ def build_bundle(
     }
 
     for node in active_nodes:
-        grouped[normalize_priority(node.get("priority"))].append(node)
+        grouped[effective_priority(node, current_turn)].append(node)
 
     for key in grouped:
         if key == "must_include":
@@ -253,7 +310,7 @@ def build_bundle(
             "node_id": node.get("node_id"),
             "type": node.get("type"),
             "content": node.get("content"),
-            "priority": normalize_priority(node.get("priority")),
+            "priority": effective_priority(node, current_turn),
         }
         entity_ref = node.get("entity_ref")
         if entity_ref is not None:
@@ -330,7 +387,7 @@ def build_bundle(
     non_selected_active = [
         {
             "node_id": node.get("node_id"),
-            "priority": normalize_priority(node.get("priority")),
+            "priority": effective_priority(node, current_turn),
             "reason": "budget_exhausted",
         }
         for node in active_nodes
@@ -404,6 +461,7 @@ def main() -> int:
     parser.add_argument("--report-out", help="Path to output assembly report json")
     parser.add_argument("--max-nodes", type=int, required=True, help="Maximum nodes allowed in bundle")
     parser.add_argument("--budget-profile", default="phase1_default", help="Budget profile label")
+    parser.add_argument("--newer-than", help="要求输入图文件的修改时间晚于该参考文件，例如本轮 patch")
     args = parser.parse_args()
 
     graph_path = Path(args.graph) if args.graph else Path("graph") / "projects" / args.project_id / "graph_state.json"
@@ -416,7 +474,13 @@ def main() -> int:
         f"assembly_report.{args.turn_id}.json",
     )
 
+    if not graph_path.exists():
+        raise SystemExit(f"找不到输入图文件: {graph_path}。请先生成本轮 apply 后的图快照。")
+
     graph_state = load_json(graph_path)
+    require_expected_turn(graph_state, args.turn_id, source_graph=str(graph_path))
+    if args.newer_than:
+        require_newer_than(graph_path, args.newer_than, role="build_context_bundle")
     try:
         bundle, report = build_bundle(
             graph_state=graph_state,

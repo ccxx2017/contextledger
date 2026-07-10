@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "summary": {
+    "nodes": 102,
+    "edges": 164,
+    "active_nodes": 87,
+    "active_edges": 164,
+    "superseded_nodes": 15,
+    "errors": 0,
+    "warnings": 0
+  },
+  "adjudication_policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "state_gate_field": "state",
+    "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+    "active_status_value": "active",
+    "superseded_status_value": "superseded"
+  },
+  "status_observations": {
+    "superseded_node_ids": [
+      "n_0010",
+      "n_0012",
+      "n_0014",
+      "n_0027",
+      "n_0030",
+      "n_0033",
+      "n_0034",
+      "n_0049",
+      "n_0052",
+      "n_0056",
+      "n_0059",
+      "n_0084",
+      "n_0086",
+      "n_0087",
+      "n_0090"
+    ],
+    "excluded_due_to_state_node_ids": []
+  },
+  "relation_enum": [
+    "depends_on",
+    "derived_from",
+    "implements",
+    "invalidates",
+    "produces",
+    "refines",
+    "serves",
+    "supersedes",
+    "supports"
+  ],
+  "minimal_state_enum": [
+    "blocked",
+    "cancelled",
+    "deployed",
+    "implemented",
+    "in_progress",
+    "open",
+    "resolved",
+    "unknown"
+  ],
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,76 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_004",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0028",
+      "raw_entity_ref": "data/knowledge/schema.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "data/knowledge",
+          "match_confidence": 0.7368,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0023"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/services/knowledge-api",
+          "match_confidence": 0.48,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0022"
+          ]
+        }
+      ],
+      "match_confidence": 0.7368,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0030",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.8974,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025"
+          ]
+        },
+        {
+          "canonical_entity_ref": "strategy_research_agent",
+          "match_confidence": 0.5455,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0002",
+            "n_0008"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5172,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024"
+          ]
+        }
+      ],
+      "match_confidence": 0.8974,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

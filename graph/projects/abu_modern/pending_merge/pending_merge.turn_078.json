@@ -1,0 +1,36 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_078",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0155",
+      "raw_entity_ref": "round6a_cache_remediation",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round6_preflight",
+          "match_confidence": 0.5366,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0150"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_3e_verification_requirements",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0135"
+          ]
+        }
+      ],
+      "match_confidence": 0.5366,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

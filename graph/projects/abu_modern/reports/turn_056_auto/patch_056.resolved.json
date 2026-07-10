@@ -1,0 +1,71 @@
+{
+  "task_id": "task_default",
+  "turn_id": 56,
+  "new_nodes": [
+    {
+      "node_id": "n_0123",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 5审计结果：总亏损-80.92%但资金曲线与交易PnL不一致，差额约689,450，分标的PnL合计-119,747无法解释最终亏损-809,197。",
+      "entity_ref": "ir_b15a65c4b9b4",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0124",
+      "type": "OpenTask",
+      "content": "TKT-2026-005B Round 5.2: 资金曲线与交易流水核对。在Round 5.1审计报告发现不一致后，需先对资金曲线、交易PnL、分标的PnL进行闭合审计。",
+      "entity_ref": "tkt-2026-005b-round5.2",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0125",
+      "type": "Decision",
+      "content": "TKT-2026-005B Round 6暂停。在Round 5.2资金曲线核对完成前，不允许进入新策略实验。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
+      "priority": "must_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0120",
+      "changes": {
+        "status": "superseded"
+      },
+      "reason": "TKT-2026-005I live path verification已通过，约束不再适用。"
+    },
+    {
+      "node_id": "n_0114",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "Round 5单变量研究已执行完成，阻塞条件已解除。因审计发现不一致，后续任务为Round 5.2核对。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0123",
+      "target": "n_0114",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0124",
+      "target": "n_0114",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0125",
+      "target": "n_0124",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0120",
+      "relation": "invalidates"
+    }
+  ]
+}

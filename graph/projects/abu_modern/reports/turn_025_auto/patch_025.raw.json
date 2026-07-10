@@ -1,0 +1,46 @@
+{
+  "task_id": "task_default",
+  "turn_id": 25,
+  "new_nodes": [
+    {
+      "node_id": "n_0079",
+      "type": "Fact",
+      "content": "烟测A验证结果：quant_assistant技能成功处理'查询实例'请求，读取SKILL.md和TOOLS.md后调用query.py脚本，返回运行实例列表。",
+      "entity_ref": "quant_assistant",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0080",
+      "type": "Fact",
+      "content": "烟测B验证结果：智能体正确识别'BTC结构怎么看'不属于任何技能范围，仅返回个人观点，未调用任何脚本。读取了根TOOLS.md和quant_assistant/TOOLS.md。",
+      "entity_ref": "quant_assistant",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0079",
+      "target": "n_0061",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0076",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0061",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0073",
+      "relation": "supports"
+    }
+  ]
+}

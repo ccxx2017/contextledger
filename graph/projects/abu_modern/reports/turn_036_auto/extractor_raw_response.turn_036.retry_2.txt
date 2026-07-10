@@ -1,0 +1,32 @@
+{
+  "task_id": "task_default",
+  "turn_id": 36,
+  "new_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0087",
+      "changes": {
+        "content": "正式执行前检查报告：实际读取工单文件、SKILL.md、research_workflow.md、TOOLS.md、hypothesis_heuristics.md、report_template.md及存量产出；最高行为手册为prompts/research_workflow.md；正式执行必须遵循Phase 0-6；阻断条件：①脚本侧硬限制已实施(call_backtest.py v1.1已部署，§3.7已写入)，②后端异步化未完成(即TKT-2026-005C阶段2未完成)，③工单TKT-2026-005B当前状态paused_for_boss_review(置于blocked目录)。结论：不满足正式执行条件，需Boss决策：是否接受受限模式恢复？是否将工单移回open并更新status？"
+      },
+      "reason": "新检查结果更新了自主测试结论，提供了全面的正式执行条件评估，取代了原满足条件的判断。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0087",
+      "target": "n_0093",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0087",
+      "target": "n_0094",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0087",
+      "target": "n_0088",
+      "relation": "supports"
+    }
+  ]
+}

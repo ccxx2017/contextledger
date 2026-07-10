@@ -1,0 +1,143 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_006",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_006_auto/graph_state.after_turn_006.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0041",
+      "n_0042",
+      "n_0031",
+      "n_0032",
+      "n_0033",
+      "n_0034",
+      "n_0035",
+      "n_0036",
+      "n_0037"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0041",
+        "type": "Decision",
+        "content": "HITL阈值：LLM调用≤20次/工单，回测≤10次/工单，连续5轮无改进（改进定义为核心指标相对当前工单内最优轮≥+5%相对增幅）",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0042",
+        "type": "Decision",
+        "content": "strategy-researcher试运行期定为3个工单",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0031",
+        "type": "Decision",
+        "content": "策略研究员应采用 duty-reporter 的 charter-bound 形态，非 quant_assistant 的开放式工具箱（确认1，等待用户确认）",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0032",
+        "type": "Decision",
+        "content": "后端自动落库 + Agent 只读 KB API 方案（B），Agent 不直接写知识库（确认2，等待用户确认）",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0033",
+        "type": "OpenTask",
+        "content": "TKT-2026-003: 后端知识库只读 API + 自动落库改造",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-003"
+      },
+      {
+        "node_id": "n_0034",
+        "type": "OpenTask",
+        "content": "TKT-2026-004: 实现 research_loop.py，跑首个真实研究工单",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-004"
+      },
+      {
+        "node_id": "n_0035",
+        "type": "OpenTask",
+        "content": "TKT-2026-005: 试运行工单1",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005"
+      },
+      {
+        "node_id": "n_0036",
+        "type": "OpenTask",
+        "content": "TKT-2026-006: 试运行工单2",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-006"
+      },
+      {
+        "node_id": "n_0037",
+        "type": "Fact",
+        "content": "knowledge_base.py 是本地 Python 模块，无 HTTP 暴露，无法被 Ubuntu OpenClaw skill 直接 import",
+        "priority": "should_include",
+        "entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0041",
+      "n_0042",
+      "n_0031",
+      "n_0032",
+      "n_0033",
+      "n_0034",
+      "n_0035",
+      "n_0036"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 39,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

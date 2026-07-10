@@ -1,0 +1,61 @@
+{
+  "task_id": "task_default",
+  "turn_id": 6,
+  "new_nodes": [
+    {
+      "node_id": "n_0041",
+      "type": "Decision",
+      "content": "HITL阈值：LLM调用≤20次/工单，回测≤10次/工单，连续5轮无改进（改进定义为核心指标相对当前工单内最优轮≥+5%相对增幅）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0042",
+      "type": "Decision",
+      "content": "strategy-researcher试运行期定为3个工单",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0031",
+      "changes": {
+        "state": "resolved"
+      },
+      "reason": "用户同意整体方案，形态决策已确认"
+    },
+    {
+      "node_id": "n_0032",
+      "changes": {
+        "state": "resolved"
+      },
+      "reason": "用户明确同意B方案"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0041",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0041",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0008",
+      "relation": "supports"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "task_id": "task_default",
+  "turn_id": 10,
+  "new_nodes": [
+    {
+      "node_id": "n_0050",
+      "type": "Fact",
+      "content": "研究循环正确数据流：1. POST /strategy-builder/invoke → strategy_id；2. POST /backtests/execution-config → {success, data: {run_id, status: completed}}，后端自动 append_backtest_result 写回测结果到策略档案 markdown；3. GET /api/v1/knowledge/archives/{strategy_id} → 整份档案 markdown（含回测指标）；4. LLM 产出下一步假设，循环。call_backtest.py 只需校验 success 和 status，无需解析 execution_summary。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0051",
+      "type": "Fact",
+      "content": "错误码处理策略：INVALID_EXECUTION_CONFIG / UNSUPPORTED_UNIVERSE_TYPE / EMPTY_UNIVERSE → abort 当前假设，喂回 LLM；DATA_MISSING_SYNC_REQUIRED → 从 universe 剔除 missing_symbols 后重试一次。call_backtest.py 应自动重试第四种。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0052",
+      "type": "OpenTask",
+      "content": "确认 Ubuntu 后端局域网 IP 或域名，作为 call_backtest.py 等脚本的默认后端地址（支持 QUANT_BACKEND_URL 环境变量覆盖）",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0049",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "返回形态已由用户提供并确认，任务完成"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0050",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0051",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0052",
+      "target": "n_0034",
+      "relation": "depends_on"
+    }
+  ]
+}

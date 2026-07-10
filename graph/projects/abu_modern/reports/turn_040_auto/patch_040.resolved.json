@@ -1,0 +1,42 @@
+{
+  "task_id": "task_default",
+  "turn_id": 40,
+  "new_nodes": [
+    {
+      "node_id": "n_0102",
+      "type": "Decision",
+      "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
+      "entity_ref": "aos/services/backtest-api",
+      "state": "resolved",
+      "priority": "must_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0099",
+      "changes": {
+        "content": "TKT-2026-005D: 新建 auto research 专用接口（POST /strategy-builder/compile-ir 或类似），要求：无 session、无 pending_user_input、输入完整 strategy_IR、输出结构化 JSON（success/error）；同时保留现有交互式接口不变。backtest 工具契约部分（返回结构化 JSON）继续执行。"
+      },
+      "reason": "根据双接口分流决策，将 builder 非交互模式明确为新建独立接口，而非修改现有接口。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0102",
+      "target": "n_0099",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0102",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0102",
+      "target": "n_0101",
+      "relation": "supports"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "task_id": "task_default",
+  "turn_id": 83,
+  "new_nodes": [
+    {
+      "node_id": "n_0162",
+      "type": "Fact",
+      "content": "Backend defect repair implementation PASSED: 1) strategy_ir.py 新增 _SUPPORTED_CONTEXT_VARS 和 IRExpression.context 校验；2) ir_evaluator.py 注册 position_pnl_pct deprecated alias 到 unrealized_pnl_pct；3) universal_factor.py 改进 KeyError 为 RuntimeError；4) 新增 test_strategy_ir_position_pnl_pct_defect.py 17个测试。共计43/43 passed。未运行真实回测，未创建新run。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0163",
+      "type": "Decision",
+      "content": "Backend defect repair implemented and unit/regression tests passed. Round 6A remains locked pending clean re-execution. Round 6B locked. Accepted baseline unchanged.",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0161",
+      "changes": {
+        "state": "implemented"
+      },
+      "reason": "Patch implementation 已完成，43/43 测试通过，修复了 position_pnl_pct 幽灵字段、单位归一化等问题"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0162",
+      "target": "n_0161",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0163",
+      "target": "n_0161",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0163",
+      "target": "n_0160",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0162",
+      "target": "n_0159",
+      "relation": "supports"
+    }
+  ]
+}

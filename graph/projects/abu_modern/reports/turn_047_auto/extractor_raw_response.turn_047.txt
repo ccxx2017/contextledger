@@ -1,0 +1,30 @@
+{
+  "task_id": "task_default",
+  "turn_id": 47,
+  "new_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0108",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "恢复前检查已完成，输出检查报告并获批准，任务结束。"
+    },
+    {
+      "node_id": "n_0095",
+      "changes": {
+        "state": "in_progress"
+      },
+      "reason": "恢复前检查通过，Boss授权，TKT-2026-005B可开始Round 4受限恢复smoke执行。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0108",
+      "target": "n_0095",
+      "relation": "supports"
+    }
+  ]
+}

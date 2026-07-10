@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -22,6 +24,8 @@ from build_extractor_prompt import (
 DEFAULT_BASE_URL = "https://api.deepseek.com/v1/chat/completions"
 DEFAULT_MODEL = "deepseek-v4-flash"
 DEFAULT_TIMEOUT_SECONDS = 120
+DEFAULT_MAX_ATTEMPTS = 3
+DEFAULT_RETRY_BACKOFF_SECONDS = 2
 
 
 def candidate_env_paths(explicit_env_file: str | None) -> list[Path]:
@@ -129,6 +133,8 @@ def call_extractor(
     model: str,
     timeout_seconds: int,
     messages: list[dict[str, str]],
+    max_attempts: int,
+    retry_backoff_seconds: int,
 ) -> str:
     payload = {
         "model": model,
@@ -137,24 +143,58 @@ def call_extractor(
         "response_format": {"type": "json_object"},
     }
     data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        base_url,
-        data=data,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-        },
-        method="POST",
-    )
+    current_url = base_url
 
-    try:
-        with urllib.request.urlopen(req, timeout=timeout_seconds) as resp:
-            raw = resp.read().decode("utf-8")
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Extractor HTTP {exc.code}: {body}") from exc
-    except urllib.error.URLError as exc:
-        raise RuntimeError(f"Extractor 网络错误: {exc}") from exc
+    attempt = 1
+    raw = ""
+    last_error: Exception | None = None
+    while attempt <= max_attempts:
+        req = urllib.request.Request(
+            current_url,
+            data=data,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout_seconds) as resp:
+                raw = resp.read().decode("utf-8")
+            break
+        except urllib.error.HTTPError as exc:
+            redirect_location = exc.headers.get("Location")
+            if exc.code in {307, 308} and redirect_location:
+                current_url = redirect_location
+                last_error = exc
+                if attempt >= max_attempts:
+                    break
+                time.sleep(retry_backoff_seconds * attempt)
+                attempt += 1
+                continue
+            body = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"Extractor HTTP {exc.code}: {body}") from exc
+        except urllib.error.URLError as exc:
+            last_error = exc
+        except http.client.IncompleteRead as exc:
+            if exc.partial:
+                raw = exc.partial.decode("utf-8", errors="replace")
+                break
+            last_error = exc
+        except http.client.RemoteDisconnected as exc:
+            last_error = exc
+
+        if attempt >= max_attempts:
+            break
+        time.sleep(retry_backoff_seconds * attempt)
+        attempt += 1
+    else:
+        raw = ""
+
+    if not raw:
+        if last_error is None:
+            raise RuntimeError("Extractor 返回空响应")
+        raise RuntimeError(f"Extractor 网络错误: {last_error}") from last_error
 
     obj = json.loads(raw)
     choices = obj.get("choices") or []
@@ -206,11 +246,31 @@ def main() -> int:
         env_values,
         str(DEFAULT_TIMEOUT_SECONDS),
     ) or str(DEFAULT_TIMEOUT_SECONDS)
+    max_attempts_str = resolve_setting(
+        "EXTRACTOR_MAX_ATTEMPTS",
+        env_values,
+        str(DEFAULT_MAX_ATTEMPTS),
+    ) or str(DEFAULT_MAX_ATTEMPTS)
+    retry_backoff_seconds_str = resolve_setting(
+        "EXTRACTOR_RETRY_BACKOFF_SECONDS",
+        env_values,
+        str(DEFAULT_RETRY_BACKOFF_SECONDS),
+    ) or str(DEFAULT_RETRY_BACKOFF_SECONDS)
 
     try:
         timeout_seconds = int(timeout_seconds_str)
     except ValueError:
         print(f"ERROR: EXTRACTOR_TIMEOUT_SECONDS 非法: {timeout_seconds_str}", file=sys.stderr)
+        return 2
+    try:
+        max_attempts = max(1, int(max_attempts_str))
+    except ValueError:
+        print(f"ERROR: EXTRACTOR_MAX_ATTEMPTS 非法: {max_attempts_str}", file=sys.stderr)
+        return 2
+    try:
+        retry_backoff_seconds = max(0, int(retry_backoff_seconds_str))
+    except ValueError:
+        print(f"ERROR: EXTRACTOR_RETRY_BACKOFF_SECONDS 非法: {retry_backoff_seconds_str}", file=sys.stderr)
         return 2
 
     turn_id_for_messages = None
@@ -262,6 +322,8 @@ def main() -> int:
             model=model,
             timeout_seconds=timeout_seconds,
             messages=messages,
+            max_attempts=max_attempts,
+            retry_backoff_seconds=retry_backoff_seconds,
         )
     except Exception as exc:
         ensure_parent(raw_response_out)

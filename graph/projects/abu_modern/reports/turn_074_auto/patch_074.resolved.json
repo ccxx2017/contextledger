@@ -1,0 +1,50 @@
+{
+  "task_id": "task_default",
+  "turn_id": 74,
+  "new_nodes": [
+    {
+      "node_id": "n_0150",
+      "type": "Fact",
+      "content": "Round 6 Preflight by Feishu Agent: conditionally passed. Baseline identity confirmed, disabled runs isolated, API clean. Blocker: train_split=0.7 not API-verifiable, requires local manifest confirmation from project AI. Round 6 execution remains locked and not approved.",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0151",
+      "type": "OpenTask",
+      "content": "项目AI本地确认：确认accepted baseline run-54b-20250101-20251230-d37c696d的manifest/parameters中train_split=0.7。只读检查，不运行回测，不创建新run，不进入Round6。",
+      "entity_ref": "train_split_local_confirmation",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0144",
+      "changes": {
+        "content": "Round 6 Preflight: 已执行检查，基本通过，但train_split=0.7无法API验证，需项目AI本地确认。",
+        "state": "in_progress"
+      },
+      "reason": "Preflight已执行但未完全闭环，需补充本地确认train_split=0.7"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0150",
+      "target": "n_0144",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0144",
+      "target": "n_0151",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0151",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

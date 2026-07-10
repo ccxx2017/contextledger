@@ -1,0 +1,25 @@
+{
+  "task_id": "task_default",
+  "turn_id": 42,
+  "new_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0099",
+      "changes": {
+        "content": "TKT-2026-005D: 新增自动研究编译接口 POST /strategy-builder/compile-ir（无session、无pending_user_input、输入完整strategy_IR、输出结构化JSON；成功时自动创建策略档案，关闭自动回测），修复后端回测异常序列化契约（全局异常处理器统一返回JSON，禁止序列化Exception对象）。保留现有交互式接口不变。",
+        "entity_ref": "TKT-2026-005D",
+        "state": "open",
+        "priority": "should_include"
+      },
+      "reason": "根据AI回复，细化工单内容，增加更多实施细节与边界条件"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0102",
+      "target": "n_0099",
+      "relation": "refines"
+    }
+  ]
+}

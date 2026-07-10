@@ -412,6 +412,13 @@ def add_issue(
         raise ValueError(f"Unknown issue level: {level}")
 
 
+def extract_patch_updated_nodes(patch: dict[str, Any]) -> list[dict[str, Any]]:
+    updated_nodes = patch.get("updated_nodes", [])
+    if not isinstance(updated_nodes, list):
+        return []
+    return [item for item in updated_nodes if isinstance(item, dict)]
+
+
 def has_invalidates(
     new_id: str,
     old_id: str,
@@ -460,6 +467,44 @@ def reconcile(
         old_id = node_id(old)
         if old_id:
             old_by_id[old_id] = old
+
+    for updated in extract_patch_updated_nodes(patch):
+        target_id = node_id(updated)
+        if not target_id:
+            continue
+        old = old_by_id.get(target_id)
+        if not old:
+            continue
+
+        old_type = normalize_type(old.get("type"))
+        if old_type != "opentask":
+            continue
+
+        changes = updated.get("changes", {})
+        if not isinstance(changes, dict):
+            continue
+
+        new_state = normalize_state(changes.get("state"))
+        new_status = normalize_state(changes.get("status"))
+        if new_state not in {"resolved", "cancelled"}:
+            continue
+
+        if new_status == "superseded":
+            continue
+
+        add_issue(
+            report,
+            "error",
+            "UPDATED_OPENTASK_TERMINAL_STATE_MISSING_STATUS_EXIT",
+            (
+                f"updated_nodes 中的 OpenTask {target_id} 被更新为终态 state={new_state}，"
+                "但未同步给出 status=superseded，应用后会错误地继续留在当前态集合。"
+            ),
+            node_id=target_id,
+            node_type=old.get("type"),
+            new_state=new_state,
+            new_status=new_status or None,
+        )
 
     active_by_entity_ref: dict[str, list[dict[str, Any]]] = {}
     for old in active_old_nodes:

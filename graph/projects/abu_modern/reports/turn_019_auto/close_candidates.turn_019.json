@@ -1,0 +1,79 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_019_auto\\patch_019.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 18,
+    "open_like_nodes_scanned": 19,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 4,
+    "score_histogram": {
+      "11": 2,
+      "3": 2
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005: 试运行工单1",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0036",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-006",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-006: 试运行工单2",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-006",
+        "tkt-2026-006"
+      ]
+    },
+    {
+      "node_id": "n_0065",
+      "type": "OpenTask",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+      "score": 3,
+      "matched_terms": [
+        "charter",
+        "skill.md",
+        "ticket"
+      ]
+    },
+    {
+      "node_id": "n_0067",
+      "type": "Decision",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "方案A：维持一个agent，靠技能区分（保持当前设置）。限制：所有任务混在同一对话上下文，LLM自行决定激活哪个SKILL.md，prompts目录需在SKILL.md中显式读取。",
+      "score": 3,
+      "matched_terms": [
+        "agent",
+        "llm",
+        "skill.md"
+      ]
+    }
+  ]
+}

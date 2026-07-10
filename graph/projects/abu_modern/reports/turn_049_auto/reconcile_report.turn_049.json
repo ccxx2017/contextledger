@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 110,
+    "active_graph_nodes": 88,
+    "new_nodes": 1,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0111",
+      "old_node_id": "n_0085",
+      "new_state": "resolved",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0111",
+      "old_node_id": "n_0089",
+      "new_state": "resolved",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0111",
+      "old_node_id": "n_0096",
+      "new_state": "resolved",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0111",
+      "old_node_id": "n_0110",
+      "new_state": "resolved",
+      "old_state": ""
+    }
+  ],
+  "weak_matches": []
+}

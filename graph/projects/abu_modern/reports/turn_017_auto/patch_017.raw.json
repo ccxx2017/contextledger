@@ -1,0 +1,62 @@
+{
+  "task_id": "task_default",
+  "turn_id": 17,
+  "new_nodes": [
+    {
+      "node_id": "n_0066",
+      "type": "Fact",
+      "content": "当前OpenClaw配置未定义agents.list，所有消息路由到默认agent，agent ID始终为default。源代码src/routing/resolve-route.ts在无配置时返回'default'。",
+      "entity_ref": "openclaw_agent_routing_default",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0067",
+      "type": "Decision",
+      "content": "方案A：维持一个agent，靠技能区分（保持当前设置）。限制：所有任务混在同一对话上下文，LLM自行决定激活哪个SKILL.md，prompts目录需在SKILL.md中显式读取。",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0068",
+      "type": "Decision",
+      "content": "方案B：配置真正的多agent，通过OpenClaw config定义两个agent（strategy-researcher和duty-reporter），并绑定飞书群路由，实现独立对话历史、独立技能、独立模型。",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0062",
+      "changes": {
+        "content": "智能体身份由OpenClaw agent配置决定；当前未配置agents.list时，所有消息路由到唯一默认agent，agent ID固定为'default'。workspace名称和SKILL.md首段身份声明仅供技能区分，不改变运行时agent ID。"
+      },
+      "reason": "根据最新代码信息修正运行时身份机制，补充无配置时的默认行为"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0066",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0066",
+      "target": "n_0062",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0067",
+      "target": "n_0044",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0068",
+      "target": "n_0044",
+      "relation": "serves"
+    }
+  ]
+}

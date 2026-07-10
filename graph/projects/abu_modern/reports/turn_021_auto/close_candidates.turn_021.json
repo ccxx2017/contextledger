@@ -1,0 +1,35 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_021_auto\\patch_021.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 19,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 2,
+    "candidates_found": 1,
+    "score_histogram": {
+      "3": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0067",
+      "type": "Decision",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "方案A：维持一个agent，靠技能区分（保持当前设置）。限制：所有任务混在同一对话上下文，LLM自行决定激活哪个SKILL.md，prompts目录需在SKILL.md中显式读取。",
+      "score": 3,
+      "matched_terms": [
+        "agent",
+        "llm",
+        "skill.md"
+      ]
+    }
+  ]
+}

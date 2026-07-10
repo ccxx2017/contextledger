@@ -1,0 +1,59 @@
+{
+  "task_id": "task_default",
+  "turn_id": 36,
+  "new_nodes": [
+    {
+      "node_id": "n_0095",
+      "type": "OpenTask",
+      "content": "TKT-2026-005B-vcp-breakout-entry: VCP形态突破点入场策略研究，当前status: paused_for_boss_review，置于blocked目录，需要Boss确认恢复",
+      "entity_ref": "TKT-2026-005B",
+      "state": "blocked",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0096",
+      "type": "Fact",
+      "content": "正式执行前检查确认：agent实际读取了6个.md文件（工单TKT-2026-005B、SKILL.md、research_workflow.md、TOOLS.md、hypothesis_heuristics.md、report_template.md）；最高行为手册是research_workflow.md；正式执行必须遵循Phase 0-6；执行条件不满足：后端异步化未完成、工单状态paused_for_boss_review",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0097",
+      "type": "Decision",
+      "content": "需要Boss决定：①是否接受同步后端受限模式恢复005B；②是否将005B从blocked移回open并更新status为ready_for_resume",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "must_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0095",
+      "target": "n_0060",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0090",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0088",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0097",
+      "target": "n_0095",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0096",
+      "target": "n_0095",
+      "relation": "supports"
+    }
+  ]
+}

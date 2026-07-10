@@ -1,0 +1,23 @@
+{
+  "task_id": "task_default",
+  "turn_id": 18,
+  "new_nodes": [
+    {
+      "node_id": "n_0069",
+      "type": "Fact",
+      "content": "Ubuntu端OpenClaw workspace目录结构：根目录有AGENTS.md, HEARTBEAT.md, IDENTITY.md, MEMORY.md, SOUL.md, TOOLS.md, USER.md, execution_config.json, execution_config_0402.json, .openclaw/workspace-state.json; memory/目录包含大量日期文件; skills/目录下有三个技能：duty_reporter（含SKILL.md, TOOLS.md, scripts/, logs/）、quant_assistant（含SKILL.md, README.md, scripts/）、strategy_researcher（含SKILL.md, TOOLS.md, tkt-worklog.md, prompts/目录含4个.md文件, scripts/含5个.py/.sh文件）。",
+      "entity_ref": "openclaw_workspace_structure",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0069",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

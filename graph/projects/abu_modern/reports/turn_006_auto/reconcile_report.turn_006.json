@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 40,
+    "active_graph_nodes": 37,
+    "new_nodes": 2,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [],
+  "weak_matches": []
+}

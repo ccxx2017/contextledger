@@ -1,0 +1,52 @@
+{
+  "task_id": "task_default",
+  "turn_id": 43,
+  "new_nodes": [
+    {
+      "node_id": "n_0103",
+      "type": "Fact",
+      "content": "TKT-2026-005D双通道分流干净：POST /strategy-builder/compile-ir无状态编译，KB自动落库成功，异常序列化修复使后端不会僵死。交付完全符合预期。",
+      "entity_ref": "aos/services/backtest-api",
+      "state": null,
+      "priority": "should_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0099",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "should_include"
+      },
+      "reason": "TKT-2026-005D 交付完成，经审计完全符合预期，双通道分流、KB自动落库、异常序列化修复均成功实施。"
+    },
+    {
+      "node_id": "n_0100",
+      "changes": {
+        "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。手写最小IR（1-5标的，1年窗口），编写bash/python脚本模拟call_builder.py（指向新端点/strategy-builder/compile-ir）→ call_backtest.py → kb_query.py链路，验证后端无僵死进程、无500序列化错误。",
+        "priority": "should_include"
+      },
+      "reason": "细化工单描述，与用户最新指示对齐，并明确依赖005D已完成。"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0099",
+      "reason": "TKT-2026-005D 已实现并验收通过，退出活跃任务集。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0103",
+      "target": "n_0099",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0100",
+      "target": "n_0099",
+      "relation": "depends_on"
+    }
+  ]
+}

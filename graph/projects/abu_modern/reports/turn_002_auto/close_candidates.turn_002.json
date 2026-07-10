@@ -1,0 +1,52 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_002_auto\\patch_002.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 1,
+    "open_like_nodes_scanned": 9,
+    "updated_nodes_in_patch": 4,
+    "candidates_found": 2,
+    "score_histogram": {
+      "12": 1,
+      "4": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "duty_reporter v0.5: 添加LLM摘要节点，验证LLM调用基础设施",
+      "score": 12,
+      "matched_terms": [
+        "duty_reporter",
+        "duty_reporter",
+        "llm"
+      ]
+    },
+    {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "entity_ref": "strategy_research_agent",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "复活Strategy Research Agent（阶段1主战场，3-4周）",
+      "score": 4,
+      "matched_terms": [
+        "agent",
+        "research",
+        "strategy",
+        "阶段"
+      ]
+    }
+  ]
+}

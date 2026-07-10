@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 49,
+    "active_graph_nodes": 43,
+    "new_nodes": 3,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "new_node_id": "n_0050",
+      "old_node_id": "n_0047",
+      "new_state": "",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "new_node_id": "n_0051",
+      "old_node_id": "n_0047",
+      "new_state": "",
+      "old_state": ""
+    }
+  ],
+  "weak_matches": []
+}

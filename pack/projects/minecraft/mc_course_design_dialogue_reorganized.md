@@ -1,3 +1,4 @@
+# [COMPACT]
 # 一、课程设计与教学策略
 
 ## 主题：面向青少年的Minecraft AI教学课程大纲（六个阶段，从自然语言问答到多AI分工与记忆）
@@ -1137,7 +1138,185 @@ HAZARD_WARNING_COOLDOWN = 6        # 从10秒改为6秒
 核心价值在于将感知**自动化、文字化**，使AI从“执行单条命令”升级为“理解场景、自主规划”。环扫、坐标、背包查询等本质是给“瞎子AI”安装各类传感器。后续可考虑增加时间感知、生命/饥饿值、玩家朝向等传感器，组合后将显著提升AI的行为智能。
 
 
+## 主题：语音模式下环顾刷屏与主动提醒干扰问题的诊断与修复
 
+### 用户：
+启动语音对话系统（`voice_bridge.py`）后，控制台持续刷环顾信息和主动危险提醒（“前面是6格高的悬崖”），每2秒一次环顾、每6秒一次提醒。怀疑此现象影响按钮触发语音交互，询问代码设置是否正确。
+
+### GPT-5.5：
+问题不在`voice_bridge.py`，根因在`mc_ai_agent.py`的两处设计：
+1. `_surroundings_listener_loop()`每2秒向控制台打印环顾信息；
+2. `maybe_post_hazard_warning()`每6秒向游戏聊天栏发送主动危险提醒。
+
+这在“演示AI主动感知”场景中合理，但在“按住按钮语音对话”模式中会造成控制台刷屏干扰，且后台扫描周期性占用`_mcpi_lock`，可能使`handle_user_text()`执行出现卡顿。
+
+**修复方案**（仅改`mc_ai_agent.py`）：
+- 添加配置开关：`ENABLE_SURROUNDINGS_CONSOLE_LOG = False`（关闭控制台环顾日志）、`ENABLE_ACTIVE_HAZARD_WARNING = False`（关闭主动危险提醒），同时将`HAZARD_WARNING_COOLDOWN`调至60秒
+- 修改`_surroundings_listener_loop()`：用上述开关分别包裹`print`和`maybe_post_hazard_warning()`调用
+
+**改后效果**：后台扫描继续运行，用户询问“附近有什么”“我安全吗”“脚下是什么”“前面会掉下去吗”时，AI仍可基于最新感知数据回答；但不再自动刷屏控制台，也不再每6秒向聊天栏推送重复提醒。语音桥接脚本本身无问题。
+## 主题：环顾刷屏开关变量触发条件的补正与导入顺序修复
+
+### 用户：
+指出此前建议中增加的`ENABLE_SURROUNDINGS_CONSOLE_LOG`和`ENABLE_ACTIVE_HAZARD_WARNING`两个开关变量未说明何时设为True，设计不完整。
+
+### GPT-5.5：
+承认遗漏——两个变量若直接写死为`False`则永远不会自动变为True，需引入按启动模式控制的机制。
+
+**改进方案：环境变量控制**
+在`mc_ai_agent.py`配置区加入`env_bool`辅助函数，从环境变量读取布尔值：
+```python
+def env_bool(name, default=False):
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in ("1", "true", "yes", "on")
+
+ENABLE_SURROUNDINGS_CONSOLE_LOG = env_bool("MC_ENABLE_SURROUNDINGS_CONSOLE_LOG", False)
+ENABLE_ACTIVE_HAZARD_WARNING = env_bool("MC_ENABLE_ACTIVE_HAZARD_WARNING", False)
+```
+默认均为`False`（语音模式友好），仅在`env`文件中显式设置`MC_ENABLE_SURROUNDINGS_CONSOLE_LOG=1`和`MC_ENABLE_ACTIVE_HAZARD_WARNING=1`时才开启。控制台日志和主动提醒分别由对应开关包裹。
+
+**导入顺序问题**：`voice_bridge.py`中当前先执行`from mc_ai_agent import handle_user_text`，后执行`load_env()`，导致环境变量在模块导入时尚未加载，配置无法生效。应调整为：
+```python
+load_env()
+from mc_ai_agent import handle_user_text
+```
+确保环境变量先于模块导入被加载。
+
+**语音模式推荐env配置**：
+```env
+MC_ENABLE_SURROUNDINGS_CONSOLE_LOG=0
+MC_ENABLE_ACTIVE_HAZARD_WARNING=0
+```
+演示模式时改为`1`即可恢复主动感知输出。
+## 主题：语音交互期间自动暂停/恢复环顾巡检的自动化设计方案
+
+### 用户：
+认为此前要求用户手动修改`env`变量的设计不佳，提出新需求：语音按钮按下时自动关闭自动巡检，语音指令处理完成后自动恢复巡检。
+
+### GPT-5.5：
+认可用户的设计更优——自动巡检应常态运行，语音交互期间（录音→识别→AI执行）自动暂停，结束后自动恢复，无需用户手动干预。
+
+**实现方案**：
+
+**一、在`mc_ai_agent.py`中添加暂停/恢复控制函数**：
+- 全局变量`_auto_perception_paused`及对应锁
+- `pause_auto_perception(reason)`：设置暂停标志
+- `resume_auto_perception(reason)`：清除暂停标志
+- `is_auto_perception_paused()`：查询当前状态
+
+**二、修改`_surroundings_listener_loop()`巡检循环**：
+- 每次循环开始时检查暂停标志，若暂停则`sleep(0.1)`后跳过
+- 扫描完成后二次检查暂停标志，防止“扫描刚完成、用户恰好按下按钮”时仍打印提醒
+
+**三、修改`voice_bridge.py`导入**：
+- 从`mc_ai_agent`导入`handle_user_text`、`pause_auto_perception`、`resume_auto_perception`
+
+**四、在按键事件中调用控制函数**：
+- `start_recording()`开头调用`pause_auto_perception("用户开始语音输入")`，暂停巡检
+- `on_asr_final_text()`的`finally`块中调用`resume_auto_perception("用户语音指令处理完成")`，恢复巡检
+- `RealTimeASR.on_close()`中若无识别结果，也调用`resume_auto_perception("未识别到语音，恢复自动巡检")`
+
+**完整流程**：
+```
+Arduino START → pause_auto_perception() → 开始录音
+Arduino STOP → 停止录音 → ASR识别 → handle_user_text() → resume_auto_perception()
+```
+
+**结论**：此设计完全由按钮事件自动控制巡检状态，语音交互期间自动巡检不再抢占输出、占用锁或插入主动提醒，无需用户手动修改配置。
+## 主题：将环扫功能改为由游戏内方块设备触发的设计提案
+
+### 用户：
+认为此前“语音按钮联动暂停/恢复”设计仍不够理想，建议将环扫功能做成游戏中的物品或设备，由玩家主动添加/使用来触发环扫，否则不执行。
+
+### Claude-Opus-4.8：
+用户方向正确——将“软件开关”转为“游戏内可交互对象”在体验上更沉浸自然。但需先明确底层接口限制：当前基于**mcpi/RaspberryJuice**，该接口无法新增自定义物品，也无法读取玩家背包或手持物品，更无“玩家使用物品”事件监听能力。因此“添加自定义物品、手持触发”的玩法在此架构下不可行。
+
+**可行替代方案：用方块作为设备开关**
+
+方案A（推荐——雷达基站）：玩家在附近放置特定方块（如信标，ID 138）作为“环扫雷达”。环扫循环每轮检测玩家周围指定半径内是否存在该方块，存在则扫描，挖掉即停止。
+
+方案B（穿戴式/最省事）：检测玩家脚下方块是否为特定方块，仅在踩上时启用环扫。
+
+**实现骨架**：
+```python
+PERCEPTION_DEVICE_BLOCK = 138
+DEVICE_SCAN_RADIUS = 3
+
+def is_perception_device_present():
+    # 扫描玩家周围是否存在设备方块（方案A）
+    # 或仅读取脚下方块（方案B）
+```
+
+环扫循环修改为：循环开头检测设备是否存在，若不存在则`sleep(0.5) continue`，存在才执行扫描和提醒。默认关闭，放置方块后才开启，完全无需修改`voice_bridge.py`，按钮联动暂停逻辑可一并移除。
+
+**两点需用户确认**：
+1. 玩家坐标获取方式是否为`mc.player.getTilePos()`（按实际代码适配）；
+2. 底层是否为mcpi/RaspberryJuice接口，若实际是RCON封装或其他方式，读写能力将不同。
+
+可额外考虑添加外观反馈（如放置时聊天栏播报“环扫雷达已激活”）以增强体验。
+## 主题：确认mcpq事件API——推荐回调模式及@ai链路上线方案
+
+### 用户：
+确认底层使用的是mcpq而非mcpi。
+
+### Claude-Opus-4.8：
+纠正此前“mcpq只能注册回调”的说法——mcpq同时支持轮询和回调两种事件接收方式，但回调模式更简洁，推荐使用。
+
+**聊天事件API**：
+- `mc.events.chat.register(on_chat)`注册回调，回调接收`ChatEvent`对象
+- `event.player`：玩家对象（含`.name`、`.pos`）
+- `event.message`：玩家发送的聊天内容字符串
+- 回调在mcpq后台线程执行，注册后主线程挂起即可，无需轮询循环
+
+**方块点击事件API**：
+- `mc.events.block_hit.register(on_block_hit)`注册回调
+- `event.pos`：被点击方块的`Vec3`坐标
+- `event.player`：点击者
+- 其他字段（`right_hand`、`held_item`、`face`）需实跑`print(vars(event))`确认
+
+**最小可运行版本（@ai指令响应链路）**：
+- 注册聊天回调，检测消息是否以`@ai`开头
+- 提取指令文本，调用现有`handle_user_text(user_text)`
+- 主线程通过无限循环挂起（`while True: time.sleep(1)`）
+- 上线时发送`mc.postToChat("§a[AI] 已上线")`
+
+**两个注意事项**：
+1. **回调串行阻塞**：同一事件流中上一个回调未完成时后续事件不会进入，若`handle_user_text`耗时较长会卡住指令响应，后续可考虑在回调中仅接收、将实际处理交由工作线程；
+2. **锁语义变更**：原`_mcpi_lock`的保护对象与mcpq的gRPC连接不同，应用层共享状态（如自动巡检线程与事件回调并发访问）仍需锁保护，但语义已变化，待核心链路跑通后再整理。
+
+下一步可将环扫感知线程迁移至mcpq版，配合“设备方块开关”设计，利用`getBlock`可直接与字符串比较的特点，逻辑比mcpi版更简洁。
+## 环扫感知的默认关闭与雷达触发设计
+
+环扫感知不再设计为程序启动后自动定时扫描和输出，而是默认关闭，仅在玩家主动触发时工作。触发方式有两种：一是通过语音指令进行一次性扫描（如“环扫一下”），二是放置特定方块（推荐信标）作为环扫雷达设备，敲击方块开启/关闭持续扫描，距离设备过远自动暂停，挖掉则自动关闭。开启后环扫线程只做三件事：定时扫描、更新结构化缓存 `world_state["surroundings"]`、检测危险状态是否发生变化，但不再每次扫描都打印日志或主动提醒。
+
+危险提醒改为状态变化式提示：仅当危险从无到有或风险升级时才提醒一次，相同危险不重复输出，危险解除时可选择提示一次。感知结果保存为结构化 JSON，包含玩家位置、脚下/头顶方块、附近水/岩浆/树木、前方落差、实体列表和风险评估等字段，后续按需转换为控制台摘要、LLM 注入文本或玩家自然语言回复。
+
+LLM 只接收压缩后的感知摘要（如玩家坐标、朝向、关键方块、实体和危险描述），不注入完整数据；当雷达关闭时，注入上下文会明确告知 AI 环扫未开启，禁止编造周围信息。
+
+模块边界上，环扫逻辑独立为 `perception_manager.py`，负责一次性扫描、雷达开关控制、上下文生成和环境问答解析，`mc_ai_agent.py` 仅调用其 `get_prompt_context()` 获取注入文本。事件处理使用 mcpq 的回调接收方块点击等事件，但回调中只执行状态更新（如切换雷达开关），不直接调用 LLM，避免阻塞。整体设计目标是使环扫感知成为一个为 AI 服务的“传感器”，不抢占输出、不干扰语音交互，同时为后续视觉感知等扩展留出清晰接口。
+## 对GPT-5.5方案的评价与按需环扫优先建议
+
+Claude-Opus-4.8 基本认可方案的三个改进点：危险提醒改为状态变化触发而非冷却计时、LLM只接收压缩感知摘要且雷达关闭时明确禁止AI编造、回调中不调用LLM。但核心保留意见在于该方案将两套触发机制（语音一次性“环扫一下”和信标常驻雷达）同时纳入，导致刚被消除的后台循环、开关状态管理、暂停/恢复等复杂度重新引入。实际上，一次性环扫根本不需要后台线程，问了才扫、扫完即答，能一次性解决之前的刷屏、抢锁等问题；而信标常驻模式需要后台监控，且mcpq的`block_hit`事件无法检测挖掉信标，“挖掉即停”仍需额外定时轮询该坐标，反而又制造了后台循环。
+
+建议分两步：第一步立即实现按需一次性环扫，彻底删除后台巡检线程，语音触发“环扫一下/周围有什么/我安全吗”后执行单次扫描并回答，用最小改动解决语音干扰问题；第二步若确需课堂叙事效果，再增加信标常驻模式并配合状态变化提醒，但需明确这主要为课程演示服务，文件拆分也应在核心链路稳定后再进行。
+## 按需环扫的意义重估：从环境问答到执行链路的坐标校验
+
+用户质疑按需环扫的实际价值。Claude-Sonnet-5指出，若环扫仅用于回答“我周围有什么”，意义薄弱——玩家本身就能看见周围的羊、岩浆、悬崖，AI只是在复述玩家已知信息，感知并未产生真正的决策价值。真正有意义的场景是感知服务于动作执行，而非独立问答：当玩家发出“帮我把羊圈起来”“看看这里能不能盖房子”“清理周围怪物”等指令时，AI需要精确坐标才能生成建造指令或执行攻击，此时扫描将玩家看得见但说不清的位置信息转化为AI可执行的数字，或补充玩家未主动核对的安全隐患。因此环扫应定位为“动作执行前的坐标/安全校验步骤”，而非独立的环境问答功能。
+
+如此调整后，扫描只在真正需要执行动作时触发一次，天然按需，无需额外设计雷达设备来管理触发时机；课堂叙事也更为诚实，重点从“AI能看见了”转向“AI能理解需要坐标的指令”，与课程主线“AI能力边界”形成更紧密的呼应。若保留“看看周围”问答，应明确其目的是教学可视化而非产品价值，真正决定功能意义的在于后续是否接入了需要坐标才能完成的动作。
+## 给出重构环扫模块的项目AI提示词
+
+用户要求根据已确立的整体设计意图，为项目AI生成可直接执行的重构提示词。Claude-Sonnet-5据此提供了完整指令，核心内容是：彻底删除后台常驻扫描线程、开关变量、信标设备检测及暂停/恢复机制，将环扫能力重构为一次性的纯函数 `scan_surroundings_once`，并在指令处理流程中增加动作前置校验路径——仅当用户指令涉及需要坐标/地形/实体位置才能执行的动作时触发扫描，将压缩摘要注入本次决策；环境问答路径保留但降级为教学演示用途；危险提示改为状态变化触发或直接注入单次扫描结果；LLM注入内容须为压缩摘要，且无感知数据时禁止编造。提示词同时包含详细删除清单、调用顺序设计、依赖检查及验收标准，要求项目AI先列出改动文件及摘要，确认后再输出完整代码。
+## 确认项目AI计划并建议分步模块化
+
+项目AI提出的改动计划核心方向正确：在 `mc_ai_agent.py` 中删除后台常驻扫描线程及相关开关变量，将扫描重构为按需调用的纯函数，新增动作前置扫描路径，将环境问答降级为一次性扫描回答，并更新LLM注入规则。Claude-Sonnet-5建议在正式编码前要求项目AI先澄清四个细节：动作前置扫描的判断机制（关键词初筛还是两轮LLM调用）、补充 `[动作前置扫描]` 可观测日志、明确危险提示已被简化为仅作为本轮扫描结果的一部分而不再做跨轮次状态对比、以及给出 `scan_surroundings_once()` 的返回值示例和注入LLM的压缩摘要格式，对齐后再动手。
+
+关于是否拆分为多文件管理，意见是：方向支持模块化，但本轮先不物理拆分。要求项目AI在单文件内部将所有环扫函数集中并用注释标记边界，仅暴露少数对外接口，实现逻辑层高内聚；待本轮逻辑验收通过后，下一轮再将环扫区块整体搬迁至独立文件 `perception.py`，避免逻辑重构与文件拆分两类变更叠加导致定位困难。
+## 验收项目AI重构执行结果与后续步骤建议
+
+Claude-Sonnet-5指出项目AI的执行总结回应了四点补充要求且落地清晰，但建议在验收前先要求其贴出关键代码细节（`instruction_needs_surroundings_scan` 关键词列表、`scan_surroundings_once` 返回值示例、注入LLM的system prompt新增部分原文），而非仅凭函数名清单通过。验收用例除项目AI提出的三句外，应增加两句边界测试：一句故意不含关键词但实际需空间信息的指令（如“帮我在这附近找棵树”）以暴露关键词启发式的漏判风险；一句触发扫描且存在危险场景（如悬崖边“帮我在这里盖个观景台”）以验证危险信息是否作为本轮决策一部分被正确融入。同意项目AI提议的第二轮增强（细化关键词表、补调式开关打印summary_text）并建议提前执行，因为该开关能区分扫描数据与LLM决策逻辑的问题来源。对voice_bridge.py未改动的结论，应要求项目AI执行全局搜索确认，并注意保留的`start_perception_listener_once`空函数体在voice_bridge.py调用时不会产生语义意外。待以上审核及5条指令联调通过后，再进入感知模块物理拆分阶段。
 # 三、系统架构演进与技术栈迁移
 
 ## 主题：OpenClaw在Minecraft游戏AI自动化场景中是否必要
@@ -1551,7 +1730,184 @@ mc.postToChat("mcpq 连上了！")
 
 
 
+## 主题：mcpq连接成功后的代码迁移分析与修改方案
 
+### 用户：
+确认mcpq已连通，将原`mc_ai_agent.py`文件提交，请求指出需要修改的部分。
+
+### Claude-Opus-4.8：
+代码结构整体清晰，无需推倒重来。RCON体系（`use_mcrcon`、`scan_nearby_entities`、`_rcon_query`）通过独立mcrcon连接，与mcpi/mcpq完全无关，**无需改动**。
+
+但以下三类差异将冲击核心逻辑，需逐一处理：
+
+**🔴 硬骨头一：`getBlock`返回字符串名称而非数字ID**
+- mcpi返回数字（石头=1），mcpq返回字符串（`"stone"`），新版本已废弃数字ID
+- 影响：第10课识别系统需重写——`WATER_IDS = {8,9}`→`{"water"}`；`BLOCK_NAME_CN`数字→中文大字典改为英文名→中文映射（`"water"→"水"`）；`AIR_ID=0`→`"air"`
+- 工作量大但逻辑简单，本质为“数字思维”转“名字思维”
+
+**🔴 硬骨头二：多人服务器无“唯一玩家”概念**
+- mcpi为单人模式，`mc.player.getTilePos()`可直接调用
+- mcpq为多人环境，需先获取玩家列表（`mc.getPlayers()`/`mc.getPlayer()`），再取`.pos`属性，具体方法名需查阅文档确认
+
+**🔴 硬骨头三：事件系统API不同**
+- 现有两根事件支柱：`mc.events.pollChatPosts()`（监听`@ai`指令）和`mc.events.pollBlockHits()`（监听剑右键点方块）
+- mcpq有事件机制但API与mcpi不一致，属迁移命门，需查阅文档events章节方能准确改写
+
+**🟡 确定可机械替换的部分**：
+| 位置 | 原mcpi写法 | 新mcpq写法 |
+|---|---|---|
+| 导入 | `import mcpi.minecraft` / `import mcpi.block` | `from mcpq import Minecraft, Vec3` |
+| 连接 | `minecraft.Minecraft.create(IP, 4711)` | `Minecraft(IP)`，端口从4711改为**1789** |
+| 坐标 | `getBlock(x, y, z)` | `getBlock(Vec3(x, y, z))` |
+| 放方块 | `mc.setBlock(x,y,z, block.GOLD_BLOCK)` | `mc.setBlock("gold_block", Vec3(x,y,z))` |
+| 聊天 | `mc.postToChat(...)` | `mc.postToChat(...)`基本不变 |
+
+**🟢 完全不动**：RCON体系、`load_env`、`clean_ai_code`、`split_cmd_decision`、AI调用逻辑、prompt（但内嵌的`mc.setBlock(x,y,z,block.XXX)`示例需配合更新）
+
+**建议行动顺序（分四步，每步可单独验证）**：
+1. **先解坑3**：提供mcpq文档的events章节，先打通`@ai`指令监听——此为命门
+2. 再解坑2：提供player相关文档，适配玩家位置获取
+3. 机械替换（import/连接/Vec3/方块名）
+4. 最后重写坑1：方块识别字典
+
+优先请求：提供mcpq文档中events/listening和player相关部分，以便精确完成迁移。
+## 主题：mcpq API确认、事件系统结构性变化及待补信息
+
+### 用户：
+提供mcpq Python库完整API文档，涵盖`Minecraft`类构造、属性、`postToChat`、`showTitle`、`getPlayer`/`getPlayerList`、`getBlock`/`setBlock`、`spawnEntity`、`getEntitiesAround`、`setBlockCube`等核心方法，以及`events.block_hit.register`示例。
+
+### Claude-Opus-4.8：
+文档确认多项API，但揭示了一个比预期更重大的架构变化，需先明确。
+
+**🔴 最重大发现：事件系统从“轮询”变为“注册回调”**
+- mcpq事件模式为`.register(回调函数)`——注册后由系统自动调用
+- 现有代码为轮询模式（`pollChatPosts()`、`pollBlockHits()`），需改为注册回调
+- 影响：`main()`中的`while True: pollChatPosts()`循环需改为注册聊天回调后主线程挂起；`_target_listener_loop`中的`pollBlockHits()`同理
+- 此改动非改名，而是结构性变化，但改后更简洁
+
+**已确认可用的API**：
+- 玩家位置：`mc.getPlayer().pos`（属性，无括号），需先用`getPlayerList()`判断是否有玩家在线
+- 方块识别：`mc.getBlock(pos)`返回的Block对象可直接与字符串比较（如`== "water"`），数字ID字典（`WATER_IDS={8,9}`、`BLOCK_NAME_CN`）需全部改为英文名字符串映射
+- 实体扫描：`mc.getEntitiesAround(pos, distance, type)`可**完整替换**RCON的`scan_nearby_entities`，又快又稳
+- 建造操作：连接`Minecraft(IP)`、坐标`mc.Vec3(x,y,z)`/`mc.vec(x,y,z)`、读/放方块`getBlock`/`setBlock("gold_block", pos)`、批量放置`setBlockCube`/`setBlockList`
+- 聊天：`mc.postToChat(...)`基本不变
+
+**仍缺失的关键信息**：
+- 聊天事件的注册方式（是否为`mc.events.chat`或其他命名）
+- 回调函数的参数格式（如何提取消息内容、发送者、坐标等）
+- `EventHandler`类的完整API及取消注册方法
+
+**当前行动**：需提供文档中`EventHandler`/`events`章节内容，以确定聊天监听和方块点击监听的准确改写方式。第一步目标：打通“听到`@ai`并回话”的完整链路，使其先运行起来，再逐步补充感知功能。
+## 主题：mcpq事件系统API确认——同时支持轮询与回调，推荐继续沿用轮询架构
+
+### 用户：
+提供mcpq文档中`EventHandler`一章完整内容，涵盖事件类型（`PlayerJoinEvent`、`PlayerLeaveEvent`、`PlayerDeathEvent`、`ChatEvent`、`BlockHitEvent`、`ProjectileHitEvent`）、两种事件接收方式（`poll()`轮询与`register()`回调）及其API说明、各事件类的字段定义。
+
+### GPT-5.5：
+文档确认了此前Claude-Opus-4.8的一个关键判断需要修正：**mcpq事件系统并非只能使用注册回调，它明确支持轮询（polling）模式**。因此原有`while True + pollChatPosts()/pollBlockHits()`架构**无需整体重构成callback模式**。
+
+由于现有AI处理逻辑可能较为耗时（LLM调用），而文档明确要求callback函数需“non-blocking and fast”，否则会阻塞其他事件接收，故**推荐继续使用轮询方式**迁移，而非注册回调。
+
+**API直接替换映射**：
+| 旧mcpi写法 | 新mcpq写法 |
+|---|---|
+| `mc.events.pollChatPosts()` | `mc.events.chat.poll()` |
+| `mc.events.pollBlockHits()` | `mc.events.block_hit.poll()` |
+| 聊天内容 | `event.message` |
+| 发送者 | `event.player` |
+| 被点击方块位置 | `event.pos` |
+| 被点击面的前方位置 | `event.pos_front` |
+| 点击的面 | `event.face` |
+| 手中物品 | `event.held_item` |
+
+**迁移后的主循环架构示例**：
+```python
+from mcpq import Minecraft
+mc = Minecraft("192.168.1.71")
+
+# 首次poll启动事件捕获
+mc.events.chat.poll()
+mc.events.block_hit.poll()
+
+while True:
+    for event in mc.events.chat.poll(None):
+        if event.message.startswith("@ai"):
+            # 调用原有聊天处理逻辑
+    for event in mc.events.block_hit.poll(None):
+        # 调用原有方块点击处理逻辑（event.pos为方块位置，event.pos_front为面前方位置）
+    time.sleep(0.05)
+```
+
+**结论**：轮询模式保留，仅替换方法名和事件字段访问方式即可。callback模式暂不采用，除非仅用于将事件塞入队列后立即返回。
+## 主题：请求直接提供迁移至mcpq的完整更新文件
+
+### 用户：
+提交原`mc_ai_agent.py`脚本，请求直接给出基于mcpq的新版完整文件。
+
+### GPT-5.5：
+提供完整更新后的`mc_ai_agent.py`，采用**mcpq + polling事件模式**。文件结构与关键组件如下（仅保留类/函数名及参数说明）：
+
+**导入与配置**：
+- `load_env(filepath)`：加载`env`文件中的API key
+- `use_mcrcon`：RCON命令模块（独立保留）
+- 常量：`SERVER_IP`、`PASSWORD`、`PORT`、`API_KEY`、`BASE_URL`、`MODEL_NAME`
+
+**mcpq兼容层**（核心适配：使旧mcpi风格代码可在mcpq上运行）：
+- `BlockConst(str)`：方块常量类，支持`.name`和`.id`属性
+- `LEGACY_ID_TO_BLOCK`：数字ID到现代方块名的映射字典
+- `block`命名空间：所有方块常量（如`block.GOLD_BLOCK`、`block.AIR`）
+- `normalize_block_name(value)`：将数字ID/对象/字符串统一转换为现代方块名称
+- `CompatPlayer`类：
+  - `getTilePos()`：返回玩家坐标（`SimpleNamespace(x,y,z)`）
+  - `getRotation()`：返回玩家朝向角度
+- `CompatMinecraft`类（包装原生mcpq`Minecraft`实例）：
+  - `vec(x,y,z)` / `Vec3(x,y,z)`：构造坐标对象
+  - `_to_vec(*args)`：统一位置参数转换
+  - `getBlock(*args)`：支持`(x,y,z)`或`(Vec3)`两种调用
+  - `setBlock(*args)`：支持`(block, pos)`或`(x,y,z,block)`两种调用（自动适配mcpq参数顺序）
+  - `setBlocks(x1,y1,z1,x2,y2,z2,block)`：批量填充（循环调用`setBlock`）
+  - `postToChat(text)`：发送聊天消息
+  - `getPlayer()`：获取任意在线玩家对象
+  - `getPlayerList()`：获取所有在线玩家列表
+  - `getEntitiesAround(pos, distance, type)`：获取附近实体列表
+- 全局`mc = CompatMinecraft(MCPQMinecraft(MC_IP))`
+
+**事件与感知**：
+- `_target_listener_loop()`：线程函数，轮询`mc.events.block_hit.poll()`，更新`world_state["target"]`（坐标、方块名、时间）
+- `start_target_listener_once()`：启动方块点击监听线程
+- `uses_target_words(text)`：检测是否提及“这里”“那儿”等目标词
+- `has_target_selected(max_age_seconds)`：判断目标是否有效
+- `get_target_for_exec()`：返回目标坐标及方块名
+- `get_target_prompt_context()`：生成目标信息的prompt上下文
+
+**第10课：结构化扫描感知**：
+- 常量：`AIR_BLOCK`、`WATER_BLOCKS`、`LAVA_BLOCKS`、`TREE_BLOCKS`、`BLOCK_NAME_CN`（英文→中文映射）
+- `block_name_cn(block_value)`：返回方块中文名
+- `scan_nearby_entities(distance)`：优先用`mc.getEntitiesAround()`，失败时回退到RCON`testfor`扫描（`scan_nearby_entities_by_rcon`）
+- `_entity_type_name(entity)`：提取实体类型名称
+- `summarize_counts(names)`：统计重复实体并格式化为“名称x数量”
+- `format_entity_list(animals, monsters)`：生成实体摘要字符串
+- `start_surroundings_listener_once()`：启动定期环顾扫描线程
+- `_surroundings_listener_loop()`：定时调用`scan_player_surroundings()`并更新`world_state`
+- `scan_player_surroundings()`：扫描玩家脚下、头顶、附近方块、液体、树木、掉落深度、实体等，返回完整感知字典
+- `rotation_to_direction(rotation)`：将角度转为方向向量及中文名
+- `format_surroundings_console(s)`：生成控制台可读的环顾信息
+- `maybe_post_hazard_warning(s)`：检测岩浆、怪物、悬崖等危险并主动提醒（带冷却）
+- `get_latest_surroundings(max_age_seconds)`：获取最新感知数据（时效内）
+- `get_surroundings_prompt_context()`：生成环顾信息的prompt上下文
+- `try_answer_surroundings_question(instruction)`：检测是否为环境提问（“周围有什么”“安全吗”等），基于最新感知直接回答
+
+**核心AI决策**：
+- `clean_ai_code(code_text)`：移除Markdown代码块标记
+- `get_ai_decision(instruction)`：构造system prompt（包含目标上下文和环顾上下文），调用LLM，返回`CMD:`/`QUERY:`/Python代码三种格式之一
+- `handle_user_text(instruction)`：主入口——启动感知监听，处理`@ai`指令，先尝试回答环境问题，再处理目标缺失，调用AI决策，分发执行（RCON或Python exec）
+- `split_cmd_decision(decision)`：拆分多行`CMD:`命令
+- `safe_chat_text(text, max_len)`：截断清洗聊天文本
+- `safe_post_chat(text)`：通过mcpq的`postToChat`发送消息
+- `get_safe_player_context()`：获取玩家位置和朝向（带容错）
+
+**主循环**：
+- `main()`：启动事件捕获（首次`mc.events.chat.poll(None)`），进入轮询循环，检测`@ai`消息并调用`handle_user_text`，捕捉Ctrl+C并停止事件捕获。
 # 四、底层代码调试与Bug修复
 
 ## 主题：Minecraft课程设计AI Agent的调试与修复：控制台输出、编码、RCON命令格式、AI能力边界约束
@@ -1855,4 +2211,1322 @@ for cmd, args in ((b"player.getEntities", [distance]),
 
 请站在羊/兔旁重新运行 `debug_get_entities()`，将 `repr(raw)` 的原始输出发回，以确认字段顺序和解析逻辑是否正确对准。
 
+# [/COMPACT]
 
+# 用户：
+以下是项目AI的回复：
+【QUOTE】
+已处理
+
+- 已修掉 summary_text 的怪物重复问题：现在 summary_text 里的 entity_bits 只保留动物信息，怪物统一走 risk_items ，见 build_surroundings_summary_text 。
+- 已把“教学问答路径”和“动作前置扫描路径”改成显式互斥，并加了同一请求内扫描缓存 ensure_request_scan() ，见 handle_user_text 。
+- 已把问答识别拆成独立函数，避免路径判断混在扫描逻辑里，见 is_surroundings_question 、 answer_surroundings_question 、 try_answer_surroundings_question 。
+- 已确认 mc 和 mc.player 走的是 mcpq 兼容层，不是遗留 mcpi 实例，见 CompatPlayer 、 CompatMinecraft 、 mc 初始化 。
+互斥逻辑
+
+- 纯教学问答： question_requested == True 且 action_scan_required == False ，走问答直答路径，扫描一次，不走 LLM 决策。
+- 动作前置扫描： action_scan_required == True ，走动作路径，扫描一次，再把摘要注入 LLM。
+- 混合请求：如果同时命中两类条件，当前优先走动作前置扫描路径，并打印 "[路径选择] 检测到混合请求..." ，不会再进入教学问答直答。
+- 单请求最多扫描一次： ensure_request_scan() 会复用同一请求内的 scan_result ，不会重复调用 scan_surroundings_once() 。
+兼容层确认
+
+- mc.player.getTilePos() 实际来自 CompatPlayer.getTilePos() 。
+- mc.getBlock(x, y, z) 实际来自 CompatMinecraft.getBlock() ，内部再转给 _raw_mc.getBlock(pos) 。
+- 全局 mc 是 mc = CompatMinecraft(_raw_mc) ，底层 _raw_mc 才是 MCPQMinecraft(MC_IP) 。
+- 已用项目根目录下的 .venv 成功执行，解释器是 D:\CCXXLESSON\minecraft\.venv\Scripts\python.exe 。
+- mcpq 也已正常导入， mc_ai_agent.py 启动日志显示：
+- ✅ [MCPQ] 已连接到 Minecraft (192.168.1.71) 这一步的初始化代码跑起来了
+实测结果
+
+- 已用 .venv 成功跑通 scan_surroundings_once() ，解释器是 D:\CCXXLESSON\minecraft\.venv\Scripts\python.exe 。
+- 3 次真实扫描耗时：
+- 1.523s
+- 0.617s
+- 0.548s
+- 平均耗时： 0.896s
+当前判断
+
+- 首次扫描明显更慢，后两次稳定在 0.55s - 0.62s 左右，像是连接/缓存预热带来的首轮开销。
+- 以语音交互来说，这个量级是“可用但能感知到等待”的水平。
+- 目前默认半径是 2 ，在这个配置下还算能接受；如果后面想把体感再压低，优先考虑继续维持小半径，而不是先加大扫描范围。
+实际扫描产物
+
+- summary_text ：
+玩家位于(150,90,20)，脚下是树叶，头顶开阔，附近树木相关方块约45个，附近有怪物：蜘蛛x1、苦力怕x1，风险较高。
+- risk_level ： high
+- risk_items ：
+["附近有怪物：蜘蛛x1、苦力怕x1"]
+这次验证到的重点
+
+- summary_text 里的怪物重复问题已经消掉了。
+- 这次实际输出里，怪物信息只出现了一次，没有再在“实体摘要”和“风险摘要”里重复。
+- 服务器连通后， mc.player / mcpq 兼容层这条链路是通的。
+结论
+
+- 你前面要求先确认的几个硬点，现在除了“真实 Minecraft 联调用例”还没跑，其他关键前置项已经基本齐了。
+- 我认为现在可以进入下一步了：加一个很轻量的调试开关，只打印本轮实际注入 LLM 的 summary_text ，然后按那 5 句验收用例做真实联调。
+如果你同意，我下一步就只做这个最小增强：加 summary_text 调试打印，不碰别的逻辑。
+【/QUOTE】
+# Claude-Sonnet-5：
+这一轮的答复质量不错——四个前置项都给出了真实证据而不是口头保证（真实报错日志、真实兼容层调用链、真实三次耗时数据、真实summary_text产物），值得认可。但在放行"加调试开关+做5句联调"之前，还有几个点需要先追问清楚，其中耗时这一条我认为需要重点关注。
+
+## 需要先确认/警惕的问题
+
+**1.（重点关注）0.5~0.9秒的扫描耗时，需要放进"端到端"语境里重新评估**
+
+项目AI自己的判断是"可用但能感知到等待"，这个判断本身是诚实的，但它测的只是`scan_surroundings_once()`单独调用的耗时，并没有把它放进真实链路里看。真实的语音交互链路是：
+
+```
+用户按住按钮说话 → 松开→ASR识别（有耗时）→ handle_user_text() → 
+  [命中动作关键词] → 扫描（0.5~0.9秒）→ LLM决策（有耗时）→ 执行 → TTS/文字反馈（如有）
+```
+
+也就是说，这次新增的扫描耗时是**叠加**在ASR和LLM调用耗时之上的，不是孤立存在的。之前设计这个模块时，环扫是后台异步进行的，玩家完全感知不到；现在改成同步阻塞式的"现扫现用"，这是一个此前讨论里没有充分权衡过的代价。建议明确要求：**在做5句联调时，不要只看扫描函数单独耗时，而是要完整计时"用户说完话到游戏里出现反应"这个端到端耗时**，如果全链路超过3-4秒，需要考虑进一步压缩（比如缩小扫描半径、减少entity扫描的distance、或者用mcpq是否有批量读取接口来减少逐格查询的网络往返次数）。
+
+**2.（需要确认）首次1.5秒的开销是"一次性"还是"会反复出现"**
+
+三次耗时里第一次明显更慢（1.523s vs 后两次0.5~0.6s），项目AI推测是"连接/缓存预热"。这个推测需要验证清楚：如果这个预热只发生在`voice_bridge.py`启动的那一刻（程序生命周期内只出现一次），那完全可以接受，甚至可以在程序启动时主动"预热"一次扫描来消化这个耗时；但如果这个1.5秒会在**每次长时间没有交互后再次触发**（比如gRPC连接空闲超时重连），那么课堂上每次学生间隔几分钟说一次话，都可能撞上这个慢速首次调用，体验会很不稳定。建议追问：**能否再测一次"间隔较长时间（比如1-2分钟不操作）后再触发扫描"的耗时，确认这个1.5秒是否会复现**。
+
+**3.（需要确认）ensure_request_scan() 的缓存作用域**
+
+它说"单请求最多扫描一次"，需要确认这个缓存是**仅存活在这一次`handle_user_text()`调用的函数栈内（比如作为局部变量或者一次性生成的对象传递）**，而不是写回了某个模块级/全局的状态变量。如果不小心又写回了类似`world_state["surroundings"]`这种全局字典，就有可能在下一次请求里被误当作"还新鲜"的数据复用，重新引入我们已经明确要砍掉的"跨请求缓存"逻辑。这一点建议让它用一句话+代码定位明确说清楚（比如"scan_result是handle_user_text内部的局部变量，函数返回后即释放，没有写入任何模块级字典"）。
+
+**4.（需要观察，不阻塞）混合请求场景下用户能否拿到完整反馈**
+
+它设计的互斥规则是"混合请求优先走动作路径，不再进入教学问答直答"，逻辑合理，但需要在联调时实际验证一个体验细节：如果用户说"这附近安全吗，能不能建房子"（同时命中问答和动作关键词），走了动作路径之后，**最终返回给用户的回复里，是否依然包含了"是否安全"这个信息**，还是模型只顾着执行/回复建房这件事，把"安全吗"这个隐含问题晾在一边没有回应。这个不是代码逻辑问题，而是需要在5句联调里专门设计一句这样的混合句子去实测LLM的实际回复质量。
+
+**5.（可以放行）mcpq兼容层确认**
+
+这一条给出的证据链很扎实——`mc.player.getTilePos()`→`CompatPlayer.getTilePos()`，`mc.getBlock()`→`CompatMinecraft.getBlock()`→`_raw_mc.getBlock(pos)`，底层`_raw_mc`确实是`MCPQMinecraft`，加上真实连接日志"已连接到 Minecraft"，这一条可以视为已经过关，不需要再追问。
+
+## 建议给项目AI的下一步指令
+
+> "①先不用单独测scan函数耗时，请在做5句联调时，对每一句都完整打印'从handle_user_text开始到最终返回结果'的总耗时，而不只是扫描耗时；②请测一次'间隔1-2分钟不操作后再触发扫描'的耗时，确认1.5秒的首次开销是否会反复出现；③明确说明ensure_request_scan()的scan_result是不是纯局部变量、请求结束后不会被任何全局状态保留；④在5句验收用例基础上，再加一句混合请求（比如'这附近安全吗，能不能建房子'），重点看最终回复有没有把安全信息也带出来。这四点都跑完之后，把总耗时数据、混合请求的实际回复内容贴给我看，然后我们再决定是否加调试开关做进一步优化，或者这个耗时水平已经可以接受、直接进入下一步。"
+
+这样可以把这次新引入的"同步阻塞式扫描"到底会不会拖累语音交互体验这件事，用真实数据说清楚，而不是停留在"能感知到等待，但还算能接受"这种主观判断上。
+
+# 用户：
+因为项目AI在测试指令时，MC终端执行需要很长时间(1分钟左右)，我让它测试并进行了反馈，如下：
+结果
+
+- 已经定位并修复这次 AI: Thinking... 后长时间无响应的问题。
+- 根因不是单纯的 thinking 模式，而是：
+- 上游 DeepSeek 接口存在偶发高延迟
+- 当前客户端默认 read timeout = 600s 、 max_retries = 2
+- 导致一次异常请求会把整条 handle_user_text() 链路拖到 50s+
+关键证据
+
+- 之前异常样本：
+- handle_user_text("给我一把钻石剑") 总耗时： 56.209s
+- 其中 client.chat.completions.create(...) 单独耗时： 51.077s
+- 受控对照后发现：
+- 默认 thinking 确实开启，且会增加约 0.5s - 1s
+- 但它不能单独解释 51s 异常峰值
+- 长 prompt 连续两次只要 1.4s 左右
+- 空闲 70s 后再请求也只要 1.541s
+- 所以更像是 接口偶发抖动 + 客户端无保护等待 ，不是“prompt 太长”或“空闲必慢”
+- 运行时还确认了客户端默认配置：
+- CLIENT_TIMEOUT = Timeout(connect=5.0, read=600, write=600, pool=600)
+- CLIENT_MAX_RETRIES = 2
+已做修复
+
+- 我在 get_ai_decision 里做了最小修复：
+- 显式关闭 thinking
+- 给单次 LLM 请求加 12s 超时
+- 禁用 SDK 自动重试 max_retries=0
+- 对超时类异常返回用户可理解的 QUERY ，避免整条链路一直挂着
+- 相关常量在 mc_ai_agent.py
+- 调试上报逻辑还保留在 report_debug_event
+修复后验证
+
+- 修复后再次跑 handle_user_text("给我一把钻石剑") ：
+- 第 1 次总耗时： 5.785s
+- 第 2 次总耗时： 5.759s
+- 对应的 get_ai_decision() 内部 LLM 耗时：
+- 0.665s
+- 0.683s
+- 调试日志也确认新参数已生效：
+- timeout_seconds = 12.0
+- max_retries = 0
+- thinking = disabled
+当前判断
+
+- 这次问题的“可修复根因”已经处理掉了：
+- 以前是上游一慢，客户端会傻等很久
+- 现在即使再遇到上游抖动，也会被 12s 上限截断，不会再出现 50s+ 的无保护等待
+当前状态
+
+- 调试插桩、调试服务器和 debug-bench-hang-prompt.md 还保留着，方便继续验证。
+- 我还没有清理这些调试痕迹。
+下一步
+
+- 现在最合适的是回到你前面那套真实联调计划：
+- 重跑 5 句/6 句验收用例
+- 记录每句 handle_user_text() 总耗时
+- 看混合请求和边界请求的实际回复是否正常
+如果你同意，我下一步就基于 修复后的版本 重新跑整套联调。
+# Claude-Sonnet-5：
+这次排查做得扎实——找到了真正的根因（上游偶发抖动+客户端无超时保护），而不是像之前那样停留在"感知到等待"的主观描述，而且给出了修复前后的对比数据（56秒→5.7秒），这是实质性进展。但在同意"回到联调计划"之前，有几个问题需要先确认清楚，避免这次修复本身又带来新的隐患。
+
+## 需要先确认的问题
+
+**1.（重点关注）12秒超时后的QUERY兜底回复，需要看真实文案**
+
+它说"对超时类异常返回用户可理解的QUERY"，但没有给出这个QUERY的具体文案。这个很重要——如果上游偶发抖动这个问题以后课堂上真的复现（哪怕概率不高），孩子说了一句"给我一把钻石剑"，等了12秒后收到一句机器味很重的报错信息（比如"请求超时，错误代码xxx"），体验会很糟，甚至可能被误解成"这个功能坏了"。需要让它贴出这段兜底文案的原文，评估是否需要改得更"角色扮演"一些（比如"我好像走神了，你再说一遍？"），这也符合课程设计里"让AI的能力边界对孩子可见、但不生硬"的一贯思路。
+
+**2.（需要确认）12秒超时阈值和之前已经确认的耗时预算是否冲突**
+
+之前测算过，正常情况下 `scan_surroundings_once()` 本身耗时0.5~0.9秒，如果一次请求命中"动作前置扫描"路径，链路是：扫描（~0.9秒）+ LLM决策（正常0.6~0.7秒，现在设了12秒硬上限）。这意味着最坏情况下，一次动作类指令的总耗时上限大约是 0.9+12=12.9秒。需要明确问一句：**这个12秒的超时阈值，是只覆盖了`get_ai_decision()`里单次LLM调用，还是覆盖了整条`handle_user_text()`链路？** 如果只是覆盖单次LLM调用，而"动作前置扫描"路径未来又要做"先判断是否需要感知"这类逻辑（虽然目前是关键词初筛不需要二次LLM），需要确认没有叠加多次LLM调用导致总耗时依然可能超出预期。
+
+**3.（需要确认）max_retries=0 会不会让偶发抖动的失败率上升**
+
+原来重试2次是为了应对偶发失败，现在改成不重试，意味着只要这一次请求恰好撞上上游抖动，直接在12秒后失败进QUERY兜底，而不会再给一次机会。这个取舍本身是合理的（用较低的失败率换取"绝不会50秒卡死"的确定性上限），但需要请它说明清楚：**这12秒的超时窗口内，是否有做任何重试（哪怕是一次极短超时的快速重试），还是完全一次性尝试、失败即走兜底？** 如果是后者，建议课堂演示前有心理预期——上游一旦抖动，这句指令这一轮就是直接进入"听不清"的兜底状态，需要孩子重新说一遍，这个体验特征值得提前告知，而不是等课堂上意外出现才发现。
+
+**4.（需要确认）调试痕迹目前保留的范围和风险**
+
+它提到"调试插桩、调试服务器和debug-bench-hang-prompt.md还保留着"。需要明确：这些调试代码/服务是否会在正常的`handle_user_text()`主链路里被执行到（哪怕只是多一次日志写入或者多起一个线程），会不会对刚刚压下来的耗时又产生新的干扰？建议要求：**在正式进入5句联调之前，先确认这些调试痕迹不会被主链路调用到，或者干脆先清理掉，避免这次测的耗时数据里混入了调试代码本身的开销**，这样联调数据才干净可信。
+
+**5.（可以放行，但要写入验收记录）thinking模式关闭是否影响回复质量**
+
+它提到"默认thinking确实开启，且会增加约0.5s-1s"，现在为了控速把它关掉了。这是一个合理的取舍，但需要留意：thinking模式通常是为了让模型有更充分的推理再输出，关闭后要在接下来的5句联调（尤其是混合请求那句"这附近安全吗，能不能建房子"）里额外留意回复质量有没有变得更随意或者漏掉细节，如果发现关闭thinking明显影响了决策质量，可能需要在"0.5~1秒的推理耗时"和"回复质量"之间重新权衡，而不是想当然认为关掉就没有副作用。
+
+## 建议的下一步指令
+
+> "先回答这4点：①贴出12秒超时触发后返回给用户的QUERY兜底文案原文；②这12秒超时具体包住的是单次LLM调用还是整条handle_user_text链路；③确认调试插桩/调试服务器不会在正常主链路里被执行，如果会，先临时关掉或清理；④说明这次超时窗口内是否还做任何重试。这4点确认清楚、必要的话把兜底文案改得更自然一点之后，我们就按原计划重新跑那6句验收用例（5句+1句混合请求），这次记录每句的端到端总耗时，同时留意关闭thinking之后混合请求的回复质量有没有变差。"
+
+这样可以确保这次"止血式"的超时修复本身没有引入新的体验问题（生硬的报错文案、调试代码干扰计时），再干净地回到联调计划上。
+
+# 用户：
+以下是项目AI的回复：
+4 点确认
+
+- ① 12 秒超时后的兜底 QUERY 原文现在是：
+  
+  - QUERY:我这次想得有点久，暂时没能给出结果。请稍后再试一次。
+  - 代码位置： mc_ai_agent.py
+- ② 这 12s 只包住单次 LLM 调用 ，不包整条 handle_user_text() 链路。
+  
+  - 具体是包在这一段：
+  - client.with_options(timeout=AI_REQUEST_TIMEOUT_SECONDS, max_retries=AI_REQUEST_MAX_RETRIES).chat.completions.create(...)
+  - 代码位置： mc_ai_agent.py
+  - 所以：
+  - 扫描耗时
+  - RCON 执行耗时
+  - 其他 Python 逻辑耗时
+  - 都不算在这 12s 里面
+  - 如果整条 handle_user_text() 最终超过 12s ，那也只可能是 LLM 之外的环节继续花时间。
+- ③ 调试插桩/调试服务器现在 不会再对正常主链路产生实际执行影响 。
+  
+  - 我已经做了两件事：
+  - 把 report_debug_event() 加了总开关，当前是 DEBUG_INSTRUMENTATION_ENABLED = False
+  - 并且首行直接 return
+  - 代码位置： mc_ai_agent.py
+  - 我还停掉了之前启动的调试服务器进程。
+  - 现在主链路里虽然还保留了调试调用点，但它们会立刻返回，不会发任何本地 HTTP 上报，也不会依赖 .dbg 或调试服务器存活。
+- ④ 这次超时窗口内 没有任何重试 。
+  
+  - SDK 自动重试已显式设为 0
+  - 代码位置： mc_ai_agent.py 和 mc_ai_agent.py
+  - 代码里也没有额外的手写重试循环。
+  - 所以现在的行为就是：
+  - 单次 LLM 请求
+  - 最多等 12s
+  - 超时就直接走上面的 QUERY 兜底
+  - 不会再像之前那样被默认 600s 读超时和 2 次自动重试拖很久。
+补充说明
+
+- 我已经把兜底文案改得更自然了，比之前的“连接决策模型超时了”更适合直接给用户看。
+- 当前还没开始重跑那 6 句验收用例，符合你这次“先确认 4 点再跑”的要求。
+现在状态
+
+- thinking ：已关闭
+- 单次 LLM 超时： 12s
+- 自动重试： 0
+- 调试上报：已关闭
+- 调试服务器：已停止
+如果你确认这 4 点没问题，我下一步就按原计划重跑这 6 句：
+
+- 给我建一个3x3的羊圈
+- 我周围有什么
+- 给我一把钻石剑
+- 帮我在这附近找棵树
+- 帮我在这里盖个观景台
+- 这附近安全吗，能不能建房子
+并记录每句的端到端总耗时、返回结果，以及混合请求的实际回复内容。
+# Claude-Sonnet-5：
+这轮的四点确认都给到了具体代码位置和明确结论，逻辑闭环，可以放行进入联调。逐条过一下：
+
+## 对这四点确认的评估
+
+**①兜底文案**："我这次想得有点久，暂时没能给出结果。请稍后再试一试。"——比之前生硬的报错提示自然很多，符合角色感，这条可以通过。
+
+**②12秒只包LLM单次调用**：这个澄清很重要，说明了`handle_user_text()`的总耗时上限公式是"扫描耗时（约0.9秒）+ LLM耗时（正常0.6~0.7秒，最坏12秒）+ RCON执行/其他逻辑耗时"，最坏情况大约13~14秒封顶，比之前50秒+的无保护等待已经是质的改善，这个范围对课堂演示是可接受的。
+
+**③调试痕迹清零**：用总开关+提前return，加上停掉调试服务器进程，这个处理方式合理，函数调用点保留但立即返回的开销可以忽略不计，不会干扰后续联调的计时数据。
+
+**④无重试**：确认清楚，符合"宁可快速失败进兜底，也不要无保护傻等"的取舍。
+
+## 放行前的最后一点提醒（不阻塞，但建议记录）
+
+这次问题的本质是"外部网络调用没有超时保护，一旦对方抖动就会拖垮整条链路"。**这个风险类别不只存在于LLM调用**——`handle_user_text()`链路里还有其他外部调用，比如`scan_nearby_entities()`里对mcpq的实体查询、RCON执行建造/给道具命令的socket调用。这些调用目前有没有类似的超时保护，还是依然是"默认无限等待"的状态？这次是LLM调用先暴露了问题，不代表其他调用不会在未来某次网络抖动时复现同样的模式。建议这轮联调顺便观察一下，如果之后有精力，可以给mcpq/RCON调用也补一层类似的超时兜底，作为一个通用的健壮性原则记下来，但**不需要现在就做**，不要打断当前联调节奏。
+
+## 关于即将开始的6句联调，补充两个执行细节
+
+1. **"给我一把钻石剑"这句建议多跑1~2次**，而不只是一次——因为这次问题的根因是"偶发抖动"，单次运行很可能测不到抖动复现的情况，多跑几次能更好确认修复在真实反复调用下的稳定性，而不只是验证了"正常情况下变快了"。
+2. 记录耗时时，除了总耗时数字本身，也留意一下**这6句里有没有任何一句真的触发了12秒超时进入QUERY兜底**——如果联调过程中恰好撞上了一次，正好可以验证兜底文案在真实场景下的实际观感是否如预期自然，这是一个难得的实测机会，不需要刻意制造，但如果自然发生了值得记录下来。
+
+其余没有问题，可以按原计划开始这6句联调，重点仍然是：每句的端到端总耗时、混合请求（第6句）的回复是否把"安全吗"和"能不能建房子"两部分都覆盖到了。
+
+# 用户：
+以下是项目AI的回复：
+联调结果
+
+- 已按你放行后的要求跑完这轮联调。
+- 实际执行样本是 8 个：
+  - 6 句主用例
+  - 其中 给我一把钻石剑 额外重复了 3 次
+- 本轮没有任何一句触发 12s 超时兜底。
+端到端耗时
+
+- 给我建一个3x3的羊圈 ： 5.362s
+- 我周围有什么 ： 0.468s
+- 给我一把钻石剑 第 1 次： 5.650s
+- 给我一把钻石剑 第 2 次： 5.747s
+- 给我一把钻石剑 第 3 次： 5.729s
+- 帮我在这附近找棵树 ： 1.176s
+- 帮我在这里盖个观景台 ： 0.008s
+- 这附近安全吗，能不能建房子 ： 1.273s
+超时兜底
+
+- 本轮所有样本 TIMEOUT_FALLBACK_HIT = false
+- 也就是说，这次联调里没有撞上 12s 超时，兜底文案没有被真实触发。
+逐句观察
+
+- 我周围有什么
+  
+  - 正常
+  - 直接走教学问答路径
+  - 回复内容符合预期
+- 给我一把钻石剑 3 次
+  
+  - 全部成功
+  - 耗时稳定在 5.65s - 5.75s
+  - 说明修复后的非扫描 LLM 路径比之前稳定得多，没有再出现 50s+
+- 帮我在这附近找棵树
+  
+  - 触发了动作前置扫描
+  - 但最终回复是：
+    - 好的，我来扫描一下附近的环境，看看哪里有树。
+  - 这更像“口头回应”，没有真正给出树的位置或下一步动作
+  - 说明这句虽然命中了扫描，但输出质量一般
+- 帮我在这里盖个观景台
+  
+  - 没进入扫描
+  - 直接被“这里需要先点选方块”拦住
+  - 回复：
+    - 请先点击一下方块，我才知道“这里”在哪里。
+  - 这个行为符合当前逻辑
+- 这附近安全吗，能不能建房子
+  
+  - 触发了混合请求路径
+  - 先扫描，再走动作前置扫描分支
+  - 实际回复是：
+    - 根据扫描结果，附近有一只蜘蛛，风险较高。建议先清除蜘蛛再建房子，或者换个更安全的位置。
+  - 这个回复 同时覆盖了“安全吗”与“能不能建房子”两部分
+  - 质量上是合格的
+关键问题
+
+- 这轮联调里最突出的新问题不是性能，而是 动作前置扫描后的建造执行格式 ：
+- 给我建一个3x3的羊圈 这句失败了
+- 原因不是扫描，也不是超时
+- 而是 LLM 返回了：
+  
+  - 一段中文解释
+  - 再加一个 Python 代码块
+- 执行阶段把整段文本都当 Python 跑，结果首行中文触发：
+  
+  - invalid character '，' (U+FF0C)
+- 这说明当前 get_ai_decision() 的输出约束还不够硬：
+  
+  - 在“需要 Python 代码”时，模型仍可能输出“解释 + 代码”
+  - 而不是“只输出纯 Python”
+混合请求结论
+
+- 混合请求回复内容是：
+根据扫描结果，附近有一只蜘蛛，风险较高。建议先清除蜘蛛再建房子，或者换个更安全的位置。
+- 结论：
+  - 覆盖了安全判断
+  - 覆盖了建房建议
+  - 没有明显因为关闭 thinking 而变差
+稳定性结论
+
+- 性能方面：
+  - 本轮看起来已经基本稳定
+  - 给我一把钻石剑 连跑 3 次都没有异常慢请求
+- 功能方面：
+  - 还有一个阻塞问题没解决：
+  - 动作前置扫描后，LLM 在“应输出纯 Python”时仍可能混入自然语言说明
+  - 这会直接导致执行失败
+我建议的下一步
+
+- 现在最值得修的不是继续测超时，而是修这个输出格式问题。
+- 最小修复方向有两个：
+- 在 prompt 里进一步加强：
+  - 需要 Python 时只能输出纯 Python，禁止任何解释性自然语言
+- 在 clean_ai_code() 或执行前清洗逻辑里补一道保险：
+  - 如果检测到 fenced code block，就只提取代码块内容执行
+  - 或者剥掉代码块前的自然语言前缀
+如果你同意，我下一步就针对这个“羊圈失败”问题继续走证据化修复，而不是再重复做性能联调。
+# Claude-Sonnet-5：
+这轮联调质量很高——不仅验证了性能问题已经解决（钻石剑连跑3次稳定在5.6~5.7秒，没有再复现超时），也真实暴露出了一个新的、更本质的问题。值得认可的是项目AI没有回避这个问题、也没有把它简单归为"个例"，而是准确定位到了根因层面（输出约束不够硬），这个判断是对的。
+
+## 对"羊圈失败"问题的评估：这不是新坑，是老坑复发
+
+这个问题其实呼应了课程设计里第三阶段就已经踩过的经典教训——"AI生成带解释文字的输出，执行层无法直接识别"和"仅靠一次性prompt约束不足以保证格式稳定"，本质上和当年"斜杠问题"（AI生成带`/`的命令导致RCON无法识别，需要靠防御性代码兜底）是同一类问题的变种：**光靠prompt要求"只输出纯代码"是不够的，历史经验已经证明必须叠加一层执行前的防御性清洗**。所以项目AI提出的两个修复方向都要做，不能只做其中一个：
+
+1. **prompt层面加强约束**——这是第一道防线，但历史经验告诉我们它会偶尔失效；
+2. **执行前清洗兜底**——这是第二道防线，真正保证课堂稳定性的是这一层，不能省略。
+
+## 正式动手修复前，需要先看到的证据
+
+**1. 先要真实的LLM原始返回文本，不要转述**
+
+目前只知道"一段中文解释+一个Python代码块"，但不知道具体长什么样——是"好的，我来帮你...\n```python\nmc.setBlocks(...)\n```"这种markdown代码块包裹的形式，还是解释文字后面直接跟裸代码、完全没有代码块标记？这两种情况对应的清洗策略完全不同（前者可以用正则提取代码块内容，后者需要更复杂的"找到第一行像代码的地方"启发式判断，风险更高）。请先贴出这次"给我建一个3x3的羊圈"触发失败的**完整原始LLM返回内容**（不是执行报错，是`get_ai_decision()`拿到的那段原始文本）。
+
+**2. 清洗逻辑的兜底设计要包含"提取失败就拒绝执行"这一分支**
+
+不管最终用哪种提取方式，一定要有这样一条规则：**如果清洗后依然无法确定这是一段纯净可执行的代码（比如提取不到代码块、或者提取出来的内容第一行仍然疑似自然语言），就不要硬着头皮exec，而是直接返回一句"这次生成的指令格式有问题，请再说一次"这类兜底提示**，而不是让整段文本（包括中文）被扔进`exec()`。这次报错还只是`invalid character`这种能被Python语法检查拦下的良性错误，但不能保证以后不会出现"格式看起来像代码、但语义是错的"这种更隐蔽的情况，兜底拒绝执行比"尽力清洗后硬跑"更安全。
+
+## 两个顺便观察到的次要问题，需要一并说清楚（但不阻塞本次修复优先级）
+
+**3. "帮我在这附近找棵树"这句回复质量差，需要确认是哪个环节的问题**
+
+回复"好的，我来扫描一下附近的环境，看看哪里有树"是一句空洞的过渡语，没有真正利用扫描到的`tree_count`数据给出实际方位建议。这里需要追问：**这句话对应的原始LLM决策输出到底是什么格式**——是走了QUERY分支但答得敷衍（说明是prompt对"如何利用tree_count数据组织回复"这块引导不够），还是模型本想生成代码但发现缺少目标坐标、又不知道怎么办只好打太极？这个问题和羊圈失败可能是同一类"输出约束不够清晰"问题的另一种表现，建议放在这次一起看一下原始输出，但不需要现在就修，先记录清楚。
+
+**4. 需要理清"target校验"和"动作前置扫描"这两套机制的优先级关系**
+
+"帮我在这里盖个观景台"被"这里需要先点选方块"拦下，这个行为本身是对的（因为课程设计里"这里/那儿"这类目标词依赖的是指点式target系统，不是环扫系统）,但值得注意的是——为什么"给我建一个3x3的羊圈"没有被同一套"是否包含目标词"的校验拦下、却触发了动作前置扫描直接往下走？这说明target校验（`uses_target_words`/`has_target_selected`）和scan校验（`instruction_needs_surroundings_scan`）是两套完全独立并行的判断逻辑，各自管各自的关键词。这次表现是符合预期的，不需要改，但建议记录清楚这两套机制的判断顺序和边界，避免以后改代码时把它们混在一起改乱了。
+
+## 下一步指令
+
+> "同意你的判断，这次优先修羊圈这个输出格式问题，不再继续测超时。请先贴出'给我建一个3x3的羊圈'这次失败时，get_ai_decision()拿到的完整原始LLM返回文本原文，我要看清楚具体是什么格式后再确认清洗方案；同时清洗逻辑里务必加一条'提取失败就拒绝执行并返回自然语言提示'的兜底分支，不能让清洗不掉的内容硬跑exec。另外顺手告诉我'帮我在这附近找棵树'那句对应的原始决策输出是什么，先记录不用现在修。"
+
+# 用户：
+以下是项目AI的回复：
+我已经把你要看的两句“ 清洗前原始 LLM 返回文本 ”抓出来了。先不改清洗逻辑，原文如下。
+
+1. 给我建一个3x3的羊圈 的原始返回
+
+- 当前这次抓到的 message.content 原文是：
+玩家附近有蜘蛛，风险较高，我先快速建一个简单的3x3羊圈，用围栏围起来。
+
+```python
+# 在玩家位置附近建一个3x3的羊圈
+x, y, z = pos.x, pos.y, pos.z
+
+# 先铺地板（草方块）
+for dx in range(3):
+    for dz in range(3):
+        mc.setBlock(x + dx, y - 1, z + dz, block.GRASS)
+
+# 四周围栏（用橡木栅栏），高度为1格
+for dx in range(3):
+    for dz in range(3):
+        if dx == 0 or dx == 2 or dz == 0 or dz == 2:
+            mc.setBlock(x + dx, y, z + dz, block.FENCE)
+```
+````
+
+- 这说明它的格式确实是：
+  - 前置中文解释
+  - 再跟一个 fenced code block
+- 这正是当前会把整段文本误当成 Python 去 `exec` 的直接原因。
+
+**2. `帮我在这附近找棵树` 的原始返回**
+- 对应的原始 `message.content` 是：
+
+```text
+QUERY:好的，我来扫描一下附近的环境，看看有没有树。
+```
+
+- 这句目前就是纯 `QUERY`，没有混入代码。
+- 我先按你的要求记录下来，这句暂时不修。
+
+**补充观察**
+- 这次重新抓到的“羊圈”原始输出，和上次联调里看到的失败样本相比，内容有一点波动。
+- 上次联调里模型返回过“中文解释 + 代码块 + 结尾补充说明”。
+- 这次抓到的是“中文解释 + 代码块”，没有再带尾部补充说明。
+- 这说明同一请求的**坏格式模式是稳定存在的**，但坏到什么程度会波动。
+
+**关于你要求的清洗兜底**
+- 我还没动清洗逻辑。
+- 但我会按你的要求，在正式修改时**强制加上这条兜底**：
+  - 如果代码提取失败
+  - 或提取后内容仍然不是可执行的纯代码
+  - 就**拒绝执行**
+  - 并返回自然语言提示
+  - 绝不再把“清不干净的内容”硬塞进 `exec`
+
+我建议下一步就按这个方向改：
+- 先做“只提取 fenced code block 中的 Python 代码”
+- 如果提取不到合法代码块，就走拒绝执行的 `QUERY` 兜底
+- 不依赖模型“自觉只输出纯代码”
+
+如果你同意，我下一步就开始改这个清洗与拒绝执行分支。
+
+# Claude-Sonnet-5：
+这两句证据抓得很干净，尤其是确认了"羊圈"问题的坏格式模式是稳定的（中文解释+fenced code block），而不是偶发噪声，这为选择"正则提取代码块"这个修复方向提供了扎实依据。"找棵树"那句原来是纯净的`QUERY:`格式，说明上一轮观察到的"回复空洞"其实是prompt引导不够、不是格式解析问题，这个判断很重要，避免了误伤到不该动的逻辑。
+
+在同意动手改清洗逻辑之前，有几个问题需要先问清楚，因为这类"防御性清洗"代码历史上就是这个项目里反复踩坑的地方（对应课程设计里"斜杠问题"那次教训——**光靠让AI自觉遵守格式是不够的，必须同时有规则约束和解析兜底两道防线**），这次不能只做提取、不做验证。
+
+## 需要先确认的问题
+
+**1. 现有的 `clean_ai_code()` 目前的实际行为是什么，为什么没能拦住这次情况**
+
+代码里之前就有一个`clean_ai_code()`函数，职责是"移除Markdown代码块标记"。需要先搞清楚：它现在是怎么处理"前面有中文解释+后面跟代码块"这种情况的？是完全没有处理前置文字（只是简单去掉```标记，但保留了外面的中文），还是它压根没被这条路径调用到？请先给出这个函数当前的实际代码，让我看清楚它目前处理到了哪一步、卡在哪一步失效的，而不是直接推倒重写。
+
+**2. 路由判断逻辑：为什么这段"中文+代码"会被送进 `exec`**
+
+这次的系统按`CMD:`/`QUERY:`/纯代码三选一做路由，"羊圈"那次的原始返回既不以`CMD:`开头也不以`QUERY:`开头，那目前的路由逻辑是不是"只要不匹配前两种前缀，就默认当作Python代码去exec"？如果是这样，这是本次问题的第一处根因——**判断"这是不是可执行代码"这件事，不应该只靠"没匹配到别的前缀"来兜底认定，需要真正验证内容本身是否是合法代码**。请确认这一层路由逻辑现状，新的提取和校验要嵌入到这层判断里，而不是在`exec`前再打一个补丁。
+
+**3. 提取代码块之后，必须加一道语法校验关卡，而不是提取到内容就直接执行**
+
+要求：不管用什么方式提取出了代码块内容（正则匹配```python ... ```或``` ... ```之间的内容），提取完成后必须先用 `ast.parse()` 或 `compile()` 做一次语法校验，校验通过才允许送进`exec`；**校验失败，或者压根没提取到任何代码块，都要走同一条"拒绝执行+返回自然语言提示"的兜底路径**，不能有任何"提取到内容但没做语法校验就直接exec"的中间状态。这是这次修复的核心质量门槛，请明确会加上这一步。
+
+**4. 边界情况需要说明处理方式**
+
+- 如果一次返回里有**两个或以上**的代码块，怎么处理（只取第一个？合并所有？直接判定为异常拒绝执行？）；
+- 如果代码块内部本身**又混入了中文注释以外的自然语言**（不是`#`开头的合法Python注释，而是裸的中文句子），语法校验环节应该能自然拦下这种情况（`ast.parse`会报错），但请确认这类报错也会被正确导向"拒绝执行"分支，而不是被别的异常处理吞掉导致静默失败。
+
+**5. 同步加强prompt，不要只做提取兜底**
+
+你之前建议的"两个方向"都要做，这次的回复里只字未提是否会同步加强system prompt里"生成代码时只能输出纯代码，禁止解释性文字"这条规则的措辞。请确认这次会**同时**做prompt加固和提取校验兜底两件事，理由和当年"斜杠问题"的处理方式一致——规则约束能降低出现概率，但不能保证100%不出现，必须靠解析层兜底兜住最后一道防线，两者缺一不可。
+
+## 下一步指令
+
+> "同意你的修复方向，但请先做这几件事再动手：①贴出当前`clean_ai_code()`的真实代码，以及决定'这段内容该走CMD/QUERY/exec哪个分支'的路由判断代码原文，让我看清楚现状；②确认新方案会在提取代码块之后加一道`ast.parse()`语法校验，校验不过或提取不到代码块，一律走拒绝执行+QUERY兜底，不允许任何未经校验的内容进入exec；③说明如果一次返回里出现多个代码块会怎么处理；④确认这次会同步加强system prompt里'生成代码只能输出纯代码'的措辞，而不是只依赖提取兜底这一层。这4点说清楚之后，把改动前后的完整diff贴给我看，我review通过后你再拿'给我建一个3x3的羊圈'这句重新跑一次验证，同时顺手把之前5句主用例也重新过一遍，确认没有引入回归问题。"
+
+# 用户：
+以下是项目AI的回复：
+现状代码
+
+- 当前 clean_ai_code() 的真实代码是：
+def clean_ai_code(code_text):
+    if not code_text:
+        return code_text
+
+    code_text = re.sub(r"^```(?:python|py)?\s*\n?", "", code_text.strip(), flags=re.IGNORECASE)
+    code_text = re.sub(r"\n?```\s*$", "", code_text.strip())
+
+    lines = code_text.split("\n")
+    cleaned_lines = []
+    for line in lines:
+        if line.strip().lower() in ("python", "py"):
+            continue
+        cleaned_lines.append(line)
+
+    return "\n".join(cleaned_lines).strip()
+当前“决定走 CMD / QUERY / exec 哪个分支”的路由原文是：
+content = response.choices[0].message.content.strip()
+clean_content = clean_ai_code(content)
+
+if not clean_content.startswith("CMD:") and not clean_content.startswith("QUERY:"):
+    lines = clean_content.split("\n")
+    safe_lines = [
+        line for line in lines
+        if ".create" not in line
+        and "import mcpi" not in line
+        and "import mcpq" not in line
+        and "Minecraft.create" not in line
+        and "from mcpi" not in line
+        and "from mcpq" not in line
+    ]
+    clean_content = "\n".join(safe_lines).strip()
+
+return clean_content
+if decision.startswith("CMD:"):
+    ...
+elif decision.startswith("QUERY:"):
+    ...
+else:
+    ...
+    with _mcpi_lock:
+        exec(decision, exec_globals)
+- 也就是说，当前现状确实是：
+  - 只做了非常弱的字符串清洗
+  - 只要不是 CMD: / QUERY: ，最后就会掉进 exec(decision, exec_globals)
+  - 中间 没有 语法校验
+  - 也 没有 “提取失败则拒绝执行”的兜底
+我建议的新方案
+
+- ① 会加 ast.parse() 语法校验，这点我确认。
+- ② 任何进入 exec 的内容都必须先经过“提取 + 语法校验”。
+- ③ 如果提取失败，或校验失败，一律 拒绝执行 并返回自然语言 QUERY 兜底。
+- ④ 会同步加强 system prompt，明确要求“生成 Python 时只能输出纯代码，不能带说明文字、不能带 Markdown 代码块”。
+关于你特别关心的 4 个细节
+
+- 1. ast.parse 校验
+  
+  - 会加，而且是 exec 前的硬门槛。
+  - 只有通过 ast.parse(..., mode="exec") 的内容才允许执行。
+- 2. 提取失败时怎么处理
+  
+  - 我会加“拒绝执行 + QUERY 兜底”。
+  - 兜底文案我拟定为：
+QUERY:我拿到的建造方案格式不对，暂时不能安全执行。请再试一次。
+- 3. 一次返回里如果有多个代码块
+  
+  - 我建议： 一律拒绝执行
+  - 理由是多代码块有歧义，不知道该执行哪一段，安全上不应该猜。
+  - 也就是说：
+    - 0 个代码块：如果整段文本本身就是纯 Python，走 ast.parse 校验；否则拒绝
+    - 1 个代码块：提取该代码块，走 ast.parse
+    - >=2 个代码块：直接拒绝执行 + QUERY
+- 4. 是否只靠提取兜底
+  
+  - 不是。
+  - 我会同步加强 prompt，明确写成硬规则：
+    - 需要 Python 时，只能输出纯 Python
+    - 不允许前置解释
+    - 不允许后置说明
+    - 不允许 Markdown fenced code block
+    - 如果做不到，就输出 QUERY:...
+这里有一个实现取舍，我先说明
+
+- 你原话里有一句“提取不到代码块，一律走拒绝执行”。
+- 我建议稍微放宽成更实用也同样安全的版本：
+  - 如果有代码块，就按代码块提取
+  - 如果没有代码块，但 整段文本本身就是纯 Python ，也允许通过 ast.parse 后执行
+- 原因是我们同时会把 prompt 强化成“只能输出纯代码”，那模型理想输出恰好就是 无代码块的纯 Python 。
+- 如果严格要求“没有代码块就一律拒绝”，反而会把“最理想的纯代码输出”也误杀。
+- 但不管是哪种情况， 任何进入 exec 的内容都必须先过 ast.parse ，这一点不变。
+拟议 diff
+
+- 下面是我建议的完整改动 diff 预览。当前只是给你 review， 还没应用 。
+*** Begin Patch
+*** Update File: d:\CCXXLESSON\minecraft\mc_ai_agent.py
+@@
+-import time
++import time
++import ast
+ import re
+ import math
+ import sys
+ import threading
+@@
+ def clean_ai_code(code_text):
+     if not code_text:
+         return code_text
+
+     code_text = re.sub(r"^```(?:python|py)?\s*\n?", "", code_text.strip(), flags=re.IGNORECASE)
+     code_text = re.sub(r"\n?```\s*$", "", code_text.strip())
+
+     lines = code_text.split("\n")
+     cleaned_lines = []
+     for line in lines:
+         if line.strip().lower() in ("python", "py"):
+             continue
+         cleaned_lines.append(line)
+
+     return "\n".join(cleaned_lines).strip()
++
++
++def extract_python_candidates(code_text):
++    text = str(code_text or "").strip()
++    fenced_matches = re.findall(r"```(?:python|py)?\s*\n([\s\S]*?)\n```", text, flags=re.IGNORECASE)
++    fenced_matches = [match.strip() for match in fenced_matches if match.strip()]
++
++    if fenced_matches:
++        return {
++            "mode": "fenced",
++            "candidates": fenced_matches,
++        }
++
++    return {
++        "mode": "raw",
++        "candidates": [text] if text else [],
++    }
++
++
++def prepare_python_for_exec(decision_text):
++    text = str(decision_text or "").strip()
++    if not text:
++        return False, None, "QUERY:我拿到的建造方案是空的，暂时不能执行。"
++
++    extraction = extract_python_candidates(text)
++    candidates = extraction["candidates"]
++
++    if extraction["mode"] == "fenced" and len(candidates) != 1:
++        return False, None, "QUERY:我拿到的建造方案里有多个代码块，暂时不能安全执行。请再试一次。"
++
++    if not candidates:
++        return False, None, "QUERY:我拿到的建造方案格式不对，暂时不能安全执行。请再试一次。"
++
++    candidate = candidates[0].strip()
++    if not candidate:
++        return False, None, "QUERY:我拿到的建造方案格式不对，暂时不能安全执行。请再试一次。"
++
++    try:
++        ast.parse(candidate, mode=\"exec\")
++    except SyntaxError:
++        return False, None, "QUERY:我拿到的建造方案格式不对，暂时不能安全执行。请再试一次。"
++
++    return True, candidate, None
+@@
+ def get_ai_decision(instruction, scan_result=None, scan_required=False):
+@@
+ TOOL 1: Python Code
+ - Use for: building, placing blocks, drawing shapes.
+ - Format: ONLY valid Python code.
++- If you choose Python Code, output ONLY executable Python code.
++- Do NOT add any explanation before the code.
++- Do NOT add any explanation after the code.
++- Do NOT wrap the code in Markdown code fences.
++- Do NOT output natural language together with Python code.
++- If you cannot provide pure executable Python code, output QUERY instead.
+ - CRITICAL: The 'mc' object is ALREADY CONNECTED AND AVAILABLE.
+ - DO NOT import mcpi.
+ - DO NOT import mcpq.
+ - DO NOT call Minecraft.create().
+@@
+ GENERAL RULES:
+ 1. Items/Admin -> CMD.
+ 2. Building/placing blocks -> Python Code.
+ 3. If scan_ready is false, never pretend to know nearby surroundings.
+ 4. Unknown state questions -> QUERY with a limitation message.
+ 5. No explanations.
+ 6. Only output one of:
+     - CMD:...
+     - QUERY:...
+     - valid Python code
+ 7. Understand Chinese, Pinyin and English.
++8. When outputting Python code, the whole response must be pure Python only.
++9. Never mix Chinese explanation text with Python code in the same response.
+ """
+@@
+-    else:
++    else:
+         pos, rotation, position_ok = get_safe_player_context()
+
+         if not position_ok:
+             print("❌ [MCPQ] 无法定位玩家，取消建造，避免建到错误位置")
+             safe_post_chat("AI: Cannot find player.")
+             return False
++
++        code_ok, exec_code, reject_query = prepare_python_for_exec(decision)
++        if not code_ok:
++            query_msg = reject_query.replace("QUERY:", "").strip()
++            print(f"⚠️ [执行拦截] {query_msg}")
++            safe_post_chat(f"AI: {query_msg[:40]}")
++            return True
+ 
+-        print(f"💻 [执行] 准备执行代码:\n{decision}")
++        print(f"💻 [执行] 准备执行代码:\n{exec_code}")
+         safe_post_chat("AI: Building...")
+@@
+         try:
+             with _mcpi_lock:
+-                exec(decision, exec_globals)
++                exec(exec_code, exec_globals)
+             safe_post_chat("AI: Done!")
+             print("✅ [结果] 建造完成")
+             report_debug_event(
+                 "B",
+                 "mc_ai_agent.py:handle_user_text:return-build-success",
+*** End Patch
+我对这个 diff 的预期效果
+
+- 给我建一个3x3的羊圈
+  - 如果模型再返回“中文说明 + 单个代码块”
+  - 会提取代码块
+  - 通过 ast.parse 后再执行
+- 如果模型返回：
+  - 中文说明 + 坏代码
+  - 多个代码块
+  - 或完全混乱格式
+  - 都不会再硬跑 exec
+  - 而是走 QUERY 拒绝执行兜底
+我建议你重点 review 的点
+
+- 是否接受“单个代码块可提取执行、多个代码块一律拒绝”这条规则
+- 是否接受“无代码块但整段文本本身是纯 Python 时，也允许通过 ast.parse 后执行”这条兼容策略
+- 兜底文案是否要再改口吻
+如果你 review 通过，我下一步就按这版 diff 落地，然后只重跑：
+
+- 给我建一个3x3的羊圈
+- 再加上之前 5 句主用例回归验证
+确认没有回归后再把结果交给你。
+# Claude-Sonnet-5：
+这版方案的核心设计（fenced代码块提取 + ast.parse硬校验 + 拒绝执行兜底 + prompt同步加固）思路是对的，也确认了"决不允许未经校验内容进exec"这条底线。但这个diff在正式落地前，有几个问题需要先确认清楚，其中第1点和第4点建议作为阻塞项处理。
+
+## 需要确认/修正的问题
+
+**1.（疑似bug，需先确认）diff里出现了字面反斜杠转义引号**
+
+diff中这一行：
+```python
+ast.parse(candidate, mode=\"exec\")
+```
+带有 `\"` 这种转义符号。如果这是patch工具展示格式的转义artifact，那没问题；但如果这段代码原样写进`.py`文件，`mode=\"exec\"` 会导致这行本身就是Python语法错误，直接让整个模块加载失败。请**在应用前明确确认**：实际写入文件的内容是 `mode="exec"`（正常双引号），而不是带反斜杠的转义形式。这种"改bug的代码本身又带一个新bug"的情况，历史上这个项目已经出现过好几次（比如最早的斜杠问题），这次务必自查一遍再落地。
+
+**2. ast.parse 只能挡语法错误，挡不住运行时错误——exec的异常处理要一并确认**
+
+`ast.parse()`校验的是语法合法性，但挡不住"语法正确、但引用了不存在的东西"这类问题——比如模型编出一个`block.SHEEP_PEN`这种压根不存在的方块常量，语法上完全合法，能通过`ast.parse`，但真正`exec`执行时会抛`AttributeError`。这次diff只解决了"格式错误（中文夹代码）"这一类问题，没有触及"代码语法对、但运行时报错"这一类问题。需要确认：**现有`exec(exec_code, exec_globals)`外层的`try/except`是否已经能优雅捕获这类运行时异常并走友好提示，而不会让整条链路挂掉或者留下"建了一半"的烂摊子**。这不需要现在就修，但要明确这是一个已知的、暂未覆盖的风险边界，别误以为加了ast.parse就等于"exec前完全安全"了。
+
+**3. 旧的"逐行过滤import/create"安全网，建议评估是否该移除，而不是让它和新校验叠在一起**
+
+现状代码里那段用字符串子串匹配（`.create`、`import mcpi`等）逐行过滤的逻辑，是在还没有真正语法校验能力时的"土办法"防御。现在有了`ast.parse`这道硬校验，这个旧的逐行过滤反而成了一个隐患：它在`prepare_python_for_exec()`介入**之前**就已经对`decision`做了一次逐行删减，如果它误删了一行本该完整保留的合法代码（比如某行恰好包含子串`.create`但其实是变量名的一部分，如`mc.create_something(...)`这种误伤），会导致原本语法正确的代码被这层旧过滤搞出**新的**语法错误，然后被`ast.parse`拦下、误判为"模型输出格式有问题"，但真实原因其实是旧过滤误删。建议：**要么在新校验生效后彻底移除这层旧的逐行字符串过滤，要么明确说明保留它的理由并确认它不会跟fenced代码块的提取产生冲突**。这本质上是"两层防御机制互相不知道对方存在"的经典维护隐患，值得现在理清楚，而不是留到以后再踩一次坑。
+
+**4.（重点，建议阻塞）"拒绝执行"和"建造成功"目前共用同一个`return True`，需要区分**
+
+diff里拒绝执行分支最后是`return True`，而原有建造成功分支打印"✅ 建造完成"之后也是`return True`。这意味着调用方拿到的返回值**无法区分"这次真的建成了"和"这次被拒绝、什么都没建"**。这一点在当前阶段可能看不出问题，但课程设计里明确提到过后续要做**记忆模块**，其中包含"建造历史"这类字段——如果将来记忆系统是根据这个返回值来判断"要不要把这次操作记进历史"，那么一次被拒绝执行的羊圈请求就会被误记成"AI成功建了一个羊圈"，这是一个会污染记忆数据的真实风险。建议这次就把返回值语义区分开（比如拒绝分支返回`False`或者一个专门的状态标记），避免以后接记忆模块时还要回头排查这个历史遗留的语义混淆问题。
+
+## 对已给出的三个设计取舍的意见
+
+- **"单代码块提取执行，多代码块一律拒绝"**：同意，这个策略清晰、安全边界明确，不需要改。
+- **"无代码块但整段文本本身是纯Python时也放行"**：同意这个兼容策略，因为最终都要过`ast.parse`这一关，不会因为放宽了"必须要有代码块"这个前提而引入新风险，逻辑自洽。
+- **拒绝执行的兜底文案**："我拿到的建造方案格式不对，暂时不能安全执行。请再试一次。"——这句偏"系统提示"口吻，跟你们之前把LLM超时兜底改得更自然（"我这次想得有点久..."）的方向不太一致。建议统一成同样自然的角色口吻，比如"这次的建造方案好像没写对，你再说一遍看看？"，保持两处兜底文案的语气一致性。
+
+## 下一步指令
+
+> "先确认并处理这4点：①检查diff里`mode=\"exec\"`的转义符号是不是patch工具的展示artifact，确认实际写入文件时是正常的`mode=\"exec\"`；②明确exec外层的try/except能否优雅兜住'语法对但运行时报错'（比如编造不存在的方块名）这类异常；③评估旧的逐行字符串过滤逻辑是否该移除，如果保留，说明它不会跟新的代码块提取产生冲突；④把'拒绝执行'和'建造成功'的返回值区分开，不要共用同一个True，避免以后记忆模块把被拒绝的请求误记成建造成功。这4点处理完、兜底文案口吻也统一之后，把最终diff重新贴给我，我确认后你再跑'给我建一个3x3的羊圈'加上之前5句主用例做完整回归。"
+
+# 用户：
+以下是项目AI的回复：
+我先把这 4 点逐条确认，并把 diff 按你的要求重新收紧。 这次仍然只是最终 diff 预览，还没落地。
+
+4 点确认
+
+- ① mode=\"exec\" 是我上次在 markdown diff 里的转义展示痕迹，不是准备写进文件的真实内容。
+  
+  - 实际落地时会写成正常 Python：
+  - ast.parse(candidate, mode="exec")
+- ② exec 外层当前已有 try/except ，能兜住“语法合法但运行时报错”的异常。
+  
+  - 例如：
+    - 不存在的方块名
+    - 运行时变量错误
+    - API 调用时报错
+  - 这些都会落到现有这段：
+try:
+    with _mcpi_lock:
+        exec(exec_code, exec_globals)
+    ...
+    return True
+except Exception as e:
+    print(f"❌ [错误] 代码执行失败：{e}")
+    safe_post_chat("AI: Build error.")
+    return False
+- - 所以新方案里：
+    - ast.parse() 负责兜“语法不合法”
+    - try/except exec(...) 负责兜“运行时不合法”
+- ③ 旧的逐行字符串过滤逻辑我建议 移除 ，不保留。
+  
+  - 原因：
+    - 它现在是在 get_ai_decision() 里对整段 clean_content 先做逐行删减
+    - 这会和新的“代码块提取 + AST 校验”形成职责重叠
+    - 更糟的是，它可能在提取前就改坏原始结构，反而影响代码块识别
+  - 所以更稳妥的做法是：
+    - get_ai_decision() 只保留原始 content
+    - 不再做那段逐行删减
+    - 安全性由后续 prepare_python_for_exec() 统一处理
+  - 这样不会和新提取逻辑冲突，职责也更清晰
+- ④ 我同意你的要求： “拒绝执行”不能和“建造成功”共用 True
+  
+  - 新方案里我会改成：
+    - 建造成功 -> return True
+    - 拒绝执行（格式不安全/提取失败/AST失败） -> return False
+  - 同时仍然会给用户发自然语言提示
+  - 这样以后记忆或统计模块不会把“被安全拒绝执行”误记成成功建造
+兜底文案统一
+
+- 我把“拒绝执行”的口吻统一成更自然、也更偏安全提示的版本：
+QUERY:我拿到的建造方案格式不够安全，暂时先不执行。请再试一次。
+- 这个文案会用于：
+- 提取不到代码
+- 提取到多个代码块
+- ast.parse() 失败
+- 超时兜底文案保持现有这条，不混用：
+QUERY:我这次想得有点久，暂时没能给出结果。请稍后再试一次。
+关于多个代码块
+
+- 新方案明确：
+  - 0 个代码块：
+    - 如果整段文本本身是纯 Python，并能过 ast.parse() ，允许执行
+    - 否则拒绝执行
+  - 1 个代码块：
+    - 提取它，过 ast.parse() ，通过后执行
+  - >=2 个代码块：
+    - 一律拒绝执行
+- 我保留“无代码块但整段是纯 Python 仍可执行”这条兼容策略，因为这是模型最理想的输出形态；如果硬要求“没代码块就拒绝”，会把合法纯代码也误伤。
+最终 diff 预览
+*** Begin Patch
+*** Update File: d:\CCXXLESSON\minecraft\mc_ai_agent.py
+@@
+-import time
++import time
++import ast
+ import re
+ import math
+ import sys
+ import threading
+@@
+ AI_REQUEST_TIMEOUT_SECONDS = 12.0
+ AI_REQUEST_MAX_RETRIES = 0
+ AI_THINKING_DISABLED_BODY = {"thinking": {"type": "disabled"}}
+ DEBUG_INSTRUMENTATION_ENABLED = False
++EXECUTION_REJECT_QUERY = "QUERY:我拿到的建造方案格式不够安全，暂时先不执行。请再试一次。"
+@@
+ def clean_ai_code(code_text):
+     if not code_text:
+         return code_text
+ 
+     code_text = re.sub(r"^```(?:python|py)?\s*\n?", "", code_text.strip(), flags=re.IGNORECASE)
+@@
+ 
+     return "\n".join(cleaned_lines).strip()
++
++
++def extract_python_candidates(code_text):
++    text = str(code_text or "").strip()
++    fenced_matches = re.findall(
++        r"```(?:python|py)?\s*\n([\s\S]*?)\n```",
++        text,
++        flags=re.IGNORECASE,
++    )
++    fenced_matches = [match.strip() for match in fenced_matches if match.strip()]
++
++    if fenced_matches:
++        return {
++            "mode": "fenced",
++            "candidates": fenced_matches,
++        }
++
++    return {
++        "mode": "raw",
++        "candidates": [text] if text else [],
++    }
++
++
++def prepare_python_for_exec(decision_text):
++    text = str(decision_text or "").strip()
++    if not text:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    extraction = extract_python_candidates(text)
++    candidates = extraction["candidates"]
++
++    if extraction["mode"] == "fenced" and len(candidates) != 1:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    if not candidates:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    candidate = candidates[0].strip()
++    if not candidate:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    try:
++        ast.parse(candidate, mode="exec")
++    except SyntaxError:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    return True, candidate, None
+@@
+ TOOL 1: Python Code
+ - Use for: building, placing blocks, drawing shapes.
+ - Format: ONLY valid Python code.
++- If you choose Python Code, output ONLY executable Python code.
++- Do NOT add any explanation before the code.
++- Do NOT add any explanation after the code.
++- Do NOT wrap the code in Markdown code fences.
++- Do NOT mix Chinese explanation text with Python code.
++- If you cannot provide pure executable Python code, output QUERY instead.
+ - CRITICAL: The 'mc' object is ALREADY CONNECTED AND AVAILABLE.
+ - DO NOT import mcpi.
+ - DO NOT import mcpq.
+ - DO NOT call Minecraft.create().
+@@
+ GENERAL RULES:
+ 1. Items/Admin -> CMD.
+ 2. Building/placing blocks -> Python Code.
+ 3. If scan_ready is false, never pretend to know nearby surroundings.
+ 4. Unknown state questions -> QUERY with a limitation message.
+ 5. No explanations.
+ 6. Only output one of:
+     - CMD:...
+     - QUERY:...
+     - valid Python code
+ 7. Understand Chinese, Pinyin and English.
++8. When outputting Python code, the whole response must be pure Python only.
++9. Never mix explanation text with Python code in the same response.
+ """
+@@
+-        content = response.choices[0].message.content.strip()
+-        clean_content = clean_ai_code(content)
+-
+-        if not clean_content.startswith("CMD:") and not clean_content.startswith("QUERY:"):
+-            lines = clean_content.split("\n")
+-            safe_lines = [
+-                line for line in lines
+-                if ".create" not in line
+-                and "import mcpi" not in line
+-                and "import mcpq" not in line
+-                and "Minecraft.create" not in line
+-                and "from mcpi" not in line
+-                and "from mcpq" not in line
+-            ]
+-            clean_content = "\n".join(safe_lines).strip()
++        content = response.choices[0].message.content.strip()
++        clean_content = clean_ai_code(content)
+@@
+     else:
+         pos, rotation, position_ok = get_safe_player_context()
+ 
+         if not position_ok:
+             print("❌ [MCPQ] 无法定位玩家，取消建造，避免建到错误位置")
+             safe_post_chat("AI: Cannot find player.")
+             return False
++
++        code_ok, exec_code, reject_query = prepare_python_for_exec(decision)
++        if not code_ok:
++            query_msg = reject_query.replace("QUERY:", "").strip()
++            print(f"⚠️ [执行拦截] {query_msg}")
++            safe_post_chat(f"AI: {query_msg[:40]}")
++            return False
+ 
+-        print(f"💻 [执行] 准备执行代码:\n{decision}")
++        print(f"💻 [执行] 准备执行代码:\n{exec_code}")
+         safe_post_chat("AI: Building...")
+@@
+         try:
+             with _mcpi_lock:
+-                exec(decision, exec_globals)
++                exec(exec_code, exec_globals)
+             safe_post_chat("AI: Done!")
+             print("✅ [结果] 建造完成")
+             report_debug_event(
+                 "B",
+                 "mc_ai_agent.py:handle_user_text:return-build-success",
+*** End Patch
+这版 diff 相比上一版的关键调整
+
+- 明确 ast.parse(candidate, mode="exec") 是正常 Python 写法
+- 删除旧的逐行字符串过滤，不和新提取逻辑冲突
+- 拒绝执行时改为 return False
+- 兜底文案统一成“格式不够安全，暂时先不执行”
+- prompt 进一步强化“生成代码只能输出纯代码”
+如果你确认这版 diff 没问题，我下一步就正式落地，然后按你要求重跑：
+
+- 给我建一个3x3的羊圈
+- 再加上之前 5 句主用例做完整回归。
+
+# Claude-Sonnet-5：
+这版diff质量已经很高，四点确认都给了扎实证据，尤其是"拒绝执行返回False、区分建造成功"和"文案统一"这两点处理得很到位。但在正式落地前，还有一个**结构性隐患**需要指出，我认为这是本次唯一需要阻塞的问题，其余是可以放行但建议顺手记录的细节。
+
+## 需要阻塞的问题：移除旧过滤后，出现了一个安全防线的真空地带
+
+`ast.parse()`只能校验**语法**是否合法，完全不管**语义**是否安全。而被删掉的那段旧的逐行字符串过滤（过滤`import mcpi`、`Minecraft.create()`等），其实不是在做"代码块清洗"，它承担的是另一个完全独立的职责——**防止AI生成的代码里意外混入会重新创建一条Minecraft连接、或导入已废弃模块的语句**。这类语句语法上完全合法（`import mcpi.minecraft`是一句合法的Python），能顺利通过`ast.parse()`，但真正`exec`执行时会带来实质性风险：如果运行环境里`mcpi`包还没卸载干净（这在当前的迁移阶段完全可能发生），这句话会真的执行成功，创建一个游离于`exec_globals`里那个`mc`实例之外的、独立的连接，这正是system prompt里专门用"DO NOT import mcpi"、"DO NOT call Minecraft.create()"这几条规则去防的那类问题——**既然专门写了禁止性规则，说明这类输出历史上真实出现过，不是假设性风险**。
+
+这次diff的处理方式是"删除旧过滤 + 只靠加强prompt措辞"，这恰好是这个项目从"斜杠问题"那次教训里得出的核心原则的反面——**仅靠让AI自觉遵守规则是不够的，必须同时有代码层面的兜底**。当时的解决方案是"防御性代码修复"配合"提示词约束"两者并存，不是二选一。
+
+**建议的修复方式**：不是把旧的逐行过滤原样加回去（那样确实会像项目AI说的那样，在提取代码块之前就动了原始文本，可能误伤代码块识别），而是把这层语义检查**挪到`prepare_python_for_exec()`内部、`ast.parse()`通过之后、真正`exec`之前**，只对最终提取出来的、已经确认语法合法的`candidate`做一次检查（比如用`ast`遍历`Import`/`ImportFrom`节点，或者退而求其次做子串检查`"import mcpi"`、`"import mcpq"`、`"Minecraft.create("`），一旦命中就同样走`EXECUTION_REJECT_QUERY`拒绝执行。这样既不会像之前那样在提取前破坏原始结构，又补上了这道语义层的安全网，两道防线（prompt约束 + 代码层拦截）继续并存，符合这个项目一直以来验证过的设计哲学。
+
+## 需要顺手确认的问题（不阻塞，但建议了解清楚）
+
+**1. `exec_globals`里实际暴露了哪些名字**：如果`exec_globals`本身没有做任何限制（比如把内置的`__import__`也完整暴露进去了），那么即便这次补上了对"import mcpi/mcpq"这几个具体字符串的检查，AI依然可能用其他写法绕过去（比如`__import__('mcpi')`这种变体）。建议顺手贴一下`exec_globals`当前的构造代码，评估一下这个沙箱本身的严格程度，作为这次修复要不要做得更周全的参考依据（如果`exec_globals`已经足够收紧，那简单的子串检查就够用；如果完全开放，可能需要更谨慎的处理，但这个可以留到下一轮再说，不阻塞这次）。
+
+**2. `safe_post_chat(f"AI: {query_msg[:40]}")`用的是手写切片，而不是项目里已有的`safe_chat_text()`工具函数**：这是个很小的一致性问题，建议统一改成调用已有的`safe_chat_text()`，避免两处截断逻辑（长度限制、特殊字符处理等）以后各自演化出不一致的行为。这个不影响这次修复的正确性，可以顺手改，不改也不阻塞。
+
+## 其余部分可以放行
+
+- 转义符号确认是展示artifact，不是真实代码，这个疑虑解除。
+- exec外层try/except能兜住运行时异常，这个确认清楚了，`ast.parse`管语法、try/except管运行时，分工明确。
+- 拒绝执行统一返回`False`，和建造成功的`True`区分开，这个改动到位，避免了以后记忆模块的数据污染风险。
+- 兜底文案口吻统一，多代码块/无代码块的处理策略都合理。
+
+## 下一步指令
+
+> "这版diff基本通过，但有一个阻塞项：请在`prepare_python_for_exec()`里，`ast.parse()`校验通过、真正返回可执行代码之前，再加一道语义检查——对最终提取出来的`candidate`本身（不是原始content）做一次检查，如果包含`import mcpi`、`import mcpq`、`Minecraft.create(`这几类字符串（或者用ast遍历import节点更严谨），同样触发`EXECUTION_REJECT_QUERY`拒绝执行。这样prompt约束和代码层拦截两道防线才都在。顺手告诉我`exec_globals`目前具体暴露了哪些名字，让我评估一下这个沙箱本身的严格程度。这两点确认后，把最终diff再贴一次，我看过没问题你就落地，然后按计划跑'给我建一个3x3的羊圈'加5句主用例做完整回归。"
+
+# 用户：
+以下是项目AI的回复：
+这两点我先确认清楚，并把 最终 diff 预览 按你的要求补完整。 这次仍然先不落地修改。
+
+新增阻塞项确认
+
+- 我同意在 prepare_python_for_exec() 里加第二道代码层拦截。
+- 顺序会是：
+  - 提取 candidate
+  - ast.parse(candidate, mode="exec")
+  - 再对 提取后的 candidate 本身 做安全检查
+  - 只要命中危险模式，就返回 EXECUTION_REJECT_QUERY
+- 我会同时做两层：
+  - 字符串级拦截：
+    - import mcpi
+    - from mcpi
+    - import mcpq
+    - from mcpq
+    - Minecraft.create(
+    - .create(
+  - AST 级拦截：
+    - ast.Import
+    - ast.ImportFrom
+    - ast.Call 中命中 Minecraft.create(...)
+- 这样就不只依赖 prompt，也不只依赖字符串清洗，而是：
+  - prompt 约束一层
+  - 提取后 AST 语法校验一层
+  - 提取后危险语义拦截一层
+exec_globals 当前暴露的名字
+
+- 目前执行沙箱里暴露的是这些名字：
+exec_globals = {
+    "mc": mc,
+    "block": block,
+    "minecraft": minecraft,
+    "time": time,
+    "math": math,
+    "pos": pos,
+    "rotation": rotation,
+    "target": target,
+    "target_block_id": target_block_id,
+    "target_selected": target is not None,
+}
+- 也就是说，当前模型代码可以直接访问：
+  - mc
+  - block
+  - minecraft
+  - time
+  - math
+  - pos
+  - rotation
+  - target
+  - target_block_id
+  - target_selected
+- 从“沙箱严格程度”看，这仍然是 功能型沙箱 ，不是安全型沙箱。
+- 但在当前项目目标下，这层主要是：
+  - 给 Minecraft 建造代码提供足够上下文
+  - 配合 prompt 和前置拦截，尽量避免模型跑偏
+- 不是防恶意代码执行的强隔离环境。
+- 这次你要求的“禁止重新导入 mcpi/mcpq 、禁止 Minecraft.create() ”正好是对现有沙箱的必要补强。
+最终 diff 预览：
+*** Begin Patch
+*** Update File: d:\CCXXLESSON\minecraft\mc_ai_agent.py
+@@
+-import time
++import time
++import ast
+ import re
+ import math
+ import sys
+ import threading
+@@
+ AI_REQUEST_TIMEOUT_SECONDS = 12.0
+ AI_REQUEST_MAX_RETRIES = 0
+ AI_THINKING_DISABLED_BODY = {"thinking": {"type": "disabled"}}
+ DEBUG_INSTRUMENTATION_ENABLED = False
+ EXECUTION_REJECT_QUERY = "QUERY:我拿到的建造方案格式不够安全，暂时先不执行。请再试一次。"
+@@
+ def clean_ai_code(code_text):
+     if not code_text:
+         return code_text
+@@
+ 
+     return "\n".join(cleaned_lines).strip()
++
++
++def extract_python_candidates(code_text):
++    text = str(code_text or "").strip()
++    fenced_matches = re.findall(
++        r"```(?:python|py)?\s*\n([\s\S]*?)\n```",
++        text,
++        flags=re.IGNORECASE,
++    )
++    fenced_matches = [match.strip() for match in fenced_matches if match.strip()]
++
++    if fenced_matches:
++        return {
++            "mode": "fenced",
++            "candidates": fenced_matches,
++        }
++
++    return {
++        "mode": "raw",
++        "candidates": [text] if text else [],
++    }
++
++
++def candidate_uses_forbidden_runtime(candidate, parsed_tree):
++    lowered = candidate.lower()
++    forbidden_snippets = [
++        "import mcpi",
++        "from mcpi",
++        "import mcpq",
++        "from mcpq",
++        "minecraft.create(",
++        ".create(",
++    ]
++
++    if any(snippet in lowered for snippet in forbidden_snippets):
++        return True
++
++    for node in ast.walk(parsed_tree):
++        if isinstance(node, ast.Import):
++            return True
++        if isinstance(node, ast.ImportFrom):
++            return True
++        if isinstance(node, ast.Call):
++            func = node.func
++            if (
++                isinstance(func, ast.Attribute)
++                and func.attr == "create"
++                and isinstance(func.value, ast.Name)
++                and func.value.id == "Minecraft"
++            ):
++                return True
++
++    return False
++
++
++def prepare_python_for_exec(decision_text):
++    text = str(decision_text or "").strip()
++    if not text:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    extraction = extract_python_candidates(text)
++    candidates = extraction["candidates"]
++
++    if extraction["mode"] == "fenced" and len(candidates) != 1:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    if not candidates:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    candidate = candidates[0].strip()
++    if not candidate:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    try:
++        parsed_tree = ast.parse(candidate, mode="exec")
++    except SyntaxError:
++        return False, None, EXECUTION_REJECT_QUERY
++
++    if candidate_uses_forbidden_runtime(candidate, parsed_tree):
++        return False, None, EXECUTION_REJECT_QUERY
++
++    return True, candidate, None
+@@
+ TOOL 1: Python Code
+ - Use for: building, placing blocks, drawing shapes.
+ - Format: ONLY valid Python code.
++- If you choose Python Code, output ONLY executable Python code.
++- Do NOT add any explanation before the code.
++- Do NOT add any explanation after the code.
++- Do NOT wrap the code in Markdown code fences.
++- Do NOT mix Chinese explanation text with Python code.
++- Do NOT import mcpi.
++- Do NOT import mcpq.
++- Do NOT call Minecraft.create().
++- If you cannot provide pure executable Python code, output QUERY instead.
+ - CRITICAL: The 'mc' object is ALREADY CONNECTED AND AVAILABLE.
+ - DO NOT import mcpi.
+ - DO NOT import mcpq.
+ - DO NOT call Minecraft.create().
+@@
+ GENERAL RULES:
+ 1. Items/Admin -> CMD.
+ 2. Building/placing blocks -> Python Code.
+ 3. If scan_ready is false, never pretend to know nearby surroundings.
+ 4. Unknown state questions -> QUERY with a limitation message.
+ 5. No explanations.
+ 6. Only output one of:
+     - CMD:...
+     - QUERY:...
+     - valid Python code
+ 7. Understand Chinese, Pinyin and English.
++8. When outputting Python code, the whole response must be pure Python only.
++9. Never mix explanation text with Python code in the same response.
+ """
+@@
+-        content = response.choices[0].message.content.strip()
+-        clean_content = clean_ai_code(content)
+-
+-        if not clean_content.startswith("CMD:") and not clean_content.startswith("QUERY:"):
+-            lines = clean_content.split("\n")
+-            safe_lines = [
+-                line for line in lines
+-                if ".create" not in line
+-                and "import mcpi" not in line
+-                and "import mcpq" not in line
+-                and "Minecraft.create" not in line
+-                and "from mcpi" not in line
+-                and "from mcpq" not in line
+-            ]
+-            clean_content = "\n".join(safe_lines).strip()
++        content = response.choices[0].message.content.strip()
++        clean_content = clean_ai_code(content)
+@@
+     else:
+         pos, rotation, position_ok = get_safe_player_context()
+ 
+         if not position_ok:
+             print("❌ [MCPQ] 无法定位玩家，取消建造，避免建到错误位置")
+             safe_post_chat("AI: Cannot find player.")
+             return False
++
++        code_ok, exec_code, reject_query = prepare_python_for_exec(decision)
++        if not code_ok:
++            query_msg = reject_query.replace("QUERY:", "").strip()
++            print(f"⚠️ [执行拦截] {query_msg}")
++            safe_post_chat(f"AI: {query_msg[:40]}")
++            return False
+ 
+-        print(f"💻 [执行] 准备执行代码:\n{decision}")
++        print(f"💻 [执行] 准备执行代码:\n{exec_code}")
+         safe_post_chat("AI: Building...")
+@@
+         try:
+             with _mcpi_lock:
+-                exec(decision, exec_globals)
++                exec(exec_code, exec_globals)
+             safe_post_chat("AI: Done!")
+             print("✅ [结果] 建造完成")
+             report_debug_event(
+                 "B",
+                 "mc_ai_agent.py:handle_user_text:return-build-success",
+*** End Patch
+关于这版 diff 的几个明确结论
+
+- ast.parse(..., mode="exec") 会按正常 Python 写入，不会有转义残留问题。
+- 旧的逐行字符串过滤会移除，不和新逻辑叠加。
+- 拒绝执行会 return False ，不会和建造成功共用 True 。
+- 对提取后的 candidate ，不仅做语法校验，还会做危险语义检查。
+- prompt 也会同步加强，不是只靠代码拦截。
+如果你确认这版没问题，我下一步就正式落地，然后按计划回归：
+
+- 给我建一个3x3的羊圈
+- 再加上之前 5 句主用例一起跑。
+
+# Claude-Sonnet-5：
+这版diff质量已经达标，可以批准落地了。四道防线（prompt约束 + 语法校验 + 字符串级危险检测 + AST级危险检测）叠加在一起，思路完整，且这次没有再出现"改一个bug带来新bug"的问题（比如上次的转义符号artifact这次确认没有复现）。在正式落地前，还有两个小问题建议顺手确认清楚，但不阻塞落地。
+
+## 建议顺手确认的两点（不阻塞，落地时一并问清楚）
+
+**1. `exec_globals`里暴露的`"minecraft"`这个名字，具体指向什么**
+
+你贴的沙箱清单里有一个`"minecraft": minecraft`，需要搞清楚这个`minecraft`变量本身是什么——是mcpq兼容层里一个受限的命名空间/占位对象，还是当年`import mcpi.minecraft as minecraft`遗留下来的、**真正能调用`Minecraft.create()`创建新连接的原始模块**？这个问题的重要性在于：这次新加的AST级检测（`isinstance(func.value, ast.Name) and func.value.id == "Minecraft"`）只能精确匹配裸露的`Minecraft.create(...)`这种写法，如果AI写成`minecraft.Minecraft.create(...)`这种带前缀的嵌套属性访问，AST检测这条规则**是抓不到的**（因为`func.value`此时是一个`ast.Attribute`节点而不是`ast.Name`节点）。好在你们同时保留了字符串级的`.create(`检测，这个宽泛的子串匹配能兜住这类变体写法——但这意味着**目前真正起主要防护作用的是字符串检测，AST检测只是补充覆盖了字符串检测理论上可能被绕过的字面量拼接场景**。建议在代码里加一句注释说明这层依赖关系（比如"字符串检测为主防线，AST检测为辅助覆盖精确模式"），避免以后有人觉得"AST已经检测了，字符串检测可以精简掉"，结果无意中削弱了对`minecraft.Minecraft.create()`这类变体写法的防护。
+
+**2. `.create(` 这个字符串检测范围较宽，建议确认一下不会误伤未来可能新增的合法方法**
+
+目前项目里`mc`对象常用方法是`setBlock`/`getBlock`/`postToChat`这些，没有任何合法方法叫`xxx.create(...)`，所以现阶段不会有误伤。但这是个需要记在心里的"技术债务"——如果未来给`mc`扩展了某个名字恰好包含`.create(`的新方法（可能性较低但不是零），这条规则会把合法代码也一并拒绝掉。这个不需要现在处理，只是建议在代码注释里标注一下这个宽泛匹配的取舍原因，方便以后排查"为什么这段看起来正常的代码被拒绝了"这类问题时能快速定位到这里。
+
+## 可以确认放行的部分
+
+- 转义符号问题已解决，`ast.parse(candidate, mode="exec")`是正常写法。
+- 旧的逐行字符串过滤只影响exec分支、不影响CMD/QUERY分支，移除后由新的`prepare_python_for_exec()`完整接管，职责没有出现真空。
+- 拒绝执行与建造成功用`False`/`True`区分开，避免了记忆模块未来的数据污染风险。
+- `exec_globals`目前是"功能型沙箱"而非"安全型沙箱"的判断是诚实的，符合当前项目阶段的实际需要（不是防恶意代码，是防AI输出跑偏），这个定位清楚，不需要现在就做更强隔离。
+
+## 下一步指令
+
+> "这版diff批准落地。落地时顺手确认一下exec_globals里`minecraft`这个变量具体是mcpq兼容层的占位对象还是原始mcpi模块，并在`candidate_uses_forbidden_runtime()`函数上方加一句注释说明'字符串检测是主要防线，能覆盖AST检测抓不到的嵌套属性写法（如minecraft.Minecraft.create()）'。落地后跑py_compile和GetDiagnostics确认无语法错误，然后按计划回归：'给我建一个3x3的羊圈'请求连续跑3次（因为之前发现同一句话的坏格式模式会有波动），加上之前5句主用例（周围有什么/钻石剑/找棵树/观景台/混合安全问句）一起跑完整回归，记录每句端到端耗时和是否触发了拒绝执行兜底，全部结果贴给我看。"

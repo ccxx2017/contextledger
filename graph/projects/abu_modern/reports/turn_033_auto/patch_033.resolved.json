@@ -1,0 +1,64 @@
+{
+  "task_id": "task_default",
+  "turn_id": 33,
+  "new_nodes": [
+    {
+      "node_id": "n_0088",
+      "type": "OpenTask",
+      "content": "TKT-2026-005C-backtest-safety-guard: 限制回测规模、修改workflow、给call_backtest.py加硬保护",
+      "entity_ref": "TKT-2026-005C",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0089",
+      "type": "Fact",
+      "content": "TKT-2026-005B首次执行暴露后端资源闸和builder非交互接口缺失，当前不能支撑autonomous research",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0090",
+      "type": "Decision",
+      "content": "暂停TKT-2026-005B执行，待工具安全边界补丁完成后再重跑；先在飞书发停止指令",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
+      "priority": "must_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0084",
+      "changes": {
+        "content": "TKT-2026-005B因后端回测阻塞执行失败，暂停等待Boss审核和工具安全补丁",
+        "state": "blocked"
+      },
+      "reason": "首次执行反馈：后端被大universe回测阻塞，agent重复尝试导致再次卡死，需先补安全边界"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0088",
+      "target": "n_0035",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0089",
+      "target": "n_0084",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0090",
+      "target": "n_0084",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0090",
+      "target": "n_0088",
+      "relation": "supports"
+    }
+  ]
+}

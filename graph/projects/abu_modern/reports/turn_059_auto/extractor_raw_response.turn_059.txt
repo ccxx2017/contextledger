@@ -1,0 +1,36 @@
+{
+  "task_id": "task_default",
+  "turn_id": 59,
+  "new_nodes": [
+    {
+      "node_id": "n_0123",
+      "type": "Fact",
+      "content": "Feishu Agent审计结论：Round5回测引擎存在固定资本金sizing、无cash约束、允许重复开仓、final equity无法闭合等结构性问题，导致所有指标失真，当前结果不允许进入Round6。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0124",
+      "type": "Fact",
+      "content": "项目AI完成修复：修改executor_facade.py、custom_positions.py、abupy_caller.py，新增5个测试并通过，建议重新通过后端API跑Round5 baseline验证修复效果。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0123",
+      "target": "n_0124",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0124",
+      "target": "n_0114",
+      "relation": "supports"
+    }
+  ]
+}

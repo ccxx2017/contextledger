@@ -26,6 +26,7 @@ REQUIRED_RELATIONS = {
     "depends_on",
     "supports",
     "invalidates",
+    "supersedes",
     "implements",
     "serves",
     "produces",
@@ -146,6 +147,50 @@ def normalize_entity_ref(value: Any) -> str:
 
 def normalize_node_type(value: Any) -> str:
     return normalize_lower(value).replace("_", "").replace("-", "")
+
+
+def parse_turn_number(value: Any) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        pass
+
+    text = normalize_lower(value)
+    if text.startswith("turn_"):
+        text = text.split("_", 1)[1]
+    try:
+        return int(text)
+    except (TypeError, ValueError):
+        return None
+
+
+def require_expected_turn(graph_state: dict[str, Any], expected_turn: Any, *, source: str) -> int:
+    expected = parse_turn_number(expected_turn)
+    if expected is None:
+        raise ValueError(f"无法解析预期轮次: {expected_turn!r}")
+
+    actual = parse_turn_number(graph_state.get("turn_counter"))
+    if actual is None:
+        raise ValueError(f"{source} 缺少可解析的 turn_counter，无法确认是否为 turn_{expected:03d} 的图快照。")
+
+    if actual != expected:
+        raise ValueError(
+            f"{source} 的 turn_counter={actual}，与预期 turn_{expected:03d} 不一致。"
+            "请确认输入不是旧快照，或先生成本轮 apply 后的图。"
+        )
+    return actual
+
+
+def require_newer_than(target_path: Path, reference_path: str | Path, *, role: str) -> None:
+    reference = Path(reference_path)
+    if not reference.exists():
+        raise ValueError(f"{role} 参考文件不存在: {reference}")
+
+    if target_path.stat().st_mtime_ns <= reference.stat().st_mtime_ns:
+        raise ValueError(
+            f"{target_path} 的修改时间不晚于 {reference}。"
+            f"为避免误读旧快照，{role} 已拒绝执行；请先重新生成本轮 graph_state 快照。"
+        )
 
 
 def is_pending_open_candidate(node: dict[str, Any]) -> bool:
@@ -459,12 +504,27 @@ def content_obviously_completed(content: str) -> bool:
         r"尚未部署",
         r"未解决",
         r"尚未解决",
+        r"待完成",
+        r"待实现",
+        r"待部署",
+        r"待解决",
+        r"下一步",
+        r"接下来",
+        r"后续",
+        r"还需",
+        r"仍需要",
+        r"进行中",
+        r"尚未开始",
+        r"阶段",
         r"\bnot\s+done\b",
         r"\bnot\s+completed\b",
         r"\bnot\s+implemented\b",
         r"\bnot\s+deployed\b",
         r"\bnot\s+resolved\b",
         r"\bblocked\b",
+        r"\bin\s+progress\b",
+        r"\bTODO\b",
+        r"\bFIXME\b",
     ]
 
     if any(re.search(p, text, flags=re.IGNORECASE) for p in negative_patterns):
@@ -873,6 +933,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Lint graph_state.json after patch application.")
     parser.add_argument("graph_state", help="Path to graph_state.json")
     parser.add_argument("--out", help="Optional output path for lint report JSON")
+    parser.add_argument("--expected-turn", help="预期输入图应对应的轮次，如 4 或 turn_004")
+    parser.add_argument("--newer-than", help="要求输入图文件的修改时间晚于该参考文件，例如本轮 patch")
     parser.add_argument("--no-fail", action="store_true", help="Always exit 0 even if errors exist")
     parser.add_argument(
         "--fail-on-warning",
@@ -882,7 +944,15 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    graph_state = load_json(args.graph_state)
+    graph_path = Path(args.graph_state)
+    if not graph_path.exists():
+        raise SystemExit(f"找不到输入图文件: {graph_path}。请先生成 apply 后的 graph_state 快照。")
+
+    graph_state = load_json(graph_path)
+    if args.expected_turn:
+        require_expected_turn(graph_state, args.expected_turn, source=str(graph_path))
+    if args.newer_than:
+        require_newer_than(graph_path, args.newer_than, role="graph_lint")
     report = lint_graph(graph_state)
 
     if args.out:

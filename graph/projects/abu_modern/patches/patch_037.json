@@ -1,0 +1,83 @@
+{
+  "task_id": "task_default",
+  "turn_id": 37,
+  "new_nodes": [
+    {
+      "node_id": "n_0095",
+      "type": "OpenTask",
+      "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）",
+      "entity_ref": "TKT-2026-005B",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0096",
+      "type": "Fact",
+      "content": "Boss已授权TKT-2026-005B受限恢复执行：禁止回测、禁止调用后端（脚本侧），仅限烟测（symbols≤5, years≤1, timeout=90s），smoke通过后最多放大到symbols≤20, years≤3，后端失败即paused_for_boss_review，禁止自动重试，禁止231标的回测，受限阶段结果不作为完整研究结论",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0097",
+      "type": "FileArtifact",
+      "content": "TKT-2026-005B工单文件（已移至open目录，status=ready_for_limited_resume，包含Worklog Boss授权记录）",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "state": "deployed",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0090",
+      "reason": "Boss决定恢复受限执行，暂停决策不再适用"
+    },
+    {
+      "node_id": "n_0087",
+      "reason": "工单状态已从paused_for_boss_review变为ready_for_limited_resume，原检查报告过时"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0095",
+      "target": "n_0035",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0091",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0094",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0093",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0096",
+      "target": "n_0095",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0097",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0090",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0087",
+      "relation": "invalidates"
+    }
+  ]
+}

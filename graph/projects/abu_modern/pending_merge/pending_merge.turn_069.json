@@ -1,0 +1,133 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_069",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0142",
+      "raw_entity_ref": "round5_4b_audit_result",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round5_4b_clean_run_review",
+          "match_confidence": 0.625,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0141"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_4a_spec",
+          "match_confidence": 0.5556,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0138"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_3e_verification_requirements",
+          "match_confidence": 0.4912,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0135"
+          ]
+        }
+      ],
+      "match_confidence": 0.625,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0144",
+      "raw_entity_ref": "round5_4b_fix1",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round5_4a_spec",
+          "match_confidence": 0.6429,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0138"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_4b_clean_run_review",
+          "match_confidence": 0.55,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0141"
+          ]
+        }
+      ],
+      "match_confidence": 0.6429,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0145",
+      "raw_entity_ref": "round5_4b_blocker1_initial_capital",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round5_4b_clean_run_review",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0141"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_3e_verification_requirements",
+          "match_confidence": 0.4928,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0135"
+          ]
+        }
+      ],
+      "match_confidence": 0.5,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0146",
+      "raw_entity_ref": "round5_4b_blocker2_metrics_open_trade",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round5_4b_clean_run_review",
+          "match_confidence": 0.5079,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0141"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_4a_spec",
+          "match_confidence": 0.4706,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0138"
+          ]
+        }
+      ],
+      "match_confidence": 0.5079,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

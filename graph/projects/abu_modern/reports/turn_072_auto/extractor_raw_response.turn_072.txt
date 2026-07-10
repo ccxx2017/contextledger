@@ -1,0 +1,50 @@
+{
+  "task_id": "task_default",
+  "turn_id": 72,
+  "new_nodes": [
+    {
+      "node_id": "n_0142",
+      "type": "Decision",
+      "content": "Round 5.4B-fix1通过，有效run_id=run-54b-20250101-20251230-d37c696d；旧run_id=run-54b-20250101-20251230-dfc9611d作废；Round6锁定禁止进入。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0143",
+      "type": "OpenTask",
+      "content": "Round 5.5 Baseline Freeze & Handoff：冻结run-54b-20250101-20251230-d37c696d为后续唯一基线；更新工单状态、追加验收记录、冻结baseline metadata、禁用旧run清单；不运行新回测，不进入Round6。",
+      "entity_ref": "round5_5_baseline_freeze",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0141",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "Round5.4B clean run复核通过，有效run_id已确立。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0142",
+      "target": "n_0141",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0143",
+      "target": "n_0142",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0143",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

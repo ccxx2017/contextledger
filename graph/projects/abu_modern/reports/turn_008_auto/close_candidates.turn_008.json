@@ -1,0 +1,17 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_008_auto\\patch_008.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 7,
+    "open_like_nodes_scanned": 16,
+    "updated_nodes_in_patch": 2,
+    "candidates_found": 0,
+    "score_histogram": {}
+  },
+  "candidates": []
+}

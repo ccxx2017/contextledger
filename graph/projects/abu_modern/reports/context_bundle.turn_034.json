@@ -1,0 +1,143 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_034",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_034_auto/graph_state.after_turn_034.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0078",
+      "n_0090",
+      "n_0091",
+      "n_0088",
+      "n_0089"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0073",
+        "type": "OpenTask",
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+        "priority": "must_include",
+        "entity_ref": "workspace_root_bootstrap_audit"
+      },
+      {
+        "node_id": "n_0078",
+        "type": "Fact",
+        "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+        "priority": "must_include",
+        "entity_ref": "skills/quant_assistant/TOOLS.md"
+      },
+      {
+        "node_id": "n_0090",
+        "type": "Decision",
+        "content": "暂停TKT-2026-005B执行，待工具安全边界补丁完成后再重跑；先在飞书发停止指令",
+        "priority": "must_include",
+        "entity_ref": "TKT-2026-005B"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0091",
+        "type": "Decision",
+        "content": "对后端回测系统脆弱性问题，采取先限制后改造的应对策略：第1天agent/脚本侧加硬限制（max_symbols≤20, max_years≤3, 超时≤90s, 非响应paused_for_boss_review），第1-2周后端做请求级超时、回测异步化、取消接口、并发隔离，第3周起可放开限制。两个都要做，但顺序重要。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0088",
+        "type": "OpenTask",
+        "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005C"
+      },
+      {
+        "node_id": "n_0089",
+        "type": "Fact",
+        "content": "TKT-2026-005B首次执行暴露后端资源闸和builder非交互接口缺失，当前不能支撑autonomous research",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0090",
+      "n_0091",
+      "n_0088"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 79,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

@@ -1,0 +1,6 @@
+{
+  "turn_id": "turn_051",
+  "stage": "invoke_extractor",
+  "reason": "invoke_extractor 阶段脚本异常退出 (code=1)",
+  "quarantine_patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_051_failed_patch.json"
+}

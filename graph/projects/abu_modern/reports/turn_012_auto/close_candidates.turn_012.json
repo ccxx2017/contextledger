@@ -1,0 +1,38 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\patch_012.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 11,
+    "open_like_nodes_scanned": 14,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 1,
+    "score_histogram": {
+      "15": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0034",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-004",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-004: 实现strategy-researcher脚本（3个HTTP封装：call_builder.py、call_backtest.py、kb_query.py）",
+      "score": 15,
+      "matched_terms": [
+        "TKT-2026-004",
+        "call_backtest.py",
+        "call_builder.py",
+        "kb_query.py",
+        "strategy-researcher",
+        "tkt-2026-004"
+      ]
+    }
+  ]
+}

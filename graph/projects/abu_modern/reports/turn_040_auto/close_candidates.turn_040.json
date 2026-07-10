@@ -1,0 +1,50 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_040_auto\\patch_040.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 39,
+    "open_like_nodes_scanned": 22,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 2,
+    "score_histogram": {
+      "11": 1,
+      "3": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005: 试运行工单1",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0100",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005E",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。用手写最小IR，1-5标的，3-12月窗口，测试builder strict compile→backtest→KB读取，验证8项验收标准，不允许自主研究。",
+      "score": 3,
+      "matched_terms": [
+        "backtest",
+        "builder",
+        "tkt-2026-005"
+      ]
+    }
+  ]
+}

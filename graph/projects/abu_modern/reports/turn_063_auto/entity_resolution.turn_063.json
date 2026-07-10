@@ -1,0 +1,23 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_063",
+  "summary": {
+    "new_nodes": 1,
+    "resolved_exact": 1,
+    "resolved_alias": 0,
+    "pending_merge": 0,
+    "unresolved": 0
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0131",
+      "raw_entity_ref": "round5.3d_closure_audit",
+      "resolved_entity_ref": "round5.3d_closure_audit",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    }
+  ]
+}

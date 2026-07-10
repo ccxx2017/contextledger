@@ -1,0 +1,130 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_052",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0115",
+      "raw_entity_ref": "TKT-2026-005I",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0085",
+            "n_0089",
+            "n_0096",
+            "n_0110",
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0088"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0112"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0116",
+      "raw_entity_ref": "quant_intelligence/knowledge_base.py",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py",
+          "match_confidence": 0.809,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0037"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/services/knowledge-api",
+          "match_confidence": 0.5161,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0022"
+          ]
+        },
+        {
+          "canonical_entity_ref": "backend/app/api/endpoints/knowledge.py",
+          "match_confidence": 0.4865,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0048"
+          ]
+        },
+        {
+          "canonical_entity_ref": "data/knowledge",
+          "match_confidence": 0.48,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0023"
+          ]
+        },
+        {
+          "canonical_entity_ref": "data/knowledge/schema.md",
+          "match_confidence": 0.4667,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0028"
+          ]
+        }
+      ],
+      "match_confidence": 0.809,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

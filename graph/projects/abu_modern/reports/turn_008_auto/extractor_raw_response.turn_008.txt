@@ -1,0 +1,55 @@
+{
+  "task_id": "task_default",
+  "turn_id": 8,
+  "new_nodes": [
+    {
+      "node_id": "n_0047",
+      "type": "Fact",
+      "content": "strategy-researcher 脚本清单：call_builder.py（POST /strategy-builder/invoke）、call_backtest.py（POST /backtests/execution-config）、kb_query.py（GET /api/v1/knowledge/* 四个子命令：index/list/read/log）",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0010",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "用户已完成对Charter与SKILL骨架草案的评审，TKT-2026-002已闭环"
+    },
+    {
+      "node_id": "n_0034",
+      "changes": {
+        "content": "TKT-2026-004: 实现strategy-researcher脚本（3个HTTP封装：call_builder.py、call_backtest.py、kb_query.py）",
+        "priority": "should_include"
+      },
+      "reason": "根据Claude详细说明更新脚本清单，明确交付物为三个脚本"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0030",
+      "reason": "脚本清单已更新，旧清单（research_loop.py+kb_query.py+可选kb_write.py）不再适用，新清单为call_builder.py、call_backtest.py、kb_query.py"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0047",
+      "target": "n_0030",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0047",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0047",
+      "target": "n_0034",
+      "relation": "refines"
+    }
+  ]
+}

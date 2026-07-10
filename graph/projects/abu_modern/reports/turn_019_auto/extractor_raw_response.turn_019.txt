@@ -1,0 +1,71 @@
+{
+  "task_id": "task_default",
+  "turn_id": 19,
+  "new_nodes": [
+    {
+      "node_id": "n_0070",
+      "type": "Fact",
+      "content": "KB写入桥已存在：overview.md确认emit_config触发create_strategy_archive和研究日志写入，research_run.py串起NL编译→回测→归档→索引全链路。",
+      "entity_ref": "quant_backend_kb_bridge",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0071",
+      "type": "Fact",
+      "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "optional"
+    },
+    {
+      "node_id": "n_0072",
+      "type": "Fact",
+      "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径（例如'@机器人 执行工单 aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md，按 skills/strategy_researcher/SKILL.md 的 investigation 流程处理'），避免口语化需求。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "background"
+    },
+    {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β，确保不污染strategy_researcher专业人格。",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0061",
+      "changes": {
+        "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。",
+        "entity_ref": "openclaw_agent_runtime_mechanisms"
+      },
+      "reason": "根据评估报告确认根目录bootstrap文件全文注入，修正此前只提SKILL.md自动注入的笼统说法。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0070",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0071",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0072",
+      "target": "n_0065",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

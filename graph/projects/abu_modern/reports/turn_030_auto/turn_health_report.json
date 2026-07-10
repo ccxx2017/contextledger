@@ -1,0 +1,67 @@
+{
+  "turn_id": "turn_030",
+  "project_id": "abu_modern",
+  "work_dir": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto",
+  "stages": {
+    "build_graph_slice": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\slice_030.json"
+    },
+    "invoke_extractor": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\patch_030.raw.json"
+    },
+    "detect_close_candidates": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\close_candidates.turn_030.json"
+    },
+    "entity_resolver": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\patch_030.resolved.json"
+    },
+    "reconcile_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\reconcile_report.turn_030.json",
+      "retries": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "apply_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_030_auto\\graph_state.after_turn_030.json"
+    },
+    "graph_lint": {
+      "status": "OK",
+      "errors": 1,
+      "warnings": 0
+    },
+    "diff_lint_reports": {
+      "status": "OK",
+      "introduced_errors": 1,
+      "introduced_warnings": 0,
+      "overdue_baseline_issues": 0
+    },
+    "build_context_bundle": {
+      "status": "REJECTED",
+      "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\assembly_report.turn_030.json",
+      "reason": "rejected"
+    },
+    "check_pending_merge_register": {
+      "status": "OK",
+      "overdue_items": 0
+    }
+  },
+  "summary": {
+    "status": "OK"
+  },
+  "lights": {
+    "critical_status": "GREEN",
+    "lint_baseline": "RED",
+    "queue_health": "GREEN",
+    "assembly_integrity": "RED"
+  },
+  "committed": {
+    "committed": false,
+    "reason": "not all lights green"
+  }
+}

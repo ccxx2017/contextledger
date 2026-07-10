@@ -1,0 +1,115 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_050",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0112",
+      "raw_entity_ref": "TKT-2026-005F",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0085",
+            "n_0089",
+            "n_0096",
+            "n_0110",
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0088"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0113",
+      "raw_entity_ref": "tkt-2026-005b-magnify-validation",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.5778,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0085",
+            "n_0089",
+            "n_0096",
+            "n_0110",
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.5455,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.5333,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0088"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "match_confidence": 0.5778,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "task_id": "task_default",
+  "turn_id": 53,
+  "new_nodes": [
+    {
+      "node_id": "n_0117",
+      "type": "Decision",
+      "content": "暂停TKT-2026-005I验收，要求执行live path verification",
+      "entity_ref": "TKT-2026-005I",
+      "state": "resolved",
+      "priority": "should_include",
+      "_entity_ref_sanitized": true
+    },
+    {
+      "node_id": "n_0118",
+      "type": "OpenTask",
+      "content": "TKT-2026-005I-live-path-verification: 执行live路径验证，确认compile-ir→KB archive主链路是否产出##档案元数据JSON和sanity状态。步骤：1. 确认archive是否旧档案；2. 确认后端版本和路径；3. 新建005I专用live test archive；4. 验证元数据区块；5. 输出报告。必须先完成此任务才能验收005I。",
+      "entity_ref": "005i_live_path_verification",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0119",
+      "type": "Fact",
+      "content": "项目AI检查了三个现有archive（strategy_id未列），均无##档案元数据JSON或sanity字段。这与n_0116声称的KB archive新增元数据功能不符，需验证live路径。",
+      "entity_ref": "quant_intelligence/knowledge_base.py",
+      "state": null,
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0120",
+      "type": "Constraint",
+      "content": "在TKT-2026-005I live path verification通过前，禁止恢复TKT-2026-005B Round5研究。",
+      "entity_ref": "TKT-2026-005I",
+      "state": null,
+      "priority": "must_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0114",
+      "changes": {
+        "state": "blocked",
+        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n\n当前因Boss要求先完成005I live path verification，暂时阻塞。"
+      },
+      "reason": "Boss要求暂停Round5，待005I live path verification通过后恢复"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0116",
+      "reason": "项目AI检查live archive未发现元数据JSON区块，与n_0116声称的实现不一致。暂时废弃，待005I验证后重建。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0117",
+      "target": "n_0118",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0120",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0114",
+      "target": "n_0120",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0119",
+      "target": "n_0116",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "task_id": "task_default",
+  "turn_id": 45,
+  "new_nodes": [
+    {
+      "node_id": "n_0105",
+      "type": "Fact",
+      "content": "项目AI只能做恢复前补丁（工单修正、状态修改、追加约束等），不能执行研究。strategy-researcher 负责执行研究。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0106",
+      "type": "OpenTask",
+      "content": "项目AI执行 TKT-2026-005B 恢复前补丁：修正 ticket_id 为005B、报告名、移至open、status改为ready_for_limited_resume、追加Boss worklog、添加恢复硬约束（从Round4开始、必须使用/strategy-builder/compile-ir、保留资源限制等）",
+      "entity_ref": "TKT-2026-005B-patch",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0106",
+      "target": "n_0095",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0105",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0105",
+      "target": "n_0044",
+      "relation": "supports"
+    }
+  ]
+}

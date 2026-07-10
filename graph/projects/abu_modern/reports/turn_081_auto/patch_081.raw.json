@@ -1,0 +1,82 @@
+{
+  "task_id": "task_default",
+  "turn_id": 81,
+  "new_nodes": [
+    {
+      "node_id": "n_0158",
+      "type": "Decision",
+      "content": "Round 6A Execution Aborted. 正式中止Round 6A执行链路。不再重试。拒绝方案1和2。暂停Round 6A。交由项目AI排查后端position_pnl_pct支持问题。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0159",
+      "type": "OpenTask",
+      "content": "项目AI后端缺陷诊断：排查compile-ir接受但execution数据同步失败的原因。检查内容包括：1)后端是否支持position_pnl_pct作为holding phase context; 2)多transition holding phase是否导致识别问题; 3)trade_data_source=missing设置点; 4)BUY triggered_count=0原因; 5)position_pnl_pct单位; 6)holding_days与position_pnl_pct是否同类context; 7)是否需显式声明context fields; 8)单元测试覆盖; 9)找出ir_8001383b352d对应invalid run并备份隔离; 10)其他。允许读源码、写单元测试、写最小synthetic evaluator test。禁止跑回测、做实验、修改baseline。",
+      "entity_ref": "round6a_backend_diagnosis",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0160",
+      "type": "Fact",
+      "content": "第三次相同异常：IR ir_8001383b352d执行后trade_data_source=missing, trade_count=0, BUY triggered_count=0, wall clock 8.3s。确认不是缓存问题，是后端数据同步问题。",
+      "entity_ref": "ir_8001383b352d",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0154",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "Round 6A formally aborted; re-execution cannot proceed due to backend defect."
+    },
+    {
+      "node_id": "n_0155",
+      "changes": {
+        "content": "项目AI执行Round 6A缓存诊断与定向清理：只读诊断缓存位置、cache key组成、污染原因，评估定向清除可行性，如有权限则定向清除策略ir_92c31feee6bd相关污染缓存。具体步骤：1）dry-run列出处理目录；2）备份到data/backups/round6a_cache_pollution_20260531/；3）将data/runs/backtest/下的污染目录移到data/runs/backtest_quarantine/；4）清理idempotency.index.json中对应条目；5）验证baseline完好。追加：找到并隔离IR ir_8001383b352d对应的所有run，标记为invalid/forbidden/quarantined/not comparable，备份到data/backups/round6a_cache_pollution_20260531/，从active cache移出。禁止运行回测、创建新run、修改策略。须在清除前报告并获得Boss批准。清除后由Feishu Agent执行Round 6A re-execution。"
+      },
+      "reason": "扩展任务范围以包含新IR ir_8001383b352d的隔离。"
+    },
+    {
+      "node_id": "n_0153",
+      "changes": {
+        "content": "Round 6A执行因缓存污染返回trade_count=0/trade_data_source=missing，不可接受。诊断run-e92b485b-20250101-20251230-820b8995被标记为forbidden，不可用于比较。Feishu声称该run可正常运行出18笔交易，但项目AI之前检查trades.csv为空，冲突存在。该run仍保持quarantined/forbidden/not comparable。"
+      },
+      "reason": "添加冲突信息以澄清不可用证据。"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0152",
+      "reason": "被新Decision n_0158替代：从cache-bypass re-execution改为正式中止Round 6A执行链路，转交后端诊断。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0158",
+      "target": "n_0152",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0158",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0159",
+      "target": "n_0158",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0160",
+      "target": "n_0158",
+      "relation": "supports"
+    }
+  ]
+}

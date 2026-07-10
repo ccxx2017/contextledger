@@ -1,0 +1,8 @@
+{
+  "task_id": "task_default",
+  "turn_id": 75,
+  "new_nodes": [],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": []
+}

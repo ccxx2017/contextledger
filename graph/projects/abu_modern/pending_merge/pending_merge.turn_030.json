@@ -1,0 +1,85 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_030",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0084",
+      "raw_entity_ref": "src/agents/system-prompt.ts",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "agents/git_sync_protocol",
+          "match_confidence": 0.5098,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0043"
+          ]
+        }
+      ],
+      "match_confidence": 0.5098,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0086",
+      "raw_entity_ref": "~/.openclaw/openclaw.json",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_workspace_structure",
+          "match_confidence": 0.4528,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0069"
+          ]
+        }
+      ],
+      "match_confidence": 0.5,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0087",
+      "raw_entity_ref": "src/agents/system-prompt.ts",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "agents/git_sync_protocol",
+          "match_confidence": 0.5098,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0043"
+          ]
+        }
+      ],
+      "match_confidence": 0.5098,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

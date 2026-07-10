@@ -1,0 +1,70 @@
+{
+  "turn_id": "turn_012",
+  "project_id": "abu_modern",
+  "work_dir": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto",
+  "stages": {
+    "build_graph_slice": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\slice_012.json"
+    },
+    "invoke_extractor": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\patch_012.raw.json"
+    },
+    "detect_close_candidates": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\close_candidates.turn_012.json"
+    },
+    "entity_resolver": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\patch_012.resolved.json"
+    },
+    "reconcile_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\reconcile_report.turn_012.json",
+      "retries": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "apply_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_012_auto\\graph_state.after_turn_012.json"
+    },
+    "graph_lint": {
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0
+    },
+    "diff_lint_reports": {
+      "status": "OK",
+      "introduced_errors": 0,
+      "introduced_warnings": 0,
+      "overdue_baseline_issues": 0
+    },
+    "build_context_bundle": {
+      "status": "OK",
+      "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\context_bundle.turn_012.json",
+      "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\assembly_report.turn_012.json",
+      "l1_must_include_count": 4,
+      "selected_count": 12
+    },
+    "check_pending_merge_register": {
+      "status": "OK",
+      "overdue_items": 0
+    }
+  },
+  "summary": {
+    "status": "OK"
+  },
+  "lights": {
+    "critical_status": "GREEN",
+    "lint_baseline": "GREEN",
+    "queue_health": "GREEN",
+    "assembly_integrity": "GREEN"
+  },
+  "committed": {
+    "graph_state": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+    "run_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_012.json",
+    "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\patches\\patch_012.json"
+  }
+}

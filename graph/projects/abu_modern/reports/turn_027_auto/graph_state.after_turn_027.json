@@ -1,0 +1,1451 @@
+{
+  "task_id": "task_default",
+  "turn_counter": 27,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+      "entity_ref": null,
+      "state": null,
+      "priority": "must_include",
+      "created_turn": 1
+    },
+    "n_0002": {
+      "node_id": "n_0002",
+      "type": "Fact",
+      "content": "Strategy Research Agent被设计但未真正跑起来，LLM解析稳定性卡住",
+      "entity_ref": "strategy_research_agent",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0003": {
+      "node_id": "n_0003",
+      "type": "Fact",
+      "content": "duty_reporter v0刚刚跑通，证明AOS基础设施可行",
+      "entity_ref": "duty_reporter",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0004": {
+      "node_id": "n_0004",
+      "type": "Fact",
+      "content": "量化主线已停滞，注意力被基础设施吸走",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0005": {
+      "node_id": "n_0005",
+      "type": "Constraint",
+      "content": "避免基础设施惯性导致AOS完美而无用",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0006": {
+      "node_id": "n_0006",
+      "type": "Constraint",
+      "content": "量化研究优先，AOS为手段不是目的",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0007": {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "duty_reporter v0.5: 添加LLM摘要节点，验证LLM调用基础设施",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0008": {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "content": "复活Strategy Research Agent（阶段1主战场），已拆分为TKT-2026-002/003/004/005/006",
+      "entity_ref": "strategy_research_agent",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 1,
+      "_update_reason": "Claude提供了详细的子工单拆分，更新高层任务描述并添加稳定实体标识"
+    },
+    "n_0009": {
+      "node_id": "n_0009",
+      "type": "OpenTask",
+      "content": "根据Claude指导，压缩整理为ROADMAP_v2.md，包含阶段1详细计划、时间线、成功定义、攻坚点排序、技术方案、AOS-native形态等",
+      "entity_ref": "aos/projects/abu_modern/ROADMAP_v2.md",
+      "state": "in_progress",
+      "priority": "optional",
+      "created_turn": 1,
+      "_update_reason": "用户今天开始执行写ROADMAP_v2.md任务"
+    },
+    "n_0010": {
+      "node_id": "n_0010",
+      "type": "OpenTask",
+      "content": "TKT-2026-002: 起草策略研究员 Charter 与 SKILL 骨架（已产出三份草案等待用户评审）",
+      "entity_ref": "TKT-2026-002",
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 1,
+      "_entity_ref_sanitized": true,
+      "_update_reason": "用户已完成对Charter与SKILL骨架草案的评审，TKT-2026-002已闭环",
+      "status": "superseded"
+    },
+    "n_0011": {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "创建aos/runtime/_frozen_ideas.md冻结其他诱惑",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open",
+      "priority": "optional",
+      "created_turn": 1
+    },
+    "n_0012": {
+      "node_id": "n_0012",
+      "type": "Decision",
+      "content": "决策1：是否认可阶段1以Strategy Research Agent为优先",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 1,
+      "status": "superseded",
+      "_update_reason": "用户认可决策1：主战场为Strategy Research Agent"
+    },
+    "n_0013": {
+      "node_id": "n_0013",
+      "type": "Decision",
+      "content": "决策2：v0.5 LLM摘要是否值得做",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0014": {
+      "node_id": "n_0014",
+      "type": "Decision",
+      "content": "决策3：Strategy Research Agent采用AOS-native还是quant-native",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 1,
+      "status": "superseded",
+      "_update_reason": "用户认可决策3：阶段1 Strategy Research Agent为AOS-native"
+    },
+    "n_0015": {
+      "node_id": "n_0015",
+      "type": "Decision",
+      "content": "决策4：节奏快慢",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 1
+    },
+    "n_0016": {
+      "node_id": "n_0016",
+      "type": "Fact",
+      "content": "用户提供了整体实施压缩文档，包含从策略发现到数字组织演进全记录",
+      "entity_ref": "docs/operations/从策略发现到数字组织：量化系统知识体系与Agentic组织演进全记录.md",
+      "state": null,
+      "priority": "background",
+      "created_turn": 1
+    },
+    "n_0017": {
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "决定LLM选型（阶段1用哪家LLM）",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 2
+    },
+    "n_0018": {
+      "node_id": "n_0018",
+      "type": "Fact",
+      "content": "阶段1成功定义: 五条标准（产出≥10策略档案，自主性，可信性，AOS-native，可复盘）",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 2
+    },
+    "n_0019": {
+      "node_id": "n_0019",
+      "type": "Fact",
+      "content": "阶段1攻坚点排序: 一级风险(结构化输出稳定性、假设多样性、退出条件)，二级风险(prompt版本管理、token成本、回测耗时)，三级风险(市场认知文档、数据漂移)",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 2
+    },
+    "n_0020": {
+      "node_id": "n_0020",
+      "type": "Decision",
+      "content": "阶段1采用Structured Output (Function Calling)替代自由文本prompt",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 2
+    },
+    "n_0021": {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "content": "升级duty_reporter v0.6：集成研究进度汇报",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 2
+    },
+    "n_0022": {
+      "node_id": "n_0022",
+      "type": "Fact",
+      "content": "物理布局定稿：四层分离（组织契约层aos/，智能体能力层openclaw_skills/，领域知识层data/knowledge/，架构文档层docs/）",
+      "entity_ref": "aos/services/knowledge-api",
+      "state": null,
+      "priority": "should_include",
+      "_entity_ref_sanitized": true,
+      "created_turn": 3
+    },
+    "n_0023": {
+      "node_id": "n_0023",
+      "type": "Fact",
+      "content": "data/knowledge/目录应原地不动，包含5个真实策略档案和schema等文件",
+      "entity_ref": "data/knowledge",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 3
+    },
+    "n_0024": {
+      "node_id": "n_0024",
+      "type": "Fact",
+      "content": "openclaw_skills目录已有duty-reporter、quant_assistant两个技能，结构为每个技能包含SKILL.md、TOOLS.md、scripts/子目录",
+      "entity_ref": "openclaw_skills",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 3
+    },
+    "n_0025": {
+      "node_id": "n_0025",
+      "type": "Fact",
+      "content": "strategy-researcher技能应建立在openclaw_skills/strategy-researcher/，与已有技能对称",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 3
+    },
+    "n_0026": {
+      "node_id": "n_0026",
+      "type": "Decision",
+      "content": "确定strategy-researcher与quant_assistant的关系（平行Agent/共享后端）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 3,
+      "_update_reason": "用户提供quant_assistant文件和schema.md后，Claude确认关系为平行Agent共享后端，决策已拍板"
+    },
+    "n_0027": {
+      "node_id": "n_0027",
+      "type": "OpenTask",
+      "content": "决定strategy-researcher与quant_assistant的关系（平行Agent/共享后端，已决断）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 3,
+      "status": "superseded",
+      "_update_reason": "该OpenTask对应的决策已在n_0026中resolved，任务完成需退出现役"
+    },
+    "n_0028": {
+      "node_id": "n_0028",
+      "type": "Fact",
+      "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+      "entity_ref": "data/knowledge/schema.md",
+      "state": null,
+      "priority": "must_include",
+      "created_turn": 4
+    },
+    "n_0029": {
+      "node_id": "n_0029",
+      "type": "Fact",
+      "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+      "entity_ref": null,
+      "state": null,
+      "priority": "must_include",
+      "created_turn": 4
+    },
+    "n_0030": {
+      "node_id": "n_0030",
+      "type": "Fact",
+      "content": "strategy-researcher的脚本精简为research_loop.py和kb_query.py，可选kb_write.py",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 4,
+      "status": "superseded",
+      "_superseded_reason": "脚本清单已更新，旧清单（research_loop.py+kb_query.py+可选kb_write.py）不再适用，新清单为call_builder.py、call_backtest.py、kb_query.py"
+    },
+    "n_0031": {
+      "node_id": "n_0031",
+      "type": "Decision",
+      "content": "策略研究员应采用 duty-reporter 的 charter-bound 形态，非 quant_assistant 的开放式工具箱（用户已确认）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 5,
+      "_update_reason": "用户已确认该决策"
+    },
+    "n_0032": {
+      "node_id": "n_0032",
+      "type": "Decision",
+      "content": "后端自动落库 + Agent 只读 KB API 方案（B），Agent 不直接写知识库（用户已确认）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 5,
+      "_update_reason": "用户已确认该决策"
+    },
+    "n_0033": {
+      "node_id": "n_0033",
+      "type": "OpenTask",
+      "content": "TKT-2026-003: 后端知识库只读 API + 自动落库改造",
+      "entity_ref": "TKT-2026-003",
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 5,
+      "status": "superseded",
+      "_update_reason": "TKT-2026-003 知识库只读API已交付，真实返回类型为markdown-native，与初版spec不同，已记录"
+    },
+    "n_0034": {
+      "node_id": "n_0034",
+      "type": "OpenTask",
+      "content": "TKT-2026-004: 实现strategy-researcher脚本（3个HTTP封装：call_builder.py、call_backtest.py、kb_query.py）",
+      "entity_ref": "TKT-2026-004",
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 5,
+      "_update_reason": "TKT-2026-004 smoke pass，脚本实现完成并验证通过",
+      "status": "superseded"
+    },
+    "n_0035": {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "content": "TKT-2026-005: 试运行工单1",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0036": {
+      "node_id": "n_0036",
+      "type": "OpenTask",
+      "content": "TKT-2026-006: 试运行工单2",
+      "entity_ref": "TKT-2026-006",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0037": {
+      "node_id": "n_0037",
+      "type": "Fact",
+      "content": "knowledge_base.py 是本地 Python 模块，无 HTTP 暴露，无法被 Ubuntu OpenClaw skill 直接 import",
+      "entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0038": {
+      "node_id": "n_0038",
+      "type": "FileArtifact",
+      "content": "aos/org/agents/agent-strategy-researcher.md (Charter V0.1.0 draft)",
+      "entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0039": {
+      "node_id": "n_0039",
+      "type": "FileArtifact",
+      "content": "openclaw_skills/strategy-researcher/SKILL.md (skeleton v0.1.0 draft)",
+      "entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0040": {
+      "node_id": "n_0040",
+      "type": "FileArtifact",
+      "content": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 5
+    },
+    "n_0041": {
+      "node_id": "n_0041",
+      "type": "Decision",
+      "content": "HITL阈值：LLM调用≤20次/工单，回测≤10次/工单，连续5轮无改进（改进定义为核心指标相对当前工单内最优轮≥+5%相对增幅）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 6
+    },
+    "n_0042": {
+      "node_id": "n_0042",
+      "type": "Decision",
+      "content": "strategy-researcher试运行期定为3个工单",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 6
+    },
+    "n_0043": {
+      "node_id": "n_0043",
+      "type": "Constraint",
+      "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+      "entity_ref": "agents/git_sync_protocol",
+      "state": null,
+      "priority": "must_include",
+      "created_turn": 7
+    },
+    "n_0044": {
+      "node_id": "n_0044",
+      "type": "Constraint",
+      "content": "数字员工继任原则：每类工作对应数字员工；BOSS负责初始任务下发、重要事项批准和结果检查；初期手动是过渡态",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 7
+    },
+    "n_0045": {
+      "node_id": "n_0045",
+      "type": "Fact",
+      "content": "用户已确认策略研究员采用duty-reporter形态决策",
+      "entity_ref": null,
+      "state": null,
+      "priority": "background",
+      "created_turn": 7
+    },
+    "n_0046": {
+      "node_id": "n_0046",
+      "type": "Fact",
+      "content": "用户已确认知识库只读API+自动落库决策",
+      "entity_ref": null,
+      "state": null,
+      "priority": "background",
+      "created_turn": 7
+    },
+    "n_0047": {
+      "node_id": "n_0047",
+      "type": "Fact",
+      "content": "strategy-researcher 脚本清单：call_builder.py（POST /strategy-builder/invoke）、call_backtest.py（POST /backtests/execution-config）、kb_query.py（GET /api/v1/knowledge/* 四个子命令：index/list/read/log），以及smoke_http_clients.sh（happy-path连通性自检脚本）",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 8,
+      "_update_reason": "用户澄清scripts实际清单包含smoke_http_clients.sh"
+    },
+    "n_0048": {
+      "node_id": "n_0048",
+      "type": "Fact",
+      "content": "知识库只读API endpoints真实返回类型：read_index()返回str（index.md原文），read_log()返回str（log.md原文），read_strategy_archive(id)返回{strategy_id, content:str, file_path}，list_strategy_archives()返回list[{strategy_id, content:str, file_path}]——知识库对外暴露的是markdown文本，不是结构化JSON",
+      "entity_ref": "backend/app/api/endpoints/knowledge.py",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 9
+    },
+    "n_0049": {
+      "node_id": "n_0049",
+      "type": "OpenTask",
+      "content": "确认/backtests/execution-config的返回形态，以确定call_backtest.py的返回格式",
+      "entity_ref": "/backtests/execution-config",
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 9,
+      "status": "superseded",
+      "_update_reason": "返回形态已由用户提供并确认，任务完成"
+    },
+    "n_0050": {
+      "node_id": "n_0050",
+      "type": "Fact",
+      "content": "研究循环正确数据流：1. POST /strategy-builder/invoke → strategy_id；2. POST /backtests/execution-config → {success, data: {run_id, status: completed}}，后端自动 append_backtest_result 写回测结果到策略档案 markdown；3. GET /api/v1/knowledge/archives/{strategy_id} → 整份档案 markdown（含回测指标）；4. LLM 产出下一步假设，循环。call_backtest.py 只需校验 success 和 status，无需解析 execution_summary。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 10
+    },
+    "n_0051": {
+      "node_id": "n_0051",
+      "type": "Fact",
+      "content": "错误码处理策略：INVALID_EXECUTION_CONFIG / UNSUPPORTED_UNIVERSE_TYPE / EMPTY_UNIVERSE → abort 当前假设，喂回 LLM；DATA_MISSING_SYNC_REQUIRED → 从 universe 剔除 missing_symbols 后重试一次。call_backtest.py 应自动重试第四种。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 10
+    },
+    "n_0052": {
+      "node_id": "n_0052",
+      "type": "OpenTask",
+      "content": "确认 Ubuntu 后端局域网 IP 或域名，作为 call_backtest.py 等脚本的默认后端地址（支持 QUANT_BACKEND_URL 环境变量覆盖）",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 10,
+      "status": "superseded",
+      "_update_reason": "用户已提供实际可达后端地址，任务完成"
+    },
+    "n_0053": {
+      "node_id": "n_0053",
+      "type": "Fact",
+      "content": "后端默认地址已确认为 http://192.168.1.136:8000，可通过 QUANT_BACKEND_URL 环境变量覆盖",
+      "entity_ref": "quant_backend_url_default",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 11
+    },
+    "n_0054": {
+      "node_id": "n_0054",
+      "type": "Fact",
+      "content": "openclaw_skills目录实际位于abu_modern项目下，作为临时存放Ubuntu openclaw技能文件的源，通过手动传输到Ubuntu的/home/ccxx/.openclaw/workspace/skills/目录下",
+      "entity_ref": "openclaw_skills",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 12
+    },
+    "n_0055": {
+      "node_id": "n_0055",
+      "type": "FileArtifact",
+      "content": "TOOLS.md v1正式内容（替换占位版），包含call_builder.py、call_backtest.py、kb_query.py、smoke_http_clients.sh的签名、参数、错误码、示例",
+      "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 12
+    },
+    "n_0056": {
+      "node_id": "n_0056",
+      "type": "FileArtifact",
+      "content": "TKT-2026-004工单文件（重写版），包含前置假设、任务步骤、边界、Worklog",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-004strategy_researcher_Agent_HTTP_适配脚本.md",
+      "state": "deployed",
+      "priority": "should_include",
+      "created_turn": 12,
+      "status": "superseded",
+      "_update_reason": "工单文件已更新worklog并推送，TKT-2026-004已完成"
+    },
+    "n_0057": {
+      "node_id": "n_0057",
+      "type": "OpenTask",
+      "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": "open",
+      "priority": "must_include",
+      "created_turn": 13
+    },
+    "n_0058": {
+      "node_id": "n_0058",
+      "type": "Fact",
+      "content": "TKT-2026-004智能体实际在openclaw_skills/strategy_researcher/下创建了4个文件（SKILL.md, TOOLS.md, scripts/call_builder.py, scripts/call_backtest.py, scripts/kb_query.py）",
+      "entity_ref": "openclaw_skills/strategy_researcher",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 13
+    },
+    "n_0059": {
+      "node_id": "n_0059",
+      "type": "OpenTask",
+      "content": "对TKT-2026-004进行独立核验（参考Claude给出的6步检查清单）",
+      "entity_ref": "TKT-2026-004",
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 13,
+      "status": "superseded",
+      "_update_reason": "独立核验完成，确认TKT-2026-004已通过所有检查"
+    },
+    "n_0060": {
+      "node_id": "n_0060",
+      "type": "OpenTask",
+      "content": "VCP形态突破点入场策略研究：验证趋势→调整→紧凑→放量→突破形态在A股市场的统计优势",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 15
+    },
+    "n_0061": {
+      "node_id": "n_0061",
+      "type": "Fact",
+      "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码确认：src/agents/bootstrap-files.ts会加载workspace bootstrap files；src/config/types.agent-defaults.ts中bootstrap文件被injected into system prompt；src/agents/system-prompt.ts先扫描<available_skills>，再决定读取SKILL.md。",
+      "entity_ref": "openclaw_agent_runtime_mechanisms",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 16,
+      "_update_reason": "补充具体代码路径和测试确认，使机制描述更精确"
+    },
+    "n_0062": {
+      "node_id": "n_0062",
+      "type": "Fact",
+      "content": "智能体身份由OpenClaw agent配置决定；当前未配置agents.list时，所有消息路由到唯一默认agent，agent ID固定为'default'。workspace名称和SKILL.md首段身份声明仅供技能区分，不改变运行时agent ID。",
+      "entity_ref": "openclaw_identity_mechanism",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 16,
+      "_update_reason": "根据最新代码信息修正运行时身份机制，补充无配置时的默认行为"
+    },
+    "n_0063": {
+      "node_id": "n_0063",
+      "type": "Fact",
+      "content": "Charter文件默认不被智能体知晓，其约束需要通过SKILL.md摘抄或显式读取才能落地。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 16
+    },
+    "n_0064": {
+      "node_id": "n_0064",
+      "type": "Fact",
+      "content": "当前SKILL.md可能未包含显式读取research_workflow.md等prompts文件的指令，存在prompts内容被闲置的风险。",
+      "entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 16
+    },
+    "n_0065": {
+      "node_id": "n_0065",
+      "type": "OpenTask",
+      "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "must_include",
+      "created_turn": 16
+    },
+    "n_0066": {
+      "node_id": "n_0066",
+      "type": "Fact",
+      "content": "当前OpenClaw配置未定义agents.list，所有消息路由到默认agent，agent ID始终为default。源代码src/routing/resolve-route.ts在无配置时返回'default'，测试src/routing/resolve-route.test.ts验证no bindings时默认是main/default。",
+      "entity_ref": "openclaw_agent_routing_default",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 17,
+      "_update_reason": "补充代码路径和测试验证，确认路由行为"
+    },
+    "n_0067": {
+      "node_id": "n_0067",
+      "type": "Decision",
+      "content": "方案A：维持一个agent，靠技能区分（当前设置）。已被采纳为临时层方案，等待正式层替换。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 17,
+      "_update_reason": "Claude明确临时层采用方案A"
+    },
+    "n_0068": {
+      "node_id": "n_0068",
+      "type": "Decision",
+      "content": "方案B：配置真正的多agent，通过agents.list定义独立agent。已被采纳为正式层方案，待Ticket B后排期实施。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "created_turn": 17,
+      "_update_reason": "Claude明确正式层采用方案B"
+    },
+    "n_0069": {
+      "node_id": "n_0069",
+      "type": "Fact",
+      "content": "Ubuntu端OpenClaw workspace目录结构：根目录有AGENTS.md, HEARTBEAT.md, IDENTITY.md, MEMORY.md, SOUL.md, TOOLS.md, USER.md, execution_config.json, execution_config_0402.json, .openclaw/workspace-state.json; memory/目录包含大量日期文件; skills/目录下有三个技能：duty_reporter（含SKILL.md, TOOLS.md, scripts/, logs/）、quant_assistant（含SKILL.md, README.md, scripts/）、strategy_researcher（含SKILL.md, TOOLS.md, tkt-worklog.md, prompts/目录含4个.md文件, scripts/含5个.py/.sh文件）。",
+      "entity_ref": "openclaw_workspace_structure",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 18
+    },
+    "n_0070": {
+      "node_id": "n_0070",
+      "type": "Fact",
+      "content": "KB写入桥已存在：overview.md确认emit_config触发create_strategy_archive和研究日志写入，research_run.py串起NL编译→回测→归档→索引全链路。",
+      "entity_ref": "quant_backend_kb_bridge",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 19
+    },
+    "n_0071": {
+      "node_id": "n_0071",
+      "type": "Fact",
+      "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+      "entity_ref": "TKT-2026-006",
+      "state": null,
+      "priority": "optional",
+      "_entity_ref_sanitized": true,
+      "created_turn": 19
+    },
+    "n_0072": {
+      "node_id": "n_0072",
+      "type": "Fact",
+      "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径，避免口语化需求。增加行为级烟测门槛（三条标准见n_0077），替换弱smoke test。",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
+      "state": null,
+      "priority": "background",
+      "_entity_ref_sanitized": true,
+      "created_turn": 19,
+      "_update_reason": "Claude提高Ticket B门槛，加入行为验证"
+    },
+    "n_0073": {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β：P0（剥离根TOOLS.md）已完成。现在优先做P1：清理IDENTITY.md和AGENTS.md（内容见n_0081），P2（修改SOUL.md）延后。正式层上agents.list+bindings暂不做，等待触发条件（见n_0085）。",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "in_progress",
+      "priority": "must_include",
+      "created_turn": 19,
+      "_update_reason": "P0已完成，最新建议强调优先P1，调整优先级顺序。"
+    },
+    "n_0074": {
+      "node_id": "n_0074",
+      "type": "Fact",
+      "content": "GPT5.4对Opus4.7方案评价：大方向正确，但表述过满；短期可采纳作为临时补丁，长期需上多agent架构；优先级：最高修根TOOLS.md，次高IDENTITY.md和AGENTS.md，最低SOUL.md；建议分两层：临时层精简bootstrap，正式层推进agents.list+bindings+skills allowlist。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 21
+    },
+    "n_0075": {
+      "node_id": "n_0075",
+      "type": "Fact",
+      "content": "Claude接受评审修正：三点过满（改4文件解决身份、根TOOLS.md整个作废重写、问一句你是谁做smoke test）和两处坚持（根TOOLS.md最高危、临时层必须先止血）。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 22
+    },
+    "n_0076": {
+      "node_id": "n_0076",
+      "type": "Fact",
+      "content": "根TOOLS.md当前状态是最高危污染源：包含quant_assistant专属规则，需要剥离。本轮暴露根TOOLS.md内容后确认，其内容实质为quant_assistant技能的私有文件（包括后端地址、脚本路径、命令模板等），仅需在顶部增加一行定位说明即可完整迁移至skills/quant_assistant/TOOLS.md，具体剥离步骤已明确。",
+      "entity_ref": "TOOLS.md",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 22,
+      "_update_reason": "本轮用户暴露根TOOLS.md内容，Claude确认其本质为skill-private文件，细化污染源具体信息和剥离方案。"
+    },
+    "n_0077": {
+      "node_id": "n_0077",
+      "type": "Fact",
+      "content": "行为级烟测三条标准：1) trace中read_file skills/strategy_researcher/SKILL.md；2) 工具调用路径在strategy_researcher/scripts/下；3) DATA_MISSING_SYNC_REQUIRED按workflow自动重试。",
+      "entity_ref": "skills/strategy_researcher/SKILL.md",
+      "state": null,
+      "priority": "should_include",
+      "_entity_ref_sanitized": true,
+      "created_turn": 22
+    },
+    "n_0078": {
+      "node_id": "n_0078",
+      "type": "Fact",
+      "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+      "entity_ref": "skills/quant_assistant/TOOLS.md",
+      "state": null,
+      "priority": "must_include",
+      "_entity_ref_sanitized": true,
+      "created_turn": 24
+    },
+    "n_0079": {
+      "node_id": "n_0079",
+      "type": "Fact",
+      "content": "烟测A验证结果：quant_assistant技能成功处理'查询实例'请求，读取SKILL.md和TOOLS.md后调用query.py脚本，返回运行实例列表。",
+      "entity_ref": "quant_assistant",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 25
+    },
+    "n_0080": {
+      "node_id": "n_0080",
+      "type": "Fact",
+      "content": "烟测B验证结果：智能体正确识别'BTC结构怎么看'不属于任何技能范围，仅返回个人观点，未调用任何脚本。读取了根TOOLS.md和quant_assistant/TOOLS.md。",
+      "entity_ref": "quant_assistant",
+      "state": null,
+      "priority": "should_include",
+      "created_turn": 25
+    },
+    "n_0081": {
+      "node_id": "n_0081",
+      "type": "OpenTask",
+      "content": "P1：清理根bootstrap中的IDENTITY.md和AGENTS.md。IDENTITY.md改为'当前agent是OpenClaw数字组织运行时成员，具体岗位由skill/工单决定'；AGENTS.md关闭主动读取memory/检查email/calendar/weather/Twitter等污染源，限定写文件路径为SKILL.md或工单允许路径。",
+      "entity_ref": "identity_agents_cleanup",
+      "state": "open",
+      "priority": "must_include",
+      "created_turn": 27
+    },
+    "n_0082": {
+      "node_id": "n_0082",
+      "type": "OpenTask",
+      "content": "烟测C：身份是否干净测试。飞书问'你是谁？当前消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'，不主动读memory，能说清具体岗位由skill/工单决定。",
+      "entity_ref": "smoke_test_identity",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 27
+    },
+    "n_0083": {
+      "node_id": "n_0083",
+      "type": "OpenTask",
+      "content": "烟测D：Ticket B前置检查。发指令'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、skills/strategy_researcher/SKILL.md、必要prompts如research_workflow.md；不读取quant_assistant/TOOLS.md；不调用builder/backtest/order/deploy脚本。",
+      "entity_ref": "smoke_test_ticket_b_prereq",
+      "state": "open",
+      "priority": "should_include",
+      "created_turn": 27
+    },
+    "n_0084": {
+      "node_id": "n_0084",
+      "type": "Decision",
+      "content": "暂时不做源码级多agent改造（agents.list/bindings/skills allowlist），直到触发条件（Ticket B中仍读错skill、混用quant_assistant工具、主动读无关memory、不按research_workflow调用工具、trace不可验收）满足。若触发，优先修SKILL/bootstrap而非启动机制层改造。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "must_include",
+      "created_turn": 27
+    },
+    "n_0085": {
+      "node_id": "n_0085",
+      "type": "Fact",
+      "content": "多agent改造触发条件：1) Ticket B中仍读错skill；2) 仍混用quant_assistant工具；3) 仍主动读无关memory；4) 仍不按research_workflow调用工具；5) trace不可验收。",
+      "entity_ref": "openclaw_skills/quant-assistant",
+      "state": null,
+      "priority": "should_include",
+      "_entity_ref_sanitized": true,
+      "created_turn": 27
+    }
+  },
+  "edges": [
+    {
+      "source": "n_0007",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0009",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0005",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0013",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0014",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0015",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0015",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0002",
+      "target": "n_0012",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0007",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0012",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0011",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0012",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0016",
+      "target": "n_0005",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0016",
+      "target": "n_0006",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0018",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0019",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0020",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0020",
+      "target": "n_0014",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0020",
+      "target": "n_0012",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0017",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0021",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0021",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0022",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0023",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0024",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0025",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0026",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0027",
+      "target": "n_0026",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0028",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0029",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0030",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0028",
+      "target": "n_0022",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0029",
+      "target": "n_0026",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0031",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0032",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0033",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0034",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0035",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0036",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0035",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0036",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0037",
+      "target": "n_0032",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0033",
+      "target": "n_0032",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0034",
+      "target": "n_0033",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0038",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0039",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0040",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0038",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0039",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0040",
+      "target": "n_0010",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0041",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0041",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0042",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0043",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0044",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0045",
+      "target": "n_0031",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0046",
+      "target": "n_0032",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0047",
+      "target": "n_0030",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0047",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0047",
+      "target": "n_0034",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0048",
+      "target": "n_0033",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0049",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0049",
+      "target": "n_0033",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0050",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0051",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0052",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0053",
+      "target": "n_0034",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0053",
+      "target": "n_0052",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0053",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0054",
+      "target": "n_0025",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0054",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0055",
+      "target": "n_0034",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0056",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0056",
+      "target": "n_0055",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0057",
+      "target": "n_0025",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0058",
+      "target": "n_0057",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0058",
+      "target": "n_0034",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0060",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0060",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0061",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0062",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0063",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0064",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0065",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0065",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0066",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0066",
+      "target": "n_0062",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0067",
+      "target": "n_0044",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0068",
+      "target": "n_0044",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0069",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0070",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0071",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0072",
+      "target": "n_0065",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0065",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0067",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0068",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0075",
+      "target": "n_0074",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0076",
+      "target": "n_0069",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0077",
+      "target": "n_0072",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0067",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0074",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0075",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0073",
+      "target": "n_0076",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0076",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0075",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0079",
+      "target": "n_0061",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0076",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0061",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0081",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0082",
+      "target": "n_0081",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0083",
+      "target": "n_0081",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0084",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0084",
+      "target": "n_0068",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0085",
+      "target": "n_0084",
+      "relation": "supports"
+    }
+  ]
+}

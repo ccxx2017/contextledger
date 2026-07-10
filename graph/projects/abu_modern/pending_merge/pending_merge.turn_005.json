@@ -1,0 +1,152 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_005",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0033",
+      "raw_entity_ref": "TKT-2026-003",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ],
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0034",
+      "raw_entity_ref": "TKT-2026-004",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ],
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0035",
+      "raw_entity_ref": "TKT-2026-005",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ],
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0036",
+      "raw_entity_ref": "TKT-2026-006",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ],
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0039",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.8861,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.8736,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0030"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5085,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024"
+          ]
+        },
+        {
+          "canonical_entity_ref": "strategy_research_agent",
+          "match_confidence": 0.5075,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0002",
+            "n_0008"
+          ]
+        }
+      ],
+      "match_confidence": 0.8861,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0040",
+      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.466,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025"
+          ]
+        }
+      ],
+      "match_confidence": 0.466,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

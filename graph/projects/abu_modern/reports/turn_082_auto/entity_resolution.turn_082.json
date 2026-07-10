@@ -1,0 +1,142 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_082",
+  "summary": {
+    "new_nodes": 4,
+    "resolved_exact": 0,
+    "resolved_alias": 0,
+    "pending_merge": 2,
+    "unresolved": 2
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0158",
+      "raw_entity_ref": "round6a_forbidden_runs",
+      "resolved_entity_ref": "round6a_forbidden_runs",
+      "match_confidence": 0.6977,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round6a_polluted_runs",
+          "match_confidence": 0.6977,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0156"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_cache_remediation",
+          "match_confidence": 0.5106,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0155"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_stop_loss_7pct",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0154"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6_preflight",
+          "match_confidence": 0.4737,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0150"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round5_3e_verification_requirements",
+          "match_confidence": 0.4561,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0135"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0159",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0160",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0161",
+      "raw_entity_ref": "round6a_backend_defect_repair",
+      "resolved_entity_ref": "round6a_backend_defect_repair",
+      "match_confidence": 0.5926,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round6a_cache_remediation",
+          "match_confidence": 0.5926,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0155"
+          ]
+        },
+        {
+          "canonical_entity_ref": "quant_backend_url_default",
+          "match_confidence": 0.5556,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0053"
+          ]
+        },
+        {
+          "canonical_entity_ref": "quant_backend_kb_bridge",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0070"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round6a_polluted_runs",
+          "match_confidence": 0.48,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0156"
+          ]
+        }
+      ]
+    }
+  ]
+}

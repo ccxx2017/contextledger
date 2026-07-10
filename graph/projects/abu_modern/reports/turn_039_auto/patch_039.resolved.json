@@ -1,0 +1,59 @@
+{
+  "task_id": "task_default",
+  "turn_id": 39,
+  "new_nodes": [
+    {
+      "node_id": "n_0099",
+      "type": "OpenTask",
+      "content": "TKT-2026-005D: 修builder/backtest工具契约。要求：backtest返回结构化JSON（code, message, retryable）；builder提供非交互strict IR模式（无pending_user_input，一次提交编译）；暂时关闭auto_backtest。",
+      "entity_ref": "TKT-2026-005D",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0100",
+      "type": "OpenTask",
+      "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。用手写最小IR，1-5标的，3-12月窗口，测试builder strict compile→backtest→KB读取，验证8项验收标准，不允许自主研究。",
+      "entity_ref": "TKT-2026-005E",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0101",
+      "type": "Fact",
+      "content": "GPT5.5方案：暂停研究→修工具契约(005D)→技术smoke(005E)→恢复受限研究(005B)→后端异步化(接续005C阶段2)。当前首要修builder/backtest契约，使工具链可稳定调用。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "background"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0099",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0100",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0100",
+      "target": "n_0099",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0100",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0101",
+      "target": "n_0095",
+      "relation": "supports"
+    }
+  ]
+}

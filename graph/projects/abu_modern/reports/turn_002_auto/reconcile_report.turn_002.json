@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 16,
+    "active_graph_nodes": 16,
+    "new_nodes": 5,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "duty_reporter",
+      "new_node_id": "n_0021",
+      "old_node_id": "n_0003",
+      "new_state": "open",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "duty_reporter",
+      "new_node_id": "n_0021",
+      "old_node_id": "n_0007",
+      "new_state": "open",
+      "old_state": "open"
+    }
+  ],
+  "weak_matches": []
+}

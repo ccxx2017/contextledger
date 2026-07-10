@@ -1,0 +1,209 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_005",
+  "summary": {
+    "new_nodes": 10,
+    "resolved_exact": 0,
+    "resolved_alias": 1,
+    "pending_merge": 6,
+    "unresolved": 3
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0031",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0032",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0033",
+      "raw_entity_ref": "TKT-2026-003",
+      "resolved_entity_ref": "TKT-2026-003",
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0034",
+      "raw_entity_ref": "TKT-2026-004",
+      "resolved_entity_ref": "TKT-2026-004",
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0035",
+      "raw_entity_ref": "TKT-2026-005",
+      "resolved_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0036",
+      "raw_entity_ref": "TKT-2026-006",
+      "resolved_entity_ref": "TKT-2026-006",
+      "match_confidence": 0.9167,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-002",
+          "match_confidence": 0.9167,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0010"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0037",
+      "raw_entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py",
+      "resolved_entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py",
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "no_candidate_found",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0038",
+      "raw_entity_ref": "aos/org/agents/agent-strategy-researcher.md",
+      "resolved_entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+      "match_confidence": 0.95,
+      "merge_reason": "alias_registry_match",
+      "non_merge_reason": "",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+          "match_confidence": 0.95,
+          "evidence": [
+            "alias_registry"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0039",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+      "resolved_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+      "match_confidence": 0.8861,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.8861,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.8736,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0030"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5085,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024"
+          ]
+        },
+        {
+          "canonical_entity_ref": "strategy_research_agent",
+          "match_confidence": 0.5075,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0002",
+            "n_0008"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0040",
+      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+      "resolved_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+      "match_confidence": 0.466,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.466,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025"
+          ]
+        }
+      ]
+    }
+  ]
+}

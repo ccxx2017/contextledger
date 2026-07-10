@@ -1,0 +1,68 @@
+{
+  "task_id": "task_default",
+  "turn_id": 52,
+  "new_nodes": [
+    {
+      "node_id": "n_0115",
+      "type": "OpenTask",
+      "content": "TKT-2026-005I: KB最小字段完整性和universe占位值防护。核心实现：knowledge_base.py、strategy_builder.py。已追加工单执行记录到TKT-2026-005I-kb-minimum-sanity-check.md。已完成。",
+      "entity_ref": "TKT-2026-005I",
+      "state": "resolved",
+      "priority": "must_include",
+      "status": "superseded",
+      "_status_sanitized": true
+    },
+    {
+      "node_id": "n_0116",
+      "type": "Fact",
+      "content": "KB archive新增元数据JSON区块（strategy_id, run_id等），sanity规则检测缺字段和占位universe，回测回填后升级为passed。",
+      "entity_ref": "quant_intelligence/knowledge_base.py",
+      "state": null,
+      "priority": "must_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0115",
+      "changes": {
+        "status": "superseded"
+      },
+      "reason": "工单已完成，等待Boss验收或已确认通过"
+    },
+    {
+      "node_id": "n_0114",
+      "changes": {
+        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。"
+      },
+      "reason": "根据005I完成后的工具链状态和GPT5.5建议，补充Round 5硬限制和研究细节"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0115",
+      "target": "n_0035",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0116",
+      "target": "n_0115",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0116",
+      "target": "n_0104",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0114",
+      "target": "n_0111",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0114",
+      "target": "n_0035",
+      "relation": "refines"
+    }
+  ]
+}

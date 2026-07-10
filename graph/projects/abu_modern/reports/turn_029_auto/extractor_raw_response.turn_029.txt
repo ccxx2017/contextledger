@@ -1,0 +1,43 @@
+{
+  "task_id": "task_default",
+  "turn_id": 29,
+  "new_nodes": [
+    {
+      "node_id": "n_0083",
+      "type": "Fact",
+      "content": "测试失败原因：助手身份陈述违反IDENTITY.md和AGENTS.md规则，模型仍沿用旧有拟人化身份'小爪'。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0081",
+      "changes": {
+        "state": "deployed"
+      },
+      "reason": "测试反馈确认IDENTITY.md v2已实际生效被读取，从草案推进到已部署。"
+    },
+    {
+      "node_id": "n_0082",
+      "changes": {
+        "state": "deployed"
+      },
+      "reason": "测试反馈确认AGENTS.md v2已实际生效被读取，从草案推进到已部署。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0083",
+      "target": "n_0081",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0083",
+      "target": "n_0082",
+      "relation": "supports"
+    }
+  ]
+}

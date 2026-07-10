@@ -1,0 +1,35 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_027_auto\\patch_027.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 26,
+    "open_like_nodes_scanned": 18,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 1,
+    "score_histogram": {
+      "3": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0065",
+      "type": "OpenTask",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+      "score": 3,
+      "matched_terms": [
+        "prompts",
+        "skill.md",
+        "ticket"
+      ]
+    }
+  ]
+}

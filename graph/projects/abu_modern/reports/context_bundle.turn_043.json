@@ -1,0 +1,143 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_043",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_043_auto/graph_state.after_turn_043.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0078",
+      "n_0098",
+      "n_0102",
+      "n_0103",
+      "n_0100"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0073",
+        "type": "OpenTask",
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+        "priority": "must_include",
+        "entity_ref": "workspace_root_bootstrap_audit"
+      },
+      {
+        "node_id": "n_0078",
+        "type": "Fact",
+        "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+        "priority": "must_include",
+        "entity_ref": "skills/quant_assistant/TOOLS.md"
+      },
+      {
+        "node_id": "n_0098",
+        "type": "Decision",
+        "content": "Boss审核结论：TKT-2026-005B smoke run未通过。builder会话异常（5轮未收敛），backtest端点返回HTTP 500。依据Boss guardrail，工单暂停至paused_for_boss_review。要求：停止执行，不重试，更新工单Worklog后commit/push，不修改策略或脚本。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0102",
+        "type": "Decision",
+        "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
+        "priority": "must_include",
+        "entity_ref": "aos/services/backtest-api"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0103",
+        "type": "Fact",
+        "content": "TKT-2026-005D双通道分流干净：POST /strategy-builder/compile-ir无状态编译，KB自动落库成功，异常序列化修复使后端不会僵死。交付完全符合预期。",
+        "priority": "should_include",
+        "entity_ref": "aos/services/backtest-api"
+      },
+      {
+        "node_id": "n_0100",
+        "type": "OpenTask",
+        "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。手写最小IR（1-5标的，1年窗口），编写bash/python脚本模拟call_builder.py（指向新端点/strategy-builder/compile-ir）→ call_backtest.py → kb_query.py链路，验证后端无僵死进程、无500序列化错误。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005E"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0098",
+      "n_0102",
+      "n_0100"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 87,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

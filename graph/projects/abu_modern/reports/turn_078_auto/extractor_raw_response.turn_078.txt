@@ -1,0 +1,31 @@
+{
+  "task_id": "task_default",
+  "turn_id": 78,
+  "new_nodes": [
+    {
+      "node_id": "n_0155",
+      "type": "OpenTask",
+      "content": "项目AI执行Round 6A缓存诊断与定向清理：只读诊断缓存位置、cache key组成、污染原因，评估定向清除可行性，如有权限则定向清除策略ir_92c31feee6bd相关污染缓存。禁止运行回测、创建新run、修改策略。须在清除前报告并获得Boss批准。清除后由Feishu Agent执行Round 6A cache-bypass re-execution。",
+      "entity_ref": "round6a_cache_remediation",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0154",
+      "changes": {
+        "content": "Round 6A cache-bypass re-execution：先由项目AI完成缓存诊断与定向清理（n_0155），清理批准后再由Feishu Agent执行一次仅修改IR非语义字段的完整回测，stop_loss=-7%，time_stop=20天，完整周期2025-01-01至2025-12-30。必须输出diff证明executable logic完全一致，并报告15项检查。一旦再次命中缓存立即暂停。"
+      },
+      "reason": "根据Boss建议，增加缓存清理作为前置条件，明确分工：项目AI负责清理，Feishu Agent负责执行。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0154",
+      "target": "n_0155",
+      "relation": "depends_on"
+    }
+  ]
+}

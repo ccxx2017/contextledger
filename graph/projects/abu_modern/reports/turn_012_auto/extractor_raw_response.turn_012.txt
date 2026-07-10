@@ -1,0 +1,67 @@
+{
+  "task_id": "task_default",
+  "turn_id": 12,
+  "new_nodes": [
+    {
+      "node_id": "n_0054",
+      "type": "Fact",
+      "content": "openclaw_skills目录实际位于abu_modern项目下，作为临时存放Ubuntu openclaw技能文件的源，通过手动传输到Ubuntu的/home/ccxx/.openclaw/workspace/skills/目录下",
+      "entity_ref": "openclaw_skills",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0055",
+      "type": "FileArtifact",
+      "content": "TOOLS.md v1正式内容（替换占位版），包含call_builder.py、call_backtest.py、kb_query.py、smoke_http_clients.sh的签名、参数、错误码、示例",
+      "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0056",
+      "type": "FileArtifact",
+      "content": "TKT-2026-004工单文件（重写版），包含前置假设、任务步骤、边界、Worklog",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-004strategy_researcher_Agent_HTTP_适配脚本.md",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0047",
+      "changes": {
+        "content": "strategy-researcher 脚本清单：call_builder.py（POST /strategy-builder/invoke）、call_backtest.py（POST /backtests/execution-config）、kb_query.py（GET /api/v1/knowledge/* 四个子命令：index/list/read/log），以及smoke_http_clients.sh（happy-path连通性自检脚本）"
+      },
+      "reason": "用户澄清scripts实际清单包含smoke_http_clients.sh"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0054",
+      "target": "n_0025",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0054",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0055",
+      "target": "n_0034",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0056",
+      "target": "n_0034",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0056",
+      "target": "n_0055",
+      "relation": "supports"
+    }
+  ]
+}

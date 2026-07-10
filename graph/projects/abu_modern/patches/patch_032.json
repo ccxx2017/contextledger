@@ -1,0 +1,51 @@
+{
+  "task_id": "task_default",
+  "turn_id": 32,
+  "new_nodes": [
+    {
+      "node_id": "n_0087",
+      "type": "Fact",
+      "content": "自主激活测试通过：智能体自主读取了skills/strategy_researcher/SKILL.md、prompts/research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md，未越界，满足正式执行条件。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0084",
+      "changes": {
+        "state": "in_progress",
+        "content": "前置检查通过，进入正式执行阶段",
+        "status": "active"
+      },
+      "reason": "自主激活测试通过，满足正式执行条件"
+    },
+    {
+      "node_id": "n_0085",
+      "changes": {
+        "content": "前置检查结果：工单TKT-2026-005B应由strategy_researcher处理，依据intent_type:investigation和assigned_to:agent-strategy-researcher；未读取其他技能私有文件，未调用scripts。自主激活测试通过，实际读取了6个文件（SKILL.md、research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md、工单本体），未越界。",
+        "status": "active"
+      },
+      "reason": "补充自主激活测试详细结果"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0086",
+      "reason": "自主激活测试已完成并通过，原建议不再适用"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0087",
+      "target": "n_0084",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0087",
+      "target": "n_0086",
+      "relation": "invalidates"
+    }
+  ]
+}

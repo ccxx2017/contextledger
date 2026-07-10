@@ -1,0 +1,44 @@
+{
+  "task_id": "task_default",
+  "turn_id": 48,
+  "new_nodes": [
+    {
+      "node_id": "n_0110",
+      "type": "Fact",
+      "content": "Round 4 受限恢复 smoke 完成：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。需修正：call_builder.py 修改记录、非 2xx 请求说明、指标口径来源（以 KB 口径为准）、后续应使用 70/30 时间切分。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0095",
+      "changes": {
+        "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）—— Round 4 smoke 执行通过，Boss 接受结果但要求补充修正说明。",
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "should_include"
+      },
+      "reason": "smoke 执行完成且 Boss 审核通过（需补充说明），任务终结"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0109",
+      "reason": "所描述的可执行状态已被实际 smoke 执行结果替代"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0110",
+      "target": "n_0095",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0110",
+      "target": "n_0109",
+      "relation": "invalidates"
+    }
+  ]
+}

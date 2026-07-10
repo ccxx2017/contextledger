@@ -1,0 +1,97 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_057",
+  "summary": {
+    "new_nodes": 3,
+    "resolved_exact": 1,
+    "resolved_alias": 0,
+    "pending_merge": 1,
+    "unresolved": 1
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0123",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0124",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0125",
+      "raw_entity_ref": "tkt-2026-005b-round53-engine-audit",
+      "resolved_entity_ref": "tkt-2026-005b-round53-engine-audit",
+      "match_confidence": 0.5532,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.5532,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0085",
+            "n_0089",
+            "n_0096",
+            "n_0110",
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005I",
+          "match_confidence": 0.5532,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0120",
+            "n_0121"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.5217,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.5106,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0088"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.5106,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0112"
+          ]
+        }
+      ]
+    }
+  ]
+}

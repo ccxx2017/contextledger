@@ -1,0 +1,94 @@
+{
+  "kind": "assembly_report.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_030",
+  "result": "rejected",
+  "input_graph_turn_counter": 30,
+  "policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "priority_order": [
+      "must_include",
+      "should_include",
+      "optional",
+      "background"
+    ],
+    "backfill_order": "created_turn desc, node_id asc",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "overflow_rule": "never_drop_must_include"
+  },
+  "summary": {
+    "all_nodes": 88,
+    "active_nodes": 77,
+    "superseded_nodes": 11,
+    "active_must_include_nodes": 13,
+    "selected_nodes": 0
+  },
+  "rejection": {
+    "code": "MUST_INCLUDE_OVER_BUDGET",
+    "message": "装配预算不足：active must_include=13 超过 max_nodes=12，根据规则拒绝装配，避免静默丢弃 must_include。",
+    "active_must_include_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0078",
+      "n_0084",
+      "n_0085",
+      "n_0086",
+      "n_0087",
+      "n_0088"
+    ]
+  },
+  "excluded_due_to_status": [
+    {
+      "node_id": "n_0010",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0012",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0014",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0027",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0030",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0033",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0034",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0049",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0052",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0056",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0059",
+      "status": "superseded"
+    }
+  ],
+  "excluded_due_to_state": []
+}

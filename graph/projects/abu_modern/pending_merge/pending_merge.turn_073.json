@@ -1,0 +1,118 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_073",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0144",
+      "raw_entity_ref": "round6_preflight",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round5_4a_spec",
+          "match_confidence": 0.5333,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0138"
+          ]
+        }
+      ],
+      "match_confidence": 0.5333,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0147",
+      "raw_entity_ref": "tkt_2026_005b.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.7586,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0085",
+            "n_0089",
+            "n_0096",
+            "n_0110",
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.7143,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.6897,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0088"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.6897,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0112"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005I",
+          "match_confidence": 0.6897,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0121"
+          ]
+        }
+      ],
+      "match_confidence": 0.7586,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0149",
+      "raw_entity_ref": "log.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TOOLS.md",
+          "match_confidence": 0.5714,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0076"
+          ]
+        },
+        {
+          "canonical_entity_ref": "AGENTS.md",
+          "match_confidence": 0.5333,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0082"
+          ]
+        }
+      ],
+      "match_confidence": 0.5714,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

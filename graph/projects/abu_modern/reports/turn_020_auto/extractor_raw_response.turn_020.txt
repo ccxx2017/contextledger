@@ -1,0 +1,137 @@
+{
+  "task_id": "task_default",
+  "turn_id": 20,
+  "new_nodes": [
+    {
+      "node_id": "n_0074",
+      "type": "Fact",
+      "content": "根TOOLS.md实际是quant_assistant的TOOLS.md，被错误放置在工作区根目录，导致与strategy_researcher的workflow冲突（工具脚本、禁止重试规则、base_url不匹配）。",
+      "entity_ref": "TOOLS.md",
+      "state": null,
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0075",
+      "type": "Fact",
+      "content": "IDENTITY.md使用OpenClaw默认模板，将Agent定位为'小爪'个人助理，与strategy_researcher专业人格冲突，必须重写。",
+      "entity_ref": "IDENTITY.md",
+      "state": null,
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0076",
+      "type": "Fact",
+      "content": "AGENTS.md包含大量对量化研究员无关的指令（Session Startup强制读memory、Heartbeats检查email等），会污染context，需清理。",
+      "entity_ref": "AGENTS.md",
+      "state": null,
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0077",
+      "type": "Fact",
+      "content": "SOUL.md基本可留但缺角色分诊声明，需补充身份切换说明，删除Continuity段以避免冲突。",
+      "entity_ref": "SOUL.md",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0078",
+      "type": "Fact",
+      "content": "Claude建议暂缓派发Ticket B，优先完成bootstrap文件修改，待用户确认。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0079",
+      "type": "OpenTask",
+      "content": "重写根TOOLS.md为路由层文件，删除quant_assistant特定规则，加入技能选择分诊表。",
+      "entity_ref": "TOOLS.md",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0080",
+      "type": "OpenTask",
+      "content": "重写IDENTITY.md为数字组织员工声明，移除'小爪'个人助理身份。",
+      "entity_ref": "IDENTITY.md",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0081",
+      "type": "OpenTask",
+      "content": "清理AGENTS.md：删除Session Startup、Heartbeats等对研究员有害的段落，限定写文件路径。",
+      "entity_ref": "AGENTS.md",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0082",
+      "type": "OpenTask",
+      "content": "更新SOUL.md：添加角色分诊声明，删除Continuity段。",
+      "entity_ref": "SOUL.md",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0073",
+      "changes": {
+        "content": "审查并调整工作区根部bootstrap文件：审查完成，确定四个文件均需修改（IDENTITY.md、根TOOLS.md、AGENTS.md必改，SOUL.md建议改），已制定具体修改方案待执行。",
+        "state": "in_progress",
+        "priority": "must_include"
+      },
+      "reason": "审计完成，获得具体修改方案，进入执行阶段。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0074",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0075",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0076",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0077",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0079",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0081",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0082",
+      "target": "n_0073",
+      "relation": "refines"
+    }
+  ]
+}

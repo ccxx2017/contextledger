@@ -1,0 +1,41 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_036",
+  "summary": {
+    "new_nodes": 3,
+    "resolved_exact": 3,
+    "resolved_alias": 0,
+    "pending_merge": 0,
+    "unresolved": 0
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0095",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0096",
+      "raw_entity_ref": "TKT-2026-005C",
+      "resolved_entity_ref": "TKT-2026-005C",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0097",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    }
+  ]
+}

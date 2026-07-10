@@ -1,0 +1,152 @@
+{
+  "kind": "lint_delta.phase1_prep.v1",
+  "before_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_003.json",
+  "after_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_004_auto\\graph_state.after_turn_004.json",
+  "baseline_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\lint_baseline.json",
+  "current_turn": 4,
+  "baseline_report": {
+    "errors": [],
+    "warnings": []
+  },
+  "before_report": {
+    "ok": true,
+    "summary": {
+      "nodes": 27,
+      "edges": 32,
+      "active_nodes": 25,
+      "active_edges": 32,
+      "superseded_nodes": 2,
+      "errors": 0,
+      "warnings": 0
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0012",
+        "n_0014"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [],
+    "warnings": []
+  },
+  "after_report": {
+    "ok": true,
+    "summary": {
+      "nodes": 30,
+      "edges": 37,
+      "active_nodes": 27,
+      "active_edges": 37,
+      "superseded_nodes": 3,
+      "errors": 0,
+      "warnings": 0
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0012",
+        "n_0014",
+        "n_0027"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [],
+    "warnings": []
+  },
+  "issue_code_histogram": {
+    "before": {
+      "errors": {},
+      "warnings": {}
+    },
+    "after": {
+      "errors": {},
+      "warnings": {}
+    },
+    "introduced": {
+      "errors": {},
+      "warnings": {}
+    },
+    "baseline": {
+      "errors": {},
+      "warnings": {}
+    }
+  },
+  "summary": {
+    "before_errors": 0,
+    "after_errors": 0,
+    "before_warnings": 0,
+    "after_warnings": 0,
+    "baseline_errors": 0,
+    "baseline_warnings": 0,
+    "introduced_errors": 0,
+    "preexisting_errors": 0,
+    "introduced_warnings": 0,
+    "preexisting_warnings": 0,
+    "baseline_matched_errors": 0,
+    "baseline_matched_warnings": 0,
+    "overdue_baseline_issues": 0
+  },
+  "introduced_errors": [],
+  "preexisting_errors": [],
+  "introduced_warnings": [],
+  "preexisting_warnings": [],
+  "baseline_matched_errors": [],
+  "baseline_matched_warnings": [],
+  "overdue_baseline_issues": []
+}

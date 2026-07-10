@@ -1,0 +1,243 @@
+{
+  "kind": "lint_delta.phase1_prep.v1",
+  "before_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_026.json",
+  "after_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_027_auto\\graph_state.after_turn_027.json",
+  "baseline_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\lint_baseline.json",
+  "current_turn": 27,
+  "baseline_report": {
+    "ok": true,
+    "summary": {
+      "nodes": 40,
+      "edges": 54,
+      "active_nodes": 37,
+      "active_edges": 54,
+      "superseded_nodes": 3,
+      "errors": 0,
+      "warnings": 0,
+      "baseline_errors": 0,
+      "baseline_warnings": 0,
+      "baseline_anchor_turn": 5,
+      "tracked_issue_policy": "Phase 1-prep baseline established at turn_005."
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0012",
+        "n_0014",
+        "n_0027"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [],
+    "warnings": [],
+    "kind": "lint_baseline.phase1_prep.v1",
+    "project_id": "abu_modern",
+    "source_graph": "graph/projects/abu_modern/graph_state.json"
+  },
+  "before_report": {
+    "ok": true,
+    "summary": {
+      "nodes": 80,
+      "edges": 121,
+      "active_nodes": 69,
+      "active_edges": 121,
+      "superseded_nodes": 11,
+      "errors": 0,
+      "warnings": 0
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0010",
+        "n_0012",
+        "n_0014",
+        "n_0027",
+        "n_0030",
+        "n_0033",
+        "n_0034",
+        "n_0049",
+        "n_0052",
+        "n_0056",
+        "n_0059"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [],
+    "warnings": []
+  },
+  "after_report": {
+    "ok": true,
+    "summary": {
+      "nodes": 85,
+      "edges": 127,
+      "active_nodes": 74,
+      "active_edges": 127,
+      "superseded_nodes": 11,
+      "errors": 0,
+      "warnings": 1
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0010",
+        "n_0012",
+        "n_0014",
+        "n_0027",
+        "n_0030",
+        "n_0033",
+        "n_0034",
+        "n_0049",
+        "n_0052",
+        "n_0056",
+        "n_0059"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "level": "warning",
+        "code": "OPEN_TASK_CONTENT_LOOKS_COMPLETED",
+        "message": "OpenTask n_0073 的内容看起来已经完成，但 state 不是 resolved。该判断基于关键词启发式，只作为 warning。",
+        "node_id": "n_0073",
+        "state": "in_progress"
+      }
+    ]
+  },
+  "issue_code_histogram": {
+    "before": {
+      "errors": {},
+      "warnings": {}
+    },
+    "after": {
+      "errors": {},
+      "warnings": {
+        "OPEN_TASK_CONTENT_LOOKS_COMPLETED": 1
+      }
+    },
+    "introduced": {
+      "errors": {},
+      "warnings": {
+        "OPEN_TASK_CONTENT_LOOKS_COMPLETED": 1
+      }
+    },
+    "baseline": {
+      "errors": {},
+      "warnings": {}
+    }
+  },
+  "summary": {
+    "before_errors": 0,
+    "after_errors": 0,
+    "before_warnings": 0,
+    "after_warnings": 1,
+    "baseline_errors": 0,
+    "baseline_warnings": 0,
+    "introduced_errors": 0,
+    "preexisting_errors": 0,
+    "introduced_warnings": 1,
+    "preexisting_warnings": 0,
+    "baseline_matched_errors": 0,
+    "baseline_matched_warnings": 0,
+    "overdue_baseline_issues": 0
+  },
+  "introduced_errors": [],
+  "preexisting_errors": [],
+  "introduced_warnings": [
+    {
+      "level": "warning",
+      "code": "OPEN_TASK_CONTENT_LOOKS_COMPLETED",
+      "message": "OpenTask n_0073 的内容看起来已经完成，但 state 不是 resolved。该判断基于关键词启发式，只作为 warning。",
+      "node_id": "n_0073",
+      "state": "in_progress"
+    }
+  ],
+  "preexisting_warnings": [],
+  "baseline_matched_errors": [],
+  "baseline_matched_warnings": [],
+  "overdue_baseline_issues": []
+}

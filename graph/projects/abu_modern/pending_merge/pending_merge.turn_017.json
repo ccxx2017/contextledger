@@ -1,0 +1,67 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_017",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0066",
+      "raw_entity_ref": "openclaw_agent_routing_default",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_agent_runtime_mechanisms",
+          "match_confidence": 0.6349,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0061"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.4912,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.4889,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "quant_backend_url_default",
+          "match_confidence": 0.4727,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0053"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.4615,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        }
+      ],
+      "match_confidence": 0.6349,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

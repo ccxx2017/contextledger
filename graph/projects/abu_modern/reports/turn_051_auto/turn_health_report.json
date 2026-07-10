@@ -1,0 +1,24 @@
+{
+  "turn_id": "turn_051",
+  "project_id": "abu_modern",
+  "work_dir": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto",
+  "stages": {
+    "build_graph_slice": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\slice_051.json"
+    }
+  },
+  "summary": {
+    "status": "QUARANTINE",
+    "stage": "invoke_extractor",
+    "reason": "invoke_extractor 阶段脚本异常退出 (code=1)",
+    "quarantine_patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_051_failed_patch.json",
+    "quarantine_meta": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_051_failed.json"
+  },
+  "lights": {
+    "critical_status": "RED",
+    "lint_baseline": "RED",
+    "queue_health": "RED",
+    "assembly_integrity": "RED"
+  }
+}

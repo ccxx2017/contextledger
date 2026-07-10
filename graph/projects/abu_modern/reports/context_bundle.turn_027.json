@@ -1,0 +1,144 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_027",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_027_auto/graph_state.after_turn_027.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0078",
+      "n_0081",
+      "n_0084",
+      "n_0082",
+      "n_0083"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0073",
+        "type": "OpenTask",
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β：P0（剥离根TOOLS.md）已完成。现在优先做P1：清理IDENTITY.md和AGENTS.md（内容见n_0081），P2（修改SOUL.md）延后。正式层上agents.list+bindings暂不做，等待触发条件（见n_0085）。",
+        "priority": "must_include",
+        "entity_ref": "workspace_root_bootstrap_audit"
+      },
+      {
+        "node_id": "n_0078",
+        "type": "Fact",
+        "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+        "priority": "must_include",
+        "entity_ref": "skills/quant_assistant/TOOLS.md"
+      },
+      {
+        "node_id": "n_0081",
+        "type": "OpenTask",
+        "content": "P1：清理根bootstrap中的IDENTITY.md和AGENTS.md。IDENTITY.md改为'当前agent是OpenClaw数字组织运行时成员，具体岗位由skill/工单决定'；AGENTS.md关闭主动读取memory/检查email/calendar/weather/Twitter等污染源，限定写文件路径为SKILL.md或工单允许路径。",
+        "priority": "must_include",
+        "entity_ref": "identity_agents_cleanup"
+      },
+      {
+        "node_id": "n_0084",
+        "type": "Decision",
+        "content": "暂时不做源码级多agent改造（agents.list/bindings/skills allowlist），直到触发条件（Ticket B中仍读错skill、混用quant_assistant工具、主动读无关memory、不按research_workflow调用工具、trace不可验收）满足。若触发，优先修SKILL/bootstrap而非启动机制层改造。",
+        "priority": "must_include"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0082",
+        "type": "OpenTask",
+        "content": "烟测C：身份是否干净测试。飞书问'你是谁？当前消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'，不主动读memory，能说清具体岗位由skill/工单决定。",
+        "priority": "should_include",
+        "entity_ref": "smoke_test_identity"
+      },
+      {
+        "node_id": "n_0083",
+        "type": "OpenTask",
+        "content": "烟测D：Ticket B前置检查。发指令'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、skills/strategy_researcher/SKILL.md、必要prompts如research_workflow.md；不读取quant_assistant/TOOLS.md；不调用builder/backtest/order/deploy脚本。",
+        "priority": "should_include",
+        "entity_ref": "smoke_test_ticket_b_prereq"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0081",
+      "n_0084",
+      "n_0082",
+      "n_0083"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 74,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

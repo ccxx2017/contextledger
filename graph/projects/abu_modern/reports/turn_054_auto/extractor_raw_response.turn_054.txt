@@ -1,0 +1,68 @@
+{
+  "task_id": "task_default",
+  "turn_id": 54,
+  "new_nodes": [
+    {
+      "node_id": "n_0121",
+      "type": "Decision",
+      "content": "TKT-2026-005I正式验收通过，结论live_verified_passed。新archive ir_86a1843218b0已包含档案元数据JSON和sanity_check_failed状态。",
+      "entity_ref": "TKT-2026-005I",
+      "state": "resolved",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0122",
+      "type": "Fact",
+      "content": "005I live path verification报告确认：新archive ir_86a1843218b0包含##档案元数据JSON、strategy_id、strategy_ir、universe、sanity_check_failed、sanity_missing_fields等字段。",
+      "entity_ref": "ir_86a1843218b0",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0114",
+      "changes": {
+        "state": "open"
+      },
+      "reason": "005I live path verification已通过，阻塞条件解除，Round5研究不再被阻塞。"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0117",
+      "reason": "新Decision确认验收通过，原暂停验收决定被取代。"
+    },
+    {
+      "node_id": "n_0118",
+      "reason": "live path verification任务已执行完成并获得通过结论。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0121",
+      "target": "n_0117",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0118",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0122",
+      "target": "n_0118",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0120",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0114",
+      "relation": "supports"
+    }
+  ]
+}

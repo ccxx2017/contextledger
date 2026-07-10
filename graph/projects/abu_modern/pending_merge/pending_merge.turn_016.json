@@ -1,0 +1,162 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_016",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0061",
+      "raw_entity_ref": "openclaw_agent_runtime_mechanisms",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.4583,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        }
+      ],
+      "match_confidence": 0.5,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0062",
+      "raw_entity_ref": "openclaw_identity_mechanism",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5238,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.5161,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.4857,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0047",
+            "n_0050",
+            "n_0051"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.4839,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.4789,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        }
+      ],
+      "match_confidence": 0.5238,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0064",
+      "raw_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.9773,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.8864,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.8861,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.8608,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.8506,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0047",
+            "n_0050",
+            "n_0051"
+          ]
+        }
+      ],
+      "match_confidence": 0.9773,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

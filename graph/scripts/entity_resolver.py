@@ -74,6 +74,44 @@ def similarity(a: str, b: str) -> float:
     return max(surface, token_score)
 
 
+def looks_like_path(value: str) -> bool:
+    if not value:
+        return False
+    text = value.strip().replace("\\", "/")
+    if "/" not in text:
+        return False
+    if "." in Path(text).name:
+        return True
+    if text.endswith("/"):
+        return True
+    return False
+
+
+def path_similarity(a: str, b: str) -> tuple[float, str] | None:
+    left = a.strip().replace("\\", "/")
+    right = b.strip().replace("\\", "/")
+    if not looks_like_path(left) or not looks_like_path(right):
+        return None
+
+    if left == right:
+        return 1.0, "path_exact_match"
+
+    if left.endswith(right) or right.endswith(left):
+        return 0.92, "path_suffix_match"
+
+    if Path(left).name and Path(left).name == Path(right).name:
+        return 0.75, "path_basename_match"
+
+    for prefix in ("docs/", "graph/", "./"):
+        if left.startswith(prefix) and left[len(prefix) :] == right:
+            return 0.9, "path_prefix_trim_match"
+        if right.startswith(prefix) and right[len(prefix) :] == left:
+            return 0.9, "path_prefix_trim_match"
+
+    return None
+
+
+
 def parse_alias_registry(path: Path) -> dict[str, str]:
     registry: dict[str, str] = {}
     if not path.exists():
@@ -105,7 +143,13 @@ def resolve_patch(
     turn_id: str,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     active_nodes = [node for node in extract_nodes(graph_state) if is_active(node)]
-    active_refs = sorted({normalize_ref(node.get("entity_ref")) for node in active_nodes if normalize_ref(node.get("entity_ref"))})
+    active_ref_to_node_ids: dict[str, list[str]] = {}
+    for node in active_nodes:
+        ref = normalize_ref(node.get("entity_ref"))
+        if not ref:
+            continue
+        active_ref_to_node_ids.setdefault(ref, []).append(str(node.get("node_id")))
+    active_refs = sorted(active_ref_to_node_ids.keys())
 
     resolved_patch = json.loads(json.dumps(patch))
     new_nodes = extract_new_nodes(resolved_patch)
@@ -153,15 +197,22 @@ def resolve_patch(
 
         candidates = []
         for existing_ref in active_refs:
+            evidence = ["surface_or_token_similarity"]
             score = similarity(raw_entity_ref, existing_ref)
+            path_result = path_similarity(raw_entity_ref, existing_ref)
+            if path_result:
+                path_score, path_evidence = path_result
+                if path_score > score:
+                    score = path_score
+                    evidence = [path_evidence]
             if score < 0.45:
                 continue
-            evidence = ["surface_or_token_similarity"]
             candidates.append(
                 {
                     "canonical_entity_ref": existing_ref,
                     "match_confidence": round(score, 4),
                     "evidence": evidence,
+                    "canonical_node_ids": active_ref_to_node_ids.get(existing_ref, []),
                 }
             )
 

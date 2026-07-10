@@ -1,0 +1,102 @@
+{
+  "task_id": "task_default",
+  "turn_id": 82,
+  "new_nodes": [
+    {
+      "node_id": "n_0158",
+      "type": "Fact",
+      "content": "新增forbidden runs: run-8f20f146-20250101-20250912-820b8995, run-8f20f146-20250101-20251230-820b8995, run-8f20f146-20250912-20251230-820b8995",
+      "entity_ref": "round6a_forbidden_runs",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0159",
+      "type": "Fact",
+      "content": "诊断结论：Round 6A失败原因为后端IR context字段position_pnl_pct未注册，不是策略实验失败。该字段在compile层被静默接受，但evaluator/execution层不支持，导致0 trades及trade_data_source=missing。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0160",
+      "type": "Decision",
+      "content": "Round 6A被诊断为后端缺陷，停止所有Round 6A执行，进入后端修复工单。accepted baseline不变，forbidden runs清单更新。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0161",
+      "type": "OpenTask",
+      "content": "后端修复task：修复IR context字段不匹配、单位统一、compile校验等。详细范围见用户指示：1) IRExpression.context增加合法校验；2) 支持unrealized_pnl_pct；3) position_pnl_pct处理（拒绝或alias）；4) 统一百分比单位（小数制）；5) universal_factor.py KeyError改进；6) 添加单元测试。禁止运行真实回测、创建新run、修改baseline。",
+      "entity_ref": "round6a_backend_defect_repair",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0154",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "Round 6A被认定为后端缺陷，不再尝试re-execution"
+    },
+    {
+      "node_id": "n_0155",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "缓存诊断与定向清理已完成，后续re-execution已取消"
+    },
+    {
+      "node_id": "n_0152",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "决策被替代：真正原因不是缓存污染而是后端缺陷"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0159",
+      "target": "n_0160",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0158",
+      "target": "n_0160",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0160",
+      "target": "n_0152",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0160",
+      "target": "n_0154",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0160",
+      "target": "n_0161",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0161",
+      "target": "n_0157",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0161",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

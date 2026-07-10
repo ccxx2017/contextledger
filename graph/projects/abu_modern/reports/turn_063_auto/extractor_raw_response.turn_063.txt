@@ -1,0 +1,43 @@
+{
+  "task_id": "task_default",
+  "turn_id": 63,
+  "new_nodes": [
+    {
+      "node_id": "n_0131",
+      "type": "Fact",
+      "content": "Round 5.3D资金闭合复核报告确认：gap=-185,592精确来源为持仓重叠期MTM损失-178,668（96.5%）加其他微小差异；cash ledger不闭合但来源已解释；5月exposure真实；不影响指标可信度；允许进入Round6。",
+      "entity_ref": "round5.3d_closure_audit",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0128",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded",
+        "content": "Round 5.3D: 最终资金闭合复核（已完成，报告确认gap来源并同意进入Round6）"
+      },
+      "reason": "Round 5.3D执行完成，资金闭合问题已解释，任务结束。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0131",
+      "target": "n_0128",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0131",
+      "target": "n_0129",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0131",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

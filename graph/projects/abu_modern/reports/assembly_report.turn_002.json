@@ -1,0 +1,111 @@
+{
+  "kind": "assembly_report.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_002",
+  "result": "assembled",
+  "input_graph_turn_counter": 2,
+  "policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "priority_order": [
+      "must_include",
+      "should_include",
+      "optional",
+      "background"
+    ],
+    "backfill_order": "created_turn desc, node_id asc",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "overflow_rule": "never_drop_must_include"
+  },
+  "summary": {
+    "all_nodes": 21,
+    "active_nodes": 19,
+    "superseded_nodes": 2,
+    "excluded_due_to_state_nodes": 0,
+    "active_must_include_nodes": 1,
+    "selected_nodes": 12
+  },
+  "selected_node_ids": [
+    "n_0001",
+    "n_0017",
+    "n_0018",
+    "n_0019",
+    "n_0020",
+    "n_0021",
+    "n_0002",
+    "n_0003",
+    "n_0004",
+    "n_0005",
+    "n_0006",
+    "n_0007"
+  ],
+  "selected_by_priority": {
+    "must_include": [
+      "n_0001"
+    ],
+    "should_include": [
+      "n_0017",
+      "n_0018",
+      "n_0019",
+      "n_0020",
+      "n_0021",
+      "n_0002",
+      "n_0003",
+      "n_0004",
+      "n_0005",
+      "n_0006",
+      "n_0007"
+    ],
+    "optional": [],
+    "background": []
+  },
+  "excluded_due_to_status": [
+    {
+      "node_id": "n_0012",
+      "status": "superseded"
+    },
+    {
+      "node_id": "n_0014",
+      "status": "superseded"
+    }
+  ],
+  "excluded_due_to_state": [],
+  "excluded_due_to_budget": [
+    {
+      "node_id": "n_0008",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0010",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0013",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0015",
+      "priority": "should_include",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0009",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0011",
+      "priority": "optional",
+      "reason": "budget_exhausted"
+    },
+    {
+      "node_id": "n_0016",
+      "priority": "background",
+      "reason": "budget_exhausted"
+    }
+  ]
+}

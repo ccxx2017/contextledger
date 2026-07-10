@@ -1,0 +1,76 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_031",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0084",
+      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
+          "match_confidence": 0.9381,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0072"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+          "match_confidence": 0.7344,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0040"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/runtime/_frozen_ideas.md",
+          "match_confidence": 0.4545,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0011"
+          ]
+        }
+      ],
+      "match_confidence": 0.9381,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0085",
+      "raw_entity_ref": "TKT-2026-005B",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

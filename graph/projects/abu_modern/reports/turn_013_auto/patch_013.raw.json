@@ -1,0 +1,67 @@
+{
+  "task_id": "task_default",
+  "turn_id": 13,
+  "new_nodes": [
+    {
+      "node_id": "n_0057",
+      "type": "OpenTask",
+      "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0058",
+      "type": "Fact",
+      "content": "TKT-2026-004智能体实际在openclaw_skills/strategy_researcher/下创建了4个文件（SKILL.md, TOOLS.md, scripts/call_builder.py, scripts/call_backtest.py, scripts/kb_query.py）",
+      "entity_ref": "openclaw_skills/strategy_researcher",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0059",
+      "type": "OpenTask",
+      "content": "对TKT-2026-004进行独立核验（参考Claude给出的6步检查清单）",
+      "entity_ref": "TKT-2026-004",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0034",
+      "changes": {
+        "state": "in_progress"
+      },
+      "reason": "智能体已完成TKT-2026-004所有步骤，但需Boss独立核验后方可确认完成"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0057",
+      "target": "n_0025",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0058",
+      "target": "n_0057",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0058",
+      "target": "n_0034",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "refines"
+    }
+  ]
+}

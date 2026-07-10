@@ -1,0 +1,42 @@
+{
+  "task_id": "task_default",
+  "turn_id": 24,
+  "new_nodes": [
+    {
+      "node_id": "n_0078",
+      "type": "Fact",
+      "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+      "entity_ref": "skills/quant_assistant/TOOLS.md",
+      "state": null,
+      "priority": "must_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0076",
+      "changes": {
+        "content": "根TOOLS.md当前状态是最高危污染源：包含quant_assistant专属规则，需要剥离。本轮暴露根TOOLS.md内容后确认，其内容实质为quant_assistant技能的私有文件（包括后端地址、脚本路径、命令模板等），仅需在顶部增加一行定位说明即可完整迁移至skills/quant_assistant/TOOLS.md，具体剥离步骤已明确。"
+      },
+      "reason": "本轮用户暴露根TOOLS.md内容，Claude确认其本质为skill-private文件，细化污染源具体信息和剥离方案。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0078",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0076",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0075",
+      "relation": "derived_from"
+    }
+  ]
+}

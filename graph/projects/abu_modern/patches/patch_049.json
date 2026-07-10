@@ -1,0 +1,42 @@
+{
+  "task_id": "task_default",
+  "turn_id": 49,
+  "new_nodes": [
+    {
+      "node_id": "n_0111",
+      "type": "Decision",
+      "content": "Boss验收通过：TKT-2026-005B Round 4 受限 smoke 已完成，4项修正满足验收口径，不再违反Boss guardrail。同意记录最终状态。解除暂停。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
+      "priority": "should_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0110",
+      "changes": {
+        "content": "Round 4 受限恢复 smoke 完成（已通过Boss验收）：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。4项修正已全部完成：call_builder.py修改已记录、非2xx请求已说明、指标口径以KB准、train/test切分70/30。结果仅用于技术恢复验证，不构成完整策略研究结论。下一步需Boss授权后才可进入更大样本或正式研究。"
+      },
+      "reason": "本轮确认修正已完成，满足验收口径，内容更新为最终状态"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0098",
+      "reason": "Boss验收通过，原审核结论（不通过、暂停）不再适用，暂停已解除"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0111",
+      "target": "n_0110",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0111",
+      "target": "n_0098",
+      "relation": "invalidates"
+    }
+  ]
+}

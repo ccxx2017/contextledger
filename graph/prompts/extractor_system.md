@@ -24,12 +24,13 @@ new_nodes:
   "content": "节点内容",
   "entity_ref": "稳定实体标识，无则 null",
   "state": "open|blocked|in_progress|implemented|deployed|resolved|cancelled|unknown|null",
+  "priority": "must_include|should_include|optional|background"
 }
 ```
 
 updated_nodes:
 ```json
-{ "node_id": "n_0001", "changes": { "content": "...", "entity_ref": "...", "state": "...", "status": "active|superseded|resolved" }, "reason": "为什么更新" }
+{ "node_id": "n_0001", "changes": { "content": "...", "entity_ref": "...", "state": "...", "status": "active|superseded", "priority": "must_include|should_include|optional|background" }, "reason": "为什么更新" }
 ```
 
 superseded_nodes:
@@ -49,11 +50,18 @@ new_edges:
 - 类型约束：
   - `Decision.state` 只允许 `open|resolved|cancelled|unknown|null`
   - 决策“已经拍板”应写 `resolved`，不得写 `implemented` 或 `deployed`
+- 联动规则：
+  - 任何 `updated_nodes` 若表达“已解决/已确认/已完成/已决断/不再待办”，必须同步给出正确的状态转移，不能只改内容或只改 `state`
+  - 对 `OpenTask` 而言，若更新后 `state=resolved|cancelled`，通常必须同步把 `status` 设为 `superseded`，使其退出当前态集合
+- priority 规则：
+  - 本轮新增的关键 `Decision` / `OpenTask` 若无明确降级理由，默认标为 `should_include`
+  - 只有明显外围、背景性、可延后项，才可标为 `optional` 或 `background`
 - entity_ref 取值规则(按优先级):
   1. 文件/目录 → 仓库相对路径原文(如 aos/runtime/_frozen_ideas.md)
   2. 代码组件 / Agent / 脚本 → 全小写 snake_case slug(如 strategy_research_agent、duty_reporter),禁止空格和大写
   3. 工单/外部 ID → 仅当真实 ID 已存在时填写;未分配则填 null,禁止 XXX、TBD 等占位符
   4. 抽象目标/决策/阶段 → null
+- **强制要求**：若节点内容中出现可识别实体线索（ticket_id、file_path、api_path、模块名、脚本名、Agent/技能名等），必须为其设置 entity_ref；禁止以 null 逃避。Fact 节点描述具体 API 数据流或脚本清单时，必须锚定到对应技能/模块/文件路径。
 - 不得输出 state 之外的状态字段(如 status)。
 
 ## 四、Patch 总结构（顶层字段不可省略）
@@ -67,6 +75,8 @@ new_edges:
 新节点从系统给的 next_node_id 起递增；不复用、不臆造旧 ID；superseded_nodes 与边的 source/target 只能引用 Slice 中已有节点或本轮新节点。
 
 ## 六、生命周期判定（先对齐 Slice 中所有 active 节点，尤其 conflict_candidates，再决定动作）
+
+生成任何 `new_nodes` 之前，先回看 Slice 中现有的 `open` / `blocked` / `in_progress` 节点：如果本轮信息已经回答、推进或关闭了某个旧问题，必须优先输出对应 `updated_nodes`，不能只新增节点而漏掉旧节点更新。
 
 对每个候选信息只能选一种动作：
 
@@ -83,6 +93,7 @@ new_edges:
 
 必须捕获的互斥迁移（旧→新）：
 - open/blocked/in_progress/pending/todo → implemented/deployed/resolved（工单完成）
+- FileArtifact open/draft → deployed（文件/工件从草案状态推进到已创建/已部署），必须 supersede 同 entity_ref 的旧节点
 - “A 阻塞 B / B 依赖未完成的 A” → “A 已实现/部署/完成”（阻塞失效）
 - “接口返回格式待确认” → “返回格式已明确”（OpenTask 转 resolved 或 superseded）
 - “采用方案 A” → “改用 B / A 不可行”（方案替代）

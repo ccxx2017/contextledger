@@ -1,0 +1,50 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_007",
+  "summary": {
+    "new_nodes": 4,
+    "resolved_exact": 0,
+    "resolved_alias": 0,
+    "pending_merge": 0,
+    "unresolved": 4
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0043",
+      "raw_entity_ref": "agents/git_sync_protocol",
+      "resolved_entity_ref": "agents/git_sync_protocol",
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "no_candidate_found",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0044",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0045",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0046",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "project_id": "abu_modern",
+  "turn_id": "turn_025",
+  "generated_by": "graph/scripts/entity_resolver.py",
+  "items": [
+    {
+      "new_node_id": "n_0079",
+      "raw_entity_ref": "quant_assistant",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "skills/quant_assistant/TOOLS.md",
+          "match_confidence": 0.6522,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0078"
+          ]
+        }
+      ],
+      "match_confidence": 0.6522,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    },
+    {
+      "new_node_id": "n_0080",
+      "raw_entity_ref": "quant_assistant",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "skills/quant_assistant/TOOLS.md",
+          "match_confidence": 0.6522,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0078"
+          ]
+        }
+      ],
+      "match_confidence": 0.6522,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review"
+    }
+  ]
+}

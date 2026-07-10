@@ -1,0 +1,42 @@
+{
+  "task_id": "task_default",
+  "turn_id": 11,
+  "new_nodes": [
+    {
+      "node_id": "n_0053",
+      "type": "Fact",
+      "content": "后端默认地址已确认为 http://192.168.1.136:8000，可通过 QUANT_BACKEND_URL 环境变量覆盖",
+      "entity_ref": "quant_backend_url_default",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0052",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "用户已提供实际可达后端地址，任务完成"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0053",
+      "target": "n_0034",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0053",
+      "target": "n_0052",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0053",
+      "target": "n_0008",
+      "relation": "supports"
+    }
+  ]
+}

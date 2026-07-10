@@ -1,0 +1,39 @@
+{
+  "task_id": "task_default",
+  "turn_id": 14,
+  "new_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0034",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "TKT-2026-004 smoke pass，脚本实现完成并验证通过"
+    },
+    {
+      "node_id": "n_0059",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "独立核验完成，确认TKT-2026-004已通过所有检查"
+    },
+    {
+      "node_id": "n_0056",
+      "changes": {
+        "state": "deployed",
+        "status": "superseded"
+      },
+      "reason": "工单文件已更新worklog并推送，TKT-2026-004已完成"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0059",
+      "target": "n_0034",
+      "relation": "depends_on"
+    }
+  ]
+}

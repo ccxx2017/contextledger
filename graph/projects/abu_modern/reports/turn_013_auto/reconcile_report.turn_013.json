@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 56,
+    "active_graph_nodes": 48,
+    "new_nodes": 3,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "new_node_id": "n_0057",
+      "old_node_id": "n_0025",
+      "new_state": "open",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-004",
+      "new_node_id": "n_0059",
+      "old_node_id": "n_0034",
+      "new_state": "open",
+      "old_state": "open"
+    }
+  ],
+  "weak_matches": []
+}

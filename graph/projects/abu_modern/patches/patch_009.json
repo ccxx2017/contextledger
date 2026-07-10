@@ -1,0 +1,51 @@
+{
+  "task_id": "task_default",
+  "turn_id": 9,
+  "new_nodes": [
+    {
+      "node_id": "n_0048",
+      "type": "Fact",
+      "content": "知识库只读API endpoints真实返回类型：read_index()返回str（index.md原文），read_log()返回str（log.md原文），read_strategy_archive(id)返回{strategy_id, content:str, file_path}，list_strategy_archives()返回list[{strategy_id, content:str, file_path}]——知识库对外暴露的是markdown文本，不是结构化JSON",
+      "entity_ref": "backend/app/api/endpoints/knowledge.py",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0049",
+      "type": "OpenTask",
+      "content": "确认/backtests/execution-config的返回形态，以确定call_backtest.py的返回格式",
+      "entity_ref": "/backtests/execution-config",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0033",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "should_include"
+      },
+      "reason": "TKT-2026-003 知识库只读API已交付，真实返回类型为markdown-native，与初版spec不同，已记录"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0048",
+      "target": "n_0033",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0049",
+      "target": "n_0034",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0049",
+      "target": "n_0033",
+      "relation": "depends_on"
+    }
+  ]
+}

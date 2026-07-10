@@ -1,0 +1,142 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_083",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_083_auto/graph_state.after_turn_083.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0078",
+      "n_0102",
+      "n_0121",
+      "n_0132",
+      "n_0140"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0073",
+        "type": "OpenTask",
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+        "priority": "must_include",
+        "entity_ref": "workspace_root_bootstrap_audit"
+      },
+      {
+        "node_id": "n_0078",
+        "type": "Fact",
+        "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
+        "priority": "must_include",
+        "entity_ref": "skills/quant_assistant/TOOLS.md"
+      },
+      {
+        "node_id": "n_0102",
+        "type": "Decision",
+        "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
+        "priority": "must_include",
+        "entity_ref": "aos/services/backtest-api"
+      },
+      {
+        "node_id": "n_0121",
+        "type": "Decision",
+        "content": "TKT-2026-005I正式验收通过，结论live_verified_passed。新archive ir_86a1843218b0已包含档案元数据JSON和sanity_check_failed状态。",
+        "priority": "must_include",
+        "entity_ref": "TKT-2026-005I"
+      },
+      {
+        "node_id": "n_0132",
+        "type": "Decision",
+        "content": "Boss裁决：Round 5.3D未通过，暂不允许进入Round 6。原因：cash ledger不闭合（expected_cash=965,323, actual_cash=779,731, gap=-185,592），gap不能解释为MTM。要求执行Round 5.3E三账一致性复核。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0140",
+        "type": "Decision",
+        "content": "Round5.4A账本产物生成链修复通过审计，条件性通过（API canonical推导一致性复核通过，但磁盘指纹审计未满分闭环）。同意作为进入Round5.4B的依据。继续禁止进入Round6。",
+        "priority": "must_include"
+      }
+    ],
+    "should_include": [],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0073",
+      "n_0102",
+      "n_0121",
+      "n_0132",
+      "n_0140"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 119,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

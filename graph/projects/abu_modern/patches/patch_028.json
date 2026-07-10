@@ -1,0 +1,46 @@
+{
+  "task_id": "task_default",
+  "turn_id": 28,
+  "new_nodes": [
+    {
+      "node_id": "n_0081",
+      "type": "FileArtifact",
+      "content": "IDENTITY.md v2: 重写为运行时身份文件，移除拟人化，强调按技能/工单确定角色，行为优先级明确，风格简洁。",
+      "entity_ref": "IDENTITY.md",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0082",
+      "type": "FileArtifact",
+      "content": "AGENTS.md v2: 重写为工作区运行时规则，移除默认记忆/心跳/外部检查，强调技能路由优先，严格文件写入与工具使用边界。",
+      "entity_ref": "AGENTS.md",
+      "state": "open",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0081",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0082",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0081",
+      "target": "n_0073",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0082",
+      "target": "n_0073",
+      "relation": "implements"
+    }
+  ]
+}

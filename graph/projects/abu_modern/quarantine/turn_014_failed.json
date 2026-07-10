@@ -1,0 +1,6 @@
+{
+  "turn_id": "turn_014",
+  "stage": "apply_patch",
+  "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+  "quarantine_patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_014_failed_patch.json"
+}

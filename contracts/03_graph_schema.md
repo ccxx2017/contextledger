@@ -49,6 +49,7 @@
 - `state` 只用于同一 entity_ref 下的领域状态比较(如 open → resolved / blocked → deployed)
 - 被 supersede 的节点必须表现为: `status=superseded`
 - 一个节点即便 `priority=must_include`,只要 `status!=active`,也必须退出当前态集合
+- 对 patch 的 `updated_nodes`：若更新表达了“已解决 / 已确认 / 已完成 / 已决断 / 不再待办”的语义，必须同步给出足以退出当前态集合的状态转移；不得只改内容或只改 `state` 而遗漏 `status`
 
 ## state 互斥矩阵(按 node type)
 
@@ -60,6 +61,7 @@
     resolved/cancelled → 重新激活        → supersedes(reopen/复活,保留痕迹)
   说明:不为 OpenTask 设"并存"情形;blocked 视为独占状态而非 in_progress 的子态。
        "内容显示已完成但 state≠resolved" 属 lint 检查,不在此处。
+       若 OpenTask 经 `updated_nodes` 进入 `resolved/cancelled`,必须同步令该节点退出当前态集合(通常 `status=superseded`)。
 
 ### Constraint —— 在force/不在force,state 恒为 null
   同 entity_ref 出现新的 active 约束 → 旧约束 invalidates(旧约束不再成立=变假)
@@ -88,7 +90,9 @@
 
 ### UserGoal / ToolResult / FileArtifact
   UserGoal:通常 entity_ref=null,目标变更走 supersedes;一般不参与机械强判定。
-  ToolResult/FileArtifact:state 多为 null;同 entity_ref 新版本 → supersedes 旧版本。
+  ToolResult:state 多为 null;同 entity_ref 新版本 → supersedes 旧版本。
+  FileArtifact:`state=open` 表示计划/草案阶段,不代表文件已在仓库中物理存在;在转为 `resolved` 前不做机械存在性校验。
+  FileArtifact:同 entity_ref 新版本 → supersedes 旧版本。
 
 ## 手工期备注
 - 本矩阵只覆盖当前真实会遇到的情形,遇到未覆盖的 state 对,当场补一行并记一次判定日志。

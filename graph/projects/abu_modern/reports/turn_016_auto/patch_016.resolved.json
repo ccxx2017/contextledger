@@ -1,0 +1,80 @@
+{
+  "task_id": "task_default",
+  "turn_id": 16,
+  "new_nodes": [
+    {
+      "node_id": "n_0061",
+      "type": "Fact",
+      "content": "OpenClaw智能体context包由SKILL加载器组装，只自动加载SKILL.md进system prompt；其他文件（Charter, TOOLS.md, prompts/等）默认不进入context，需要SKILL.md显式指令读取。SKILL.md是纸面制度与运行时行为的唯一接口。",
+      "entity_ref": "openclaw_agent_runtime_mechanisms",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0062",
+      "type": "Fact",
+      "content": "智能体身份由OpenClaw workspace配置决定，而非通过阅读Charter等文件；workspace名称和SKILL.md首段身份声明共同决定。",
+      "entity_ref": "openclaw_identity_mechanism",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0063",
+      "type": "Fact",
+      "content": "Charter文件默认不被智能体知晓，其约束需要通过SKILL.md摘抄或显式读取才能落地。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0064",
+      "type": "Fact",
+      "content": "当前SKILL.md可能未包含显式读取research_workflow.md等prompts文件的指令，存在prompts内容被闲置的风险。",
+      "entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0065",
+      "type": "OpenTask",
+      "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "must_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0061",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0062",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0063",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0064",
+      "target": "n_0008",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0065",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0065",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

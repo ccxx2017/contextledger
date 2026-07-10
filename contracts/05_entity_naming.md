@@ -94,3 +94,21 @@ Phase 1-prep 的最小 resolver 可以保守，但每个新节点必须输出以
 - `entity_ref` 只标“是哪个实体”，不标“实体处于什么状态”；状态归 `state`
 - 同一实体在一个项目内只能有一个 canonical ref；跨项目不共享
 - 一旦某 ref 已被图引用，不直接改名；如需切换规范名，应通过 resolver 规范化新写入，并保留别名登记
+
+## 7. pending_merge 消化纪律
+
+- `pending_merge/` 的目的是“保守不合并”，不是“无限期搁置”
+- 每条 pending_merge 进入队列后，必须在项目侧登记为一条可追踪条目（建议：`graph/projects/<project_id>/pending_merge/pending_merge_register.json`）
+- 登记条目最小字段建议：
+  - `raw_entity_ref`
+  - `canonical_entity_ref`（候选 canonical）
+  - `match_confidence` / `evidence`
+  - `requires_evidence`
+  - `blocked_turn`
+  - `escalate_after_turns` / `escalate_on_or_after_turn`
+  - `remediation_status`：`tracked|resolved|cancelled`
+  - `resolution`：`alias|supersede|coexist`（消化后的机械化去向）
+
+## 8. abu_modern 已登记别名（可被 resolver 读取）
+
+docs/aos/org/agents/agent-strategy-researcher.md <- aos/org/agents/agent-strategy-researcher.md | turn_005

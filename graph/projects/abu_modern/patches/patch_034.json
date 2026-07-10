@@ -1,0 +1,41 @@
+{
+  "task_id": "task_default",
+  "turn_id": 34,
+  "new_nodes": [
+    {
+      "node_id": "n_0091",
+      "type": "Decision",
+      "content": "对后端回测系统脆弱性问题，采取先限制后改造的应对策略：第1天agent/脚本侧加硬限制（max_symbols≤20, max_years≤3, 超时≤90s, 非响应paused_for_boss_review），第1-2周后端做请求级超时、回测异步化、取消接口、并发隔离，第3周起可放开限制。两个都要做，但顺序重要。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0088",
+      "changes": {
+        "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。"
+      },
+      "reason": "明确决策为先限制后改造，扩充分阶段详细计划"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0091",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0091",
+      "target": "n_0088",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0091",
+      "target": "n_0089",
+      "relation": "derived_from"
+    }
+  ]
+}

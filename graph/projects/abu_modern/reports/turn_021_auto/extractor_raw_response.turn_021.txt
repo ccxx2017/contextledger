@@ -1,0 +1,55 @@
+{
+  "task_id": "task_default",
+  "turn_id": 21,
+  "new_nodes": [
+    {
+      "node_id": "n_0074",
+      "type": "Fact",
+      "content": "GPT5.4对Opus4.7方案评价：大方向正确，但表述过满；短期可采纳作为临时补丁，长期需上多agent架构；优先级：最高修根TOOLS.md，次高IDENTITY.md和AGENTS.md，最低SOUL.md；建议分两层：临时层精简bootstrap，正式层推进agents.list+bindings+skills allowlist。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0061",
+      "changes": {
+        "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码确认：src/agents/bootstrap-files.ts会加载workspace bootstrap files；src/config/types.agent-defaults.ts中bootstrap文件被injected into system prompt；src/agents/system-prompt.ts先扫描<available_skills>，再决定读取SKILL.md。",
+        "entity_ref": "openclaw_agent_runtime_mechanisms"
+      },
+      "reason": "补充具体代码路径和测试确认，使机制描述更精确"
+    },
+    {
+      "node_id": "n_0066",
+      "changes": {
+        "content": "当前OpenClaw配置未定义agents.list，所有消息路由到默认agent，agent ID始终为default。源代码src/routing/resolve-route.ts在无配置时返回'default'，测试src/routing/resolve-route.test.ts验证no bindings时默认是main/default。",
+        "entity_ref": "openclaw_agent_routing_default"
+      },
+      "reason": "补充代码路径和测试验证，确认路由行为"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0074",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0065",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0067",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0074",
+      "target": "n_0068",
+      "relation": "supports"
+    }
+  ]
+}

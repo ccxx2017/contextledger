@@ -1,0 +1,54 @@
+{
+  "kind": "close_candidates.phase1_gate.v1",
+  "graph_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "patch_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_035_auto\\patch_035.raw.json",
+  "threshold": {
+    "min_score": 3,
+    "max_candidates": 30
+  },
+  "stats": {
+    "graph_turn_counter": 34,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 1,
+    "candidates_found": 2,
+    "score_histogram": {
+      "11": 1,
+      "6": 1
+    }
+  },
+  "candidates": [
+    {
+      "node_id": "n_0035",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005: 试运行工单1",
+      "score": 11,
+      "matched_terms": [
+        "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0088",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005C",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
+      "score": 6,
+      "matched_terms": [
+        "90s",
+        "call_backtest.py",
+        "max_symbols",
+        "max_years",
+        "paused_for_boss_review",
+        "tkt-2026-005",
+        "次即"
+      ]
+    }
+  ]
+}
