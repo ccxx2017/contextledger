@@ -201,6 +201,7 @@ def main() -> int:
     parser.add_argument("--max-retry", type=int, default=MAX_RECONCILE_RETRIES, help="reconcile 失败后 extractor 重试次数")
     parser.add_argument("--max-nodes", type=int, default=12, help="bundle 预算")
     parser.add_argument("--budget-profile", default="phase1_prep_baseline", help="bundle budget profile")
+    parser.add_argument("--warnings-non-blocking", action="store_true", help="lint warning 不阻塞提交")
     args = parser.parse_args()
 
     project_id = args.project_id
@@ -559,7 +560,10 @@ def main() -> int:
         )
         baseline_green = (
             health["stages"]["diff_lint_reports"]["introduced_errors"] == 0
-            and health["stages"]["diff_lint_reports"]["introduced_warnings"] == 0
+            and (
+                args.warnings_non_blocking
+                or health["stages"]["diff_lint_reports"]["introduced_warnings"] == 0
+            )
         )
         queue_green = overdue_items == 0
         assembly_green = (
