@@ -13,8 +13,8 @@ run_auto_turn.py
 流程：
     build_graph_slice -> build_extractor_prompt -> invoke_extractor
     -> detect_close_candidates -> entity_resolver -> reconcile_patch
-    -> [失败则自动重试 extractor，最多 2 次] -> apply_patch -> graph_lint
-    -> diff_lint_reports -> build_context_bundle -> check_pending_merge_register
+    -> [失败则自动重试 extractor，最多 3 次] -> apply_patch -> graph_lint
+    -> diff_lint_reports -> build_context_bundle -> pending_merge 登记/检查
     -> turn_health_report.json
 
 如果 reconcile 最终仍失败，本轮 patch 被隔离到 quarantine/，不污染主图。
@@ -37,7 +37,7 @@ CONTRACTS_DIR = PROJECT_ROOT / "contracts"
 
 DEFAULT_SYSTEM_PROMPT = GRAPH_DIR / "prompts" / "extractor_system.md"
 ALIAS_CONTRACT = CONTRACTS_DIR / "05_entity_naming.md"
-MAX_RECONCILE_RETRIES = 2
+MAX_RECONCILE_RETRIES = 3
 
 
 def run(
@@ -79,6 +79,72 @@ def parse_turn_number(turn_id: str) -> int:
     if text.startswith("turn_"):
         text = text.split("_", 1)[1]
     return int(text)
+
+
+def read_graph_turn_counter(graph_state_path: Path) -> int:
+    graph_state = load_json(graph_state_path)
+    if not isinstance(graph_state, dict):
+        raise ValueError(f"主图不是 JSON object: {graph_state_path}")
+    try:
+        return int(graph_state["turn_counter"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"主图缺少合法 turn_counter: {graph_state_path}") from exc
+
+
+def audit_committed_history(
+    *,
+    project_dir: Path,
+    raw_session_dir: Path,
+    committed_turn: int,
+) -> dict[str, Any]:
+    """检查已宣称提交的每一轮是否都有 raw、patch 与图快照。"""
+    missing_raw: list[str] = []
+    missing_patches: list[str] = []
+    missing_snapshots: list[str] = []
+    for turn in range(1, committed_turn + 1):
+        turn_id = f"turn_{turn:03d}"
+        if not (raw_session_dir / f"{turn_id}.md").exists():
+            missing_raw.append(turn_id)
+        if not (project_dir / "patches" / f"patch_{turn:03d}.json").exists():
+            missing_patches.append(turn_id)
+        if not (project_dir / "run" / f"graph_state.{turn_id}.json").exists():
+            missing_snapshots.append(turn_id)
+    return {
+        "committed_turn": committed_turn,
+        "missing_raw": missing_raw,
+        "missing_patches": missing_patches,
+        "missing_snapshots": missing_snapshots,
+        "ok": not (missing_raw or missing_patches or missing_snapshots),
+    }
+
+
+def write_start_block_report(
+    *,
+    project_dir: Path,
+    project_id: str,
+    turn_id: str,
+    stage: str,
+    reason: str,
+    continuity: dict[str, Any],
+) -> None:
+    work_dir = project_dir / "reports" / f"{turn_id}_auto"
+    work_dir.mkdir(parents=True, exist_ok=True)
+    write_json(
+        work_dir / "turn_health_report.json",
+        {
+            "turn_id": turn_id,
+            "project_id": project_id,
+            "stages": {stage: {"status": "BLOCKED", "continuity": continuity}},
+            "summary": {"status": "BLOCKED", "stage": stage, "reason": reason},
+            "committed": {"committed": False, "reason": reason},
+            "lights": {
+                "critical_status": "RED",
+                "lint_baseline": "RED",
+                "queue_health": "RED",
+                "assembly_integrity": "RED",
+            },
+        },
+    )
 
 
 def ensure_dirs(project_dir: Path, turn_id: str) -> Path:
@@ -156,12 +222,46 @@ def main() -> int:
     else:
         before_graph_path = graph_state_path
 
-    raw_turn_path = (
-        PROJECT_ROOT / args.raw_dir / project_id / args.session / f"{turn_id}.md"
-    )
+    raw_session_dir = PROJECT_ROOT / args.raw_dir / project_id / args.session
+    raw_turn_path = raw_session_dir / f"{turn_id}.md"
     if not raw_turn_path.exists():
         print(f"FATAL: raw 文件不存在: {raw_turn_path}", file=sys.stderr)
         return 1
+
+    committed_turn = read_graph_turn_counter(graph_state_path)
+    continuity = audit_committed_history(
+        project_dir=project_dir,
+        raw_session_dir=raw_session_dir,
+        committed_turn=committed_turn,
+    )
+    expected_turn = committed_turn + 1
+    if turn_num != expected_turn:
+        reason = (
+            f"轮次不连续：主图已提交到 turn_{committed_turn:03d}，"
+            f"本次只能执行 turn_{expected_turn:03d}，不能直接执行 {turn_id}。"
+        )
+        write_start_block_report(
+            project_dir=project_dir,
+            project_id=project_id,
+            turn_id=turn_id,
+            stage="turn_sequence_guard",
+            reason=reason,
+            continuity=continuity,
+        )
+        print(f"BLOCKED: {reason}", file=sys.stderr)
+        return 2
+    if not continuity["ok"]:
+        reason = "已提交轮次缺少 raw、patch 或图快照；修复或裁定历史链后才能开始下一轮。"
+        write_start_block_report(
+            project_dir=project_dir,
+            project_id=project_id,
+            turn_id=turn_id,
+            stage="committed_history_audit",
+            reason=reason,
+            continuity=continuity,
+        )
+        print(f"BLOCKED: {reason}", file=sys.stderr)
+        return 2
 
     work_dir = ensure_dirs(project_dir, turn_id)
 
@@ -173,14 +273,18 @@ def main() -> int:
     close_candidates_path = work_dir / f"close_candidates.{turn_id}.json"
     resolved_patch_path = work_dir / f"patch_{turn_num:03d}.resolved.json"
     entity_resolution_report_path = work_dir / f"entity_resolution.{turn_id}.json"
-    pending_merge_turn_path = project_dir / "pending_merge" / f"pending_merge.{turn_id}.json"
+    pending_merge_turn_path = work_dir / f"pending_merge.{turn_id}.json"
+    published_pending_merge_path = project_dir / "pending_merge" / f"pending_merge.{turn_id}.json"
     reconcile_report_path = work_dir / f"reconcile_report.{turn_id}.json"
     after_graph_path = work_dir / f"graph_state.after_{turn_id}.json"
     lint_report_path = work_dir / f"lint_report.{turn_id}.json"
     lint_delta_path = work_dir / f"lint_delta.{turn_id}.json"
     pending_merge_overdue_path = work_dir / f"pending_merge_overdue.{turn_id}.json"
-    bundle_path = project_dir / "reports" / f"context_bundle.{turn_id}.json"
-    assembly_report_path = project_dir / "reports" / f"assembly_report.{turn_id}.json"
+    bundle_path = work_dir / f"context_bundle.{turn_id}.json"
+    assembly_report_path = work_dir / f"assembly_report.{turn_id}.json"
+    published_bundle_path = project_dir / "reports" / f"context_bundle.{turn_id}.json"
+    published_assembly_report_path = project_dir / "reports" / f"assembly_report.{turn_id}.json"
+    pending_merge_sync_report_path = work_dir / f"pending_merge_register_sync.{turn_id}.json"
     health_report_path = work_dir / "turn_health_report.json"
 
     health: dict[str, Any] = {
@@ -286,6 +390,7 @@ def main() -> int:
                 retry_response = work_dir / f"extractor_raw_response.{turn_id}.retry_{attempt}.txt"
                 run([
                     "graph/scripts/invoke_extractor.py",
+                    "--system", str(DEFAULT_SYSTEM_PROMPT),
                     "--slice", str(slice_path),
                     "--turn", str(raw_turn_path),
                     "--project-id", project_id,
@@ -394,12 +499,15 @@ def main() -> int:
         # 9. build_context_bundle
         current_stage = "build_context_bundle"
         print(f"[{turn_id}] 9/9 build_context_bundle ...")
+        l1_must_count = 0
         try:
             run([
                 "graph/scripts/build_context_bundle.py",
                 "--graph", str(after_graph_path),
                 "--project-id", project_id,
                 "--turn-id", turn_id,
+                "--out", str(bundle_path),
+                "--report-out", str(assembly_report_path),
                 "--max-nodes", str(args.max_nodes),
                 "--budget-profile", args.budget_profile,
                 "--newer-than", str(current_patch),
@@ -466,22 +574,49 @@ def main() -> int:
             "assembly_integrity": "GREEN" if assembly_green else "RED",
         }
 
-        # 如果全绿且非 dry-run，提交主图
+        # 只有所有机械闸门通过，才允许把 scratch 产物发布为项目权威产物。
         all_green = all(v == "GREEN" for v in health["lights"].values())
         if all_green and not args.dry_run:
+            current_stage = "sync_pending_merge_register"
+            print(f"[{turn_id}] syncing pending_merge register ...")
+            run([
+                "graph/scripts/sync_pending_merge_register.py",
+                "--pending-merge", str(pending_merge_turn_path),
+                "--register", str(project_dir / "pending_merge" / "pending_merge_register.json"),
+                "--current-turn", str(turn_num),
+                "--report-out", str(pending_merge_sync_report_path),
+            ])
+            health["stages"]["sync_pending_merge_register"] = {
+                "status": "OK",
+                "report": str(pending_merge_sync_report_path),
+            }
+
             print(f"[{turn_id}] all green, committing to main graph ...")
             shutil.copy2(after_graph_path, graph_state_path)
             shutil.copy2(after_graph_path, project_dir / "run" / f"graph_state.turn_{turn_num:03d}.json")
             shutil.copy2(current_patch, project_dir / "patches" / f"patch_{turn_num:03d}.json")
+            shutil.copy2(pending_merge_turn_path, published_pending_merge_path)
+            shutil.copy2(bundle_path, published_bundle_path)
+            shutil.copy2(assembly_report_path, published_assembly_report_path)
             health["committed"] = {
                 "graph_state": str(graph_state_path),
                 "run_snapshot": str(project_dir / "run" / f"graph_state.turn_{turn_num:03d}.json"),
                 "patch": str(project_dir / "patches" / f"patch_{turn_num:03d}.json"),
+                "pending_merge": str(published_pending_merge_path),
+                "bundle": str(published_bundle_path),
+                "assembly_report": str(published_assembly_report_path),
             }
         elif args.dry_run:
             health["committed"] = {"dry_run": True}
         else:
-            health["committed"] = {"committed": False, "reason": "not all lights green"}
+            failed_lights = [name for name, value in health["lights"].items() if value != "GREEN"]
+            reason = f"提交闸门未通过: {', '.join(failed_lights)}"
+            health["summary"] = {
+                "status": "BLOCKED",
+                "stage": "precommit_gates",
+                "reason": reason,
+            }
+            health["committed"] = {"committed": False, "reason": reason}
 
         write_json(health_report_path, health)
         print(f"[{turn_id}] DONE. health: {health['lights']}")

@@ -48,7 +48,6 @@ def main() -> int:
     register_path = Path(args.register)
     if not register_path.exists():
         register = {"kind": "pending_merge_register.v1", "items": []}
-        write_json(register_path, register)
     else:
         register = load_json(register_path)
     items = register.get("items") or []
@@ -91,4 +90,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

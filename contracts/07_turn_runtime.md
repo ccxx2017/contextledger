@@ -8,20 +8,20 @@
 - 校准期 `human_edits` 记录与毕业条件
 - 正式流水线的时序前置校验
 
-## 1. 主项目 checkpoint
+## 1. 主项目 checkpoint 与线性提交
 
-针对 `abu_modern` 当前状态：
-- `graph/projects/abu_modern/graph_state.json` 的 `turn_counter = 3`
-- `raw/projects/abu_modern/s001/` 下已有 `turn_001.md` 到 `turn_006.md`
-- `graph/projects/abu_modern/run/` 已保存到 `graph_state.turn_003.json`
+每次启动前必须以当前文件状态机械判定 checkpoint，不在契约中固化某个项目的轮次数字：
 
-结论：
-- Phase 1 首个正式 turn 应从 `turn_004` 开始
+- 读取 `graph/projects/<project_id>/graph_state.json` 的 `turn_counter = N`
+- 本次唯一允许执行 `turn_(N+1)`；不得跳过未提交的 raw 轮次
+- 对 `turn_001..turn_N`，必须逐轮同时存在 raw、`patches/patch_NNN.json` 与 `run/graph_state.turn_NNN.json`
+
+若上述任一条件不满足，运行器必须写出 `turn_health_report.json`，标记 `status=BLOCKED`，并停止在 Extractor 之前。修复历史产物、重放该轮，或由人工完成明确裁定前，不得开始下一轮。
 
 理由：
-1. `turn_counter=3` 说明主图当前权威态只覆盖到第 3 轮
-2. 直接从 `turn_007` 开始会跳过 `turn_004~006`，破坏 raw 到 graph 的线性提交序
-3. 当前主图并非空图，因此不需要回到 cold-start replay；只需从已确认 checkpoint 顺延
+1. `turn_counter` 只代表已提交权威图的末轮，不得被当作“原始对话已被覆盖”的证明
+2. 未通过 lint、assembly 或 queue 闸门的轮次即使没有污染主图，也不能被后续 raw 静默跨越
+3. 只有完整的 raw → patch → snapshot 链才能支持可重放和事后审计
 
 ## 2. reconcile retry 上限
 
@@ -215,6 +215,12 @@ dry-run 目标：
   - `escalate_after_turns` / `escalate_on_or_after_turn`：超期升级阈值
 - 超期策略：
   - 若达到 `escalate_on_or_after_turn` 且仍未消化，必须升级为硬阻塞（退出本轮提交或阻止进入下一轮）
+
+运行器约定：
+- resolver 的 `pending_merge.turn_NNN.json` 先作为本轮 scratch 产物生成
+- 仅当本轮所有提交闸门均通过时，运行器才发布该文件，并调用 `sync_pending_merge_register.py` 将其写入 register
+- 同步写入的 tracked 条目必须带稳定 `register_key`、`source_turn`、`blocked_turn` 与升级阈值；重跑同一轮时刷新同一条目，不得制造重复队列项
+- dry-run 与未提交轮不得修改项目级 register，也不得把 scratch pending 文件伪装成已提交的队列事实
 
 消化去向必须落盘：
 - digest 成 `alias`：更新 `contracts/05_entity_naming.md` 的别名映射表，使 resolver 下次可自动规范化
