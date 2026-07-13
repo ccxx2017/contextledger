@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-07-13T10:38:39.832603+00:00",
+  "generated_at_utc": "2026-07-13T10:38:39Z",
+  "project_id": "abu_modern",
+  "manifest_generation": {
+    "script_path": "graph/scripts/generate_state_manifest.py",
+    "script_sha256": "12f2b38d401f4b58619d05afc1093ccf1f1f00268eabcdc85c1b3f808a9de655",
+    "invocation_cwd": "D:\\CCXXLESSON\\contextledger",
+    "invocation_argv": [
+      "graph/scripts/generate_state_manifest.py"
+    ]
+  },
+  "git": {
+    "branch": "phase1-lifecycle-stage02",
+    "commit": "890219b2e2fab2a4aecbdf4f6c070d2e20b2d044",
+    "base_commit_on_main": "890219b2e2fab2a4aecbdf4f6c070d2e20b2d044",
+    "working_tree_clean_at_generation": false,
+    "status_short_at_generation": "M contracts/05_phase1_lifecycle_schema.md\n M pack/projects/contextLedger/context_ledger_design_and_impliment_stage02_compact.md\n M raw/projects/contextLedger/context_ledger_design_and_impliment_stage02.md\n?? graph/scripts/generate_state_manifest.py\n?? reports/current_graph_lint_report.json\n?? reports/current_state_manifest.json"
+  },
+  "schema": {
+    "current_contract": "contracts/03_graph_schema.md",
+    "current_contract_status": "PROVISIONAL",
+    "lifecycle_rfc": "contracts/05_phase1_lifecycle_schema.md",
+    "lifecycle_rfc_status": "RFC Draft",
+    "compatibility_mode": "legacy_entity_ref_fallback"
+  },
+  "runtime_components": {
+    "scripts_dir_sha256": "e5bf64cd56c139f8862ad4486ca4fbda695b66fdf93d5dd5efec4ddfab2ed5d7",
+    "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
+    "contracts_dir_sha256": "be412187e9ca26f684c89bf5932f97dd3c800bd4faf9d74576520320e19cac9f",
+    "key_files": {
+      "contracts/03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "contracts/05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
+      "contracts/06_extractor_runtime.md": "a9b3b4df951e49a20d6abe55af86fa188446ea94a8dbc86e2525015cbe1e0ff0",
+      "contracts/07_turn_runtime.md": "61e49c5f98ddc2849c9d4dd23fa7f1098ebbe3c36bfc89ebe2a44b4738e2d1e8",
+      "graph/scripts/entity_resolver.py": "652cbe8d715795e2512985bddc0cf5ec8e845c84a8687abac01a18f747d2b6a2",
+      "graph/scripts/reconcile_patch.py": "d721394f3de31c84914d21f0050c6c3fe79488d40648d08c39f49e1eb70f6aba",
+      "graph/scripts/apply_patch.py": "6b16436c311b4c85731162d0381ec5b62490e91030fb06134bcc51603199a359",
+      "graph/scripts/graph_lint.py": "4f94d8904dd4cf1a3a06dfcf78b796f0316be8975ac9f554076dce96b4b44499",
+      "graph/prompts/extractor_system.md": "8b60483a8d0605c3d28c4e106412c4cf9aef7bb3cbaf8a8dd0f7cafacc735fa5"
+    }
+  },
+  "graph_state": {
+    "path": "graph/projects/abu_modern/graph_state.json",
+    "sha256": "b8ac9dafc4b9ea103c4b2092fe257417f53a0f2c815452dd28bdadeb7bce3c88",
+    "latest_applied_turn": 84,
+    "turn_counter": 84,
+    "node_count": 204,
+    "edge_count": 340,
+    "status_distribution": {
+      "__missing__": 140,
+      "superseded": 61,
+      "active": 3
+    },
+    "state_distribution": {
+      "null": 104,
+      "open": 20,
+      "in_progress": 2,
+      "resolved": 66,
+      "deployed": 8,
+      "blocked": 1,
+      "cancelled": 1,
+      "implemented": 2
+    },
+    "quarantine_count_in_graph_state": 0
+  },
+  "quarantine": {
+    "total_files": 6,
+    "reason_distribution": {
+      "apply_patch 阶段脚本异常退出 (code=1)": 5,
+      "invoke_extractor 阶段脚本异常退出 (code=1)": 1
+    },
+    "latest_quarantined_turn": 51
+  },
+  "latest_turn_health": {
+    "path": "graph/projects/abu_modern/reports/turn_084_auto/turn_health_report.json",
+    "note": "exists if turn_084_auto report was materialized; otherwise null",
+    "graph_lint": null
+  },
+  "benchmark": {
+    "current_version": "phase05_v3",
+    "score_report_path": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_score_report.json",
+    "score_report_sha256": "2487739105da14c71207875140410f6eeb2dca3f55df0055ef73e866f5401c98",
+    "vs_flat_rag_report_path": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_v3_vs_flat_rag.md",
+    "vs_flat_rag_report_sha256": "a4988a11c2f8966baa77005e213a5243edb2c463d65eac60e154cd61476e561c",
+    "dir_sha256": "a9e4a4ebb2ce31c37ad97fb2baf61e23a3c430113ae8e10849454801f4e5bd79",
+    "current_metrics": {
+      "invalidation_precision": 0.6086956521739131,
+      "invalidation_recall": 0.7368421052631579,
+      "active_set_set_f1": 0.8979591836734694,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d1_metrics": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8213799805636537,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d2_metrics": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "valid_time_adjudication_accuracy": 0.0
+    }
+  },
+  "lint_baseline": {
+    "report_path": "reports/current_graph_lint_report.json",
+    "report_sha256": "0d4da07cccfc94d798ec33a971f02222cbe28588929e600000cb1a45e7c6a872",
+    "exists": true,
+    "nodes": 204,
+    "edges": 340,
+    "active_nodes": 143,
+    "active_edges": 340,
+    "superseded_nodes": 61,
+    "errors": 5,
+    "warnings": 1
+  },
+  "stage02_baseline_conclusions": {
+    "p4_harness_missing_resolver": "confirmed and already fixed in phase05_v3 benchmark harness",
+    "resolver_net_gain_vs_d2": "positive",
+    "must_include_redline": "fixed to 1.0 under phase05_v3",
+    "high_confidence_round5_candidates": "resolved before Stage02 branch start"
+  },
+  "notes": [
+    "this manifest is the authoritative machine-readable baseline for Stage02 experiments on branch phase1_lifecycle_stage02",
+    "all graph_state counts and hashes are measured from the file at manifest generation time, not historical narrative",
+    "future Stage02 experiments should cite this manifest instead of historical narrative documents"
+  ]
+}
