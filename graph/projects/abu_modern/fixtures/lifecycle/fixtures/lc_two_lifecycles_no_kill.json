@@ -1,0 +1,60 @@
+{
+  "fixture_id": "lc_two_lifecycles_no_kill",
+  "category": "lifecycle_identity",
+  "description": "Two distinct lifecycles for the same entity must not be auto-merged or auto-invalidated.",
+  "rationale": "lifecycle_ref separates deployment and support-ticket histories for the same entity_ref.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#lifecycle-identity-invariant",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_001",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "deploy_pipeline",
+        "payload": {
+          "entity_ref": "svc_abu_payment",
+          "lifecycle_ref": "lc_deploy_prod_2026_07",
+          "lifecycle_seq": 1,
+          "adjudication_key": "deploy:svc_abu_payment:2026-07",
+          "node_type": "Fact",
+          "content": "Payment service deployed to prod.",
+          "state": "deployed",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_002",
+        "observed_at": "2026-07-02T11:00:00Z",
+        "effective_at": "2026-07-02T11:00:00Z",
+        "source": "ticketing",
+        "payload": {
+          "entity_ref": "svc_abu_payment",
+          "lifecycle_ref": "lc_ticket_005b",
+          "lifecycle_seq": 1,
+          "adjudication_key": "ticket:TKT-2026-005B",
+          "node_type": "Issue",
+          "content": "Payment service incident ticket opened.",
+          "state": "open",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_002",
+        "after_event_id": "evt_002",
+        "active_nodes": ["n_deploy", "n_ticket_open"],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "COEXISTS", "source": "n_deploy", "target": "n_ticket_open" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_deploy", "n_ticket_open"]
+      }
+    ]
+  }
+}
