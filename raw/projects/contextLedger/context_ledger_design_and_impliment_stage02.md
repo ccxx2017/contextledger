@@ -1402,4 +1402,473 @@ classification of each diff:
 
 这样下一阶段即使发现 lifecycle 方案不成立，损失也是一组可回放、可解释的旁路实验，而不是被新语义污染过的主图。
 
-# 代战
+# 项目AI-KIMI2.7:
+已按 GPT-5.6-Terra 的评审意见执行完毕。Terra 的评审位于 [raw\projects\contextLedger\context_ledger_design_and_impliment_stage02.md](/D:/CCXXLESSON/contextledger/raw/projects/contextLedger/context_ledger_design_and_impliment_stage02.md:965) 第 965-1430 行，核心要求是：先原子提交 Stage02、把 manifest 做到可复现、再只做旁路产物，不碰主链。
+
+**Stage02 收尾**
+
+我把三个 Stage02 产物做了原子提交，并补了一个可再生的 manifest 生成脚本：
+
+- [contracts/05_phase1_lifecycle_schema.md](/D:/CCXXLESSON/contextledger/contracts/05_phase1_lifecycle_schema.md)
+- [reports/current_state_manifest.json](/D:/CCXXLESSON/contextledger/reports/current_state_manifest.json)
+- [reports/current_graph_lint_report.json](/D:/CCXXLESSON/contextledger/reports/current_graph_lint_report.json)
+- [graph/scripts/generate_state_manifest.py](/D:/CCXXLESSON/contextledger/graph/scripts/generate_state_manifest.py)
+
+manifest 现在包含：graph_state 实测路径/SHA256、生成时间、生成脚本与 hash、runtime 组件（scripts/prompts/contracts）指纹、benchmark score/hash、quarantine 分布、lint baseline hash、git 状态快照，数字全部来自当前 [graph/projects/abu_modern/graph_state.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/graph_state.json)。
+
+当前 git 状态：
+
+- branch: `phase1-lifecycle-stage02`
+- HEAD: `683d205`
+- base main / merge-base: `890219b`
+- `git status --short`: 空
+- `git diff --check`: 无错误
+
+**Stage03 旁路产物**
+
+按 Terra 的四个阶段要求，依次交付了旁路产物，未修改 `reconcile_patch.py`、`apply_patch.py` 或 assembler 主链：
+
+1. **Benchmark v1 freeze**
+   - [graph/projects/abu_modern/benchmark/v1_freeze/benchmark_v1_freeze_manifest.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/benchmark/v1_freeze/benchmark_v1_freeze_manifest.json)
+   - splits: development=7, regression=6, blind_holdout=2, adversarial=2
+   - 校验脚本：[graph/scripts/validate_benchmark_v1_freeze.py](/D:/CCXXLESSON/contextledger/graph/scripts/validate_benchmark_v1_freeze.py)
+
+2. **Lifecycle fixtures**
+   - schema: [graph/projects/abu_modern/fixtures/lifecycle/fixture_schema.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/fixtures/lifecycle/fixture_schema.json)
+   - 8 个 fixture：two_lifecycles_no_kill、revival、provenance_conflict、late_arrival、legacy_migration、alias_abstain、sequence_collision、replay_determinism
+   - 校验脚本：[graph/scripts/validate_lifecycle_fixtures.py](/D:/CCXXLESSON/contextledger/graph/scripts/validate_lifecycle_fixtures.py)
+
+3. **Shadow replay executable spec**
+   - 主 spec：[graph/projects/abu_modern/shadow_replay/shadow_replay_spec.md](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/shadow_replay_spec.md)
+   - diff schema：[graph/projects/abu_modern/shadow_replay/diff_report_schema.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/diff_report_schema.json)
+   - 示例报告：[graph/projects/abu_modern/shadow_replay/example_diff_report.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/example_diff_report.json)
+
+4. **Stage03 readiness report**
+   - [reports/stage03_readiness_report.md](/D:/CCXXLESSON/contextledger/reports/stage03_readiness_report.md)
+
+**验证**
+
+两个校验脚本都已通过：
+
+```
+python graph/scripts/validate_benchmark_v1_freeze.py   # PASSED
+python graph/scripts/validate_lifecycle_fixtures.py    # PASSED
+```
+
+**下一步**
+
+旁路规格已齐。接下来应做的是：实现 shadow adjudication 链，把这 8 个 fixture 和 benchmark v1 的各 split 跑通 shadow replay，待连续三次 `PASS` 且 diff 分类一致后，才进入主链替换。
+
+# GPT-5.6-Terra:
+## 总体判断
+
+这份回复显示项目 AI **基本遵守了上一轮的边界要求**：
+
+- Stage02 已经原子提交；
+- manifest 从静态叙述升级为可生成、可校验的产物；
+- Stage03 目前看起来仍是旁路设计与验证产物；
+- 没有声称已修改 `reconcile_patch.py`、`apply_patch.py` 或正式 assembler 主链；
+- 已开始把 benchmark、fixture、shadow diff 和 readiness report 变成显式文件，而不是继续停留在口头设计层。
+
+因此，**可以批准进入“shadow adjudication 链的旁路实现阶段”**。
+
+但不能因为两个 validator 显示 `PASSED`，就认为 Stage03 的机制已经得到验证，更不能把“连续三次 PASS”作为进入主链替换的核心门槛。当前已验证的更可能是：
+
+> freeze manifest 和 fixture 文件在结构、引用、hash 或基本约束上自洽。
+
+这不等于已经验证：
+
+- 生命周期裁定语义正确；
+- fixture 的预期状态真的能被 compiler 推导出来；
+- shadow 链和旧链之间的差异可解释；
+- benchmark 改进具有统计或泛化意义；
+- 新逻辑不会降低 `must_include` 安全底线。
+
+---
+
+## 做得好的部分
+
+### Stage02 的提交纪律是合格的
+
+报告给出了：
+
+```text
+branch: phase1-lifecycle-stage02
+HEAD: 683d205
+base main / merge-base: 890219b
+git status --short: empty
+git diff --check: no errors
+```
+
+这比“工作区里已经做完”可靠得多。尤其是 manifest generator 被一起提交，说明当前状态清单开始具备**可再生性**，而不只是一次性的人工快照。
+
+下一步仍应确认 `683d205` 是否确实包含全部 Stage02 与 Stage03 产物；不要只确认 HEAD 存在，而要保存本次提交的文件清单，例如：
+
+```bash
+git show --stat --oneline 683d205
+git diff --name-status 890219b..683d205
+```
+
+这能证明旁路阶段确实没有意外改动正式主链文件。
+
+### manifest 的升级方向正确
+
+报告称 manifest 已包含：
+
+- `graph_state.json` 的路径与 SHA256；
+- 生成时间；
+- manifest 生成脚本及 hash；
+- scripts / prompts / contracts 等 runtime 组件指纹；
+- benchmark score/hash；
+- quarantine 分布；
+- lint baseline hash；
+- git 状态快照。
+
+这已接近一个合格的“实验状态锚点”。下一步要确保它具备两个性质：
+
+1. **可重复生成**：在同一 commit、同一输入图、同一环境下重跑，除生成时间等合理字段外，核心内容一致。
+2. **可验证失败**：任一 graph state、contract、prompt、benchmark 数据、baseline 或脚本发生变化时，验证器必须明确报错，而不是仅重新生成一份看似合法的新 manifest。
+
+### “先 shadow、后替换”仍然是正确节奏
+
+项目 AI 没有直接把 lifecycle schema 塞进正式 `reconcile → apply → assembler` 路径，这是正确的。
+
+当前最重要的工程目标不是“尽快让新 schema 生效”，而是：
+
+> 在不污染现有主图、不重写历史 patch、不影响现有装配行为的前提下，证明新裁定模型确实减少结构性错误。
+
+---
+
+## 当前报告中最需要警惕的问题
+
+### validator 通过，不等于 fixture 的语义通过
+
+报告仅说明执行了：
+
+```text
+python graph/scripts/validate_benchmark_v1_freeze.py   # PASSED
+python graph/scripts/validate_lifecycle_fixtures.py    # PASSED
+```
+
+需要项目 AI 明确每个 validator 的断言范围。
+
+例如，`validate_lifecycle_fixtures.py` 可能只验证：
+
+- fixture 文件是否符合 JSON schema；
+- fixture ID 是否唯一；
+- 必填字段是否存在；
+- 文件 hash 是否匹配；
+- expected 状态集合是否格式正确。
+
+这些都很重要，但它们不验证：
+
+```text
+输入事件流
+→ shadow extractor/resolver/adjudicator
+→ patch / semantic relation
+→ shadow compiler
+→ 预期 checkpoint state
+```
+
+是否真的成立。
+
+因此，进入下一步前应新增一个独立的、真正执行语义的 runner，例如：
+
+```text
+run_lifecycle_fixture_replay.py
+```
+
+其输出应至少逐 fixture 给出：
+
+```json
+{
+  "fixture_id": "revival",
+  "result": "PASS",
+  "input_event_hash": "...",
+  "runtime_fingerprint": "...",
+  "checkpoint_results": [
+    {
+      "checkpoint_id": "cp_01",
+      "expected_active": ["..."],
+      "actual_active": ["..."],
+      "expected_relations": ["REVIVES"],
+      "actual_relations": ["REVIVES"],
+      "status": "PASS"
+    }
+  ],
+  "graph_state_hash": "...",
+  "bundle_hash": "..."
+}
+```
+
+**文件合法性校验**和**语义行为回放**必须是两层不同的测试，不能相互替代。
+
+### “连续三次 PASS”不是充分的主链升级门槛
+
+“连续三次 PASS 且 diff 分类一致”作为基本稳定性检查可以保留，但不能作为主要证据，原因是：
+
+- 如果输入、代码、环境都固定，三次成功可能只是同一个确定性结果重复了三次；
+- 如果模型参与 shadow adjudication，三次成功也不足以说明模型输出稳定或泛化；
+- 三次都可能稳定地产生错误结果；
+- 若 diff 分类是事后人工填写，“一致”不代表分类标准客观。
+
+应该把“三次 PASS”拆成两个不同目的：
+
+| 检查 | 它证明什么 | 不证明什么 |
+|---|---|---|
+| 同版本、同输入三次重跑 | 后端确定性、无随机漂移 | 语义正确性 |
+| 不同环境或干净 checkout 重跑 | 可复现性、依赖锁定较充分 | 泛化能力 |
+| fixture 预期结果通过 | 已知机制是否符合设计 | 真实轨迹上的收益 |
+| blind holdout 提升 | 一定程度的泛化价值 | 生产任务收益 |
+| 下游 Agent 对照实验 | 产品价值 | 所有边界条件都已覆盖 |
+
+因此，主链替换的判断不能写成：
+
+```text
+连续三次 PASS → 替换主链
+```
+
+而应写成：
+
+```text
+确定性重跑通过
++ fixture 语义通过
++ regression 不回退
++ blind holdout 达到预注册门槛
++ must_include 安全红线不下降
++ critical false invalidation 为零或全部隔离
++ diff 无未解释的 blocker
++ 旁路不污染主图
+→ 才可申请主链候选切换
+```
+
+### benchmark v1 的样本规模过小，尤其 blind holdout 只有 2 条
+
+当前 split 为：
+
+```text
+development = 7
+regression = 6
+blind_holdout = 2
+adversarial = 2
+```
+
+总计 17 条，与早期“15–20 条起步”的建议并不矛盾；但它只能算**机制验证起步集**，不能支撑强泛化结论。
+
+其中最薄弱的是：
+
+```text
+blind_holdout = 2
+```
+
+两条轨迹可以用于发现明显回归，却无法可靠回答：
+
+- lifecycle 是否普遍优于 entity-only；
+- provenance 分离是否稳定改善 precision；
+- late arrival 的收益是否真实；
+- 是否只是恰好命中了两个熟悉模式。
+
+建议项目 AI 不必立即扩张大规模 benchmark，但至少应完成以下审计：
+
+1. 每个 split 是否覆盖关键机制类型；
+2. 同一原始轨迹的不同 turn/checkpoint 是否被切到不同 split；
+3. 同一 alias 模板、实体命名模板、事件模板是否泄漏到 holdout；
+4. adversarial 是否独立于 development 规则设计；
+5. 每个 split 的 invalidation 类型和风险级别分布；
+6. holdout 是否在规则设计期间保持不可见或至少不可用于调参。
+
+特别重要的是：
+
+> **一个完整轨迹及其全部 checkpoint 必须属于同一个 split。**
+
+否则模型或规则可能在 development 看到了同一故事的早期轮次，又在 holdout 上测试其后续轮次，造成严重泄漏。
+
+---
+
+## shadow replay 实现前必须补齐的契约
+
+### shadow 链必须与正式主链物理隔离
+
+“未修改主链”还不够；还需要保证 shadow 的运行结果不会通过共享目录、共享状态文件或共享缓存污染主链。
+
+建议规定：
+
+```text
+正式图：
+graph/projects/abu_modern/graph_state.json
+
+shadow 图：
+graph/projects/abu_modern/shadow_replay/runs/<run_id>/graph_state.json
+```
+
+并明确：
+
+- shadow 不写正式 `graph_state.json`；
+- shadow 不写正式 applied patch ledger；
+- shadow 不改写 raw；
+- shadow 生成的 patch、relation、state、bundle、report 全部放入 run-scoped 目录；
+- shadow run ID、输入 hash、代码版本、runtime fingerprint 必须进入报告；
+- shadow 失败时只能写失败报告或 quarantine，不能 fallback 到正式链。
+
+### 先固定输入层，避免把所有不确定性混在一起
+
+shadow adjudication 第一阶段不应同时验证真实 Extractor、真实 Resolver、真实 Adjudicator 和新 compiler。
+
+建议至少分为两层：
+
+```text
+层 1：固定结构化声明 / 固定 resolver 输出
+→ 验证 lifecycle adjudication + compiler 的机械确定性
+
+层 2：真实 Extractor / Resolver 输出
+→ 观察语义前端造成的误差、abstain 和 quarantine 行为
+```
+
+否则 shadow 出现差异时，无法判断问题来自：
+
+- Extractor 漏提取；
+- alias 解析错误；
+- lifecycle 新建/匹配错误；
+- adjudication 关系分类错误；
+- observed/effective 时间排序错误；
+- compiler 状态转移错误；
+- assembler 预算或过滤错误。
+
+### diff 分类必须预注册，而不是事后解释
+
+shadow replay 最容易发生的一种“评测漂移”是：
+
+> 先看到 diff，再把有利的 diff 解释成 expected improvement，不利的 diff 解释成 edge case。
+
+因此，在真正跑 benchmark 前，必须在 spec 中写死：
+
+- 哪些 diff 默认是 blocker；
+- 哪些 diff 默认是 regression；
+- 哪些 diff 可以是 expected schema change；
+- 哪些 diff 必须人工 adjudication；
+- 谁可以修改分类；
+- 修改分类是否要产生版本化的规则变更；
+- 未分类 diff 是否一律阻断。
+
+建议最低限度的分类规则如下：
+
+| diff 类型 | 默认处理 |
+|---|---|
+| `must_include` 从包含变为遗漏 | Blocker |
+| critical active constraint 被错误置为 superseded | Blocker |
+| `CONTESTS` 被直接折叠为 `SUPERCEDES` | Blocker |
+| 低置信度 alias 被强制 merge | Blocker |
+| 新链多保留一条旧非关键状态 | 待人工归因 |
+| revival 从错误 inactive 变为 active | Expected improvement，仍须核对 gold |
+| legacy fallback 结果变化 | 必须有迁移规则和 fixture 支持 |
+| token 增长 | 非自动失败，但必须报告预算影响 |
+
+---
+
+## Stage03 readiness report 应接受的审查标准
+
+项目 AI 提到已交付 readiness report，但没有给出结论细节。这个报告不应只是“文件都齐了”的 checklist，而应逐项回答下面的问题。
+
+### RFC 决策是否已变成机器可测试规则
+
+需要逐条列出并指向测试或 fixture：
+
+- 谁生成 `lifecycle_ref`；
+- 谁生成 `lifecycle_seq`；
+- `observed_at` 和 `effective_at` 的字段来源、缺失策略、排序规则；
+- late arrival 的回放行为；
+- `SUPERCEDES / COEXISTS / CONTESTS / REVIVES / UNRELATED` 的状态后果；
+- `CONTESTS` 的 assembler 可见性；
+- resolver `abstain` 的 quarantine 处理；
+- legacy fallback 的 schema version 边界；
+- partial / conditional 的 Phase 1 最小支持范围；
+- revival 是否通过新事件派生，而非改写旧 patch。
+
+若某条目前还没有可执行测试，应标记为：
+
+```text
+NOT READY
+```
+
+而不是因为 RFC 已写到就标成已完成。
+
+### 必须列出“进入实现仍未解决的问题”
+
+真正有价值的 readiness report 应包含未决风险，例如：
+
+- lifecycle ID 的生成格式与 collision 策略；
+- effective time 缺失时的保守排序；
+- 多个来源冲突但都具高置信度时的处理；
+- legacy 与 lifecycle-v1 节点同桶相遇时的优先级；
+- `partial` 是否仅允许原子命题拆分；
+- quarantine 的自动恢复是否存在；
+- shadow run 是否允许复用主链 resolver cache。
+
+这些风险不需要在进入 shadow 实现前全部解决，但需要逐项有：
+
+```text
+owner
+decision deadline
+default-safe behavior
+blocker / non-blocker classification
+```
+
+---
+
+## 建议批准的下一轮任务边界
+
+建议批准项目 AI 的下一步，但把任务名称从模糊的“实现 shadow adjudication 链”收紧为：
+
+> **Stage04-A：实现无副作用、可确定性回放的 shadow lifecycle adjudication kernel。**
+
+本轮允许做：
+
+- shadow event/statement input adapter；
+- shadow lifecycle resolver adapter；
+- `adjudication_key` 分桶；
+- `SUPERCEDES / COEXISTS / CONTESTS / REVIVES / UNRELATED` 关系输出；
+- observed/effective 时间排序；
+- shadow state compiler；
+- fixture semantic replay runner；
+- run-scoped shadow output；
+- old-vs-shadow diff runner；
+- benchmark 各 split 的只读执行器；
+- 可再生报告与状态 hash。
+
+本轮禁止做：
+
+- 修改正式 `reconcile_patch.py`、`apply_patch.py` 或 assembler 默认路径；
+- 改写已存在 raw、patch 或正式 graph state；
+- 把 shadow 输出合并回正式图；
+- 用人工补 patch 让 fixture 通过；
+- 用 blind holdout 的失败案例调规则；
+- 让 LLM 自由产生最终 `lifecycle_ref` 或 `lifecycle_seq`；
+- 以“后续再解释”为由接受未分类 diff。
+
+---
+
+## 建议给项目 AI 的直接指令
+
+> 批准进入 Stage04-A，但当前仅批准 shadow lifecycle adjudication 的旁路实现，不批准任何正式主链替换。
+>
+> 请先提交一份 Stage04-A implementation contract，明确 shadow 输入、输出目录、运行 ID、状态隔离、失败处理、runtime fingerprint、patch/graph/bundle hash 和禁止写入正式主图的机制。
+>
+> 然后实现 fixture semantic replay runner。该 runner 必须实际执行 shadow adjudication 与 shadow compiler，并逐 checkpoint 比较 expected relation、expected active set、expected quarantine、expected must_include；不得只验证 fixture 文件结构。
+>
+> benchmark v1 运行前，补充 split 审计：确认完整轨迹不跨 split、检查模板/alias 泄漏、报告各 split 的机制类型分布。blind holdout 不得参与规则调参。
+>
+> shadow diff spec 中须预先锁定 blocker、regression、expected schema change、manual adjudication 与 unexplained 五类差异的分类规则；任何 `must_include` 下降、critical false invalidation、`CONTESTS → SUPERCEDES` 自动坍缩、低置信度强制 alias merge，均为 blocker。
+>
+> “连续三次 PASS”仅作为确定性复现检查，不得作为主链替换的充分条件。主链候选切换前必须同时满足：fixture 语义通过、regression 无安全回退、blind holdout 达到预注册门槛、must_include recall 不低于 D1、critical false invalidation 为零或全部进入 quarantine、无未解释 blocker diff、shadow 输出完全未污染正式主图。
+>
+> 完成后请提交 Stage04-A report，逐 fixture、逐 split、逐 checkpoint 报告输入 hash、runtime fingerprint、state hash、bundle hash、diff 分类和未决风险；不要提交主链改动。
+
+---
+
+## 最终结论
+
+这轮工作可以评价为：**工程治理和旁路准备合格，尚未形成 lifecycle 机制正确性的证据。**
+
+项目 AI 的下一步方向是对的，但需要修正一个关键表述：
+
+> 不是“跑通 8 个 fixture 和 benchmark、连续三次 PASS 后就进入主链替换”，而是“先证明 shadow kernel 在隔离条件下可确定性回放；再用冻结的 fixture、regression、holdout 和安全红线证明其语义收益；最后才申请主链候选切换。”
