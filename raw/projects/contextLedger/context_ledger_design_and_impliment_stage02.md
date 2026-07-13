@@ -5,7 +5,7 @@
 # GPT-5.6-Sol:
 我读完后的总体判断是：
 
-> **ContextLedger 已经不是一个“记忆系统构想”，而是一个已经找到核心价值、完成机械闭环验证、正在进入语义正确性攻坚阶段的工程项目。**  
+> **ContextLedger 已经不是一个“记忆系统构想”，而是一个已经找到核心价值、完成机械闭环验证、正在进入语义正确性攻坚阶段的工程项目。**
 > 它值得继续做，但接下来必须收缩战线：暂时不要扩产品形态、MemoryPack 或宿主范围，而应集中解决 **实体解析、生命周期裁定、时序/来源冲突和真实下游收益验证**。
 
 下面是我的具体评价与执行建议。
@@ -510,7 +510,7 @@ schema_version >= lifecycle_v1:
 
 \ # 五、下一阶段最优执行顺序
 
-\ ## STEP 0：先恢复“仓库当前事实”   
+\ ## STEP 0：先恢复“仓库当前事实”
 
 背景包明确指出历史快照不能视为当前仓库状态。因此接手后的第一步不应该直接改 schema，而应该生成一份机器可读的当前状态报告。
 
@@ -662,7 +662,7 @@ ContextLedger 最终必须证明，在相同 token 预算下，它能降低 Agen
 
 观察废弃方案、旧文件路径、旧接口是否污染后续动作。
 
-\ ### 任务 C：后台异步工具执行  
+\ ### 任务 C：后台异步工具执行
 
 观察迟到 ToolResult、取消任务、重试结果是否破坏当前状态。
 
@@ -961,3 +961,445 @@ OpenCode 目前应被视为实验宿主，而不是产品方向。
 > **批准 lifecycle 方向，但补齐身份、时序、来源、状态转移和迁移契约；让 LLM 负责提出声明，让机械层负责分配身份与编译状态；冻结基准，使用 shadow replay 和 blind holdout 验证；在真实下游收益被证明前，继续冻结 MemoryPack 和多宿主扩展。**
 
 这将是当前风险最低、信息增益最高、也最符合 ContextLedger 核心价值的一条执行路径。
+
+# 用户：
+请你阅读raw\projects\contextLedger\context_ledger_design_and_impliment_stage02.md，按照GPT-5.6-Sol建议实施，在执行前，先把当前的提交，并合并了，再开一个新的分支，然后开始实施
+# 项目AI：
+我这边已经核对完了：新分支正确、基线清单和 RFC 都落好了，目前只剩这 3 个 Stage02 新产物还没提交。下面我给你一个收束版结果，把“已经做完什么”和“下一步该怎么衔接”讲清楚。已按你确认的方案开始实施，而且 git 前置动作已经做完了：
+
+- 已把之前工作区提交到 main
+  - 提交： 890219b
+  - 提交信息： Finalize Phase 0.5 benchmark and Phase 1 schema design draft
+- 已从最新 main 新开分支：
+  - phase1-lifecycle-stage02
+这轮我按照 GPT-5.6-Sol 的建议，优先落了 STEP 0 和 STEP 2 ，没有贸然直接进真实实现。
+
+已完成产物
+
+1. 当前状态清单
+    current_state_manifest.json
+这份清单已经把 Stage02 需要的“仓库当前事实”钉住了，包括：
+
+- 当前分支 / commit
+- 当前 schema 契约位置
+- graph_state.json 的 SHA256
+- turn_counter = 84
+- node / edge 数
+- quarantine 分布
+- 最新 lint 基线
+- 当前 benchmark 口径与关键指标
+另外我还补跑并落盘了当前 lint 基线：
+
+- current_graph_lint_report.json
+2. 完整版 lifecycle RFC
+    05_phase1_lifecycle_schema.md
+这次不再只是“加 3 个 optional 字段”的设计稿，而是补成了可评审 RFC，已经明确了：
+
+- entity_ref / lifecycle_ref / adjudication_key 的职责拆分
+- 生命周期身份不变量
+- lifecycle_seq 不能由 LLM 自由生成
+- observed_at / effective_at 双时态边界
+- SUPERCEDES / COEXISTS / CONTESTS / REVIVES / UNRELATED
+- provenance conflict 不得默认折叠为 full invalidation
+- resolver 的 abstain
+- legacy 兼容 / 迁移规则
+- 必增 lint 规则
+- 必备 replay fixtures
+- benchmark 验收目标
+当前分支未提交改动
+
+现在 phase1-lifecycle-stage02 上还有 3 个未提交产物：
+
+- 05_phase1_lifecycle_schema.md
+- current_state_manifest.json
+- current_graph_lint_report.json
+我对下一步的建议
+
+按 stage02 文档的顺序，现在最合适的是继续做这两件，而不是直接改主链实现：
+
+1. 冻结 benchmark v1
+    把 development / regression / blind holdout / adversarial 划开，避免继续在同一批轨迹上调参
+2. 先补 lifecycle fixtures + shadow replay 设计
+    先做：
+
+   - revival
+   - provenance conflict
+   - late arrival
+   - legacy migration
+      这些最小夹具
+      然后再让新旧裁决链并跑比较差异
+这一步完成后，再进真实实现会稳很多。现在如果你要我继续，我建议下一轮直接做：
+
+- benchmark freeze artifacts
+- lifecycle fixtures
+- shadow replay plan
+而不是先改 reconcile/apply/assembler 主链。
+
+# 军师AI(GPT-5.6-Terra):
+## 总体评审
+
+这份执行回复的**方向是对的，节奏也比“直接改主链”更稳健**：先固定当前事实、补齐 RFC、再冻结评测与设计 shadow replay，符合当前阶段应优先降低语义与评测风险的原则。
+
+尤其值得肯定的是：
+
+- 没有把 `lifecycle_ref/lifecycle_seq` 简化成“加字段即完成”；
+- 已明确 LLM 不应自由分配生命周期序号；
+- 已将 provenance conflict 与 invalidation 分离；
+- 提出了 resolver abstain、双时态、迁移、lint、fixture 等必要契约；
+- 明确暂不修改 reconcile/apply/assembler 主链，避免未经回放验证就引入不可逆复杂度。
+
+但这份回复仍有一个问题：它主要是**“完成事项的叙述”**，而还不是一份足以批准进入下一轮的、可机械验收的执行交付。下一步应把它收束为明确的提交、清单、验收门槛和失败处置方案。
+
+---
+
+## 首先应要求其完成的收尾动作：提交 Stage02 产物
+
+目前三个关键产物仍未提交：
+
+- `05_phase1_lifecycle_schema.md`
+- `current_state_manifest.json`
+- `current_graph_lint_report.json`
+
+这不应留到“下一轮顺手再提交”。建议要求项目 AI 先完成一个**只包含 Stage02 文档与基线产物的原子提交**，再启动 benchmark freeze 和 fixtures 工作。
+
+建议提交信息类似：
+
+```text
+Freeze Stage02 repository baseline and lifecycle RFC
+```
+
+提交前必须报告并确认：
+
+```text
+git status --short
+git branch --show-current
+git rev-parse HEAD
+git log -1 --oneline
+git diff --check
+```
+
+提交后必须报告：
+
+```text
+new commit SHA
+git status --short  # 应为空
+base main commit SHA
+merge-base(main, phase1-lifecycle-stage02) SHA
+```
+
+原因很简单：当前状态清单与 RFC 本身就是后续所有 shadow replay、实现和评测的依据。它们若仍是未提交工作区内容，就不是真正冻结的基线。
+
+---
+
+## 对“当前状态清单”的具体审查要求
+
+项目 AI 说清单已钉住当前事实，这是正确目标；但你应要求它补充或确认以下内容，防止“清单写了历史数字，却没有形成可复现证据”。
+
+### 必须区分“清单生成时的事实”与“历史背景数字”
+
+尤其是：
+
+```text
+turn_counter = 84
+node / edge 数
+quarantine 分布
+```
+
+必须来自生成清单时实际读取的：
+
+```text
+graph/projects/abu_modern/graph_state.json
+```
+
+而不能只是复述背景包中恢复封板时的数字。
+
+建议 manifest 每个关键统计项附带来源字段，例如：
+
+```json
+{
+  "graph_state_path": "graph/projects/abu_modern/graph_state.json",
+  "graph_state_sha256": "...",
+  "graph_state_turn_counter": 84,
+  "node_count": 165,
+  "edge_count": 274,
+  "derived_at_utc": "..."
+}
+```
+
+若 `turn_counter=84` 确实是当前读取值，也应明确写为：
+
+> 该值由当前 `graph_state.json` 实测得出，不是历史叙述快照。
+
+### 应补充版本指纹
+
+建议 manifest 至少还包含：
+
+- `main_base_commit`
+- `stage_branch_head_commit`
+- `working_tree_clean_at_generation`
+- Python / Node / 包管理器版本
+- extractor prompt / contract / cleaner / resolver 的文件 hash 或版本号
+- benchmark 数据集及 metric 脚本 hash
+- `lint_baseline.json` 的 hash 与路径
+- manifest 生成脚本及其版本或 hash
+- 当前 quarantine 条目总数、按 reason 分类数、未解决条目数
+- active / superseded / pending 或其他当前状态分布
+
+这里最重要的是：**manifest 应能由脚本再生，而不是靠人工编辑维护。**
+
+若当前是 JSON，建议同时提供对应生成命令或生成脚本路径；否则未来它会变成新的“叙述性真相源”。
+
+---
+
+## 对 RFC 的评审：可以批准进入“设计冻结前审查”，但尚不应直接称为实现就绪
+
+从回复列出的内容看，RFC 已覆盖主要风险面，质量方向是好的。不过，要进入 fixtures 与 shadow replay 设计前，建议确认 RFC 中存在以下几个“可执行决策表”，而不只是原则描述。
+
+### 需要明确的决策表
+
+| 问题 | 必须写死的决策 |
+|---|---|
+| `lifecycle_ref` 分配者 | LLM 提议线索；Resolver 匹配或 abstain；机械层生成稳定 ID |
+| `lifecycle_seq` 分配者 | 只能由机械层确定，不能由 LLM 输出最终值 |
+| `observed_at` | 由 ledger step 或系统接收事件产生，单调且不可修改 |
+| `effective_at` | 可缺失、可晚到、可不确定；其排序规则必须明确 |
+| 晚到事件 | 是只影响未来编译结果，还是允许重算当前派生态；绝不能回写旧 patch |
+| `CONTESTS` | 不直接使旧节点 superseded；进入待裁定、保守共存或依来源规则处理 |
+| partial invalidation | Phase 1 是否统一要求声明原子化，而非支持通用字段级失效 |
+| conditional invalidation | condition 最小 schema、缺 condition 时的处理方式 |
+| revival | 以新事件和显式关系表达；不允许修改旧 patch |
+| abstain | 是否 quarantine、是否创建 provisional node、是否允许进入 assembler |
+| legacy 节点 | `adjudication_key` fallback 的版本化规则及退出计划 |
+
+### 建议增加“明确不做”的范围
+
+RFC 应有一个 `Non-goals for Phase 1` 小节，明确排除：
+
+- 通用规则语言；
+- 任意 JSON path / field-level patch DSL；
+- 跨项目 lifecycle 合并；
+- 自动解决所有来源冲突；
+- MemoryPack 同步；
+- 多宿主集成；
+- 全量性能优化。
+
+这样可以避免 lifecycle schema 从一次针对已知错误模式的修复，膨胀成通用知识表示系统。
+
+---
+
+## 对下一步排序的建议：认可，但应调整为四个明确阶段
+
+项目 AI 建议：
+
+1. benchmark freeze；
+2. lifecycle fixtures；
+3. shadow replay plan；
+4. 再进真实实现。
+
+这个顺序总体正确。我的建议是把它写得更严格一些：
+
+### 阶段 A：先提交并锁定 Stage02
+
+完成上文所述原子提交，确保工作树干净。
+
+**通过条件：**
+
+- Stage02 三个产物已提交；
+- manifest 可由脚本再生；
+- git diff 为空；
+- 清单中的数字与当前 `graph_state.json` 实测一致。
+
+### 阶段 B：冻结 Benchmark v1
+
+这一步不能只创建几个目录。必须真正冻结：
+
+```text
+development
+regression
+blind_holdout
+adversarial
+```
+
+并落盘以下内容：
+
+- 每个 split 的 case ID 列表；
+- 数据文件 hash；
+- gold 标注 schema 版本；
+- D1 / D2 baseline 的精确定义与实现版本；
+- metric 脚本 hash；
+- 当前旧链路的基线成绩；
+- 哪些轨迹允许调参、哪些绝对不可查看或不可用于规则设计；
+- benchmark 更新流程与版本号规则。
+
+**重要建议：**
+`lifecycle fixtures` 不应与 blind holdout 混在一起。fixtures 是机制级、白盒、预期确定的测试；holdout 是泛化评测。两者的失败含义完全不同：
+
+- fixture fail：实现或契约错误；
+- holdout fail：泛化不足、可能过拟合或设计假设错误。
+
+### 阶段 C：先写 fixtures 和 shadow replay 规格，再写 lifecycle 主链代码
+
+建议先实现最小 fixtures，至少覆盖：
+
+1. 同一 entity 的两个不同 lifecycle 不互相误杀；
+2. revival 恢复的正确派生；
+3. provenance conflict 只产生 `CONTESTS`，不默认 full invalidation；
+4. late arrival 下 `observed_at` 与 `effective_at` 的行为；
+5. legacy node 的兼容与迁移；
+6. alias 指向错误 lifecycle 时 Resolver abstain / quarantine；
+7. sequence collision 或时间不确定时的保守处理；
+8. replay 后 graph state 与 bundle 的确定性再生。
+
+每个 fixture 应具备：
+
+```text
+input event stream
+expected patches or expected semantic relations
+expected graph state at checkpoints
+expected active/superseded/pending set
+expected quarantine result, if applicable
+expected assembler must_include result, if applicable
+```
+
+不要仅写“应当通过”的自然语言说明。
+
+### 阶段 D：定义 shadow replay 的可执行验收门槛
+
+shadow replay 不能只是一份“旧新双跑比较”的计划文档。它应在实现前定义差异输出结构和判定规则，例如：
+
+```text
+old_state_hash
+shadow_state_hash
+checkpoint_id
+node-level status diffs
+relation diffs
+must_include diffs
+quarantine diffs
+assembler token diffs
+classification of each diff:
+  expected_improvement
+  expected_schema_change
+  regression
+  unexplained
+```
+
+并事先明确：
+
+- 哪些差异允许；
+- 哪些差异必须人工裁定；
+- 哪些差异自动阻断切换；
+- 什么指标门槛下可以进入主链替换候选阶段。
+
+---
+
+## 必须要求项目 AI 补上的“影子链路不变量”
+
+在真实实现前，应明确以下不变量。否则 shadow replay 即使跑完，也无法判断其结果是否可信。
+
+### 事件与 patch 不变量
+
+- 原始事件不可改写；
+- 历史 patch 不可改写；
+- lifecycle 升级不得通过人工编辑旧 patch 完成；
+- schema 迁移必须版本化、可回放；
+- 所有 shadow 输出必须落在独立目录，不能污染主图；
+- shadow 失败必须 quarantine 或终止，不允许“尽量生成一个结果”。
+
+### 确定性不变量
+
+同一输入、同一版本的：
+
+- contracts；
+- resolver；
+- cleaner；
+- extractor prompt；
+- fixture；
+- compiler；
+
+必须产生相同的：
+
+- patch 序列；
+- graph state；
+- context bundle；
+- metrics。
+
+如果 lifecycle 方案需要 LLM，那么至少要分开验证：
+
+1. **固定 LLM 输出时，机械后端是否完全确定；**
+2. **真实 LLM 输出时，前端语义波动造成了什么误差。**
+
+不要把两种不确定性混在一次实验里。
+
+### 安全不变量
+
+- `must_include recall` 不低于 D1；
+- critical constraints 不得被静默错误失效；
+- `CONTESTS` 不得自动坍缩为 `SUPERCEDES`；
+- Resolver 低置信度不能静默强行 merge；
+- 新 lifecycle 方案不能增加 silent corruption；
+- 任何降级必须可观测、可归因。
+
+---
+
+## 关于“暂不改主链”的补充建议
+
+“先不改 reconcile/apply/assembler 主链”是正确的，但应避免误解为“完全不写代码”。
+
+下一轮可以实现的代码应严格限于**旁路、可删除、无主图副作用**的部分，例如：
+
+- benchmark freeze 校验脚本；
+- fixture runner；
+- shadow graph state compiler；
+- 新旧状态 diff 工具；
+- lifecycle schema validator；
+- manifest regeneration script；
+- shadow replay report generator。
+
+不应做的包括：
+
+- 改写正式 apply 行为；
+- 将新 `adjudication_key` 接入正式 reconcile；
+- 更改生产 assembler 的默认注入；
+- 对已有 patch 做迁移式重写；
+- 用人工 patch 修复 fixture。
+
+这条边界应写入下一轮任务单。
+
+---
+
+## 我建议你给项目 AI 的直接执行指令
+
+可以直接这样下达：
+
+> 批准当前方向，但先不要进入主链实现。
+>
+> 第一，先将 `05_phase1_lifecycle_schema.md`、`current_state_manifest.json`、`current_graph_lint_report.json` 作为 Stage02 原子提交提交到 `phase1-lifecycle-stage02`，并报告 branch、HEAD、base main SHA、clean git status、`git diff --check` 结果。
+>
+> 第二，复核 manifest 中 `turn_counter`、node/edge、quarantine 等数值均由当前 `graph_state.json` 实测得出，并在 manifest 中保存源路径、SHA256、生成时间、生成脚本/命令、版本指纹及 benchmark/metrics hash；不得使用历史叙述快照替代当前状态。
+>
+> 第三，进入 Stage03 时仅做旁路产物，不修改正式 reconcile/apply/assembler 主链。依次交付：
+> 1. benchmark v1 freeze manifest 与 split/hash 机制；
+> 2. lifecycle fixture schema 与至少 8 类最小 fixture；
+> 3. shadow replay executable spec，包括 diff schema、差异分类、阻断门槛和报告样例。
+>
+> 第四，明确 fixture 与 blind holdout 完全隔离；fixture 用于机制正确性，blind holdout 不得用于规则调参。
+>
+> 第五，在提交任何 lifecycle 主链实现前，先提交一份 Stage03 readiness report，逐项确认 RFC 中 lifecycle ID 分配、双时态排序、CONTESTS、abstain、legacy migration、revival、partial/conditional 的最小语义和 quarantine 行为都已经转换成可执行验收规则。
+
+---
+
+## 最终结论
+
+项目 AI 的当前判断可以批准：**先冻结评测、补机制夹具、设计 shadow replay，不直接修改主链。**
+
+但批准的前提是它先完成 Stage02 的原子提交，并把“我已经核对过”转化为：
+
+- 可再生的 manifest；
+- 带 hash 的冻结 benchmark；
+- 可运行的 fixture；
+- 可归因的 shadow diff；
+- 预先写死的阻断门槛。
+
+这样下一阶段即使发现 lifecycle 方案不成立，损失也是一组可回放、可解释的旁路实验，而不是被新语义污染过的主图。
+
+# 代战
