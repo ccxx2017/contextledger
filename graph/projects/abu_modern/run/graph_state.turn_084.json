@@ -454,7 +454,10 @@
       "entity_ref": "backend/app/api/endpoints/knowledge.py",
       "state": null,
       "priority": "should_include",
-      "created_turn": 9
+      "created_turn": 9,
+      "merged_sources": [
+        "n_0128"
+      ]
     },
     "n_0049": {
       "node_id": "n_0049",
@@ -688,7 +691,10 @@
       "state": null,
       "priority": "background",
       "_entity_ref_sanitized": true,
-      "created_turn": 19
+      "created_turn": 19,
+      "merged_sources": [
+        "n_0090"
+      ]
     },
     "n_0073": {
       "node_id": "n_0073",
@@ -862,11 +868,13 @@
       "type": "Fact",
       "content": "前置检查执行结果：智能体成功读取工单 TKT-2026-005B-vcp-breakout-entry.md 并正确路由到 strategy_researcher（依据 intent_type: investigation 和 assigned_to: agent-strategy-researcher）。未读取 quant_assistant 或 duty_reporter 私有文件，未调用任何 scripts/ 下脚本。但缺少对 strategy_researcher 自身 SKILL.md 和 prompts/research_workflow.md 的实际读取。GPT5.5 指出这是关键缺失，需先完成最后激活检查（读取 SKILL.md、TOOLS.md、prompts 目录全部文件），通过后才能正式启动 Ticket B。",
       "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
       "created_turn": 31,
       "status": "superseded",
-      "_superseded_reason": "被新的自主激活测试结果替代，新结果证明智能体能自主读取所有必要文件，使旧结论'缺少对SKILL.md和prompts的实际读取'不再成立。"
+      "_superseded_reason": "被新的自主激活测试结果替代，新结果证明智能体能自主读取所有必要文件，使旧结论'缺少对SKILL.md和prompts的实际读取'不再成立。",
+      "superseded_by": "n_0072",
+      "superseded_reason": "batch_reconcile:MERGE"
     },
     "n_0091": {
       "node_id": "n_0091",
@@ -1244,9 +1252,11 @@
       "type": "Fact",
       "content": "后端修改：ExecutionConfigBacktestRequest 新增 train_split；start_backtest_from_execution_config 返回 metrics/train_metrics/test_metrics 等。",
       "entity_ref": "backend/app/api/endpoints/backtests/start.py",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
-      "created_turn": 51
+      "created_turn": 51,
+      "superseded_by": "n_0048",
+      "superseded_reason": "batch_reconcile:LIKELY_MERGE"
     },
     "n_0129": {
       "node_id": "n_0129",
@@ -1346,27 +1356,35 @@
       "priority": "should_include",
       "created_turn": 54,
       "status": "superseded",
-      "_update_reason": "Round 5 受限研究执行前检查已完成，研究已执行。"
+      "_update_reason": "Round 5 受限研究执行前检查已完成，研究已执行。",
+      "merged_sources": [
+        "n_0139",
+        "n_0140"
+      ]
     },
     "n_0139": {
       "node_id": "n_0139",
       "type": "Fact",
       "content": "TKT-2026-005B Round 5 受限研究执行完成：compile-ir成功，回测完成56笔交易，sanity passed。核心指标：Sharpe 1.4921, Total Return -80.92%, Max Drawdown 98.89%。结论：MA60趋势过滤改善了信号质量但未解决亏损问题。飞书Agent建议不立即扩展样本，先做指标审计。",
       "entity_ref": "TKT-2026-005B_round5_result",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
-      "created_turn": 55
+      "created_turn": 55,
+      "superseded_by": "n_0138",
+      "superseded_reason": "batch_reconcile:MERGE"
     },
     "n_0140": {
       "node_id": "n_0140",
       "type": "OpenTask",
       "content": "执行Round 5.1指标与亏损归因审计：解释total_return=-80.92%, max_drawdown=98.89%但Sharpe为正的原因；检查口径；输出资金曲线、仓位暴露、交易级归因、分标的归因。仅诊断，不修改策略。",
       "entity_ref": "TKT-2026-005B_round5.1_audit",
-      "state": "resolved",
+      "state": "superseded",
       "priority": "should_include",
       "created_turn": 55,
       "status": "superseded",
-      "_update_reason": "Round 5.1审计报告已产出，但发现数据不一致，需要进一步核对，任务完成但需后续审计。"
+      "_update_reason": "Round 5.1审计报告已产出，但发现数据不一致，需要进一步核对，任务完成但需后续审计。",
+      "superseded_by": "n_0138",
+      "superseded_reason": "batch_reconcile:LIKELY_MERGE"
     },
     "n_0141": {
       "node_id": "n_0141",
@@ -1483,7 +1501,10 @@
       "priority": "should_include",
       "created_turn": 58,
       "status": "superseded",
-      "_superseded_reason": "初始Round5.3C复核已完成，但结果需重新复核，故废弃。"
+      "_superseded_reason": "初始Round5.3C复核已完成，但结果需重新复核，故废弃。",
+      "merged_sources": [
+        "n_0155"
+      ]
     },
     "n_0152": {
       "node_id": "n_0152",
@@ -1517,12 +1538,14 @@
       "type": "OpenTask",
       "content": "重新执行Round 5.3C黑盒复核（基于项目AI修复）：按10项条件重新跑Round 5 baseline，验证资金闭合及trade/position报表正确性。",
       "entity_ref": "TKT-2026-005B_round5.3C_reverify",
-      "state": "resolved",
+      "state": "superseded",
       "priority": "should_include",
       "created_turn": 60,
       "status": "superseded",
       "_update_reason": "Round 5.3C黑盒复核已执行完成并产出报告，但结论未完全通过，由新任务Round 5.3D接替。",
-      "_superseded_reason": "任务已完成执行，但其成果不满足完全通过条件，由Round 5.3D替代继续复核。"
+      "_superseded_reason": "任务已完成执行，但其成果不满足完全通过条件，由Round 5.3D替代继续复核。",
+      "superseded_by": "n_0151",
+      "superseded_reason": "batch_reconcile:MERGE"
     },
     "n_0156": {
       "node_id": "n_0156",
@@ -1701,7 +1724,10 @@
       "priority": "must_include",
       "created_turn": 67,
       "status": "superseded",
-      "_update_reason": "Feishu Agent已独立完成Round 5.4A审计并给出PASSED结论。"
+      "_update_reason": "Feishu Agent已独立完成Round 5.4A审计并给出PASSED结论。",
+      "merged_sources": [
+        "n_0175"
+      ]
     },
     "n_0174": {
       "node_id": "n_0174",
@@ -1719,9 +1745,11 @@
       "type": "Fact",
       "content": "Feishu Agent 独立审计 Round 5.4A 结论：✅ PASSED。所有8大审计项目全部通过。关键数据：initial_capital=100000, total_return=+1.62%, final_equity=101616.52, max_exposure=0.205008, cash ledger gap=0.00。磁盘文件SHA256未直接读取但API一致性已验证。",
       "entity_ref": "round_5.4a_feishu_audit_result",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
-      "created_turn": 68
+      "created_turn": 68,
+      "superseded_by": "n_0173",
+      "superseded_reason": "batch_reconcile:MERGE"
     },
     "n_0176": {
       "node_id": "n_0176",
@@ -1730,7 +1758,10 @@
       "entity_ref": "run-54b-20250101-20251230-dfc9611d",
       "state": null,
       "priority": "must_include",
-      "created_turn": 69
+      "created_turn": 69,
+      "merged_sources": [
+        "n_0179"
+      ]
     },
     "n_0177": {
       "node_id": "n_0177",
@@ -1757,9 +1788,11 @@
       "type": "Fact",
       "content": "Round 5.4B-fix1 自审通过。新run_id=run-54b-20250101-20251230-d37c696d，初始资本和metrics口径两个blocker已修复，canonical/derived/API/Invariant全部通过。尚未经Feishu Agent独立审计。",
       "entity_ref": "run-54b-20250101-20251230-d37c696d",
-      "state": null,
+      "state": "superseded",
       "priority": "must_include",
-      "created_turn": 70
+      "created_turn": 70,
+      "superseded_by": "n_0176",
+      "superseded_reason": "batch_reconcile:MERGE"
     },
     "n_0180": {
       "node_id": "n_0180",
@@ -1843,7 +1876,10 @@
       "priority": "must_include",
       "created_turn": 77,
       "status": "superseded",
-      "_superseded_reason": "被新事实n_0195取代，确认缓存污染非根因，后端缺陷才是根因"
+      "_superseded_reason": "被新事实n_0195取代，确认缓存污染非根因，后端缺陷才是根因",
+      "merged_sources": [
+        "n_0192"
+      ]
     },
     "n_0188": {
       "node_id": "n_0188",
@@ -1894,11 +1930,13 @@
       "type": "OpenTask",
       "content": "执行Round 6A缓存修复：备份并定向隔离/清理三个污染/禁用run目录（run-749b90e9-20250101-20250110-fcac2c66、run-749b90e9-20250101-20251230-820b8995、run-e92b485b-20250101-20251230-820b8995），备份到data/backups/round6a_cache_pollution_20260531/，移出到data/runs/backtest_quarantine/，清理idempotency索引中的对应条目，验证baseline不受影响。不得运行回测、创建新run、修改策略。输出dry-run结果、备份路径、隔离路径、清理验证结果。",
       "entity_ref": "round_6a_cache_remediation",
-      "state": "resolved",
+      "state": "superseded",
       "priority": "should_include",
       "created_turn": 78,
       "_update_reason": "Round 6A cache remediation执行完毕并通过验收",
-      "status": "superseded"
+      "status": "superseded",
+      "superseded_by": "n_0187",
+      "superseded_reason": "batch_reconcile:LIKELY_MERGE"
     },
     "n_0193": {
       "node_id": "n_0193",
@@ -1936,7 +1974,10 @@
       "priority": "should_include",
       "created_turn": 81,
       "status": "superseded",
-      "_update_reason": "诊断完成并通过，Round 6A 确认为后端缺陷，诊断任务结束。"
+      "_update_reason": "诊断完成并通过，Round 6A 确认为后端缺陷，诊断任务结束。",
+      "merged_sources": [
+        "n_0199"
+      ]
     },
     "n_0197": {
       "node_id": "n_0197",
@@ -1956,16 +1997,21 @@
       "priority": "must_include",
       "created_turn": 82,
       "status": "superseded",
-      "_update_reason": "Patch implementation completed and all 43 tests passed."
+      "_update_reason": "Patch implementation completed and all 43 tests passed.",
+      "merged_sources": [
+        "n_0201"
+      ]
     },
     "n_0199": {
       "node_id": "n_0199",
       "type": "Fact",
       "content": "Round 6A 完整诊断结论：position_pnl_pct 是未注册的幽灵字段，compile 层被动接受但 evaluator/execution 层未实现；trade_data_source=missing 根因是零交易；BUY triggered_count=0 根因是 orders_df 为空；position_pnl_pct 单位陷阱（-7 百分比 vs 内部小数 -0.07）。诊断通过，不作为策略实验结论。",
       "entity_ref": "round_6a_full_diagnosis",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
-      "created_turn": 82
+      "created_turn": 82,
+      "superseded_by": "n_0196",
+      "superseded_reason": "batch_reconcile:LIKELY_MERGE"
     },
     "n_0200": {
       "node_id": "n_0200",
@@ -1981,9 +2027,11 @@
       "type": "Fact",
       "content": "Backend defect repair patch implementation passed: 43/43 tests passed (17 new, 9 M1 regression, 17 M2 generalization). Context registry final supported fields: entry_price, holding_days, unrealized_pnl_pct, max_unrealized_pnl_pct, partial_exit_count, position_pnl_pct (deprecated alias). position_pnl_pct handling: compile-time accepted, evaluator aliases to unrealized_pnl_pct, absolute percent -7 normalized to decimal -0.07. universal_factor.py KeyError now raises RuntimeError.",
       "entity_ref": "backend_defect_repair_implementation",
-      "state": null,
+      "state": "superseded",
       "priority": "should_include",
-      "created_turn": 83
+      "created_turn": 83,
+      "superseded_by": "n_0198",
+      "superseded_reason": "batch_reconcile:LIKELY_MERGE"
     },
     "n_0202": {
       "node_id": "n_0202",

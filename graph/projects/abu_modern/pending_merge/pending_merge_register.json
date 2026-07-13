@@ -120,9 +120,12 @@
       "blocked_turn": 20,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 25,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 20
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 20,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5946 too low, treating as separate entity"
     },
     {
       "register_key": "turn_024:n_0080:openclaw_skills/quant_assistant/TOOLS.md",
@@ -375,9 +378,12 @@
       "blocked_turn": 27,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 32,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 27
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 27,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5116 too low, treating as separate entity"
     },
     {
       "register_key": "turn_030:n_0087:src/agents/system-prompt.ts",
@@ -406,9 +412,12 @@
       "blocked_turn": 30,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 35,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 30
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 30,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5098 too low, treating as separate entity"
     },
     {
       "register_key": "turn_030:n_0088:~/.openclaw/openclaw.json",
@@ -479,9 +488,12 @@
       "blocked_turn": 30,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 35,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 30
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 30,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5000 too low, treating as separate entity"
     },
     {
       "register_key": "turn_031:n_0090:aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
@@ -530,9 +542,12 @@
       "blocked_turn": 31,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 36,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 31
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0072",
+      "last_seen_turn": 31,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch MERGE: confidence=0.9381, canonical=aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md"
     },
     {
       "register_key": "turn_032:n_0091:ticket_b_pre_execution_check_auto",
@@ -561,9 +576,12 @@
       "blocked_turn": 32,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 37,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 32
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 32,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5490 too low, treating as separate entity"
     },
     {
       "register_key": "turn_033:n_0095:TKT-2026-005C",
@@ -971,9 +989,12 @@
       "blocked_turn": 45,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 50,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 45
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 45,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5366 too low, treating as separate entity"
     },
     {
       "register_key": "turn_048:n_0116:openclaw_skills/strategy-researcher/scripts/call_builder.py",
@@ -1540,9 +1561,12 @@
       "blocked_turn": 51,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 56,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 51
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0048",
+      "last_seen_turn": 51,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch LIKELY_MERGE: confidence=0.7561, canonical=backend/app/api/endpoints/knowledge.py"
     },
     {
       "register_key": "turn_052:n_0130:TKT-2026-005I",
@@ -1696,9 +1720,12 @@
       "blocked_turn": 52,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 57,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 52
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 52,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4906 too low, treating as separate entity"
     },
     {
       "register_key": "turn_052:n_0133:TKT-2026-005I",
@@ -1929,9 +1956,12 @@
       "blocked_turn": 55,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 60,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 55
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0138",
+      "last_seen_turn": 55,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch MERGE: confidence=0.8511, canonical=TKT-2026-005B_round5"
     },
     {
       "register_key": "turn_055:n_0140:TKT-2026-005B_round5.1_audit",
@@ -2007,9 +2037,12 @@
       "blocked_turn": 55,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 60,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 55
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0138",
+      "last_seen_turn": 55,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch LIKELY_MERGE: confidence=0.8333, canonical=TKT-2026-005B_round5"
     },
     {
       "register_key": "turn_056:n_0142:TKT-2026-005B_round5.2_reconciliation",
@@ -2541,9 +2574,12 @@
       "blocked_turn": 60,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 65,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 60
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0151",
+      "last_seen_turn": 60,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch MERGE: confidence=0.9677, canonical=TKT-2026-005B_round5.3C_verify"
     },
     {
       "register_key": "turn_060:n_0157:TKT-2026-005B_round5.3C_fix",
@@ -2785,9 +2821,12 @@
       "blocked_turn": 64,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 69,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 64
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 64,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4783 too low, treating as separate entity"
     },
     {
       "register_key": "turn_066:n_0171:round_5.4a_artifact_chain_fix",
@@ -2867,9 +2906,12 @@
       "blocked_turn": 67,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 72,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 67
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 67,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5769 too low, treating as separate entity"
     },
     {
       "register_key": "turn_067:n_0174:round_5.4b_full_run",
@@ -2898,9 +2940,12 @@
       "blocked_turn": 67,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 72,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 67
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 67,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4583 too low, treating as separate entity"
     },
     {
       "register_key": "turn_068:n_0175:round_5.4a_feishu_audit_result",
@@ -2969,9 +3014,12 @@
       "blocked_turn": 68,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 73,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 68
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0173",
+      "last_seen_turn": 68,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch MERGE: confidence=0.8679, canonical=round_5.4a_feishu_audit"
     },
     {
       "register_key": "turn_069:n_0178:round_5.4b_fix1",
@@ -3061,9 +3109,12 @@
       "blocked_turn": 70,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 75,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 70
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0176",
+      "last_seen_turn": 70,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch MERGE: confidence=0.9118, canonical=run-54b-20250101-20251230-dfc9611d"
     },
     {
       "register_key": "turn_071:n_0180:round_5.4b_fix1_feishu_audit",
@@ -3173,9 +3224,12 @@
       "blocked_turn": 72,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 77,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 72
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 72,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4727 too low, treating as separate entity"
     },
     {
       "register_key": "turn_072:n_0183:baseline_metadata_round_5.4b_fix1",
@@ -3214,9 +3268,12 @@
       "blocked_turn": 72,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 77,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 72
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 72,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4918 too low, treating as separate entity"
     },
     {
       "register_key": "turn_074:n_0184:round_6_preflight_feishu_agent",
@@ -3327,9 +3384,12 @@
       "blocked_turn": 77,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 82,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 77
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 77,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.4906 too low, treating as separate entity"
     },
     {
       "register_key": "turn_078:n_0192:round_6a_cache_remediation",
@@ -3378,9 +3438,12 @@
       "blocked_turn": 78,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 83,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 78
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0187",
+      "last_seen_turn": 78,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch LIKELY_MERGE: confidence=0.7600, canonical=round_6a_cache_pollution"
     },
     {
       "register_key": "turn_081:n_0195:round_6a_backend_defect",
@@ -3500,9 +3563,12 @@
       "blocked_turn": 81,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 86,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 81
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 81,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch KEEP_DISTINCT: confidence=0.5306 too low, treating as separate entity"
     },
     {
       "register_key": "turn_082:n_0198:backend_defect_repair",
@@ -3622,9 +3688,12 @@
       "blocked_turn": 82,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 87,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 82
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0196",
+      "last_seen_turn": 82,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch LIKELY_MERGE: confidence=0.7755, canonical=round_6a_backend_diagnosis"
     },
     {
       "register_key": "turn_083:n_0201:backend_defect_repair_implementation",
@@ -3663,9 +3732,12 @@
       "blocked_turn": 83,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 88,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 83
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0198",
+      "last_seen_turn": 83,
+      "resolved_at_turn": 84,
+      "resolved_by": "batch_reconciliation",
+      "resolution_note": "Batch LIKELY_MERGE: confidence=0.7368, canonical=backend_defect_repair"
     }
   ]
 }
