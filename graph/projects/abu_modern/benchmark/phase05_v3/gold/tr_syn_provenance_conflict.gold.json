@@ -1,0 +1,51 @@
+{
+  "trajectory_id": "tr_syn_provenance_conflict",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr11_obs01",
+      "expected_active_set": [
+        "tr11.prod_ready.false"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr11_entity",
+          "mentions": [
+            "Broker adapter"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr11.prod_ready.false"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr11_obs02",
+      "expected_active_set": [
+        "tr11.prod_ready.false"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr11_entity",
+          "mentions": [
+            "Broker adapter"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr11.prod_ready.false"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr11_provenance_conflict",
+  "benchmark_note": "该样本用于记录 provenance 裁决目标，测的是裁决保守性，不是鼓励激进失效。"
+}

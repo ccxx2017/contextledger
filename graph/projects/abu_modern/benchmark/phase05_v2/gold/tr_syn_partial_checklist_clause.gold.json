@@ -1,0 +1,73 @@
+{
+  "trajectory_id": "tr_syn_partial_checklist_clause",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr04_obs01",
+      "expected_active_set": [
+        "tr04.backtest.required",
+        "tr04.paper_trade.required",
+        "tr04.slippage_report.required"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr04_entity",
+          "mentions": [
+            "Replay checklist"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr04.backtest.required",
+        "tr04.paper_trade.required"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr04_obs02",
+      "expected_active_set": [
+        "tr04.backtest.required",
+        "tr04.paper_trade.required",
+        "tr04.slippage_report.not_required"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr04_obs02",
+          "target_obs_id": "tr04_obs01",
+          "kind": "partial",
+          "dropped_claims": [
+            "tr04.slippage_report.required"
+          ],
+          "replacement_claims": [
+            "tr04.slippage_report.not_required"
+          ],
+          "kept_claims": [
+            "tr04.backtest.required",
+            "tr04.paper_trade.required"
+          ]
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr04_entity",
+          "mentions": [
+            "Replay checklist"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr04.backtest.required",
+        "tr04.paper_trade.required"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr04_partial_checklist_clause",
+  "benchmark_note": "当前 schema 无法表达 partial 形态，gold 仅记录真实目标，不代表现有系统应能命中。"
+}

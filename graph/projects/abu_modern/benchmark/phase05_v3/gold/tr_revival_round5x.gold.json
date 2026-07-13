@@ -1,0 +1,129 @@
+{
+  "trajectory_id": "tr_revival_round5x",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "obs01",
+      "expected_active_set": [
+        "tr_revival_round5x.obs01.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "TKT-2026-005B_round5"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_revival_round5x.obs01.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs02",
+      "expected_active_set": [
+        "tr_revival_round5x.obs02.active"
+      ],
+      "expected_invalidations": [
+        "tr_revival_round5x.obs01.active"
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "TKT-2026-005B_round5",
+            "TKT-2026-005B_round5.3A_audit"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_revival_round5x.obs02.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs03",
+      "expected_active_set": [
+        "tr_revival_round5x.obs03.active"
+      ],
+      "expected_invalidations": [
+        "tr_revival_round5x.obs02.active"
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "TKT-2026-005B_round5",
+            "TKT-2026-005B_round5.3A_audit",
+            "TKT-2026-005B_round5.3B_fix"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_revival_round5x.obs03.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs04",
+      "expected_active_set": [
+        "tr_revival_round5x.obs04.active"
+      ],
+      "expected_invalidations": [
+        "tr_revival_round5x.obs03.active"
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "TKT-2026-005B_round5",
+            "TKT-2026-005B_round5.3A_audit",
+            "TKT-2026-005B_round5.3B_fix",
+            "TKT-2026-005B_round5.3C_verify"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_revival_round5x.obs04.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs05",
+      "expected_active_set": [
+        "tr_revival_round5x.obs05.active"
+      ],
+      "expected_invalidations": [
+        "tr_revival_round5x.obs04.active"
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "TKT-2026-005B_round5",
+            "TKT-2026-005B_round5.3A_audit",
+            "TKT-2026-005B_round5.3B_fix",
+            "TKT-2026-005B_round5.3C_verify",
+            "TKT-2026-005B_round5.3C_reverify"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_revival_round5x.obs05.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

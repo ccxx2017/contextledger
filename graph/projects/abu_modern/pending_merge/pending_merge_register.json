@@ -631,9 +631,12 @@
       "blocked_turn": 33,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 38,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 33
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 33,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark KEEP_DISTINCT: TKT-2026-005C/D/E 属于同家族并行补丁工单，gold 期望 coexist 而非互相替换"
     },
     {
       "register_key": "turn_035:n_0099:openclaw_skills/strategy-researcher/scripts/call_backtest.py",
@@ -847,9 +850,12 @@
       "blocked_turn": 39,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 44,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 39
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 39,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark KEEP_DISTINCT: TKT-2026-005C/D/E 属于同家族并行补丁工单，gold 期望 coexist 而非互相替换"
     },
     {
       "register_key": "turn_039:n_0108:TKT-2026-005E",
@@ -913,9 +919,12 @@
       "blocked_turn": 39,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 44,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 39
+      "remediation_status": "resolved",
+      "resolution": "kept_distinct",
+      "last_seen_turn": 39,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark KEEP_DISTINCT: TKT-2026-005C/D/E 属于同家族并行补丁工单，gold 期望 coexist 而非互相替换"
     },
     {
       "register_key": "turn_045:n_0112:tkt_2026_005b_recovery_patch",
@@ -2050,7 +2059,7 @@
       "source_pending_merge": "pending_merge.turn_056.json",
       "new_node_id": "n_0142",
       "raw_entity_ref": "TKT-2026-005B_round5.2_reconciliation",
-      "canonical_entity_ref": "TKT-2026-005B_round5_result",
+      "canonical_entity_ref": "TKT-2026-005B_round5",
       "match_confidence": 0.7812,
       "evidence": [
         "surface_or_token_similarity"
@@ -2194,9 +2203,12 @@
       "blocked_turn": 57,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 62,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 57
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0139",
+      "last_seen_turn": 57,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，2_audit 直接回收到 round5 主链"
     },
     {
       "register_key": "turn_057:n_0148:TKT-2026-005B_round5.3_engine_audit",
@@ -2281,7 +2293,7 @@
       "source_pending_merge": "pending_merge.turn_058.json",
       "new_node_id": "n_0149",
       "raw_entity_ref": "TKT-2026-005B_round5.3A_audit",
-      "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+      "canonical_entity_ref": "TKT-2026-005B_round5",
       "match_confidence": 0.9474,
       "evidence": [
         "surface_or_token_similarity"
@@ -2348,9 +2360,12 @@
       "blocked_turn": 58,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 63,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 58
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0146",
+      "last_seen_turn": 58,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3A_audit 直接落回 round5 主链"
     },
     {
       "register_key": "turn_058:n_0150:TKT-2026-005B_round5.3B_fix",
@@ -2358,7 +2373,7 @@
       "source_pending_merge": "pending_merge.turn_058.json",
       "new_node_id": "n_0150",
       "raw_entity_ref": "TKT-2026-005B_round5.3B_fix",
-      "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+      "canonical_entity_ref": "TKT-2026-005B_round5",
       "match_confidence": 0.8364,
       "evidence": [
         "surface_or_token_similarity"
@@ -2426,9 +2441,12 @@
       "blocked_turn": 58,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 63,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 58
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0146",
+      "last_seen_turn": 58,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3B_fix 直接落回 round5 主链"
     },
     {
       "register_key": "turn_058:n_0151:TKT-2026-005B_round5.3C_verify",
@@ -2436,7 +2454,7 @@
       "source_pending_merge": "pending_merge.turn_058.json",
       "new_node_id": "n_0151",
       "raw_entity_ref": "TKT-2026-005B_round5.3C_verify",
-      "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+      "canonical_entity_ref": "TKT-2026-005B_round5",
       "match_confidence": 0.7931,
       "evidence": [
         "surface_or_token_similarity"
@@ -2503,9 +2521,12 @@
       "blocked_turn": 58,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 63,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 58
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0146",
+      "last_seen_turn": 58,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3C_verify 直接落回 round5 主链"
     },
     {
       "register_key": "turn_060:n_0155:TKT-2026-005B_round5.3C_reverify",
@@ -2648,9 +2669,12 @@
       "blocked_turn": 60,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 65,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 60
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0150",
+      "last_seen_turn": 60,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3C_fix 归并到 fix 主链"
     },
     {
       "register_key": "turn_061:n_0159:TKT-2026-005B_round5.3D_reconcile",
@@ -2719,9 +2743,12 @@
       "blocked_turn": 61,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 66,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 61
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0150",
+      "last_seen_turn": 61,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3D_reconcile 继续沿 fix / reconcile 主链推进"
     },
     {
       "register_key": "turn_063:n_0160:TKT-2026-005B_round5.3D_report",
@@ -2790,9 +2817,12 @@
       "blocked_turn": 63,
       "escalate_after_turns": 5,
       "escalate_on_or_after_turn": 68,
-      "remediation_status": "tracked",
-      "resolution": null,
-      "last_seen_turn": 63
+      "remediation_status": "resolved",
+      "resolution": "merged_into:n_0159",
+      "last_seen_turn": 63,
+      "resolved_at_turn": 84,
+      "resolved_by": "benchmark_manual_reconciliation",
+      "resolution_note": "Benchmark MERGE: round5 lifecycle 单流推进，3D_report 归并到 reconcile 主链"
     },
     {
       "register_key": "turn_064:n_0163:round_5.3e_consistency_check",

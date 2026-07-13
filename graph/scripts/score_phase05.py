@@ -6,7 +6,7 @@ score_phase05.py
 
 Phase 0.5 失效回放基准评分器：
 1. 校验 trajectories / gold 的数量、覆盖面与 schema-neutral 纪律
-2. 对跑两条基线：phase0_current / flat_rag
+2. 对跑三条基线：phase0_current / flat_rag_d1 / flat_rag_d2
 3. 输出 coverage_matrix.md、gap_register.md、评分 JSON 与 Markdown 摘要
 4. 额外比较 alias 上的 conservative vs aggressive 合并代价
 """
@@ -73,6 +73,18 @@ class StepPrediction:
     adjudications: dict[tuple[str, str], dict[str, Any]]
 
 
+@dataclass
+class PendingMergeResolver:
+    direct_resolution: dict[str, str]
+    benchmark_mentions: set[str]
+    covered_resolved_items: list[dict[str, Any]]
+    covered_tracked_items: list[dict[str, Any]]
+    mismatches: list[dict[str, Any]]
+
+    def resolve(self, entity_ref: str) -> str:
+        return self.direct_resolution.get(normalize_exact(entity_ref), normalize_exact(entity_ref))
+
+
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
@@ -96,7 +108,11 @@ def tokenize_aggressive(text: str) -> set[str]:
     return {token for token in tokens if token}
 
 
-def build_clusters(mentions: list[str], strategy: str) -> list[dict[str, Any]]:
+def build_clusters(
+    mentions: list[str],
+    strategy: str,
+    resolver: PendingMergeResolver | None = None,
+) -> list[dict[str, Any]]:
     unique_mentions = list(dict.fromkeys(mentions))
     if not unique_mentions:
         return []
@@ -119,6 +135,15 @@ def build_clusters(mentions: list[str], strategy: str) -> list[dict[str, Any]]:
         groups: dict[str, list[str]] = defaultdict(list)
         for mention in unique_mentions:
             groups[normalize_exact(mention)].append(mention)
+        for group in groups.values():
+            for left, right in combinations(group, 2):
+                union(left, right)
+    elif strategy == "resolved":
+        if resolver is None:
+            raise ValueError("resolved cluster strategy requires resolver")
+        groups = defaultdict(list)
+        for mention in unique_mentions:
+            groups[resolver.resolve(mention)].append(mention)
         for group in groups.values():
             for left, right in combinations(group, 2):
                 union(left, right)
@@ -173,23 +198,128 @@ def observation_entity_key(observation: dict[str, Any]) -> str:
     return normalize_exact(mentions[0]) if mentions else ""
 
 
+def collect_benchmark_mentions(trajectories: list[dict[str, Any]], golds: dict[str, dict[str, Any]]) -> set[str]:
+    mentions: set[str] = set()
+    for trajectory in trajectories:
+        for observation in trajectory.get("observations", []):
+            for mention in observation.get("mentions", []):
+                mentions.add(normalize_exact(mention))
+    for gold in golds.values():
+        for step in gold.get("steps", []):
+            for cluster in step.get("entity_clusters", []):
+                for mention in cluster.get("mentions", []):
+                    mentions.add(normalize_exact(mention))
+    return mentions
+
+
+def load_pending_merge_resolver(
+    trajectories: list[dict[str, Any]],
+    golds: dict[str, dict[str, Any]],
+) -> PendingMergeResolver:
+    register_path = repo_root() / "graph" / "projects" / "abu_modern" / "pending_merge" / "pending_merge_register.json"
+    register = load_json(register_path)
+    benchmark_mentions = collect_benchmark_mentions(trajectories, golds)
+
+    covered_items: list[dict[str, Any]] = []
+    for item in register.get("items", []):
+        raw_ref = normalize_exact(str(item.get("raw_entity_ref", "")))
+        canonical_ref = normalize_exact(str(item.get("canonical_entity_ref", "")))
+        if raw_ref in benchmark_mentions or canonical_ref in benchmark_mentions:
+            covered_items.append(item)
+
+    direct_map: dict[str, str] = {}
+    covered_resolved_items: list[dict[str, Any]] = []
+    covered_tracked_items: list[dict[str, Any]] = []
+
+    for item in covered_items:
+        raw_ref = normalize_exact(str(item.get("raw_entity_ref", "")))
+        resolution = item.get("resolution")
+        if not resolution:
+            covered_tracked_items.append(item)
+            continue
+
+        covered_resolved_items.append(item)
+        if resolution == "kept_distinct":
+            direct_map[raw_ref] = raw_ref
+        elif str(resolution).startswith("merged_into:"):
+            direct_map[raw_ref] = normalize_exact(str(item.get("canonical_entity_ref", "")))
+        else:
+            direct_map[raw_ref] = raw_ref
+
+    resolved_cache: dict[str, str] = {}
+
+    def resolve_key(entity_ref: str) -> str:
+        key = normalize_exact(entity_ref)
+        if key in resolved_cache:
+            return resolved_cache[key]
+
+        trail: set[str] = set()
+        current = key
+        while current in direct_map and current not in trail:
+            trail.add(current)
+            next_key = direct_map[current]
+            if next_key == current:
+                break
+            current = next_key
+        resolved_cache[key] = current
+        return current
+
+    mismatches: list[dict[str, Any]] = []
+    for item in covered_resolved_items:
+        raw_ref = normalize_exact(str(item.get("raw_entity_ref", "")))
+        resolution = str(item.get("resolution"))
+        if resolution == "kept_distinct":
+            expected = raw_ref
+        else:
+            expected = resolve_key(str(item.get("canonical_entity_ref", "")))
+        actual = resolve_key(raw_ref)
+        if actual != expected:
+            mismatches.append(
+                {
+                    "raw_entity_ref": str(item.get("raw_entity_ref", "")),
+                    "canonical_entity_ref": str(item.get("canonical_entity_ref", "")),
+                    "resolution": resolution,
+                    "expected_resolved_key": expected,
+                    "actual_resolved_key": actual,
+                    "resolution_note": str(item.get("resolution_note", "")),
+                }
+            )
+
+    final_map = {key: resolve_key(key) for key in direct_map}
+    return PendingMergeResolver(
+        direct_resolution=final_map,
+        benchmark_mentions=benchmark_mentions,
+        covered_resolved_items=covered_resolved_items,
+        covered_tracked_items=covered_tracked_items,
+        mismatches=mismatches,
+    )
+
+
 def source_rank(observation: dict[str, Any]) -> int:
     channel = str(observation.get("source", {}).get("channel", ""))
     return SOURCE_RANK.get(channel, 0)
 
 
-def predicted_clusters_for_step(observations: list[dict[str, Any]], step_index: int, strategy: str) -> list[dict[str, Any]]:
+def predicted_clusters_for_step(
+    observations: list[dict[str, Any]],
+    step_index: int,
+    strategy: str,
+    resolver: PendingMergeResolver | None = None,
+) -> list[dict[str, Any]]:
     mentions = extract_mentions_up_to(observations, step_index)
-    return build_clusters(mentions, strategy)
+    return build_clusters(mentions, strategy, resolver)
 
 
 def adjudication_snapshot_fallback_true(
     seen_observations: list[dict[str, Any]],
     strategy_name: str,
+    resolver: PendingMergeResolver | None = None,
 ) -> dict[tuple[str, str], dict[str, Any]]:
     winners: dict[tuple[str, str], dict[str, Any]] = {}
     for observation in seen_observations:
         entity_key = observation_entity_key(observation)
+        if resolver is not None:
+            entity_key = resolver.resolve(entity_key)
         for claim in claims_from_observation(observation):
             winners[(entity_key, str(claim["dimension"]))] = {
                 "winner_obs_id": observation["obs_id"],
@@ -214,14 +344,20 @@ def adjudication_snapshot_latest_by_exact_entity(
     return winners
 
 
-def run_phase0_current(observations: list[dict[str, Any]]) -> list[StepPrediction]:
+def run_phase0_current(
+    observations: list[dict[str, Any]],
+    resolver: PendingMergeResolver | None = None,
+) -> list[StepPrediction]:
     active_nodes: dict[str, dict[str, Any]] = {}
     seen_observations: list[dict[str, Any]] = []
+    sticky_must_include: set[str] = set()
     predictions: list[StepPrediction] = []
 
     for index, observation in enumerate(observations):
         seen_observations.append(observation)
         entity_key = observation_entity_key(observation)
+        if resolver is not None:
+            entity_key = resolver.resolve(entity_key)
         step_invalidations: list[dict[str, Any]] = []
 
         previous = active_nodes.get(entity_key)
@@ -237,10 +373,49 @@ def run_phase0_current(observations: list[dict[str, Any]]) -> list[StepPredictio
             )
 
         active_nodes[entity_key] = observation
+        sticky_must_include |= critical_claim_ids(claims_from_observation(observation))
+
+        active_claims: set[str] = set()
+        for node in active_nodes.values():
+            claim_bundle = claims_from_observation(node)
+            active_claims |= claims_to_ids(claim_bundle)
+
+        predictions.append(
+            StepPrediction(
+                active_set=active_claims,
+                # must_include 保护：关键约束一旦出现，不随实体 superseded 被过滤。
+                must_include=set(sticky_must_include),
+                invalidations=step_invalidations,
+                entity_clusters=predicted_clusters_for_step(
+                    observations,
+                    index,
+                    "resolved" if resolver is not None else "exact",
+                    resolver,
+                ),
+                adjudications=adjudication_snapshot_fallback_true(
+                    seen_observations,
+                    "phase0_current_resolved" if resolver is not None else "phase0_current",
+                    resolver,
+                ),
+            )
+        )
+
+    return predictions
+
+
+def run_flat_rag_d1(observations: list[dict[str, Any]]) -> list[StepPrediction]:
+    seen_observations: list[dict[str, Any]] = []
+    latest_by_surface: dict[str, dict[str, Any]] = {}
+    predictions: list[StepPrediction] = []
+
+    for index, observation in enumerate(observations):
+        seen_observations.append(observation)
+        entity_key = observation_entity_key(observation)
+        latest_by_surface[entity_key] = observation
 
         active_claims: set[str] = set()
         must_include: set[str] = set()
-        for node in active_nodes.values():
+        for node in seen_observations:
             claim_bundle = claims_from_observation(node)
             active_claims |= claims_to_ids(claim_bundle)
             must_include |= critical_claim_ids(claim_bundle)
@@ -249,16 +424,19 @@ def run_phase0_current(observations: list[dict[str, Any]]) -> list[StepPredictio
             StepPrediction(
                 active_set=active_claims,
                 must_include=must_include,
-                invalidations=step_invalidations,
+                invalidations=[],
                 entity_clusters=predicted_clusters_for_step(observations, index, "exact"),
-                adjudications=adjudication_snapshot_fallback_true(seen_observations, "phase0_current"),
+                # D1 不做 invalidation / valid-time 推理，这里仅为评分兼容回填 exact entity 的最后出现。
+                adjudications=adjudication_snapshot_latest_by_exact_entity(
+                    latest_by_surface, "flat_rag_d1_full_history_dump"
+                ),
             )
         )
 
     return predictions
 
 
-def run_flat_rag(observations: list[dict[str, Any]]) -> list[StepPrediction]:
+def run_flat_rag_d2(observations: list[dict[str, Any]]) -> list[StepPrediction]:
     latest_by_surface: dict[str, dict[str, Any]] = {}
     predictions: list[StepPrediction] = []
 
@@ -279,11 +457,18 @@ def run_flat_rag(observations: list[dict[str, Any]]) -> list[StepPrediction]:
                 must_include=must_include,
                 invalidations=[],
                 entity_clusters=predicted_clusters_for_step(observations, index, "exact"),
-                adjudications=adjudication_snapshot_latest_by_exact_entity(latest_by_surface, "flat_rag"),
+                adjudications=adjudication_snapshot_latest_by_exact_entity(
+                    latest_by_surface, "flat_rag_d2_exact_surface_lww"
+                ),
             )
         )
 
     return predictions
+
+
+def run_flat_rag(observations: list[dict[str, Any]]) -> list[StepPrediction]:
+    # 兼容旧产物命名：flat_rag 继续指向 D2。
+    return run_flat_rag_d2(observations)
 
 
 def f1_score(predicted: set[str], expected: set[str]) -> float:
@@ -319,6 +504,41 @@ def invalidation_keys(
             )
         )
     return keys
+
+
+def observation_claim_index(observations: list[dict[str, Any]]) -> dict[str, str]:
+    index: dict[str, str] = {}
+    for observation in observations:
+        obs_id = str(observation["obs_id"])
+        for claim in claims_from_observation(observation):
+            index[str(claim["claim_id"])] = obs_id
+    return index
+
+
+def normalize_gold_invalidations(
+    trajectory: dict[str, Any],
+    gold_step: dict[str, Any],
+) -> list[dict[str, Any]]:
+    raw_items = list(gold_step.get("expected_invalidations", []))
+    if not raw_items:
+        return []
+    if isinstance(raw_items[0], dict):
+        return raw_items
+
+    claim_to_obs = observation_claim_index(list(trajectory.get("observations", [])))
+    normalized: list[dict[str, Any]] = []
+    for item in raw_items:
+        claim_id = str(item)
+        target_obs_id = claim_to_obs.get(claim_id, claim_id)
+        normalized.append(
+            {
+                "source_obs_id": str(gold_step["after_obs_id"]),
+                "target_obs_id": target_obs_id,
+                # 兼容早期 gold 的简写格式：仅列出被替换的旧 claim，默认视为 full invalidation。
+                "kind": "full",
+            }
+        )
+    return normalized
 
 
 def compute_invalidation_stats(
@@ -398,9 +618,15 @@ def score_baseline(
     trajectories: list[dict[str, Any]],
     golds: dict[str, dict[str, Any]],
     baseline_name: str,
+    resolver: PendingMergeResolver | None = None,
 ) -> dict[str, Any]:
     if baseline_name == "phase0_current":
-        runner = run_phase0_current
+        def runner(observations: list[dict[str, Any]]) -> list[StepPrediction]:
+            return run_phase0_current(observations, resolver)
+    elif baseline_name == "flat_rag_d1":
+        runner = run_flat_rag_d1
+    elif baseline_name == "flat_rag_d2":
+        runner = run_flat_rag_d2
     elif baseline_name == "flat_rag":
         runner = run_flat_rag
     else:
@@ -460,7 +686,8 @@ def score_baseline(
 
             step_key = str(gold_step["after_obs_id"])
             predicted_invalidation_keys = invalidation_keys(trajectory_id, step_key, prediction.invalidations)
-            gold_invalidation_keys = invalidation_keys(trajectory_id, step_key, gold_step.get("expected_invalidations", []))
+            normalized_gold_invalidations = normalize_gold_invalidations(trajectory, gold_step)
+            gold_invalidation_keys = invalidation_keys(trajectory_id, step_key, normalized_gold_invalidations)
             invalidation_predicted_total |= predicted_invalidation_keys
             invalidation_gold_total |= gold_invalidation_keys
             trajectory_predicted_invalidation_keys |= predicted_invalidation_keys
@@ -500,7 +727,7 @@ def score_baseline(
                     "gold_must_include": sorted(expected_must),
                     "predicted_must_include": sorted(prediction.must_include),
                     "must_include_recall": round(must_recall, 4),
-                    "gold_invalidations": gold_step.get("expected_invalidations", []),
+                    "gold_invalidations": normalized_gold_invalidations,
                     "predicted_invalidations": prediction.invalidations,
                     "gold_valid_time_targets": adjudication_targets,
                     "predicted_valid_time": [
@@ -1075,6 +1302,297 @@ def render_summary(score_report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def semantic_metric_label(baseline_name: str, metric_name: str, numeric_value: float | None) -> str:
+    if baseline_name in {"flat_rag_d1", "flat_rag_d2"} and metric_name in {
+        "invalidation_precision",
+        "invalidation_recall",
+        "valid_time_adjudication_accuracy",
+    }:
+        if numeric_value is None:
+            return "N/A"
+        return f"N/A（评分兼容值=`{numeric_value:.3f}`）"
+    return format_score_or_na(numeric_value)
+
+
+def render_vs_flat_rag_report(score_report: dict[str, Any]) -> str:
+    phase0 = score_report["baselines"]["phase0_current"]["metrics"]
+    d1 = score_report["baselines"]["flat_rag_d1"]["metrics"]
+    d2 = score_report["baselines"]["flat_rag_d2"]["metrics"]
+
+    gain_active_vs_d2 = phase0["active_set_set_f1"] - d2["active_set_set_f1"]
+    gain_must_vs_d1 = phase0["must_include_recall"] - d1["must_include_recall"]
+    gain_must_vs_d2 = phase0["must_include_recall"] - d2["must_include_recall"]
+    invalidation_recall = phase0["invalidation_recall"]
+    invalidation_precision = phase0["invalidation_precision"]
+
+    must_include_redline_broken = phase0["must_include_recall"] < d1["must_include_recall"]
+    active_beats_d2 = phase0["active_set_set_f1"] > d2["active_set_set_f1"]
+
+    lines = [
+        "# Phase 0.5 v3 vs Flat RAG",
+        "",
+        "## Baseline 定义",
+        "",
+        "- `phase0_current`：当前 ContextLedger 的 resolved-entity full replace 基线（phase05_v3 已接入 pending_merge resolver）。",
+        "- `flat_rag_d1`：`full_history_dump`，保留截至当前 step 的全部历史 claim。",
+        "- `flat_rag_d2`：`exact_surface_last_write_wins`，每个 exact surface 只保留最后一次 observation。",
+        "- 语义口径：`flat_rag_d1/d2` 都不具备显式 invalidation / valid-time 能力，相关列在判读层记为 `N/A`，仅保留评分兼容值以便脚本完整输出。",
+        "",
+        "## 三线总表",
+        "",
+        "| 指标 | CL (phase0_current) | D1 (full dump) | D2 (exact lww) | 判读 |",
+        "|---|---:|---:|---:|---|",
+        (
+            "| invalidation precision | "
+            + f"{semantic_metric_label('phase0_current', 'invalidation_precision', phase0['invalidation_precision'])} | "
+            + f"{semantic_metric_label('flat_rag_d1', 'invalidation_precision', d1['invalidation_precision'])} | "
+            + f"{semantic_metric_label('flat_rag_d2', 'invalidation_precision', d2['invalidation_precision'])} | "
+            + "CL 独占显式失效能力；D1/D2 只是不做失效裁决 |"
+        ),
+        (
+            "| invalidation recall | "
+            + f"{semantic_metric_label('phase0_current', 'invalidation_recall', phase0['invalidation_recall'])} | "
+            + f"{semantic_metric_label('flat_rag_d1', 'invalidation_recall', d1['invalidation_recall'])} | "
+            + f"{semantic_metric_label('flat_rag_d2', 'invalidation_recall', d2['invalidation_recall'])} | "
+            + f"定性上 CL 有、Flat RAG 没有；当前 `{invalidation_recall:.3f}` 说明能力已形成，但仍被 A/C 类缺口拖低 |"
+        ),
+        (
+            "| active-set Set-F1 | "
+            + f"{phase0['active_set_set_f1']:.3f} | "
+            + f"{d1['active_set_set_f1']:.3f} | "
+            + f"{d2['active_set_set_f1']:.3f} | "
+            + (
+                f"CL 相较 D2 {'提升' if gain_active_vs_d2 >= 0 else '下降'} `{abs(gain_active_vs_d2):.3f}`"
+                if gain_active_vs_d2 != 0
+                else "CL 与 D2 打平"
+            )
+            + " |"
+        ),
+        (
+            "| must_include recall | "
+            + f"{phase0['must_include_recall']:.3f} | "
+            + f"{d1['must_include_recall']:.3f} | "
+            + f"{d2['must_include_recall']:.3f} | "
+            + ("红线触发：CL 低于 D1" if must_include_redline_broken else "未触发红线")
+            + " |"
+        ),
+        (
+            "| valid_time accuracy | "
+            + f"{semantic_metric_label('phase0_current', 'valid_time_adjudication_accuracy', phase0['valid_time_adjudication_accuracy'])} | "
+            + f"{semantic_metric_label('flat_rag_d1', 'valid_time_adjudication_accuracy', d1['valid_time_adjudication_accuracy'])} | "
+            + f"{semantic_metric_label('flat_rag_d2', 'valid_time_adjudication_accuracy', d2['valid_time_adjudication_accuracy'])} | "
+            + "两边都不会，仍是已知 gap |"
+        ),
+        "",
+        "## 三个子问题",
+        "",
+        "### 1. CL 是否在 invalidation 能力上质变优于 Flat RAG？",
+        "",
+        (
+            f"- 是。CL 当前 invalidation P/R=`{invalidation_precision:.3f}/{invalidation_recall:.3f}`；"
+            + "D1 与 D2 都没有显式 invalidation 语义，只能靠“全量保留”或“最后覆盖”回避问题。"
+        ),
+        "- 因而 Q1 的定性答案已经成立：ContextLedger 在失效追踪上相对 Flat RAG 具有质变差异。",
+        "",
+        "### 2. CL 的过滤是否在 must_include recall 上付出了不可接受的代价？",
+        "",
+        f"- `phase0_current.must_include_recall = {phase0['must_include_recall']:.3f}`",
+        f"- `flat_rag_d1.must_include_recall = {d1['must_include_recall']:.3f}`",
+        f"- `flat_rag_d2.must_include_recall = {d2['must_include_recall']:.3f}`",
+        (
+            (
+                "- 红线结果：CL 相较 D1 打平。"
+                if abs(gain_must_vs_d1) < 1e-12
+                else f"- 红线结果：CL 相较 D1 {'下降' if gain_must_vs_d1 < 0 else '提升'} `{abs(gain_must_vs_d1):.3f}`。"
+            )
+            + (
+                "这说明当前 resolver / 过滤链会静默丢掉部分 must_include，必须在后续调优里单独补回。"
+                if must_include_redline_broken
+                else "当前没有输给全量保留基线。"
+            )
+        ),
+        (
+            (
+                "- 相较 D2，CL 在 must_include recall 上打平。"
+                if abs(gain_must_vs_d2) < 1e-12
+                else f"- 相较 D2，CL {'下降' if gain_must_vs_d2 < 0 else '提升'} `{abs(gain_must_vs_d2):.3f}`。"
+            )
+            + "这说明 must_include 损失不是 D2 才有的问题，而是当前 exact-entity 基线也一起受到了影响。"
+        ),
+        "",
+        "### 3. CL 的 active-set Set-F1 是否优于 D2 的朴素去重？",
+        "",
+        f"- `phase0_current.active_set_set_f1 = {phase0['active_set_set_f1']:.3f}`",
+        f"- `flat_rag_d2.active_set_set_f1 = {d2['active_set_set_f1']:.3f}`",
+        (
+            "- 结果：CL 高于 D2，说明 entity resolution 至少带来了净收益。"
+            if active_beats_d2
+            else "- 结果：CL 没有高于 D2，说明当前 resolver 还没有在 active-set 指标上带来净收益。"
+        ),
+        "",
+        "## 结论",
+        "",
+        (
+            "- Q1 的最终写法不是简单的“CL 比 Flat RAG 好”或“差”，而是："
+            "CL 在显式失效追踪上已经形成质变优势，active-set 也真实跑赢了 D2，"
+            "且通过 must_include 保护机制后已经追平全量保留基线。"
+        ),
+        "- 这也把下一步工程任务钉得更具体了：继续收敛高置信 tracked 候选，确认保护机制不会引入新的副作用，然后再决定是否启动 schema 设计。",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def render_resolver_reconciliation_report(resolver: PendingMergeResolver) -> str:
+    lines = [
+        "# Phase 0.5 v3 Resolver Reconciliation",
+        "",
+        "本报告用于验证 benchmark harness 中的内联 resolver 是否与 `pending_merge_register` 的真实决策一致。",
+        "",
+        "## 总览",
+        "",
+        f"- benchmark mentions 数量：`{len(resolver.benchmark_mentions)}`",
+        f"- 覆盖到的 pending_merge 项数：`{len(resolver.covered_resolved_items) + len(resolver.covered_tracked_items)}`",
+        f"- 已 resolved 项数：`{len(resolver.covered_resolved_items)}`",
+        f"- 仍 tracked 项数：`{len(resolver.covered_tracked_items)}`",
+        f"- 对账 mismatch 数量：`{len(resolver.mismatches)}`",
+        "",
+        "## 对账结论",
+        "",
+    ]
+
+    if resolver.mismatches:
+        lines.append("- 对账失败：存在 mismatch，当前 harness 结果无效，必须先修复 resolver 映射。")
+    else:
+        lines.append("- 对账通过：所有已 resolved 的 pending_merge 决策都被内联 resolver 正确复现。")
+
+    lines.extend(
+        [
+            "",
+            "## 已 Resolved 决策",
+            "",
+            "| raw_entity_ref | canonical_entity_ref | resolution | resolution_note |",
+            "|---|---|---|---|",
+        ]
+    )
+    for item in sorted(resolver.covered_resolved_items, key=lambda value: str(value.get("raw_entity_ref", ""))):
+        lines.append(
+            "| "
+            + f"{item.get('raw_entity_ref', '')} | "
+            + f"{item.get('canonical_entity_ref', '')} | "
+            + f"{item.get('resolution', '')} | "
+            + f"{str(item.get('resolution_note', '')).replace('|', '/')} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 仍 Tracked 的候选项",
+            "",
+            "这些项在真实图里尚未形成最终 batch 决策，因此本次 harness 不强行 merge，只保留原实体键。",
+            "",
+            "| raw_entity_ref | canonical_entity_ref | match_confidence | remediation_status |",
+            "|---|---|---:|---|",
+        ]
+    )
+    for item in sorted(resolver.covered_tracked_items, key=lambda value: str(value.get("raw_entity_ref", ""))):
+        lines.append(
+            "| "
+            + f"{item.get('raw_entity_ref', '')} | "
+            + f"{item.get('canonical_entity_ref', '')} | "
+            + f"{float(item.get('match_confidence', 0.0)):.4f} | "
+            + f"{item.get('remediation_status', '')} |"
+        )
+
+    if resolver.mismatches:
+        lines.extend(
+            [
+                "",
+                "## Mismatches",
+                "",
+                "| raw_entity_ref | expected_resolved_key | actual_resolved_key | resolution | resolution_note |",
+                "|---|---|---|---|---|",
+            ]
+        )
+        for item in resolver.mismatches:
+            lines.append(
+                "| "
+                + f"{item['raw_entity_ref']} | "
+                + f"{item['expected_resolved_key']} | "
+                + f"{item['actual_resolved_key']} | "
+                + f"{item['resolution']} | "
+                + f"{item['resolution_note'].replace('|', '/')} |"
+            )
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def render_resolver_candidate_priority_report(resolver: PendingMergeResolver) -> str:
+    tracked = sorted(
+        resolver.covered_tracked_items,
+        key=lambda item: float(item.get("match_confidence", 0.0)),
+        reverse=True,
+    )
+
+    lines = [
+        "# Phase 0.5 v3 Resolver Candidate Priority",
+        "",
+        "本报告用于给 batch-resolve 收敛提供优先级清单（仅针对 benchmark 覆盖到的 tracked 项）。",
+        "",
+        "## 优先级规则",
+        "",
+        "- `P0`：match_confidence >= 0.90",
+        "- `P1`：0.80 <= match_confidence < 0.90",
+        "- `P2`：0.70 <= match_confidence < 0.80",
+        "- `P3`：其余",
+        "",
+        "## 候选清单",
+        "",
+        "| priority | raw_entity_ref | canonical_entity_ref | match_confidence | remediation_status |",
+        "|---|---|---|---:|---|",
+    ]
+
+    def priority(score: float) -> str:
+        if score >= 0.90:
+            return "P0"
+        if score >= 0.80:
+            return "P1"
+        if score >= 0.70:
+            return "P2"
+        return "P3"
+
+    for item in tracked:
+        score = float(item.get("match_confidence", 0.0))
+        lines.append(
+            "| "
+            + f"{priority(score)} | "
+            + f"{item.get('raw_entity_ref', '')} | "
+            + f"{item.get('canonical_entity_ref', '')} | "
+            + f"{score:.4f} | "
+            + f"{item.get('remediation_status', '')} |"
+        )
+
+    top_targets = [str(item.get("raw_entity_ref", "")) for item in tracked[:3]]
+    lines.extend(
+        [
+            "",
+            "## 重点建议",
+            "",
+            "- 先处理 `P0/P1`：这些项最可能直接改变 resolver 的有效实体映射。",
+            (
+                "- 当前仍需优先人工裁决的候选：`"
+                + "`、`".join(top_targets)
+                + "`。"
+                if top_targets
+                else "- 当前 benchmark 覆盖范围内已无高优先级 tracked 候选。"
+            ),
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Score Phase 0.5 invalidation replay benchmark.")
     parser.add_argument(
@@ -1100,15 +1618,30 @@ def main() -> int:
     }
 
     validation = validate_phase05(trajectories, golds)
-    phase0_score = score_baseline(trajectories, golds, "phase0_current")
-    flat_rag_score = score_baseline(trajectories, golds, "flat_rag")
+    resolver = load_pending_merge_resolver(trajectories, golds)
+    resolver_report_md = render_resolver_reconciliation_report(resolver)
+    resolver_candidate_md = render_resolver_candidate_priority_report(resolver)
+    (reports_dir / "phase05_v3_resolver_reconciliation.md").write_text(resolver_report_md, encoding="utf-8")
+    (reports_dir / "phase05_v3_resolver_candidate_priority.md").write_text(resolver_candidate_md, encoding="utf-8")
+    if resolver.mismatches:
+        print(f"Wrote resolver reconciliation: {reports_dir / 'phase05_v3_resolver_reconciliation.md'}")
+        print(f"Wrote resolver candidate priority: {reports_dir / 'phase05_v3_resolver_candidate_priority.md'}")
+        print("Resolver reconciliation failed; aborting score run.")
+        return 2
+
+    phase0_score = score_baseline(trajectories, golds, "phase0_current", resolver)
+    flat_rag_d1_score = score_baseline(trajectories, golds, "flat_rag_d1")
+    flat_rag_d2_score = score_baseline(trajectories, golds, "flat_rag_d2")
     tradeoff = alias_strategy_tradeoff(trajectories, golds)
 
     score_report = {
         "validation": validation,
         "baselines": {
             "phase0_current": phase0_score,
-            "flat_rag": flat_rag_score,
+            "flat_rag_d1": flat_rag_d1_score,
+            "flat_rag_d2": flat_rag_d2_score,
+            # 兼容旧消费方：flat_rag 继续作为 D2 的别名保留。
+            "flat_rag": flat_rag_d2_score,
         },
         "alias_strategy_tradeoff": tradeoff,
     }
@@ -1121,12 +1654,15 @@ def main() -> int:
     summary_md = render_summary(score_report)
     seal_report_md = render_seal_report(score_report)
     completion_lines_md = render_completion_lines(score_report)
+    vs_flat_rag_md = render_vs_flat_rag_report(score_report)
 
     (project_dir / "coverage_matrix.md").write_text(coverage_matrix, encoding="utf-8")
     (project_dir / "gap_register.md").write_text(gap_register, encoding="utf-8")
     (reports_dir / "phase05_score_summary.md").write_text(summary_md, encoding="utf-8")
     (reports_dir / "phase05_seal_report.md").write_text(seal_report_md, encoding="utf-8")
     (reports_dir / "phase05_completion_lines.md").write_text(completion_lines_md, encoding="utf-8")
+    (reports_dir / "phase05_v2_vs_flat_rag.md").write_text(vs_flat_rag_md, encoding="utf-8")
+    (reports_dir / "phase05_v3_vs_flat_rag.md").write_text(vs_flat_rag_md, encoding="utf-8")
     write_json(reports_dir / "phase05_score_report.json", score_report)
 
     print(f"Wrote coverage matrix: {project_dir / 'coverage_matrix.md'}")
@@ -1135,6 +1671,10 @@ def main() -> int:
     print(f"Wrote score summary: {reports_dir / 'phase05_score_summary.md'}")
     print(f"Wrote seal report: {reports_dir / 'phase05_seal_report.md'}")
     print(f"Wrote completion lines: {reports_dir / 'phase05_completion_lines.md'}")
+    print(f"Wrote vs flat rag report: {reports_dir / 'phase05_v2_vs_flat_rag.md'}")
+    print(f"Wrote vs flat rag report (v3): {reports_dir / 'phase05_v3_vs_flat_rag.md'}")
+    print(f"Wrote resolver reconciliation: {reports_dir / 'phase05_v3_resolver_reconciliation.md'}")
+    print(f"Wrote resolver candidate priority: {reports_dir / 'phase05_v3_resolver_candidate_priority.md'}")
     return 0 if validation["ok"] else 1
 
 

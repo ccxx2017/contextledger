@@ -1,0 +1,67 @@
+{
+  "trajectory_id": "tr_syn_conditional_window_exception",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr06_obs01",
+      "expected_active_set": [
+        "tr06.rebalance.blocked.all_day"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr06_entity",
+          "mentions": [
+            "Risk gate"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr06.rebalance.blocked.all_day"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr06_obs02",
+      "expected_active_set": [
+        "tr06.rebalance.blocked.all_day",
+        "tr06.rebalance.allowed.close_auction"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr06_obs02",
+          "target_obs_id": "tr06_obs01",
+          "kind": "conditional",
+          "dropped_claims": [],
+          "replacement_claims": [
+            "tr06.rebalance.allowed.close_auction"
+          ],
+          "kept_claims": [
+            "tr06.rebalance.blocked.all_day"
+          ],
+          "carve_out": "time_window=15:00-15:30"
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr06_entity",
+          "mentions": [
+            "Risk gate"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr06.rebalance.blocked.all_day",
+        "tr06.rebalance.allowed.close_auction"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr06_conditional_window_exception",
+  "benchmark_note": "当前 schema 无法表达 conditional carve-out，gold 仅记录真实目标，不代表现有系统应能命中。"
+}

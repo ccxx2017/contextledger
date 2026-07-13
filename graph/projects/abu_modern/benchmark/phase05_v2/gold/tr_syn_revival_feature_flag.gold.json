@@ -1,0 +1,96 @@
+{
+  "trajectory_id": "tr_syn_revival_feature_flag",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr07_obs01",
+      "expected_active_set": [
+        "tr07.feature.enabled.v1"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr07_entity",
+          "mentions": [
+            "Alpha feature"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr07.feature.enabled.v1"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr07_obs02",
+      "expected_active_set": [
+        "tr07.feature.disabled"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr07_obs02",
+          "target_obs_id": "tr07_obs01",
+          "kind": "full",
+          "dropped_claims": [
+            "tr07.feature.enabled.v1"
+          ],
+          "replacement_claims": [
+            "tr07.feature.disabled"
+          ]
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr07_entity",
+          "mentions": [
+            "Alpha feature"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr07.feature.disabled"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr07_obs03",
+      "expected_active_set": [
+        "tr07.feature.enabled.v2"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr07_obs03",
+          "target_obs_id": "tr07_obs02",
+          "kind": "revival",
+          "dropped_claims": [
+            "tr07.feature.disabled"
+          ],
+          "replacement_claims": [
+            "tr07.feature.enabled.v2"
+          ]
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr07_entity",
+          "mentions": [
+            "Alpha feature"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr07.feature.enabled.v2"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr07_revival_feature_flag",
+  "benchmark_note": "当前 schema 无法显式表达 revival，gold 仅记录真实目标，不代表现有系统应能命中。"
+}

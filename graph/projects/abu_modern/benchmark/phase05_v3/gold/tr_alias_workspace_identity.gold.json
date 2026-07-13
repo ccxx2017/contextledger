@@ -1,0 +1,78 @@
+{
+  "trajectory_id": "tr_alias_workspace_identity",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "obs01",
+      "expected_active_set": [
+        "tr_alias_workspace_identity.obs01.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_workspace/IDENTITY.md"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_alias_workspace_identity.obs01.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs02",
+      "expected_active_set": [
+        "tr_alias_workspace_identity.obs01.active",
+        "tr_alias_workspace_identity.obs02.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_workspace/IDENTITY.md",
+            "openclaw_workspace_structure"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_alias_workspace_identity.obs01.active",
+        "tr_alias_workspace_identity.obs02.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs03",
+      "expected_active_set": [
+        "tr_alias_workspace_identity.obs01.active",
+        "tr_alias_workspace_identity.obs02.active",
+        "tr_alias_workspace_identity.obs03.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_workspace/IDENTITY.md",
+            "openclaw_workspace_structure",
+            "openclaw_identity_mechanism"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_alias_workspace_identity.obs01.active",
+        "tr_alias_workspace_identity.obs02.active",
+        "tr_alias_workspace_identity.obs03.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

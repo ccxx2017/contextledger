@@ -1,0 +1,65 @@
+{
+  "trajectory_id": "tr_syn_out_of_order_price_band_present",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr22_obs01",
+      "expected_active_set": [
+        "tr22.price_band.wide"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr22_entity",
+          "mentions": [
+            "Price band"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr22.price_band.wide"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr22_entity",
+            "dimension": "price_band",
+            "winner_obs_id": "tr22_obs01",
+            "fallback_used": false
+          }
+        ]
+      }
+    },
+    {
+      "after_obs_id": "tr22_obs02",
+      "expected_active_set": [
+        "tr22.price_band.wide"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr22_entity",
+          "mentions": [
+            "Price band"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr22.price_band.wide"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr22_entity",
+            "dimension": "price_band",
+            "winner_obs_id": "tr22_obs01",
+            "fallback_used": false
+          }
+        ]
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr22_out_of_order_price_band_present",
+  "benchmark_note": "当前 schema 无法正确表达 observed_at 在场的乱序裁决，gold 仅记录真实目标，不代表现有系统应能命中。"
+}

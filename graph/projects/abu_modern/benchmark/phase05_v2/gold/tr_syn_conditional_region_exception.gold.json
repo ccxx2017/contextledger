@@ -1,0 +1,67 @@
+{
+  "trajectory_id": "tr_syn_conditional_region_exception",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr05_obs01",
+      "expected_active_set": [
+        "tr05.trading.blocked.global"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr05_entity",
+          "mentions": [
+            "Deployment rule"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr05.trading.blocked.global"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr05_obs02",
+      "expected_active_set": [
+        "tr05.trading.blocked.global",
+        "tr05.trading.allowed.tokyo_sim"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr05_obs02",
+          "target_obs_id": "tr05_obs01",
+          "kind": "conditional",
+          "dropped_claims": [],
+          "replacement_claims": [
+            "tr05.trading.allowed.tokyo_sim"
+          ],
+          "kept_claims": [
+            "tr05.trading.blocked.global"
+          ],
+          "carve_out": "desk=Tokyo AND mode=simulation"
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr05_entity",
+          "mentions": [
+            "Deployment rule"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr05.trading.blocked.global",
+        "tr05.trading.allowed.tokyo_sim"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr05_conditional_region_exception",
+  "benchmark_note": "当前 schema 无法表达 conditional carve-out，gold 仅记录真实目标，不代表现有系统应能命中。"
+}

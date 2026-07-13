@@ -1,0 +1,60 @@
+{
+  "trajectory_id": "tr_syn_out_of_order_inventory_present",
+  "title": "迟到旧观测不应反杀新观测（synthetic）",
+  "coverage_tags": [
+    "out_of_order_late"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr14_obs01",
+      "observed_at": "2026-06-14T10:05:00Z",
+      "valid_from": "2026-06-14T10:05:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "warehouse_feed",
+        "provenance": "warehouse_feed#1005"
+      },
+      "mentions": [
+        "Inventory snapshot"
+      ],
+      "payload": {
+        "statement": "Inventory is 10 units.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr14.inventory.10",
+            "dimension": "inventory",
+            "value": "10",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr14_obs02",
+      "observed_at": "2026-06-14T10:00:00Z",
+      "valid_from": "2026-06-14T10:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "warehouse_feed",
+        "provenance": "warehouse_feed#1000_late"
+      },
+      "mentions": [
+        "Inventory snapshot"
+      ],
+      "payload": {
+        "statement": "Inventory is 0 units.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr14.inventory.0",
+            "dimension": "inventory",
+            "value": "0",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr14_out_of_order_with_observed_at",
+  "construction_rationale": "使用 observed_at 在场的迟到旧观测样本，暴露到达序误判问题。"
+}

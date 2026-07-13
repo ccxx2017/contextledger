@@ -1,0 +1,65 @@
+{
+  "trajectory_id": "tr_syn_out_of_order_inventory_present",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr14_obs01",
+      "expected_active_set": [
+        "tr14.inventory.10"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr14_entity",
+          "mentions": [
+            "Inventory snapshot"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr14.inventory.10"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr14_entity",
+            "dimension": "inventory",
+            "winner_obs_id": "tr14_obs01",
+            "fallback_used": false
+          }
+        ]
+      }
+    },
+    {
+      "after_obs_id": "tr14_obs02",
+      "expected_active_set": [
+        "tr14.inventory.10"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr14_entity",
+          "mentions": [
+            "Inventory snapshot"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr14.inventory.10"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr14_entity",
+            "dimension": "inventory",
+            "winner_obs_id": "tr14_obs01",
+            "fallback_used": false
+          }
+        ]
+      }
+    }
+  ],
+  "synthetic": true,
+  "source_template": "tr14_out_of_order_with_observed_at",
+  "benchmark_note": "当前 schema 无法正确表达 observed_at 在场的乱序裁决，gold 仅记录真实目标，不代表现有系统应能命中。"
+}
