@@ -1,0 +1,73 @@
+{
+  "fixture_id": "lc_late_arrival",
+  "category": "late_arrival",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T132548_lc_late_arrival",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_031",
+      "after_event_id": "evt_031",
+      "graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+      "bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+      "diffs": [
+        {
+          "kind": "active_set",
+          "expected": "n_price_band_b",
+          "actual": null,
+          "classification": "regression",
+          "rationale": "Expected active node 'n_price_band_b' not found",
+          "blocking": true
+        },
+        {
+          "kind": "active_set",
+          "expected": null,
+          "actual": "n_88ccf6e4e565",
+          "classification": "expected_schema_change",
+          "rationale": "Unexpected active node n_88ccf6e4e565",
+          "blocking": false
+        },
+        {
+          "kind": "superseded_set",
+          "expected": "n_price_band_a",
+          "actual": null,
+          "classification": "regression",
+          "rationale": "Expected superseded node 'n_price_band_a' not found",
+          "blocking": true
+        },
+        {
+          "kind": "relation",
+          "expected": {
+            "relation_type": "supersedes",
+            "source": "n_price_band_b",
+            "target": "n_price_band_a"
+          },
+          "actual": null,
+          "classification": "regression",
+          "rationale": "Cannot match relation endpoints for {'relation_type': 'supersedes', 'source': 'n_price_band_b', 'target': 'n_price_band_a'}",
+          "blocking": true
+        },
+        {
+          "kind": "must_include",
+          "expected": "n_price_band_b",
+          "actual": null,
+          "classification": "blocker",
+          "rationale": "Expected must_include 'n_price_band_b' missing from bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 1,
+        "regression": 3,
+        "unexplained": 0,
+        "blocker": 5,
+        "total": 5
+      }
+    }
+  ],
+  "final_graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+  "final_bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+  "patch_hash": "4052178d8822bd2e3a0eaa37d83c2baf208f062cb132362b460cf0a12c8740c6",
+  "quarantine": []
+}

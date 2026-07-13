@@ -1,0 +1,137 @@
+{
+  "audit_version": "1.0",
+  "freeze_manifest_sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+  "total_cases": 17,
+  "duplicated_cases": {},
+  "split_integrity_ok": true,
+  "mechanism_distribution": {
+    "development": {
+      "full": 1,
+      "partial": 1,
+      "conditional": 1,
+      "revival": 1,
+      "alias_trap": 1,
+      "unknown": 1,
+      "out_of_order_late": 1
+    },
+    "regression": {
+      "full": 1,
+      "partial": 1,
+      "conditional": 1,
+      "revival": 1,
+      "alias_trap": 1,
+      "out_of_order_late": 1
+    },
+    "blind_holdout": {
+      "non_invalidation_decoy": 1,
+      "alias_trap": 1
+    },
+    "adversarial": {
+      "provenance_conflict": 2
+    }
+  },
+  "template_alias_leakage": {
+    "method": "text fingerprint overlap between blind_holdout and development trajectories",
+    "per_case": [
+      {
+        "case_id": "tr_decoy_strategy_scripts",
+        "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_decoy_strategy_scripts.json",
+        "leakage_score": {
+          "overlap_count": 30,
+          "overlap_ratio": 0.4412,
+          "samples": [
+            "\n          }\n        ]\n      }\n    },\n    {\n      ",
+            "\n      ],\n      ",
+            "2026-01-02t04",
+            "2026-01-02t04:00:00z",
+            ": [\n        ",
+            ": null,\n      ",
+            ": {\n        ",
+            "abu_modern_turn",
+            "channel",
+            "claim_bundle",
+            "claim_id",
+            "coverage_tags",
+            "critical",
+            "dimension",
+            "importance",
+            "mentions",
+            "non_invalidation_decoy",
+            "obs_id",
+            "observations",
+            "observed_at"
+          ]
+        }
+      },
+      {
+        "case_id": "tr_alias_tkt_split",
+        "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_alias_tkt_split.json",
+        "leakage_score": {
+          "overlap_count": 36,
+          "overlap_ratio": 0.4675,
+          "samples": [
+            "\n          }\n        ]\n      }\n    },\n    {\n      ",
+            "\n      ],\n      ",
+            "/strategy-builder/compile-ir",
+            "2026-01-02t16",
+            "2026-01-02t16:00:00z",
+            ": [\n        ",
+            ": null,\n      ",
+            ": {\n        ",
+            "abu_modern_turn",
+            "alias_trap",
+            "backtest",
+            "channel",
+            "claim_bundle",
+            "claim_id",
+            "coverage_tags",
+            "critical",
+            "dimension",
+            "gpt5.5",
+            "gpt5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 tkt-2026-005b-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+            "importance"
+          ]
+        }
+      }
+    ],
+    "alias_per_case": [
+      {
+        "case_id": "tr_decoy_strategy_scripts",
+        "shared_token_count": 30,
+        "samples": [
+          "\n          }\n        ]\n      }\n    },\n    {\n      ",
+          "\n      ],\n      ",
+          "2026-01-02t04",
+          "2026-01-02t04:00:00z",
+          ": [\n        ",
+          ": null,\n      ",
+          ": {\n        ",
+          "abu_modern_turn",
+          "channel",
+          "claim_bundle"
+        ]
+      },
+      {
+        "case_id": "tr_alias_tkt_split",
+        "shared_token_count": 36,
+        "samples": [
+          "\n          }\n        ]\n      }\n    },\n    {\n      ",
+          "\n      ],\n      ",
+          "/strategy-builder/compile-ir",
+          "2026-01-02t16",
+          "2026-01-02t16:00:00z",
+          ": [\n        ",
+          ": null,\n      ",
+          ": {\n        ",
+          "abu_modern_turn",
+          "alias_trap"
+        ]
+      }
+    ]
+  },
+  "blind_holdout_rule": "blind_holdout cases must not be inspected or used for rule design; overlap scores below 0.5 are considered acceptable for this audit",
+  "conclusion": {
+    "no_cross_split_trajectories": true,
+    "blind_holdout_isolated_from_development": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 9,
+  "included_node_count": 1,
+  "must_include": [
+    "n_f7465b75603d"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_f7465b75603d",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "lc_tkt_005b_prod",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_tkt_005b_prod",
+      "observed_at": "2026-07-01T10:00:00Z",
+      "effective_at": "2026-07-01T10:00:00Z",
+      "node_type": "Issue",
+      "content": "Production ticket 005B opened.",
+      "state": "open",
+      "status": "active",
+      "active": true,
+      "source": "ticketing"
+    }
+  ]
+}

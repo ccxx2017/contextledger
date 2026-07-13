@@ -1,0 +1,140 @@
+{
+  "run_id": "stage04a_20260713T132548_lc_alias_abstain",
+  "generated_at": "2026-07-13T13:25:48.281636+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_alias_abstain.json",
+  "fixture_sha256": "6ef51ef36214e87b95d83c9cbe29a7edd8e231ba6c4c0cbe67327586091655b4",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "636dd2752fa4c8405312a8adf62e4f2e5e114b5d40c0b17bd90713b3eaab7ca8",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "784a5ac47f3ca0a2fba4a25203d9461b5a8a73e7f571880efd45a6287158d1fc"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_alias_abstain",
+    "category": "alias_abstain",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T132548_lc_alias_abstain",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_051",
+        "after_event_id": "evt_051",
+        "graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+        "bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_tkt_005b_prod",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_tkt_005b_prod' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_f7465b75603d",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_f7465b75603d",
+            "blocking": false
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_tkt_005b_prod",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_tkt_005b_prod' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 1,
+          "unexplained": 0,
+          "blocker": 3,
+          "total": 3
+        }
+      }
+    ],
+    "final_graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+    "final_bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+    "patch_hash": "8bcd3f8e38f0520fc1ef94e75e931fefd4acc4d6d18db54228806d696195f61b",
+    "quarantine": [
+      {
+        "event_id": "evt_051",
+        "reason": "resolver_abstain_alias_mismatch"
+      }
+    ]
+  },
+  "run2": {
+    "fixture_id": "lc_alias_abstain",
+    "category": "alias_abstain",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T132548_lc_alias_abstain",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_051",
+        "after_event_id": "evt_051",
+        "graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+        "bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_tkt_005b_prod",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_tkt_005b_prod' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_f7465b75603d",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_f7465b75603d",
+            "blocking": false
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_tkt_005b_prod",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_tkt_005b_prod' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 1,
+          "unexplained": 0,
+          "blocker": 3,
+          "total": 3
+        }
+      }
+    ],
+    "final_graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+    "final_bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+    "patch_hash": "8bcd3f8e38f0520fc1ef94e75e931fefd4acc4d6d18db54228806d696195f61b",
+    "quarantine": [
+      {
+        "event_id": "evt_051",
+        "reason": "resolver_abstain_alias_mismatch"
+      }
+    ]
+  },
+  "gate_decision": "BLOCK"
+}

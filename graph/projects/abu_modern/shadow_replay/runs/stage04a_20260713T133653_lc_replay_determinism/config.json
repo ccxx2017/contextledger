@@ -1,0 +1,80 @@
+{
+  "run_id": "stage04a_20260713T133653_lc_replay_determinism",
+  "generated_at": "2026-07-13T13:36:53.423265+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_replay_determinism.json",
+  "fixture_sha256": "6dfe08d205595eadc910d102f028c6b686735acdeb8ae97e5af22ca981e14f88",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "636dd2752fa4c8405312a8adf62e4f2e5e114b5d40c0b17bd90713b3eaab7ca8",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "9a0b08b6f3c0e7ae5a5f963138e37e17124efc9c40b84ea2d838535d8db671e7"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_replay_determinism",
+    "category": "replay_determinism",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T133653_lc_replay_determinism",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_run_2_identical",
+        "after_event_id": "evt_071",
+        "graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+        "bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+    "final_bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+    "patch_hash": "80cd9eac26adc81c35c1ee8cf209d75e56f4fee42e69dc65cd00e12b116e380a",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_replay_determinism",
+    "category": "replay_determinism",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T133653_lc_replay_determinism",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_run_2_identical",
+        "after_event_id": "evt_071",
+        "graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+        "bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+    "final_bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+    "patch_hash": "80cd9eac26adc81c35c1ee8cf209d75e56f4fee42e69dc65cd00e12b116e380a",
+    "quarantine": []
+  },
+  "gate_decision": "PASS"
+}

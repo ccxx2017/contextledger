@@ -132,3 +132,87 @@ graph/projects/abu_modern/shadow_replay/
 ## Example
 
 See `example_diff_report.json`.
+| Class | Definition | Default Action |
+| --- | --- | --- |
+| `expected_improvement` | Shadow fixes a known false merge, false split, or invalidation error documented in a fixture or benchmark gap register. | Allow after fixture passes. |
+| `expected_schema_change` | Difference is a direct consequence of adding `lifecycle_ref`, `lifecycle_seq`, `observed_at`/`effective_at`, or new relations such as `REVIVES`/`CONTESTS`. | Allow if enumerated in RFC change list. |
+| `regression` | `must_include_recall` drops, active set F1 drops, critical constraints silent-fail, or a fixture expectation is violated. | Block. |
+| `unexplained` | Difference cannot be attributed to an expected improvement or schema change. | Block until classified. |
+
+## Gate Rules
+| Class | Definition | Default Action |
+| --- | --- | --- |
+| `blocker` | Any `must_include` decrease, critical false invalidation, `CONTESTS` auto-collapse to `SUPERCEDES`, low-confidence forced alias merge, or any diff that silently corrupts safety invariants. | Auto-block; no main-chain candidacy. |
+| `regression` | `must_include_recall` drops, active set F1 drops, critical constraints silent-fail, or a fixture expectation is violated. | Block. |
+| `expected_schema_change` | Difference is a direct consequence of adding `lifecycle_ref`, `lifecycle_seq`, `observed_at`/`effective_at`, or new relations such as `REVIVES`/`CONTESTS`. | Allow if enumerated in RFC change list and fixtures pass. |
+| `manual_adjudication` | Difference is explained but touches legacy `adjudication_key` fallback behavior or a benchmark regression split case whose cause is not a documented design assumption. | Requires human sign-off; blocks candidacy until resolved. |
+| `unexplained` | Difference cannot be attributed to any of the above four classes. | Block until classified. |
+
+### Blocker Conditions (Pre-locked)
+
+Any diff matching the following is classified as `blocker`:
+
+1. `must_include_recall` below the D1 baseline (1.0 for Phase 0.5).
+2. `must_include_recall` below the current main-chain score.
+3. Critical false invalidation: a node that should remain active is silently superseded without a documented `CONTESTS`/`SUPERCEDES` chain.
+4. `CONTESTS` auto-collapses to `SUPERCEDES` without explicit provenance resolution.
+5. Low-confidence forced alias merge: resolver abstain is overridden and nodes are merged into the wrong lifecycle.
+6. Any shadow output leaks into the formal main graph.
+7. Determinism check fails for fixed-LLM-output replay.
+
+## Gate Rules
+Any of the following triggers `BLOCK`:
+
+1. `must_include_recall` below the D1 baseline (1.0 for Phase 0.5).
+2. `must_include_recall` below the current main-chain score (1.0).
+3. Any lifecycle fixture fails against the shadow chain.
+4. Any `regression`-classified diff without a matching `expected_improvement`.
+5. Any `unexplained` diff.
+6. Any `blocker`-classified diff.
+7. New silent invalidation of a critical constraint.
+8. Quarantine count increases without a documented reason.
+9. `CONTESTS` auto-collapses to `SUPERCEDES`.
+10. Determinism check fails for fixed-LLM-output replay.
+
+### Human Arbitration Required
+
+The gate emits `ARBITRATE` when:
+
+- A diff is `expected_schema_change` but touches a legacy node whose
+  `adjudication_key` fallback behavior is not yet covered by fixtures.
+- A benchmark regression split case changes status and the cause is not a
+  documented benchmark design assumption.
+- A diff is classified as `manual_adjudication`.
+
+### Pass Conditions
+
+The gate emits `PASS` only when:
+
+1. All lifecycle fixtures pass.
+2. No `regression`, `unexplained`, or `blocker` diffs remain.
+3. `must_include_recall` >= current main-chain score.
+4. `active_set_set_f1` is not below current main-chain score by more than 0.01.
+5. Blind holdout cases show no negative flip unless the negative flip is an
+   expected improvement (e.g., correctly splitting a false merge).
+6. No `manual_adjudication` diff is unresolved.
+
+## Replacement Candidate Threshold
+
+A shadow chain becomes a **replacement candidate** only after three consecutive
+independent replay runs produce `PASS` with identical diff classification counts.
+**This is a determinism reproduction check, not a sufficient condition for main-chain
+replacement.**
+
+## Main-Chain Replacement Preconditions
+
+Before any main-chain candidate switch, the following must simultaneously hold:
+
+1. All lifecycle fixture semantics pass.
+2. Regression split shows no safety regression.
+3. Blind holdout reaches its pre-registered performance threshold.
+4. `must_include_recall` is not lower than the D1 baseline.
+5. Critical false invalidation count is zero or all such cases are quarantined.
+6. No unresolved `unexplained` or `blocker` diffs.
+7. Shadow outputs have not contaminated the formal main graph.
+
+## Output Locations

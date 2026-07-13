@@ -1,0 +1,170 @@
+{
+  "run_id": "stage04a_20260713T132548_lc_replay_determinism",
+  "generated_at": "2026-07-13T13:25:48.421856+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_replay_determinism.json",
+  "fixture_sha256": "6dfe08d205595eadc910d102f028c6b686735acdeb8ae97e5af22ca981e14f88",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "636dd2752fa4c8405312a8adf62e4f2e5e114b5d40c0b17bd90713b3eaab7ca8",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "784a5ac47f3ca0a2fba4a25203d9461b5a8a73e7f571880efd45a6287158d1fc"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_replay_determinism",
+    "category": "replay_determinism",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T132548_lc_replay_determinism",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_run_2_identical",
+        "after_event_id": "evt_071",
+        "graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+        "bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_det_b",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_det_b' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_4b1596aed7ed",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_4b1596aed7ed",
+            "blocking": false
+          },
+          {
+            "kind": "superseded_set",
+            "expected": "n_det_a",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected superseded node 'n_det_a' not found",
+            "blocking": true
+          },
+          {
+            "kind": "relation",
+            "expected": {
+              "relation_type": "supersedes",
+              "source": "n_det_b",
+              "target": "n_det_a"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Cannot match relation endpoints for {'relation_type': 'supersedes', 'source': 'n_det_b', 'target': 'n_det_a'}",
+            "blocking": true
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_det_b",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_det_b' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 3,
+          "unexplained": 0,
+          "blocker": 5,
+          "total": 5
+        }
+      }
+    ],
+    "final_graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+    "final_bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+    "patch_hash": "80cd9eac26adc81c35c1ee8cf209d75e56f4fee42e69dc65cd00e12b116e380a",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_replay_determinism",
+    "category": "replay_determinism",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T132548_lc_replay_determinism",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_run_2_identical",
+        "after_event_id": "evt_071",
+        "graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+        "bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_det_b",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_det_b' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_4b1596aed7ed",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_4b1596aed7ed",
+            "blocking": false
+          },
+          {
+            "kind": "superseded_set",
+            "expected": "n_det_a",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected superseded node 'n_det_a' not found",
+            "blocking": true
+          },
+          {
+            "kind": "relation",
+            "expected": {
+              "relation_type": "supersedes",
+              "source": "n_det_b",
+              "target": "n_det_a"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Cannot match relation endpoints for {'relation_type': 'supersedes', 'source': 'n_det_b', 'target': 'n_det_a'}",
+            "blocking": true
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_det_b",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_det_b' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 3,
+          "unexplained": 0,
+          "blocker": 5,
+          "total": 5
+        }
+      }
+    ],
+    "final_graph_state_hash": "33baa0ee1cf28fd3c11a740d6799672982196ad2029c464c4462b133b8668c61",
+    "final_bundle_hash": "4ec14bc62f56803a4bf1fc6c56481e57f98739a96f017b8b694f0a77db0faac5",
+    "patch_hash": "80cd9eac26adc81c35c1ee8cf209d75e56f4fee42e69dc65cd00e12b116e380a",
+    "quarantine": []
+  },
+  "gate_decision": "BLOCK"
+}
