@@ -1,0 +1,90 @@
+{
+  "trajectory_id": "tr_syn_provenance_conflict",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\adversarial\\stage04b_20260713T144011_adversarial\\tr_syn_provenance_conflict",
+  "trajectory_sha256": "302bbf693a584bd745c87b63cbced325f742cb61ca058ff9bd86e43f99ab449b",
+  "gold_sha256": "acf728c056128b15b842dec607b45d98def87ff1be03e000a4e4413eba24ebd4",
+  "checkpoint_count": 2,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_tr11_obs01",
+      "after_obs_id": "tr11_obs01",
+      "graph_state_hash": "9a9745b8f1d3c7289537514a93ecdf95a5e8d4ab9be5bed115cc4aff9488f311",
+      "bundle_hash": "aefe2506b12f8d086ab696c7de77e802365e9548d1941852a24e4989c69ec203",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_tr11_obs02",
+      "after_obs_id": "tr11_obs02",
+      "graph_state_hash": "0f7b96e37d77a284564ef18f043f3ae0725be08d4f6fa42323c73af82004db62",
+      "bundle_hash": "980b8ae9e5d224e9fb3048a63831b28c111c2e7f9792ac819fb4d8dee29505c1",
+      "active_set_metrics": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr11.prod_ready.true",
+          "classification": "regression",
+          "rationale": "Unexpected active claim tr11.prod_ready.true in shadow active set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr11.prod_ready.true",
+          "classification": "expected_schema_change",
+          "rationale": "Shadow bundle includes additional claim tr11.prod_ready.true",
+          "blocking": false
+        }
+      ],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 1,
+        "expected_schema_change": 1,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 2
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 0,
+    "regression_count": 1,
+    "unexplained_count": 0,
+    "min_must_include_recall": 1.0,
+    "min_active_set_set_f1": 0.6667
+  },
+  "gate_decision": "BLOCK",
+  "final_graph_state_hash": "0f7b96e37d77a284564ef18f043f3ae0725be08d4f6fa42323c73af82004db62",
+  "final_bundle_hash": "980b8ae9e5d224e9fb3048a63831b28c111c2e7f9792ac819fb4d8dee29505c1",
+  "patch_hash": "09248337083f941eb87be42fe5c9409c8fbe6ba7ee1d9872bdcd3b496471e978",
+  "quarantine": []
+}

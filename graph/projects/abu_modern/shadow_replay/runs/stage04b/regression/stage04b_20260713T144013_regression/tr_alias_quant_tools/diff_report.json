@@ -1,0 +1,125 @@
+{
+  "trajectory_id": "tr_alias_quant_tools",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\regression\\stage04b_20260713T144013_regression\\tr_alias_quant_tools",
+  "trajectory_sha256": "22379ad41222e6022b9ea26ae7f4accdd80187faa1f6edd5817258cbc0e8651a",
+  "gold_sha256": "9f0ed44baea8141cabd8a474bb64333a89d8a26e3db0e76701a0102832fd89c5",
+  "checkpoint_count": 3,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_obs01",
+      "after_obs_id": "obs01",
+      "graph_state_hash": "2b46ae2a5f0a7529b2310506d489cd86f14d314722597977879a91f651f556cd",
+      "bundle_hash": "f8521cbe30c569a3017ec467d93082536740066120f0ca9b08f28e9326830e04",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs02",
+      "after_obs_id": "obs02",
+      "graph_state_hash": "990ccfd9c7861436c436692640980e5ce43bbe5eb5e469b1c0c1fdbf329fe3fa",
+      "bundle_hash": "62e76d9b8cec5f3e986b82deded54a8ebf8bc16a8db1929970c9a3eca9231eea",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [
+        {
+          "kind": "must_include",
+          "claim_id": "tr_alias_quant_tools.obs02.active",
+          "classification": "expected_schema_change",
+          "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs02.active",
+          "blocking": false
+        }
+      ],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 1,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 1
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs03",
+      "after_obs_id": "obs03",
+      "graph_state_hash": "6ca86eb133277c761ce5a716475b7411392c64f39c036aeb0fa11e94bb4a411e",
+      "bundle_hash": "84c15a922eb43ec211b12471dd79b032ac3d3d1d9cd5c05d450833e25c10e4fd",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [
+        {
+          "kind": "must_include",
+          "claim_id": "tr_alias_quant_tools.obs02.active",
+          "classification": "expected_schema_change",
+          "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs02.active",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_alias_quant_tools.obs03.active",
+          "classification": "expected_schema_change",
+          "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs03.active",
+          "blocking": false
+        }
+      ],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 2,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 2
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 0,
+    "regression_count": 0,
+    "unexplained_count": 0,
+    "min_must_include_recall": 1.0,
+    "min_active_set_set_f1": 1.0
+  },
+  "gate_decision": "PASS",
+  "final_graph_state_hash": "6ca86eb133277c761ce5a716475b7411392c64f39c036aeb0fa11e94bb4a411e",
+  "final_bundle_hash": "84c15a922eb43ec211b12471dd79b032ac3d3d1d9cd5c05d450833e25c10e4fd",
+  "patch_hash": "78b84c42674681f662a0425d2762f1eb897cb7cf294b0d4e8b3924d95f8cd0cb",
+  "quarantine": []
+}

@@ -1,0 +1,65 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "budget": 8192,
+  "tokens_used": 34,
+  "included_node_count": 3,
+  "must_include": [
+    "n_90c9333cf624",
+    "n_46883c6100f7",
+    "n_f26405afbf68"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_90c9333cf624",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T08:00:00Z",
+      "effective_at": "2026-06-07T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled.",
+      "state": "enabled",
+      "claim_id": "tr07.feature.enabled.v1",
+      "status": "active",
+      "active": true,
+      "source": "release_note#001"
+    },
+    {
+      "node_id": "n_46883c6100f7",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T09:00:00Z",
+      "effective_at": "2026-06-07T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is disabled because of instability.",
+      "state": "disabled",
+      "claim_id": "tr07.feature.disabled",
+      "status": "active",
+      "active": true,
+      "source": "incident_note#003"
+    },
+    {
+      "node_id": "n_f26405afbf68",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T13:00:00Z",
+      "effective_at": "2026-06-07T13:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled again after rollback fixes.",
+      "state": "enabled_again",
+      "claim_id": "tr07.feature.enabled.v2",
+      "status": "active",
+      "active": true,
+      "source": "release_note#004"
+    }
+  ]
+}

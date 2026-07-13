@@ -1,0 +1,29 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 14,
+  "included_node_count": 1,
+  "must_include": [
+    "n_88ccf6e4e565"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_88ccf6e4e565",
+      "entity_ref": "SKU-2026-A",
+      "lifecycle_ref": "lc_sku_a",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_sku_a",
+      "observed_at": "2026-07-03T10:00:00Z",
+      "effective_at": "2026-07-02T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Price band B should have been effective 2026-07-02.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "inventory"
+    }
+  ]
+}

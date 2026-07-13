@@ -1,0 +1,116 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 5,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_e597420aa3ce": {
+      "node_id": "n_e597420aa3ce",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B",
+      "observed_at": "2026-01-02T16:00:00Z",
+      "effective_at": "2026-01-02T16:00:00Z",
+      "node_type": "Fact",
+      "content": "GPT5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 TKT-2026-005B-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+      "state": "resolved",
+      "claim_id": "tr_full_tkt_005b.obs01.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_032#n_0092"
+    },
+    "n_88b7e68921b8": {
+      "node_id": "n_88b7e68921b8",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B",
+      "observed_at": "2026-01-03T09:00:00Z",
+      "effective_at": "2026-01-03T09:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs02.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_049#n_0115"
+    },
+    "n_10b26fcd9e47": {
+      "node_id": "n_10b26fcd9e47",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B",
+      "observed_at": "2026-01-03T18:00:00Z",
+      "effective_at": "2026-01-03T18:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs03.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_058#n_0115"
+    },
+    "n_98d67a75b925": {
+      "node_id": "n_98d67a75b925",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B",
+      "lifecycle_seq": 4,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B",
+      "observed_at": "2026-01-04T03:00:00Z",
+      "effective_at": "2026-01-04T03:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs04.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_067#n_0115"
+    },
+    "n_07af9ecea39d": {
+      "node_id": "n_07af9ecea39d",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B",
+      "lifecycle_seq": 5,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B",
+      "observed_at": "2026-01-04T20:00:00Z",
+      "effective_at": "2026-01-04T20:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs05.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_084#n_0115"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_88b7e68921b8",
+      "target": "n_e597420aa3ce",
+      "relation": "CONTESTS"
+    },
+    {
+      "source": "n_10b26fcd9e47",
+      "target": "n_e597420aa3ce",
+      "relation": "CONTESTS"
+    },
+    {
+      "source": "n_98d67a75b925",
+      "target": "n_e597420aa3ce",
+      "relation": "CONTESTS"
+    },
+    {
+      "source": "n_07af9ecea39d",
+      "target": "n_e597420aa3ce",
+      "relation": "CONTESTS"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "obs05"
+}

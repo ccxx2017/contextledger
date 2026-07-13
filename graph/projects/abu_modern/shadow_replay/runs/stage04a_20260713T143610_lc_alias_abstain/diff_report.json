@@ -1,0 +1,33 @@
+{
+  "fixture_id": "lc_alias_abstain",
+  "category": "alias_abstain",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143610_lc_alias_abstain",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_051",
+      "after_event_id": "evt_051",
+      "graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+      "bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "ff4a4d26cc0cd1e7fd1d749893dc73e6ec5316bba6e92757418f9007541d1095",
+  "final_bundle_hash": "4a63cd291d36b2ea34a4603eae23c0b3594a6369d37cb8b65a7f8077503d821a",
+  "patch_hash": "8bcd3f8e38f0520fc1ef94e75e931fefd4acc4d6d18db54228806d696195f61b",
+  "quarantine": [
+    {
+      "event_id": "evt_051",
+      "reason": "resolver_abstain_alias_mismatch"
+    }
+  ]
+}

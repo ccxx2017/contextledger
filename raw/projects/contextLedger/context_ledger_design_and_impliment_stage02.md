@@ -1872,3 +1872,425 @@ blocker / non-blocker classification
 项目 AI 的下一步方向是对的，但需要修正一个关键表述：
 
 > 不是“跑通 8 个 fixture 和 benchmark、连续三次 PASS 后就进入主链替换”，而是“先证明 shadow kernel 在隔离条件下可确定性回放；再用冻结的 fixture、regression、holdout 和安全红线证明其语义收益；最后才申请主链候选切换。”
+
+
+
+
+# 项目AI：
+已按 [raw\projects\contextLedger\context_ledger_design_and_impliment_stage02.md](/D:/CCXXLESSON/contextledger/raw/projects/contextLedger/context_ledger_design_and_impliment_stage02.md:1850) 第 1850-1874 行评审 AI 的 Stage04-A 指令执行完毕。核心约束是：只做 shadow lifecycle adjudication 旁路实现，不批准主链替换。
+
+**已交付产物**
+
+1. **Stage04-A implementation contract**
+   - [graph/projects/abu_modern/shadow_replay/stage04a_implementation_contract.md](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/stage04a_implementation_contract.md)
+   - 明确 shadow 输入/输出目录、run ID、状态隔离、失败处理、runtime fingerprint、patch/graph/bundle hash、禁止写入正式主图机制。
+
+2. **Shadow lifecycle adjudication kernel（实际执行）**
+   - [graph/projects/abu_modern/shadow_replay/scripts/shadow_lifecycle_adjudicator.py](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/scripts/shadow_lifecycle_adjudicator.py)
+   - [graph/projects/abu_modern/shadow_replay/scripts/shadow_compiler.py](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/scripts/shadow_compiler.py)
+   - [graph/projects/abu_modern/shadow_replay/scripts/shadow_bundle_builder.py](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/scripts/shadow_bundle_builder.py)
+
+3. **Fixture semantic replay runner**
+   - [graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py)
+   - 实际执行 shadow adjudication + compiler，逐 checkpoint 比对 expected relation、active set、quarantine、must_include，并生成 diff report 与 gate decision。
+
+4. **8 个 fixture 回放结果**
+   - 全部 `PASS`，两次回放 hash 一致（deterministic）。
+   - 产物位于 `graph/projects/abu_modern/shadow_replay/runs/stage04a_*`。
+
+5. **Benchmark v1 split 审计**
+   - [graph/projects/abu_modern/benchmark/v1_freeze/split_audit_report.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/benchmark/v1_freeze/split_audit_report.json)
+   - 确认：无轨迹跨 split、blind holdout 与 development 模板/alias 泄漏分数可接受、各 split 机制类型分布已记录。
+
+6. **Shadow diff spec 更新**
+   - [graph/projects/abu_modern/shadow_replay/shadow_replay_spec.md](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/shadow_replay_spec.md)
+   - 锁定五类差异：`blocker`、`regression`、`expected_schema_change`、`manual_adjudication`、`unexplained`；明确 `must_include` 下降、critical false invalidation、`CONTESTS→SUPERCEDES` 自动坍缩、低置信度强制 alias merge 均为 blocker。
+
+7. **Stage04-A report**
+   - [reports/stage04a_report.md](/D:/CCXXLESSON/contextledger/reports/stage04a_report.md)
+   - 逐 fixture、逐 split、逐 checkpoint 报告输入 hash、runtime fingerprint、state hash、bundle hash、diff 分类和未决风险。
+
+**当前 git 状态**
+
+- branch: `phase1-lifecycle-stage02`
+- HEAD: `943b3f7`
+- base main / merge-base: `890219b`
+- `git status --short`: 空
+- `git diff --check`: 无错误
+- 未修改任何主链文件（`reconcile_patch.py`、`apply_patch.py`、`build_context_bundle.py`、assembler、正式 `graph_state.json` 均未改动）
+
+**结论**
+
+Stage04-A 完成：shadow kernel 在隔离条件下可确定性回放，8 个 lifecycle fixture 语义通过，benchmark split 审计通过。但按评审 AI 的要求，**主链替换仍未批准**；下一步是 Stage04-B，把完整 benchmark v1 的 regression 与 blind holdout 跑通 shadow replay，并满足所有安全红线后才能申请主链候选切换。
+
+# GPT-5.6-Terra：
+## 总体裁定
+
+**可以认可 Stage04-A 已完成，并批准进入 Stage04-B：冻结 benchmark v1 上的 shadow replay 评测。**
+
+但这个批准仅表示：
+
+> shadow lifecycle adjudication kernel 已具备隔离运行、机制级 fixture 回放、基础确定性验证和差异分类能力。
+
+它**不表示** lifecycle 方案已在真实历史轨迹上证明收益，也不表示可进入正式主链替换。
+
+项目 AI 的结论总体克制，尤其明确“主链替换仍未批准”，这一点是正确的。
+
+## 本轮完成得好的地方
+
+### 旁路边界看起来被遵守
+
+报告明确声称未修改：
+
+- `reconcile_patch.py`
+- `apply_patch.py`
+- `build_context_bundle.py`
+- assembler
+- 正式 `graph_state.json`
+
+并且 shadow 输出位于：
+
+```text
+graph/projects/abu_modern/shadow_replay/runs/stage04a_*
+```
+
+这符合 Stage04-A 的核心要求：**新裁定语义只能在独立 run-scoped 目录中产生状态、bundle 和报告，不得污染正式图或历史 patch 链。**
+
+不过，“未修改”不应仅靠口头说明。Stage04-B 开始前，应将以下命令输出写入报告或 CI 日志：
+
+```bash
+git diff --name-only 890219b..943b3f7
+git diff --name-only 890219b..943b3f7 -- \
+  graph/scripts/reconcile_patch.py \
+  graph/scripts/apply_patch.py \
+  graph/scripts/build_context_bundle.py \
+  graph/projects/abu_modern/graph_state.json
+```
+
+第二条命令应为空；第一条命令应能显示新增内容均为 contracts、reports、shadow replay、fixture 或 benchmark 审计相关产物。
+
+### fixture runner 已从“文件校验”升级为“语义执行”
+
+这是本轮最重要的实质进展。
+
+项目 AI 不再只是运行 JSON/schema validator，而是声称 runner 已执行：
+
+```text
+shadow adjudication
+→ shadow compiler
+→ checkpoint comparison
+→ expected relation / active set / quarantine / must_include verification
+→ diff report + gate decision
+```
+
+如果实现与报告一致，这意味着系统开始能验证以下关键问题：
+
+- `REVIVES` 是否真的改变派生当前态；
+- `CONTESTS` 是否没有被错误折叠为 `SUPERCEDES`；
+- 多 lifecycle 是否不会互相误杀；
+- late arrival 的处理是否符合已写死的规则；
+- legacy fallback 是否有明确行为；
+- alias 不确定性是否会正确 abstain 或 quarantine；
+- state 和 bundle 是否可重放再生。
+
+这比“RFC 写得完整”更接近真实工程证据。
+
+### 差异分类已被预先固定
+
+将 diff 固化为：
+
+```text
+blocker
+regression
+expected_schema_change
+manual_adjudication
+unexplained
+```
+
+并把下列情况定义为 blocker：
+
+- `must_include` 下降；
+- critical false invalidation；
+- `CONTESTS → SUPERCEDES` 自动坍缩；
+- 低置信度 alias 被强制 merge。
+
+这是正确的安全姿态。尤其要坚持：
+
+> **未分类 diff 默认不是“可接受差异”，而应是 `unexplained`，并阻断任何主链候选切换。**
+
+### split 审计是必要动作
+
+确认完整轨迹没有跨 split，能避免同一故事的前段进入 development、后段进入 holdout 的泄漏问题。
+
+但报告里的“模板/alias 泄漏分数可接受”还不够严谨；“可接受”必须由预先写死的数值门槛、算法和审计输入来定义，不能由评测后主观判断。
+
+## 当前仍未被证明的内容
+
+### 8 个 fixture 全部通过，不等于真实语料上的正确性
+
+fixture 是白盒机制验证：它们证明的是已知、人工定义的案例满足预期。
+
+它们不能充分证明：
+
+- 真实事件中的 entity/lifecycle 解析是否可靠；
+- 非标准表述、含混指代、隐含条件下的关系判断是否正确；
+- 从真实历史 patch/事件进入 shadow 输入适配器时是否发生语义丢失；
+- 新 lifecycle 模型是否在真实轨迹上提升 invalidation precision/recall；
+- 新模型是否造成更多 abstain 或 quarantine；
+- bundle 的内容变化是否真正改善下游 Agent 行为。
+
+所以 Stage04-A 应定性为：
+
+> **shadow kernel 的机制正确性与隔离性初步成立。**
+
+而不是“lifecycle 设计已验证”。
+
+### “两次 hash 一致”只说明有限的确定性
+
+两次回放 hash 一致是好信号，但它只能说明在当前输入、当前代码、当前运行环境下，至少重复两次未发生输出漂移。
+
+Stage04-B 前应明确 hash 覆盖范围：
+
+```text
+input event / patch stream hash
+fixture or case definition hash
+runtime fingerprint hash
+semantic relation output hash
+shadow graph state hash
+shadow bundle hash
+diff report hash
+```
+
+还应至少做两类确定性验证：
+
+1. **同一 checkout、同一输入、重复运行**：验证程序内确定性。
+2. **干净 checkout 或独立工作目录、同一 commit、同一输入运行**：验证没有依赖未提交文件、缓存或本地环境残留。
+
+若 shadow 链的某一段调用 LLM，则必须将它与机械核评测拆开：
+
+- 固定结构化输入时，shadow adjudicator/compiler 必须完全确定；
+- 接入真实 Extractor/Resolver 时，单独报告模型输出波动、abstain、quarantine 和下游错误归因。
+
+不要把“机械核稳定”与“LLM 前端稳定”混成一个 PASS。
+
+### Stage04-A report 中“逐 split”的表述需要澄清
+
+报告说 `stage04a_report.md` “逐 fixture、逐 split、逐 checkpoint”报告结果，但同一报告又说下一步才是“把完整 benchmark v1 的 regression 与 blind holdout 跑通 shadow replay”。
+
+这里有潜在表述歧义：
+
+- 若 Stage04-A **尚未真正运行完整 benchmark shadow replay**，则报告不应写成“逐 split 报告 shadow 结果”；
+- 它可以报告 split 审计、冻结状态、待运行 case 清单和预注册门槛；
+- 但不能暗示 regression/holdout 已被实际评测。
+
+建议在报告中清楚分为：
+
+```text
+Fixture execution results: executed
+Benchmark split audit: executed
+Development shadow replay: [executed / not executed]
+Regression shadow replay: not executed
+Blind holdout shadow replay: not executed
+Adversarial shadow replay: [executed / not executed]
+```
+
+这很重要，因为评测状态必须可审计，不能让“审计过数据集”与“跑过数据集”混淆。
+
+## Stage04-B 的正确目标
+
+Stage04-B 不是“尽量跑出比旧链好的分数”，而是：
+
+> 在不改变冻结 benchmark、冻结 diff 分类、冻结安全红线和不污染正式主图的条件下，测量 shadow lifecycle 链相对旧链的真实收益、退化和不确定性。
+
+建议将本阶段命名为：
+
+```text
+Stage04-B: Frozen Benchmark Shadow Evaluation
+```
+
+其产物和验收必须与 Stage04-A 区分开。
+
+## Stage04-B 开始前必须锁定的事项
+
+### 锁定 benchmark 和运行配置
+
+在首次跑 regression 前，提交或生成一份不可随意改写的 evaluation manifest，至少包含：
+
+```text
+benchmark version and split manifest hash
+case IDs per split
+gold annotation hash
+metric script hash
+old-chain output/state hash
+shadow kernel commit SHA
+runtime fingerprint
+diff classification spec hash
+gate rules version
+run command
+random seed / deterministic mode
+timestamp
+```
+
+尤其应锁定：
+
+- D1 `full_history_dump` 的具体实现；
+- D2 `exact_surface_last_write_wins` 的具体实现；
+- 当前正式旧链的基线；
+- shadow 链使用的输入适配规则；
+- `must_include` 的计算口径；
+- critical constraint 的标注口径；
+- 哪些事件或节点视为 quarantine。
+
+如果这些在跑完后还能调整，评测结果就不具备可信的比较意义。
+
+### 定义“模板/alias 泄漏可接受”的精确门槛
+
+“可接受”必须替换为可验证规则。例如：
+
+```text
+- 同一 canonical entity 或同一 alias family 不得跨 development 与 blind_holdout；
+- 同一事件模板的规范化指纹不得跨 development 与 blind_holdout；
+- 若允许弱表层相似，则报告 Jaccard / embedding / n-gram 阈值与命中项；
+- 任一人工判定的语义同构案例跨 split，视为 leakage；
+- leakage 发现后，必须重新 split、重新生成 freeze manifest，并提升 benchmark version。
+```
+
+具体采用什么相似度算法可以由项目选择，但**门槛必须在评测前写死**。
+
+### 固定 diff 的裁定流程
+
+对于 `manual_adjudication`，必须明确：
+
+- 谁进行人工裁定；
+- 是否盲看“old/shadow”来源；
+- 裁定使用什么 gold 或证据；
+- 裁定结论如何记录；
+- 是否能修改 benchmark gold；
+- 若修改 gold，是否必须发布新 benchmark 版本并重新跑全套。
+
+建议规则：
+
+```text
+manual_adjudication 不得直接计为 shadow 改进。
+未裁定时，计入 unresolved；
+任何 blocker 或 unexplained 都不得被手工“降级”为 expected_schema_change，
+除非先修改版本化规则/fixture，再从头复跑相关评测。
+```
+
+## Stage04-B 的推荐执行顺序
+
+### 先跑 development，但仅用于诊断
+
+development split 可以用来发现：
+
+- 输入适配遗漏；
+- lifecycle key 分配异常；
+- observed/effective 时间排序问题；
+- `CONTESTS`、`COEXISTS`、`REVIVES` 的状态编译错误；
+- shadow bundle 与预期 must_include 不一致；
+- quarantine 过高或 silence failure。
+
+但必须坚持：
+
+> development 可用于诊断和规则修改；每次规则修改后，应提升 shadow implementation version，并重新跑 fixture 与 development。
+
+不要在 development 跑完后直接看 holdout 再回头调规则。
+
+### 冻结候选实现后，跑 regression
+
+在 candidate commit 固定后：
+
+- 重新跑全部 8 个 fixture；
+- 跑 regression split；
+- 对照旧链；
+- 分类所有差异；
+- 统计 invalidation P/R、active-set Set-F1、must_include recall、critical false invalidation、quarantine 变化；
+- 生成逐 case、逐 checkpoint diff。
+
+如果 regression 存在 blocker、未解释 diff 或安全红线退化，不应打开 blind holdout。
+
+### regression 通过后，只运行一次 blind holdout 评测
+
+blind holdout 只有 2 条，信息量有限，更应该防止被反复“试跑—调参—重跑”污染。
+
+建议：
+
+- holdout 运行前生成 sealed run manifest；
+- 固定 candidate commit 与所有 hash；
+- 运行一次；
+- 若出现失败，记录为真实评测结果；
+- 任何修改后必须视为新 candidate，最好新增或重新构造新的 holdout 才能声称独立泛化。
+
+不建议反复查看这两条 holdout 的具体错误后持续调规则，再使用同一两条宣称泛化提升。
+
+### adversarial split 应作为安全门，而非普通加分项
+
+adversarial cases 的重点不是平均分，而是触发高风险错误：
+
+- 低置信 alias 的强制合并；
+- `CONTESTS` 错判替代；
+- partial/conditional 被整体失效；
+- late arrival 覆盖当前有效状态；
+- revival 无目标或错目标；
+- legacy 与 lifecycle-v1 混裁；
+- must_include 被新筛选逻辑丢弃。
+
+任何 adversarial blocker 都应阻断主链候选切换，即使总体 F1 提升。
+
+## Stage04-B 的硬门槛建议
+
+在现有项目红线基础上，建议将“可申请主链候选切换”的最低条件写成以下形式。
+
+| 维度 | 最低要求 |
+|---|---|
+| 旁路隔离 | shadow 不写正式 raw、patch、graph state、bundle；证据完备 |
+| 可复现性 | fixture 与 benchmark replay 在干净环境下 hash 一致 |
+| fixture | 8 个已定义 fixture 全通过；新增修复对应的新 fixture |
+| diff | 无 blocker；无 `unexplained` diff；所有 `manual_adjudication` 已留存裁定 |
+| must_include | recall 不低于 D1，且不得低于正式旧链 |
+| critical safety | critical false invalidation 为零；否则必须全部进入 quarantine 且不影响正式/候选 bundle |
+| regression | 不出现预注册安全指标回退；核心指标改善或至少不劣于旧链 |
+| blind holdout | 不低于预注册基线；结果仅作为有限证据，不夸大泛化 |
+| adversarial | 无 blocker；`CONTESTS`、alias abstain、late arrival、revival 等安全用例无回归 |
+| quarantine | 增量有归因；不得以大量 quarantine 换取表面 precision 提升 |
+| 审计 | 所有输入、代码、输出、报告与裁定均带 hash 和 commit 指纹 |
+
+其中，“核心指标改善”的阈值应在运行前定下。由于 holdout 很小，不建议设置看似精确但缺乏统计意义的微小提升要求；更合理的说法是：
+
+- 安全红线必须不退；
+- regression 上需有可解释、按错误类型分解的净改善；
+- holdout 至少不能显示与该改善方向相反的严重回归；
+- 没有证据时，结论应是“尚不足以切主链”，而不是“没有发现问题”。
+
+## 对项目 AI 当前结论的修正
+
+可以接受其最后一句的主旨，但建议将：
+
+> “把完整 benchmark v1 的 regression 与 blind holdout 跑通 shadow replay，并满足所有安全红线后才能申请主链候选切换。”
+
+修正为：
+
+> “先在冻结 candidate 上完成 fixture 重跑与 regression shadow replay；只有在无 blocker、无未解释差异、must_include 与关键约束安全红线均不退化后，才可执行一次 sealed blind-holdout replay。随后结合 adversarial 结果、quarantine 变化、差异裁定与可复现性证据，申请主链候选切换评审；不得自动替换主链。”
+
+“申请评审”比“进入替换”更准确。即使 Stage04-B 通过，也应先形成一个**候选切换包**，而不是直接改正式链路。
+
+## 建议直接下达给项目 AI 的指令
+
+> 批准 Stage04-A 完成，并批准进入 Stage04-B：Frozen Benchmark Shadow Evaluation。  
+>
+> 本阶段仍严格禁止修改正式 `reconcile_patch.py`、`apply_patch.py`、assembler 默认路径、正式 patch ledger、正式 `graph_state.json` 与正式 bundle。所有输出必须位于 run-scoped shadow 目录。  
+>
+> 在运行 benchmark 前，请先提交 Stage04-B evaluation manifest，冻结 benchmark split/hash、gold/hash、旧链基线、shadow candidate commit、runtime fingerprint、metrics 版本、diff spec hash、gate rules、运行命令与 deterministic 配置。  
+>
+> 请将 split audit 中“模板/alias 泄漏可接受”改为预先写死的算法、阈值、命中项和处理规则；并明确 Stage04-A 尚未执行的 benchmark split，不得将 split audit 表述为 benchmark replay 结果。  
+>
+> 执行顺序必须是：  
+> 1. 固定 candidate 后重跑 8 个 fixture；  
+> 2. 跑 development，仅用于诊断；规则变化后提升版本并重新跑 fixture/development；  
+> 3. 冻结最终 candidate，跑 regression；  
+> 4. regression 无 blocker、无 unexplained diff、must_include 不低于 D1 且关键约束无 false invalidation 后，执行一次 sealed blind-holdout run；  
+> 5. 执行 adversarial 安全评测。  
+>
+> 每次运行需逐 case、逐 checkpoint 输出 input hash、runtime fingerprint、relation/state/bundle hash、旧新差异、diff 分类、quarantine 变化和 gate decision。  
+>
+> 连续重复运行仅用于证明确定性，不能替代语义正确性、泛化性或主链切换证据。最终仅可提交 Stage04-B evaluation report 和主链候选切换申请包；不得提交主链替换实现。

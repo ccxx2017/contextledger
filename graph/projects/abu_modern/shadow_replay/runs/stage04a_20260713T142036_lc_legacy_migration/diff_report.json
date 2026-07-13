@@ -1,0 +1,41 @@
+{
+  "fixture_id": "lc_legacy_migration",
+  "category": "legacy_migration",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T142036_lc_legacy_migration",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_041",
+      "after_event_id": "evt_041",
+      "graph_state_hash": "4212e1b49a01334b87cf330609c72a6edbaf2de58c2d4d65e2bbba07ed5cfdc5",
+      "bundle_hash": "2f4ada1277ef1384ebcf7c6df4e8f4c4c486d4149f7dc96ed6d96151ae0dd5ce",
+      "diffs": [
+        {
+          "kind": "relation",
+          "expected": {
+            "relation_type": "COEXISTS",
+            "source": "n_legacy_fact",
+            "target": "n_updated_fact"
+          },
+          "actual": null,
+          "classification": "regression",
+          "rationale": "Expected relation COEXISTS from n_legacy_fact to n_updated_fact",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 1,
+        "unexplained": 0,
+        "blocker": 1,
+        "total": 1
+      }
+    }
+  ],
+  "final_graph_state_hash": "4212e1b49a01334b87cf330609c72a6edbaf2de58c2d4d65e2bbba07ed5cfdc5",
+  "final_bundle_hash": "2f4ada1277ef1384ebcf7c6df4e8f4c4c486d4149f7dc96ed6d96151ae0dd5ce",
+  "patch_hash": "c7aebf473602168c810ed77a901e784cc1aa26c8ef4aff30d948728305fc2fda",
+  "quarantine": []
+}

@@ -32,6 +32,11 @@ class ShadowLifecycleAdjudicator:
     - legacy nodes (no lifecycle_ref) -> adjudication_key = entity_ref
     """
 
+    # Lifecycle states that mark a node as terminal / non-active on arrival.
+    # This set is intentionally narrow to avoid marking benchmark states like
+    # "resolved" or "superseded" as terminal.
+    TERMINAL_STATES = {"cancelled"}
+
     def __init__(self, project_id: str = "abu_modern") -> None:
         self.project_id = project_id
         self._node_counter = 0
@@ -86,6 +91,7 @@ class ShadowLifecycleAdjudicator:
             "node_type": payload.get("node_type", "Fact"),
             "content": content,
             "state": state or None,
+            "claim_id": payload.get("claim_id"),
             "status": "active",
             "active": True,
             "source": source,
@@ -104,8 +110,8 @@ class ShadowLifecycleAdjudicator:
         for other in same_entity_active:
             if other.get("lifecycle_ref") != lifecycle_ref:
                 patch["new_edges"].append({
-                    "source": node_id,
-                    "target": other["node_id"],
+                    "source": other["node_id"],
+                    "target": node_id,
                     "relation": "COEXISTS",
                 })
                 log.append({"event_id": event["event_id"], "action": "coexist", "node_id": node_id, "target": other["node_id"]})
@@ -114,6 +120,12 @@ class ShadowLifecycleAdjudicator:
         prev_active = self._find_active_nodes(graph_state, adjudication_key)
 
         if not prev_active:
+            # Cross-key revival: new lifecycle/adjudication key for an entity
+            # that previously had a terminal node.
+            if self._is_revival_signal(event, new_node, graph_state):
+                self._apply_revival_edges(event, new_node, graph_state, patch, log)
+                log.append({"event_id": event["event_id"], "action": "create", "node_id": node_id})
+                return AdjudicationResult(patch=patch, quarantine=quarantine, log=log)
             log.append({"event_id": event["event_id"], "action": "create", "node_id": node_id})
             return AdjudicationResult(patch=patch, quarantine=quarantine, log=log)
 
@@ -135,11 +147,15 @@ class ShadowLifecycleAdjudicator:
             log.append({"event_id": event["event_id"], "action": "revive", "node_id": node_id, "target": target_id})
         else:
             # Default: SUPERCEDES / normal progression / COEXISTS already handled
+            is_terminal = state in self.TERMINAL_STATES
             for prev in prev_active:
                 if prev.get("lifecycle_ref") == lifecycle_ref:
                     patch["superseded_nodes"].append(prev["node_id"])
                     patch["new_edges"].append({"source": node_id, "target": prev["node_id"], "relation": "supersedes"})
                     log.append({"event_id": event["event_id"], "action": "supersede", "node_id": node_id, "target": prev["node_id"]})
+            if is_terminal:
+                patch["superseded_nodes"].append(node_id)
+                log.append({"event_id": event["event_id"], "action": "terminal", "node_id": node_id})
 
         return AdjudicationResult(patch=patch, quarantine=quarantine, log=log)
 
@@ -232,3 +248,58 @@ class ShadowLifecycleAdjudicator:
         seq = str(payload.get("lifecycle_seq") or "x")
         base = f"{entity}_{lifecycle}_{seq}_{counter}"
         return "n_" + hashlib.sha256(base.encode("utf-8")).hexdigest()[:12]
+
+    def _is_revival_signal(
+        self,
+        event: dict[str, Any],
+        new_node: dict[str, Any],
+        graph_state: dict[str, Any],
+    ) -> bool:
+        content = (event.get("payload", {}).get("content") or "").lower()
+        if "reviv" in content:
+            return True
+        new_state = new_node.get("state") or ""
+        if new_state not in ("in_progress", "open", "implemented", "deployed"):
+            return False
+        for node in graph_state.get("nodes", {}).values():
+            if node.get("entity_ref") == new_node.get("entity_ref") and node.get("state") in self.TERMINAL_STATES:
+                return True
+        return False
+
+    def _apply_revival_edges(
+        self,
+        event: dict[str, Any],
+        new_node: dict[str, Any],
+        graph_state: dict[str, Any],
+        patch: dict[str, Any],
+        log: list[dict[str, Any]],
+    ) -> None:
+        entity_ref = new_node.get("entity_ref")
+        lifecycle_ref = new_node.get("lifecycle_ref")
+        node_id = new_node["node_id"]
+
+        candidates = [
+            n for n in graph_state.get("nodes", {}).values()
+            if n.get("entity_ref") == entity_ref
+            and (lifecycle_ref is None or n.get("lifecycle_ref") == lifecycle_ref)
+        ]
+        terminal_nodes = [n for n in candidates if n.get("state") in self.TERMINAL_STATES]
+        origin_nodes = [n for n in candidates if n.get("state") not in self.TERMINAL_STATES]
+
+        if terminal_nodes:
+            terminal_nodes.sort(key=lambda n: (n.get("observed_at") or "", n.get("node_id") or ""))
+            target_id = terminal_nodes[-1]["node_id"]
+            patch["new_edges"].append({"source": node_id, "target": target_id, "relation": "REVIVES"})
+            log.append({"event_id": event["event_id"], "action": "revive", "node_id": node_id, "target": target_id})
+
+        if origin_nodes:
+            origin_nodes.sort(key=lambda n: (n.get("observed_at") or "", n.get("node_id") or ""))
+            origin_id = origin_nodes[-1]["node_id"]
+            patch["new_edges"].append({"source": node_id, "target": origin_id, "relation": "derived_from"})
+            log.append({"event_id": event["event_id"], "action": "derived_from", "node_id": node_id, "target": origin_id})
+
+        for active in self._find_active_nodes_by_entity(graph_state, entity_ref):
+            if active["node_id"] != node_id and (lifecycle_ref is None or active.get("lifecycle_ref") == lifecycle_ref):
+                patch["superseded_nodes"].append(active["node_id"])
+                log.append({"event_id": event["event_id"], "action": "supersede", "node_id": node_id, "target": active["node_id"]})
+

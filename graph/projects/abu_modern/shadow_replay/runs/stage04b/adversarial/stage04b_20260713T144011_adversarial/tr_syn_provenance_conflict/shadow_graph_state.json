@@ -1,0 +1,50 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_1442d10af042": {
+      "node_id": "n_1442d10af042",
+      "entity_ref": "Broker adapter",
+      "lifecycle_ref": "Broker adapter",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Broker adapter",
+      "observed_at": "2026-06-11T08:00:00Z",
+      "effective_at": "2026-06-11T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Probe says broker adapter is not ready for production.",
+      "state": "false",
+      "claim_id": "tr11.prod_ready.false",
+      "status": "active",
+      "active": true,
+      "source": "probe_log#771"
+    },
+    "n_792df1b9c5f2": {
+      "node_id": "n_792df1b9c5f2",
+      "entity_ref": "Broker adapter",
+      "lifecycle_ref": "Broker adapter",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Broker adapter",
+      "observed_at": "2026-06-11T08:30:00Z",
+      "effective_at": "2026-06-11T08:30:00Z",
+      "node_type": "Fact",
+      "content": "A user note says broker adapter should be considered production ready.",
+      "state": "true",
+      "claim_id": "tr11.prod_ready.true",
+      "status": "active",
+      "active": true,
+      "source": "user_note#771"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_792df1b9c5f2",
+      "target": "n_1442d10af042",
+      "relation": "CONTESTS"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "tr11_obs02"
+}

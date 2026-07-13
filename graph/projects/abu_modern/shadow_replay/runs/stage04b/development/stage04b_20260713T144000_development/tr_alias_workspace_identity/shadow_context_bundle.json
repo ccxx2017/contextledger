@@ -1,0 +1,65 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "budget": 8192,
+  "tokens_used": 125,
+  "included_node_count": 3,
+  "must_include": [
+    "n_5d6d76d385f1",
+    "n_e5e8b29b3594",
+    "n_8abe610344e6"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_5d6d76d385f1",
+      "entity_ref": "openclaw_identity_mechanism",
+      "lifecycle_ref": "openclaw_identity_mechanism",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "openclaw_identity_mechanism",
+      "observed_at": "2026-01-02T04:00:00Z",
+      "effective_at": "2026-01-02T04:00:00Z",
+      "node_type": "Fact",
+      "content": "智能体身份由OpenClaw agent配置决定；当前未配置agents.list时，所有消息路由到唯一默认agent，agent ID固定为'default'。workspace名称和SKILL.md首段身份声明仅供技能区分，不改变运行时agent ID。",
+      "state": "openclaw_identity_mechanism",
+      "claim_id": "tr_alias_workspace_identity.obs03.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_020#n_0062"
+    },
+    {
+      "node_id": "n_e5e8b29b3594",
+      "entity_ref": "openclaw_workspace_structure",
+      "lifecycle_ref": "openclaw_workspace_structure",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "openclaw_workspace_structure",
+      "observed_at": "2026-01-02T04:00:00Z",
+      "effective_at": "2026-01-02T04:00:00Z",
+      "node_type": "Fact",
+      "content": "Ubuntu端OpenClaw workspace目录结构：根目录有AGENTS.md, HEARTBEAT.md, IDENTITY.md, MEMORY.md, SOUL.md, TOOLS.md, USER.md, execution_config.json, execution_config_0402.json, .openclaw/workspace-state.json; memory/目录包含大量日期文件; skills/目录下有三个技能：duty_reporter（含SKILL.",
+      "state": "openclaw_workspace_structure",
+      "claim_id": "tr_alias_workspace_identity.obs02.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_020#n_0069"
+    },
+    {
+      "node_id": "n_8abe610344e6",
+      "entity_ref": "openclaw_workspace/IDENTITY.md",
+      "lifecycle_ref": "openclaw_workspace/IDENTITY.md",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "openclaw_workspace/IDENTITY.md",
+      "observed_at": "2026-01-02T11:00:00Z",
+      "effective_at": "2026-01-02T11:00:00Z",
+      "node_type": "Fact",
+      "content": "GPT5.5建议：P1清理IDENTITY.md，改为：当前agent是OpenClaw数字组织运行时成员，具体岗位身份由当前激活的skill/工单/用户指令共同决定，执行任务时以对应SKILL.md为最高行为准则。",
+      "state": "openclaw_workspace/identity.md",
+      "claim_id": "tr_alias_workspace_identity.obs01.active",
+      "status": "active",
+      "active": true,
+      "source": "turn_027#n_0083"
+    }
+  ]
+}

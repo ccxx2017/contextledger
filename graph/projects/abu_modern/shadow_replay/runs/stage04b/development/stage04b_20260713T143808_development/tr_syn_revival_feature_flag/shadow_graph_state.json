@@ -1,0 +1,69 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_90c9333cf624": {
+      "node_id": "n_90c9333cf624",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T08:00:00Z",
+      "effective_at": "2026-06-07T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled.",
+      "state": "enabled",
+      "status": "active",
+      "active": true,
+      "source": "release_note#001"
+    },
+    "n_46883c6100f7": {
+      "node_id": "n_46883c6100f7",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T09:00:00Z",
+      "effective_at": "2026-06-07T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is disabled because of instability.",
+      "state": "disabled",
+      "status": "active",
+      "active": true,
+      "source": "incident_note#003"
+    },
+    "n_f26405afbf68": {
+      "node_id": "n_f26405afbf68",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature",
+      "observed_at": "2026-06-07T13:00:00Z",
+      "effective_at": "2026-06-07T13:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled again after rollback fixes.",
+      "state": "enabled_again",
+      "status": "active",
+      "active": true,
+      "source": "release_note#004"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_46883c6100f7",
+      "target": "n_90c9333cf624",
+      "relation": "CONTESTS"
+    },
+    {
+      "source": "n_f26405afbf68",
+      "target": "n_90c9333cf624",
+      "relation": "CONTESTS"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "tr07_obs03"
+}

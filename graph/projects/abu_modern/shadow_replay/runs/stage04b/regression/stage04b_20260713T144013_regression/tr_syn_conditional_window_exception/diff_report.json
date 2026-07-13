@@ -1,0 +1,75 @@
+{
+  "trajectory_id": "tr_syn_conditional_window_exception",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\regression\\stage04b_20260713T144013_regression\\tr_syn_conditional_window_exception",
+  "trajectory_sha256": "b752859f80bc7afdca06edafd3c2eadbd30e781b8d606832fbc31e2e63364267",
+  "gold_sha256": "e96c2a70f5055a07a3e0e5bf2298ba55efbfbc60692674adfda014a961fb5265",
+  "checkpoint_count": 2,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_tr06_obs01",
+      "after_obs_id": "tr06_obs01",
+      "graph_state_hash": "d5efc23830113a983728f650d78846c9f59c48723f76d60e3f75059f56d999f2",
+      "bundle_hash": "92d0c0da860edf59046aa356b01a8e0504b96eec5a481cf81da61d9cf0b23ca9",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_tr06_obs02",
+      "after_obs_id": "tr06_obs02",
+      "graph_state_hash": "7b2d1c6f922eaaa8db6d7a0fc2e969b165a90a2b7bf78579ab1de322d537cfbd",
+      "bundle_hash": "f3b988e6ec2c22b8b85351981dd816c94647232152b6f84487b2680195200720",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 0,
+    "regression_count": 0,
+    "unexplained_count": 0,
+    "min_must_include_recall": 1.0,
+    "min_active_set_set_f1": 1.0
+  },
+  "gate_decision": "PASS",
+  "final_graph_state_hash": "7b2d1c6f922eaaa8db6d7a0fc2e969b165a90a2b7bf78579ab1de322d537cfbd",
+  "final_bundle_hash": "f3b988e6ec2c22b8b85351981dd816c94647232152b6f84487b2680195200720",
+  "patch_hash": "6ecead59a611db074308af2e94030be2d15e8cce358c49fbb07c6b9fc9bc45d6",
+  "quarantine": []
+}

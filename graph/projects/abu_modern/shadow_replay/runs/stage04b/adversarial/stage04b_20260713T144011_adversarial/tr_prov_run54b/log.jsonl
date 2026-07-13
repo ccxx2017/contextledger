@@ -1,0 +1,12 @@
+[
+  {
+    "event_id": "obs01",
+    "action": "create",
+    "node_id": "n_bbddcb89d24c"
+  },
+  {
+    "event_id": "obs02",
+    "action": "create",
+    "node_id": "n_91e71d1d1983"
+  }
+]

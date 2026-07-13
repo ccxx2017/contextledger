@@ -1,0 +1,122 @@
+[
+  {
+    "turn_id": "obs01",
+    "new_nodes": [
+      {
+        "node_id": "n_b79821a115a4",
+        "entity_ref": "TKT-2026-005B_round5",
+        "lifecycle_ref": "TKT-2026-005B_round5",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-005B_round5",
+        "observed_at": "2026-01-03T14:00:00Z",
+        "effective_at": "2026-01-03T14:00:00Z",
+        "node_type": "Fact",
+        "content": "执行005B Round 5受限研究执行前检查。研究目标：基于Round4放量突破基线，只加入前期趋势过滤。硬限制：symbols≤5, years≤1, timeout=90s, train_split=0.7, 禁止自动重试等。",
+        "state": "resolved",
+        "status": "active",
+        "active": true,
+        "source": "turn_054#n_0138"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "obs02",
+    "new_nodes": [
+      {
+        "node_id": "n_624a78d57ea8",
+        "entity_ref": "TKT-2026-005B_round5.3A_audit",
+        "lifecycle_ref": "TKT-2026-005B_round5.3A_audit",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-005B_round5.3A_audit",
+        "observed_at": "2026-01-03T19:00:00Z",
+        "effective_at": "2026-01-03T19:00:00Z",
+        "node_type": "Fact",
+        "content": "Round5.3A黑盒审计确认：fixed initial capital sizing、无cash constraint、market_value>equity、同一symbol重复开仓、trade PnL不闭合（gap -689,451）；所有指标因杠杆放大失真，不允许进入Round 6。",
+        "state": "open",
+        "status": "active",
+        "active": true,
+        "source": "turn_059#n_0153"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "obs03",
+    "new_nodes": [
+      {
+        "node_id": "n_db26e2e938c6",
+        "entity_ref": "TKT-2026-005B_round5.3B_fix",
+        "lifecycle_ref": "TKT-2026-005B_round5.3B_fix",
+        "lifecycle_seq": 3,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-005B_round5.3B_fix",
+        "observed_at": "2026-01-03T19:00:00Z",
+        "effective_at": "2026-01-03T19:00:00Z",
+        "node_type": "Fact",
+        "content": "Round5.3B源码排查与修复完成：定位4个bug（final_equity取值错误、未成交订单污染统计、仓位sizing使用初始资金、默认允许重复开仓），在executor_facade.py、custom_positions.py、abupy_caller.py中修复；新增单元测试12个全部通过。",
+        "state": "open",
+        "status": "active",
+        "active": true,
+        "source": "turn_059#n_0154"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "obs04",
+    "new_nodes": [
+      {
+        "node_id": "n_598b71b1d224",
+        "entity_ref": "TKT-2026-005B_round5.3C_verify",
+        "lifecycle_ref": "TKT-2026-005B_round5.3C_verify",
+        "lifecycle_seq": 4,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-005B_round5.3C_verify",
+        "observed_at": "2026-01-03T18:00:00Z",
+        "effective_at": "2026-01-03T18:00:00Z",
+        "node_type": "Fact",
+        "content": "执行Round 5.3C：修复后黑盒复核。Feishu Agent通过后端API重新跑Round5 baseline，验证资金闭合等10项指标。",
+        "state": "open",
+        "status": "active",
+        "active": true,
+        "source": "turn_058#n_0151"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "obs05",
+    "new_nodes": [
+      {
+        "node_id": "n_05ee14ffa5da",
+        "entity_ref": "TKT-2026-005B_round5.3C_reverify",
+        "lifecycle_ref": "TKT-2026-005B_round5.3C_reverify",
+        "lifecycle_seq": 5,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-005B_round5.3C_reverify",
+        "observed_at": "2026-01-03T20:00:00Z",
+        "effective_at": "2026-01-03T20:00:00Z",
+        "node_type": "Fact",
+        "content": "重新执行Round 5.3C黑盒复核（基于项目AI修复）：按10项条件重新跑Round 5 baseline，验证资金闭合及trade/position报表正确性。",
+        "state": "superseded",
+        "status": "active",
+        "active": true,
+        "source": "turn_060#n_0155"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  }
+]

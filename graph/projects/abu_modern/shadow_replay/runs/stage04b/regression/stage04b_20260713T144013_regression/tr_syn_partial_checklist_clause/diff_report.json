@@ -1,0 +1,126 @@
+{
+  "trajectory_id": "tr_syn_partial_checklist_clause",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\regression\\stage04b_20260713T144013_regression\\tr_syn_partial_checklist_clause",
+  "trajectory_sha256": "eb6d25006d7d459b32f4d2303574a693555afe4d18efb199e194b2d0bbe46d74",
+  "gold_sha256": "ab735dae7a765e5bff55e625a4fbddc47e0f80552a15d8b35a9326d8eb0b2a56",
+  "checkpoint_count": 2,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_tr04_obs01",
+      "after_obs_id": "tr04_obs01",
+      "graph_state_hash": "00ee8489c4ace4642ddd5ea47fb9387163e9006fe38ed68220192b1083b32ebc",
+      "bundle_hash": "9da9c44c1daa0a0fd16b8ed3fabf3f09d95c57a8013d262b92c908bf191ae746",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1": 0.5
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.5,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr04.paper_trade.required",
+          "classification": "regression",
+          "rationale": "Expected active claim tr04.paper_trade.required not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "active_set",
+          "claim_id": "tr04.slippage_report.required",
+          "classification": "regression",
+          "rationale": "Expected active claim tr04.slippage_report.required not in shadow active set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr04.paper_trade.required",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr04.paper_trade.required missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_tr04_obs02",
+      "after_obs_id": "tr04_obs02",
+      "graph_state_hash": "75572aed685dc3861be9e9e0d7e7e4e2bfc10bbfd6c42b7edf1a56cbe06c4954",
+      "bundle_hash": "9a8547b71b398faec7413b8ca21120d015916e96f1583365e552170b4add770f",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1": 0.8
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.5,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr04.paper_trade.required",
+          "classification": "regression",
+          "rationale": "Expected active claim tr04.paper_trade.required not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr04.slippage_report.required",
+          "classification": "regression",
+          "rationale": "Expected invalidated claim tr04.slippage_report.required not in shadow superseded set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr04.paper_trade.required",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr04.paper_trade.required missing from shadow bundle",
+          "blocking": true
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr04.slippage_report.not_required",
+          "classification": "expected_schema_change",
+          "rationale": "Shadow bundle includes additional claim tr04.slippage_report.not_required",
+          "blocking": false
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 1,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 4
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 2,
+    "regression_count": 4,
+    "unexplained_count": 0,
+    "min_must_include_recall": 0.5,
+    "min_active_set_set_f1": 0.5
+  },
+  "gate_decision": "BLOCK",
+  "final_graph_state_hash": "75572aed685dc3861be9e9e0d7e7e4e2bfc10bbfd6c42b7edf1a56cbe06c4954",
+  "final_bundle_hash": "9a8547b71b398faec7413b8ca21120d015916e96f1583365e552170b4add770f",
+  "patch_hash": "35b7b7c05437b4331b41705668279ba85c296f37a6c5b9e71fcf771b5f242e8d",
+  "quarantine": []
+}

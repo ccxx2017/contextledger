@@ -1,0 +1,18 @@
+[
+  {
+    "event_id": "evt_060",
+    "action": "create",
+    "node_id": "n_4b1ccaad4879"
+  },
+  {
+    "event_id": "evt_061",
+    "action": "supersede",
+    "node_id": "n_e43443ca6331",
+    "target": "n_4b1ccaad4879"
+  },
+  {
+    "event_id": "evt_062",
+    "action": "quarantine",
+    "reason": "lifecycle_seq_collision"
+  }
+]

@@ -1,5 +1,6 @@
 {
-  "audit_version": "1.0",
+  "audit_version": "2.0",
+  "note": "This audit checks split integrity and textual/alias leakage between splits. It does NOT execute benchmark trajectories through any adjudication chain and is therefore not a benchmark replay result.",
   "freeze_manifest_sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
   "total_cases": 17,
   "duplicated_cases": {},
@@ -31,7 +32,22 @@
     }
   },
   "template_alias_leakage": {
-    "method": "text fingerprint overlap between blind_holdout and development trajectories",
+    "algorithms": {
+      "template_leakage": {
+        "name": "text_fingerprint_overlap",
+        "description": "Extract stable phrase-like tokens (identifiers, paths, entity refs, quoted strings >= 10 chars) from each trajectory. Compute overlap between blind_holdout fingerprints and the union of development fingerprints.",
+        "threshold": 0.5,
+        "threshold_semantics": "overlap_ratio < 0.5 is acceptable; >= 0.5 flags the case for manual review",
+        "handling_rule": "If a blind_holdout case has overlap_ratio >= threshold, it must not be used for rule design and must be escalated for review. The case may be moved to regression or removed from holdout."
+      },
+      "alias_leakage": {
+        "name": "shared_alias_token_ratio",
+        "description": "Compute the ratio of text fingerprints shared between each blind_holdout trajectory and the union of development trajectories, relative to the holdout trajectory's total fingerprints. This reduces false positives from shared entity references that appear across many trajectories.",
+        "threshold": 0.5,
+        "threshold_semantics": "shared_ratio < 0.5 is acceptable; >= 0.5 flags the case for manual review",
+        "handling_rule": "If a blind_holdout case shares >= threshold of its fingerprints with development, it must be treated as potentially leaked and excluded from final holdout evaluation until reviewed."
+      }
+    },
     "per_case": [
       {
         "case_id": "tr_decoy_strategy_scripts",
@@ -60,7 +76,30 @@
             "obs_id",
             "observations",
             "observed_at"
-          ]
+          ],
+          "hits": [
+            "\n          }\n        ]\n      }\n    },\n    {\n      ",
+            "\n      ],\n      ",
+            "2026-01-02t04",
+            "2026-01-02t04:00:00z",
+            ": [\n        ",
+            ": null,\n      ",
+            ": {\n        ",
+            "abu_modern_turn",
+            "channel",
+            "claim_bundle",
+            "claim_id",
+            "coverage_tags",
+            "critical",
+            "dimension",
+            "importance",
+            "mentions",
+            "non_invalidation_decoy",
+            "obs_id",
+            "observations",
+            "observed_at"
+          ],
+          "exceeds_threshold": false
         }
       },
       {
@@ -90,7 +129,30 @@
             "gpt5.5",
             "gpt5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 tkt-2026-005b-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
             "importance"
-          ]
+          ],
+          "hits": [
+            "\n          }\n        ]\n      }\n    },\n    {\n      ",
+            "\n      ],\n      ",
+            "/strategy-builder/compile-ir",
+            "2026-01-02t16",
+            "2026-01-02t16:00:00z",
+            ": [\n        ",
+            ": null,\n      ",
+            ": {\n        ",
+            "abu_modern_turn",
+            "alias_trap",
+            "backtest",
+            "channel",
+            "claim_bundle",
+            "claim_id",
+            "coverage_tags",
+            "critical",
+            "dimension",
+            "gpt5.5",
+            "gpt5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 tkt-2026-005b-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+            "importance"
+          ],
+          "exceeds_threshold": false
         }
       }
     ],
@@ -98,7 +160,9 @@
       {
         "case_id": "tr_decoy_strategy_scripts",
         "shared_token_count": 30,
-        "samples": [
+        "holdout_token_count": 68,
+        "shared_ratio": 0.4412,
+        "hits": [
           "\n          }\n        ]\n      }\n    },\n    {\n      ",
           "\n      ],\n      ",
           "2026-01-02t04",
@@ -108,13 +172,26 @@
           ": {\n        ",
           "abu_modern_turn",
           "channel",
-          "claim_bundle"
-        ]
+          "claim_bundle",
+          "claim_id",
+          "coverage_tags",
+          "critical",
+          "dimension",
+          "importance",
+          "mentions",
+          "non_invalidation_decoy",
+          "obs_id",
+          "observations",
+          "observed_at"
+        ],
+        "exceeds_threshold": false
       },
       {
         "case_id": "tr_alias_tkt_split",
         "shared_token_count": 36,
-        "samples": [
+        "holdout_token_count": 77,
+        "shared_ratio": 0.4675,
+        "hits": [
           "\n          }\n        ]\n      }\n    },\n    {\n      ",
           "\n      ],\n      ",
           "/strategy-builder/compile-ir",
@@ -124,14 +201,27 @@
           ": null,\n      ",
           ": {\n        ",
           "abu_modern_turn",
-          "alias_trap"
-        ]
+          "alias_trap",
+          "backtest",
+          "channel",
+          "claim_bundle",
+          "claim_id",
+          "coverage_tags",
+          "critical",
+          "dimension",
+          "gpt5.5",
+          "gpt5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 tkt-2026-005b-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+          "importance"
+        ],
+        "exceeds_threshold": false
       }
     ]
   },
-  "blind_holdout_rule": "blind_holdout cases must not be inspected or used for rule design; overlap scores below 0.5 are considered acceptable for this audit",
+  "blind_holdout_rule": "blind_holdout cases must not be inspected or used for rule design. Cases flagged by the leakage algorithms must be escalated before use in final evaluation.",
   "conclusion": {
     "no_cross_split_trajectories": true,
+    "template_leakage_acceptable": true,
+    "alias_leakage_acceptable": true,
     "blind_holdout_isolated_from_development": true
   }
 }

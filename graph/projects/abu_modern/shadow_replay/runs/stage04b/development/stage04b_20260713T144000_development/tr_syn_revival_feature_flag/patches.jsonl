@@ -1,0 +1,89 @@
+[
+  {
+    "turn_id": "tr07_obs01",
+    "new_nodes": [
+      {
+        "node_id": "n_90c9333cf624",
+        "entity_ref": "Alpha feature",
+        "lifecycle_ref": "Alpha feature",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "Alpha feature",
+        "observed_at": "2026-06-07T08:00:00Z",
+        "effective_at": "2026-06-07T08:00:00Z",
+        "node_type": "Fact",
+        "content": "Alpha feature is enabled.",
+        "state": "enabled",
+        "claim_id": "tr07.feature.enabled.v1",
+        "status": "active",
+        "active": true,
+        "source": "release_note#001"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr07_obs02",
+    "new_nodes": [
+      {
+        "node_id": "n_46883c6100f7",
+        "entity_ref": "Alpha feature",
+        "lifecycle_ref": "Alpha feature",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "Alpha feature",
+        "observed_at": "2026-06-07T09:00:00Z",
+        "effective_at": "2026-06-07T09:00:00Z",
+        "node_type": "Fact",
+        "content": "Alpha feature is disabled because of instability.",
+        "state": "disabled",
+        "claim_id": "tr07.feature.disabled",
+        "status": "active",
+        "active": true,
+        "source": "incident_note#003"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_46883c6100f7",
+        "target": "n_90c9333cf624",
+        "relation": "CONTESTS"
+      }
+    ]
+  },
+  {
+    "turn_id": "tr07_obs03",
+    "new_nodes": [
+      {
+        "node_id": "n_f26405afbf68",
+        "entity_ref": "Alpha feature",
+        "lifecycle_ref": "Alpha feature",
+        "lifecycle_seq": 3,
+        "lifecycle_stage": null,
+        "adjudication_key": "Alpha feature",
+        "observed_at": "2026-06-07T13:00:00Z",
+        "effective_at": "2026-06-07T13:00:00Z",
+        "node_type": "Fact",
+        "content": "Alpha feature is enabled again after rollback fixes.",
+        "state": "enabled_again",
+        "claim_id": "tr07.feature.enabled.v2",
+        "status": "active",
+        "active": true,
+        "source": "release_note#004"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_f26405afbf68",
+        "target": "n_90c9333cf624",
+        "relation": "CONTESTS"
+      }
+    ]
+  }
+]

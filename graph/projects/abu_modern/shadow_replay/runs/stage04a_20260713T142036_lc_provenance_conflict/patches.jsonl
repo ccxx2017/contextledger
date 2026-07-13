@@ -1,0 +1,56 @@
+[
+  {
+    "turn_id": "evt_020",
+    "new_nodes": [
+      {
+        "node_id": "n_7764415170aa",
+        "entity_ref": "POL-2026-003",
+        "lifecycle_ref": "lc_policy_003",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "lc_policy_003",
+        "observed_at": "2026-07-01T12:00:00Z",
+        "effective_at": "2026-07-01T12:00:00Z",
+        "node_type": "Policy",
+        "content": "Policy requires two-person review.",
+        "state": "implemented",
+        "status": "active",
+        "active": true,
+        "source": "policy_team"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "evt_021",
+    "new_nodes": [
+      {
+        "node_id": "n_795634b6dc88",
+        "entity_ref": "POL-2026-003",
+        "lifecycle_ref": "lc_policy_003",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "lc_policy_003",
+        "observed_at": "2026-07-02T12:00:00Z",
+        "effective_at": "2026-07-02T12:00:00Z",
+        "node_type": "Policy",
+        "content": "Probe reports policy waived for region X.",
+        "state": "implemented",
+        "status": "active",
+        "active": true,
+        "source": "audit_probe"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_795634b6dc88",
+        "target": "n_7764415170aa",
+        "relation": "CONTESTS"
+      }
+    ]
+  }
+]

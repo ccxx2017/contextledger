@@ -1,0 +1,31 @@
+[
+  {
+    "event_id": "obs01",
+    "action": "create",
+    "node_id": "n_33d2972345ff"
+  },
+  {
+    "event_id": "obs02",
+    "action": "contest",
+    "node_id": "n_8acecec5b809",
+    "target": "n_33d2972345ff"
+  },
+  {
+    "event_id": "obs03",
+    "action": "contest",
+    "node_id": "n_c587f4899406",
+    "target": "n_33d2972345ff"
+  },
+  {
+    "event_id": "obs04",
+    "action": "contest",
+    "node_id": "n_bc7542d2d37e",
+    "target": "n_33d2972345ff"
+  },
+  {
+    "event_id": "obs05",
+    "action": "contest",
+    "node_id": "n_f0a9f2288df3",
+    "target": "n_33d2972345ff"
+  }
+]

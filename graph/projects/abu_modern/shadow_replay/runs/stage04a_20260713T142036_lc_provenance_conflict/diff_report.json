@@ -1,0 +1,28 @@
+{
+  "fixture_id": "lc_provenance_conflict",
+  "category": "provenance_conflict",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T142036_lc_provenance_conflict",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_021",
+      "after_event_id": "evt_021",
+      "graph_state_hash": "3ad0636f912f807a54484147818b891e0d7283f73e8d25911557bdab36636ed2",
+      "bundle_hash": "671c2a2361449a16cf33ba9b338854a3d373f8d50793481d5ec0e18dc9569b52",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "3ad0636f912f807a54484147818b891e0d7283f73e8d25911557bdab36636ed2",
+  "final_bundle_hash": "671c2a2361449a16cf33ba9b338854a3d373f8d50793481d5ec0e18dc9569b52",
+  "patch_hash": "e798f744dbdd6246b267a20e0bd0da51abd7b2cf43d4a90fcc3b10a4a75afeba",
+  "quarantine": []
+}

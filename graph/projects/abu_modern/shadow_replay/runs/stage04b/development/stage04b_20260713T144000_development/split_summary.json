@@ -1,0 +1,985 @@
+{
+  "split": "development",
+  "run_id": "stage04b_20260713T144000_development",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development",
+  "generated_at": "2026-07-13T14:40:00.020240+00:00",
+  "case_count": 7,
+  "cases": [
+    {
+      "trajectory_id": "tr_full_tkt_005b",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_full_tkt_005b",
+      "trajectory_sha256": "83fd9a0d01f8aa07d63e54fc0ce5c4a2ac7efb63055be5bd17d70d79f700859d",
+      "gold_sha256": "ba7c53ff8ebf8cffac704322e7596d3ae58c1068260067f9a7d1cc0cd5892974",
+      "checkpoint_count": 5,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_obs01",
+          "after_obs_id": "obs01",
+          "graph_state_hash": "8d9c87858d0af34c734064da6d96c6b1c9d8547f3416052f2019fe56d13ea550",
+          "bundle_hash": "4f81749c9deb103e484058597593f92f9d217e8332fbacd672db3b112e78e5bb",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs02",
+          "after_obs_id": "obs02",
+          "graph_state_hash": "0e9e1afd381cf762f85da0fb61cc66ca6b2701035e5c31a861d73c710c06e64f",
+          "bundle_hash": "a44fcf06b06c3bbe7b3e7e99725c1ebe199cea82dd86a0ca85ff198c1211f289",
+          "active_set_metrics": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs01.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr_full_tkt_005b.obs01.active not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs01.active",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 2,
+            "expected_schema_change": 1,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 3
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs03",
+          "after_obs_id": "obs03",
+          "graph_state_hash": "809e107a824773071b504428e712ae3024a32b4b1e203cf28470a8c6e97257bf",
+          "bundle_hash": "37804d94dfe4ff148e61f504b1d16d411051627c1b8e04d2ff149472abdc68bc",
+          "active_set_metrics": {
+            "precision": 0.3333,
+            "recall": 1.0,
+            "f1": 0.5
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs02.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs01.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr_full_tkt_005b.obs02.active not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs02.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs01.active",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 3,
+            "expected_schema_change": 2,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 5
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs04",
+          "after_obs_id": "obs04",
+          "graph_state_hash": "c4fc28c2bcf66de53c42a217b335eca2302cd10d8b266c5b5ce6134cd97d681f",
+          "bundle_hash": "e36bd67d66a1e2c26e2b0b6e670b6bfb54f0b500eaa5d543b18639bae2ccda9b",
+          "active_set_metrics": {
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs02.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs03.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs03.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs01.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr_full_tkt_005b.obs03.active",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr_full_tkt_005b.obs03.active not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs02.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs03.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs03.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs01.active",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 4,
+            "expected_schema_change": 3,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 7
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs05",
+          "after_obs_id": "obs05",
+          "graph_state_hash": "dfeac3e82d198956671d90bf134ad7b2c53a479f73926ec5def9db3fe7d5aa8e",
+          "bundle_hash": "b27c350254d719cbb5c8d05b7ba9c15af8e16a3b8c9f0caefe7d94b1d87add9d",
+          "active_set_metrics": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs02.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs03.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs03.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs04.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs04.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr_full_tkt_005b.obs01.active in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr_full_tkt_005b.obs04.active",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr_full_tkt_005b.obs04.active not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs02.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs02.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs03.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs03.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs04.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs04.active",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr_full_tkt_005b.obs01.active",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr_full_tkt_005b.obs01.active",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 5,
+            "expected_schema_change": 4,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 9
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 14,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.3333
+      },
+      "gate_decision": "BLOCK",
+      "final_graph_state_hash": "dfeac3e82d198956671d90bf134ad7b2c53a479f73926ec5def9db3fe7d5aa8e",
+      "final_bundle_hash": "b27c350254d719cbb5c8d05b7ba9c15af8e16a3b8c9f0caefe7d94b1d87add9d",
+      "patch_hash": "4eed43c83b98459cf35793ee6dfa4ce11dbbf94c95ca4da301fe3739ca1a1d32",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_syn_partial_policy_clause",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_syn_partial_policy_clause",
+      "trajectory_sha256": "3b265de3272a9a4a4222af8114fb8c130e2bfd6456a290e0f7c51dbaeef5ebe3",
+      "gold_sha256": "1b542f97fa4d81ff7cdac2ff629d905cb71062f31a5544ae80fc26f61b5dda1f",
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_tr03_obs01",
+          "after_obs_id": "tr03_obs01",
+          "graph_state_hash": "bfc59e22ad37b7ffd6921e925a8512af1ffd0e3c21290685d6041aee1f84e94b",
+          "bundle_hash": "34a2b88b8181f15a6eef86dcb011b01ebd2860100111604c50105db0cb6f0d26",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 0.3333,
+            "f1": 0.5
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 0.5,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr03.audit.required",
+              "classification": "regression",
+              "rationale": "Expected active claim tr03.audit.required not in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr03.retries.2",
+              "classification": "regression",
+              "rationale": "Expected active claim tr03.retries.2 not in shadow active set",
+              "blocking": true
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr03.retries.2",
+              "classification": "blocker",
+              "rationale": "Expected must_include claim tr03.retries.2 missing from shadow bundle",
+              "blocking": true
+            }
+          ],
+          "diff_counts": {
+            "blocker": 1,
+            "regression": 2,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 3
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr03_obs02",
+          "after_obs_id": "tr03_obs02",
+          "graph_state_hash": "7cf732b9e74d7b74135318fa683172de7c955a119b2e10b8b13e41b99dd23277",
+          "bundle_hash": "5a0549a4add82ed84784e626880cb3a88f6b72da0742347f6224fea8f84b544e",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr03.audit.required",
+              "classification": "regression",
+              "rationale": "Expected active claim tr03.audit.required not in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr03.retries.2",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr03.retries.2 not in shadow superseded set",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 2,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 2
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 1,
+        "regression_count": 4,
+        "unexplained_count": 0,
+        "min_must_include_recall": 0.5,
+        "min_active_set_set_f1": 0.5
+      },
+      "gate_decision": "BLOCK",
+      "final_graph_state_hash": "7cf732b9e74d7b74135318fa683172de7c955a119b2e10b8b13e41b99dd23277",
+      "final_bundle_hash": "5a0549a4add82ed84784e626880cb3a88f6b72da0742347f6224fea8f84b544e",
+      "patch_hash": "f0a4041b9a51ef8464746b48a12e8ebe20f0217f0b562038f49d577f8b2c7405",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_syn_conditional_region_exception",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_syn_conditional_region_exception",
+      "trajectory_sha256": "a4a8c05dc2cc29ad0fbb6c0d8ae7980f5306a3b1a946d4089aa3a3e891e20bcd",
+      "gold_sha256": "f0bf7eb90c9aa19a391dfeb100b4874070221b52a63d292a03bacbf4f43dfd97",
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_tr05_obs01",
+          "after_obs_id": "tr05_obs01",
+          "graph_state_hash": "6fc2e2b9ebbdd0c2432da98cb269d2de5501bd7adc0cb38824f60b138df3b1ca",
+          "bundle_hash": "27098c0c6d4e01b23a6c1137c1bc840ea5d1e972496c0d59abf28f4fd6ebafc1",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr05_obs02",
+          "after_obs_id": "tr05_obs02",
+          "graph_state_hash": "1f8f979deac61929730760fc833d518e61399fd3d68e35602ebadd49ab7c0698",
+          "bundle_hash": "c2cca5be3c2901690c8c87f041e0b98985e1b762159ccadb614c6a3ecb4ee939",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 0,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 1.0
+      },
+      "gate_decision": "PASS",
+      "final_graph_state_hash": "1f8f979deac61929730760fc833d518e61399fd3d68e35602ebadd49ab7c0698",
+      "final_bundle_hash": "c2cca5be3c2901690c8c87f041e0b98985e1b762159ccadb614c6a3ecb4ee939",
+      "patch_hash": "31b1dee7f16e764214cde7aece84ff29d13502e34d90abc201a96328a7232328",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_syn_revival_feature_flag",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_syn_revival_feature_flag",
+      "trajectory_sha256": "ff1c63200a9c804f3dd25354a8a0c983a5ffaace851d62c0398293b81bea463e",
+      "gold_sha256": "f79ea4ec0f16d612f2c5694ac283b2a01ba3645a7d825963395e9726ad77dc40",
+      "checkpoint_count": 3,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_tr07_obs01",
+          "after_obs_id": "tr07_obs01",
+          "graph_state_hash": "79804623a5b512c9080e686848891f3fb8397b9fe24672485157da5d4e29f361",
+          "bundle_hash": "3b45238dcdd538984ec6b46cb9d24777d39297f5774cb98b5a79d132419fcd9e",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr07_obs02",
+          "after_obs_id": "tr07_obs02",
+          "graph_state_hash": "a701d6b33d6cbb8609e1aa59b57f016031b7cc0c28e8f59c52ec2667bedf2f77",
+          "bundle_hash": "ab7c355d0945b1fb72a9798526effda3097e1add8928e08817a8d65d52168b44",
+          "active_set_metrics": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr07.feature.enabled.v1",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr07.feature.enabled.v1 in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr07.feature.enabled.v1",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr07.feature.enabled.v1 not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr07.feature.enabled.v1",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr07.feature.enabled.v1",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 2,
+            "expected_schema_change": 1,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 3
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr07_obs03",
+          "after_obs_id": "tr07_obs03",
+          "graph_state_hash": "27f0070a2836eff3b201a0e79ef5fef63401efca9b21a3ce97e28f772b3630ad",
+          "bundle_hash": "33c9f20df7d0ad0bbb09021894a8325e3818a55ae2bee10f6f3d2e091f0de624",
+          "active_set_metrics": {
+            "precision": 0.3333,
+            "recall": 1.0,
+            "f1": 0.5
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr07.feature.enabled.v1",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr07.feature.enabled.v1 in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "active_set",
+              "claim_id": "tr07.feature.disabled",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr07.feature.disabled in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "invalidation",
+              "claim_id": "tr07.feature.disabled",
+              "classification": "regression",
+              "rationale": "Expected invalidated claim tr07.feature.disabled not in shadow superseded set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr07.feature.enabled.v1",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr07.feature.enabled.v1",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr07.feature.disabled",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr07.feature.disabled",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 3,
+            "expected_schema_change": 2,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 5
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 5,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.5
+      },
+      "gate_decision": "BLOCK",
+      "final_graph_state_hash": "27f0070a2836eff3b201a0e79ef5fef63401efca9b21a3ce97e28f772b3630ad",
+      "final_bundle_hash": "33c9f20df7d0ad0bbb09021894a8325e3818a55ae2bee10f6f3d2e091f0de624",
+      "patch_hash": "4022893401c5d74f22f1a26bb35802a0efd5126fa5468355e662cf0d6ddea3a8",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_alias_workspace_identity",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_alias_workspace_identity",
+      "trajectory_sha256": "f2707ae3643d1ba06f4f0e748d68362bde6e98624a0a1e9dfcac56908cf9b0bb",
+      "gold_sha256": "94c44ea93e4ed26f5d66e1d2cc4d9be41eefe5bb4419fb2c1ec7af9fa38e3586",
+      "checkpoint_count": 3,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_obs01",
+          "after_obs_id": "obs01",
+          "graph_state_hash": "806096c2340b2f2c544614a51ed23c97980c9cb4f078c93a9df02d6e64f1b73e",
+          "bundle_hash": "996d2188ec8b27ac4508d50b8f91f361d8f0170dd73564eba71ab43df2ef532d",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs02",
+          "after_obs_id": "obs02",
+          "graph_state_hash": "274dde2c572d547a4bc250e688494cd882fe630a1f17f3497c508191d416d063",
+          "bundle_hash": "66e27f5ce9fffb28268c23e0186201175ea61d5d9ce03d7dd8dd6927cec57c48",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_obs03",
+          "after_obs_id": "obs03",
+          "graph_state_hash": "c8c26dd0cccff02818c004ae7227c1ae4e8bdc6756726bcf3baffd08b7d67741",
+          "bundle_hash": "ae61977a5ee90262dc6e2785bf6c6a057bfde6dce78f74b5a44fa8a6ea090043",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 0,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 1.0
+      },
+      "gate_decision": "PASS",
+      "final_graph_state_hash": "c8c26dd0cccff02818c004ae7227c1ae4e8bdc6756726bcf3baffd08b7d67741",
+      "final_bundle_hash": "ae61977a5ee90262dc6e2785bf6c6a057bfde6dce78f74b5a44fa8a6ea090043",
+      "patch_hash": "779e0f0b143dd3430733cb3ab5dd6d5d1cbb385575e4f1cfe7041abcfdf06acd",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_syn_non_invalidation_parallel_targets",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_syn_non_invalidation_parallel_targets",
+      "trajectory_sha256": "983cc3036d2235ecba49799958af2e2faf5139fe97c77a91a8bc018acf562cc7",
+      "gold_sha256": "74659aa0dce1f2b08190fee7492a639028be6836b5ca506c0d7feb07ad059faf",
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_tr12_obs01",
+          "after_obs_id": "tr12_obs01",
+          "graph_state_hash": "de078887c1739464137136cf8561fcb6be148d86b8c4b07b00fd820381a1ba53",
+          "bundle_hash": "47912553ac2656333b8579bf28523ce0314468c75eee6cf172ed953a495f28f1",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr12_obs02",
+          "after_obs_id": "tr12_obs02",
+          "graph_state_hash": "ea7bbaad3e1dbc613e96df83c94bbfa2318644e088a0097e3bce7a77a062d647",
+          "bundle_hash": "8ee8df9e99089b17e6fc9ac13949d88e79e7d527021dc7954cd04b12001470fc",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 0,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 1.0
+      },
+      "gate_decision": "PASS",
+      "final_graph_state_hash": "ea7bbaad3e1dbc613e96df83c94bbfa2318644e088a0097e3bce7a77a062d647",
+      "final_bundle_hash": "8ee8df9e99089b17e6fc9ac13949d88e79e7d527021dc7954cd04b12001470fc",
+      "patch_hash": "e743e6ebda44647efeacac7da39873c222d573c70332c49e2efd0e34d6c67cb2",
+      "quarantine": [],
+      "deterministic": true
+    },
+    {
+      "trajectory_id": "tr_syn_out_of_order_inventory_present",
+      "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development\\tr_syn_out_of_order_inventory_present",
+      "trajectory_sha256": "067ac152d9c0cdf127af7a29c6f91c15d45694325602348dec02d3027d2f793e",
+      "gold_sha256": "7ba1f56dbd8002bb07cb61b413c548986f009118f630ee9706325eed83786a6c",
+      "checkpoint_count": 2,
+      "checkpoints": [
+        {
+          "checkpoint_id": "cp_after_tr14_obs01",
+          "after_obs_id": "tr14_obs01",
+          "graph_state_hash": "1e44a8a4a85d904f34076b0c360634e3c2c5dfcd105200b3914b31a1663b1b0e",
+          "bundle_hash": "c55ab5cfca53d7bae3ac5b8d9a4cbbbed8800bae11dfdcf6d426489986e889ff",
+          "active_set_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 0,
+            "expected_schema_change": 0,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 0
+          }
+        },
+        {
+          "checkpoint_id": "cp_after_tr14_obs02",
+          "after_obs_id": "tr14_obs02",
+          "graph_state_hash": "3411748c9edd6bf990285bd4afd8e5e724a250386f0923c53cd34e6ac79a0c83",
+          "bundle_hash": "7ce15f9bf1460f4b914e415ea1b6fb5cbeaf9a1d96fdf92dc49932091e0392f2",
+          "active_set_metrics": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667
+          },
+          "invalidation_metrics": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "must_include_recall": 1.0,
+          "diffs": [
+            {
+              "kind": "active_set",
+              "claim_id": "tr14.inventory.0",
+              "classification": "regression",
+              "rationale": "Unexpected active claim tr14.inventory.0 in shadow active set",
+              "blocking": false
+            },
+            {
+              "kind": "must_include",
+              "claim_id": "tr14.inventory.0",
+              "classification": "expected_schema_change",
+              "rationale": "Shadow bundle includes additional claim tr14.inventory.0",
+              "blocking": false
+            }
+          ],
+          "diff_counts": {
+            "blocker": 0,
+            "regression": 1,
+            "expected_schema_change": 1,
+            "expected_improvement": 0,
+            "unexplained": 0,
+            "manual_adjudication": 0,
+            "total": 2
+          }
+        }
+      ],
+      "aggregate": {
+        "blocker_count": 0,
+        "regression_count": 1,
+        "unexplained_count": 0,
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.6667
+      },
+      "gate_decision": "BLOCK",
+      "final_graph_state_hash": "3411748c9edd6bf990285bd4afd8e5e724a250386f0923c53cd34e6ac79a0c83",
+      "final_bundle_hash": "7ce15f9bf1460f4b914e415ea1b6fb5cbeaf9a1d96fdf92dc49932091e0392f2",
+      "patch_hash": "24d9f0a1b604a5f424e8eaa19bfb3c761285b8ac1a7df50226335f70a40b3928",
+      "quarantine": [],
+      "deterministic": true
+    }
+  ],
+  "split_gate_decision": "BLOCK",
+  "aggregate": {
+    "min_must_include_recall": 0.5,
+    "min_active_set_set_f1": 0.3333,
+    "total_blockers": 1,
+    "total_regressions": 24,
+    "total_unexplained": 0
+  },
+  "freeze_manifest_sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "ee35d693d9b2346ca5929e08dd6e38cad302a35a74a831a2792241b24237182a",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "benchmark_shadow_runner.py": "48a76671f5cf58cd8279262053aae6f46377cffadff45b07a5f495b660de22b4"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+      "--split",
+      "development"
+    ]
+  }
+}

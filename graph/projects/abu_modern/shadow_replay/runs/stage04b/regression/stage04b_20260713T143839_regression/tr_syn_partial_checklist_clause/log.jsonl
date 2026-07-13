@@ -1,0 +1,13 @@
+[
+  {
+    "event_id": "tr04_obs01",
+    "action": "create",
+    "node_id": "n_bb09efb5ae59"
+  },
+  {
+    "event_id": "tr04_obs02",
+    "action": "contest",
+    "node_id": "n_08a7185bad66",
+    "target": "n_bb09efb5ae59"
+  }
+]

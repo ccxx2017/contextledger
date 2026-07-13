@@ -1,0 +1,80 @@
+{
+  "run_id": "stage04a_20260713T143610_lc_late_arrival",
+  "generated_at": "2026-07-13T14:36:10.653994+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_late_arrival.json",
+  "fixture_sha256": "972621a2d9e2c868af2ca73a1697bf89a3c1ed4b38131af25e8b924574e0f8f9",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "6502a23a343a1b572b53377270adfe5ff29115c852f3f65f746d9af87d23fbf0",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "9a0b08b6f3c0e7ae5a5f963138e37e17124efc9c40b84ea2d838535d8db671e7"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_late_arrival",
+    "category": "late_arrival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143610_lc_late_arrival",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_031",
+        "after_event_id": "evt_031",
+        "graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+        "bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+    "final_bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+    "patch_hash": "4052178d8822bd2e3a0eaa37d83c2baf208f062cb132362b460cf0a12c8740c6",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_late_arrival",
+    "category": "late_arrival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143610_lc_late_arrival",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_031",
+        "after_event_id": "evt_031",
+        "graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+        "bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "330efb0a5eb6c585f6cd5da2320dd4e7aee81496e9af6f57b87b783ba28aa7e0",
+    "final_bundle_hash": "32a1f2fd910c5a4f7bd88825440dd821b19c15220cab90c499b275373cf204dc",
+    "patch_hash": "4052178d8822bd2e3a0eaa37d83c2baf208f062cb132362b460cf0a12c8740c6",
+    "quarantine": []
+  },
+  "gate_decision": "PASS"
+}

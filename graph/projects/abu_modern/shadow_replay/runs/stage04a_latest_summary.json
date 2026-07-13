@@ -4,49 +4,49 @@
       "fixture_id": "lc_alias_abstain",
       "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_alias_abstain"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_alias_abstain"
     },
     {
       "fixture_id": "lc_late_arrival",
       "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_late_arrival"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_late_arrival"
     },
     {
       "fixture_id": "lc_legacy_migration",
-      "gate_decision": "BLOCK",
+      "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_legacy_migration"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_legacy_migration"
     },
     {
       "fixture_id": "lc_provenance_conflict",
       "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_provenance_conflict"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_provenance_conflict"
     },
     {
       "fixture_id": "lc_replay_determinism",
       "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_replay_determinism"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_replay_determinism"
     },
     {
       "fixture_id": "lc_revival",
-      "gate_decision": "BLOCK",
+      "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_revival"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_revival"
     },
     {
       "fixture_id": "lc_sequence_collision",
       "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_sequence_collision"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_sequence_collision"
     },
     {
       "fixture_id": "lc_two_lifecycles_no_kill",
-      "gate_decision": "BLOCK",
+      "gate_decision": "PASS",
       "deterministic": true,
-      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T134132_lc_two_lifecycles_no_kill"
+      "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_two_lifecycles_no_kill"
     }
   ]
 }

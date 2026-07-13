@@ -1,0 +1,151 @@
+[
+  {
+    "turn_id": "obs01",
+    "new_nodes": [
+      {
+        "node_id": "n_33d2972345ff",
+        "entity_ref": "TKT-2026-006",
+        "lifecycle_ref": "TKT-2026-006",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-006",
+        "observed_at": "2026-01-02T04:00:00Z",
+        "effective_at": "2026-01-02T04:00:00Z",
+        "node_type": "Fact",
+        "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "state": "open",
+        "claim_id": "tr_full_tkt_006.obs01.active",
+        "status": "active",
+        "active": true,
+        "source": "turn_020#n_0071"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "obs02",
+    "new_nodes": [
+      {
+        "node_id": "n_8acecec5b809",
+        "entity_ref": "TKT-2026-006",
+        "lifecycle_ref": "TKT-2026-006",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-006",
+        "observed_at": "2026-01-02T20:00:00Z",
+        "effective_at": "2026-01-02T20:00:00Z",
+        "node_type": "Fact",
+        "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "state": "open",
+        "claim_id": "tr_full_tkt_006.obs02.active",
+        "status": "active",
+        "active": true,
+        "source": "turn_036#n_0071"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_8acecec5b809",
+        "target": "n_33d2972345ff",
+        "relation": "CONTESTS"
+      }
+    ]
+  },
+  {
+    "turn_id": "obs03",
+    "new_nodes": [
+      {
+        "node_id": "n_c587f4899406",
+        "entity_ref": "TKT-2026-006",
+        "lifecycle_ref": "TKT-2026-006",
+        "lifecycle_seq": 3,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-006",
+        "observed_at": "2026-01-03T12:00:00Z",
+        "effective_at": "2026-01-03T12:00:00Z",
+        "node_type": "Fact",
+        "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "state": "open",
+        "claim_id": "tr_full_tkt_006.obs03.active",
+        "status": "active",
+        "active": true,
+        "source": "turn_052#n_0071"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_c587f4899406",
+        "target": "n_33d2972345ff",
+        "relation": "CONTESTS"
+      }
+    ]
+  },
+  {
+    "turn_id": "obs04",
+    "new_nodes": [
+      {
+        "node_id": "n_bc7542d2d37e",
+        "entity_ref": "TKT-2026-006",
+        "lifecycle_ref": "TKT-2026-006",
+        "lifecycle_seq": 4,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-006",
+        "observed_at": "2026-01-04T04:00:00Z",
+        "effective_at": "2026-01-04T04:00:00Z",
+        "node_type": "Fact",
+        "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "state": "open",
+        "claim_id": "tr_full_tkt_006.obs04.active",
+        "status": "active",
+        "active": true,
+        "source": "turn_068#n_0071"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_bc7542d2d37e",
+        "target": "n_33d2972345ff",
+        "relation": "CONTESTS"
+      }
+    ]
+  },
+  {
+    "turn_id": "obs05",
+    "new_nodes": [
+      {
+        "node_id": "n_f0a9f2288df3",
+        "entity_ref": "TKT-2026-006",
+        "lifecycle_ref": "TKT-2026-006",
+        "lifecycle_seq": 5,
+        "lifecycle_stage": null,
+        "adjudication_key": "TKT-2026-006",
+        "observed_at": "2026-01-04T20:00:00Z",
+        "effective_at": "2026-01-04T20:00:00Z",
+        "node_type": "Fact",
+        "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "state": "open",
+        "claim_id": "tr_full_tkt_006.obs05.active",
+        "status": "active",
+        "active": true,
+        "source": "turn_084#n_0071"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_f0a9f2288df3",
+        "target": "n_33d2972345ff",
+        "relation": "CONTESTS"
+      }
+    ]
+  }
+]

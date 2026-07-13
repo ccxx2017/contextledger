@@ -1,0 +1,58 @@
+[
+  {
+    "turn_id": "tr06_obs01",
+    "new_nodes": [
+      {
+        "node_id": "n_e5852d94da79",
+        "entity_ref": "Risk gate",
+        "lifecycle_ref": "Risk gate",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "Risk gate",
+        "observed_at": "2026-06-06T08:00:00Z",
+        "effective_at": "2026-06-06T08:00:00Z",
+        "node_type": "Fact",
+        "content": "Rebalances are blocked for the whole day.",
+        "state": "blocked_all_day",
+        "claim_id": "tr06.rebalance.blocked.all_day",
+        "status": "active",
+        "active": true,
+        "source": "risk_note#020"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr06_obs02",
+    "new_nodes": [
+      {
+        "node_id": "n_0cde636f6c9b",
+        "entity_ref": "Risk gate",
+        "lifecycle_ref": "Risk gate",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "Risk gate",
+        "observed_at": "2026-06-06T08:40:00Z",
+        "effective_at": "2026-06-06T08:40:00Z",
+        "node_type": "Fact",
+        "content": "Rebalances may run during the 15:00-15:30 close auction window.",
+        "state": "close_auction_allowed",
+        "claim_id": "tr06.rebalance.allowed.close_auction",
+        "status": "active",
+        "active": true,
+        "source": "risk_note#021"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_0cde636f6c9b",
+        "target": "n_e5852d94da79",
+        "relation": "CONTESTS"
+      }
+    ]
+  }
+]

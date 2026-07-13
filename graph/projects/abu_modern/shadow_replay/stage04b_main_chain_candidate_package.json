@@ -1,0 +1,35 @@
+{
+  "request": "main_chain_candidate_switch",
+  "status": "blocked",
+  "candidate_commit": "943b3f7908c830a8ab683938c0196ee85c8d7d64-dirty",
+  "branch": "phase1-lifecycle-stage02",
+  "base_main_commit": "890219b2e2fab2a4aecbdf4f6c070d2e20b2d044",
+  "evaluation_report": "reports/stage04b_report.md",
+  "manifest": "graph/projects/abu_modern/shadow_replay/stage04b_evaluation_manifest.json",
+  "gate_decisions": {
+    "fixtures": "PASS",
+    "development": "BLOCK",
+    "regression": "BLOCK",
+    "blind_holdout": "not_run",
+    "adversarial": "BLOCK"
+  },
+  "red_line_checklist": {
+    "fixture_semantic_pass": true,
+    "regression_no_safety_regression": false,
+    "blind_holdout_preregistered_threshold": false,
+    "must_include_recall_at_least_d1": false,
+    "critical_false_invalidation_zero_or_quarantined": false,
+    "no_unexplained_blocker_diff": false,
+    "shadow_output_uncontaminated": true
+  },
+  "blocker_reasons": [
+    "Regression split gate decision is BLOCK.",
+    "Blind holdout was not executed because regression did not pass.",
+    "min must_include_recall on development and regression splits is below the D1 baseline of 1.0.",
+    "min active_set_set_f1 on development and regression splits is below the Phase0 baseline."
+  ],
+  "sealed_blind_holdout_status": {
+    "executed": false,
+    "reason": "Regression gate not met; sealed run withheld to preserve holdout integrity."
+  }
+}

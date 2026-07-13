@@ -1,0 +1,4 @@
+{
+  "gate_decision": "BLOCK",
+  "reason": "3 blocker diff(s); 3 regression diff(s)"
+}

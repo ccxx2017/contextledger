@@ -1,0 +1,259 @@
+{
+  "trajectory_id": "tr_revival_round5x",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\regression\\stage04b_20260713T143839_regression\\tr_revival_round5x",
+  "trajectory_sha256": "905c9ec55dc0776982469fe9cc4d5cfa6b8fd25940e6d8a2948befc7938ac986",
+  "gold_sha256": "fc266b87fce1996bc109c1ec72930a6cc0d790c12ec15e9aed119b001633a628",
+  "checkpoint_count": 5,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_obs01",
+      "after_obs_id": "obs01",
+      "graph_state_hash": "26b173e450f81e01644c677cdb7f08c8750dbdb0d369e79df66df2e9ce35aeac",
+      "bundle_hash": "bb9efa41ae9f4ea650583bb5d147a7ae5872496773ef9cdc160578a70024e9e9",
+      "active_set_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr_revival_round5x.obs01.active",
+          "classification": "regression",
+          "rationale": "Expected active claim tr_revival_round5x.obs01.active not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_revival_round5x.obs01.active",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr_revival_round5x.obs01.active missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 1,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 2
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs02",
+      "after_obs_id": "obs02",
+      "graph_state_hash": "75dc03f4d87e873a42f1919432bf3413c3ef8034e22fa87b060623a4cda3738d",
+      "bundle_hash": "7d2775e3fa5715459caa7dcbda48542ac6a6cc4afc05624ed503507bb84ab2dd",
+      "active_set_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr_revival_round5x.obs02.active",
+          "classification": "regression",
+          "rationale": "Expected active claim tr_revival_round5x.obs02.active not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr_revival_round5x.obs01.active",
+          "classification": "regression",
+          "rationale": "Expected invalidated claim tr_revival_round5x.obs01.active not in shadow superseded set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_revival_round5x.obs02.active",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr_revival_round5x.obs02.active missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs03",
+      "after_obs_id": "obs03",
+      "graph_state_hash": "ab7bbf8c3e81f0ca43e96dd98b269ca94c5d99ccf60de2c1fe0da6455009ac2d",
+      "bundle_hash": "3768ffa97aaf196322725a15700b98148761e61501d833ab57a4fc33f4a61547",
+      "active_set_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr_revival_round5x.obs03.active",
+          "classification": "regression",
+          "rationale": "Expected active claim tr_revival_round5x.obs03.active not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr_revival_round5x.obs02.active",
+          "classification": "regression",
+          "rationale": "Expected invalidated claim tr_revival_round5x.obs02.active not in shadow superseded set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_revival_round5x.obs03.active",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr_revival_round5x.obs03.active missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs04",
+      "after_obs_id": "obs04",
+      "graph_state_hash": "6c46d527333f4ceb3552b460f357ee25ed1630cb99e25351cec7dae0481a09c5",
+      "bundle_hash": "d27d5f560b2cb8504fec09aa1f23b21d5f0c6ae3ec94c845c7776f13893143c1",
+      "active_set_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr_revival_round5x.obs04.active",
+          "classification": "regression",
+          "rationale": "Expected active claim tr_revival_round5x.obs04.active not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr_revival_round5x.obs03.active",
+          "classification": "regression",
+          "rationale": "Expected invalidated claim tr_revival_round5x.obs03.active not in shadow superseded set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_revival_round5x.obs04.active",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr_revival_round5x.obs04.active missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs05",
+      "after_obs_id": "obs05",
+      "graph_state_hash": "40de45565f72b95eca2f59aea278772eb928309d30a1fce1f7c8f0c13a5bb74f",
+      "bundle_hash": "d988cefd78118fe914f9e66314e2a015b6234cf8f0988fab40e0fd6c77bf3844",
+      "active_set_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.0,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr_revival_round5x.obs05.active",
+          "classification": "regression",
+          "rationale": "Expected active claim tr_revival_round5x.obs05.active not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr_revival_round5x.obs04.active",
+          "classification": "regression",
+          "rationale": "Expected invalidated claim tr_revival_round5x.obs04.active not in shadow superseded set",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr_revival_round5x.obs05.active",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr_revival_round5x.obs05.active missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 1,
+        "regression": 2,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 5,
+    "regression_count": 9,
+    "unexplained_count": 0,
+    "min_must_include_recall": 0.0,
+    "min_active_set_set_f1": 0.0
+  },
+  "gate_decision": "BLOCK",
+  "final_graph_state_hash": "40de45565f72b95eca2f59aea278772eb928309d30a1fce1f7c8f0c13a5bb74f",
+  "final_bundle_hash": "d988cefd78118fe914f9e66314e2a015b6234cf8f0988fab40e0fd6c77bf3844",
+  "patch_hash": "24b2fbe8af7f20bcc4454f450ddab834ef8338378dcab55d009b4cdce9f0d476",
+  "quarantine": []
+}
