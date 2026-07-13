@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr18_provenance_conflict_policy_wins",
+  "title": "规范压过随手备注",
+  "coverage_tags": [
+    "provenance_conflict"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr18_obs01",
+      "observed_at": "2026-06-18T08:00:00Z",
+      "valid_from": "2026-06-18T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "policy_doc",
+        "provenance": "policy_doc#880"
+      },
+      "mentions": [
+        "Broker adapter retries"
+      ],
+      "payload": {
+        "statement": "Official policy says broker adapter retries are capped at 2.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr18.retries.2",
+            "dimension": "retry_cap",
+            "value": "2",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr18_obs02",
+      "observed_at": "2026-06-18T08:03:00Z",
+      "valid_from": "2026-06-18T08:03:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "user_note",
+        "provenance": "user_note#881"
+      },
+      "mentions": [
+        "Broker adapter retries"
+      ],
+      "payload": {
+        "statement": "A user note says retries can be treated as 4 during the incident.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr18.retries.4",
+            "dimension": "retry_cap",
+            "value": "4",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

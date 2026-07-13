@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr13_non_invalidation_parallel_modes",
+  "title": "同一栏位的多值并列",
+  "coverage_tags": [
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr13_obs01",
+      "observed_at": "2026-06-13T08:00:00Z",
+      "valid_from": "2026-06-13T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "mode_sheet",
+        "provenance": "mode_sheet#001"
+      },
+      "mentions": [
+        "Allowed modes"
+      ],
+      "payload": {
+        "statement": "Paper mode is allowed.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr13.mode.paper.allowed",
+            "dimension": "allowed_modes",
+            "value": "paper",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr13_obs02",
+      "observed_at": "2026-06-13T08:05:00Z",
+      "valid_from": "2026-06-13T08:05:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "mode_sheet",
+        "provenance": "mode_sheet#002"
+      },
+      "mentions": [
+        "Allowed modes"
+      ],
+      "payload": {
+        "statement": "Simulation mode is allowed as well.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr13.mode.simulation.allowed",
+            "dimension": "allowed_modes",
+            "value": "simulation",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

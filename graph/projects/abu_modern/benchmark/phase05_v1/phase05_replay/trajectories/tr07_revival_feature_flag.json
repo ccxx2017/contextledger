@@ -1,0 +1,81 @@
+{
+  "trajectory_id": "tr07_revival_feature_flag",
+  "title": "关闭后再次启用功能",
+  "coverage_tags": [
+    "revival"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr07_obs01",
+      "observed_at": "2026-06-07T08:00:00Z",
+      "valid_from": "2026-06-07T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "release_note",
+        "provenance": "release_note#001"
+      },
+      "mentions": [
+        "Alpha feature"
+      ],
+      "payload": {
+        "statement": "Alpha feature is enabled.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr07.feature.enabled.v1",
+            "dimension": "feature_flag",
+            "value": "enabled",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr07_obs02",
+      "observed_at": "2026-06-07T09:00:00Z",
+      "valid_from": "2026-06-07T09:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "incident_note",
+        "provenance": "incident_note#003"
+      },
+      "mentions": [
+        "Alpha feature"
+      ],
+      "payload": {
+        "statement": "Alpha feature is disabled because of instability.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr07.feature.disabled",
+            "dimension": "feature_flag",
+            "value": "disabled",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr07_obs03",
+      "observed_at": "2026-06-07T13:00:00Z",
+      "valid_from": "2026-06-07T13:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "release_note",
+        "provenance": "release_note#004"
+      },
+      "mentions": [
+        "Alpha feature"
+      ],
+      "payload": {
+        "statement": "Alpha feature is enabled again after rollback fixes.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr07.feature.enabled.v2",
+            "dimension": "feature_flag",
+            "value": "enabled_again",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

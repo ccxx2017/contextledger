@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr17_provenance_conflict_probe_wins",
+  "title": "探针压过口述",
+  "coverage_tags": [
+    "provenance_conflict"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr17_obs01",
+      "observed_at": "2026-06-17T08:00:00Z",
+      "valid_from": "2026-06-17T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "probe_log",
+        "provenance": "probe_log#880"
+      },
+      "mentions": [
+        "Risk snapshot"
+      ],
+      "payload": {
+        "statement": "Probe shows circuit breaker is armed.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr17.circuit_breaker.armed",
+            "dimension": "circuit_breaker",
+            "value": "armed",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr17_obs02",
+      "observed_at": "2026-06-17T08:05:00Z",
+      "valid_from": "2026-06-17T08:05:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "user_note",
+        "provenance": "user_note#880"
+      },
+      "mentions": [
+        "Risk snapshot"
+      ],
+      "payload": {
+        "statement": "A user note says circuit breaker should be considered disarmed.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr17.circuit_breaker.disarmed",
+            "dimension": "circuit_breaker",
+            "value": "disarmed",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

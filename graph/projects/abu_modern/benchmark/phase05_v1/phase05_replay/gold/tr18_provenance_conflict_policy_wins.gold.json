@@ -1,0 +1,48 @@
+{
+  "trajectory_id": "tr18_provenance_conflict_policy_wins",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr18_obs01",
+      "expected_active_set": [
+        "tr18.retries.2"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr18_entity",
+          "mentions": [
+            "Broker adapter retries"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr18.retries.2"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr18_obs02",
+      "expected_active_set": [
+        "tr18.retries.2"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr18_entity",
+          "mentions": [
+            "Broker adapter retries"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr18.retries.2"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

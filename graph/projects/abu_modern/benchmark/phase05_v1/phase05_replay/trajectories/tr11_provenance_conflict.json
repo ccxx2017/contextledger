@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr11_provenance_conflict",
+  "title": "高可信探针与低可信口述冲突",
+  "coverage_tags": [
+    "provenance_conflict"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr11_obs01",
+      "observed_at": "2026-06-11T08:00:00Z",
+      "valid_from": "2026-06-11T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "probe_log",
+        "provenance": "probe_log#771"
+      },
+      "mentions": [
+        "Broker adapter"
+      ],
+      "payload": {
+        "statement": "Probe says broker adapter is not ready for production.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr11.prod_ready.false",
+            "dimension": "prod_readiness",
+            "value": "false",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr11_obs02",
+      "observed_at": "2026-06-11T08:30:00Z",
+      "valid_from": "2026-06-11T08:30:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "user_note",
+        "provenance": "user_note#771"
+      },
+      "mentions": [
+        "Broker adapter"
+      ],
+      "payload": {
+        "statement": "A user note says broker adapter should be considered production ready.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr11.prod_ready.true",
+            "dimension": "prod_readiness",
+            "value": "true",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

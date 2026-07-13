@@ -1,0 +1,80 @@
+{
+  "trajectory_id": "tr21_alias_mixed_cost_profile",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr21_obs01",
+      "expected_active_set": [
+        "tr21.release_gate.owner"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr21_entity_a",
+          "mentions": [
+            "OMS"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr21.release_gate.owner"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr21_obs02",
+      "expected_active_set": [
+        "tr21.release_gate.owner",
+        "tr21.platform.identity"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr21_entity_a",
+          "mentions": [
+            "OMS",
+            "order manager"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr21.release_gate.owner"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr21_obs03",
+      "expected_active_set": [
+        "tr21.release_gate.owner",
+        "tr21.platform.identity",
+        "tr21.oms_desk.owner"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr21_entity_a",
+          "mentions": [
+            "OMS",
+            "order manager"
+          ]
+        },
+        {
+          "cluster_id": "tr21_entity_b",
+          "mentions": [
+            "OMS desk"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr21.release_gate.owner"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

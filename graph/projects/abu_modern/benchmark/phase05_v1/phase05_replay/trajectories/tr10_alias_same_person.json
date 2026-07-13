@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr10_alias_same_person",
+  "title": "同一人的不同表面形式",
+  "coverage_tags": [
+    "alias_trap"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr10_obs01",
+      "observed_at": "2026-06-10T08:00:00Z",
+      "valid_from": "2026-06-10T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "staff_note",
+        "provenance": "staff_note#001"
+      },
+      "mentions": [
+        "M. Chen"
+      ],
+      "payload": {
+        "statement": "M. Chen must review final changes.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr10.reviewer.required",
+            "dimension": "review_gate",
+            "value": "required",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr10_obs02",
+      "observed_at": "2026-06-10T08:10:00Z",
+      "valid_from": "2026-06-10T08:10:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "staff_note",
+        "provenance": "staff_note#002"
+      },
+      "mentions": [
+        "Mei Chen"
+      ],
+      "payload": {
+        "statement": "Mei Chen works in UTC+8.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr10.timezone.utc_plus_8",
+            "dimension": "timezone",
+            "value": "UTC+8",
+            "importance": "supporting"
+          }
+        ]
+      }
+    }
+  ]
+}

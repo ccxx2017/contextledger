@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr22_out_of_order_price_band_present",
+  "title": "迟到旧价带不应覆盖新价带",
+  "coverage_tags": [
+    "out_of_order_late"
+  ],
+  "observations": [
+    {
+      "obs_id": "tr22_obs01",
+      "observed_at": "2026-06-22T10:05:00Z",
+      "valid_from": "2026-06-22T10:05:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "warehouse_feed",
+        "provenance": "warehouse_feed#2205"
+      },
+      "mentions": [
+        "Price band"
+      ],
+      "payload": {
+        "statement": "Price band is set to wide.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr22.price_band.wide",
+            "dimension": "price_band",
+            "value": "wide",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "tr22_obs02",
+      "observed_at": "2026-06-22T10:01:00Z",
+      "valid_from": "2026-06-22T10:01:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "warehouse_feed",
+        "provenance": "warehouse_feed#2201_late"
+      },
+      "mentions": [
+        "Price band"
+      ],
+      "payload": {
+        "statement": "Price band is set to narrow.",
+        "claim_bundle": [
+          {
+            "claim_id": "tr22.price_band.narrow",
+            "dimension": "price_band",
+            "value": "narrow",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

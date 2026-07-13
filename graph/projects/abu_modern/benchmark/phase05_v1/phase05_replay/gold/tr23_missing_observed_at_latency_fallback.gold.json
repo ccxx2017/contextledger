@@ -1,0 +1,74 @@
+{
+  "trajectory_id": "tr23_missing_observed_at_latency_fallback",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr23_obs01",
+      "expected_active_set": [
+        "tr23.latency_threshold.50"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr23_entity",
+          "mentions": [
+            "Latency threshold"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr23.latency_threshold.50"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr23_entity",
+            "dimension": "latency_threshold",
+            "winner_obs_id": "tr23_obs01",
+            "fallback_used": true
+          }
+        ]
+      }
+    },
+    {
+      "after_obs_id": "tr23_obs02",
+      "expected_active_set": [
+        "tr23.latency_threshold.80"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr23_obs02",
+          "target_obs_id": "tr23_obs01",
+          "kind": "full",
+          "dropped_claims": [
+            "tr23.latency_threshold.50"
+          ],
+          "replacement_claims": [
+            "tr23.latency_threshold.80"
+          ]
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr23_entity",
+          "mentions": [
+            "Latency threshold"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr23.latency_threshold.80"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": [
+          {
+            "entity_cluster_id": "tr23_entity",
+            "dimension": "latency_threshold",
+            "winner_obs_id": "tr23_obs02",
+            "fallback_used": true
+          }
+        ]
+      }
+    }
+  ]
+}

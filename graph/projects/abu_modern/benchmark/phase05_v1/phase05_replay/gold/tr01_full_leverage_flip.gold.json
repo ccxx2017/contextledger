@@ -1,0 +1,66 @@
+{
+  "trajectory_id": "tr01_full_leverage_flip",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "tr01_obs01",
+      "expected_active_set": [
+        "tr01.leverage_cap.2x",
+        "tr01.overnight.forbidden"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr01_entity",
+          "mentions": [
+            "Risk Engine"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr01.leverage_cap.2x",
+        "tr01.overnight.forbidden"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "tr01_obs02",
+      "expected_active_set": [
+        "tr01.leverage_cap.4x",
+        "tr01.overnight.hedged_only"
+      ],
+      "expected_invalidations": [
+        {
+          "source_obs_id": "tr01_obs02",
+          "target_obs_id": "tr01_obs01",
+          "kind": "full",
+          "dropped_claims": [
+            "tr01.leverage_cap.2x",
+            "tr01.overnight.forbidden"
+          ],
+          "replacement_claims": [
+            "tr01.leverage_cap.4x",
+            "tr01.overnight.hedged_only"
+          ]
+        }
+      ],
+      "entity_clusters": [
+        {
+          "cluster_id": "tr01_entity",
+          "mentions": [
+            "Risk Engine"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr01.leverage_cap.4x",
+        "tr01.overnight.hedged_only"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}
