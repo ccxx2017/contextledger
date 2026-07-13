@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shadow Replay Diff Report",
+  "description": "Machine-readable diff report comparing main-chain and shadow-chain outputs at one or more checkpoints.",
+  "type": "object",
+  "required": ["run_id", "generated_at", "inputs", "checkpoints", "summary"],
+  "properties": {
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "inputs": {
+      "type": "object",
+      "required": ["fixture_id", "event_stream_hash", "contract_hashes"],
+      "properties": {
+        "fixture_id": { "type": ["string", "null"] },
+        "event_stream_hash": { "type": "string" },
+        "contract_hashes": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["checkpoint_id", "old_state_hash", "shadow_state_hash", "diffs"],
+        "properties": {
+          "checkpoint_id": { "type": "string" },
+          "old_state_hash": { "type": "string" },
+          "shadow_state_hash": { "type": "string" },
+          "diffs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["kind", "node_id", "classification", "blocking"],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["node_status", "relation", "must_include", "quarantine", "assembler_token"]
+                },
+                "node_id": { "type": "string" },
+                "old_value": {},
+                "shadow_value": {},
+                "classification": {
+                  "type": "string",
+                  "enum": ["expected_improvement", "expected_schema_change", "regression", "unexplained"]
+                },
+                "rationale": { "type": "string" },
+                "blocking": { "type": "boolean" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total_diffs", "expected_improvement_count", "expected_schema_change_count", "regression_count", "unexplained_count", "blocking_count", "gate_decision"],
+      "properties": {
+        "total_diffs": { "type": "integer" },
+        "expected_improvement_count": { "type": "integer" },
+        "expected_schema_change_count": { "type": "integer" },
+        "regression_count": { "type": "integer" },
+        "unexplained_count": { "type": "integer" },
+        "blocking_count": { "type": "integer" },
+        "gate_decision": { "type": "string", "enum": ["PASS", "ARBITRATE", "BLOCK"] },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
