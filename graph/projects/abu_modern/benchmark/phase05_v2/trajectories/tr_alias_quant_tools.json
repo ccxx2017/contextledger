@@ -1,0 +1,81 @@
+{
+  "trajectory_id": "tr_alias_quant_tools",
+  "title": "Quant assistant TOOLS.md alias vs skill entity",
+  "coverage_tags": [
+    "alias_trap"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-02T07:00:00Z",
+      "valid_from": "2026-01-02T07:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_023#n_0077"
+      },
+      "mentions": [
+        "openclaw_skills/quant-assistant"
+      ],
+      "payload": {
+        "statement": "Claude提出P0具体方案：步骤1将根TOOLS.md搬家到skills/quant_assistant/TOOLS.md（mv或merge），步骤2在工作区根目录新建路由层TOOLS.md，包含技能地图、分诊规则和全局约束。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_quant_tools.obs01.active",
+            "dimension": "artifact_identity",
+            "value": "openclaw_skills/quant-assistant",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-02T08:00:00Z",
+      "valid_from": "2026-01-02T08:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_024#n_0080"
+      },
+      "mentions": [
+        "openclaw_skills/quant_assistant/TOOLS.md"
+      ],
+      "payload": {
+        "statement": "quant_assistant 的本地环境信息 TOOLS.md 文件，包含后端地址、脚本路径、鉴权信息、使用规则等（源自当前 turn 中 Claude 提供的全文）",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_quant_tools.obs02.active",
+            "dimension": "artifact_identity",
+            "value": "openclaw_skills/quant_assistant/TOOLS.md",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-02T07:00:00Z",
+      "valid_from": "2026-01-02T07:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_023#n_0079"
+      },
+      "mentions": [
+        "skills/quant_assistant/SKILL.md且调用正确脚本"
+      ],
+      "payload": {
+        "statement": "P0完成后的行为级烟测方案：烟测A（分诊测试：输入'帮我查一下当前有哪些实例在跑'，观察是否read_file skills/quant_assistant/SKILL.md且调用正确脚本）；烟测B（污染清除测试：输入'最近BTC这波结构怎么看？'，观察是否不再触发strategy_builder.py，而是澄清意图或自然语言回答）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_quant_tools.obs03.active",
+            "dimension": "artifact_identity",
+            "value": "skills/quant_assistant/SKILL.md且调用正确脚本",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

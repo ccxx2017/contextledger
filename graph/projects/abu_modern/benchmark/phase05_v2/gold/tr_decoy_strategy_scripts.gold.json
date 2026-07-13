@@ -1,0 +1,78 @@
+{
+  "trajectory_id": "tr_decoy_strategy_scripts",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "obs01",
+      "expected_active_set": [
+        "tr_decoy_strategy_scripts.obs01.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_skills/strategy-researcher/scripts/call_backtest.py"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_decoy_strategy_scripts.obs01.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs02",
+      "expected_active_set": [
+        "tr_decoy_strategy_scripts.obs01.active",
+        "tr_decoy_strategy_scripts.obs02.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+            "openclaw_skills/strategy-researcher/SKILL.md"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_decoy_strategy_scripts.obs01.active",
+        "tr_decoy_strategy_scripts.obs02.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs03",
+      "expected_active_set": [
+        "tr_decoy_strategy_scripts.obs01.active",
+        "tr_decoy_strategy_scripts.obs02.active",
+        "tr_decoy_strategy_scripts.obs03.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+            "openclaw_skills/strategy-researcher/SKILL.md",
+            "openclaw_skills/strategy-researcher/TOOLS.md"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_decoy_strategy_scripts.obs01.active",
+        "tr_decoy_strategy_scripts.obs02.active",
+        "tr_decoy_strategy_scripts.obs03.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

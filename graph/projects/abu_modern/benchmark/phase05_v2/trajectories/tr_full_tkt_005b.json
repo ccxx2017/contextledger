@@ -1,0 +1,129 @@
+{
+  "trajectory_id": "tr_full_tkt_005b",
+  "title": "TKT-2026-005B full lifecycle from open to resolved",
+  "coverage_tags": [
+    "full"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-02T16:00:00Z",
+      "valid_from": "2026-01-02T16:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_032#n_0092"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "GPT5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 TKT-2026-005B-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_005b.obs01.active",
+            "dimension": "ticket_state",
+            "value": "resolved",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-03T09:00:00Z",
+      "valid_from": "2026-01-03T09:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_049#n_0115"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_005b.obs02.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-03T18:00:00Z",
+      "valid_from": "2026-01-03T18:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_058#n_0115"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_005b.obs03.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-01-04T03:00:00Z",
+      "valid_from": "2026-01-04T03:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_067#n_0115"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_005b.obs04.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs05",
+      "observed_at": "2026-01-04T20:00:00Z",
+      "valid_from": "2026-01-04T20:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_084#n_0115"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_005b.obs05.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "trajectory_id": "tr_revival_round5x",
+  "title": "Round 5.x audit fix verify reverify cycle as revival pattern",
+  "coverage_tags": [
+    "revival",
+    "full"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-03T14:00:00Z",
+      "valid_from": "2026-01-03T14:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_054#n_0138"
+      },
+      "mentions": [
+        "TKT-2026-005B_round5"
+      ],
+      "payload": {
+        "statement": "执行005B Round 5受限研究执行前检查。研究目标：基于Round4放量突破基线，只加入前期趋势过滤。硬限制：symbols≤5, years≤1, timeout=90s, train_split=0.7, 禁止自动重试等。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_revival_round5x.obs01.active",
+            "dimension": "round_state",
+            "value": "resolved",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-03T19:00:00Z",
+      "valid_from": "2026-01-03T19:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_059#n_0153"
+      },
+      "mentions": [
+        "TKT-2026-005B_round5.3A_audit"
+      ],
+      "payload": {
+        "statement": "Round5.3A黑盒审计确认：fixed initial capital sizing、无cash constraint、market_value>equity、同一symbol重复开仓、trade PnL不闭合（gap -689,451）；所有指标因杠杆放大失真，不允许进入Round 6。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_revival_round5x.obs02.active",
+            "dimension": "round_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-03T19:00:00Z",
+      "valid_from": "2026-01-03T19:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_059#n_0154"
+      },
+      "mentions": [
+        "TKT-2026-005B_round5.3B_fix"
+      ],
+      "payload": {
+        "statement": "Round5.3B源码排查与修复完成：定位4个bug（final_equity取值错误、未成交订单污染统计、仓位sizing使用初始资金、默认允许重复开仓），在executor_facade.py、custom_positions.py、abupy_caller.py中修复；新增单元测试12个全部通过。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_revival_round5x.obs03.active",
+            "dimension": "round_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-01-03T18:00:00Z",
+      "valid_from": "2026-01-03T18:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_058#n_0151"
+      },
+      "mentions": [
+        "TKT-2026-005B_round5.3C_verify"
+      ],
+      "payload": {
+        "statement": "执行Round 5.3C：修复后黑盒复核。Feishu Agent通过后端API重新跑Round5 baseline，验证资金闭合等10项指标。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_revival_round5x.obs04.active",
+            "dimension": "round_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs05",
+      "observed_at": "2026-01-03T20:00:00Z",
+      "valid_from": "2026-01-03T20:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_060#n_0155"
+      },
+      "mentions": [
+        "TKT-2026-005B_round5.3C_reverify"
+      ],
+      "payload": {
+        "statement": "重新执行Round 5.3C黑盒复核（基于项目AI修复）：按10项条件重新跑Round 5 baseline，验证资金闭合及trade/position报表正确性。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_revival_round5x.obs05.active",
+            "dimension": "round_state",
+            "value": "superseded",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "trajectory_id": "tr_full_tkt_006",
+  "title": "TKT-2026-006 full lifecycle",
+  "coverage_tags": [
+    "full"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-02T04:00:00Z",
+      "valid_from": "2026-01-02T04:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_020#n_0071"
+      },
+      "mentions": [
+        "TKT-2026-006"
+      ],
+      "payload": {
+        "statement": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_006.obs01.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-02T20:00:00Z",
+      "valid_from": "2026-01-02T20:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_036#n_0071"
+      },
+      "mentions": [
+        "TKT-2026-006"
+      ],
+      "payload": {
+        "statement": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_006.obs02.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-03T12:00:00Z",
+      "valid_from": "2026-01-03T12:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_052#n_0071"
+      },
+      "mentions": [
+        "TKT-2026-006"
+      ],
+      "payload": {
+        "statement": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_006.obs03.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-01-04T04:00:00Z",
+      "valid_from": "2026-01-04T04:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_068#n_0071"
+      },
+      "mentions": [
+        "TKT-2026-006"
+      ],
+      "payload": {
+        "statement": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_006.obs04.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs05",
+      "observed_at": "2026-01-04T20:00:00Z",
+      "valid_from": "2026-01-04T20:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_084#n_0071"
+      },
+      "mentions": [
+        "TKT-2026-006"
+      ],
+      "payload": {
+        "statement": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_full_tkt_006.obs05.active",
+            "dimension": "ticket_state",
+            "value": "open",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

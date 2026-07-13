@@ -1,0 +1,105 @@
+{
+  "trajectory_id": "tr_alias_tkt_split",
+  "title": "TKT-2026-005 lettered variants as alias split case",
+  "coverage_tags": [
+    "alias_trap"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-02T16:00:00Z",
+      "valid_from": "2026-01-02T16:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_032#n_0092"
+      },
+      "mentions": [
+        "TKT-2026-005B"
+      ],
+      "payload": {
+        "statement": "GPT5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 TKT-2026-005B-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_tkt_split.obs01.active",
+            "dimension": "ticket_identity",
+            "value": "TKT-2026-005B",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-02T17:00:00Z",
+      "valid_from": "2026-01-02T17:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_033#n_0095"
+      },
+      "mentions": [
+        "TKT-2026-005C"
+      ],
+      "payload": {
+        "statement": "创建补丁工单 TKT-2026-005C-backtest-safety-guard：1) 限制试运行回测规模(首轮5-20标的，时间窗1-2年)；2) 修改 workflow：backend 无响应一次即暂停，不允许 agent 重启后重试大请求，pending_user_input 视为 builder 不适配；3) call_backtest.py 加硬保护：默认 max_symbols <= 20，超时拒绝，禁止绕过脚本直接 curl 大回测。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_tkt_split.obs02.active",
+            "dimension": "ticket_identity",
+            "value": "TKT-2026-005C",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-02T23:00:00Z",
+      "valid_from": "2026-01-02T23:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_039#n_0107"
+      },
+      "mentions": [
+        "TKT-2026-005D"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005D-builder-backtest-contract-repair：修backtest 500问题（统一JSON错误结构）、Builder改为非交互式契约（POST /strategy-builder/compile-ir，禁止pending_user_input）、暂时关闭auto_backtest。实施主体为Project AI/Claude Code/后端开发者。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_tkt_split.obs03.active",
+            "dimension": "ticket_identity",
+            "value": "TKT-2026-005D",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-01-02T23:00:00Z",
+      "valid_from": "2026-01-02T23:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_039#n_0108"
+      },
+      "mentions": [
+        "TKT-2026-005E"
+      ],
+      "payload": {
+        "statement": "TKT-2026-005E-technical-e2e-smoke：纯技术端到端smoke，使用手写最小IR测试工具链闭环，不进行VCP研究。验收标准：builder返回strategy_id，无pending_user_input，backtest返回合法JSON，无HTTP 500，KB写入成功，backtest结果追加，无卡死，护栏仍生效。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_alias_tkt_split.obs04.active",
+            "dimension": "ticket_identity",
+            "value": "TKT-2026-005E",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

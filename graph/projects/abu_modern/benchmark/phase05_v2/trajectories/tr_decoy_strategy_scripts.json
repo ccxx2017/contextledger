@@ -1,0 +1,81 @@
+{
+  "trajectory_id": "tr_decoy_strategy_scripts",
+  "title": "Strategy researcher scripts vs SKILL.md vs TOOLS.md as parallel targets",
+  "coverage_tags": [
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-01-02T19:00:00Z",
+      "valid_from": "2026-01-02T19:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_035#n_0099"
+      },
+      "mentions": [
+        "openclaw_skills/strategy-researcher/scripts/call_backtest.py"
+      ],
+      "payload": {
+        "statement": "call_backtest.py已增加硬限制：MAX_SYMBOLS_DEFAULT=20、MAX_YEARS_DEFAULT=3、REQUEST_TIMEOUT_SEC=90；新增_validate_request()函数；超限且无AOS_BOSS_OVERRIDE时抛出BacktestGuardrailError。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_decoy_strategy_scripts.obs01.active",
+            "dimension": "artifact_role",
+            "value": "openclaw_skills/strategy-researcher/TOOLS.md",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-01-02T04:00:00Z",
+      "valid_from": "2026-01-02T04:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_020#n_0039"
+      },
+      "mentions": [
+        "openclaw_skills/strategy-researcher/SKILL.md"
+      ],
+      "payload": {
+        "statement": "openclaw_skills/strategy-researcher/SKILL.md (skeleton v0.1.0 draft)",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_decoy_strategy_scripts.obs02.active",
+            "dimension": "artifact_role",
+            "value": "openclaw_skills/strategy-researcher/TOOLS.md",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-01-02T04:00:00Z",
+      "valid_from": "2026-01-02T04:00:00Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_020#n_0055"
+      },
+      "mentions": [
+        "openclaw_skills/strategy-researcher/TOOLS.md"
+      ],
+      "payload": {
+        "statement": "TOOLS.md v1正式内容（替换占位版），包含call_builder.py、call_backtest.py、kb_query.py、smoke_http_clients.sh的签名、参数、错误码、示例",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_decoy_strategy_scripts.obs03.active",
+            "dimension": "artifact_role",
+            "value": "openclaw_skills/strategy-researcher/TOOLS.md",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}
