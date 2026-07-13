@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0",
+  "freeze_version": "v1",
+  "based_on_benchmark_version": "phase05_v3",
+  "project_id": "abu_modern",
+  "generated_at": "2026-07-13T10:41:05.282674+00:00",
+  "generated_at_utc": "2026-07-13T10:41:05Z",
+  "source_path": "graph/projects/abu_modern/benchmark/phase05_v3",
+  "source_dir_sha256": "a9e4a4ebb2ce31c37ad97fb2baf61e23a3c430113ae8e10849454801f4e5bd79",
+  "metric_script_path": "graph/scripts/score_phase05.py",
+  "metric_script_sha256": "bb381b45416fcf38c4278e99ac403bcea9f486e1311e44941dbcd48c5298ed58",
+  "score_report_path": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_score_report.json",
+  "score_report_sha256": "2487739105da14c71207875140410f6eeb2dca3f55df0055ef73e866f5401c98",
+  "gold_annotation_schema_version": "phase05_v3",
+  "d1_baseline_definition": "Flat RAG with static context window, no invalidation tracking",
+  "d2_baseline_definition": "Flat RAG with injected chronological summary, no explicit lifecycle adjudication",
+  "splits": [
+    {
+      "name": "development",
+      "rule": "Allowed for iterative development, rule tuning, and prompt engineering. Results may be inspected.",
+      "case_count": 7,
+      "case_ids": [
+        "tr_full_tkt_005b",
+        "tr_syn_partial_policy_clause",
+        "tr_syn_conditional_region_exception",
+        "tr_syn_revival_feature_flag",
+        "tr_alias_workspace_identity",
+        "tr_syn_non_invalidation_parallel_targets",
+        "tr_syn_out_of_order_inventory_present"
+      ],
+      "cases": [
+        {
+          "case_id": "tr_full_tkt_005b",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_full_tkt_005b.json",
+          "trajectory_sha256": "83fd9a0d01f8aa07d63e54fc0ce5c4a2ac7efb63055be5bd17d70d79f700859d",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_full_tkt_005b.gold.json",
+          "gold_sha256": "ba7c53ff8ebf8cffac704322e7596d3ae58c1068260067f9a7d1cc0cd5892974"
+        },
+        {
+          "case_id": "tr_syn_partial_policy_clause",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_partial_policy_clause.json",
+          "trajectory_sha256": "3b265de3272a9a4a4222af8114fb8c130e2bfd6456a290e0f7c51dbaeef5ebe3",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_partial_policy_clause.gold.json",
+          "gold_sha256": "1b542f97fa4d81ff7cdac2ff629d905cb71062f31a5544ae80fc26f61b5dda1f"
+        },
+        {
+          "case_id": "tr_syn_conditional_region_exception",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_conditional_region_exception.json",
+          "trajectory_sha256": "a4a8c05dc2cc29ad0fbb6c0d8ae7980f5306a3b1a946d4089aa3a3e891e20bcd",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_conditional_region_exception.gold.json",
+          "gold_sha256": "f0bf7eb90c9aa19a391dfeb100b4874070221b52a63d292a03bacbf4f43dfd97"
+        },
+        {
+          "case_id": "tr_syn_revival_feature_flag",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_revival_feature_flag.json",
+          "trajectory_sha256": "ff1c63200a9c804f3dd25354a8a0c983a5ffaace851d62c0398293b81bea463e",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_revival_feature_flag.gold.json",
+          "gold_sha256": "f79ea4ec0f16d612f2c5694ac283b2a01ba3645a7d825963395e9726ad77dc40"
+        },
+        {
+          "case_id": "tr_alias_workspace_identity",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_alias_workspace_identity.json",
+          "trajectory_sha256": "f2707ae3643d1ba06f4f0e748d68362bde6e98624a0a1e9dfcac56908cf9b0bb",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_alias_workspace_identity.gold.json",
+          "gold_sha256": "94c44ea93e4ed26f5d66e1d2cc4d9be41eefe5bb4419fb2c1ec7af9fa38e3586"
+        },
+        {
+          "case_id": "tr_syn_non_invalidation_parallel_targets",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_non_invalidation_parallel_targets.json",
+          "trajectory_sha256": "983cc3036d2235ecba49799958af2e2faf5139fe97c77a91a8bc018acf562cc7",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_non_invalidation_parallel_targets.gold.json",
+          "gold_sha256": "74659aa0dce1f2b08190fee7492a639028be6836b5ca506c0d7feb07ad059faf"
+        },
+        {
+          "case_id": "tr_syn_out_of_order_inventory_present",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_out_of_order_inventory_present.json",
+          "trajectory_sha256": "067ac152d9c0cdf127af7a29c6f91c15d45694325602348dec02d3027d2f793e",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_out_of_order_inventory_present.gold.json",
+          "gold_sha256": "7ba1f56dbd8002bb07cb61b413c548986f009118f630ee9706325eed83786a6c"
+        }
+      ]
+    },
+    {
+      "name": "regression",
+      "rule": "Must pass on every commit that touches reconcile/apply/assembler/resolver. Results may be inspected.",
+      "case_count": 6,
+      "case_ids": [
+        "tr_full_tkt_006",
+        "tr_syn_partial_checklist_clause",
+        "tr_syn_conditional_window_exception",
+        "tr_revival_round5x",
+        "tr_alias_quant_tools",
+        "tr_syn_out_of_order_price_band_present"
+      ],
+      "cases": [
+        {
+          "case_id": "tr_full_tkt_006",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_full_tkt_006.json",
+          "trajectory_sha256": "1a64ba59bdcad659e7016a19a7a9e1e54fabc39360e6f57e56b2d192989b691d",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_full_tkt_006.gold.json",
+          "gold_sha256": "ff77a7eeedc38985e7967362f2f50927043a6c87321fb4ad9c765dc1f2c53306"
+        },
+        {
+          "case_id": "tr_syn_partial_checklist_clause",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_partial_checklist_clause.json",
+          "trajectory_sha256": "eb6d25006d7d459b32f4d2303574a693555afe4d18efb199e194b2d0bbe46d74",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_partial_checklist_clause.gold.json",
+          "gold_sha256": "ab735dae7a765e5bff55e625a4fbddc47e0f80552a15d8b35a9326d8eb0b2a56"
+        },
+        {
+          "case_id": "tr_syn_conditional_window_exception",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_conditional_window_exception.json",
+          "trajectory_sha256": "b752859f80bc7afdca06edafd3c2eadbd30e781b8d606832fbc31e2e63364267",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_conditional_window_exception.gold.json",
+          "gold_sha256": "e96c2a70f5055a07a3e0e5bf2298ba55efbfbc60692674adfda014a961fb5265"
+        },
+        {
+          "case_id": "tr_revival_round5x",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_revival_round5x.json",
+          "trajectory_sha256": "905c9ec55dc0776982469fe9cc4d5cfa6b8fd25940e6d8a2948befc7938ac986",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_revival_round5x.gold.json",
+          "gold_sha256": "fc266b87fce1996bc109c1ec72930a6cc0d790c12ec15e9aed119b001633a628"
+        },
+        {
+          "case_id": "tr_alias_quant_tools",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_alias_quant_tools.json",
+          "trajectory_sha256": "22379ad41222e6022b9ea26ae7f4accdd80187faa1f6edd5817258cbc0e8651a",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_alias_quant_tools.gold.json",
+          "gold_sha256": "9f0ed44baea8141cabd8a474bb64333a89d8a26e3db0e76701a0102832fd89c5"
+        },
+        {
+          "case_id": "tr_syn_out_of_order_price_band_present",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_out_of_order_price_band_present.json",
+          "trajectory_sha256": "44be9f5861d2a0be35b8f037d60a29a3cbacd816746f2a7bb967c78c41c950b2",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_out_of_order_price_band_present.gold.json",
+          "gold_sha256": "31a972c47bd4909dbe9e2dc72a0e13a33129350cab9a58aeebd8b53f34b4e359"
+        }
+      ]
+    },
+    {
+      "name": "blind_holdout",
+      "rule": "Must not be inspected or used for rule design before final evaluation. Used only for generalization check.",
+      "case_count": 2,
+      "case_ids": [
+        "tr_decoy_strategy_scripts",
+        "tr_alias_tkt_split"
+      ],
+      "cases": [
+        {
+          "case_id": "tr_decoy_strategy_scripts",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_decoy_strategy_scripts.json",
+          "trajectory_sha256": "82c6e93d86ad880ef4e7480caf28585afdb2e33bd4c37bce3dc986fc9f353f71",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_decoy_strategy_scripts.gold.json",
+          "gold_sha256": "dafd0f0802d31e8e99d6aaf7abaef840ba9b199c0e3c17bec661780b01e22b9c"
+        },
+        {
+          "case_id": "tr_alias_tkt_split",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_alias_tkt_split.json",
+          "trajectory_sha256": "aed0fae840a63dfaa513f96d21aacb4dd2eae9ff007caf11298d842ab05db40b",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_alias_tkt_split.gold.json",
+          "gold_sha256": "3dbaf3eed98d2be8d8b197792e2df05b3ab5e95b37d26710fdb0ab1e06233fb1"
+        }
+      ]
+    },
+    {
+      "name": "adversarial",
+      "rule": "Stress-tests for false merge/split, provenance conflict, and adversarial alias traps. May be inspected after initial design.",
+      "case_count": 2,
+      "case_ids": [
+        "tr_prov_run54b",
+        "tr_syn_provenance_conflict"
+      ],
+      "cases": [
+        {
+          "case_id": "tr_prov_run54b",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_prov_run54b.json",
+          "trajectory_sha256": "ce032b3e463618b5d9f9c753312e4bcbebe72ce504285d37e68279719c1b8be5",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_prov_run54b.gold.json",
+          "gold_sha256": "fadbca9a71cf468b024c33e898170086910d9f04c435a9352f8fe01dad39fe49"
+        },
+        {
+          "case_id": "tr_syn_provenance_conflict",
+          "trajectory_path": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/tr_syn_provenance_conflict.json",
+          "trajectory_sha256": "302bbf693a584bd745c87b63cbced325f742cb61ca058ff9bd86e43f99ab449b",
+          "gold_path": "graph/projects/abu_modern/benchmark/phase05_v3/gold/tr_syn_provenance_conflict.gold.json",
+          "gold_sha256": "acf728c056128b15b842dec607b45d98def87ff1be03e000a4e4413eba24ebd4"
+        }
+      ]
+    }
+  ],
+  "total_cases": 17,
+  "all_case_ids": [
+    "tr_full_tkt_005b",
+    "tr_syn_partial_policy_clause",
+    "tr_syn_conditional_region_exception",
+    "tr_syn_revival_feature_flag",
+    "tr_alias_workspace_identity",
+    "tr_syn_non_invalidation_parallel_targets",
+    "tr_syn_out_of_order_inventory_present",
+    "tr_full_tkt_006",
+    "tr_syn_partial_checklist_clause",
+    "tr_syn_conditional_window_exception",
+    "tr_revival_round5x",
+    "tr_alias_quant_tools",
+    "tr_syn_out_of_order_price_band_present",
+    "tr_decoy_strategy_scripts",
+    "tr_alias_tkt_split",
+    "tr_prov_run54b",
+    "tr_syn_provenance_conflict"
+  ],
+  "split_overlap_check": true,
+  "usage_rules": {
+    "development": "May be used for tuning and debugging. Inspect freely.",
+    "regression": "Must remain green for any candidate replacement of reconcile/apply/assembler/resolver.",
+    "blind_holdout": "Never inspect before final evaluation. Do not use for prompt or rule design.",
+    "adversarial": "May be inspected, but failures must be treated as high-priority regressions."
+  },
+  "update_policy": {
+    "versioning": "Semver: MAJOR for split changes, MINOR for new cases, PATCH for metadata fixes.",
+    "allowed_changes": [
+      "Fix trajectory formatting errors without changing semantics",
+      "Add metadata or hashes",
+      "Update baseline scores when the old-link implementation changes"
+    ],
+    "forbidden_changes_without_new_version": [
+      "Move a case from blind_holdout to development",
+      "Modify gold annotations",
+      "Add or remove cases",
+      "Change metric scripts"
+    ]
+  },
+  "baselines": {
+    "phase0_current": {
+      "invalidation_precision": 0.6086956521739131,
+      "invalidation_recall": 0.7368421052631579,
+      "active_set_set_f1": 0.8979591836734694,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d1": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8213799805636537,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d2": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "valid_time_adjudication_accuracy": 0.0
+    }
+  },
+  "notes": [
+    "This freeze separates mechanism correctness (fixtures) from generalization (blind_holdout).",
+    "The blind_holdout split must remain uninspected until lifecycle implementation is finalized."
+  ]
+}
