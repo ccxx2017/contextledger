@@ -7,15 +7,34 @@
     "max_candidates": 30
   },
   "stats": {
-    "graph_turn_counter": 19,
+    "graph_turn_counter": 20,
     "open_like_nodes_scanned": 20,
     "updated_nodes_in_patch": 2,
-    "candidates_found": 1,
+    "candidates_found": 2,
     "score_histogram": {
+      "6": 1,
       "3": 1
     }
   },
   "candidates": [
+    {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β。具体诊断：IDENTITY.md身份定位错误需重写；AGENTS.md大部分无用指令需压制或删除；SOUL.md基本可留但需补角色分诊声明；根TOOLS.md严重错位必须重写为路由层。详细改动方案见Claude回复。",
+      "score": 6,
+      "matched_terms": [
+        "agents.md",
+        "bootstrap",
+        "claude",
+        "identity.md",
+        "soul.md",
+        "tools.md"
+      ]
+    },
     {
       "node_id": "n_0067",
       "type": "Decision",

@@ -11,7 +11,7 @@
   },
   "decisions": [
     {
-      "new_node_id": "n_0132",
+      "new_node_id": "n_0162",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,
@@ -20,41 +20,41 @@
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0133",
-      "raw_entity_ref": "round5_3e_accounting_recon",
-      "resolved_entity_ref": "round5_3e_accounting_recon",
-      "match_confidence": 0.4898,
+      "new_node_id": "n_0163",
+      "raw_entity_ref": "round_5.3e_consistency_check",
+      "resolved_entity_ref": "round_5.3e_consistency_check",
+      "match_confidence": 0.4783,
       "merge_reason": "",
       "non_merge_reason": "needs_manual_merge_review",
       "candidate_aliases": [
         {
-          "canonical_entity_ref": "round5.3d_closure_audit",
-          "match_confidence": 0.4898,
+          "canonical_entity_ref": "pre_ticket_b_check",
+          "match_confidence": 0.4783,
           "evidence": [
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0131"
+            "n_0086"
           ]
         }
       ]
     },
     {
-      "new_node_id": "n_0134",
-      "raw_entity_ref": "gap_185592_diagnosis_ai",
-      "resolved_entity_ref": "gap_185592_diagnosis_ai",
+      "new_node_id": "n_0164",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
       "match_confidence": 0.0,
       "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
+      "non_merge_reason": "entity_ref_missing",
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0135",
-      "raw_entity_ref": "round5_3e_verification_requirements",
-      "resolved_entity_ref": "round5_3e_verification_requirements",
+      "new_node_id": "n_0165",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
       "match_confidence": 0.0,
       "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
+      "non_merge_reason": "entity_ref_missing",
       "candidate_aliases": []
     }
   ]

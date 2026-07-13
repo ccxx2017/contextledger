@@ -1,13 +1,13 @@
 {
   "ok": true,
   "summary": {
-    "nodes": 85,
+    "nodes": 86,
     "edges": 127,
     "active_nodes": 74,
     "active_edges": 127,
-    "superseded_nodes": 11,
+    "superseded_nodes": 12,
     "errors": 0,
-    "warnings": 1
+    "warnings": 0
   },
   "adjudication_policy": {
     "current_membership_field": "status",
@@ -29,7 +29,8 @@
       "n_0049",
       "n_0052",
       "n_0056",
-      "n_0059"
+      "n_0059",
+      "n_0074"
     ],
     "excluded_due_to_state_node_ids": []
   },
@@ -55,13 +56,5 @@
     "unknown"
   ],
   "errors": [],
-  "warnings": [
-    {
-      "level": "warning",
-      "code": "OPEN_TASK_CONTENT_LOOKS_COMPLETED",
-      "message": "OpenTask n_0073 的内容看起来已经完成，但 state 不是 resolved。该判断基于关键词启发式，只作为 warning。",
-      "node_id": "n_0073",
-      "state": "in_progress"
-    }
-  ]
+  "warnings": []
 }

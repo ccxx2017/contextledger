@@ -1,15 +1,23 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 78,
-    "active_graph_nodes": 67,
-    "new_nodes": 2,
+    "graph_nodes": 81,
+    "active_graph_nodes": 69,
+    "new_nodes": 1,
     "errors": 0,
     "warnings": 0
   },
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "openclaw_skills/quant-assistant",
+      "new_node_id": "n_0082",
+      "old_node_id": "n_0077",
+      "new_state": "",
+      "old_state": ""
+    }
+  ],
   "weak_matches": []
 }

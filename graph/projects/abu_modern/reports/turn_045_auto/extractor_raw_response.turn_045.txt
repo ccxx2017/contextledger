@@ -3,39 +3,34 @@
   "turn_id": 45,
   "new_nodes": [
     {
-      "node_id": "n_0105",
-      "type": "Fact",
-      "content": "项目AI只能做恢复前补丁（工单修正、状态修改、追加约束等），不能执行研究。strategy-researcher 负责执行研究。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0106",
+      "node_id": "n_0112",
       "type": "OpenTask",
-      "content": "项目AI执行 TKT-2026-005B 恢复前补丁：修正 ticket_id 为005B、报告名、移至open、status改为ready_for_limited_resume、追加Boss worklog、添加恢复硬约束（从Round4开始、必须使用/strategy-builder/compile-ir、保留资源限制等）",
-      "entity_ref": "TKT-2026-005B-patch",
+      "content": "项目AI执行TKT-2026-005B恢复前补丁：1.修正ticket_id和文件名；2.从blocked移回open；3.status改为ready_for_limited_resume；4.追加Worklog；5.新增恢复硬约束（从Round4开始、用compile-ir接口、禁止用旧invoke）",
+      "entity_ref": "TKT-2026-005B",
       "state": "open",
       "priority": "should_include"
     }
   ],
-  "updated_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0101",
+      "changes": {
+        "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。恢复时从Round4开始；必须使用call_builder.py --endpoint /strategy-builder/compile-ir；禁止使用旧接口/strategy-builder/invoke。"
+      },
+      "reason": "根据GPT5.5方案补充恢复条件：从Round4开始、使用compile-ir接口、禁止旧接口。"
+    }
+  ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0106",
-      "target": "n_0095",
+      "source": "n_0112",
+      "target": "n_0101",
       "relation": "refines"
     },
     {
-      "source": "n_0105",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0105",
-      "target": "n_0044",
-      "relation": "supports"
+      "source": "n_0112",
+      "target": "n_0035",
+      "relation": "refines"
     }
   ]
 }

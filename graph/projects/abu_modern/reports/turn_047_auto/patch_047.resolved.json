@@ -1,29 +1,35 @@
 {
   "task_id": "task_default",
   "turn_id": 47,
-  "new_nodes": [],
+  "new_nodes": [
+    {
+      "node_id": "n_0114",
+      "type": "Fact",
+      "content": "GPT5.5回复：可以执行TKT-2026-005B Round 4受限恢复smoke，并建议在授权中加一句口径修正：'本次满足Round 4受限恢复smoke执行条件；不满足完整研究恢复条件。'",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include",
+      "_entity_ref_sanitized": true
+    }
+  ],
   "updated_nodes": [
     {
-      "node_id": "n_0108",
+      "node_id": "n_0103",
       "changes": {
-        "state": "resolved",
-        "status": "superseded"
+        "content": "TKT-2026-005B Round 4 受限恢复 Smoke — 恢复前检查\n本次实际读取的.md文件：skills/strategy_researcher/SKILL.md, TOOLS.md, prompts/research_workflow.md, tkt-worklog.md, aos_repo/aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md, aos_repo/aos/runtime/research-runs/TKT-2026-005B/README_PAUSE.md, summary.md, memory/2026-05-19-0914.md。未调用任何scripts。最高行为手册为prompts/research_workflow.md。正式执行需遵循Phase 0-6。当前不满足完整研究恢复条件，仅满足受限恢复smoke条件。资源预算：symbols≤5，years≤1，timeout=90s，builder对话≤2轮，Round 4仅此一轮，禁止自动重试。确认必须使用call_builder.py --endpoint /strategy-builder/compile-ir，禁止使用/strategy-builder/invoke，确认从Round 4开始不重跑。总结：本轮是受限恢复smoke ✅ — Round4，仅1轮，约束已全部确认。",
+        "state": null,
+        "status": "active",
+        "entity_ref": "skills/strategy_researcher/SKILL.md",
+        "_entity_ref_sanitized": true
       },
-      "reason": "恢复前检查已完成，输出检查报告并获批准，任务结束。"
-    },
-    {
-      "node_id": "n_0095",
-      "changes": {
-        "state": "in_progress"
-      },
-      "reason": "恢复前检查通过，Boss授权，TKT-2026-005B可开始Round 4受限恢复smoke执行。"
+      "reason": "详细检查报告更新，覆盖原简略版本"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0108",
-      "target": "n_0095",
+      "source": "n_0114",
+      "target": "n_0101",
       "relation": "supports"
     }
   ]

@@ -8,11 +8,12 @@
   },
   "stats": {
     "graph_turn_counter": 38,
-    "open_like_nodes_scanned": 20,
+    "open_like_nodes_scanned": 19,
     "updated_nodes_in_patch": 0,
-    "candidates_found": 1,
+    "candidates_found": 2,
     "score_histogram": {
-      "11": 1
+      "11": 1,
+      "3": 1
     }
   },
   "candidates": [
@@ -28,6 +29,21 @@
       "matched_terms": [
         "TKT-2026-005",
         "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0097",
+      "type": "OpenTask",
+      "entity_ref": "aos/services/backtest-api",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
+      "score": 3,
+      "matched_terms": [
+        "http",
+        "post",
+        "返回"
       ]
     }
   ]

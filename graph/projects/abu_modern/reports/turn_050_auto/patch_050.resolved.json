@@ -3,26 +3,26 @@
   "turn_id": 50,
   "new_nodes": [
     {
-      "node_id": "n_0112",
+      "node_id": "n_0118",
       "type": "OpenTask",
-      "content": "TKT-2026-005F: 固化工具契约——同步call_builder.py --endpoint到正式技能资产；TOOLS.md明确investigation必须用/strategy-builder/compile-ir，禁止/strategy-builder/invoke，execution-config回测必须传完整strategy_ir；research_workflow.md补充新流程；metrics.py兼容新路径；明确400/404不等于Boss guardrail。",
+      "content": "TKT-2026-005F: 固化strategy-researcher工具契约 — 同步call_builder.py --endpoint修改到正式技能资产、更新TOOLS.md明确compile-ir与execution-config契约、更新research_workflow.md补充新流程、metrics.py兼容新路径、明确400/404不等于Boss guardrail。由项目AI/工具维护者执行。",
       "entity_ref": "TKT-2026-005F",
       "state": "open",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0113",
+      "node_id": "n_0119",
       "type": "OpenTask",
-      "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。",
-      "entity_ref": "tkt-2026-005b-magnify-validation",
+      "content": "TKT-2026-005B 步骤：受限放大验证 — 使用Round4同一IR，symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。若失败则paused_for_boss_review。",
+      "entity_ref": "TKT-2026-005B",
       "state": "open",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0114",
+      "node_id": "n_0120",
       "type": "OpenTask",
-      "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。",
-      "entity_ref": "vcp_trend_filter_study",
+      "content": "TKT-2026-005B 步骤：Round 5单变量研究 — 在放大验证通过后，加入前期趋势过滤（如MA20>MA60或60日涨幅>X%），并遵循hypothesis_heuristics.md单变量原则。",
+      "entity_ref": "TKT-2026-005B",
       "state": "open",
       "priority": "should_include"
     }
@@ -31,28 +31,38 @@
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0112",
-      "target": "n_0001",
+      "source": "n_0118",
+      "target": "n_0008",
       "relation": "serves"
     },
     {
-      "source": "n_0112",
-      "target": "n_0091",
-      "relation": "implements"
-    },
-    {
-      "source": "n_0113",
-      "target": "n_0112",
+      "source": "n_0118",
+      "target": "n_0116",
       "relation": "depends_on"
     },
     {
-      "source": "n_0114",
-      "target": "n_0060",
-      "relation": "refines"
+      "source": "n_0119",
+      "target": "n_0008",
+      "relation": "serves"
     },
     {
-      "source": "n_0114",
-      "target": "n_0113",
+      "source": "n_0119",
+      "target": "n_0118",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0119",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0120",
+      "target": "n_0008",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0120",
+      "target": "n_0119",
       "relation": "depends_on"
     }
   ]

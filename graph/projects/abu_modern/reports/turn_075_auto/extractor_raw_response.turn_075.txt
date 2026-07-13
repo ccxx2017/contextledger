@@ -2,7 +2,36 @@
   "task_id": "task_default",
   "turn_id": 75,
   "new_nodes": [],
-  "updated_nodes": [],
+  "updated_nodes": [
+    {
+      "node_id": "n_0184",
+      "changes": {
+        "content": "Feishu Agent Round 6 Preflight conditionally passed after API preflight but train_split=0.7 not API-verifiable. Subsequently project AI local manifest confirmation verified train_split=0.7 for accepted baseline run-54b-20250101-20251230-d37c696d, closing the blocker. Preflight now fully passed. Round 6 execution still locked, requires explicit approval.",
+        "entity_ref": "round_6_preflight_feishu_agent",
+        "state": null,
+        "status": "active",
+        "priority": "should_include"
+      },
+      "reason": "Preflight status updated from conditionally passed to fully passed after local train_split confirmation."
+    },
+    {
+      "node_id": "n_0186",
+      "changes": {
+        "content": "项目AI本地确认accepted baseline run-54b-20250101-20251230-d37c696d的manifest/parameters中train_split=0.7。只读检查，不运行回测，不修改策略，不创建新run，不进入Round 6。已完成。",
+        "entity_ref": "confirm_train_split_0.7",
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "optional"
+      },
+      "reason": "Task completed: project AI confirmed train_split=0.7 from local manifest, closing the only blocker for Round 6 Preflight."
+    }
+  ],
   "superseded_nodes": [],
-  "new_edges": []
+  "new_edges": [
+    {
+      "source": "n_0186",
+      "target": "n_0184",
+      "relation": "refines"
+    }
+  ]
 }

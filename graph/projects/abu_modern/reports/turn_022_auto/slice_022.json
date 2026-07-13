@@ -61,7 +61,7 @@
     {
       "node_id": "n_0073",
       "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β，确保不污染strategy_researcher专业人格。",
+      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β。具体诊断：IDENTITY.md身份定位错误需重写；AGENTS.md大部分无用指令需压制或删除；SOUL.md基本可留但需补角色分诊声明；根TOOLS.md严重错位必须重写为路由层。详细改动方案见Claude回复。",
       "entity_ref": "workspace_root_bootstrap_audit",
       "state": "open",
       "status": "active"
@@ -139,10 +139,26 @@
       "status": "active"
     },
     {
+      "node_id": "n_0076",
+      "type": "Fact",
+      "content": "GPT5.4对Opus4.7方案的评价：问题识别准（8.5/10），短期止血价值高（8/10），但作为最终架构方案不足（4/10）。建议拆为临时层（精简根bootstrap，清除TOOLS.md技能污染）和正式层（后续上agents.list+bindings+每agent skills allowlist）。对4个根文件的修改优先级：最高-根TOOLS.md，次高-IDENTITY.md和AGENTS.md，最低-SOUL.md。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0075",
+      "type": "Fact",
+      "content": "Claude建议在完成bootstrap文件修改后执行烟测：飞书询问Agent'你是谁？此时应该读哪份SKILL.md？'，验证其正确选择strategy_researcher/SKILL.md，否则继续修改。GPT5.4补充：此烟测只能测'会不会说'，不能测'会不会做'；更可靠的是观察是否真的读取目标SKILL.md并按该技能调用工具。",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": null,
+      "status": "active"
+    },
+    {
       "node_id": "n_0074",
       "type": "Fact",
-      "content": "GPT5.4对Opus4.7方案评价：大方向正确，但表述过满；短期可采纳作为临时补丁，长期需上多agent架构；优先级：最高修根TOOLS.md，次高IDENTITY.md和AGENTS.md，最低SOUL.md；建议分两层：临时层精简bootstrap，正式层推进agents.list+bindings+skills allowlist。",
-      "entity_ref": null,
+      "content": "根TOOLS.md（工作区根目录）实际是quant_assistant的工具文件，包含quant_assistant特定的API路径和规则（如禁止穷举试错），与strategy_researcher的workflow直接冲突（如要求5轮迭代）。",
+      "entity_ref": "openclaw_root_tools_md",
       "state": null,
       "status": "active"
     },
@@ -197,7 +213,7 @@
     {
       "node_id": "n_0066",
       "type": "Fact",
-      "content": "当前OpenClaw配置未定义agents.list，所有消息路由到默认agent，agent ID始终为default。源代码src/routing/resolve-route.ts在无配置时返回'default'，测试src/routing/resolve-route.test.ts验证no bindings时默认是main/default。",
+      "content": "当前OpenClaw配置未定义agents.list，所有消息路由到默认agent，agent ID始终为default。源代码src/routing/resolve-route.ts在无配置时返回'default'。",
       "entity_ref": "openclaw_agent_routing_default",
       "state": null,
       "status": "active"
@@ -229,16 +245,8 @@
     {
       "node_id": "n_0061",
       "type": "Fact",
-      "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码确认：src/agents/bootstrap-files.ts会加载workspace bootstrap files；src/config/types.agent-defaults.ts中bootstrap文件被injected into system prompt；src/agents/system-prompt.ts先扫描<available_skills>，再决定读取SKILL.md。",
+      "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码支持contextInjection、lightContext、heartbeat特殊过滤，所以默认通常会注入但不是无条件每回合全量注入。",
       "entity_ref": "openclaw_agent_runtime_mechanisms",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0058",
-      "type": "Fact",
-      "content": "TKT-2026-004智能体实际在openclaw_skills/strategy_researcher/下创建了4个文件（SKILL.md, TOOLS.md, scripts/call_builder.py, scripts/call_backtest.py, scripts/kb_query.py）",
-      "entity_ref": "openclaw_skills/strategy_researcher",
       "state": null,
       "status": "active"
     },
@@ -247,6 +255,14 @@
       "type": "Fact",
       "content": "duty_reporter v0刚刚跑通，证明AOS基础设施可行",
       "entity_ref": "duty_reporter",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0058",
+      "type": "Fact",
+      "content": "TKT-2026-004智能体实际在openclaw_skills/strategy_researcher/下创建了4个文件（SKILL.md, TOOLS.md, scripts/call_builder.py, scripts/call_backtest.py, scripts/kb_query.py）",
+      "entity_ref": "openclaw_skills/strategy_researcher",
       "state": null,
       "status": "active"
     },
@@ -300,6 +316,8 @@
       "n_0008"
     ],
     "recent_nodes": [
+      "n_0076",
+      "n_0075",
       "n_0074",
       "n_0073",
       "n_0072",
@@ -313,27 +331,25 @@
       "n_0064",
       "n_0063",
       "n_0062",
-      "n_0061",
-      "n_0060",
-      "n_0058"
+      "n_0061"
     ],
     "symbol_hits": [
       "n_0021",
       "n_0007",
       "n_0003",
       "n_0069",
-      "n_0074",
+      "n_0076",
       "n_0061",
       "n_0058",
-      "n_0073",
       "n_0064",
+      "n_0073",
       "n_0072",
       "n_0039",
       "n_0024",
+      "n_0075",
       "n_0055",
-      "n_0066",
-      "n_0062",
-      "n_0057"
+      "n_0074",
+      "n_0062"
     ],
     "conflict_candidates": [
       "n_0021",
@@ -523,8 +539,8 @@
       "blocked",
       "open"
     ],
-    "total_nodes": 74,
-    "active_nodes": 63,
+    "total_nodes": 76,
+    "active_nodes": 65,
     "selected_node_ids": [
       "n_0001",
       "n_0003",
@@ -559,11 +575,13 @@
       "n_0071",
       "n_0072",
       "n_0073",
-      "n_0074"
+      "n_0074",
+      "n_0075",
+      "n_0076"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0075",
+    "next_node_id": "n_0077",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_022.md"
   }

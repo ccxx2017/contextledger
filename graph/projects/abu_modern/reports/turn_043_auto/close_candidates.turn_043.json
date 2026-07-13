@@ -8,12 +8,12 @@
   },
   "stats": {
     "graph_turn_counter": 42,
-    "open_like_nodes_scanned": 22,
+    "open_like_nodes_scanned": 21,
     "updated_nodes_in_patch": 2,
-    "candidates_found": 3,
+    "candidates_found": 2,
     "score_histogram": {
       "11": 1,
-      "3": 2
+      "3": 1
     }
   },
   "candidates": [
@@ -32,33 +32,18 @@
       ]
     },
     {
-      "node_id": "n_0055",
-      "type": "FileArtifact",
-      "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "TOOLS.md v1正式内容（替换占位版），包含call_builder.py、call_backtest.py、kb_query.py、smoke_http_clients.sh的签名、参数、错误码、示例",
-      "score": 3,
-      "matched_terms": [
-        "call_backtest.py",
-        "call_builder.py",
-        "kb_query.py"
-      ]
-    },
-    {
-      "node_id": "n_0088",
+      "node_id": "n_0097",
       "type": "OpenTask",
-      "entity_ref": "TKT-2026-005C",
+      "entity_ref": "aos/services/backtest-api",
       "state": "open",
       "status": "active",
       "priority": "should_include",
-      "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
+      "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
       "score": 3,
       "matched_terms": [
-        "call_backtest.py",
-        "post",
-        "tkt-2026-005"
+        "http",
+        "回测",
+        "返回"
       ]
     }
   ]

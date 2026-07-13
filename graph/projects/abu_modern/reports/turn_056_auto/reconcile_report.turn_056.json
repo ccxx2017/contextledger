@@ -1,51 +1,15 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 122,
-    "active_graph_nodes": 95,
-    "new_nodes": 3,
+    "graph_nodes": 141,
+    "active_graph_nodes": 111,
+    "new_nodes": 4,
     "errors": 0,
     "warnings": 0
   },
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0125",
-      "old_node_id": "n_0085",
-      "new_state": "resolved",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0125",
-      "old_node_id": "n_0089",
-      "new_state": "resolved",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0125",
-      "old_node_id": "n_0096",
-      "new_state": "resolved",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0125",
-      "old_node_id": "n_0110",
-      "new_state": "resolved",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0125",
-      "old_node_id": "n_0111",
-      "new_state": "resolved",
-      "old_state": "resolved"
-    }
-  ],
+  "entity_ref_matches": [],
   "weak_matches": []
 }

@@ -45,7 +45,7 @@
     {
       "node_id": "n_0073",
       "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β，确保不污染strategy_researcher专业人格。",
+      "content": "审查并调整工作区根部bootstrap文件（AGENTS.md/SOUL.md/IDENTITY.md/TOOLS.md）以适应路线β。具体诊断：IDENTITY.md身份定位错误需重写；AGENTS.md大部分无用指令需压制或删除；SOUL.md基本可留但需补角色分诊声明；根TOOLS.md严重错位必须重写为路由层。详细改动方案见Claude回复。",
       "entity_ref": "workspace_root_bootstrap_audit",
       "state": "open",
       "status": "active"
@@ -136,6 +136,22 @@
       "content": "duty_reporter v0.5: 添加LLM摘要节点，验证LLM调用基础设施",
       "entity_ref": "duty_reporter",
       "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0075",
+      "type": "Fact",
+      "content": "Claude建议在完成bootstrap文件修改后执行烟测：飞书询问Agent'你是谁？此时应该读哪份SKILL.md？'，验证其正确选择strategy_researcher/SKILL.md，否则继续修改。",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0074",
+      "type": "Fact",
+      "content": "根TOOLS.md（工作区根目录）实际是quant_assistant的工具文件，包含quant_assistant特定的API路径和规则（如禁止穷举试错），与strategy_researcher的workflow直接冲突（如要求5轮迭代）。",
+      "entity_ref": "openclaw_root_tools_md",
+      "state": null,
       "status": "active"
     },
     {
@@ -284,6 +300,8 @@
       "n_0007"
     ],
     "recent_nodes": [
+      "n_0075",
+      "n_0074",
       "n_0073",
       "n_0072",
       "n_0071",
@@ -297,9 +315,7 @@
       "n_0063",
       "n_0062",
       "n_0061",
-      "n_0060",
-      "n_0058",
-      "n_0057"
+      "n_0060"
     ],
     "symbol_hits": [
       "n_0069",
@@ -311,6 +327,8 @@
       "n_0055",
       "n_0039",
       "n_0024",
+      "n_0075",
+      "n_0074",
       "n_0072",
       "n_0067",
       "n_0065",
@@ -327,6 +345,8 @@
       "n_0055",
       "n_0039",
       "n_0024",
+      "n_0075",
+      "n_0074",
       "n_0072",
       "n_0067",
       "n_0065",
@@ -515,8 +535,8 @@
       "in_progress",
       "resolved"
     ],
-    "total_nodes": 73,
-    "active_nodes": 62,
+    "total_nodes": 75,
+    "active_nodes": 64,
     "selected_node_ids": [
       "n_0001",
       "n_0005",
@@ -549,11 +569,13 @@
       "n_0070",
       "n_0071",
       "n_0072",
-      "n_0073"
+      "n_0073",
+      "n_0074",
+      "n_0075"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0074",
+    "next_node_id": "n_0076",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_021.md"
   }

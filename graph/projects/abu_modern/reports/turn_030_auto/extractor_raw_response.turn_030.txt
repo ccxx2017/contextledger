@@ -3,103 +3,52 @@
   "turn_id": 30,
   "new_nodes": [
     {
-      "node_id": "n_0084",
-      "type": "Fact",
-      "content": "根因1：system-prompt.ts第632行硬编码'You are a personal assistant running inside OpenClaw.'导致模型推断'小爪'身份。",
-      "entity_ref": "src/agents/system-prompt.ts",
-      "state": null,
-      "priority": "must_include"
-    },
-    {
-      "node_id": "n_0085",
-      "type": "Fact",
-      "content": "根因2：IDENTITY.md注入位置在system prompt末尾（# Project Context部分），位于约250+行之后，无法覆盖首行身份声明。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "must_include"
-    },
-    {
-      "node_id": "n_0086",
-      "type": "Fact",
-      "content": "根因3：Ubuntu端.openclaw/openclaw.json已配置agents.defaults.workspace，工作区加载正确。",
-      "entity_ref": "~/.openclaw/openclaw.json",
-      "state": null,
-      "priority": "must_include"
-    },
-    {
       "node_id": "n_0087",
-      "type": "Decision",
-      "content": "修复方案A：修改system-prompt.ts首行为条件性声明——若工作区IDENTITY.md存在且有实质内容（>100字符）则使用'You are an AI running inside OpenClaw.'否则回退'personal assistant'。",
+      "type": "Fact",
+      "content": "智能体身份误报根因：system-prompt.ts第632行硬编码'You are a personal assistant running inside OpenClaw.'，导致模型推断'小爪'身份；IDENTITY.md注入位置靠后（约250+行），影响力被稀释，无法覆盖首行声明。",
       "entity_ref": "src/agents/system-prompt.ts",
-      "state": "resolved",
-      "priority": "must_include"
+      "state": null,
+      "priority": "should_include"
     },
     {
       "node_id": "n_0088",
       "type": "Fact",
-      "content": "不推荐方案：修改IDENTITY.md格式或添加systemPromptOverride，因为不解决首行冲突或破坏性过大。",
-      "entity_ref": null,
+      "content": "工作区配置确认正确：Ubuntu端.openclaw/openclaw.json中已有agents.defaults.workspace注册，IDENTITY.md已正常加载到Project Context部分。",
+      "entity_ref": "~/.openclaw/openclaw.json",
       "state": null,
-      "priority": "must_include"
-    }
-  ],
-  "updated_nodes": [
-    {
-      "node_id": "n_0083",
-      "changes": {
-        "content": "测试失败根因：system-prompt.ts首行硬编码'personal assistant'导致模型推断'小爪'身份；IDENTITY.md因位置靠后无法覆盖。"
-      },
-      "reason": "根据用户提供的根因分析，细化原节点内容。"
+      "priority": "should_include"
     },
     {
-      "node_id": "n_0073",
-      "changes": {
-        "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。新增发现：身份误报根因在于system-prompt.ts硬编码，需纳入修复范围。"
-      },
-      "reason": "补充身份误报根因信息，扩大任务范围。"
+      "node_id": "n_0089",
+      "type": "Fact",
+      "content": "修复方案：方案A（推荐）修改system-prompt.ts第632行，改为条件性声明；方案B（辅助）确认openclaw.json配置。方案A必须，方案B辅助。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
     }
   ],
+  "updated_nodes": [],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0084",
-      "target": "n_0083",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0085",
-      "target": "n_0083",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0086",
-      "target": "n_0083",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0084",
-      "target": "n_0061",
-      "relation": "supports"
-    },
-    {
       "source": "n_0087",
-      "target": "n_0083",
-      "relation": "invalidates"
+      "target": "n_0085",
+      "relation": "supports"
     },
     {
       "source": "n_0088",
+      "target": "n_0085",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0089",
+      "target": "n_0087",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0089",
       "target": "n_0073",
       "relation": "refines"
-    },
-    {
-      "source": "n_0088",
-      "target": "n_0081",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0088",
-      "target": "n_0082",
-      "relation": "supports"
     }
   ]
 }

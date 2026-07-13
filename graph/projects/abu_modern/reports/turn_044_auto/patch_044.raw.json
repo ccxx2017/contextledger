@@ -3,40 +3,35 @@
   "turn_id": 44,
   "new_nodes": [
     {
-      "node_id": "n_0104",
+      "node_id": "n_0111",
       "type": "Fact",
-      "content": "TKT-2026-005E技术smoke通过：新编译接口可用、回测链路打通、KB写入闭环成立、异常契约稳定、进程清理正常，工具链闭环。下一步建议恢复005B受限研究，但必须严格使用新接口/strategy-builder/compile-ir，禁止旧接口，限制标的≤5、年份≤1、后端失败一次即暂停。",
-      "entity_ref": null,
+      "content": "TKT-2026-005E技术smoke通过：compile-ir → backtest → KB append → kb_query 工具链已闭环验证",
+      "entity_ref": "TKT-2026-005E",
       "state": null,
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0100",
+      "node_id": "n_0108",
       "changes": {
         "state": "resolved",
         "status": "superseded"
       },
-      "reason": "TKT-2026-005E technical smoke passed, no further execution needed."
+      "reason": "TKT-2026-005E技术smoke通过，工具链闭环验证成功，工单完成"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0104",
-      "target": "n_0095",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0104",
-      "target": "n_0100",
+      "source": "n_0111",
+      "target": "n_0108",
       "relation": "derived_from"
     },
     {
-      "source": "n_0104",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0111",
+      "target": "n_0008",
+      "relation": "supports"
     }
   ]
 }

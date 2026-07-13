@@ -1,6 +1,6 @@
 {
   "kind": "lint_delta.phase1_prep.v1",
-  "before_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+  "before_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_020.json",
   "after_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_021_auto\\graph_state.after_turn_021.json",
   "baseline_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\lint_baseline.json",
   "current_turn": 21,
@@ -65,10 +65,10 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 73,
-      "edges": 102,
-      "active_nodes": 62,
-      "active_edges": 102,
+      "nodes": 75,
+      "edges": 105,
+      "active_nodes": 64,
+      "active_edges": 105,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0
@@ -124,10 +124,10 @@
   "after_report": {
     "ok": true,
     "summary": {
-      "nodes": 74,
-      "edges": 106,
-      "active_nodes": 63,
-      "active_edges": 106,
+      "nodes": 76,
+      "edges": 108,
+      "active_nodes": 65,
+      "active_edges": 108,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0

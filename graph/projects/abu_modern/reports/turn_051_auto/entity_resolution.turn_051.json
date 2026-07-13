@@ -1,0 +1,400 @@
+{
+  "kind": "entity_resolution_report.phase1_prep.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_051",
+  "summary": {
+    "new_nodes": 10,
+    "resolved_exact": 1,
+    "resolved_alias": 0,
+    "pending_merge": 6,
+    "unresolved": 3
+  },
+  "decisions": [
+    {
+      "new_node_id": "n_0120",
+      "raw_entity_ref": "TKT-2026-005F",
+      "resolved_entity_ref": "TKT-2026-005F",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0121",
+      "raw_entity_ref": "aos/org/skills/strategy_researcher",
+      "resolved_entity_ref": "aos/org/skills/strategy_researcher",
+      "match_confidence": 0.7826,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.7826,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.7536,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057",
+            "n_0075"
+          ]
+        },
+        {
+          "canonical_entity_ref": "skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.7536,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0103"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.6923,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        },
+        {
+          "canonical_entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+          "match_confidence": 0.6829,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0038"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0122",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0123",
+      "raw_entity_ref": "TKT-2026-005G",
+      "resolved_entity_ref": "TKT-2026-005G",
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0124",
+      "raw_entity_ref": "TKT-2026-005G",
+      "resolved_entity_ref": "TKT-2026-005G",
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0125",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0126",
+      "raw_entity_ref": "TKT-2026-005H",
+      "resolved_entity_ref": "TKT-2026-005H",
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0127",
+      "raw_entity_ref": "TKT-2026-005H",
+      "resolved_entity_ref": "TKT-2026-005H",
+      "match_confidence": 0.96,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0128",
+      "raw_entity_ref": "backend/app/api/endpoints/backtests/start.py",
+      "resolved_entity_ref": "backend/app/api/endpoints/backtests/start.py",
+      "match_confidence": 0.7561,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "backend/app/api/endpoints/knowledge.py",
+          "match_confidence": 0.7561,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0048"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0129",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    }
+  ]
+}

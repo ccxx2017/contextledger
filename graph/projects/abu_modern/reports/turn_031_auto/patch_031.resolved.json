@@ -3,51 +3,25 @@
   "turn_id": 31,
   "new_nodes": [
     {
-      "node_id": "n_0084",
-      "type": "OpenTask",
-      "content": "TKT-2026-005B vcp-breakout-entry: 前置检查通过，待最后激活检查后正式进入研究",
+      "node_id": "n_0090",
+      "type": "Fact",
+      "content": "前置检查执行结果：智能体成功读取工单 TKT-2026-005B-vcp-breakout-entry.md 并正确路由到 strategy_researcher（依据 intent_type: investigation 和 assigned_to: agent-strategy-researcher）。未读取 quant_assistant 或 duty_reporter 私有文件，未调用任何 scripts/ 下脚本。但缺少对 strategy_researcher 自身 SKILL.md 和 prompts/research_workflow.md 的实际读取。GPT5.5 指出这是关键缺失，需先完成最后激活检查（读取 SKILL.md、TOOLS.md、prompts 目录全部文件），通过后才能正式启动 Ticket B。",
       "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "state": "open",
+      "state": null,
       "priority": "should_include"
-    },
-    {
-      "node_id": "n_0085",
-      "type": "Fact",
-      "content": "前置检查结果：工单TKT-2026-005B应由strategy_researcher处理，依据intent_type:investigation和assigned_to:agent-strategy-researcher；未读取其他技能私有文件，未调用scripts；正式执行需读取SKILL.md、TOOLS.md、prompts目录下的4个文件",
-      "entity_ref": "TKT-2026-005B",
-      "state": null,
-      "priority": "background"
-    },
-    {
-      "node_id": "n_0086",
-      "type": "Fact",
-      "content": "GPT5.5评价：路由通过，但缺少实际读取SKILL.md和research_workflow.md等激活手册；建议先进行最后激活检查后再正式进入研究",
-      "entity_ref": null,
-      "state": null,
-      "priority": "background"
     }
   ],
   "updated_nodes": [],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0084",
-      "target": "n_0008",
+      "source": "n_0090",
+      "target": "n_0086",
       "relation": "refines"
     },
     {
-      "source": "n_0084",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0085",
-      "target": "n_0084",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0086",
-      "target": "n_0084",
+      "source": "n_0090",
+      "target": "n_0008",
       "relation": "supports"
     }
   ]

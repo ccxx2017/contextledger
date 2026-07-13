@@ -3,66 +3,43 @@
   "turn_id": 54,
   "new_nodes": [
     {
-      "node_id": "n_0121",
-      "type": "Decision",
-      "content": "TKT-2026-005I正式验收通过，结论live_verified_passed。新archive ir_86a1843218b0已包含档案元数据JSON和sanity_check_failed状态。",
+      "node_id": "n_0137",
+      "type": "Fact",
+      "content": "TKT-2026-005I live path verification: live_verified_passed. 新archive ir_86a1843218b0包含##档案元数据JSON、sanity_check_failed、sanity_missing_fields、sanity_failure_reasons等字段。旧archive（stg_20260526_1231e6, stg_20260526_test_ir, tkt_2026_005e_vcp_20260520_112814）为005I部署前创建，不含相关字段。",
       "entity_ref": "TKT-2026-005I",
-      "state": "resolved",
+      "state": null,
       "priority": "must_include"
     },
     {
-      "node_id": "n_0122",
-      "type": "Fact",
-      "content": "005I live path verification报告确认：新archive ir_86a1843218b0包含##档案元数据JSON、strategy_id、strategy_ir、universe、sanity_check_failed、sanity_missing_fields等字段。",
-      "entity_ref": "ir_86a1843218b0",
-      "state": null,
+      "node_id": "n_0138",
+      "type": "OpenTask",
+      "content": "执行005B Round 5受限研究执行前检查。研究目标：基于Round4放量突破基线，只加入前期趋势过滤。硬限制：symbols≤5, years≤1, timeout=90s, train_split=0.7, 禁止自动重试等。",
+      "entity_ref": "TKT-2026-005B_round5",
+      "state": "open",
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0114",
+      "node_id": "n_0136",
       "changes": {
-        "state": "open"
+        "state": "resolved",
+        "status": "superseded"
       },
-      "reason": "005I live path verification已通过，阻塞条件解除，Round5研究不再被阻塞。"
+      "reason": "005I live path verification已完成并通过，新archive包含所有要求字段，任务不再待办。"
     }
   ],
-  "superseded_nodes": [
-    {
-      "node_id": "n_0117",
-      "reason": "新Decision确认验收通过，原暂停验收决定被取代。"
-    },
-    {
-      "node_id": "n_0118",
-      "reason": "live path verification任务已执行完成并获得通过结论。"
-    }
-  ],
+  "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0121",
-      "target": "n_0117",
-      "relation": "invalidates"
-    },
-    {
-      "source": "n_0121",
-      "target": "n_0118",
+      "source": "n_0137",
+      "target": "n_0136",
       "relation": "derived_from"
     },
     {
-      "source": "n_0122",
-      "target": "n_0118",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0121",
-      "target": "n_0120",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0121",
-      "target": "n_0114",
-      "relation": "supports"
+      "source": "n_0138",
+      "target": "n_0101",
+      "relation": "depends_on"
     }
   ]
 }

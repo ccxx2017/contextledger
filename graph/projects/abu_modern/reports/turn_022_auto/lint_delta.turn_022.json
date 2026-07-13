@@ -65,10 +65,10 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 74,
-      "edges": 106,
-      "active_nodes": 63,
-      "active_edges": 106,
+      "nodes": 76,
+      "edges": 108,
+      "active_nodes": 65,
+      "active_edges": 108,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0
@@ -124,10 +124,10 @@
   "after_report": {
     "ok": true,
     "summary": {
-      "nodes": 77,
-      "edges": 111,
-      "active_nodes": 66,
-      "active_edges": 111,
+      "nodes": 76,
+      "edges": 109,
+      "active_nodes": 65,
+      "active_edges": 109,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0

@@ -3,82 +3,70 @@
   "turn_id": 57,
   "new_nodes": [
     {
-      "node_id": "n_0123",
+      "node_id": "n_0146",
       "type": "Fact",
-      "content": "TKT-2026-005B Round 5.2审计报告确认：position sizing基于initial capital固定下单，同一symbol重复叠加开仓，无cash constraint，无max_exposure，导致NAV与trade PnL无法闭合；结论为backtest_invalid，不进入Round 6。",
-      "entity_ref": "TKT-2026-005B",
+      "content": "Round5.2审计揭示回测引擎严重问题：position sizing基于initial capital、同一symbol重复开仓、无cash constraint、final equity与trade PnL缺口-674,445、NAV与daily_return自洽但反映的是杠杆放大而非策略表现。",
+      "entity_ref": "TKT-2026-005B_round5.2_audit",
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0124",
+      "node_id": "n_0147",
       "type": "Decision",
-      "content": "根据审计结论，决定暂停Round 6止损实验，优先进行Round 5.3回测引擎会计与仓位逻辑定位审计。在引擎修复前，不进行任何新策略实验。",
+      "content": "基于Round5.2审计结果，暂停进入Round 6止损实验，优先执行Round 5.3回测引擎会计与仓位逻辑定位审计。",
       "entity_ref": null,
       "state": "resolved",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0125",
+      "node_id": "n_0148",
       "type": "OpenTask",
-      "content": "Round 5.3：回测引擎会计与仓位逻辑定位审计。目标：验证realized_pnl口径、输出最终日持仓、重新验证资金闭合公式、定位订单会计逻辑、对关键区间逐笔replay、检查position sizing源代码、构造最小单元测试、给出bug分类和修复建议。完成前不允许进入Round 6。",
-      "entity_ref": "tkt-2026-005b-round53-engine-audit",
+      "content": "执行Round 5.3回测引擎会计与仓位逻辑定位审计：定位position sizing、cash constraint、same-symbol重复开仓、NAV会计口径等问题，输出bug分类与修复建议，不做策略实验。",
+      "entity_ref": "TKT-2026-005B_round5.3_engine_audit",
       "state": "open",
-      "priority": "must_include"
+      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0114",
-      "changes": {
-        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n\n当前因Round 5.2审计发现position sizing等引擎问题，已确认backtest_invalid，需先完成Round 5.3引擎审计后才能重新验证，暂时阻塞。",
-        "state": "blocked"
-      },
-      "reason": "审计报告显示Round 5.2结果因引擎bug无效，需先修复引擎再重验Round 5"
-    },
-    {
-      "node_id": "n_0113",
-      "changes": {
-        "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。当前因引擎审计阻塞，暂停。",
-        "state": "blocked"
-      },
-      "reason": "引擎审计发现sizing和会计问题，放大验证需先等待引擎修复"
-    },
-    {
-      "node_id": "n_0120",
+      "node_id": "n_0142",
       "changes": {
         "state": "resolved",
         "status": "superseded"
       },
-      "reason": "TKT-2026-005I live path verification已通过，条件满足，约束自动解除"
+      "reason": "Round 5.2审计报告已输出，任务完成。"
     }
   ],
-  "superseded_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0145",
+      "reason": "Round 5.2审计已完成，其建议已执行，该节点不再活跃。"
+    },
+    {
+      "node_id": "n_0143",
+      "reason": "该决策目的已达成，被新决策n_0147取代：暂停Round 6，转向Round 5.3引擎审计。"
+    }
+  ],
   "new_edges": [
     {
-      "source": "n_0123",
-      "target": "n_0114",
+      "source": "n_0146",
+      "target": "n_0147",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0147",
+      "target": "n_0143",
       "relation": "invalidates"
     },
     {
-      "source": "n_0124",
-      "target": "n_0123",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0125",
-      "target": "n_0124",
+      "source": "n_0147",
+      "target": "n_0008",
       "relation": "serves"
     },
     {
-      "source": "n_0125",
-      "target": "n_0114",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0125",
-      "target": "n_0113",
-      "relation": "depends_on"
+      "source": "n_0148",
+      "target": "n_0147",
+      "relation": "refines"
     }
   ]
 }

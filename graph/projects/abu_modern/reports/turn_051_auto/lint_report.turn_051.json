@@ -1,0 +1,116 @@
+{
+  "ok": false,
+  "summary": {
+    "nodes": 129,
+    "edges": 205,
+    "active_nodes": 104,
+    "active_edges": 205,
+    "superseded_nodes": 25,
+    "errors": 3,
+    "warnings": 0
+  },
+  "adjudication_policy": {
+    "current_membership_field": "status",
+    "state_participates_in_current_membership": true,
+    "state_gate_field": "state",
+    "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+    "active_status_value": "active",
+    "superseded_status_value": "superseded"
+  },
+  "status_observations": {
+    "superseded_node_ids": [
+      "n_0010",
+      "n_0012",
+      "n_0014",
+      "n_0027",
+      "n_0030",
+      "n_0033",
+      "n_0034",
+      "n_0049",
+      "n_0052",
+      "n_0055",
+      "n_0056",
+      "n_0059",
+      "n_0074",
+      "n_0090",
+      "n_0092",
+      "n_0094",
+      "n_0095",
+      "n_0105",
+      "n_0106",
+      "n_0107",
+      "n_0108",
+      "n_0112",
+      "n_0118",
+      "n_0123",
+      "n_0126"
+    ],
+    "excluded_due_to_state_node_ids": []
+  },
+  "relation_enum": [
+    "depends_on",
+    "derived_from",
+    "implements",
+    "invalidates",
+    "produces",
+    "refines",
+    "serves",
+    "supersedes",
+    "supports"
+  ],
+  "minimal_state_enum": [
+    "blocked",
+    "cancelled",
+    "deployed",
+    "implemented",
+    "in_progress",
+    "open",
+    "resolved",
+    "unknown"
+  ],
+  "errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+      "entity_ref": "TKT-2026-005B",
+      "states": {
+        "deployed": [
+          "n_0104"
+        ],
+        "resolved": [
+          "n_0101"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ]
+    }
+  ],
+  "warnings": []
+}

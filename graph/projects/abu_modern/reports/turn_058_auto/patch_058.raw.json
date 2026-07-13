@@ -1,46 +1,82 @@
 {
   "task_id": "task_default",
   "turn_id": 58,
-  "new_nodes": [],
-  "updated_nodes": [
+  "new_nodes": [
     {
-      "node_id": "n_0114",
-      "changes": {
-        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n005I live path verification已通过，阻塞解除。但仍需等待005F固化工具契约和005B放大验证完成后才能执行。"
-      },
-      "reason": "005I live path verification通过，阻塞解除，更新任务描述。"
+      "node_id": "n_0149",
+      "type": "OpenTask",
+      "content": "执行Round 5.3A：Feishu Agent黑盒审计与证据导出。通过后端API获取数据、复核结果、导出证据，不修改源码，不写单元测试，不进入Round 6。",
+      "entity_ref": "TKT-2026-005B_round5.3A_audit",
+      "state": "open",
+      "priority": "should_include"
     },
     {
-      "node_id": "n_0119",
-      "changes": {
-        "status": "superseded"
-      },
-      "reason": "n_0122确认新archive包含元数据JSON和sanity字段，与n_0119的怀疑矛盾，被证实不准确。"
+      "node_id": "n_0150",
+      "type": "OpenTask",
+      "content": "执行Round 5.3B：项目AI源码排查与修复。阅读回测引擎源码，定位sizing、cash constraint、repeated entry、accounting不变量等问题，写最小单元测试，修复引擎。",
+      "entity_ref": "TKT-2026-005B_round5.3B_fix",
+      "state": "open",
+      "priority": "should_include"
     },
     {
-      "node_id": "n_0120",
-      "changes": {
-        "status": "superseded"
-      },
-      "reason": "TKT-2026-005I live path verification通过，约束条件已满足，不再生效。"
+      "node_id": "n_0151",
+      "type": "OpenTask",
+      "content": "执行Round 5.3C：修复后黑盒复核。Feishu Agent通过后端API重新跑Round5 baseline，验证资金闭合等10项指标。",
+      "entity_ref": "TKT-2026-005B_round5.3C_verify",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0152",
+      "type": "Decision",
+      "content": "短期不给项目AI后端API技能，保持职责分离：Feishu Agent负责黑盒审计和验收，项目AI负责源码修复。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
     }
   ],
-  "superseded_nodes": [],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0148",
+      "reason": "被更细粒度的Round 5.3A、5.3B、5.3C拆分替代"
+    }
+  ],
   "new_edges": [
     {
-      "source": "n_0121",
-      "target": "n_0120",
+      "source": "n_0149",
+      "target": "n_0148",
       "relation": "invalidates"
     },
     {
-      "source": "n_0122",
-      "target": "n_0119",
-      "relation": "invalidates"
+      "source": "n_0150",
+      "target": "n_0149",
+      "relation": "depends_on"
     },
     {
-      "source": "n_0122",
-      "target": "n_0121",
-      "relation": "supports"
+      "source": "n_0151",
+      "target": "n_0150",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0149",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0150",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0151",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0152",
+      "target": "n_0001",
+      "relation": "serves"
     }
   ]
 }

@@ -43,49 +43,25 @@
       "status": "active"
     },
     {
-      "node_id": "n_0133",
+      "node_id": "n_0168",
       "type": "OpenTask",
-      "content": "Round 5.3E：同一run_id下capital/trades/executions/timeseries四账一致性复核。不改策略，不进入Round6，不做止损实验。需输出一致性检查，锁定run_id，校验hash等。验证cash ledger全年闭合、capital ledger全年闭合、trade ledger与execution ledger一致、timeseries使用真实equity、final keep_sum与market_value一致、API与磁盘CSV一致、max exposure全年可验证。",
-      "entity_ref": "round5_3e_accounting_recon",
+      "content": "Round 5.3F：同一 artifact pack 下的账本权威源复核。目标：固定 artifact pack（manifest.json、meta.json、metrics.json、capital.csv、timeseries.csv、trades.csv、orders/actions/executions.csv、positions_daily.csv、summary.json），SHA256 一致性，明确 API endpoint 文件来源，从原始订单生成 canonical_fills.csv，逐日重建 canonical portfolio，输出最大误差并确定唯一最终状态。通过标准包括：Feishu 与项目 AI 锁定相同 run_id、所有关键文件 SHA256 一致、canonical fills 重建 final_cash 误差<1元、final_market_value=0 时 final_keep_sum=0 等9项。",
+      "entity_ref": "round_5.3f_artifact_source_reconciliation",
       "state": "open",
       "status": "active"
     },
     {
-      "node_id": "n_0114",
+      "node_id": "n_0097",
       "type": "OpenTask",
-      "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n005I live path verification已通过，阻塞解除。但仍需等待005F固化工具契约和005B放大验证完成后才能执行。",
-      "entity_ref": "vcp_trend_filter_study",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0113",
-      "type": "OpenTask",
-      "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。",
-      "entity_ref": "tkt-2026-005b-magnify-validation",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0112",
-      "type": "OpenTask",
-      "content": "TKT-2026-005F: 固化工具契约——同步call_builder.py --endpoint到正式技能资产；TOOLS.md明确investigation必须用/strategy-builder/compile-ir，禁止/strategy-builder/invoke，execution-config回测必须传完整strategy_ir；research_workflow.md补充新流程；metrics.py兼容新路径；明确400/404不等于Boss guardrail。",
-      "entity_ref": "TKT-2026-005F",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0088",
-      "type": "OpenTask",
-      "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
-      "entity_ref": "TKT-2026-005C",
+      "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
+      "entity_ref": "aos/services/backtest-api",
       "state": "open",
       "status": "active"
     },
     {
       "node_id": "n_0073",
       "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
       "entity_ref": "workspace_root_bootstrap_audit",
       "state": "in_progress",
       "status": "active"
@@ -101,9 +77,9 @@
     {
       "node_id": "n_0060",
       "type": "OpenTask",
-      "content": "VCP形态突破点入场策略研究：验证趋势→调整→紧凑→放量→突破形态在A股市场的统计优势",
-      "entity_ref": null,
-      "state": "open",
+      "content": "VCP形态突破点入场策略研究 - 已暂停，因后端回测阻塞，等待补丁工单 TKT-2026-005C 后重跑",
+      "entity_ref": "TKT-2026-005C",
+      "state": "blocked",
       "status": "active"
     },
     {
@@ -139,98 +115,146 @@
       "status": "active"
     },
     {
-      "node_id": "n_0135",
-      "type": "Fact",
-      "content": "Boss给出Round 5.3E具体验证要求：1) capital.csv每天equity=cash+stocks_blance且stocks_blance=sum(*_worth)；2) 若*_keep>0则*_worth不能长期为0；3) final_market_value=0的前提是final keep_sum=0；4) 用真实成交流水重建cash，gap<1元或逐项解释；5) trades.csv覆盖全部真实成交；6) API输出与磁盘CSV一致；7) max_total_exposure全年生效检查。",
-      "entity_ref": "round5_3e_verification_requirements",
-      "state": null,
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "决定LLM选型（阶段1用哪家LLM）",
+      "entity_ref": null,
+      "state": "open",
       "status": "active"
     },
     {
-      "node_id": "n_0134",
-      "type": "Fact",
-      "content": "项目AI诊断：gap=-185,592根因是capital ledger缺失持仓市值（keep>0但*_worth=0）、trades.csv未覆盖全部现金事件（有现金跳变无对应trade）、timeseries使用现金序列而非完整权益序列。核心问题是三账不一致：capital ledger、trade ledger、report/timeseries ledger。",
-      "entity_ref": "gap_185592_diagnosis_ai",
-      "state": null,
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "创建aos/runtime/_frozen_ideas.md冻结其他诱惑",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open",
       "status": "active"
     },
     {
-      "node_id": "n_0132",
+      "node_id": "n_0009",
+      "type": "OpenTask",
+      "content": "根据Claude指导，压缩整理为ROADMAP_v2.md，包含阶段1详细计划、时间线、成功定义、攻坚点排序、技术方案、AOS-native形态等",
+      "entity_ref": "aos/projects/abu_modern/ROADMAP_v2.md",
+      "state": "in_progress",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0167",
       "type": "Decision",
-      "content": "Boss裁决：Round 5.3D未通过，暂不允许进入Round 6。原因：cash ledger不闭合（expected_cash=965,323, actual_cash=779,731, gap=-185,592），gap不能解释为MTM。要求执行Round 5.3E三账一致性复核。",
+      "content": "基于 Round 5.3E 未通过，禁止进入 Round 6；命令执行 Round 5.3F：同一 artifact pack 下的账本权威源复核，包括 artifact pack 固定、canonical fills 重建、逐日对账、最终状态唯一性判定。",
       "entity_ref": null,
       "state": "resolved",
       "status": "active"
     },
     {
-      "node_id": "n_0130",
+      "node_id": "n_0166",
       "type": "Fact",
-      "content": "Feishu Agent将Round5.3C v2 gap=-185,592解释为intra-trade MTM噪音，但Boss认为若最终全部平仓，MTM应已实现，因此gap不能仅用MTM解释。需要现金账簿完整闭合验证。",
+      "content": "Round 5.3E 三账一致性复核结论：未通过。Feishu Agent 报告指出 timeseries/nav 存在 bug（NAV 与 real cash+MV 脱钩）；项目 AI 指出同一 run_id 下 capital.csv、trades.csv、positions_daily.csv 之间互相冲突（final_keep_sum=3000 vs positions_final_qty=7900、trade_count=11 vs 13 等），gap=-185,592 无法归因于 MTM。GPT5.5确认 Feishu 低估问题范围，项目 AI 更可信，但需同一 artifact pack 固定后才能最终判定。",
       "entity_ref": null,
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0129",
+      "node_id": "n_0165",
       "type": "Decision",
-      "content": "Boss定夺：Round 5.3C v2不能算完全通过。核心修复初步有效，但gap=-185,592需用cash ledger闭合才能确认。在缺口明确解释前，不许进入Round6。需先执行Round 5.3D最小闭合复核。",
+      "content": "采信项目AI对问题性质的方向性判断：gap=-185592的原因是capital ledger、trade ledger、report/timeseries ledger三账不一致，而非正常MTM。",
       "entity_ref": null,
       "state": "resolved",
       "status": "active"
     },
     {
-      "node_id": "n_0126",
+      "node_id": "n_0164",
       "type": "Fact",
-      "content": "项目AI第二轮修复已在Round5.3C v2中验证：trades.csv过滤、positions_daily重建生效，但仍有gap=-185,592未解决。",
-      "entity_ref": "result_processor.py",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0125",
-      "type": "Fact",
-      "content": "Round 5.3C v2黑盒复核报告（Feishu Agent）：13/14通过，条件2 gap -185,592为不可接受项。Boss判定不能算完全通过，需补充5.3D资金闭合复核。",
-      "entity_ref": "vcp_trend_filter_study",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0123",
-      "type": "Fact",
-      "content": "Feishu Agent审计结论：Round5回测引擎存在固定资本金sizing、无cash约束、允许重复开仓、final equity无法闭合等结构性问题，导致所有指标失真，当前结果不允许进入Round6。",
+      "content": "Feishu Agent的Round5.3D结论存在三个逻辑矛盾：1）cash ledger不闭合（expected_cash=965323 vs actual_cash=779731，gap=-185592）却称可以通过；2）MTM不能解释最终cash缺口；3）5月max_gross_exposure=33.9x与max_total_exposure生效的结论冲突。",
       "entity_ref": null,
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0122",
+      "node_id": "n_0162",
+      "type": "Decision",
+      "content": "Round 5.3D未通过，不能进入Round 6。要求执行Round 5.3E三账一致性复核（capital/trades/executions/timeseries）。",
+      "entity_ref": null,
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0157",
       "type": "Fact",
-      "content": "005I live path verification报告确认：新archive ir_86a1843218b0包含##档案元数据JSON、strategy_id、strategy_ir、universe、sanity_check_failed、sanity_missing_fields等字段。",
-      "entity_ref": "ir_86a1843218b0",
+      "content": "项目AI源码排查与修复（针对Round5.3C未通过项）：trades.csv过滤未平仓头寸，positions_daily改用capital_pd真实数据，新增测试2 passed。",
+      "entity_ref": "TKT-2026-005B_round5.3C_fix",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0121",
+      "node_id": "n_0156",
+      "type": "Fact",
+      "content": "Round5.3C黑盒复核报告（Feishu Agent）：14项检查通过12/14；条件2（final_equity与trade PnL gap -185k）和条件12（最后2笔交易exit_price=0）未通过；结论暂不建议进入Round 6。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0154",
+      "type": "Fact",
+      "content": "Round5.3B源码排查与修复完成：定位4个bug（final_equity取值错误、未成交订单污染统计、仓位sizing使用初始资金、默认允许重复开仓），在executor_facade.py、custom_positions.py、abupy_caller.py中修复；新增单元测试12个全部通过。",
+      "entity_ref": "TKT-2026-005B_round5.3B_fix",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0153",
+      "type": "Fact",
+      "content": "Round5.3A黑盒审计确认：fixed initial capital sizing、无cash constraint、market_value>equity、同一symbol重复开仓、trade PnL不闭合（gap -689,451）；所有指标因杠杆放大失真，不允许进入Round 6。",
+      "entity_ref": "TKT-2026-005B_round5.3A_audit",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0152",
       "type": "Decision",
-      "content": "TKT-2026-005I正式验收通过，结论live_verified_passed。新archive ir_86a1843218b0已包含档案元数据JSON和sanity_check_failed状态。",
+      "content": "短期不给项目AI后端API技能，保持职责分离：Feishu Agent负责黑盒审计和验收，项目AI负责源码修复。",
+      "entity_ref": null,
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0147",
+      "type": "Decision",
+      "content": "基于Round5.2审计结果，暂停进入Round 6止损实验，优先执行Round 5.3回测引擎会计与仓位逻辑定位审计。",
+      "entity_ref": null,
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0146",
+      "type": "Fact",
+      "content": "Round5.2审计揭示回测引擎严重问题：position sizing基于initial capital、同一symbol重复开仓、无cash constraint、final equity与trade PnL缺口-674,445、NAV与daily_return自洽但反映的是杠杆放大而非策略表现。",
+      "entity_ref": "TKT-2026-005B_round5.2_audit",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0144",
+      "type": "Fact",
+      "content": "Round 5.1审计报告结论：交易级PnL、分标的PnL、最终资金、最大回撤、daily returns之间无法闭合，差额约689,450。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0139",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 5 受限研究执行完成：compile-ir成功，回测完成56笔交易，sanity passed。核心指标：Sharpe 1.4921, Total Return -80.92%, Max Drawdown 98.89%。结论：MA60趋势过滤改善了信号质量但未解决亏损问题。飞书Agent建议不立即扩展样本，先做指标审计。",
+      "entity_ref": "TKT-2026-005B_round5_result",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0137",
+      "type": "Fact",
+      "content": "TKT-2026-005I live path verification: live_verified_passed. 新archive ir_86a1843218b0包含##档案元数据JSON、sanity_check_failed、sanity_missing_fields、sanity_failure_reasons等字段。旧archive（stg_20260526_1231e6, stg_20260526_test_ir, tkt_2026_005e_vcp_20260520_112814）为005I部署前创建，不含相关字段。",
       "entity_ref": "TKT-2026-005I",
-      "state": "resolved",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0111",
-      "type": "Decision",
-      "content": "Boss验收通过：TKT-2026-005B Round 4 受限 smoke 已完成，4项修正满足验收口径，不再违反Boss guardrail。同意记录最终状态。解除暂停。",
-      "entity_ref": "TKT-2026-005B",
-      "state": "resolved",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0110",
-      "type": "Fact",
-      "content": "Round 4 受限恢复 smoke 完成（已通过Boss验收）：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。4项修正已全部完成：call_builder.py修改已记录、非2xx请求已说明、指标口径以KB准、train/test切分70/30。结果仅用于技术恢复验证，不构成完整策略研究结论。下一步需Boss授权后才可进入更大样本或正式研究。",
-      "entity_ref": "TKT-2026-005B",
       "state": null,
       "status": "active"
     }
@@ -246,49 +270,64 @@
       "n_0005"
     ],
     "active_open_tasks": [
-      "n_0133",
-      "n_0114",
-      "n_0113",
-      "n_0112",
-      "n_0088",
+      "n_0168",
+      "n_0097",
       "n_0073",
       "n_0065",
       "n_0060",
       "n_0057",
       "n_0036",
       "n_0035",
-      "n_0021"
+      "n_0021",
+      "n_0017",
+      "n_0011",
+      "n_0009"
     ],
     "recent_nodes": [
-      "n_0135",
-      "n_0134",
-      "n_0133",
-      "n_0132",
-      "n_0130",
-      "n_0129",
-      "n_0126",
-      "n_0125",
-      "n_0123",
-      "n_0122",
-      "n_0121",
-      "n_0114",
-      "n_0113",
-      "n_0112",
-      "n_0111",
-      "n_0110"
+      "n_0168",
+      "n_0167",
+      "n_0166",
+      "n_0165",
+      "n_0164",
+      "n_0162",
+      "n_0157",
+      "n_0156",
+      "n_0154",
+      "n_0153",
+      "n_0152",
+      "n_0147",
+      "n_0146",
+      "n_0144",
+      "n_0139",
+      "n_0137"
     ],
     "symbol_hits": [
-      "n_0135",
-      "n_0134",
-      "n_0126"
+      "n_0168",
+      "n_0166",
+      "n_0157"
     ],
     "conflict_candidates": [
-      "n_0135",
-      "n_0134",
-      "n_0126"
+      "n_0168",
+      "n_0166",
+      "n_0157"
     ]
   },
   "recent_edges": [
+    {
+      "source": "n_0009",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0005",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0011",
+      "relation": "supports"
+    },
     {
       "source": "n_0021",
       "target": "n_0001",
@@ -320,109 +359,54 @@
       "relation": "serves"
     },
     {
-      "source": "n_0073",
+      "source": "n_0097",
       "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0088",
-      "target": "n_0035",
-      "relation": "refines"
+      "source": "n_0146",
+      "target": "n_0147",
+      "relation": "supports"
     },
     {
-      "source": "n_0111",
-      "target": "n_0110",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0112",
+      "source": "n_0152",
       "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0113",
-      "target": "n_0112",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
+      "source": "n_0153",
       "target": "n_0060",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0113",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0111",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0121",
-      "target": "n_0114",
       "relation": "supports"
     },
     {
-      "source": "n_0122",
-      "target": "n_0121",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0125",
-      "target": "n_0126",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0129",
-      "target": "n_0125",
+      "source": "n_0157",
+      "target": "n_0156",
       "relation": "derived_from"
     },
     {
-      "source": "n_0129",
+      "source": "n_0165",
+      "target": "n_0162",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0164",
+      "target": "n_0162",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0162",
       "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0130",
-      "target": "n_0129",
+      "source": "n_0167",
+      "target": "n_0166",
       "relation": "supports"
     },
     {
-      "source": "n_0130",
-      "target": "n_0125",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0132",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0133",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0134",
-      "target": "n_0132",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0135",
-      "target": "n_0133",
+      "source": "n_0168",
+      "target": "n_0167",
       "relation": "refines"
-    },
-    {
-      "source": "n_0133",
-      "target": "n_0134",
-      "relation": "derived_from"
     }
   ],
   "retrieval_trace": {
@@ -459,12 +443,15 @@
       "open",
       "resolved"
     ],
-    "total_nodes": 135,
-    "active_nodes": 102,
+    "total_nodes": 168,
+    "active_nodes": 123,
     "selected_node_ids": [
       "n_0001",
       "n_0005",
       "n_0006",
+      "n_0009",
+      "n_0011",
+      "n_0017",
       "n_0021",
       "n_0035",
       "n_0036",
@@ -474,27 +461,27 @@
       "n_0060",
       "n_0065",
       "n_0073",
-      "n_0088",
-      "n_0110",
-      "n_0111",
-      "n_0112",
-      "n_0113",
-      "n_0114",
-      "n_0121",
-      "n_0122",
-      "n_0123",
-      "n_0125",
-      "n_0126",
-      "n_0129",
-      "n_0130",
-      "n_0132",
-      "n_0133",
-      "n_0134",
-      "n_0135"
+      "n_0097",
+      "n_0137",
+      "n_0139",
+      "n_0144",
+      "n_0146",
+      "n_0147",
+      "n_0152",
+      "n_0153",
+      "n_0154",
+      "n_0156",
+      "n_0157",
+      "n_0162",
+      "n_0164",
+      "n_0165",
+      "n_0166",
+      "n_0167",
+      "n_0168"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0136",
+    "next_node_id": "n_0169",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_066.md"
   }

@@ -3,33 +3,64 @@
   "turn_id": 59,
   "new_nodes": [
     {
-      "node_id": "n_0123",
+      "node_id": "n_0153",
       "type": "Fact",
-      "content": "Feishu Agent审计结论：Round5回测引擎存在固定资本金sizing、无cash约束、允许重复开仓、final equity无法闭合等结构性问题，导致所有指标失真，当前结果不允许进入Round6。",
-      "entity_ref": null,
+      "content": "Round5.3A黑盒审计确认：fixed initial capital sizing、无cash constraint、market_value>equity、同一symbol重复开仓、trade PnL不闭合（gap -689,451）；所有指标因杠杆放大失真，不允许进入Round 6。",
+      "entity_ref": "TKT-2026-005B_round5.3A_audit",
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0124",
+      "node_id": "n_0154",
       "type": "Fact",
-      "content": "项目AI完成修复：修改executor_facade.py、custom_positions.py、abupy_caller.py，新增5个测试并通过，建议重新通过后端API跑Round5 baseline验证修复效果。",
-      "entity_ref": null,
+      "content": "Round5.3B源码排查与修复完成：定位4个bug（final_equity取值错误、未成交订单污染统计、仓位sizing使用初始资金、默认允许重复开仓），在executor_facade.py、custom_positions.py、abupy_caller.py中修复；新增单元测试12个全部通过。",
+      "entity_ref": "TKT-2026-005B_round5.3B_fix",
       "state": null,
       "priority": "should_include"
     }
   ],
-  "updated_nodes": [],
-  "superseded_nodes": [],
-  "new_edges": [
+  "updated_nodes": [
     {
-      "source": "n_0123",
-      "target": "n_0124",
-      "relation": "supports"
+      "node_id": "n_0149",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "Round5.3A黑盒审计完成，审计结论已记录"
     },
     {
-      "source": "n_0124",
-      "target": "n_0114",
+      "node_id": "n_0150",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "Round5.3B源码排查与修复完成，单元测试通过"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0149",
+      "reason": "Round5.3A黑盒审计完成，审计结论已记录"
+    },
+    {
+      "node_id": "n_0150",
+      "reason": "Round5.3B源码排查与修复完成，单元测试通过"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0149",
+      "target": "n_0153",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0150",
+      "target": "n_0154",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0153",
+      "target": "n_0060",
       "relation": "supports"
     }
   ]

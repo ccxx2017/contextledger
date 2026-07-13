@@ -4,62 +4,11 @@
   "new_nodes": [],
   "updated_nodes": [
     {
-      "node_id": "n_0144",
+      "node_id": "n_0184",
       "changes": {
-        "content": "Round 6 Preflight: fully passed and archived",
-        "state": "resolved",
-        "status": "superseded"
+        "content": "Feishu Agent Round 6 Preflight fully passed and archived. API preflight passed, project AI local train_split confirmation passed, baseline freeze confirmed. Accepted baseline: run-54b-20250101-20251230-d37c696d. Round 6 execution remains locked / not_started / requires explicit approval."
       },
-      "reason": "Round 6 Preflight fully passed and archived; no further preflight actions needed."
-    },
-    {
-      "node_id": "n_0151",
-      "changes": {
-        "content": "train_split=0.7 confirmed via local baseline metadata freeze. Task completed.",
-        "state": "resolved",
-        "status": "superseded"
-      },
-      "reason": "项目AI本地确认已完成，train_split=0.7 confirmed via local baseline metadata freeze."
-    },
-    {
-      "node_id": "n_0150",
-      "changes": {
-        "content": "Round 6 Preflight by Feishu Agent: fully passed and archived. Baseline identity confirmed, disabled runs isolated, API clean. train_split=0.7 confirmed via local baseline metadata freeze. Round 6 execution remains locked and not approved.",
-        "entity_ref": null,
-        "state": null,
-        "status": "active"
-      },
-      "reason": "Preflight状态从conditionally passed更新为fully passed并已归档。"
-    },
-    {
-      "node_id": "n_0147",
-      "changes": {
-        "content": "主工单：TKT-2026-005B-vcp-breakout-entry.md。记录Round 5.4B-fix1验收、baseline冻结及Round 6 Preflight fully passed归档信息。",
-        "entity_ref": "tkt_2026_005b.md",
-        "state": "deployed",
-        "status": "active"
-      },
-      "reason": "更新工单文档以包含Round 6 Preflight fully passed归档内容。"
-    },
-    {
-      "node_id": "n_0148",
-      "changes": {
-        "content": "策略验证文档：ir_b15a65c4b9b4.md。追加Round 5.4B-fix1 final acceptance及Round 6 Preflight fully passed归档信息。",
-        "entity_ref": "ir_b15a65c4b9b4.md",
-        "state": "deployed",
-        "status": "active"
-      },
-      "reason": "更新策略验证文档以包含Round 6 Preflight fully passed归档内容。"
-    },
-    {
-      "node_id": "n_0149",
-      "changes": {
-        "content": "研究日志：log.md。记录baseline freeze事件及Round 6 Preflight fully passed归档。",
-        "entity_ref": "log.md",
-        "state": "deployed",
-        "status": "active"
-      },
-      "reason": "更新日志文档以包含Round 6 Preflight fully passed归档内容。"
+      "reason": "Round 6 Preflight fully passed and archived per user action"
     }
   ],
   "superseded_nodes": [],

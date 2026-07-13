@@ -3,113 +3,59 @@
   "turn_id": 66,
   "new_nodes": [
     {
-      "node_id": "n_0136",
+      "node_id": "n_0169",
+      "type": "Fact",
+      "content": "Round 5.3F 未通过：Feishu Agent 与项目 AI 混用 run_id（Feishu: run-e92b485b-20241231-20251230-0e74ffa7, 项目AI: run-e92b485b-20250101-20251230-0e74ffa7），导致此前所有混合结论无效；锁定 Feishu pack 后，capital.csv、timeseries.csv、trades.csv、positions_daily.csv 仍不一致（final_keep_sum=3000 vs positions_final_qty=4400 等），且 pack 内不存在 orders.csv/actions.csv/executions.csv/summary.json，trades.csv.fills 全空，无法生成 canonical fills；因此不具备唯一账本权威源，禁止进入 Round 6。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0170",
       "type": "Decision",
-      "content": "Boss判定：Round 5.3F未通过。原因：同一run_id下artifact pack无单一权威账本，缺少原始fills源，各文件相互冲突。继续禁止进入Round6。",
+      "content": "基于 Round 5.3F 未通过，禁止进入 Round 6；命令执行 Round 5.4A：账本产物生成链修复，重构回测产出链路，确保每 run 拥有唯一可审计账本源。",
       "entity_ref": null,
       "state": "resolved",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0137",
-      "type": "Fact",
-      "content": "Feishu Agent使用run-e92b485b-20241231-20251230-0e74ffa7，项目AI使用run-e92b485b-20250101-20251230-0e74ffa7。两者run_id不同，之前混用的结论无效。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0138",
-      "type": "Fact",
-      "content": "Round5.4A账本产物生成链修复要求：每个run必须输出canonical_fills.csv、canonical_positions_daily.csv、canonical_portfolio_daily.csv；所有输出文件由canonical派生；增加run级invariant check等。",
-      "entity_ref": "round5_4a_spec",
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0139",
+      "node_id": "n_0171",
       "type": "OpenTask",
-      "content": "执行Round5.4A账本产物生成链修复：实现canonical文件生成、重构输出文件关系、增加invariant check，重新生成干净run并通过验收标准。",
-      "entity_ref": "round5_4a_generation_fix",
+      "content": "Round 5.4A：账本产物生成链修复。目标：在回测产物生成阶段建立唯一权威链路 canonical_fills.csv -> canonical_positions_daily.csv -> canonical_portfolio_daily.csv -> 所有下游文件（trades.csv/capital.csv/timeseries.csv/positions_daily.csv/metrics.json/API endpoints）。要求新增 canonical_fills.csv、canonical_positions_daily.csv、canonical_portfolio_daily.csv；重构现有文件来源关系；增加 run 级 invariant check；重新生成一个干净 run；通过9项验收标准。在 Round 5.4A 通过前，继续禁止进入 Round 6。",
+      "entity_ref": "round_5.4a_artifact_chain_fix",
       "state": "open",
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0133",
+      "node_id": "n_0168",
       "changes": {
-        "content": "Round 5.3E：同一run_id下capital/trades/executions/timeseries四账一致性复核。不改策略，不进入Round6，不做止损实验。需输出一致性检查，锁定run_id，校验hash等。验证cash ledger全年闭合、capital ledger全年闭合、trade ledger与execution ledger一致、timeseries使用真实equity、final keep_sum与market_value一致、API与磁盘CSV一致、max exposure全年可验证。",
         "state": "resolved",
-        "status": "superseded",
-        "priority": "should_include"
+        "status": "superseded"
       },
-      "reason": "Round5.3E完成后经5.3F审计未通过，结论无效，需进入5.4A修复。"
-    },
-    {
-      "node_id": "n_0134",
-      "changes": {
-        "content": "项目AI诊断：gap=-185,592根因是capital ledger缺失持仓市值（keep>0但*_worth=0）、trades.csv未覆盖全部现金事件（有现金跳变无对应trade）、timeseries使用现金序列而非完整权益序列。核心问题是三账不一致：capital ledger、trade ledger、report/timeseries ledger。",
-        "state": null,
-        "status": "superseded",
-        "priority": "should_include"
-      },
-      "reason": "诊断基于不同run_id（Feishu和项目AI不同run），混用结论无效，被n_0137替代。"
-    },
-    {
-      "node_id": "n_0126",
-      "changes": {
-        "content": "项目AI第二轮修复已在Round5.3C v2中验证：trades.csv过滤、positions_daily重建生效，但仍有gap=-185,592未解决。",
-        "state": null,
-        "status": "superseded",
-        "priority": "should_include"
-      },
-      "reason": "该修复验证基于项目AI的run（与Feishu不同），且5.3F确认同一run内不一致，结论不再适用，被n_0138新要求覆盖。"
+      "reason": "Round 5.3F 审计完成，结果未通过，任务结束。"
     }
   ],
-  "superseded_nodes": [
-    {
-      "node_id": "n_0134",
-      "reason": "诊断基于不同run_id（Feishu和项目AI不同run），混用结论无效，被n_0137替代。"
-    },
-    {
-      "node_id": "n_0126",
-      "reason": "该修复验证基于项目AI的run（与Feishu不同），且5.3F确认同一run内不一致，结论不再适用，被n_0138新要求覆盖。"
-    }
-  ],
+  "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0136",
-      "target": "n_0133",
-      "relation": "invalidates"
+      "source": "n_0169",
+      "target": "n_0168",
+      "relation": "derived_from"
     },
     {
-      "source": "n_0136",
-      "target": "n_0132",
+      "source": "n_0170",
+      "target": "n_0169",
       "relation": "supports"
     },
     {
-      "source": "n_0137",
-      "target": "n_0134",
-      "relation": "invalidates"
-    },
-    {
-      "source": "n_0137",
-      "target": "n_0126",
-      "relation": "invalidates"
-    },
-    {
-      "source": "n_0139",
-      "target": "n_0136",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0138",
-      "target": "n_0139",
+      "source": "n_0171",
+      "target": "n_0170",
       "relation": "refines"
     },
     {
-      "source": "n_0139",
+      "source": "n_0171",
       "target": "n_0001",
       "relation": "serves"
     }

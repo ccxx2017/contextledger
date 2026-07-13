@@ -124,10 +124,10 @@
   "after_report": {
     "ok": true,
     "summary": {
-      "nodes": 82,
-      "edges": 111,
-      "active_nodes": 71,
-      "active_edges": 111,
+      "nodes": 75,
+      "edges": 105,
+      "active_nodes": 64,
+      "active_edges": 105,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0

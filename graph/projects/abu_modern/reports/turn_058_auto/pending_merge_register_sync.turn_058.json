@@ -1,0 +1,10 @@
+{
+  "kind": "pending_merge_register_sync_report.v1",
+  "turn_id": "turn_058",
+  "summary": {
+    "source_items": 3,
+    "added": 3,
+    "refreshed": 0,
+    "tracked_items": 36
+  }
+}

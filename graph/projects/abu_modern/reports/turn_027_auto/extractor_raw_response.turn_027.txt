@@ -3,86 +3,67 @@
   "turn_id": 27,
   "new_nodes": [
     {
-      "node_id": "n_0081",
-      "type": "OpenTask",
-      "content": "P1：清理根bootstrap中的IDENTITY.md和AGENTS.md。IDENTITY.md改为'当前agent是OpenClaw数字组织运行时成员，具体岗位由skill/工单决定'；AGENTS.md关闭主动读取memory/检查email/calendar/weather/Twitter等污染源，限定写文件路径为SKILL.md或工单允许路径。",
-      "entity_ref": "identity_agents_cleanup",
-      "state": "open",
-      "priority": "must_include"
-    },
-    {
-      "node_id": "n_0082",
-      "type": "OpenTask",
-      "content": "烟测C：身份是否干净测试。飞书问'你是谁？当前消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'，不主动读memory，能说清具体岗位由skill/工单决定。",
-      "entity_ref": "smoke_test_identity",
-      "state": "open",
-      "priority": "should_include"
-    },
-    {
       "node_id": "n_0083",
-      "type": "OpenTask",
-      "content": "烟测D：Ticket B前置检查。发指令'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、skills/strategy_researcher/SKILL.md、必要prompts如research_workflow.md；不读取quant_assistant/TOOLS.md；不调用builder/backtest/order/deploy脚本。",
-      "entity_ref": "smoke_test_ticket_b_prereq",
-      "state": "open",
+      "type": "Fact",
+      "content": "GPT5.5建议：P1清理IDENTITY.md，改为：当前agent是OpenClaw数字组织运行时成员，具体岗位身份由当前激活的skill/工单/用户指令共同决定，执行任务时以对应SKILL.md为最高行为准则。",
+      "entity_ref": "openclaw_workspace/IDENTITY.md",
+      "state": null,
       "priority": "should_include"
     },
     {
       "node_id": "n_0084",
-      "type": "Decision",
-      "content": "暂时不做源码级多agent改造（agents.list/bindings/skills allowlist），直到触发条件（Ticket B中仍读错skill、混用quant_assistant工具、主动读无关memory、不按research_workflow调用工具、trace不可验收）满足。若触发，优先修SKILL/bootstrap而非启动机制层改造。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "must_include"
+      "type": "Fact",
+      "content": "GPT5.5建议：P1清理AGENTS.md，关闭启动时主动读取大量memory、检查email/calendar/weather/Twitter，把通用记忆维护规则凌驾于skill的读写边界之上，写文件只能写SKILL.md或工单允许的路径。",
+      "entity_ref": "openclaw_workspace/AGENTS.md",
+      "state": null,
+      "priority": "should_include"
     },
     {
       "node_id": "n_0085",
       "type": "Fact",
-      "content": "多agent改造触发条件：1) Ticket B中仍读错skill；2) 仍混用quant_assistant工具；3) 仍主动读无关memory；4) 仍不按research_workflow调用工具；5) trace不可验收。",
-      "entity_ref": null,
+      "content": "GPT5.5提出的烟测C：身份是否干净。飞书问'你是谁？当前这条消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'、不主动读memory、能说清具体岗位由skill/工单决定。",
+      "entity_ref": "identity_smoke_c",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0086",
+      "type": "Fact",
+      "content": "GPT5.5提出的烟测D：Ticket B前置检查。发'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、读取skills/strategy_researcher/SKILL.md、读取必要prompts如research_workflow.md、不读quant_assistant/TOOLS.md、不调用builder/backtest/order/deploy脚本。",
+      "entity_ref": "pre_ticket_b_check",
       "state": null,
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0073",
+      "node_id": "n_0068",
       "changes": {
-        "content": "审查并调整工作区根部bootstrap文件以适应路线β：P0（剥离根TOOLS.md）已完成。现在优先做P1：清理IDENTITY.md和AGENTS.md（内容见n_0081），P2（修改SOUL.md）延后。正式层上agents.list+bindings暂不做，等待触发条件（见n_0085）。",
-        "priority": "must_include"
+        "state": "cancelled"
       },
-      "reason": "P0已完成，最新建议强调优先P1，调整优先级顺序。"
+      "reason": "GPT5.5建议先做P1清理再派Ticket B，暂缓多agent改造，触发条件：Ticket B跑通后再排期做机制层；跑不通优先修SKILL/bootstrap。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0081",
-      "target": "n_0073",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0082",
-      "target": "n_0081",
-      "relation": "depends_on"
-    },
-    {
       "source": "n_0083",
-      "target": "n_0081",
-      "relation": "depends_on"
+      "target": "n_0073",
+      "relation": "supports"
     },
     {
       "source": "n_0084",
       "target": "n_0073",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0084",
-      "target": "n_0068",
-      "relation": "depends_on"
+      "relation": "supports"
     },
     {
       "source": "n_0085",
-      "target": "n_0084",
+      "target": "n_0082",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0086",
+      "target": "n_0073",
       "relation": "supports"
     }
   ]

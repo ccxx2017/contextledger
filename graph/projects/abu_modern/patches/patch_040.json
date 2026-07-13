@@ -3,40 +3,32 @@
   "turn_id": 40,
   "new_nodes": [
     {
-      "node_id": "n_0102",
-      "type": "Decision",
-      "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
+      "node_id": "n_0110",
+      "type": "Fact",
+      "content": "双接口分流原则：人类交互式构建使用旧接口POST /strategy-builder/invoke（支持pending_user_input、多轮会话），自动研究闭环使用新接口POST /strategy-builder/compile-ir（单次请求、无session、不追问、输入完整IR、返回结构化JSON）。两条链路分别验收，互不影响。",
       "entity_ref": "aos/services/backtest-api",
-      "state": "resolved",
-      "priority": "must_include",
+      "state": null,
+      "priority": "should_include",
       "_entity_ref_sanitized": true
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0099",
+      "node_id": "n_0107",
       "changes": {
-        "content": "TKT-2026-005D: 新建 auto research 专用接口（POST /strategy-builder/compile-ir 或类似），要求：无 session、无 pending_user_input、输入完整 strategy_IR、输出结构化 JSON（success/error）；同时保留现有交互式接口不变。backtest 工具契约部分（返回结构化 JSON）继续执行。"
+        "content": "TKT-2026-005D-builder-backtest-contract-repair：实施双接口分流。保留现有交互式接口POST /strategy-builder/invoke（支持pending_user_input、多轮会话），新增auto research专用接口POST /strategy-builder/compile-ir（单次请求、无session依赖、不追问、输入完整IR、返回结构化JSON，不允许pending_user_input）。验收标准：1) 旧接口行为不变；2) 新接口无pending_user_input；3) 新接口无session依赖；4) 输入完整IR；5) 返回结构化JSON（成功含strategy_id，失败含error code与retryable）；6) 成功后生成strategy_id并落KB；7) 失败时不触发回测，不进入对话循环。",
+        "state": "open",
+        "priority": "should_include"
       },
-      "reason": "根据双接口分流决策，将 builder 非交互模式明确为新建独立接口，而非修改现有接口。"
+      "reason": "本轮讨论明确要求新建auto research专用接口，不再只修改旧接口，细化验收标准，state不变。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0102",
-      "target": "n_0099",
+      "source": "n_0110",
+      "target": "n_0107",
       "relation": "refines"
-    },
-    {
-      "source": "n_0102",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0102",
-      "target": "n_0101",
-      "relation": "supports"
     }
   ]
 }

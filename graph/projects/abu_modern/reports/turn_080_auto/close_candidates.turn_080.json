@@ -8,58 +8,10 @@
   },
   "stats": {
     "graph_turn_counter": 79,
-    "open_like_nodes_scanned": 24,
-    "updated_nodes_in_patch": 5,
-    "candidates_found": 3,
-    "score_histogram": {
-      "11": 1,
-      "3": 2
-    }
+    "open_like_nodes_scanned": 21,
+    "updated_nodes_in_patch": 2,
+    "candidates_found": 0,
+    "score_histogram": {}
   },
-  "candidates": [
-    {
-      "node_id": "n_0035",
-      "type": "OpenTask",
-      "entity_ref": "TKT-2026-005",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "TKT-2026-005: 试运行工单1",
-      "score": 11,
-      "matched_terms": [
-        "TKT-2026-005",
-        "tkt-2026-005"
-      ]
-    },
-    {
-      "node_id": "n_0114",
-      "type": "OpenTask",
-      "entity_ref": "vcp_trend_filter_study",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n005I live path verification已通过，阻塞解除。但仍需等待005F固化工具契约和005B放大验证完成后才能执行。",
-      "score": 3,
-      "matched_terms": [
-        "passed",
-        "round",
-        "verification"
-      ]
-    },
-    {
-      "node_id": "n_0154",
-      "type": "OpenTask",
-      "entity_ref": "round6a_stop_loss_7pct",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "Round 6A re-execution via new IR compilation：先由项目AI完成缓存诊断与定向清理（n_0155），清理批准后再由Feishu Agent重新compile一个executable logic完全一致、仅meta字段不同的新IR，然后执行一次完整回测，stop_loss=-7%，time_stop=20天，周期2025-01-01至2025-12-30。必须输出diff证明executable logic完全一致，并报告15项检查。一旦再次命中缓存立即暂停。",
-      "score": 3,
-      "matched_terms": [
-        "n_0155",
-        "re-execution",
-        "round"
-      ]
-    }
-  ]
+  "candidates": []
 }

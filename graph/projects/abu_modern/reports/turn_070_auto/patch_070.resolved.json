@@ -3,48 +3,45 @@
   "turn_id": 70,
   "new_nodes": [
     {
-      "node_id": "n_0142",
+      "node_id": "n_0179",
       "type": "Fact",
-      "content": "Round5.4B fix1自审通过：initial_capital全链路一致为100000，metrics只统计closed trades，canonical/derived/API/invariant全部通过。新run_id: run-54b-20250101-20251230-d37c696d。等待Feishu Agent独立审计。",
-      "entity_ref": "round5_4b_fix1_self_audit",
+      "content": "Round 5.4B-fix1 自审通过。新run_id=run-54b-20250101-20251230-d37c696d，初始资本和metrics口径两个blocker已修复，canonical/derived/API/Invariant全部通过。尚未经Feishu Agent独立审计。",
+      "entity_ref": "run-54b-20250101-20251230-d37c696d",
       "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0143",
-      "type": "Decision",
-      "content": "Boss确认：Round5.4B fix1自审通过，但需Feishu Agent独立审计通过后方可视为Round5.4B passed。仍禁止进入Round6。",
-      "entity_ref": null,
-      "state": "resolved",
       "priority": "must_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0141",
+      "node_id": "n_0178",
       "changes": {
-        "content": "Round5.4B完整正式区间clean run复核：项目AI自审通过（Run run-54b-20250101-20251230-d37c696d），等待Feishu Agent独立审计。通过前禁止进入Round6。",
-        "state": "in_progress"
+        "state": "implemented",
+        "content": "Round 5.4B-fix1：修复 initial_capital 口径统一为 100000；修复 metrics.json 将 open trade 计入胜负统计的 bug（trade_count 只计 closed trades，win_rate 基于 closed trades）。重新运行完整正式区间 clean run，生成新 run_id=run-54b-20250101-20251230-d37c696d，自审通过。不进入 Round 6。",
+        "priority": "should_include"
       },
-      "reason": "自审通过但需外部审计，任务推进中"
+      "reason": "项目AI完成修复并自审通过，新run已生成，两个blocker解除。"
+    },
+    {
+      "node_id": "n_0174",
+      "changes": {
+        "state": "in_progress",
+        "content": "Round 5.4B：完整正式区间clean run复核。原run_id=run-54b-20250101-20251230-dfc9611d审计未通过，blocker已由Round 5.4B-fix1修复，新run=run-54b-20250101-20251230-d37c696d自审通过，等待Feishu Agent独立审计。",
+        "priority": "should_include"
+      },
+      "reason": "Blockers已解除，Round 5.4B进度推进至等待独立审计。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0142",
-      "target": "n_0141",
-      "relation": "supports"
+      "source": "n_0179",
+      "target": "n_0178",
+      "relation": "derived_from"
     },
     {
-      "source": "n_0143",
-      "target": "n_0141",
+      "source": "n_0179",
+      "target": "n_0174",
       "relation": "supports"
-    },
-    {
-      "source": "n_0143",
-      "target": "n_0001",
-      "relation": "serves"
     }
   ]
 }

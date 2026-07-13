@@ -1,0 +1,96 @@
+{
+  "task_id": "task_default",
+  "turn_id": 48,
+  "new_nodes": [
+    {
+      "node_id": "n_0115",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0116",
+      "type": "Fact",
+      "content": "为支持--endpoint参数，修改了openclaw_skills/strategy-researcher/scripts/call_builder.py，硬编码ENDPOINT改为可配置。该修改未随本次commit进入aos_repo（位于.openclaw工作区）。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_builder.py",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0117",
+      "type": "Fact",
+      "content": "GPT5.5评估结论：接受本次smoke结果，但需补充修正：记录call_builder.py修改、说明非2xx请求（404/schema校验）、指定指标口径（以KB口径Sharp 1.1659/total_return -83.84%/max_drawdown 99.86%为准）、改后续计划为70/30切分。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0102",
+      "changes": {
+        "content": "TKT-2026-005B工单状态从paused_for_boss_review变为已执行smoke待修正。Worklog需追加修正说明。"
+      },
+      "reason": "Boss评估后要求补充修正，工单未关闭"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0105",
+      "reason": "旧执行结果被本轮成功smoke取代"
+    },
+    {
+      "node_id": "n_0106",
+      "reason": "旧决策拒绝旧结果，新结果已被接受"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0115",
+      "target": "n_0104",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0116",
+      "target": "n_0115",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0115",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0102",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0060",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0105",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0106",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0060",
+      "relation": "supports"
+    }
+  ]
+}

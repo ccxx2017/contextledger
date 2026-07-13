@@ -8,11 +8,12 @@
   },
   "stats": {
     "graph_turn_counter": 59,
-    "open_like_nodes_scanned": 22,
-    "updated_nodes_in_patch": 1,
-    "candidates_found": 1,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 0,
+    "candidates_found": 2,
     "score_histogram": {
-      "9": 1
+      "11": 1,
+      "6": 1
     }
   },
   "candidates": [
@@ -24,9 +25,27 @@
       "status": "active",
       "priority": "should_include",
       "content": "TKT-2026-005: 试运行工单1",
-      "score": 9,
+      "score": 11,
       "matched_terms": [
         "TKT-2026-005",
+        "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0151",
+      "type": "OpenTask",
+      "entity_ref": "TKT-2026-005B_round5.3C_verify",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "执行Round 5.3C：修复后黑盒复核。Feishu Agent通过后端API重新跑Round5 baseline，验证资金闭合等10项指标。",
+      "score": 6,
+      "matched_terms": [
+        "5.3c",
+        "agent",
+        "baseline",
+        "feishu",
+        "round",
         "tkt-2026-005"
       ]
     }

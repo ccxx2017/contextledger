@@ -7,11 +7,29 @@
     "max_candidates": 30
   },
   "stats": {
-    "graph_turn_counter": 79,
-    "open_like_nodes_scanned": 24,
-    "updated_nodes_in_patch": 3,
-    "candidates_found": 0,
-    "score_histogram": {}
+    "graph_turn_counter": 80,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 0,
+    "candidates_found": 1,
+    "score_histogram": {
+      "3": 1
+    }
   },
-  "candidates": []
+  "candidates": [
+    {
+      "node_id": "n_0190",
+      "type": "OpenTask",
+      "entity_ref": "round_6a_stop_loss_7pct",
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "content": "Round 6A fixed stop_loss=-7% 实验（cache-bypass re-execution）。当前状态：等待项目AI完成缓存诊断与清理后，由Feishu Agent执行单次实验。",
+      "score": 3,
+      "matched_terms": [
+        "agent",
+        "feishu",
+        "round"
+      ]
+    }
+  ]
 }

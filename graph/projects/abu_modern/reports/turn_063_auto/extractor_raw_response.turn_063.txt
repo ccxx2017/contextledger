@@ -3,41 +3,54 @@
   "turn_id": 63,
   "new_nodes": [
     {
-      "node_id": "n_0131",
+      "node_id": "n_0160",
       "type": "Fact",
-      "content": "Round 5.3D资金闭合复核报告确认：gap=-185,592精确来源为持仓重叠期MTM损失-178,668（96.5%）加其他微小差异；cash ledger不闭合但来源已解释；5月exposure真实；不影响指标可信度；允许进入Round6。",
-      "entity_ref": "round5.3d_closure_audit",
+      "content": "Round5.3D最小闭合复核完成。gap=-185,592的96.5%来自5/08~6/16持仓重叠期MTM损失，3.5%为后续现金管理差异。cash ledger闭合缺口由每日价格变动导致，非reporting bug。NAV total_return、cash、realized PnL计算正确。max exposure只在6/16后生效。正式允许进入Round 6。",
+      "entity_ref": "TKT-2026-005B_round5.3D_report",
       "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0161",
+      "type": "Decision",
+      "content": "基于Round 5.3D复核，确认gap来源合法，允许正式进入Round 6。",
+      "entity_ref": null,
+      "state": "resolved",
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0128",
+      "node_id": "n_0159",
       "changes": {
         "state": "resolved",
         "status": "superseded",
-        "content": "Round 5.3D: 最终资金闭合复核（已完成，报告确认gap来源并同意进入Round6）"
+        "content": "Round 5.3D最小闭合复核完成，结论可进入Round 6。"
       },
-      "reason": "Round 5.3D执行完成，资金闭合问题已解释，任务结束。"
+      "reason": "Feishu Agent完成复核，gap来源精确确认，允许进入Round 6。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0131",
-      "target": "n_0128",
+      "source": "n_0160",
+      "target": "n_0159",
       "relation": "derived_from"
     },
     {
-      "source": "n_0131",
-      "target": "n_0129",
+      "source": "n_0161",
+      "target": "n_0159",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0161",
+      "target": "n_0158",
       "relation": "supports"
     },
     {
-      "source": "n_0131",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0160",
+      "target": "n_0156",
+      "relation": "invalidates"
     }
   ]
 }

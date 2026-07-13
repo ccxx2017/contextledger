@@ -1,8 +1,8 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 120,
-    "active_graph_nodes": 95,
+    "graph_nodes": 136,
+    "active_graph_nodes": 109,
     "new_nodes": 2,
     "errors": 0,
     "warnings": 0
@@ -13,17 +13,17 @@
   "entity_ref_matches": [
     {
       "entity_ref": "TKT-2026-005I",
-      "new_node_id": "n_0121",
-      "old_node_id": "n_0117",
-      "new_state": "resolved",
-      "old_state": "resolved"
+      "new_node_id": "n_0137",
+      "old_node_id": "n_0134",
+      "new_state": "",
+      "old_state": ""
     },
     {
       "entity_ref": "TKT-2026-005I",
-      "new_node_id": "n_0121",
-      "old_node_id": "n_0120",
-      "new_state": "resolved",
-      "old_state": ""
+      "new_node_id": "n_0137",
+      "old_node_id": "n_0136",
+      "new_state": "",
+      "old_state": "open"
     }
   ],
   "weak_matches": []

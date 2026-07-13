@@ -1,0 +1,67 @@
+{
+  "task_id": "task_default",
+  "turn_id": 52,
+  "new_nodes": [
+    {
+      "node_id": "n_0130",
+      "type": "Fact",
+      "content": "005I 工单已完成：compile-ir KB archive 新增元数据 JSON 区块，含关键字段；sanity_check_failed 机制；占位 universe 被防护；append_backtest_result 回填逻辑；测试 14 passed。",
+      "entity_ref": "TKT-2026-005I",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0131",
+      "type": "FileArtifact",
+      "content": "新建工单执行记录文件 TKT-2026-005I-kb-minimum-sanity-check.md",
+      "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check.md",
+      "state": "deployed",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0132",
+      "type": "FileArtifact",
+      "content": "新建验证记录文件 TKT-2026-005I-kb-minimum-sanity-check-validation.md",
+      "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check-validation.md",
+      "state": "deployed",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0133",
+      "type": "Decision",
+      "content": "验收通过 005I 工单。下一步恢复 005B Round 5 受限研究，但必须先做执行前检查，并严格限定为单变量趋势过滤实验。",
+      "entity_ref": "TKT-2026-005I",
+      "state": "resolved",
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0130",
+      "target": "n_0131",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0130",
+      "target": "n_0132",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0133",
+      "target": "n_0130",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0133",
+      "target": "n_0115",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0133",
+      "target": "n_0101",
+      "relation": "supports"
+    }
+  ]
+}

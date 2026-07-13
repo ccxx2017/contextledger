@@ -3,68 +3,85 @@
   "turn_id": 60,
   "new_nodes": [
     {
-      "node_id": "n_0125",
+      "node_id": "n_0155",
+      "type": "OpenTask",
+      "content": "重新执行Round 5.3C黑盒复核（基于项目AI修复）：按10项条件重新跑Round 5 baseline，验证资金闭合及trade/position报表正确性。",
+      "entity_ref": "TKT-2026-005B_round5.3C_reverify",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0156",
       "type": "Fact",
-      "content": "Round 5.3C修复后黑盒复核报告：14项通过12项，条件2（equity gap -185k）和条件12（未平仓交易exit_price=0）未通过。5月初仍存在cash<0和mv>eq现象。",
+      "content": "Round5.3C黑盒复核报告（Feishu Agent）：14项检查通过12/14；条件2（final_equity与trade PnL gap -185k）和条件12（最后2笔交易exit_price=0）未通过；结论暂不建议进入Round 6。",
       "entity_ref": null,
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0126",
+      "node_id": "n_0157",
       "type": "Fact",
-      "content": "项目AI第二轮修复：trades.csv新增过滤仅保留已平仓交易，positions_daily改用capital_pd真实持仓重建，新增测试2个通过。建议Feishu重新复核。",
-      "entity_ref": "result_processor.py",
+      "content": "项目AI源码排查与修复（针对Round5.3C未通过项）：trades.csv过滤未平仓头寸，positions_daily改用capital_pd真实数据，新增测试2 passed。",
+      "entity_ref": "TKT-2026-005B_round5.3C_fix",
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0127",
-      "type": "OpenTask",
-      "content": "重新通过后端API运行Round 5.3C基线复核，验证第二轮修复效果。重点检查trades.csv无open trade、positions_daily一致性、5月exposure控制、equity闭合。通过后方可建议进入Round6。",
-      "entity_ref": "tkt-2026-005b-round5.3c-review-v2",
-      "state": "open",
+      "node_id": "n_0158",
+      "type": "Decision",
+      "content": "暂不建议进入Round 6，需先完成重新复核（Round5.3C_reverify）并确认全部条件通过。",
+      "entity_ref": null,
+      "state": "resolved",
       "priority": "should_include"
     }
   ],
-  "updated_nodes": [
+  "updated_nodes": [],
+  "superseded_nodes": [
     {
-      "node_id": "n_0124",
-      "changes": {
-        "content": "项目AI完成第一轮修复（修改executor_facade.py、custom_positions.py、abupy_caller.py，新增5个测试并通过），但Feishu Agent Round 5.3C复核发现两个未通过条件，已由第二轮修复替代。",
-        "state": null,
-        "status": "superseded",
-        "priority": "should_include"
-      },
-      "reason": "第一轮修复不完整，被第二轮修复替代"
+      "node_id": "n_0151",
+      "reason": "初始Round5.3C复核已完成，但结果需重新复核，故废弃。"
     }
   ],
-  "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0125",
-      "target": "n_0124",
+      "source": "n_0155",
+      "target": "n_0151",
       "relation": "invalidates"
     },
     {
-      "source": "n_0126",
-      "target": "n_0124",
-      "relation": "invalidates"
+      "source": "n_0155",
+      "target": "n_0157",
+      "relation": "depends_on"
     },
     {
-      "source": "n_0125",
-      "target": "n_0126",
+      "source": "n_0155",
+      "target": "n_0154",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0155",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0156",
+      "target": "n_0151",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0157",
+      "target": "n_0156",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0158",
+      "target": "n_0156",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0158",
+      "target": "n_0147",
       "relation": "supports"
-    },
-    {
-      "source": "n_0127",
-      "target": "n_0126",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0127",
-      "relation": "depends_on"
     }
   ]
 }

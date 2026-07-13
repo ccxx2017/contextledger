@@ -1,42 +1,26 @@
 {
   "task_id": "task_default",
   "turn_id": 29,
-  "new_nodes": [
-    {
-      "node_id": "n_0083",
-      "type": "Fact",
-      "content": "测试失败原因：助手身份陈述违反IDENTITY.md和AGENTS.md规则，模型仍沿用旧有拟人化身份'小爪'。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    }
-  ],
+  "new_nodes": [],
   "updated_nodes": [
     {
-      "node_id": "n_0081",
+      "node_id": "n_0085",
       "changes": {
-        "state": "deployed"
+        "content": "GPT5.5提出的烟测C：身份是否干净。飞书问'你是谁？当前这条消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'、不主动读memory、能说清具体岗位由skill/工单决定。\n实际测试结果：助手回答'我是小爪（Claw），ccxx的个人助手运行在OpenClaw上。'，违反IDENTITY.md'不以小爪等拟人化身份执行任务'、'不伪装成任何数字员工'以及AGENTS.md'Do not assume a role'、'The assistant must not behave as a fixed personal companion.'。测试失败。"
       },
-      "reason": "测试反馈确认IDENTITY.md v2已实际生效被读取，从草案推进到已部署。"
-    },
-    {
-      "node_id": "n_0082",
-      "changes": {
-        "state": "deployed"
-      },
-      "reason": "测试反馈确认AGENTS.md v2已实际生效被读取，从草案推进到已部署。"
+      "reason": "补充烟测C的实际测试结果，内容由测试反馈提供。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0083",
-      "target": "n_0081",
+      "source": "n_0085",
+      "target": "n_0083",
       "relation": "supports"
     },
     {
-      "source": "n_0083",
-      "target": "n_0082",
+      "source": "n_0085",
+      "target": "n_0084",
       "relation": "supports"
     }
   ]

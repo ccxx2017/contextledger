@@ -7,11 +7,29 @@
     "max_candidates": 30
   },
   "stats": {
-    "graph_turn_counter": 26,
-    "open_like_nodes_scanned": 18,
-    "updated_nodes_in_patch": 0,
-    "candidates_found": 0,
-    "score_histogram": {}
+    "graph_turn_counter": 27,
+    "open_like_nodes_scanned": 19,
+    "updated_nodes_in_patch": 2,
+    "candidates_found": 1,
+    "score_histogram": {
+      "3": 1
+    }
   },
-  "candidates": []
+  "candidates": [
+    {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "in_progress",
+      "status": "active",
+      "priority": "should_include",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
+      "score": 3,
+      "matched_terms": [
+        "memory",
+        "人格",
+        "小爪"
+      ]
+    }
+  ]
 }

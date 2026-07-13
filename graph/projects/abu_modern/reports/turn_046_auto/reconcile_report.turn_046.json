@@ -1,51 +1,15 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 106,
-    "active_graph_nodes": 89,
-    "new_nodes": 3,
+    "graph_nodes": 113,
+    "active_graph_nodes": 94,
+    "new_nodes": 0,
     "errors": 0,
     "warnings": 0
   },
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [
-    {
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "new_node_id": "n_0107",
-      "old_node_id": "n_0097",
-      "new_state": "deployed",
-      "old_state": "deployed"
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0109",
-      "old_node_id": "n_0085",
-      "new_state": "",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0109",
-      "old_node_id": "n_0089",
-      "new_state": "",
-      "old_state": ""
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0109",
-      "old_node_id": "n_0095",
-      "new_state": "",
-      "old_state": "blocked"
-    },
-    {
-      "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0109",
-      "old_node_id": "n_0096",
-      "new_state": "",
-      "old_state": ""
-    }
-  ],
+  "entity_ref_matches": [],
   "weak_matches": []
 }

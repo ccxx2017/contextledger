@@ -45,7 +45,7 @@
     {
       "node_id": "n_0073",
       "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
       "entity_ref": "workspace_root_bootstrap_audit",
       "state": "in_progress",
       "status": "active"
@@ -139,81 +139,105 @@
       "status": "active"
     },
     {
+      "node_id": "n_0086",
+      "type": "Fact",
+      "content": "GPT5.5提出的烟测D：Ticket B前置检查。发'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、读取skills/strategy_researcher/SKILL.md、读取必要prompts如research_workflow.md、不读quant_assistant/TOOLS.md、不调用builder/backtest/order/deploy脚本。",
+      "entity_ref": "pre_ticket_b_check",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0085",
+      "type": "Fact",
+      "content": "GPT5.5提出的烟测C：身份是否干净。飞书问'你是谁？当前这条消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'、不主动读memory、能说清具体岗位由skill/工单决定。",
+      "entity_ref": "identity_smoke_c",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0084",
+      "type": "Fact",
+      "content": "AGENTS.md已替换：关闭启动时自动读取memory/和MEMORY.md，关闭心跳检查、邮件/日历/社交检查，写入边界限制，明确路由规则。",
+      "entity_ref": "openclaw_workspace/AGENTS.md",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0083",
+      "type": "Fact",
+      "content": "IDENTITY.md已替换：去掉'小爪'人格，岗位由当前激活skill和工单决定，不再主动读取memory，身份原则按优先级服从skill规则。",
+      "entity_ref": "openclaw_workspace/IDENTITY.md",
+      "state": null,
+      "status": "active"
+    },
+    {
       "node_id": "n_0082",
-      "type": "FileArtifact",
-      "content": "AGENTS.md v2: 重写为工作区运行时规则，移除默认记忆/心跳/外部检查，强调技能路由优先，严格文件写入与工具使用边界。",
-      "entity_ref": "AGENTS.md",
-      "state": "open",
+      "type": "Fact",
+      "content": "P0烟测A和B均通过：烟测A中智能体正确读取skills/quant_assistant/SKILL.md和TOOLS.md并调用脚本查询实例；烟测B中智能体读取根TOOLS.md后未触发量化脚本，给出自然语言市场分析。新根TOOLS.md路由层和quant_assistant本地TOOLS.md已正常工作。",
+      "entity_ref": "openclaw_skills/quant-assistant",
+      "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0081",
       "type": "FileArtifact",
-      "content": "IDENTITY.md v2: 重写为运行时身份文件，移除拟人化，强调按技能/工单确定角色，行为优先级明确，风格简洁。",
-      "entity_ref": "IDENTITY.md",
-      "state": "open",
+      "content": "根 TOOLS.md 将被替换为路由层 TOOLS.md（包含技能地图、分诊规则和全局约束），具体内容参考 Claude 上一轮输出",
+      "entity_ref": "openclaw_root_tools_md",
+      "state": "deployed",
       "status": "active"
     },
     {
       "node_id": "n_0080",
-      "type": "Fact",
-      "content": "烟测B验证结果：智能体正确识别'BTC结构怎么看'不属于任何技能范围，仅返回个人观点，未调用任何脚本。读取了根TOOLS.md和quant_assistant/TOOLS.md。",
-      "entity_ref": "quant_assistant",
-      "state": null,
+      "type": "FileArtifact",
+      "content": "quant_assistant 的本地环境信息 TOOLS.md 文件，包含后端地址、脚本路径、鉴权信息、使用规则等（源自当前 turn 中 Claude 提供的全文）",
+      "entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+      "state": "deployed",
       "status": "active"
     },
     {
       "node_id": "n_0079",
       "type": "Fact",
-      "content": "烟测A验证结果：quant_assistant技能成功处理'查询实例'请求，读取SKILL.md和TOOLS.md后调用query.py脚本，返回运行实例列表。",
-      "entity_ref": "quant_assistant",
+      "content": "P0完成后的行为级烟测方案：烟测A（分诊测试：输入'帮我查一下当前有哪些实例在跑'，观察是否read_file skills/quant_assistant/SKILL.md且调用正确脚本）；烟测B（污染清除测试：输入'最近BTC这波结构怎么看？'，观察是否不再触发strategy_builder.py，而是澄清意图或自然语言回答）。",
+      "entity_ref": "skills/quant_assistant/SKILL.md且调用正确脚本",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0078",
-      "type": "Fact",
-      "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
-      "entity_ref": "skills/quant_assistant/TOOLS.md",
-      "state": null,
+      "type": "Decision",
+      "content": "采纳Claude提出的P0方案（根TOOLS.md搬家+新建路由层）作为n_0073的临时层实施方案。",
+      "entity_ref": null,
+      "state": "resolved",
       "status": "active"
     },
     {
       "node_id": "n_0077",
       "type": "Fact",
-      "content": "行为级烟测三条标准：1) trace中read_file skills/strategy_researcher/SKILL.md；2) 工具调用路径在strategy_researcher/scripts/下；3) DATA_MISSING_SYNC_REQUIRED按workflow自动重试。",
-      "entity_ref": "skills/strategy_researcher/SKILL.md",
+      "content": "Claude提出P0具体方案：步骤1将根TOOLS.md搬家到skills/quant_assistant/TOOLS.md（mv或merge），步骤2在工作区根目录新建路由层TOOLS.md，包含技能地图、分诊规则和全局约束。",
+      "entity_ref": "openclaw_skills/quant-assistant",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0076",
       "type": "Fact",
-      "content": "根TOOLS.md当前状态是最高危污染源：包含quant_assistant专属规则，需要剥离。本轮暴露根TOOLS.md内容后确认，其内容实质为quant_assistant技能的私有文件（包括后端地址、脚本路径、命令模板等），仅需在顶部增加一行定位说明即可完整迁移至skills/quant_assistant/TOOLS.md，具体剥离步骤已明确。",
-      "entity_ref": "TOOLS.md",
+      "content": "GPT5.4对Opus4.7方案的评价：问题识别准（8.5/10），短期止血价值高（8/10），但作为最终架构方案不足（4/10）。建议拆为临时层（精简根bootstrap，清除TOOLS.md技能污染）和正式层（后续上agents.list+bindings+每agent skills allowlist）。对4个根文件的修改优先级：最高-根TOOLS.md，次高-IDENTITY.md和AGENTS.md，最低-SOUL.md。",
+      "entity_ref": null,
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0075",
       "type": "Fact",
-      "content": "Claude接受评审修正：三点过满（改4文件解决身份、根TOOLS.md整个作废重写、问一句你是谁做smoke test）和两处坚持（根TOOLS.md最高危、临时层必须先止血）。",
-      "entity_ref": null,
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0074",
-      "type": "Fact",
-      "content": "GPT5.4对Opus4.7方案评价：大方向正确，但表述过满；短期可采纳作为临时补丁，长期需上多agent架构；优先级：最高修根TOOLS.md，次高IDENTITY.md和AGENTS.md，最低SOUL.md；建议分两层：临时层精简bootstrap，正式层推进agents.list+bindings+skills allowlist。",
-      "entity_ref": null,
+      "content": "Ticket B派发前行为级烟测（替换简单\"你是谁\"测试）：\n1.Agent接收含TKT-*+intent_type=investigation输入后，trace是否出现read_file skills/strategy_researcher/SKILL.md\n2.后续工具调用脚本路径是否落在skills/strategy_researcher/scripts/下\n3.遇到DATA_MISSING_SYNC_REQUIRED时是否按workflow自动剔除重试，而非被根TOOLS.md的\"停止并原样返回\"掐断\n三条全过再派真Ticket B。",
+      "entity_ref": "openclaw_skills/strategy-researcher",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0072",
       "type": "Fact",
-      "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径，避免口语化需求。增加行为级烟测门槛（三条标准见n_0077），替换弱smoke test。",
+      "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径（例如'@机器人 执行工单 aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md，按 skills/strategy_researcher/SKILL.md 的 investigation 流程处理'），避免口语化需求。",
       "entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
       "state": null,
       "status": "active"
@@ -243,25 +267,9 @@
       "status": "active"
     },
     {
-      "node_id": "n_0068",
-      "type": "Decision",
-      "content": "方案B：配置真正的多agent，通过agents.list定义独立agent。已被采纳为正式层方案，待Ticket B后排期实施。",
-      "entity_ref": null,
-      "state": "resolved",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0067",
-      "type": "Decision",
-      "content": "方案A：维持一个agent，靠技能区分（当前设置）。已被采纳为临时层方案，等待正式层替换。",
-      "entity_ref": null,
-      "state": "resolved",
-      "status": "active"
-    },
-    {
       "node_id": "n_0061",
       "type": "Fact",
-      "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码确认：src/agents/bootstrap-files.ts会加载workspace bootstrap files；src/config/types.agent-defaults.ts中bootstrap文件被injected into system prompt；src/agents/system-prompt.ts先扫描<available_skills>，再决定读取SKILL.md。",
+      "content": "OpenClaw智能体context包组装机制：根目录（.openclaw/workspace/）下的AGENTS.md、SOUL.md、TOOLS.md、IDENTITY.md、USER.md、HEARTBEAT.md、MEMORY.md全文自动注入system prompt；skills/*/SKILL.md只注入name+description+location，正文需LLM主动read才能进入context；prompts/目录、scripts/目录默认不进入context。Charter等文件默认不被智能体知晓。代码支持contextInjection、lightContext、heartbeat特殊过滤，所以默认通常会注入但不是无条件每回合全量注入。",
       "entity_ref": "openclaw_agent_runtime_mechanisms",
       "state": null,
       "status": "active"
@@ -292,6 +300,10 @@
       "n_0007"
     ],
     "recent_nodes": [
+      "n_0086",
+      "n_0085",
+      "n_0084",
+      "n_0083",
       "n_0082",
       "n_0081",
       "n_0080",
@@ -300,27 +312,20 @@
       "n_0077",
       "n_0076",
       "n_0075",
-      "n_0074",
       "n_0073",
       "n_0072",
       "n_0071",
-      "n_0070",
-      "n_0069",
-      "n_0068",
-      "n_0067"
+      "n_0070"
     ],
     "symbol_hits": [
-      "n_0082",
-      "n_0081",
-      "n_0074",
+      "n_0084",
+      "n_0083",
+      "n_0076",
       "n_0073",
       "n_0069",
       "n_0061"
     ],
-    "conflict_candidates": [
-      "n_0082",
-      "n_0081"
-    ]
+    "conflict_candidates": []
   },
   "recent_edges": [
     {
@@ -414,16 +419,6 @@
       "relation": "serves"
     },
     {
-      "source": "n_0067",
-      "target": "n_0044",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0068",
-      "target": "n_0044",
-      "relation": "serves"
-    },
-    {
       "source": "n_0069",
       "target": "n_0001",
       "relation": "serves"
@@ -449,29 +444,39 @@
       "relation": "serves"
     },
     {
-      "source": "n_0074",
+      "source": "n_0075",
       "target": "n_0073",
       "relation": "supports"
     },
     {
-      "source": "n_0074",
-      "target": "n_0065",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0074",
-      "target": "n_0067",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0074",
-      "target": "n_0068",
+      "source": "n_0076",
+      "target": "n_0073",
       "relation": "supports"
     },
     {
       "source": "n_0075",
-      "target": "n_0074",
-      "relation": "derived_from"
+      "target": "n_0072",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0077",
+      "target": "n_0073",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0078",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0079",
+      "target": "n_0073",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0080",
+      "target": "n_0073",
+      "relation": "implements"
     }
   ],
   "retrieval_trace": {
@@ -485,8 +490,8 @@
     "turn_state_signals": [
       "open"
     ],
-    "total_nodes": 82,
-    "active_nodes": 71,
+    "total_nodes": 86,
+    "active_nodes": 74,
     "selected_node_ids": [
       "n_0001",
       "n_0005",
@@ -505,14 +510,11 @@
       "n_0060",
       "n_0061",
       "n_0065",
-      "n_0067",
-      "n_0068",
       "n_0069",
       "n_0070",
       "n_0071",
       "n_0072",
       "n_0073",
-      "n_0074",
       "n_0075",
       "n_0076",
       "n_0077",
@@ -520,11 +522,15 @@
       "n_0079",
       "n_0080",
       "n_0081",
-      "n_0082"
+      "n_0082",
+      "n_0083",
+      "n_0084",
+      "n_0085",
+      "n_0086"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0083",
+    "next_node_id": "n_0087",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_029.md"
   }

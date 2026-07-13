@@ -3,20 +3,80 @@
   "project_id": "abu_modern",
   "turn_id": "turn_024",
   "summary": {
-    "new_nodes": 1,
-    "resolved_exact": 0,
+    "new_nodes": 2,
+    "resolved_exact": 1,
     "resolved_alias": 0,
-    "pending_merge": 0,
-    "unresolved": 1
+    "pending_merge": 1,
+    "unresolved": 0
   },
   "decisions": [
     {
-      "new_node_id": "n_0078",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
+      "new_node_id": "n_0080",
+      "raw_entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+      "resolved_entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+      "match_confidence": 0.8451,
       "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/quant-assistant",
+          "match_confidence": 0.8451,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0077"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.75,
+          "evidence": [
+            "path_basename_match"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "skills/quant_assistant/SKILL.md且调用正确脚本",
+          "match_confidence": 0.6923,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0079"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.5952,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.5952,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0081",
+      "raw_entity_ref": "openclaw_root_tools_md",
+      "resolved_entity_ref": "openclaw_root_tools_md",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
       "candidate_aliases": []
     }
   ]

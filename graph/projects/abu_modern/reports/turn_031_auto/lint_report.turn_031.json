@@ -1,11 +1,11 @@
 {
   "ok": true,
   "summary": {
-    "nodes": 86,
-    "edges": 131,
-    "active_nodes": 75,
-    "active_edges": 131,
-    "superseded_nodes": 11,
+    "nodes": 90,
+    "edges": 137,
+    "active_nodes": 78,
+    "active_edges": 137,
+    "superseded_nodes": 12,
     "errors": 0,
     "warnings": 0
   },
@@ -29,7 +29,8 @@
       "n_0049",
       "n_0052",
       "n_0056",
-      "n_0059"
+      "n_0059",
+      "n_0074"
     ],
     "excluded_due_to_state_node_ids": []
   },

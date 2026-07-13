@@ -1,10 +1,10 @@
 {
   "ok": true,
   "summary": {
-    "nodes": 74,
-    "edges": 106,
-    "active_nodes": 63,
-    "active_edges": 106,
+    "nodes": 76,
+    "edges": 108,
+    "active_nodes": 65,
+    "active_edges": 108,
     "superseded_nodes": 11,
     "errors": 0,
     "warnings": 0

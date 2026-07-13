@@ -1,91 +1,36 @@
 {
   "task_id": "task_default",
   "turn_id": 22,
-  "new_nodes": [
-    {
-      "node_id": "n_0075",
-      "type": "Fact",
-      "content": "Claude接受评审修正：三点过满（改4文件解决身份、根TOOLS.md整个作废重写、问一句你是谁做smoke test）和两处坚持（根TOOLS.md最高危、临时层必须先止血）。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0076",
-      "type": "Fact",
-      "content": "根TOOLS.md当前状态是最高危污染源：包含quant_assistant专属规则，需要剥离。",
-      "entity_ref": "TOOLS.md",
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0077",
-      "type": "Fact",
-      "content": "行为级烟测三条标准：1) trace中read_file skills/strategy_researcher/SKILL.md；2) 工具调用路径在strategy_researcher/scripts/下；3) DATA_MISSING_SYNC_REQUIRED按workflow自动重试。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    }
-  ],
+  "new_nodes": [],
   "updated_nodes": [
     {
       "node_id": "n_0073",
       "changes": {
-        "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
-        "priority": "should_include"
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。"
       },
-      "reason": "根据Claude修正后的两层执行计划补充具体动作和优先级"
+      "reason": "根据Claude评审修正，将执行计划细化为临时层和正式层，明确优先级和动作"
     },
     {
-      "node_id": "n_0067",
+      "node_id": "n_0074",
       "changes": {
-        "state": "resolved",
-        "content": "方案A：维持一个agent，靠技能区分（当前设置）。已被采纳为临时层方案，等待正式层替换。"
+        "content": "根TOOLS.md（工作区根目录）含有quant_assistant特定API路径和规则。正确做法：剥离quant_assistant专属规则（api路径、脚本参数、\"禁止穷举试错\"等），保留全局安全条款，补一张\"技能分诊表\"指向各skills/<name>/TOOLS.md。"
       },
-      "reason": "Claude明确临时层采用方案A"
+      "reason": "根据评审修正，从\"整个作废重写\"改为\"剥离技能私货，保留全局约束\""
     },
     {
-      "node_id": "n_0068",
+      "node_id": "n_0075",
       "changes": {
-        "state": "resolved",
-        "content": "方案B：配置真正的多agent，通过agents.list定义独立agent。已被采纳为正式层方案，待Ticket B后排期实施。"
+        "content": "Ticket B派发前行为级烟测（替换简单\"你是谁\"测试）：\n1.Agent接收含TKT-*+intent_type=investigation输入后，trace是否出现read_file skills/strategy_researcher/SKILL.md\n2.后续工具调用脚本路径是否落在skills/strategy_researcher/scripts/下\n3.遇到DATA_MISSING_SYNC_REQUIRED时是否按workflow自动剔除重试，而非被根TOOLS.md的\"停止并原样返回\"掐断\n三条全过再派真Ticket B。"
       },
-      "reason": "Claude明确正式层采用方案B"
-    },
-    {
-      "node_id": "n_0072",
-      "changes": {
-        "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径，避免口语化需求。增加行为级烟测门槛（三条标准见n_0077），替换弱smoke test。"
-      },
-      "reason": "Claude提高Ticket B门槛，加入行为验证"
+      "reason": "根据评审补充行为级烟测，替代简单口头测试"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
       "source": "n_0075",
-      "target": "n_0074",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0076",
-      "target": "n_0069",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0077",
       "target": "n_0072",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0073",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0073",
-      "target": "n_0067",
-      "relation": "implements"
+      "relation": "supports"
     }
   ]
 }

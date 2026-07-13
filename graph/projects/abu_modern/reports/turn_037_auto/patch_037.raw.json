@@ -3,26 +3,34 @@
   "turn_id": 37,
   "new_nodes": [
     {
-      "node_id": "n_0095",
-      "type": "OpenTask",
-      "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）",
+      "node_id": "n_0101",
+      "type": "Decision",
+      "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。",
       "entity_ref": "TKT-2026-005B",
-      "state": "open",
+      "state": "resolved",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0096",
+      "node_id": "n_0102",
       "type": "Fact",
-      "content": "Boss已授权TKT-2026-005B受限恢复执行：禁止回测、禁止调用后端（脚本侧），仅限烟测（symbols≤5, years≤1, timeout=90s），smoke通过后最多放大到symbols≤20, years≤3，后端失败即paused_for_boss_review，禁止自动重试，禁止231标的回测，受限阶段结果不作为完整研究结论",
+      "content": "TKT-2026-005B工单已从blocked目录移至open目录，status设为ready_for_limited_resume，Worklog追加了Boss授权记录。",
       "entity_ref": "TKT-2026-005B",
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0097",
+      "node_id": "n_0103",
+      "type": "Fact",
+      "content": "受限恢复执行前检查完成：读取6个文件，最高行为手册为research_workflow.md；工单status为ready_for_limited_resume；所有约束均已识别；后端异步化未完成，需Boss确认风险。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0104",
       "type": "FileArtifact",
-      "content": "TKT-2026-005B工单文件（已移至open目录，status=ready_for_limited_resume，包含Worklog Boss授权记录）",
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "content": "TKT-2026-005B工单文件（已修改为受限恢复执行状态）",
+      "entity_ref": "TKT-2026-005B",
       "state": "deployed",
       "priority": "should_include"
     }
@@ -30,54 +38,30 @@
   "updated_nodes": [],
   "superseded_nodes": [
     {
-      "node_id": "n_0090",
-      "reason": "Boss决定恢复受限执行，暂停决策不再适用"
-    },
-    {
-      "node_id": "n_0087",
-      "reason": "工单状态已从paused_for_boss_review变为ready_for_limited_resume，原检查报告过时"
+      "node_id": "n_0094",
+      "reason": "Boss已做出新决策（受限恢复执行），取代旧暂停等待决策"
     }
   ],
   "new_edges": [
     {
-      "source": "n_0095",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0091",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0095",
+      "source": "n_0101",
       "target": "n_0094",
-      "relation": "depends_on"
+      "relation": "invalidates"
     },
     {
-      "source": "n_0095",
-      "target": "n_0093",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0096",
-      "target": "n_0095",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0097",
+      "source": "n_0101",
+      "target": "n_0102",
       "relation": "produces"
     },
     {
-      "source": "n_0095",
-      "target": "n_0090",
-      "relation": "invalidates"
+      "source": "n_0101",
+      "target": "n_0104",
+      "relation": "produces"
     },
     {
-      "source": "n_0095",
-      "target": "n_0087",
-      "relation": "invalidates"
+      "source": "n_0103",
+      "target": "n_0101",
+      "relation": "supports"
     }
   ]
 }

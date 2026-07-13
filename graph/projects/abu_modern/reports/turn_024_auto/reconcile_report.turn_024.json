@@ -1,15 +1,23 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 77,
-    "active_graph_nodes": 66,
-    "new_nodes": 1,
+    "graph_nodes": 79,
+    "active_graph_nodes": 68,
+    "new_nodes": 2,
     "errors": 0,
     "warnings": 0
   },
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "openclaw_root_tools_md",
+      "new_node_id": "n_0081",
+      "old_node_id": "n_0074",
+      "new_state": "open",
+      "old_state": ""
+    }
+  ],
   "weak_matches": []
 }

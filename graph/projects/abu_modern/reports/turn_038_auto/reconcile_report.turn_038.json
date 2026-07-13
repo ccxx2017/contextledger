@@ -1,15 +1,44 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 97,
-    "active_graph_nodes": 82,
-    "new_nodes": 1,
+    "graph_nodes": 104,
+    "active_graph_nodes": 87,
+    "new_nodes": 2,
     "errors": 0,
     "warnings": 0
   },
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0105",
+      "old_node_id": "n_0093",
+      "new_state": "",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0105",
+      "old_node_id": "n_0101",
+      "new_state": "",
+      "old_state": "resolved"
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0105",
+      "old_node_id": "n_0102",
+      "new_state": "",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0105",
+      "old_node_id": "n_0104",
+      "new_state": "",
+      "old_state": "deployed"
+    }
+  ],
   "weak_matches": []
 }

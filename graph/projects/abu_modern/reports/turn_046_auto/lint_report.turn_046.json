@@ -1,12 +1,12 @@
 {
-  "ok": true,
+  "ok": false,
   "summary": {
-    "nodes": 109,
-    "edges": 180,
-    "active_nodes": 90,
-    "active_edges": 180,
-    "superseded_nodes": 19,
-    "errors": 0,
+    "nodes": 113,
+    "edges": 182,
+    "active_nodes": 93,
+    "active_edges": 182,
+    "superseded_nodes": 20,
+    "errors": 4,
     "warnings": 0
   },
   "adjudication_policy": {
@@ -28,16 +28,17 @@
       "n_0034",
       "n_0049",
       "n_0052",
+      "n_0055",
       "n_0056",
       "n_0059",
-      "n_0084",
-      "n_0086",
-      "n_0087",
+      "n_0074",
       "n_0090",
-      "n_0097",
-      "n_0099",
-      "n_0100",
-      "n_0106"
+      "n_0092",
+      "n_0094",
+      "n_0095",
+      "n_0107",
+      "n_0108",
+      "n_0112"
     ],
     "excluded_due_to_state_node_ids": []
   },
@@ -62,6 +63,59 @@
     "resolved",
     "unknown"
   ],
-  "errors": [],
+  "errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[172] 指向的节点 n_0105 未标记为 superseded。",
+      "edge_id": "edge[172]",
+      "source": "n_0107",
+      "target": "n_0105",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+      "entity_ref": "TKT-2026-005B",
+      "states": {
+        "deployed": [
+          "n_0104"
+        ],
+        "resolved": [
+          "n_0101"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ]
+    }
+  ],
   "warnings": []
 }

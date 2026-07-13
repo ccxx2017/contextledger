@@ -3,15 +3,15 @@
   "project_id": "abu_modern",
   "turn_id": "turn_030",
   "summary": {
-    "new_nodes": 5,
+    "new_nodes": 3,
     "resolved_exact": 0,
     "resolved_alias": 0,
-    "pending_merge": 3,
-    "unresolved": 2
+    "pending_merge": 2,
+    "unresolved": 1
   },
   "decisions": [
     {
-      "new_node_id": "n_0084",
+      "new_node_id": "n_0087",
       "raw_entity_ref": "src/agents/system-prompt.ts",
       "resolved_entity_ref": "src/agents/system-prompt.ts",
       "match_confidence": 0.5098,
@@ -31,16 +31,7 @@
       ]
     },
     {
-      "new_node_id": "n_0085",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0086",
+      "new_node_id": "n_0088",
       "raw_entity_ref": "~/.openclaw/openclaw.json",
       "resolved_entity_ref": "~/.openclaw/openclaw.json",
       "match_confidence": 0.5,
@@ -69,39 +60,40 @@
           ]
         },
         {
-          "canonical_entity_ref": "openclaw_workspace_structure",
+          "canonical_entity_ref": "openclaw_root_tools_md",
+          "match_confidence": 0.4681,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0081"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/quant-assistant",
+          "match_confidence": 0.4643,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0077",
+            "n_0082"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_workspace/AGENTS.md",
           "match_confidence": 0.4528,
           "evidence": [
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0069"
+            "n_0084"
           ]
         }
       ]
     },
     {
-      "new_node_id": "n_0087",
-      "raw_entity_ref": "src/agents/system-prompt.ts",
-      "resolved_entity_ref": "src/agents/system-prompt.ts",
-      "match_confidence": 0.5098,
-      "merge_reason": "",
-      "non_merge_reason": "needs_manual_merge_review",
-      "candidate_aliases": [
-        {
-          "canonical_entity_ref": "agents/git_sync_protocol",
-          "match_confidence": 0.5098,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0043"
-          ]
-        }
-      ]
-    },
-    {
-      "new_node_id": "n_0088",
+      "new_node_id": "n_0089",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,

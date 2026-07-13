@@ -65,11 +65,11 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 80,
-      "edges": 121,
-      "active_nodes": 69,
-      "active_edges": 121,
-      "superseded_nodes": 11,
+      "nodes": 82,
+      "edges": 123,
+      "active_nodes": 70,
+      "active_edges": 123,
+      "superseded_nodes": 12,
       "errors": 0,
       "warnings": 0
     },
@@ -93,7 +93,8 @@
         "n_0049",
         "n_0052",
         "n_0056",
-        "n_0059"
+        "n_0059",
+        "n_0074"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -124,13 +125,13 @@
   "after_report": {
     "ok": true,
     "summary": {
-      "nodes": 85,
+      "nodes": 86,
       "edges": 127,
       "active_nodes": 74,
       "active_edges": 127,
-      "superseded_nodes": 11,
+      "superseded_nodes": 12,
       "errors": 0,
-      "warnings": 1
+      "warnings": 0
     },
     "adjudication_policy": {
       "current_membership_field": "status",
@@ -152,7 +153,8 @@
         "n_0049",
         "n_0052",
         "n_0056",
-        "n_0059"
+        "n_0059",
+        "n_0074"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -178,15 +180,7 @@
       "unknown"
     ],
     "errors": [],
-    "warnings": [
-      {
-        "level": "warning",
-        "code": "OPEN_TASK_CONTENT_LOOKS_COMPLETED",
-        "message": "OpenTask n_0073 的内容看起来已经完成，但 state 不是 resolved。该判断基于关键词启发式，只作为 warning。",
-        "node_id": "n_0073",
-        "state": "in_progress"
-      }
-    ]
+    "warnings": []
   },
   "issue_code_histogram": {
     "before": {
@@ -195,15 +189,11 @@
     },
     "after": {
       "errors": {},
-      "warnings": {
-        "OPEN_TASK_CONTENT_LOOKS_COMPLETED": 1
-      }
+      "warnings": {}
     },
     "introduced": {
       "errors": {},
-      "warnings": {
-        "OPEN_TASK_CONTENT_LOOKS_COMPLETED": 1
-      }
+      "warnings": {}
     },
     "baseline": {
       "errors": {},
@@ -214,12 +204,12 @@
     "before_errors": 0,
     "after_errors": 0,
     "before_warnings": 0,
-    "after_warnings": 1,
+    "after_warnings": 0,
     "baseline_errors": 0,
     "baseline_warnings": 0,
     "introduced_errors": 0,
     "preexisting_errors": 0,
-    "introduced_warnings": 1,
+    "introduced_warnings": 0,
     "preexisting_warnings": 0,
     "baseline_matched_errors": 0,
     "baseline_matched_warnings": 0,
@@ -227,15 +217,7 @@
   },
   "introduced_errors": [],
   "preexisting_errors": [],
-  "introduced_warnings": [
-    {
-      "level": "warning",
-      "code": "OPEN_TASK_CONTENT_LOOKS_COMPLETED",
-      "message": "OpenTask n_0073 的内容看起来已经完成，但 state 不是 resolved。该判断基于关键词启发式，只作为 warning。",
-      "node_id": "n_0073",
-      "state": "in_progress"
-    }
-  ],
+  "introduced_warnings": [],
   "preexisting_warnings": [],
   "baseline_matched_errors": [],
   "baseline_matched_warnings": [],

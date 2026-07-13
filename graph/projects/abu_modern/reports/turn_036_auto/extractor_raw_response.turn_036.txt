@@ -1,49 +1,16 @@
 {
   "task_id": "task_default",
   "turn_id": 36,
-  "new_nodes": [
+  "new_nodes": [],
+  "updated_nodes": [
     {
-      "node_id": "n_0095",
-      "type": "Fact",
-      "content": "TKT-2026-005B当前状态为paused_for_boss_review，位于blocked/目录，需Boss显式确认才能恢复。",
-      "entity_ref": "TKT-2026-005B",
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0096",
-      "type": "Fact",
-      "content": "后端异步化改造未完成（192.168.1.136:8000 backtest endpoint仍为同步），TKT-2026-005C阶段2未实施。",
-      "entity_ref": "TKT-2026-005C",
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0097",
-      "type": "OpenTask",
-      "content": "待Boss决策是否在同步后端受限模式下恢复TKT-2026-005B执行。",
-      "entity_ref": "TKT-2026-005B",
-      "state": "blocked",
-      "priority": "should_include"
+      "node_id": "n_0094",
+      "changes": {
+        "content": "暂停 TKT-2026-005B 执行，标记为 paused_for_boss_review，原因是 backend_backtest_blocked / infrastructure_failure；等待 Boss 确认以下两个决定后重跑：1. 是否接受在同步后端上仅用 ≤20 标的、≤3 年、90s 超时的受限模式恢复 005B 研究；2. 是否显式将 005B 从 blocked 移回 open 并更新 status 为 ready_for_resume。不得继续执行。"
+      },
+      "reason": "本轮执行检查报告明确了恢复条件需要Boss两个显式决定：是否接受受限模式、是否将工单状态改为ready_for_resume，故更新决策细节。"
     }
   ],
-  "updated_nodes": [],
   "superseded_nodes": [],
-  "new_edges": [
-    {
-      "source": "n_0095",
-      "target": "n_0090",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0096",
-      "target": "n_0088",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0097",
-      "target": "n_0089",
-      "relation": "refines"
-    }
-  ]
+  "new_edges": []
 }

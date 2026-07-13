@@ -3,48 +3,67 @@
   "turn_id": 74,
   "new_nodes": [
     {
-      "node_id": "n_0150",
+      "node_id": "n_0184",
       "type": "Fact",
-      "content": "Round 6 Preflight by Feishu Agent: conditionally passed. Baseline identity confirmed, disabled runs isolated, API clean. Blocker: train_split=0.7 not API-verifiable, requires local manifest confirmation from project AI. Round 6 execution remains locked and not approved.",
-      "entity_ref": null,
+      "content": "Feishu Agent Round 6 Preflight: conditionally passed, baseline identity verified (run-54b-20250101-20251230-d37c696d) via API, train_split=0.7 not API-verifiable, needs local manifest confirmation. Disabled runs not mixed. No new run created. Round 6 execution still locked.",
+      "entity_ref": "round_6_preflight_feishu_agent",
       "state": null,
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0185",
+      "type": "Decision",
+      "content": "暂不批准Round 6执行，先由项目AI本地确认accepted baseline的train_split=0.7，确认后并得到用户显式批准才可进入Round 6。Round 6仍保持locked/not_approved。",
+      "entity_ref": null,
+      "state": "resolved",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0151",
+      "node_id": "n_0186",
       "type": "OpenTask",
-      "content": "项目AI本地确认：确认accepted baseline run-54b-20250101-20251230-d37c696d的manifest/parameters中train_split=0.7。只读检查，不运行回测，不创建新run，不进入Round6。",
-      "entity_ref": "train_split_local_confirmation",
+      "content": "项目AI本地确认accepted baseline run-54b-20250101-20251230-d37c696d的manifest/parameters中train_split=0.7。只读检查，不运行回测，不修改策略，不创建新run，不进入Round 6。",
+      "entity_ref": "confirm_train_split_0.7",
       "state": "open",
-      "priority": "should_include"
+      "priority": "must_include"
     }
   ],
-  "updated_nodes": [
-    {
-      "node_id": "n_0144",
-      "changes": {
-        "content": "Round 6 Preflight: 已执行检查，基本通过，但train_split=0.7无法API验证，需项目AI本地确认。",
-        "state": "in_progress"
-      },
-      "reason": "Preflight已执行但未完全闭环，需补充本地确认train_split=0.7"
-    }
-  ],
+  "updated_nodes": [],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0150",
-      "target": "n_0144",
+      "source": "n_0184",
+      "target": "n_0183",
       "relation": "derived_from"
     },
     {
-      "source": "n_0144",
-      "target": "n_0151",
-      "relation": "depends_on"
+      "source": "n_0184",
+      "target": "n_0180",
+      "relation": "supports"
     },
     {
-      "source": "n_0151",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0184",
+      "target": "n_0182",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0184",
+      "target": "n_0185",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0185",
+      "target": "n_0182",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0186",
+      "target": "n_0185",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0186",
+      "target": "n_0183",
+      "relation": "depends_on"
     }
   ]
 }

@@ -8,7 +8,7 @@
   },
   "stats": {
     "graph_turn_counter": 72,
-    "open_like_nodes_scanned": 23,
+    "open_like_nodes_scanned": 20,
     "updated_nodes_in_patch": 1,
     "candidates_found": 0,
     "score_histogram": {}

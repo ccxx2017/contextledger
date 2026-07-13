@@ -3,15 +3,15 @@
   "project_id": "abu_modern",
   "turn_id": "turn_052",
   "summary": {
-    "new_nodes": 2,
-    "resolved_exact": 0,
+    "new_nodes": 3,
+    "resolved_exact": 1,
     "resolved_alias": 0,
-    "pending_merge": 2,
-    "unresolved": 0
+    "pending_merge": 1,
+    "unresolved": 1
   },
   "decisions": [
     {
-      "new_node_id": "n_0115",
+      "new_node_id": "n_0130",
       "raw_entity_ref": "TKT-2026-005I",
       "resolved_entity_ref": "TKT-2026-005I",
       "match_confidence": 0.96,
@@ -35,11 +35,13 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0085",
-            "n_0089",
-            "n_0096",
-            "n_0110",
-            "n_0111"
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
           ]
         },
         {
@@ -49,7 +51,17 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0088"
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
           ]
         },
         {
@@ -59,81 +71,29 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0112"
-          ]
-        },
-        {
-          "canonical_entity_ref": "TKT-2026-006",
-          "match_confidence": 0.88,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0036",
-            "n_0071"
+            "n_0119",
+            "n_0120"
           ]
         }
       ]
     },
     {
-      "new_node_id": "n_0116",
-      "raw_entity_ref": "quant_intelligence/knowledge_base.py",
-      "resolved_entity_ref": "quant_intelligence/knowledge_base.py",
-      "match_confidence": 0.809,
+      "new_node_id": "n_0131",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
       "merge_reason": "",
-      "non_merge_reason": "needs_manual_merge_review",
-      "candidate_aliases": [
-        {
-          "canonical_entity_ref": "quant_intelligence/strategy_builder/knowledge_base.py",
-          "match_confidence": 0.809,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0037"
-          ]
-        },
-        {
-          "canonical_entity_ref": "aos/services/knowledge-api",
-          "match_confidence": 0.5161,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0022"
-          ]
-        },
-        {
-          "canonical_entity_ref": "backend/app/api/endpoints/knowledge.py",
-          "match_confidence": 0.4865,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0048"
-          ]
-        },
-        {
-          "canonical_entity_ref": "data/knowledge",
-          "match_confidence": 0.48,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0023"
-          ]
-        },
-        {
-          "canonical_entity_ref": "data/knowledge/schema.md",
-          "match_confidence": 0.4667,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0028"
-          ]
-        }
-      ]
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0132",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
     }
   ]
 }

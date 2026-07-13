@@ -11,14 +11,6 @@
       "status": "active"
     },
     {
-      "node_id": "n_0120",
-      "type": "Constraint",
-      "content": "在TKT-2026-005I live path verification通过前，禁止恢复TKT-2026-005B Round5研究。",
-      "entity_ref": "TKT-2026-005I",
-      "state": null,
-      "status": "active"
-    },
-    {
       "node_id": "n_0044",
       "type": "Constraint",
       "content": "数字员工继任原则：每类工作对应数字员工；BOSS负责初始任务下发、重要事项批准和结果检查；初期手动是过渡态",
@@ -59,19 +51,11 @@
       "status": "active"
     },
     {
-      "node_id": "n_0112",
+      "node_id": "n_0060",
       "type": "OpenTask",
-      "content": "TKT-2026-005F: 固化工具契约——同步call_builder.py --endpoint到正式技能资产；TOOLS.md明确investigation必须用/strategy-builder/compile-ir，禁止/strategy-builder/invoke，execution-config回测必须传完整strategy_ir；research_workflow.md补充新流程；metrics.py兼容新路径；明确400/404不等于Boss guardrail。",
-      "entity_ref": "TKT-2026-005F",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0088",
-      "type": "OpenTask",
-      "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
+      "content": "VCP形态突破点入场策略研究 - 已暂停，因后端回测阻塞，等待补丁工单 TKT-2026-005C 后重跑",
       "entity_ref": "TKT-2026-005C",
-      "state": "open",
+      "state": "blocked",
       "status": "active"
     },
     {
@@ -83,10 +67,10 @@
       "status": "active"
     },
     {
-      "node_id": "n_0113",
+      "node_id": "n_0142",
       "type": "OpenTask",
-      "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。",
-      "entity_ref": "tkt-2026-005b-magnify-validation",
+      "content": "执行Round 5.2资金曲线与交易流水闭合审计：核对final_equity与交易PnL闭合、最大回撤与仓位核对、position sizing逻辑、daily_return计算公式等。仅诊断，不修改策略。",
+      "entity_ref": "TKT-2026-005B_round5.2_reconciliation",
       "state": "open",
       "status": "active"
     },
@@ -99,17 +83,17 @@
       "status": "active"
     },
     {
-      "node_id": "n_0114",
+      "node_id": "n_0097",
       "type": "OpenTask",
-      "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n\n当前因Boss要求先完成005I live path verification，暂时阻塞。",
-      "entity_ref": "vcp_trend_filter_study",
+      "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
+      "entity_ref": "aos/services/backtest-api",
       "state": "open",
       "status": "active"
     },
     {
       "node_id": "n_0073",
       "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
       "entity_ref": "workspace_root_bootstrap_audit",
       "state": "in_progress",
       "status": "active"
@@ -118,14 +102,6 @@
       "node_id": "n_0065",
       "type": "OpenTask",
       "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
-      "entity_ref": null,
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0060",
-      "type": "OpenTask",
-      "content": "VCP形态突破点入场策略研究：验证趋势→调整→紧凑→放量→突破形态在A股市场的统计优势",
       "entity_ref": null,
       "state": "open",
       "status": "active"
@@ -147,131 +123,211 @@
       "status": "active"
     },
     {
-      "node_id": "n_0122",
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "决定LLM选型（阶段1用哪家LLM）",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0011",
+      "type": "OpenTask",
+      "content": "创建aos/runtime/_frozen_ideas.md冻结其他诱惑",
+      "entity_ref": "aos/runtime/_frozen_ideas.md",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0145",
       "type": "Fact",
-      "content": "005I live path verification报告确认：新archive ir_86a1843218b0包含##档案元数据JSON、strategy_id、strategy_ir、universe、sanity_check_failed、sanity_missing_fields等字段。",
-      "entity_ref": "ir_86a1843218b0",
+      "content": "GPT5.5分析指出审计报告存在数据不一致，建议先做Round 5.2资金曲线核对，通过后再考虑Round 6止损实验。",
+      "entity_ref": null,
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0121",
+      "node_id": "n_0144",
+      "type": "Fact",
+      "content": "Round 5.1审计报告结论：交易级PnL、分标的PnL、最终资金、最大回撤、daily returns之间无法闭合，差额约689,450。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0143",
       "type": "Decision",
-      "content": "TKT-2026-005I正式验收通过，结论live_verified_passed。新archive ir_86a1843218b0已包含档案元数据JSON和sanity_check_failed状态。",
+      "content": "基于Round 5.1审计报告发现资金曲线与交易PnL无法闭合，暂不接受进入Round 6，决定先执行Round 5.2资金曲线闭合审计。",
+      "entity_ref": null,
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0139",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 5 受限研究执行完成：compile-ir成功，回测完成56笔交易，sanity passed。核心指标：Sharpe 1.4921, Total Return -80.92%, Max Drawdown 98.89%。结论：MA60趋势过滤改善了信号质量但未解决亏损问题。飞书Agent建议不立即扩展样本，先做指标审计。",
+      "entity_ref": "TKT-2026-005B_round5_result",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0137",
+      "type": "Fact",
+      "content": "TKT-2026-005I live path verification: live_verified_passed. 新archive ir_86a1843218b0包含##档案元数据JSON、sanity_check_failed、sanity_missing_fields、sanity_failure_reasons等字段。旧archive（stg_20260526_1231e6, stg_20260526_test_ir, tkt_2026_005e_vcp_20260520_112814）为005I部署前创建，不含相关字段。",
       "entity_ref": "TKT-2026-005I",
-      "state": "resolved",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0119",
-      "type": "Fact",
-      "content": "项目AI检查了三个现有archive（strategy_id未列），均无##档案元数据JSON或sanity字段。这与n_0116声称的KB archive新增元数据功能不符，需验证live路径。",
-      "entity_ref": "quant_intelligence/knowledge_base.py",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0111",
+      "node_id": "n_0135",
       "type": "Decision",
-      "content": "Boss验收通过：TKT-2026-005B Round 4 受限 smoke 已完成，4项修正满足验收口径，不再违反Boss guardrail。同意记录最终状态。解除暂停。",
-      "entity_ref": "TKT-2026-005B",
+      "content": "暂停005B，暂停005I验收，要求005I live path verification。必须验证compile-ir→KB archive主链路实际产出##档案元数据JSON与sanity状态，否则不可验收005I，不可恢复005B。",
+      "entity_ref": null,
       "state": "resolved",
       "status": "active"
     },
     {
-      "node_id": "n_0110",
-      "type": "Fact",
-      "content": "Round 4 受限恢复 smoke 完成（已通过Boss验收）：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。4项修正已全部完成：call_builder.py修改已记录、非2xx请求已说明、指标口径以KB准、train/test切分70/30。结果仅用于技术恢复验证，不构成完整策略研究结论。下一步需Boss授权后才可进入更大样本或正式研究。",
-      "entity_ref": "TKT-2026-005B",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0107",
+      "node_id": "n_0132",
       "type": "FileArtifact",
-      "content": "TKT-2026-005B工单文件(已修正: ticket_id=005B, status=ready_for_limited_resume, 添加硬约束等)",
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "content": "新建验证记录文件 TKT-2026-005I-kb-minimum-sanity-check-validation.md",
+      "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check-validation.md",
       "state": "deployed",
       "status": "active"
     },
     {
-      "node_id": "n_0105",
+      "node_id": "n_0131",
+      "type": "FileArtifact",
+      "content": "新建工单执行记录文件 TKT-2026-005I-kb-minimum-sanity-check.md",
+      "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check.md",
+      "state": "deployed",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0129",
       "type": "Fact",
-      "content": "项目AI只能做恢复前补丁（工单修正、状态修改、追加约束等），不能执行研究。strategy-researcher 负责执行研究。",
+      "content": "GPT5.5 建议下一步顺序：005H-live-smoke → 005I（KB 字段完整性）→ 005B Round 5（受限研究）",
       "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0128",
+      "type": "Fact",
+      "content": "后端修改：ExecutionConfigBacktestRequest 新增 train_split；start_backtest_from_execution_config 返回 metrics/train_metrics/test_metrics 等。",
+      "entity_ref": "backend/app/api/endpoints/backtests/start.py",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0127",
+      "type": "Fact",
+      "content": "TKT-2026-005H 执行完成：后端 start.py 新增 train_split 字段并返回 train_metrics/test_metrics；call_backtest.py 透传参数；TOOLS.md/research_workflow.md/report_template.md 更新；自动化测试通过。",
+      "entity_ref": "TKT-2026-005H",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0125",
+      "type": "Decision",
+      "content": "优先做 TKT-2026-005H-execution-config-train-split-bridge，打通 train_split 主链路。",
+      "entity_ref": "TKT-2026-005H",
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0124",
+      "type": "Fact",
+      "content": "审计报告关键结论：规则分五类；高风险项已覆盖 4 位小数等；P0 缺口：execution-config 不支持 train_split、compile-ir 无字段完整性检查；P1 缺口：日志、关联策略等。",
+      "entity_ref": "TKT-2026-005G",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0122",
+      "type": "Decision",
+      "content": "弃用 openclaw_skills，以 aos/org/skills 为权威源（手动操作移除）。",
+      "entity_ref": "aos/org/skills",
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0121",
+      "type": "FileArtifact",
+      "content": "新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源，同步全部脚本和 prompts。",
+      "entity_ref": "aos/org/skills/strategy_researcher",
+      "state": "deployed",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0115",
+      "type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授权后才可进入更大样本。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0114",
+      "type": "Fact",
+      "content": "GPT5.5回复：可以执行TKT-2026-005B Round 4受限恢复smoke，并建议在授权中加一句口径修正：'本次满足Round 4受限恢复smoke执行条件；不满足完整研究恢复条件。'",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0113",
+      "type": "Fact",
+      "content": "GPT5.5建议：项目AI先对TKT-2026-005B做行政恢复补丁，然后Boss确认后通过飞书派发给strategy-researcher执行受限Round 4 smoke；项目AI不应直接执行研究。",
+      "entity_ref": "TKT-2026-005B",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0104",
-      "type": "Fact",
-      "content": "TKT-2026-005E技术smoke通过：新编译接口可用、回测链路打通、KB写入闭环成立、异常契约稳定、进程清理正常，工具链闭环。下一步建议恢复005B受限研究，但必须严格使用新接口/strategy-builder/compile-ir，禁止旧接口，限制标的≤5、年份≤1、后端失败一次即暂停。",
-      "entity_ref": "aos/services/backtest-api",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0103",
-      "type": "Fact",
-      "content": "TKT-2026-005D双通道分流干净：POST /strategy-builder/compile-ir无状态编译，KB自动落库成功，异常序列化修复使后端不会僵死。交付完全符合预期。",
-      "entity_ref": "aos/services/backtest-api",
-      "state": null,
+      "type": "FileArtifact",
+      "content": "TKT-2026-005B工单文件（已修改为ready_for_limited_resume状态）",
+      "entity_ref": "TKT-2026-005B",
+      "state": "deployed",
       "status": "active"
     },
     {
       "node_id": "n_0102",
-      "type": "Decision",
-      "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
-      "entity_ref": "aos/services/backtest-api",
-      "state": "resolved",
+      "type": "Fact",
+      "content": "TKT-2026-005B工单状态从paused_for_boss_review变为已执行smoke待修正。Worklog已追加修正说明。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0101",
-      "type": "Fact",
-      "content": "GPT5.5方案：暂停研究→修工具契约(005D)→技术smoke(005E)→恢复受限研究(005B)→后端异步化(接续005C阶段2)。当前首要修builder/backtest契约，使工具链可稳定调用。",
-      "entity_ref": null,
-      "state": null,
+      "type": "Decision",
+      "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
       "status": "active"
     },
     {
-      "node_id": "n_0096",
+      "node_id": "n_0093",
       "type": "Fact",
-      "content": "Boss已授权TKT-2026-005B受限恢复执行：禁止回测、禁止调用后端（脚本侧），仅限烟测（symbols≤5, years≤1, timeout=90s），smoke通过后最多放大到symbols≤20, years≤3，后端失败即paused_for_boss_review，禁止自动重试，禁止231标的回测，受限阶段结果不作为完整研究结论。执行结果：Phase0-2通过，Phase3 smoke未完成，builder 5轮未收敛，backtest HTTP 500，无交易产生。Boss审核后要求暂停。",
+      "content": "TKT-2026-005B 执行失败：backend 被大 universe 回测阻塞，agent 发送 231 个标的 × 7 年回测请求，导致后端卡死；builder session corrupted，因子不在注册表中，pending_user_input；重启后端无效，底层回测进程可能仍运行。",
       "entity_ref": "TKT-2026-005B",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0089",
+      "node_id": "n_0120",
       "type": "Fact",
-      "content": "TKT-2026-005B首次执行暴露后端资源闸和builder非交互接口缺失，当前不能支撑autonomous research",
-      "entity_ref": "TKT-2026-005B",
+      "content": "TKT-2026-005F 已完成：call_builder.py 默认端点改为 /compile-ir；SKILL.md 更新；TOOLS.md 新增错误语义表；research_workflow.md 新流程；metrics.py 兼容新旧路径；新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源。",
+      "entity_ref": "TKT-2026-005F",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0085",
+      "node_id": "n_0119",
       "type": "Fact",
-      "content": "前置检查结果：工单TKT-2026-005B应由strategy_researcher处理，依据intent_type:investigation和assigned_to:agent-strategy-researcher；未读取其他技能私有文件，未调用scripts。自主激活测试通过，实际读取了6个文件（SKILL.md、research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md、工单本体），未越界。",
-      "entity_ref": "TKT-2026-005B",
+      "content": "GPT5.5提出下一步推荐顺序：优先完成TKT-2026-005F固化工具契约，然后恢复TKT-2026-005B做受限放大验证（同IR、≤20 symbols、≤3 years），通过后再做Round 5单变量研究（如加入前期趋势过滤）。暂时不要做大回测、完整研究、多agent改造等。",
+      "entity_ref": "TKT-2026-005F",
       "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0071",
-      "type": "Fact",
-      "content": "Claude建议首次TicketB采用路线β（单agent多技能）先跑通，同时开TKT-2026-006做路线α配置改造。",
-      "entity_ref": "TKT-2026-006",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0040",
-      "type": "FileArtifact",
-      "content": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
-      "state": "open",
       "status": "active"
     }
   ],
@@ -280,7 +336,6 @@
       "n_0001"
     ],
     "standing_constraints": [
-      "n_0120",
       "n_0044",
       "n_0043",
       "n_0006",
@@ -288,53 +343,53 @@
     ],
     "active_open_tasks": [
       "n_0035",
-      "n_0112",
-      "n_0088",
+      "n_0060",
       "n_0036",
-      "n_0113",
+      "n_0142",
       "n_0008",
-      "n_0114",
+      "n_0097",
       "n_0073",
       "n_0065",
-      "n_0060",
       "n_0057",
-      "n_0021"
+      "n_0021",
+      "n_0017",
+      "n_0011"
     ],
     "recent_nodes": [
+      "n_0145",
+      "n_0144",
+      "n_0143",
+      "n_0142",
+      "n_0139",
+      "n_0137",
+      "n_0135",
+      "n_0132",
+      "n_0131",
+      "n_0129",
+      "n_0128",
+      "n_0127",
+      "n_0125",
+      "n_0124",
       "n_0122",
-      "n_0121",
-      "n_0120",
-      "n_0119",
-      "n_0114",
-      "n_0113",
-      "n_0112",
-      "n_0111",
-      "n_0110",
-      "n_0107",
-      "n_0105",
-      "n_0104",
-      "n_0103",
-      "n_0102",
-      "n_0101",
-      "n_0096"
+      "n_0121"
     ],
     "symbol_hits": [
-      "n_0111",
-      "n_0096",
-      "n_0089",
-      "n_0085",
-      "n_0035",
-      "n_0110",
-      "n_0121",
-      "n_0120",
-      "n_0112",
-      "n_0107",
-      "n_0088",
-      "n_0071",
-      "n_0040",
-      "n_0036",
+      "n_0115",
+      "n_0114",
       "n_0113",
-      "n_0104"
+      "n_0104",
+      "n_0102",
+      "n_0101",
+      "n_0093",
+      "n_0035",
+      "n_0139",
+      "n_0137",
+      "n_0132",
+      "n_0131",
+      "n_0127",
+      "n_0125",
+      "n_0120",
+      "n_0119"
     ],
     "conflict_candidates": []
   },
@@ -343,6 +398,21 @@
       "source": "n_0008",
       "target": "n_0001",
       "relation": "serves"
+    },
+    {
+      "source": "n_0011",
+      "target": "n_0005",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0011",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0017",
+      "target": "n_0008",
+      "relation": "refines"
     },
     {
       "source": "n_0021",
@@ -390,98 +460,88 @@
       "relation": "serves"
     },
     {
-      "source": "n_0071",
-      "target": "n_0008",
+      "source": "n_0073",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0097",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0101",
+      "target": "n_0102",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0101",
+      "target": "n_0104",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0113",
+      "target": "n_0073",
       "relation": "supports"
     },
     {
-      "source": "n_0073",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0073",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0088",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0102",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0102",
+      "source": "n_0114",
       "target": "n_0101",
       "relation": "supports"
     },
     {
-      "source": "n_0104",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0105",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0105",
-      "target": "n_0044",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0111",
-      "target": "n_0110",
+      "source": "n_0115",
+      "target": "n_0104",
       "relation": "derived_from"
     },
     {
-      "source": "n_0112",
+      "source": "n_0115",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0060",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0119",
       "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0113",
-      "target": "n_0112",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0060",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0113",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0111",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0120",
-      "relation": "depends_on"
-    },
-    {
       "source": "n_0121",
-      "target": "n_0120",
+      "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0121",
-      "target": "n_0114",
+      "source": "n_0122",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0125",
+      "target": "n_0124",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0129",
+      "target": "n_0125",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0129",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0135",
+      "target": "n_0060",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0139",
+      "target": "n_0008",
       "relation": "supports"
     }
   ],
@@ -505,47 +565,54 @@
       "blocked",
       "open"
     ],
-    "total_nodes": 122,
-    "active_nodes": 95,
+    "total_nodes": 145,
+    "active_nodes": 113,
     "selected_node_ids": [
       "n_0001",
       "n_0005",
       "n_0006",
       "n_0008",
+      "n_0011",
+      "n_0017",
       "n_0021",
       "n_0035",
       "n_0036",
-      "n_0040",
       "n_0043",
       "n_0044",
       "n_0057",
       "n_0060",
       "n_0065",
-      "n_0071",
       "n_0073",
-      "n_0085",
-      "n_0088",
-      "n_0089",
-      "n_0096",
+      "n_0093",
+      "n_0097",
       "n_0101",
       "n_0102",
-      "n_0103",
       "n_0104",
-      "n_0105",
-      "n_0107",
-      "n_0110",
-      "n_0111",
-      "n_0112",
       "n_0113",
       "n_0114",
+      "n_0115",
       "n_0119",
       "n_0120",
       "n_0121",
-      "n_0122"
+      "n_0122",
+      "n_0124",
+      "n_0125",
+      "n_0127",
+      "n_0128",
+      "n_0129",
+      "n_0131",
+      "n_0132",
+      "n_0135",
+      "n_0137",
+      "n_0139",
+      "n_0142",
+      "n_0143",
+      "n_0144",
+      "n_0145"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0123",
+    "next_node_id": "n_0146",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_057.md"
   }

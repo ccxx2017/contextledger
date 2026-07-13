@@ -7,9 +7,9 @@
     "max_candidates": 30
   },
   "stats": {
-    "graph_turn_counter": 54,
-    "open_like_nodes_scanned": 22,
-    "updated_nodes_in_patch": 2,
+    "graph_turn_counter": 55,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 1,
     "candidates_found": 1,
     "score_histogram": {
       "11": 1

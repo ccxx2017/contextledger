@@ -43,14 +43,18 @@
     },
     "build_context_bundle": {
       "status": "OK",
-      "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\context_bundle.turn_029.json",
-      "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\assembly_report.turn_029.json",
-      "l1_must_include_count": 8,
+      "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_029_auto\\context_bundle.turn_029.json",
+      "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_029_auto\\assembly_report.turn_029.json",
+      "l1_must_include_count": 7,
       "selected_count": 12
     },
     "check_pending_merge_register": {
       "status": "OK",
-      "overdue_items": 0
+      "overdue_items": 3
+    },
+    "sync_pending_merge_register": {
+      "status": "OK",
+      "report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_029_auto\\pending_merge_register_sync.turn_029.json"
     }
   },
   "summary": {
@@ -65,6 +69,9 @@
   "committed": {
     "graph_state": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "run_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_029.json",
-    "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\patches\\patch_029.json"
+    "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\patches\\patch_029.json",
+    "pending_merge": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\pending_merge\\pending_merge.turn_029.json",
+    "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\context_bundle.turn_029.json",
+    "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\assembly_report.turn_029.json"
   }
 }

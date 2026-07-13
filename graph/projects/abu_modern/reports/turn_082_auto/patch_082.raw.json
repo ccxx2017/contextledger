@@ -3,98 +3,72 @@
   "turn_id": 82,
   "new_nodes": [
     {
-      "node_id": "n_0158",
-      "type": "Fact",
-      "content": "新增forbidden runs: run-8f20f146-20250101-20250912-820b8995, run-8f20f146-20250101-20251230-820b8995, run-8f20f146-20250912-20251230-820b8995",
-      "entity_ref": "round6a_forbidden_runs",
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0159",
-      "type": "Fact",
-      "content": "诊断结论：Round 6A失败原因为后端IR context字段position_pnl_pct未注册，不是策略实验失败。该字段在compile层被静默接受，但evaluator/execution层不支持，导致0 trades及trade_data_source=missing。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0160",
+      "node_id": "n_0197",
       "type": "Decision",
-      "content": "Round 6A被诊断为后端缺陷，停止所有Round 6A执行，进入后端修复工单。accepted baseline不变，forbidden runs清单更新。",
+      "content": "批准进入 backend defect repair planning / patch implementation。核心目标：修复 position_pnl_pct 未注册 context 字段及单位混用问题，禁止运行真实回测，禁止创建新 run，禁止进入 Round 6A/6B。",
       "entity_ref": null,
       "state": "resolved",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0161",
+      "node_id": "n_0198",
       "type": "OpenTask",
-      "content": "后端修复task：修复IR context字段不匹配、单位统一、compile校验等。详细范围见用户指示：1) IRExpression.context增加合法校验；2) 支持unrealized_pnl_pct；3) position_pnl_pct处理（拒绝或alias）；4) 统一百分比单位（小数制）；5) universal_factor.py KeyError改进；6) 添加单元测试。禁止运行真实回测、创建新run、修改baseline。",
-      "entity_ref": "round6a_backend_defect_repair",
+      "content": "后端 IR context 字段不一致修复：1) IRExpression.context 增加合法 context 校验；2) 明确支持 canonical context unrealized_pnl_pct；3) 对 position_pnl_pct 编译期拒绝或显式 alias；4) 统一百分比单位（内部小数制）；5) universal_factor.py 对 KeyError 增加清晰错误报告；6) 添加单元测试覆盖。禁止运行真实回测和创建新 run。",
+      "entity_ref": "backend_defect_repair",
       "state": "open",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0199",
+      "type": "Fact",
+      "content": "Round 6A 完整诊断结论：position_pnl_pct 是未注册的幽灵字段，compile 层被动接受但 evaluator/execution 层未实现；trade_data_source=missing 根因是零交易；BUY triggered_count=0 根因是 orders_df 为空；position_pnl_pct 单位陷阱（-7 百分比 vs 内部小数 -0.07）。诊断通过，不作为策略实验结论。",
+      "entity_ref": "round_6a_full_diagnosis",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0200",
+      "type": "Fact",
+      "content": "当前 forbidden runs 清单（禁用为正式证据）：run-749b90e9-20250101-20250110-fcac2c66, run-749b90e9-20250101-20251230-820b8995, run-e92b485b-20250101-20251230-820b8995, run-8f20f146-20250101-20250912-820b8995, run-8f20f146-20250101-20251230-820b8995, run-8f20f146-20250912-20251230-820b8995。均不得用于 baseline 比较或绩效判断。",
+      "entity_ref": "forbidden_runs_list",
+      "state": null,
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0154",
-      "changes": {
-        "state": "cancelled",
-        "status": "superseded"
-      },
-      "reason": "Round 6A被认定为后端缺陷，不再尝试re-execution"
-    },
-    {
-      "node_id": "n_0155",
+      "node_id": "n_0196",
       "changes": {
         "state": "resolved",
         "status": "superseded"
       },
-      "reason": "缓存诊断与定向清理已完成，后续re-execution已取消"
-    },
-    {
-      "node_id": "n_0152",
-      "changes": {
-        "state": "cancelled",
-        "status": "superseded"
-      },
-      "reason": "决策被替代：真正原因不是缓存污染而是后端缺陷"
+      "reason": "诊断完成并通过，Round 6A 确认为后端缺陷，诊断任务结束。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0159",
-      "target": "n_0160",
-      "relation": "supports"
+      "source": "n_0197",
+      "target": "n_0196",
+      "relation": "depends_on"
     },
     {
-      "source": "n_0158",
-      "target": "n_0160",
-      "relation": "supports"
+      "source": "n_0198",
+      "target": "n_0197",
+      "relation": "depends_on"
     },
     {
-      "source": "n_0160",
-      "target": "n_0152",
-      "relation": "invalidates"
+      "source": "n_0199",
+      "target": "n_0196",
+      "relation": "derived_from"
     },
     {
-      "source": "n_0160",
-      "target": "n_0154",
-      "relation": "invalidates"
+      "source": "n_0200",
+      "target": "n_0199",
+      "relation": "derived_from"
     },
     {
-      "source": "n_0160",
-      "target": "n_0161",
-      "relation": "implements"
-    },
-    {
-      "source": "n_0161",
-      "target": "n_0157",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0161",
+      "source": "n_0198",
       "target": "n_0001",
       "relation": "serves"
     }

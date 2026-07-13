@@ -1,9 +1,9 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 111,
-    "active_graph_nodes": 88,
-    "new_nodes": 3,
+    "graph_nodes": 117,
+    "active_graph_nodes": 95,
+    "new_nodes": 2,
     "errors": 0,
     "warnings": 0
   },

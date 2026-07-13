@@ -1,0 +1,141 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_051",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_051_auto/graph_state.after_turn_051.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 12,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0076",
+      "n_0120",
+      "n_0121",
+      "n_0122",
+      "n_0124",
+      "n_0125"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0076",
+        "type": "Fact",
+        "content": "GPT5.4对Opus4.7方案的评价：问题识别准（8.5/10），短期止血价值高（8/10），但作为最终架构方案不足（4/10）。建议拆为临时层（精简根bootstrap，清除TOOLS.md技能污染）和正式层（后续上agents.list+bindings+每agent skills allowlist）。对4个根文件的修改优先级：最高-根TOOLS.md，次高-IDENTITY.md和AGENTS.md，最低-SOUL.md。",
+        "priority": "must_include"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0120",
+        "type": "Fact",
+        "content": "TKT-2026-005F 已完成：call_builder.py 默认端点改为 /compile-ir；SKILL.md 更新；TOOLS.md 新增错误语义表；research_workflow.md 新流程；metrics.py 兼容新旧路径；新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005F"
+      },
+      {
+        "node_id": "n_0121",
+        "type": "FileArtifact",
+        "content": "新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源，同步全部脚本和 prompts。",
+        "priority": "should_include",
+        "entity_ref": "aos/org/skills/strategy_researcher"
+      },
+      {
+        "node_id": "n_0122",
+        "type": "Decision",
+        "content": "弃用 openclaw_skills，以 aos/org/skills 为权威源（手动操作移除）。",
+        "priority": "should_include",
+        "entity_ref": "aos/org/skills"
+      },
+      {
+        "node_id": "n_0124",
+        "type": "Fact",
+        "content": "审计报告关键结论：规则分五类；高风险项已覆盖 4 位小数等；P0 缺口：execution-config 不支持 train_split、compile-ir 无字段完整性检查；P1 缺口：日志、关联策略等。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005G"
+      },
+      {
+        "node_id": "n_0125",
+        "type": "Decision",
+        "content": "优先做 TKT-2026-005H-execution-config-train-split-bridge，打通 train_split 主链路。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005H"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0122",
+      "n_0125"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 104,
+    "bundled_node_count": 12
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

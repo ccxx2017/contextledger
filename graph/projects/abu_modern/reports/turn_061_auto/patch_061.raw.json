@@ -3,90 +3,52 @@
   "turn_id": 61,
   "new_nodes": [
     {
-      "node_id": "n_0128",
+      "node_id": "n_0159",
       "type": "OpenTask",
-      "content": "Round 5.3D: 最终资金闭合复核。使用cash ledger/orders/trades/positions做完整资金闭合，验证gap来源。具体指令包括全年资金闭合公式、cash ledger闭合、trades覆盖检查、5月初exposure检查，并明确回答final_equity是否能由cash ledger和trade PnL闭合，gap精确来源，是否影响指标可信度，是否允许正式进入Round6。",
-      "entity_ref": "round5.3d_closure_audit",
+      "content": "Round 5.3D最小闭合复核：最终资金闭合复核。要求Feishu Agent执行完整资金闭合（cash ledger/orders/trades/positions），验证gap=-185,592的精确来源，确认final_equity是否可由cash ledger或trade PnL完全闭合，检查5月exposure真实性，确认是否允许进入Round 6。",
+      "entity_ref": "TKT-2026-005B_round5.3D_reconcile",
       "state": "open",
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0129",
-      "type": "Decision",
-      "content": "Boss定夺：Round 5.3C v2不能算完全通过。核心修复初步有效，但gap=-185,592需用cash ledger闭合才能确认。在缺口明确解释前，不许进入Round6。需先执行Round 5.3D最小闭合复核。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0130",
-      "type": "Fact",
-      "content": "Feishu Agent将Round5.3C v2 gap=-185,592解释为intra-trade MTM噪音，但Boss认为若最终全部平仓，MTM应已实现，因此gap不能仅用MTM解释。需要现金账簿完整闭合验证。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "background"
+      "priority": "must_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0127",
+      "node_id": "n_0158",
       "changes": {
-        "content": "重新通过后端API运行Round 5.3C基线复核，验证第二轮修复效果。已完成复核，结果13/14通过，条件2 gap=-185,592未通过。Boss判定不能算完全通过，需补充Round 5.3D资金闭合复核。",
+        "content": "Round 5.3C v2不能算完全通过，只能算核心引擎修复初步通过。在gap=-185,592被cash ledger或完整PnL明确解释前，不应正式进入Round 6。需补Round 5.3D最小闭合复核。",
+        "state": "resolved"
+      },
+      "reason": "基于本轮讨论，更新决策内容明确暂缓进入Round 6，并要求新增Round 5.3D复核。"
+    },
+    {
+      "node_id": "n_0155",
+      "changes": {
         "state": "resolved",
         "status": "superseded"
       },
-      "reason": "任务已完成，但需后续补充任务，状态设为resolved并标记为superseded以反映不再活跃。"
-    },
-    {
-      "node_id": "n_0125",
-      "changes": {
-        "content": "Round 5.3C v2黑盒复核报告（Feishu Agent）：13/14通过，条件2 gap -185,592为不可接受项。Boss判定不能算完全通过，需补充5.3D资金闭合复核。"
-      },
-      "reason": "更新为v2复核结果及Boss判定。"
-    },
-    {
-      "node_id": "n_0126",
-      "changes": {
-        "content": "项目AI第二轮修复已在Round5.3C v2中验证：trades.csv过滤、positions_daily重建生效，但仍有gap=-185,592未解决。"
-      },
-      "reason": "补充修复后的实际验证结果。"
+      "reason": "Round 5.3C黑盒复核已执行完成并产出报告，但结论未完全通过，由新任务Round 5.3D接替。"
     }
   ],
-  "superseded_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0155",
+      "reason": "任务已完成执行，但其成果不满足完全通过条件，由Round 5.3D替代继续复核。"
+    }
+  ],
   "new_edges": [
     {
-      "source": "n_0129",
-      "target": "n_0125",
-      "relation": "derived_from"
+      "source": "n_0159",
+      "target": "n_0158",
+      "relation": "refines"
     },
     {
-      "source": "n_0129",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0128",
-      "target": "n_0125",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0128",
-      "target": "n_0127",
+      "source": "n_0159",
+      "target": "n_0155",
       "relation": "depends_on"
     },
     {
-      "source": "n_0130",
-      "target": "n_0129",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0130",
-      "target": "n_0125",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0128",
-      "target": "n_0001",
+      "source": "n_0159",
+      "target": "n_0008",
       "relation": "serves"
     }
   ]

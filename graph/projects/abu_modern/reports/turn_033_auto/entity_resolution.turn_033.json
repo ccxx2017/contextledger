@@ -4,14 +4,32 @@
   "turn_id": "turn_033",
   "summary": {
     "new_nodes": 3,
-    "resolved_exact": 1,
+    "resolved_exact": 2,
     "resolved_alias": 0,
     "pending_merge": 1,
-    "unresolved": 1
+    "unresolved": 0
   },
   "decisions": [
     {
-      "new_node_id": "n_0088",
+      "new_node_id": "n_0093",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0094",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0095",
       "raw_entity_ref": "TKT-2026-005C",
       "resolved_entity_ref": "TKT-2026-005C",
       "match_confidence": 0.96,
@@ -35,8 +53,7 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0085",
-            "n_0087"
+            "n_0092"
           ]
         },
         {
@@ -51,24 +68,6 @@
           ]
         }
       ]
-    },
-    {
-      "new_node_id": "n_0089",
-      "raw_entity_ref": "TKT-2026-005B",
-      "resolved_entity_ref": "TKT-2026-005B",
-      "match_confidence": 1.0,
-      "merge_reason": "exact_entity_ref_match",
-      "non_merge_reason": "",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0090",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
     }
   ]
 }

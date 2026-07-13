@@ -11,67 +11,7 @@
   },
   "decisions": [
     {
-      "new_node_id": "n_0158",
-      "raw_entity_ref": "round6a_forbidden_runs",
-      "resolved_entity_ref": "round6a_forbidden_runs",
-      "match_confidence": 0.6977,
-      "merge_reason": "",
-      "non_merge_reason": "needs_manual_merge_review",
-      "candidate_aliases": [
-        {
-          "canonical_entity_ref": "round6a_polluted_runs",
-          "match_confidence": 0.6977,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0156"
-          ]
-        },
-        {
-          "canonical_entity_ref": "round6a_cache_remediation",
-          "match_confidence": 0.5106,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0155"
-          ]
-        },
-        {
-          "canonical_entity_ref": "round6a_stop_loss_7pct",
-          "match_confidence": 0.5,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0154"
-          ]
-        },
-        {
-          "canonical_entity_ref": "round6_preflight",
-          "match_confidence": 0.4737,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0150"
-          ]
-        },
-        {
-          "canonical_entity_ref": "round5_3e_verification_requirements",
-          "match_confidence": 0.4561,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0135"
-          ]
-        }
-      ]
-    },
-    {
-      "new_node_id": "n_0159",
+      "new_node_id": "n_0197",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,
@@ -80,35 +20,26 @@
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0160",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0161",
-      "raw_entity_ref": "round6a_backend_defect_repair",
-      "resolved_entity_ref": "round6a_backend_defect_repair",
-      "match_confidence": 0.5926,
+      "new_node_id": "n_0198",
+      "raw_entity_ref": "backend_defect_repair",
+      "resolved_entity_ref": "backend_defect_repair",
+      "match_confidence": 0.6364,
       "merge_reason": "",
       "non_merge_reason": "needs_manual_merge_review",
       "candidate_aliases": [
         {
-          "canonical_entity_ref": "round6a_cache_remediation",
-          "match_confidence": 0.5926,
+          "canonical_entity_ref": "round_6a_backend_defect",
+          "match_confidence": 0.6364,
           "evidence": [
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0155"
+            "n_0195"
           ]
         },
         {
           "canonical_entity_ref": "quant_backend_url_default",
-          "match_confidence": 0.5556,
+          "match_confidence": 0.5217,
           "evidence": [
             "surface_or_token_similarity"
           ],
@@ -117,26 +48,85 @@
           ]
         },
         {
+          "canonical_entity_ref": "round_6a_backend_diagnosis",
+          "match_confidence": 0.4681,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0196"
+          ]
+        },
+        {
           "canonical_entity_ref": "quant_backend_kb_bridge",
-          "match_confidence": 0.5,
+          "match_confidence": 0.4545,
           "evidence": [
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
             "n_0070"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0199",
+      "raw_entity_ref": "round_6a_full_diagnosis",
+      "resolved_entity_ref": "round_6a_full_diagnosis",
+      "match_confidence": 0.7755,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
         {
-          "canonical_entity_ref": "round6a_polluted_runs",
-          "match_confidence": 0.48,
+          "canonical_entity_ref": "round_6a_backend_diagnosis",
+          "match_confidence": 0.7755,
           "evidence": [
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0156"
+            "n_0196"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round_6_preflight_feishu_agent",
+          "match_confidence": 0.5283,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0184"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round_6a_backend_defect",
+          "match_confidence": 0.4783,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0195"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round_5.4b_fix1_feishu_audit",
+          "match_confidence": 0.4706,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0180"
           ]
         }
       ]
+    },
+    {
+      "new_node_id": "n_0200",
+      "raw_entity_ref": "forbidden_runs_list",
+      "resolved_entity_ref": "forbidden_runs_list",
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "no_candidate_found",
+      "candidate_aliases": []
     }
   ]
 }

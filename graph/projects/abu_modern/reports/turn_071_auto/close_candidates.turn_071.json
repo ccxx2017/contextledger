@@ -7,29 +7,11 @@
     "max_candidates": 30
   },
   "stats": {
-    "graph_turn_counter": 68,
-    "open_like_nodes_scanned": 23,
-    "updated_nodes_in_patch": 1,
-    "candidates_found": 1,
-    "score_histogram": {
-      "3": 1
-    }
+    "graph_turn_counter": 70,
+    "open_like_nodes_scanned": 20,
+    "updated_nodes_in_patch": 2,
+    "candidates_found": 0,
+    "score_histogram": {}
   },
-  "candidates": [
-    {
-      "node_id": "n_0114",
-      "type": "OpenTask",
-      "entity_ref": "vcp_trend_filter_study",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n005I live path verification已通过，阻塞解除。但仍需等待005F固化工具契约和005B放大验证完成后才能执行。",
-      "score": 3,
-      "matched_terms": [
-        "0.7",
-        "passed",
-        "train_split"
-      ]
-    }
-  ]
+  "candidates": []
 }

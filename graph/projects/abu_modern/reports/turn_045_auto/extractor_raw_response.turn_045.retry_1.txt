@@ -1,0 +1,82 @@
+{
+  "task_id": "task_default",
+  "turn_id": 45,
+  "new_nodes": [
+    {
+      "node_id": "n_0112",
+      "type": "OpenTask",
+      "content": "项目AI执行TKT-2026-005B恢复前补丁：1.修正ticket_id为005B；2.将工单从blocked移回open目录；3.将status改为ready_for_limited_resume；4.追加Worklog记录（005C资源闸完成、005D接口完成、005E smoke通过）；5.明确从Round4开始、使用compile-ir接口、保留资源限制；6.完成后仅提交工单修改，不执行研究。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0113",
+      "type": "Fact",
+      "content": "恢复前补丁具体指令：修正frontmatter中ticket_id从00X改为005B，报告名改为TKT-2026-005B-vcp-breakout-entry.md，移回open目录，status改为ready_for_limited_resume，Worklog追加Boss授权记录，恢复约束包括从Round4开始、必须使用/strategy-builder/compile-ir接口、call_builder.py带--endpoint参数、禁止旧Invoke接口、保留symbols≤5/years≤1/timeout=90s等限制。",
+      "entity_ref": "TKT-2026-005B_recovery_patch",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0114",
+      "type": "Fact",
+      "content": "call_builder.py必须使用--endpoint /strategy-builder/compile-ir参数调用新接口，禁止使用旧/strategy-builder/invoke接口。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_builder.py",
+      "state": null,
+      "priority": "should_include"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0101",
+      "changes": {
+        "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。恢复时从Round4开始，必须使用新接口/strategy-builder/compile-ir，call_builder.py需带--endpoint参数指定该接口，禁止使用旧/strategy-builder/invoke。"
+      },
+      "reason": "本轮GPT5.5提供了更详细的恢复约束，包括从Round4开始、明确使用新接口和参数、禁止旧接口等，故更新节点内容以反映完整授权条件。"
+    },
+    {
+      "node_id": "n_0060",
+      "changes": {
+        "state": "open",
+        "content": "VCP形态突破点入场策略研究 - 因后端回测阻塞而暂停，等待补丁工单 TKT-2026-005C 后重跑。TKT-2026-005C（资源闸）已完成，阻塞解除；准备进入受限恢复阶段。"
+      },
+      "reason": "本轮确认TKT-2026-005C资源闸已完成，因此该任务从blocked状态解除，改为open准备恢复。"
+    },
+    {
+      "node_id": "n_0110",
+      "changes": {
+        "content": "双接口分流原则：人类交互式构建使用旧接口POST /strategy-builder/invoke（支持pending_user_input、多轮会话），自动研究闭环使用新接口POST /strategy-builder/compile-ir（单次请求、无session、不追问、输入完整IR、返回结构化JSON）。两条链路分别验收，互不影响。同时修复回测异常序列化：全局异常处理器统一返回JSON，禁止直接暴露Python异常对象。特别注意：自动研究闭环必须强制使用/strategy-builder/compile-ir，禁止回退到Invoke接口。"
+      },
+      "reason": "本轮GPT5.5强调自动研究必须使用compile-ir接口，故更新Fact内容以强化该约束。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0112",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0112",
+      "target": "n_0104",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0112",
+      "target": "n_0110",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0113",
+      "target": "n_0112",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0114",
+      "target": "n_0110",
+      "relation": "supports"
+    }
+  ]
+}

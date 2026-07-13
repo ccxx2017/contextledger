@@ -3,39 +3,11 @@
   "project_id": "abu_modern",
   "turn_id": "turn_046",
   "summary": {
-    "new_nodes": 3,
-    "resolved_exact": 1,
+    "new_nodes": 0,
+    "resolved_exact": 0,
     "resolved_alias": 0,
     "pending_merge": 0,
-    "unresolved": 2
+    "unresolved": 0
   },
-  "decisions": [
-    {
-      "new_node_id": "n_0107",
-      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "resolved_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "match_confidence": 1.0,
-      "merge_reason": "exact_entity_ref_match",
-      "non_merge_reason": "",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0108",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0109",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
-    }
-  ]
+  "decisions": []
 }

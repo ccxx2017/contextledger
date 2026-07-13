@@ -4,21 +4,5 @@
   "new_nodes": [],
   "updated_nodes": [],
   "superseded_nodes": [],
-  "new_edges": [
-    {
-      "source": "n_0099",
-      "target": "n_0102",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0100",
-      "target": "n_0102",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0100",
-      "target": "n_0099",
-      "relation": "depends_on"
-    }
-  ]
+  "new_edges": []
 }

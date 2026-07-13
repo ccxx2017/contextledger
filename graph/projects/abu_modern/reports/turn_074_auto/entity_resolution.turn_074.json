@@ -3,15 +3,45 @@
   "project_id": "abu_modern",
   "turn_id": "turn_074",
   "summary": {
-    "new_nodes": 2,
+    "new_nodes": 3,
     "resolved_exact": 0,
     "resolved_alias": 0,
-    "pending_merge": 0,
+    "pending_merge": 1,
     "unresolved": 2
   },
   "decisions": [
     {
-      "new_node_id": "n_0150",
+      "new_node_id": "n_0184",
+      "raw_entity_ref": "round_6_preflight_feishu_agent",
+      "resolved_entity_ref": "round_6_preflight_feishu_agent",
+      "match_confidence": 0.6552,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "round_5.4b_fix1_feishu_audit",
+          "match_confidence": 0.6552,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0180"
+          ]
+        },
+        {
+          "canonical_entity_ref": "round_5.4a_feishu_audit_result",
+          "match_confidence": 0.5667,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0175"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0185",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,
@@ -20,9 +50,9 @@
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0151",
-      "raw_entity_ref": "train_split_local_confirmation",
-      "resolved_entity_ref": "train_split_local_confirmation",
+      "new_node_id": "n_0186",
+      "raw_entity_ref": "confirm_train_split_0.7",
+      "resolved_entity_ref": "confirm_train_split_0.7",
       "match_confidence": 0.0,
       "merge_reason": "",
       "non_merge_reason": "no_candidate_found",

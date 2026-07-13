@@ -63,89 +63,14 @@
     "source_graph": "graph/projects/abu_modern/graph_state.json"
   },
   "before_report": {
-    "ok": true,
-    "summary": {
-      "nodes": 122,
-      "edges": 205,
-      "active_nodes": 95,
-      "active_edges": 205,
-      "superseded_nodes": 27,
-      "errors": 0,
-      "warnings": 0
-    },
-    "adjudication_policy": {
-      "current_membership_field": "status",
-      "state_participates_in_current_membership": true,
-      "state_gate_field": "state",
-      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
-      "active_status_value": "active",
-      "superseded_status_value": "superseded"
-    },
-    "status_observations": {
-      "superseded_node_ids": [
-        "n_0010",
-        "n_0012",
-        "n_0014",
-        "n_0027",
-        "n_0030",
-        "n_0033",
-        "n_0034",
-        "n_0049",
-        "n_0052",
-        "n_0056",
-        "n_0059",
-        "n_0084",
-        "n_0086",
-        "n_0087",
-        "n_0090",
-        "n_0095",
-        "n_0097",
-        "n_0098",
-        "n_0099",
-        "n_0100",
-        "n_0106",
-        "n_0108",
-        "n_0109",
-        "n_0115",
-        "n_0116",
-        "n_0117",
-        "n_0118"
-      ],
-      "excluded_due_to_state_node_ids": []
-    },
-    "relation_enum": [
-      "depends_on",
-      "derived_from",
-      "implements",
-      "invalidates",
-      "produces",
-      "refines",
-      "serves",
-      "supersedes",
-      "supports"
-    ],
-    "minimal_state_enum": [
-      "blocked",
-      "cancelled",
-      "deployed",
-      "implemented",
-      "in_progress",
-      "open",
-      "resolved",
-      "unknown"
-    ],
-    "errors": [],
-    "warnings": []
-  },
-  "after_report": {
     "ok": false,
     "summary": {
-      "nodes": 126,
-      "edges": 210,
-      "active_nodes": 97,
-      "active_edges": 210,
-      "superseded_nodes": 29,
-      "errors": 1,
+      "nodes": 138,
+      "edges": 217,
+      "active_nodes": 110,
+      "active_edges": 217,
+      "superseded_nodes": 28,
+      "errors": 4,
       "warnings": 0
     },
     "adjudication_policy": {
@@ -167,26 +92,25 @@
         "n_0034",
         "n_0049",
         "n_0052",
+        "n_0055",
         "n_0056",
         "n_0059",
-        "n_0084",
-        "n_0086",
-        "n_0087",
+        "n_0074",
         "n_0090",
+        "n_0092",
+        "n_0094",
         "n_0095",
-        "n_0097",
-        "n_0098",
-        "n_0099",
-        "n_0100",
+        "n_0105",
         "n_0106",
+        "n_0107",
         "n_0108",
-        "n_0109",
-        "n_0114",
-        "n_0115",
-        "n_0116",
-        "n_0117",
+        "n_0112",
         "n_0118",
-        "n_0120"
+        "n_0123",
+        "n_0126",
+        "n_0130",
+        "n_0133",
+        "n_0136"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -214,29 +138,207 @@
     "errors": [
       {
         "level": "error",
-        "code": "ACTIVE_ISOLATED_NODE",
-        "message": "active 节点 n_0123 是孤立节点；除根 UserGoal 外不允许 active 孤立节点。",
-        "node_id": "n_0123",
-        "node_type": "Fact"
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[144]",
+        "source": "n_0094",
+        "target": "n_0060",
+        "target_status": "active",
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+        "edge_id": "edge[173]",
+        "source": "n_0107",
+        "target": "n_0093",
+        "target_status": null,
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[212] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[212]",
+        "source": "n_0135",
+        "target": "n_0060",
+        "target_status": "active",
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+        "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+        "entity_ref": "TKT-2026-005B",
+        "states": {
+          "deployed": [
+            "n_0104"
+          ],
+          "resolved": [
+            "n_0101"
+          ]
+        },
+        "mutually_exclusive_states": [
+          "blocked",
+          "cancelled",
+          "deployed",
+          "implemented",
+          "open",
+          "resolved"
+        ]
+      }
+    ],
+    "warnings": []
+  },
+  "after_report": {
+    "ok": false,
+    "summary": {
+      "nodes": 141,
+      "edges": 222,
+      "active_nodes": 111,
+      "active_edges": 222,
+      "superseded_nodes": 30,
+      "errors": 4,
+      "warnings": 0
+    },
+    "adjudication_policy": {
+      "current_membership_field": "status",
+      "state_participates_in_current_membership": true,
+      "state_gate_field": "state",
+      "pending_state_rule": "exclude state=open pending open-task candidates from current membership",
+      "active_status_value": "active",
+      "superseded_status_value": "superseded"
+    },
+    "status_observations": {
+      "superseded_node_ids": [
+        "n_0010",
+        "n_0012",
+        "n_0014",
+        "n_0027",
+        "n_0030",
+        "n_0033",
+        "n_0034",
+        "n_0049",
+        "n_0052",
+        "n_0055",
+        "n_0056",
+        "n_0059",
+        "n_0074",
+        "n_0090",
+        "n_0092",
+        "n_0094",
+        "n_0095",
+        "n_0105",
+        "n_0106",
+        "n_0107",
+        "n_0108",
+        "n_0112",
+        "n_0118",
+        "n_0123",
+        "n_0126",
+        "n_0130",
+        "n_0133",
+        "n_0134",
+        "n_0136",
+        "n_0138"
+      ],
+      "excluded_due_to_state_node_ids": []
+    },
+    "relation_enum": [
+      "depends_on",
+      "derived_from",
+      "implements",
+      "invalidates",
+      "produces",
+      "refines",
+      "serves",
+      "supersedes",
+      "supports"
+    ],
+    "minimal_state_enum": [
+      "blocked",
+      "cancelled",
+      "deployed",
+      "implemented",
+      "in_progress",
+      "open",
+      "resolved",
+      "unknown"
+    ],
+    "errors": [
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[144]",
+        "source": "n_0094",
+        "target": "n_0060",
+        "target_status": "active",
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+        "edge_id": "edge[173]",
+        "source": "n_0107",
+        "target": "n_0093",
+        "target_status": null,
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[212] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[212]",
+        "source": "n_0135",
+        "target": "n_0060",
+        "target_status": "active",
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+        "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+        "entity_ref": "TKT-2026-005B",
+        "states": {
+          "deployed": [
+            "n_0104"
+          ],
+          "resolved": [
+            "n_0101"
+          ]
+        },
+        "mutually_exclusive_states": [
+          "blocked",
+          "cancelled",
+          "deployed",
+          "implemented",
+          "open",
+          "resolved"
+        ]
       }
     ],
     "warnings": []
   },
   "issue_code_histogram": {
     "before": {
-      "errors": {},
+      "errors": {
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 3,
+        "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF": 1
+      },
       "warnings": {}
     },
     "after": {
       "errors": {
-        "ACTIVE_ISOLATED_NODE": 1
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 3,
+        "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF": 1
       },
       "warnings": {}
     },
     "introduced": {
-      "errors": {
-        "ACTIVE_ISOLATED_NODE": 1
-      },
+      "errors": {},
       "warnings": {}
     },
     "baseline": {
@@ -245,30 +347,75 @@
     }
   },
   "summary": {
-    "before_errors": 0,
-    "after_errors": 1,
+    "before_errors": 4,
+    "after_errors": 4,
     "before_warnings": 0,
     "after_warnings": 0,
     "baseline_errors": 0,
     "baseline_warnings": 0,
-    "introduced_errors": 1,
-    "preexisting_errors": 0,
+    "introduced_errors": 0,
+    "preexisting_errors": 4,
     "introduced_warnings": 0,
     "preexisting_warnings": 0,
     "baseline_matched_errors": 0,
     "baseline_matched_warnings": 0,
     "overdue_baseline_issues": 0
   },
-  "introduced_errors": [
+  "introduced_errors": [],
+  "preexisting_errors": [
     {
       "level": "error",
-      "code": "ACTIVE_ISOLATED_NODE",
-      "message": "active 节点 n_0123 是孤立节点；除根 UserGoal 外不允许 active 孤立节点。",
-      "node_id": "n_0123",
-      "node_type": "Fact"
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[212] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[212]",
+      "source": "n_0135",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+      "entity_ref": "TKT-2026-005B",
+      "states": {
+        "deployed": [
+          "n_0104"
+        ],
+        "resolved": [
+          "n_0101"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ]
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null
     }
   ],
-  "preexisting_errors": [],
   "introduced_warnings": [],
   "preexisting_warnings": [],
   "baseline_matched_errors": [],

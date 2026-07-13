@@ -43,18 +43,10 @@
       "status": "active"
     },
     {
-      "node_id": "n_0088",
+      "node_id": "n_0060",
       "type": "OpenTask",
-      "content": "TKT-2026-005C-backtest-safety-guard: 分两阶段实施——阶段1（止血）：限制回测规模（max_symbols≤20, max_years≤3）、修改workflow、给call_backtest.py加硬保护（单请求超时≤90s、非响应1次即paused_for_boss_review不准重试）；阶段2（根治）：后端请求级超时（408）、回测异步化（job queue）、取消接口POST /runs/{id}/cancel、并发隔离（每用户/agent限1-2 worker）。第3周起放开软限制。",
+      "content": "VCP形态突破点入场策略研究 - 已暂停，因后端回测阻塞，等待补丁工单 TKT-2026-005C 后重跑",
       "entity_ref": "TKT-2026-005C",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0095",
-      "type": "OpenTask",
-      "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）—— 执行后Boss审核未通过，已暂停至paused_for_boss_review，禁止重试。",
-      "entity_ref": "TKT-2026-005B",
       "state": "blocked",
       "status": "active"
     },
@@ -64,6 +56,14 @@
       "content": "TKT-2026-005: 试运行工单1",
       "entity_ref": "TKT-2026-005",
       "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "in_progress",
       "status": "active"
     },
     {
@@ -91,14 +91,6 @@
       "status": "active"
     },
     {
-      "node_id": "n_0073",
-      "type": "OpenTask",
-      "content": "审查并调整工作区根部bootstrap文件以适应路线β：临时层剥离根TOOLS.md（P0），修改IDENTITY.md和AGENTS.md（P1），修改SOUL.md（P2）；正式层上agents.list+bindings。优先单独出P0根TOOLS.md剥离版本。",
-      "entity_ref": "workspace_root_bootstrap_audit",
-      "state": "in_progress",
-      "status": "active"
-    },
-    {
       "node_id": "n_0065",
       "type": "OpenTask",
       "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
@@ -115,10 +107,10 @@
       "status": "active"
     },
     {
-      "node_id": "n_0060",
+      "node_id": "n_0097",
       "type": "OpenTask",
-      "content": "VCP形态突破点入场策略研究：验证趋势→调整→紧凑→放量→突破形态在A股市场的统计优势",
-      "entity_ref": null,
+      "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
+      "entity_ref": "aos/services/backtest-api",
       "state": "open",
       "status": "active"
     },
@@ -139,114 +131,146 @@
       "status": "active"
     },
     {
-      "node_id": "n_0104",
+      "node_id": "n_0017",
+      "type": "OpenTask",
+      "content": "决定LLM选型（阶段1用哪家LLM）",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0111",
       "type": "Fact",
-      "content": "TKT-2026-005E技术smoke通过：新编译接口可用、回测链路打通、KB写入闭环成立、异常契约稳定、进程清理正常，工具链闭环。下一步建议恢复005B受限研究，但必须严格使用新接口/strategy-builder/compile-ir，禁止旧接口，限制标的≤5、年份≤1、后端失败一次即暂停。",
-      "entity_ref": "aos/services/backtest-api",
+      "content": "TKT-2026-005E技术smoke通过：compile-ir → backtest → KB append → kb_query 工具链已闭环验证",
+      "entity_ref": "TKT-2026-005E",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0110",
+      "type": "Fact",
+      "content": "双接口分流原则：人类交互式构建使用旧接口POST /strategy-builder/invoke（支持pending_user_input、多轮会话），自动研究闭环使用新接口POST /strategy-builder/compile-ir（单次请求、无session、不追问、输入完整IR、返回结构化JSON）。两条链路分别验收，互不影响。同时修复回测异常序列化：全局异常处理器统一返回JSON，禁止直接暴露Python异常对象。",
+      "entity_ref": "aos/services/strategy-builder",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0109",
+      "type": "Fact",
+      "content": "GPT5.5提出的整体方案：阶段0冻结005B、阶段1开005D修契约、阶段2开005E纯技术smoke、阶段3恢复005B受限研究、阶段4并行后端异步化。工单顺序：005B保持paused→005D→005E→005B恢复→006→异步化。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0106",
+      "type": "Decision",
+      "content": "Boss拒绝接受TKT-2026-005B Smoke Run结果，理由：Phase3未完成、builder异常、backtest HTTP500；根据护栏，任何后端失败即停止；要求：停止执行、更新工单状态为paused_for_boss_review、追加Worklog说明、commit推送、不修改策略逻辑。",
+      "entity_ref": null,
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0105",
+      "type": "Fact",
+      "content": "TKT-2026-005B 受限Smoke Run执行结果：Phase0/1/2通过，Phase3 builder stuck after 5 turns，builder返回200但未收敛；手动调用backtest返回HTTP 500；无交易产生；未通过。Boss拒绝接受，要求停止、更新工单状态为paused_for_boss_review并commit/push。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0104",
+      "type": "FileArtifact",
+      "content": "TKT-2026-005B工单文件（已修改为paused_for_boss_review状态）",
+      "entity_ref": "TKT-2026-005B",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0103",
       "type": "Fact",
-      "content": "TKT-2026-005D双通道分流干净：POST /strategy-builder/compile-ir无状态编译，KB自动落库成功，异常序列化修复使后端不会僵死。交付完全符合预期。",
-      "entity_ref": "aos/services/backtest-api",
+      "content": "受限恢复执行前检查完成：读取6个文件，最高行为手册为research_workflow.md；工单status为ready_for_limited_resume；所有约束均已识别；后端异步化未完成，需Boss确认风险。",
+      "entity_ref": null,
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0102",
-      "type": "Decision",
-      "content": "双接口分流方案：保留现有交互式接口 /strategy-builder/invoke 供人类使用（支持多轮追问、pending_user_input、session），全新新建 auto research 专用接口 /strategy-builder/compile-ir（单次请求、无session、不允许pending_user_input、输入完整IR、返回结构化JSON）。两条链路分别验收，quant_assistant 和 strategy-researcher 职责清晰。",
-      "entity_ref": "aos/services/backtest-api",
-      "state": "resolved",
+      "type": "Fact",
+      "content": "TKT-2026-005B工单状态已从ready_for_limited_resume变更为paused_for_boss_review，Worklog追加了Smoke Run结果和Boss审核结论。",
+      "entity_ref": "TKT-2026-005B",
+      "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0101",
+      "type": "Decision",
+      "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0100",
       "type": "Fact",
-      "content": "GPT5.5方案：暂停研究→修工具契约(005D)→技术smoke(005E)→恢复受限研究(005B)→后端异步化(接续005C阶段2)。当前首要修builder/backtest契约，使工具链可稳定调用。",
-      "entity_ref": null,
+      "content": "research_workflow.md已新增§3.7“资源闸(Resource Guard)”条款：单次回测universe≤20标的，时间窗≤3年；后端失败1次即暂停；builder交互≤2轮。",
+      "entity_ref": "openclaw_skills/strategy-researcher/prompts/research_workflow.md",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0099",
+      "type": "Fact",
+      "content": "call_backtest.py已增加硬限制：MAX_SYMBOLS_DEFAULT=20、MAX_YEARS_DEFAULT=3、REQUEST_TIMEOUT_SEC=90；新增_validate_request()函数；超限且无AOS_BOSS_OVERRIDE时抛出BacktestGuardrailError。",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
       "state": null,
       "status": "active"
     },
     {
       "node_id": "n_0098",
-      "type": "Decision",
-      "content": "Boss审核结论：TKT-2026-005B smoke run未通过。builder会话异常（5轮未收敛），backtest端点返回HTTP 500。依据Boss guardrail，工单暂停至paused_for_boss_review。要求：停止执行，不重试，更新工单Worklog后commit/push，不修改策略或脚本。",
-      "entity_ref": null,
-      "state": "resolved",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0097",
       "type": "FileArtifact",
-      "content": "TKT-2026-005B工单文件（已移至open目录，status=ready_for_limited_resume，包含Worklog Boss授权记录及smoke run执行记录，Boss暂停指示）",
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "content": "TOOLS.md正式内容（包含超时默认值从600s更新为90s，以及技能契约）",
+      "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
       "state": "deployed",
       "status": "active"
     },
     {
       "node_id": "n_0096",
-      "type": "Fact",
-      "content": "Boss已授权TKT-2026-005B受限恢复执行：禁止回测、禁止调用后端（脚本侧），仅限烟测（symbols≤5, years≤1, timeout=90s），smoke通过后最多放大到symbols≤20, years≤3，后端失败即paused_for_boss_review，禁止自动重试，禁止231标的回测，受限阶段结果不作为完整研究结论。执行结果：Phase0-2通过，Phase3 smoke未完成，builder 5轮未收敛，backtest HTTP 500，无交易产生。Boss审核后要求暂停。",
-      "entity_ref": "TKT-2026-005B",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0094",
-      "type": "FileArtifact",
-      "content": "research_workflow.md新增§3.7资源闸条款：universe≤20标的，时间窗≤3年；后端失败1次即paused_for_boss_review；builder交互≤2轮；大universe先smoke",
-      "entity_ref": "skills/strategy_researcher/prompts/research_workflow.md",
-      "state": "deployed",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0093",
-      "type": "FileArtifact",
-      "content": "call_backtest.py v1.1: 新增BacktestGuardrailError, _validate_request, max_symbols=20, max_years=3, timeout=90s, BOSS_OVERRIDE支持",
-      "entity_ref": "skills/strategy_researcher/scripts/call_backtest.py",
-      "state": "deployed",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0092",
-      "type": "Fact",
-      "content": "P0-3完成：scripts/call_backtest.py新增资源闸（max_symbols=20, max_years=3, timeout=90s, boss override）；research_workflow.md新增§3.7资源闸条款；TOOLS.md更新超时默认值为90s",
-      "entity_ref": null,
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0091",
       "type": "Decision",
-      "content": "对后端回测系统脆弱性问题，采取先限制后改造的应对策略：第1天agent/脚本侧加硬限制（max_symbols≤20, max_years≤3, 超时≤90s, 非响应paused_for_boss_review），第1-2周后端做请求级超时、回测异步化、取消接口、并发隔离，第3周起可放开限制。两个都要做，但顺序重要。",
+      "content": "先实施限制措施止血（第1天），再进行后端架构改造（第1-2周：请求级超时、回测异步化、取消接口、并发隔离），第3周起将硬限制转为软限制。不是二选一，必须两阶段执行。",
       "entity_ref": null,
       "state": "resolved",
       "status": "active"
     },
     {
-      "node_id": "n_0089",
+      "node_id": "n_0093",
       "type": "Fact",
-      "content": "TKT-2026-005B首次执行暴露后端资源闸和builder非交互接口缺失，当前不能支撑autonomous research",
+      "content": "TKT-2026-005B 执行失败：backend 被大 universe 回测阻塞，agent 发送 231 个标的 × 7 年回测请求，导致后端卡死；builder session corrupted，因子不在注册表中，pending_user_input；重启后端无效，底层回测进程可能仍运行。",
       "entity_ref": "TKT-2026-005B",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0085",
+      "node_id": "n_0091",
       "type": "Fact",
-      "content": "前置检查结果：工单TKT-2026-005B应由strategy_researcher处理，依据intent_type:investigation和assigned_to:agent-strategy-researcher；未读取其他技能私有文件，未调用scripts。自主激活测试通过，实际读取了6个文件（SKILL.md、research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md、工单本体），未越界。",
-      "entity_ref": "TKT-2026-005B",
+      "content": "自主激活测试结果：智能体根据工单 TKT-2026-005B-vcp-breakout-entry.md 自行判断并读取了 skills/strategy_researcher/SKILL.md、prompts/research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md 共6个文件；未读取 quant_assistant 或 duty_reporter 的任何文件；未调用任何 scripts；明确 Phase 0-6 流程；等待确认开始。前置文档准备就绪。",
+      "entity_ref": "ticket_b_pre_execution_check_auto",
       "state": null,
       "status": "active"
     },
     {
-      "node_id": "n_0083",
+      "node_id": "n_0086",
       "type": "Fact",
-      "content": "测试失败原因：助手身份陈述违反IDENTITY.md和AGENTS.md规则，模型仍沿用旧有拟人化身份'小爪'。",
-      "entity_ref": null,
+      "content": "GPT5.5提出的烟测D：Ticket B前置检查。发'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、读取skills/strategy_researcher/SKILL.md、读取必要prompts如research_workflow.md、不读quant_assistant/TOOLS.md、不调用builder/backtest/order/deploy脚本。",
+      "entity_ref": "pre_ticket_b_check",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0072",
+      "type": "Fact",
+      "content": "Ticket B首次派发方式建议：在飞书发短指令显式点名技能和工单路径（例如'@机器人 执行工单 aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md，按 skills/strategy_researcher/SKILL.md 的 investigation 流程处理'），避免口语化需求。",
+      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
       "state": null,
       "status": "active"
     },
@@ -275,34 +299,10 @@
       "status": "active"
     },
     {
-      "node_id": "n_0077",
-      "type": "Fact",
-      "content": "行为级烟测三条标准：1) trace中read_file skills/strategy_researcher/SKILL.md；2) 工具调用路径在strategy_researcher/scripts/下；3) DATA_MISSING_SYNC_REQUIRED按workflow自动重试。",
-      "entity_ref": "skills/strategy_researcher/SKILL.md",
-      "state": null,
-      "status": "active"
-    },
-    {
       "node_id": "n_0064",
       "type": "Fact",
       "content": "当前SKILL.md可能未包含显式读取research_workflow.md等prompts文件的指令，存在prompts内容被闲置的风险。",
       "entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
-      "state": null,
-      "status": "active"
-    },
-    {
-      "node_id": "n_0055",
-      "type": "FileArtifact",
-      "content": "TOOLS.md v1正式内容（替换占位版），包含call_builder.py、call_backtest.py、kb_query.py、smoke_http_clients.sh的签名、参数、错误码、示例",
-      "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
-      "state": "open",
-      "status": "active"
-    },
-    {
-      "node_id": "n_0078",
-      "type": "Fact",
-      "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
-      "entity_ref": "skills/quant_assistant/TOOLS.md",
       "state": null,
       "status": "active"
     }
@@ -318,72 +318,72 @@
       "n_0005"
     ],
     "active_open_tasks": [
-      "n_0088",
-      "n_0095",
+      "n_0060",
       "n_0035",
+      "n_0073",
       "n_0036",
       "n_0011",
       "n_0009",
-      "n_0073",
       "n_0065",
       "n_0008",
-      "n_0060",
+      "n_0097",
       "n_0057",
-      "n_0021"
+      "n_0021",
+      "n_0017"
     ],
     "recent_nodes": [
+      "n_0111",
+      "n_0110",
+      "n_0109",
+      "n_0106",
+      "n_0105",
       "n_0104",
       "n_0103",
       "n_0102",
       "n_0101",
+      "n_0100",
+      "n_0099",
       "n_0098",
       "n_0097",
       "n_0096",
-      "n_0095",
-      "n_0094",
       "n_0093",
-      "n_0092",
-      "n_0091",
-      "n_0089",
-      "n_0088",
-      "n_0085",
-      "n_0083"
+      "n_0091"
     ],
     "symbol_hits": [
-      "n_0085",
-      "n_0088",
-      "n_0096",
-      "n_0095",
-      "n_0089",
+      "n_0060",
+      "n_0093",
+      "n_0111",
+      "n_0105",
+      "n_0104",
+      "n_0102",
       "n_0035",
+      "n_0101",
+      "n_0100",
+      "n_0091",
+      "n_0086",
+      "n_0073",
+      "n_0072",
       "n_0058",
       "n_0040",
-      "n_0038",
-      "n_0104",
-      "n_0103",
-      "n_0092",
-      "n_0077",
-      "n_0064",
-      "n_0055",
-      "n_0078"
+      "n_0038"
     ],
     "conflict_candidates": [
-      "n_0085",
-      "n_0088",
-      "n_0096",
-      "n_0095",
-      "n_0089",
+      "n_0060",
+      "n_0093",
+      "n_0111",
+      "n_0105",
+      "n_0104",
+      "n_0102",
       "n_0035",
+      "n_0100",
+      "n_0091",
+      "n_0086",
+      "n_0073",
+      "n_0072",
       "n_0058",
       "n_0040",
       "n_0038",
-      "n_0104",
-      "n_0103",
-      "n_0092",
-      "n_0077",
-      "n_0064",
-      "n_0055",
-      "n_0078"
+      "n_0064"
     ]
   },
   "recent_edges": [
@@ -406,6 +406,11 @@
       "source": "n_0005",
       "target": "n_0011",
       "relation": "supports"
+    },
+    {
+      "source": "n_0017",
+      "target": "n_0008",
+      "relation": "refines"
     },
     {
       "source": "n_0021",
@@ -468,9 +473,9 @@
       "relation": "serves"
     },
     {
-      "source": "n_0073",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0072",
+      "target": "n_0065",
+      "relation": "refines"
     },
     {
       "source": "n_0073",
@@ -478,64 +483,59 @@
       "relation": "serves"
     },
     {
-      "source": "n_0078",
+      "source": "n_0086",
       "target": "n_0073",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0088",
-      "target": "n_0035",
-      "relation": "refines"
+      "relation": "supports"
     },
     {
       "source": "n_0091",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0091",
-      "target": "n_0088",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0091",
-      "target": "n_0089",
+      "target": "n_0086",
       "relation": "derived_from"
     },
     {
-      "source": "n_0092",
-      "target": "n_0091",
-      "relation": "supports"
+      "source": "n_0096",
+      "target": "n_0001",
+      "relation": "serves"
     },
     {
-      "source": "n_0093",
-      "target": "n_0091",
-      "relation": "implements"
-    },
-    {
-      "source": "n_0094",
-      "target": "n_0091",
-      "relation": "implements"
-    },
-    {
-      "source": "n_0092",
-      "target": "n_0088",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0091",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0094",
+      "source": "n_0097",
+      "target": "n_0096",
       "relation": "depends_on"
+    },
+    {
+      "source": "n_0097",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0101",
+      "target": "n_0102",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0101",
+      "target": "n_0104",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0103",
+      "target": "n_0101",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0106",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0105",
+      "target": "n_0103",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0106",
+      "target": "n_0104",
+      "relation": "serves"
     }
   ],
   "retrieval_trace": {
@@ -565,8 +565,8 @@
       "open",
       "resolved"
     ],
-    "total_nodes": 104,
-    "active_nodes": 87,
+    "total_nodes": 111,
+    "active_nodes": 92,
     "selected_node_ids": [
       "n_0001",
       "n_0005",
@@ -574,6 +574,7 @@
       "n_0008",
       "n_0009",
       "n_0011",
+      "n_0017",
       "n_0021",
       "n_0035",
       "n_0036",
@@ -581,35 +582,34 @@
       "n_0040",
       "n_0043",
       "n_0044",
-      "n_0055",
       "n_0057",
       "n_0058",
       "n_0060",
       "n_0064",
       "n_0065",
+      "n_0072",
       "n_0073",
-      "n_0077",
-      "n_0078",
-      "n_0083",
-      "n_0085",
-      "n_0088",
-      "n_0089",
+      "n_0086",
       "n_0091",
-      "n_0092",
       "n_0093",
-      "n_0094",
-      "n_0095",
       "n_0096",
       "n_0097",
       "n_0098",
+      "n_0099",
+      "n_0100",
       "n_0101",
       "n_0102",
       "n_0103",
-      "n_0104"
+      "n_0104",
+      "n_0105",
+      "n_0106",
+      "n_0109",
+      "n_0110",
+      "n_0111"
     ]
   },
   "_runtime": {
-    "next_node_id": "n_0105",
+    "next_node_id": "n_0112",
     "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
     "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\abu_modern\\s001\\turn_045.md"
   }

@@ -3,62 +3,73 @@
   "turn_id": 33,
   "new_nodes": [
     {
-      "node_id": "n_0088",
-      "type": "OpenTask",
-      "content": "TKT-2026-005C-backtest-safety-guard: 限制回测规模、修改workflow、给call_backtest.py加硬保护",
-      "entity_ref": "TKT-2026-005C",
-      "state": "open",
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0089",
+      "node_id": "n_0093",
       "type": "Fact",
-      "content": "TKT-2026-005B首次执行暴露后端资源闸和builder非交互接口缺失，当前不能支撑autonomous research",
+      "content": "TKT-2026-005B 执行失败：backend 被大 universe 回测阻塞，agent 发送 231 个标的 × 7 年回测请求，导致后端卡死；builder session corrupted，因子不在注册表中，pending_user_input；重启后端无效，底层回测进程可能仍运行。",
       "entity_ref": "TKT-2026-005B",
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0090",
+      "node_id": "n_0094",
       "type": "Decision",
-      "content": "暂停TKT-2026-005B执行，待工具安全边界补丁完成后再重跑；先在飞书发停止指令",
+      "content": "暂停 TKT-2026-005B 执行，标记为 paused_for_boss_review，原因是 backend_backtest_blocked / infrastructure_failure；等待 Boss 确认补丁工单后再重跑，不得继续执行。",
       "entity_ref": "TKT-2026-005B",
       "state": "resolved",
-      "priority": "must_include",
-      "_entity_ref_sanitized": true
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0095",
+      "type": "OpenTask",
+      "content": "创建补丁工单 TKT-2026-005C-backtest-safety-guard：1) 限制试运行回测规模(首轮5-20标的，时间窗1-2年)；2) 修改 workflow：backend 无响应一次即暂停，不允许 agent 重启后重试大请求，pending_user_input 视为 builder 不适配；3) call_backtest.py 加硬保护：默认 max_symbols <= 20，超时拒绝，禁止绕过脚本直接 curl 大回测。",
+      "entity_ref": "TKT-2026-005C",
+      "state": "open",
+      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0084",
+      "node_id": "n_0060",
       "changes": {
-        "content": "TKT-2026-005B因后端回测阻塞执行失败，暂停等待Boss审核和工具安全补丁",
-        "state": "blocked"
+        "content": "VCP形态突破点入场策略研究 - 已暂停，因后端回测阻塞，等待补丁工单 TKT-2026-005C 后重跑",
+        "state": "blocked",
+        "entity_ref": "TKT-2026-005C",
+        "_entity_ref_sanitized": true
       },
-      "reason": "首次执行反馈：后端被大universe回测阻塞，agent重复尝试导致再次卡死，需先补安全边界"
+      "reason": "TKT-2026-005B 执行失败，后端被大回测阻塞，暂停 VCP 研究，待基础设施修复"
     }
   ],
-  "superseded_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0092",
+      "reason": "原决策允许正式执行，但执行因后端阻塞失败，新暂停决策替代旧决策"
+    }
+  ],
   "new_edges": [
     {
-      "source": "n_0088",
-      "target": "n_0035",
-      "relation": "refines"
+      "source": "n_0093",
+      "target": "n_0094",
+      "relation": "supports"
     },
     {
-      "source": "n_0089",
-      "target": "n_0084",
-      "relation": "derived_from"
+      "source": "n_0094",
+      "target": "n_0092",
+      "relation": "invalidates"
     },
     {
-      "source": "n_0090",
-      "target": "n_0084",
+      "source": "n_0094",
+      "target": "n_0060",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0095",
+      "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0090",
-      "target": "n_0088",
-      "relation": "supports"
+      "source": "n_0095",
+      "target": "n_0008",
+      "relation": "refines"
     }
   ]
 }

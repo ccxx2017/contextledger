@@ -3,52 +3,84 @@
   "turn_id": 77,
   "new_nodes": [
     {
-      "node_id": "n_0152",
-      "type": "Decision",
-      "content": "Round 6A缓存污染处理决策：选择B，执行一次cache-bypass re-execution，只允许修改非语义字段。原始Round 6A结果因缓存污染拒绝，诊断run-e92b485b-20250101-20251230-820b8995标记为forbidden/not comparable。等待cache-bypass执行，不得进入Round 6B。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "should_include"
+      "node_id": "n_0187",
+      "type": "Fact",
+      "content": "Round 6A fixed stop_loss=-7% 执行因缓存污染未完成。执行-config命中污染缓存，返回trade_count=0/trade_data_source=missing。墙钟仅3.8s确认缓存命中。结果不可接受。",
+      "entity_ref": "round_6a_cache_pollution",
+      "state": null,
+      "priority": "must_include"
     },
     {
-      "node_id": "n_0153",
+      "node_id": "n_0188",
       "type": "Fact",
-      "content": "Round 6A执行因缓存污染返回trade_count=0/trade_data_source=missing，不可接受。诊断run-e92b485b-20250101-20251230-820b8995被标记为forbidden，不可用于比较。",
+      "content": "诊断性run run-e92b485b-20250101-20251230-820b8995被标记为diagnostic-only/forbidden/not comparable，不得作为基线或与baseline比较。",
       "entity_ref": "run-e92b485b-20250101-20251230-820b8995",
       "state": null,
-      "priority": "should_include"
+      "priority": "must_include"
     },
     {
-      "node_id": "n_0154",
+      "node_id": "n_0189",
+      "type": "Decision",
+      "content": "批准Round 6A执行一次cache-bypass re-execution。仅允许修改IR metadata非执行语义字段（如meta.cache_buster/meta.note），不得修改任何策略行为（entry/exit/sizing/filter/universe/date/capital/train_split等）。stop-loss逻辑：position_pnl_pct <= -7和holding_days>=20保持不变。仅执行完整周期2025-01-01~2025-12-30，最多创建1个正式run。如果仍命中污染缓存则停止。执行前必须输出strategy_id、diff等审计证明。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0190",
       "type": "OpenTask",
-      "content": "Round 6A cache-bypass re-execution：执行一次仅修改IR非语义字段的完整回测，stop_loss=-7%，time_stop=20天，完整周期2025-01-01至2025-12-30。必须输出diff证明executable logic完全一致，并报告15项检查。一旦再次命中缓存立即暂停。",
-      "entity_ref": "round6a_stop_loss_7pct",
-      "state": "open",
-      "priority": "should_include"
+      "content": "Round 6A fixed stop_loss=-7% 实验（cache-bypass re-execution）。当前状态：由于缓存污染暂停，等待执行cache-bypass后重新评估。",
+      "entity_ref": "round_6a_stop_loss_7pct",
+      "state": "blocked",
+      "priority": "must_include"
     }
   ],
   "updated_nodes": [],
-  "superseded_nodes": [],
-  "new_edges": [
+  "superseded_nodes": [
     {
-      "source": "n_0152",
-      "target": "n_0001",
-      "relation": "serves"
+      "node_id": "n_0182",
+      "reason": "新决策允许进入Round 6A执行缓存绕过重新执行，旧决策禁止进入Round 6不再适用"
     },
     {
-      "source": "n_0153",
-      "target": "n_0152",
+      "node_id": "n_0185",
+      "reason": "用户已执行Round 6A并遇到缓存污染，暂不批准决策被新批准决策替代"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0187",
+      "target": "n_0189",
       "relation": "supports"
     },
     {
-      "source": "n_0154",
-      "target": "n_0152",
-      "relation": "implements"
+      "source": "n_0188",
+      "target": "n_0189",
+      "relation": "supports"
     },
     {
-      "source": "n_0154",
+      "source": "n_0189",
+      "target": "n_0182",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0189",
+      "target": "n_0185",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0189",
+      "target": "n_0001",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0190",
       "target": "n_0001",
       "relation": "serves"
+    },
+    {
+      "source": "n_0190",
+      "target": "n_0008",
+      "relation": "refines"
     }
   ]
 }

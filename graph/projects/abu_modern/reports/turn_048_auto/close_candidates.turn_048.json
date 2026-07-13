@@ -8,11 +8,12 @@
   },
   "stats": {
     "graph_turn_counter": 47,
-    "open_like_nodes_scanned": 20,
+    "open_like_nodes_scanned": 19,
     "updated_nodes_in_patch": 1,
-    "candidates_found": 1,
+    "candidates_found": 2,
     "score_histogram": {
-      "11": 1
+      "11": 1,
+      "10": 1
     }
   },
   "candidates": [
@@ -28,6 +29,19 @@
       "matched_terms": [
         "TKT-2026-005",
         "tkt-2026-005"
+      ]
+    },
+    {
+      "node_id": "n_0057",
+      "type": "OpenTask",
+      "entity_ref": "openclaw_skills/strategy-researcher",
+      "state": "open",
+      "status": "active",
+      "priority": "must_include",
+      "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+      "score": 10,
+      "matched_terms": [
+        "openclaw_skills/strategy-researcher"
       ]
     }
   ]

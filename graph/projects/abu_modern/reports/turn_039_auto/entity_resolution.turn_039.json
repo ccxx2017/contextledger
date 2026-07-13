@@ -11,7 +11,7 @@
   },
   "decisions": [
     {
-      "new_node_id": "n_0099",
+      "new_node_id": "n_0107",
       "raw_entity_ref": "TKT-2026-005D",
       "resolved_entity_ref": "TKT-2026-005D",
       "match_confidence": 0.96,
@@ -35,10 +35,11 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0085",
-            "n_0089",
-            "n_0095",
-            "n_0096"
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0105"
           ]
         },
         {
@@ -48,7 +49,7 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0088"
+            "n_0060"
           ]
         },
         {
@@ -65,7 +66,7 @@
       ]
     },
     {
-      "new_node_id": "n_0100",
+      "new_node_id": "n_0108",
       "raw_entity_ref": "TKT-2026-005E",
       "resolved_entity_ref": "TKT-2026-005E",
       "match_confidence": 0.96,
@@ -89,10 +90,11 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0085",
-            "n_0089",
-            "n_0095",
-            "n_0096"
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0105"
           ]
         },
         {
@@ -102,7 +104,7 @@
             "surface_or_token_similarity"
           ],
           "canonical_node_ids": [
-            "n_0088"
+            "n_0060"
           ]
         },
         {
@@ -119,7 +121,7 @@
       ]
     },
     {
-      "new_node_id": "n_0101",
+      "new_node_id": "n_0109",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,

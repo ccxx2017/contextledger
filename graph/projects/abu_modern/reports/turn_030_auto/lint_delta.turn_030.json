@@ -65,11 +65,11 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 83,
-      "edges": 127,
-      "active_nodes": 72,
-      "active_edges": 127,
-      "superseded_nodes": 11,
+      "nodes": 86,
+      "edges": 131,
+      "active_nodes": 74,
+      "active_edges": 131,
+      "superseded_nodes": 12,
       "errors": 0,
       "warnings": 0
     },
@@ -93,7 +93,8 @@
         "n_0049",
         "n_0052",
         "n_0056",
-        "n_0059"
+        "n_0059",
+        "n_0074"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -122,14 +123,14 @@
     "warnings": []
   },
   "after_report": {
-    "ok": false,
+    "ok": true,
     "summary": {
-      "nodes": 88,
+      "nodes": 89,
       "edges": 135,
       "active_nodes": 77,
       "active_edges": 135,
-      "superseded_nodes": 11,
-      "errors": 1,
+      "superseded_nodes": 12,
+      "errors": 0,
       "warnings": 0
     },
     "adjudication_policy": {
@@ -152,7 +153,8 @@
         "n_0049",
         "n_0052",
         "n_0056",
-        "n_0059"
+        "n_0059",
+        "n_0074"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -177,18 +179,7 @@
       "resolved",
       "unknown"
     ],
-    "errors": [
-      {
-        "level": "error",
-        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-        "message": "invalidates 边 edge[131] 指向的节点 n_0083 未标记为 superseded。",
-        "edge_id": "edge[131]",
-        "source": "n_0087",
-        "target": "n_0083",
-        "target_status": null,
-        "target_active": null
-      }
-    ],
+    "errors": [],
     "warnings": []
   },
   "issue_code_histogram": {
@@ -197,15 +188,11 @@
       "warnings": {}
     },
     "after": {
-      "errors": {
-        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
-      },
+      "errors": {},
       "warnings": {}
     },
     "introduced": {
-      "errors": {
-        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
-      },
+      "errors": {},
       "warnings": {}
     },
     "baseline": {
@@ -215,12 +202,12 @@
   },
   "summary": {
     "before_errors": 0,
-    "after_errors": 1,
+    "after_errors": 0,
     "before_warnings": 0,
     "after_warnings": 0,
     "baseline_errors": 0,
     "baseline_warnings": 0,
-    "introduced_errors": 1,
+    "introduced_errors": 0,
     "preexisting_errors": 0,
     "introduced_warnings": 0,
     "preexisting_warnings": 0,
@@ -228,18 +215,7 @@
     "baseline_matched_warnings": 0,
     "overdue_baseline_issues": 0
   },
-  "introduced_errors": [
-    {
-      "level": "error",
-      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-      "message": "invalidates 边 edge[131] 指向的节点 n_0083 未标记为 superseded。",
-      "edge_id": "edge[131]",
-      "source": "n_0087",
-      "target": "n_0083",
-      "target_status": null,
-      "target_active": null
-    }
-  ],
+  "introduced_errors": [],
   "preexisting_errors": [],
   "introduced_warnings": [],
   "preexisting_warnings": [],

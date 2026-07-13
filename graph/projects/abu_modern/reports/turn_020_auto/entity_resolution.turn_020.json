@@ -3,33 +3,65 @@
   "project_id": "abu_modern",
   "turn_id": "turn_020",
   "summary": {
-    "new_nodes": 9,
+    "new_nodes": 2,
     "resolved_exact": 0,
     "resolved_alias": 0,
-    "pending_merge": 2,
-    "unresolved": 7
+    "pending_merge": 1,
+    "unresolved": 1
   },
   "decisions": [
     {
       "new_node_id": "n_0074",
-      "raw_entity_ref": "TOOLS.md",
-      "resolved_entity_ref": "TOOLS.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0075",
-      "raw_entity_ref": "IDENTITY.md",
-      "resolved_entity_ref": "IDENTITY.md",
-      "match_confidence": 0.4737,
+      "raw_entity_ref": "openclaw_root_tools_md",
+      "resolved_entity_ref": "openclaw_root_tools_md",
+      "match_confidence": 0.5946,
       "merge_reason": "",
       "non_merge_reason": "needs_manual_merge_review",
       "candidate_aliases": [
         {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5946,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.5455,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_agent_routing_default",
+          "match_confidence": 0.5385,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0066"
+          ]
+        },
+        {
+          "canonical_entity_ref": "workspace_root_bootstrap_audit",
+          "match_confidence": 0.5385,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0073"
+          ]
+        },
+        {
           "canonical_entity_ref": "openclaw_identity_mechanism",
-          "match_confidence": 0.4737,
+          "match_confidence": 0.5306,
           "evidence": [
             "surface_or_token_similarity"
           ],
@@ -40,77 +72,12 @@
       ]
     },
     {
-      "new_node_id": "n_0076",
-      "raw_entity_ref": "AGENTS.md",
-      "resolved_entity_ref": "AGENTS.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0077",
-      "raw_entity_ref": "SOUL.md",
-      "resolved_entity_ref": "SOUL.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0078",
+      "new_node_id": "n_0075",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,
       "merge_reason": "",
       "non_merge_reason": "entity_ref_missing",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0079",
-      "raw_entity_ref": "TOOLS.md",
-      "resolved_entity_ref": "TOOLS.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0080",
-      "raw_entity_ref": "IDENTITY.md",
-      "resolved_entity_ref": "IDENTITY.md",
-      "match_confidence": 0.4737,
-      "merge_reason": "",
-      "non_merge_reason": "needs_manual_merge_review",
-      "candidate_aliases": [
-        {
-          "canonical_entity_ref": "openclaw_identity_mechanism",
-          "match_confidence": 0.4737,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0062"
-          ]
-        }
-      ]
-    },
-    {
-      "new_node_id": "n_0081",
-      "raw_entity_ref": "AGENTS.md",
-      "resolved_entity_ref": "AGENTS.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
-      "candidate_aliases": []
-    },
-    {
-      "new_node_id": "n_0082",
-      "raw_entity_ref": "SOUL.md",
-      "resolved_entity_ref": "SOUL.md",
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "no_candidate_found",
       "candidate_aliases": []
     }
   ]

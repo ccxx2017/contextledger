@@ -1,12 +1,12 @@
 {
-  "ok": true,
+  "ok": false,
   "summary": {
-    "nodes": 98,
-    "edges": 156,
-    "active_nodes": 83,
-    "active_edges": 156,
-    "superseded_nodes": 15,
-    "errors": 0,
+    "nodes": 106,
+    "edges": 164,
+    "active_nodes": 89,
+    "active_edges": 164,
+    "superseded_nodes": 17,
+    "errors": 1,
     "warnings": 0
   },
   "adjudication_policy": {
@@ -28,12 +28,14 @@
       "n_0034",
       "n_0049",
       "n_0052",
+      "n_0055",
       "n_0056",
       "n_0059",
-      "n_0084",
-      "n_0086",
-      "n_0087",
-      "n_0090"
+      "n_0074",
+      "n_0090",
+      "n_0092",
+      "n_0094",
+      "n_0095"
     ],
     "excluded_due_to_state_node_ids": []
   },
@@ -58,6 +60,17 @@
     "resolved",
     "unknown"
   ],
-  "errors": [],
+  "errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": null,
+      "target_active": null
+    }
+  ],
   "warnings": []
 }

@@ -3,48 +3,75 @@
   "turn_id": 72,
   "new_nodes": [
     {
-      "node_id": "n_0142",
-      "type": "Decision",
-      "content": "Round 5.4B-fix1通过，有效run_id=run-54b-20250101-20251230-d37c696d；旧run_id=run-54b-20250101-20251230-dfc9611d作废；Round6锁定禁止进入。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "should_include"
+      "node_id": "n_0181",
+      "type": "OpenTask",
+      "content": "Round 5.5 Baseline Freeze & Handoff：冻结run-54b-20250101-20251230-d37c696d为后续唯一基线，更新工单状态，追加验收记录，记录baseline metadata，明确旧run禁用清单。不运行新回测，不修改策略，不进入Round 6。",
+      "entity_ref": "round_5.5_baseline_freeze",
+      "state": "open",
+      "priority": "must_include"
     },
     {
-      "node_id": "n_0143",
-      "type": "OpenTask",
-      "content": "Round 5.5 Baseline Freeze & Handoff：冻结run-54b-20250101-20251230-d37c696d为后续唯一基线；更新工单状态、追加验收记录、冻结baseline metadata、禁用旧run清单；不运行新回测，不进入Round6。",
-      "entity_ref": "round5_5_baseline_freeze",
-      "state": "open",
+      "node_id": "n_0182",
+      "type": "Decision",
+      "content": "正式接受run-54b-20250101-20251230-d37c696d为Round6唯一基线，但继续禁止进入Round 6，等待后续指令。旧run run-54b-20250101-20251230-dfc9611d及所有run-e92b485b-*作废，不得作为基线。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0183",
+      "type": "Fact",
+      "content": "Baseline metadata: run_id=run-54b-20250101-20251230-d37c696d, initial_capital=100000, train_split=0.7, universe_size=5, closed_trades=18, open_trades=1, canonical_fills_rows=37, artifact_valid=true, allowed_as_round6_baseline=true, round6_status=locked_until_explicit_approval",
+      "entity_ref": "baseline_metadata_round_5.4b_fix1",
+      "state": null,
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0141",
+      "node_id": "n_0104",
       "changes": {
-        "state": "resolved",
-        "status": "superseded"
+        "content": "TKT-2026-005B工单文件：已更新Round 5.4B-fix1为passed，基线run_id=run-54b-20250101-20251230-d37c696d标记为唯一基线，旧run标记为obsolete，Round 6标记为locked/not_started。"
       },
-      "reason": "Round5.4B clean run复核通过，有效run_id已确立。"
+      "reason": "根据Round 5.4B-fix1通过结果，工单状态需要标记新状态和基线信息"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0142",
-      "target": "n_0141",
-      "relation": "derived_from"
+      "source": "n_0181",
+      "target": "n_0001",
+      "relation": "serves"
     },
     {
-      "source": "n_0143",
-      "target": "n_0142",
+      "source": "n_0182",
+      "target": "n_0001",
       "relation": "refines"
     },
     {
-      "source": "n_0143",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0181",
+      "target": "n_0182",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0183",
+      "target": "n_0182",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0180",
+      "target": "n_0182",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0179",
+      "target": "n_0182",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0182",
+      "target": "n_0177",
+      "relation": "refines"
     }
   ]
 }

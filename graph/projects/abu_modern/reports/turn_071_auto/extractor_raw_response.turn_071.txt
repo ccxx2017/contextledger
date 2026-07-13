@@ -3,50 +3,45 @@
   "turn_id": 71,
   "new_nodes": [
     {
-      "node_id": "n_0142",
+      "node_id": "n_0180",
       "type": "Fact",
-      "content": "Round5.4B-fix1 通过Run: run-54b-20250101-20251230-d37c696d；旧失败Run: run-54b-20250101-20251230-dfc9611d。现金账本闭合: canonical_fills重建final_cash=80117.01720000002, canonical_portfolio final_cash=80117.0172, gap=1.4551915228366852e-11。Metrics仅统计closed trades(18), open trade正确排除。",
-      "entity_ref": "round5_4b_fix1_passed_run",
+      "content": "Feishu Agent 独立黑盒审计 Round 5.4B-fix1 通过：18项 invariant 全部 PASS；run identity 干净；initial_capital 全链路一致 100000；metrics 仅统计 closed trades，open trade 正确排除；现金账本闭合（MTM 辅助验证）；持仓重建正确；NAV identity 自洽。warning: metrics.json 无 run_id 字段但不阻断通过。",
+      "entity_ref": "round_5.4b_fix1_feishu_audit",
       "state": null,
       "priority": "must_include"
-    },
-    {
-      "node_id": "n_0143",
-      "type": "Decision",
-      "content": "Round5.4B-fix1: PASSED。依据: 项目AI artifact自审+Feishu Agent API黑盒审计。Round6仍禁止进入。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0141",
+      "node_id": "n_0174",
       "changes": {
-        "content": "执行Round5.4B完整正式区间clean run复核：使用5.4A修复的canonical链，跑完整区间5标的（600519.SH, 000858.SZ, 600036.SH, 601318.SH, 000333.SZ），1年（2025-01-01至2025-12-30），train_split=0.7，验证账本一致性。通过前禁止进入Round6。",
         "state": "resolved",
         "status": "superseded",
-        "priority": "must_include"
+        "priority": "should_include"
       },
-      "reason": "Round5.4B-fix1已通过审计，任务完成。"
+      "reason": "Feishu Agent 独立审计通过，Round 5.4B-fix1 验收完成，复核任务结束。"
+    },
+    {
+      "node_id": "n_0178",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded",
+        "priority": "should_include"
+      },
+      "reason": "Round 5.4B-fix1 修复任务已完成并通过审计，状态从 implemented 推进为 resolved。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0142",
-      "target": "n_0143",
+      "source": "n_0180",
+      "target": "n_0174",
       "relation": "supports"
     },
     {
-      "source": "n_0143",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0143",
-      "target": "n_0141",
-      "relation": "refines"
+      "source": "n_0180",
+      "target": "n_0178",
+      "relation": "derived_from"
     }
   ]
 }

@@ -8,12 +8,11 @@
   },
   "stats": {
     "graph_turn_counter": 54,
-    "open_like_nodes_scanned": 22,
+    "open_like_nodes_scanned": 20,
     "updated_nodes_in_patch": 1,
-    "candidates_found": 2,
+    "candidates_found": 1,
     "score_histogram": {
-      "11": 1,
-      "3": 1
+      "11": 1
     }
   },
   "candidates": [
@@ -28,21 +27,6 @@
       "score": 11,
       "matched_terms": [
         "TKT-2026-005",
-        "tkt-2026-005"
-      ]
-    },
-    {
-      "node_id": "n_0113",
-      "type": "OpenTask",
-      "entity_ref": "tkt-2026-005b-magnify-validation",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "使用Round 4同一IR，放大规模至symbols≤20, years≤3, timeout=90s，验证工具链在授权上限内稳定。通过后才进入Round5研究。",
-      "score": 3,
-      "matched_terms": [
-        "round",
-        "symbols",
         "tkt-2026-005"
       ]
     }

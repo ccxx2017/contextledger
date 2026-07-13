@@ -65,11 +65,11 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 87,
-      "edges": 133,
-      "active_nodes": 75,
-      "active_edges": 133,
-      "superseded_nodes": 12,
+      "nodes": 92,
+      "edges": 142,
+      "active_nodes": 79,
+      "active_edges": 142,
+      "superseded_nodes": 13,
       "errors": 0,
       "warnings": 0
     },
@@ -94,7 +94,8 @@
         "n_0052",
         "n_0056",
         "n_0059",
-        "n_0086"
+        "n_0074",
+        "n_0090"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -123,14 +124,14 @@
     "warnings": []
   },
   "after_report": {
-    "ok": true,
+    "ok": false,
     "summary": {
-      "nodes": 90,
-      "edges": 137,
-      "active_nodes": 78,
-      "active_edges": 137,
-      "superseded_nodes": 12,
-      "errors": 0,
+      "nodes": 95,
+      "edges": 147,
+      "active_nodes": 81,
+      "active_edges": 147,
+      "superseded_nodes": 14,
+      "errors": 2,
       "warnings": 0
     },
     "adjudication_policy": {
@@ -154,7 +155,9 @@
         "n_0052",
         "n_0056",
         "n_0059",
-        "n_0086"
+        "n_0074",
+        "n_0090",
+        "n_0092"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -179,7 +182,40 @@
       "resolved",
       "unknown"
     ],
-    "errors": [],
+    "errors": [
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[144]",
+        "source": "n_0094",
+        "target": "n_0060",
+        "target_status": null,
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+        "message": "相同 entity_ref=TKT-2026-005C 下同时存在多个互斥 active state: blocked, open",
+        "entity_ref": "TKT-2026-005C",
+        "states": {
+          "blocked": [
+            "n_0060"
+          ],
+          "open": [
+            "n_0095"
+          ]
+        },
+        "mutually_exclusive_states": [
+          "blocked",
+          "cancelled",
+          "deployed",
+          "implemented",
+          "open",
+          "resolved"
+        ]
+      }
+    ],
     "warnings": []
   },
   "issue_code_histogram": {
@@ -188,11 +224,17 @@
       "warnings": {}
     },
     "after": {
-      "errors": {},
+      "errors": {
+        "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF": 1,
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
+      },
       "warnings": {}
     },
     "introduced": {
-      "errors": {},
+      "errors": {
+        "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF": 1,
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
+      },
       "warnings": {}
     },
     "baseline": {
@@ -202,12 +244,12 @@
   },
   "summary": {
     "before_errors": 0,
-    "after_errors": 0,
+    "after_errors": 2,
     "before_warnings": 0,
     "after_warnings": 0,
     "baseline_errors": 0,
     "baseline_warnings": 0,
-    "introduced_errors": 0,
+    "introduced_errors": 2,
     "preexisting_errors": 0,
     "introduced_warnings": 0,
     "preexisting_warnings": 0,
@@ -215,7 +257,40 @@
     "baseline_matched_warnings": 0,
     "overdue_baseline_issues": 0
   },
-  "introduced_errors": [],
+  "introduced_errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-005C 下同时存在多个互斥 active state: blocked, open",
+      "entity_ref": "TKT-2026-005C",
+      "states": {
+        "blocked": [
+          "n_0060"
+        ],
+        "open": [
+          "n_0095"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ]
+    }
+  ],
   "preexisting_errors": [],
   "introduced_warnings": [],
   "preexisting_warnings": [],

@@ -3,81 +3,74 @@
   "turn_id": 53,
   "new_nodes": [
     {
-      "node_id": "n_0117",
-      "type": "Decision",
-      "content": "暂停TKT-2026-005I验收，要求执行live path verification",
+      "node_id": "n_0134",
+      "type": "Fact",
+      "content": "项目AI检查了三个archive，未发现##档案元数据JSON区块，也没有sanity_check_failed/passed字段。这表明005I的实现声明与live archive输出不一致。",
       "entity_ref": "TKT-2026-005I",
-      "state": "resolved",
-      "priority": "should_include",
-      "_entity_ref_sanitized": true
+      "state": null,
+      "priority": "must_include"
     },
     {
-      "node_id": "n_0118",
+      "node_id": "n_0135",
+      "type": "Decision",
+      "content": "暂停005B，暂停005I验收，要求005I live path verification。必须验证compile-ir→KB archive主链路实际产出##档案元数据JSON与sanity状态，否则不可验收005I，不可恢复005B。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "must_include"
+    },
+    {
+      "node_id": "n_0136",
       "type": "OpenTask",
-      "content": "TKT-2026-005I-live-path-verification: 执行live路径验证，确认compile-ir→KB archive主链路是否产出##档案元数据JSON和sanity状态。步骤：1. 确认archive是否旧档案；2. 确认后端版本和路径；3. 新建005I专用live test archive；4. 验证元数据区块；5. 输出报告。必须先完成此任务才能验收005I。",
-      "entity_ref": "005i_live_path_verification",
+      "content": "执行TKT-2026-005I live path verification。步骤：1)确认之前检查的archive是旧还是新；2)确认当前后端代码版本和数据路径；3)新建005I专用live test archive（compile-ir）；4)验证新archive是否包含##档案元数据JSON及sanity字段；5)报告验证结果（live_verified_passed/failed/inconclusive）。",
+      "entity_ref": "TKT-2026-005I",
       "state": "open",
       "priority": "must_include"
-    },
-    {
-      "node_id": "n_0119",
-      "type": "Fact",
-      "content": "项目AI检查了三个现有archive（strategy_id未列），均无##档案元数据JSON或sanity字段。这与n_0116声称的KB archive新增元数据功能不符，需验证live路径。",
-      "entity_ref": "quant_intelligence/knowledge_base.py",
-      "state": null,
-      "priority": "must_include"
-    },
-    {
-      "node_id": "n_0120",
-      "type": "Constraint",
-      "content": "在TKT-2026-005I live path verification通过前，禁止恢复TKT-2026-005B Round5研究。",
-      "entity_ref": "TKT-2026-005I",
-      "state": null,
-      "priority": "must_include",
-      "_entity_ref_sanitized": true
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0114",
+      "node_id": "n_0060",
       "changes": {
-        "state": "blocked",
-        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。\n\n当前因Boss要求先完成005I live path verification，暂时阻塞。"
+        "state": "blocked"
       },
-      "reason": "Boss要求暂停Round5，待005I live path verification通过后恢复"
+      "reason": "005B被暂停，005I未验证，依赖条件不满足"
     }
   ],
   "superseded_nodes": [
     {
-      "node_id": "n_0116",
-      "reason": "项目AI检查live archive未发现元数据JSON区块，与n_0116声称的实现不一致。暂时废弃，待005I验证后重建。"
+      "node_id": "n_0133",
+      "reason": "005I验收被暂停，live path未验证，原验收Decision不再有效。"
+    },
+    {
+      "node_id": "n_0130",
+      "reason": "005I完成事实被质疑，live archive未显示元数据区块，新事实表明完成声明不成立。"
     }
   ],
   "new_edges": [
     {
-      "source": "n_0117",
-      "target": "n_0118",
-      "relation": "implements"
+      "source": "n_0134",
+      "target": "n_0135",
+      "relation": "supports"
     },
     {
-      "source": "n_0117",
-      "target": "n_0120",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0114",
-      "target": "n_0120",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0119",
-      "target": "n_0116",
+      "source": "n_0135",
+      "target": "n_0133",
       "relation": "invalidates"
     },
     {
-      "source": "n_0117",
-      "target": "n_0001",
-      "relation": "serves"
+      "source": "n_0135",
+      "target": "n_0060",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0136",
+      "target": "n_0135",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0134",
+      "target": "n_0130",
+      "relation": "invalidates"
     }
   ]
 }

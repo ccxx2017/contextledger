@@ -1,69 +1,32 @@
 {
   "task_id": "task_default",
   "turn_id": 46,
-  "new_nodes": [
-    {
-      "node_id": "n_0107",
-      "type": "FileArtifact",
-      "content": "TKT-2026-005B工单文件(已修正: ticket_id=005B, status=ready_for_limited_resume, 添加硬约束等)",
-      "entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "state": "deployed",
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0108",
-      "type": "OpenTask",
-      "content": "对TKT-2026-005B执行正式恢复前检查：不调用scripts，仅读取文件验证条件。输出检查结果后才能正式执行。",
-      "entity_ref": null,
-      "state": "open",
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0109",
-      "type": "Fact",
-      "content": "TKT-2026-005B修改版已满足所有关键条件（ticket_id修正、status=ready_for_limited_resume、硬约束添加等），可交给strategy_researcher执行，但需先执行前检查再授权执行。",
-      "entity_ref": "TKT-2026-005B",
-      "state": null,
-      "priority": "should_include",
-      "_entity_ref_sanitized": true
-    }
-  ],
+  "new_nodes": [],
   "updated_nodes": [
     {
-      "node_id": "n_0106",
+      "node_id": "n_0112",
       "changes": {
         "state": "resolved",
-        "status": "superseded"
+        "status": "superseded",
+        "priority": "should_include"
       },
-      "reason": "补丁已通过附件应用，工单文件已更新为n_0107。"
-    }
-  ],
-  "superseded_nodes": [
+      "reason": "TKT-2026-005B工单已按建议修改完毕，可派发执行前检查"
+    },
     {
-      "node_id": "n_0097",
-      "reason": "被修改版工单文件n_0107替代。"
+      "node_id": "n_0104",
+      "changes": {
+        "content": "TKT-2026-005B工单文件（已修改为ready_for_limited_resume状态）",
+        "state": "deployed"
+      },
+      "reason": "工单内容已更新为ready_for_limited_resume，符合派发条件"
     }
   ],
+  "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0107",
-      "target": "n_0097",
-      "relation": "invalidates"
-    },
-    {
-      "source": "n_0106",
-      "target": "n_0107",
+      "source": "n_0112",
+      "target": "n_0104",
       "relation": "produces"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0108",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0109",
-      "target": "n_0095",
-      "relation": "supports"
     }
   ]
 }

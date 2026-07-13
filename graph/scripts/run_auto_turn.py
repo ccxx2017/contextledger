@@ -202,6 +202,9 @@ def main() -> int:
     parser.add_argument("--max-nodes", type=int, default=12, help="bundle 预算")
     parser.add_argument("--budget-profile", default="phase1_prep_baseline", help="bundle budget profile")
     parser.add_argument("--warnings-non-blocking", action="store_true", help="lint warning 不阻塞提交")
+    parser.add_argument("--pending-merge-non-blocking", action="store_true", help="pending_merge 超期不阻塞提交")
+    parser.add_argument("--lint-errors-non-blocking", action="store_true", help="lint error 不阻塞提交（重建历史链时临时使用）")
+    parser.add_argument("--reconcile-errors-non-blocking", action="store_true", help="reconcile error 不阻塞提交（重建历史链时临时使用）")
     args = parser.parse_args()
 
     project_id = args.project_id
@@ -422,15 +425,25 @@ def main() -> int:
                 current_patch = retry_resolved
 
         if not reconcile_ok or not reconcile_report:
-            reason = f"reconcile 失败且重试 {args.max_retry} 次后仍无法通过"
-            health["stages"]["reconcile_patch"] = {"status": "FAIL", "reason": reason}
-            health["summary"] = quarantine_turn(
-                project_dir, turn_id, work_dir, "reconcile_patch", reason, current_patch
-            )
-            health["lights"] = {"critical_status": "RED", "lint_baseline": "RED", "queue_health": "RED", "assembly_integrity": "RED"}
-            write_json(health_report_path, health)
-            print(f"[{turn_id}] QUARANTINE: {reason}")
-            return 0
+            if reconcile_report and args.reconcile_errors_non_blocking:
+                print(f"[{turn_id}] reconcile has errors but --reconcile-errors-non-blocking is set; continuing")
+                health["stages"]["reconcile_patch"] = {
+                    "status": "OK",
+                    "out": str(reconcile_report_path),
+                    "retries": attempt,
+                    "errors": reconcile_report.get("summary", {}).get("errors", 0),
+                    "warnings": reconcile_report.get("summary", {}).get("warnings", 0),
+                }
+            else:
+                reason = f"reconcile 失败且重试 {args.max_retry} 次后仍无法通过"
+                health["stages"]["reconcile_patch"] = {"status": "FAIL", "reason": reason}
+                health["summary"] = quarantine_turn(
+                    project_dir, turn_id, work_dir, "reconcile_patch", reason, current_patch
+                )
+                health["lights"] = {"critical_status": "RED", "lint_baseline": "RED", "queue_health": "RED", "assembly_integrity": "RED"}
+                write_json(health_report_path, health)
+                print(f"[{turn_id}] QUARANTINE: {reason}")
+                return 0
 
         health["stages"]["reconcile_patch"] = {
             "status": "OK",
@@ -538,14 +551,21 @@ def main() -> int:
         # 10. check_pending_merge_register
         current_stage = "check_pending_merge_register"
         print(f"[{turn_id}] checking pending_merge_register ...")
-        run([
+        result = run([
             "graph/scripts/check_pending_merge_register.py",
             "--register", str(project_dir / "pending_merge" / "pending_merge_register.json"),
             "--current-turn", str(turn_num),
             "--out", str(pending_merge_overdue_path),
-        ])
+        ], check=False)
         overdue_report = load_json(pending_merge_overdue_path)
         overdue_items = overdue_report.get("summary", {}).get("overdue_items", 0)
+        if result.returncode != 0 and overdue_items and not args.pending_merge_non_blocking:
+            raise subprocess.CalledProcessError(
+                result.returncode,
+                ["graph/scripts/check_pending_merge_register.py"],
+                output=result.stdout,
+                stderr=result.stderr,
+            )
         health["stages"]["check_pending_merge_register"] = {
             "status": "OK",
             "overdue_items": overdue_items,
@@ -559,13 +579,16 @@ def main() -> int:
             and health["summary"].get("status") != "QUARANTINE"
         )
         baseline_green = (
-            health["stages"]["diff_lint_reports"]["introduced_errors"] == 0
+            (
+                args.lint_errors_non_blocking
+                or health["stages"]["diff_lint_reports"]["introduced_errors"] == 0
+            )
             and (
                 args.warnings_non_blocking
                 or health["stages"]["diff_lint_reports"]["introduced_warnings"] == 0
             )
         )
-        queue_green = overdue_items == 0
+        queue_green = overdue_items == 0 or args.pending_merge_non_blocking
         assembly_green = (
             health["stages"]["build_context_bundle"]["status"] == "OK"
             and l1_must_count > 0

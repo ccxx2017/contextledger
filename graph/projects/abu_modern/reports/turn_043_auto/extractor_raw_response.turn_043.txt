@@ -1,51 +1,24 @@
 {
   "task_id": "task_default",
   "turn_id": 43,
-  "new_nodes": [
-    {
-      "node_id": "n_0103",
-      "type": "Fact",
-      "content": "TKT-2026-005D双通道分流干净：POST /strategy-builder/compile-ir无状态编译，KB自动落库成功，异常序列化修复使后端不会僵死。交付完全符合预期。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "should_include"
-    }
-  ],
+  "new_nodes": [],
   "updated_nodes": [
     {
-      "node_id": "n_0099",
+      "node_id": "n_0107",
       "changes": {
-        "state": "resolved",
-        "status": "superseded",
-        "priority": "should_include"
+        "state": "implemented",
+        "status": "superseded"
       },
-      "reason": "TKT-2026-005D 交付完成，经审计完全符合预期，双通道分流、KB自动落库、异常序列化修复均成功实施。"
+      "reason": "TKT-2026-005D双接口分流与契约修复已实现，审计通过，交付物符合预期"
     },
     {
-      "node_id": "n_0100",
+      "node_id": "n_0108",
       "changes": {
-        "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。手写最小IR（1-5标的，1年窗口），编写bash/python脚本模拟call_builder.py（指向新端点/strategy-builder/compile-ir）→ call_backtest.py → kb_query.py链路，验证后端无僵死进程、无500序列化错误。",
-        "priority": "should_include"
+        "content": "TKT-2026-005E-technical-e2e-smoke：纯技术端到端smoke，使用手写最小IR测试工具链闭环，不进行VCP研究。具体步骤：1.手写极简VCP策略IR JSON（1-5只标的，2025年1年窗口）；2.编写验证脚本，模拟核心工具调用链：a)调用call_builder.py指向新端点/strategy-builder/compile-ir，验证获取strategy_id且KB自动落库；b)调用call_backtest.py传入strategy_id回测，验证200瘦响应；c)调用kb_query.py读取策略档案，验证回测指标已追加。验收标准：builder返回strategy_id，无pending_user_input，backtest返回合法JSON，无HTTP 500，KB写入成功，backtest结果追加，无卡死，护栏仍生效。"
       },
-      "reason": "细化工单描述，与用户最新指示对齐，并明确依赖005D已完成。"
+      "reason": "根据Gemini审计建议，细化执行步骤以明确技术Smoke的具体脚本调用路径"
     }
   ],
-  "superseded_nodes": [
-    {
-      "node_id": "n_0099",
-      "reason": "TKT-2026-005D 已实现并验收通过，退出活跃任务集。"
-    }
-  ],
-  "new_edges": [
-    {
-      "source": "n_0103",
-      "target": "n_0099",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0100",
-      "target": "n_0099",
-      "relation": "depends_on"
-    }
-  ]
+  "superseded_nodes": [],
+  "new_edges": []
 }

@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 119,
+    "active_graph_nodes": 97,
+    "new_nodes": 10,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-005F",
+      "new_node_id": "n_0120",
+      "old_node_id": "n_0118",
+      "new_state": "",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "TKT-2026-005F",
+      "new_node_id": "n_0120",
+      "old_node_id": "n_0119",
+      "new_state": "",
+      "old_state": ""
+    }
+  ],
+  "weak_matches": []
+}

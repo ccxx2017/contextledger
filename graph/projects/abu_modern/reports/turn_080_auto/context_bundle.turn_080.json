@@ -1,0 +1,680 @@
+{
+  "kind": "context_bundle.graph_only.v1",
+  "project_id": "abu_modern",
+  "turn_id": "turn_080",
+  "goal": "基于 graph_state 机械生成当前态上下文包，用于主项目的 Graph-only 装配。",
+  "source_graph": "D:/CCXXLESSON/contextledger/graph/projects/abu_modern/reports/turn_080_auto/graph_state.after_turn_080.json",
+  "authority": {
+    "mode": "graph_only",
+    "current_state_field": "status",
+    "state_gate_field": "state",
+    "priority_field": "priority"
+  },
+  "assembly": {
+    "generated_by": "graph/scripts/build_context_bundle.py",
+    "selection_rule": "status=active -> exclude pending open-task candidates with state=open -> priority order -> greedy within budget",
+    "budget_profile": "phase1_prep_baseline",
+    "max_nodes": 80,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0028",
+      "n_0029",
+      "n_0043",
+      "n_0057",
+      "n_0065",
+      "n_0076",
+      "n_0135",
+      "n_0137",
+      "n_0144",
+      "n_0162",
+      "n_0167",
+      "n_0176",
+      "n_0177",
+      "n_0179",
+      "n_0180",
+      "n_0187",
+      "n_0188",
+      "n_0189",
+      "n_0190",
+      "n_0193",
+      "n_0191",
+      "n_0184",
+      "n_0183",
+      "n_0175",
+      "n_0172",
+      "n_0169",
+      "n_0170",
+      "n_0166",
+      "n_0164",
+      "n_0165",
+      "n_0156",
+      "n_0157",
+      "n_0153",
+      "n_0154",
+      "n_0152",
+      "n_0146",
+      "n_0147",
+      "n_0139",
+      "n_0131",
+      "n_0132",
+      "n_0120",
+      "n_0121",
+      "n_0122",
+      "n_0124",
+      "n_0125",
+      "n_0127",
+      "n_0128",
+      "n_0115",
+      "n_0116",
+      "n_0117",
+      "n_0114",
+      "n_0111",
+      "n_0110",
+      "n_0101",
+      "n_0102",
+      "n_0103",
+      "n_0104",
+      "n_0098",
+      "n_0099",
+      "n_0100",
+      "n_0096",
+      "n_0097",
+      "n_0093",
+      "n_0091",
+      "n_0087",
+      "n_0088",
+      "n_0089",
+      "n_0083",
+      "n_0084",
+      "n_0085",
+      "n_0086",
+      "n_0082",
+      "n_0080",
+      "n_0081",
+      "n_0077",
+      "n_0078",
+      "n_0075",
+      "n_0070",
+      "n_0073"
+    ]
+  },
+  "l1_baseline": {
+    "selection_basis": "status=active AND not(state=open on pending open-task candidate) AND priority ordered packing",
+    "must_include": [
+      {
+        "node_id": "n_0001",
+        "type": "UserGoal",
+        "content": "构建量化研究与数字组织系统，实现AOS反哺量化主线",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0028",
+        "type": "Fact",
+        "content": "schema.md定义了知识库操作函数和数据结构，是strategy-researcher的设计基础",
+        "priority": "must_include",
+        "entity_ref": "data/knowledge/schema.md"
+      },
+      {
+        "node_id": "n_0029",
+        "type": "Fact",
+        "content": "quant_assistant与strategy-researcher是平行Agent，共享后端但不互相调用",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0043",
+        "type": "Constraint",
+        "content": "仓库同步协议：工作前git pull，工作中commit，工作后git push；禁止自行解决冲突、force push等",
+        "priority": "must_include",
+        "entity_ref": "agents/git_sync_protocol"
+      },
+      {
+        "node_id": "n_0057",
+        "type": "OpenTask",
+        "content": "解决openclaw_skills/strategy-researcher目录命名歧义，统一为strategy-researcher连字符",
+        "priority": "must_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0065",
+        "type": "OpenTask",
+        "content": "SKILL.md覆盖审计：逐条核对Charter约束在SKILL.md的落地，核对prompts文件读取指令，核对端点常量等，确保在派出Ticket B前补全漏洞。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0076",
+        "type": "Fact",
+        "content": "GPT5.4对Opus4.7方案的评价：问题识别准（8.5/10），短期止血价值高（8/10），但作为最终架构方案不足（4/10）。建议拆为临时层（精简根bootstrap，清除TOOLS.md技能污染）和正式层（后续上agents.list+bindings+每agent skills allowlist）。对4个根文件的修改优先级：最高-根TOOLS.md，次高-IDENTITY.md和AGENTS.md，最低-SOUL.md。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0135",
+        "type": "Decision",
+        "content": "暂停005B，暂停005I验收，要求005I live path verification。必须验证compile-ir→KB archive主链路实际产出##档案元数据JSON与sanity状态，否则不可验收005I，不可恢复005B。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0137",
+        "type": "Fact",
+        "content": "TKT-2026-005I live path verification: live_verified_passed. 新archive ir_86a1843218b0包含##档案元数据JSON、sanity_check_failed、sanity_missing_fields、sanity_failure_reasons等字段。旧archive（stg_20260526_1231e6, stg_20260526_test_ir, tkt_2026_005e_vcp_20260520_112814）为005I部署前创建，不含相关字段。",
+        "priority": "must_include",
+        "entity_ref": "TKT-2026-005I"
+      },
+      {
+        "node_id": "n_0144",
+        "type": "Fact",
+        "content": "Round 5.1审计报告结论：交易级PnL、分标的PnL、最终资金、最大回撤、daily returns之间无法闭合，差额约689,450。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0162",
+        "type": "Decision",
+        "content": "Round 5.3D未通过，不能进入Round 6。要求执行Round 5.3E三账一致性复核（capital/trades/executions/timeseries）。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0167",
+        "type": "Decision",
+        "content": "基于 Round 5.3E 未通过，禁止进入 Round 6；命令执行 Round 5.3F：同一 artifact pack 下的账本权威源复核，包括 artifact pack 固定、canonical fills 重建、逐日对账、最终状态唯一性判定。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0176",
+        "type": "Fact",
+        "content": "Round 5.4B 全年正式区间 clean run 完成但不通过。run_id=run-54b-20250101-20251230-dfc9611d。两个 blocker：1) initial_capital 口径不一致（实际使用 1000000，要求 100000）；2) metrics.json 将 open trade 计入 trade_count/losing_trades。canonical artifact chain 本身通过：fills 闭合、positions 可重建、derived 一致、API 无泄漏。",
+        "priority": "must_include",
+        "entity_ref": "run-54b-20250101-20251230-dfc9611d"
+      },
+      {
+        "node_id": "n_0177",
+        "type": "Decision",
+        "content": "基于 Round 5.4B 未通过，继续禁止进入 Round 6；命令执行 Round 5.4B-fix1：仅修复 initial_capital 口径和 metrics open trade 统计口径，重新 clean run。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0179",
+        "type": "Fact",
+        "content": "Round 5.4B-fix1 自审通过。新run_id=run-54b-20250101-20251230-d37c696d，初始资本和metrics口径两个blocker已修复，canonical/derived/API/Invariant全部通过。尚未经Feishu Agent独立审计。",
+        "priority": "must_include",
+        "entity_ref": "run-54b-20250101-20251230-d37c696d"
+      },
+      {
+        "node_id": "n_0180",
+        "type": "Fact",
+        "content": "Feishu Agent 独立黑盒审计 Round 5.4B-fix1 通过：18项 invariant 全部 PASS；run identity 干净；initial_capital 全链路一致 100000；metrics 仅统计 closed trades，open trade 正确排除；现金账本闭合（MTM 辅助验证）；持仓重建正确；NAV identity 自洽。warning: metrics.json 无 run_id 字段但不阻断通过。",
+        "priority": "must_include",
+        "entity_ref": "round_5.4b_fix1_feishu_audit"
+      },
+      {
+        "node_id": "n_0187",
+        "type": "Fact",
+        "content": "Round 6A fixed stop_loss=-7% 执行因缓存污染未完成。执行-config命中污染缓存，返回trade_count=0/trade_data_source=missing。墙钟仅3.8s确认缓存命中。结果不可接受。",
+        "priority": "must_include",
+        "entity_ref": "round_6a_cache_pollution"
+      },
+      {
+        "node_id": "n_0188",
+        "type": "Fact",
+        "content": "诊断性run run-e92b485b-20250101-20251230-820b8995被标记为diagnostic-only/forbidden/not comparable，不得作为基线或与baseline比较。",
+        "priority": "must_include",
+        "entity_ref": "run-e92b485b-20250101-20251230-820b8995"
+      },
+      {
+        "node_id": "n_0189",
+        "type": "Decision",
+        "content": "批准Round 6A执行一次cache-bypass re-execution。仅允许修改IR metadata非执行语义字段（如meta.cache_buster/meta.note），不得修改任何策略行为（entry/exit/sizing/filter/universe/date/capital/train_split等）。stop-loss逻辑：position_pnl_pct <= -7和holding_days>=20保持不变。仅执行完整周期2025-01-01~2025-12-30，最多创建1个正式run。如果仍命中污染缓存则停止。执行前必须输出strategy_id、diff等审计证明。",
+        "priority": "must_include"
+      },
+      {
+        "node_id": "n_0190",
+        "type": "OpenTask",
+        "content": "Round 6A fixed stop_loss=-7% 实验（cache-bypass re-execution）。当前状态：等待项目AI完成缓存诊断与清理后，由Feishu Agent执行单次实验。",
+        "priority": "must_include",
+        "entity_ref": "round_6a_stop_loss_7pct"
+      }
+    ],
+    "should_include": [
+      {
+        "node_id": "n_0193",
+        "type": "Fact",
+        "content": "Round 6A cache remediation completed and passed on 2026-05-31. Three polluted runs backed up and quarantined: run-749b90e9-20250101-20250110-fcac2c66, run-749b90e9-20250101-20251230-820b8995, run-e92b485b-20250101-20251230-820b8995. Baseline run-54b-20250101-20251230-d37c696d unchanged. No backtest executed, no strategy modified, no new run created. Active cache clear of three runs.",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0191",
+        "type": "Decision",
+        "content": "决定由项目AI负责Round 6A缓存污染问题的诊断与清理，但不得执行回测、创建新run、修改策略。后续Feishu Agent执行Round 6A单次实验。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0184",
+        "type": "Fact",
+        "content": "Feishu Agent Round 6 Preflight fully passed and archived. API preflight passed, project AI local train_split confirmation passed, baseline freeze confirmed. Accepted baseline: run-54b-20250101-20251230-d37c696d. Round 6 execution remains locked / not_started / requires explicit approval.",
+        "priority": "should_include",
+        "entity_ref": "round_6_preflight_feishu_agent"
+      },
+      {
+        "node_id": "n_0183",
+        "type": "Fact",
+        "content": "Baseline metadata: run_id=run-54b-20250101-20251230-d37c696d, initial_capital=100000, train_split=0.7, universe_size=5, closed_trades=18, open_trades=1, canonical_fills_rows=37, artifact_valid=true, allowed_as_round6_baseline=true, round6_status=locked_until_explicit_approval",
+        "priority": "should_include",
+        "entity_ref": "baseline_metadata_round_5.4b_fix1"
+      },
+      {
+        "node_id": "n_0175",
+        "type": "Fact",
+        "content": "Feishu Agent 独立审计 Round 5.4A 结论：✅ PASSED。所有8大审计项目全部通过。关键数据：initial_capital=100000, total_return=+1.62%, final_equity=101616.52, max_exposure=0.205008, cash ledger gap=0.00。磁盘文件SHA256未直接读取但API一致性已验证。",
+        "priority": "should_include",
+        "entity_ref": "round_5.4a_feishu_audit_result"
+      },
+      {
+        "node_id": "n_0172",
+        "type": "Fact",
+        "content": "项目AI自测：Round 5.4A 账本产物生成链修复通过。新 clean run: run-54a-20250509-20250515-5f0e9904。9项验收项满足，包括canonical_fills/canonical_positions_daily/canonical_portfolio_daily存在且一致，派生文件与API端点一致性全部通过。但尚未经Feishu Agent独立审计。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0169",
+        "type": "Fact",
+        "content": "Round 5.3F 未通过：Feishu Agent 与项目 AI 混用 run_id（Feishu: run-e92b485b-20241231-20251230-0e74ffa7, 项目AI: run-e92b485b-20250101-20251230-0e74ffa7），导致此前所有混合结论无效；锁定 Feishu pack 后，capital.csv、timeseries.csv、trades.csv、positions_daily.csv 仍不一致（final_keep_sum=3000 vs positions_final_qty=4400 等），且 pack 内不存在 orders.csv/actions.csv/executions.csv/summary.json，trades.csv.fills 全空，无法生成 canonical fills；因此不具备唯一账本权威源，禁止进入 Round 6。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0170",
+        "type": "Decision",
+        "content": "基于 Round 5.3F 未通过，禁止进入 Round 6；命令执行 Round 5.4A：账本产物生成链修复，重构回测产出链路，确保每 run 拥有唯一可审计账本源。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0166",
+        "type": "Fact",
+        "content": "Round 5.3E 三账一致性复核结论：未通过。Feishu Agent 报告指出 timeseries/nav 存在 bug（NAV 与 real cash+MV 脱钩）；项目 AI 指出同一 run_id 下 capital.csv、trades.csv、positions_daily.csv 之间互相冲突（final_keep_sum=3000 vs positions_final_qty=7900、trade_count=11 vs 13 等），gap=-185,592 无法归因于 MTM。GPT5.5确认 Feishu 低估问题范围，项目 AI 更可信，但需同一 artifact pack 固定后才能最终判定。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0164",
+        "type": "Fact",
+        "content": "Feishu Agent的Round5.3D结论存在三个逻辑矛盾：1）cash ledger不闭合（expected_cash=965323 vs actual_cash=779731，gap=-185592）却称可以通过；2）MTM不能解释最终cash缺口；3）5月max_gross_exposure=33.9x与max_total_exposure生效的结论冲突。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0165",
+        "type": "Decision",
+        "content": "采信项目AI对问题性质的方向性判断：gap=-185592的原因是capital ledger、trade ledger、report/timeseries ledger三账不一致，而非正常MTM。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0156",
+        "type": "Fact",
+        "content": "Round5.3C黑盒复核报告（Feishu Agent）：14项检查通过12/14；条件2（final_equity与trade PnL gap -185k）和条件12（最后2笔交易exit_price=0）未通过；结论暂不建议进入Round 6。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0157",
+        "type": "Fact",
+        "content": "项目AI源码排查与修复（针对Round5.3C未通过项）：trades.csv过滤未平仓头寸，positions_daily改用capital_pd真实数据，新增测试2 passed。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B_round5.3C_fix"
+      },
+      {
+        "node_id": "n_0153",
+        "type": "Fact",
+        "content": "Round5.3A黑盒审计确认：fixed initial capital sizing、无cash constraint、market_value>equity、同一symbol重复开仓、trade PnL不闭合（gap -689,451）；所有指标因杠杆放大失真，不允许进入Round 6。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B_round5.3A_audit"
+      },
+      {
+        "node_id": "n_0154",
+        "type": "Fact",
+        "content": "Round5.3B源码排查与修复完成：定位4个bug（final_equity取值错误、未成交订单污染统计、仓位sizing使用初始资金、默认允许重复开仓），在executor_facade.py、custom_positions.py、abupy_caller.py中修复；新增单元测试12个全部通过。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B_round5.3B_fix"
+      },
+      {
+        "node_id": "n_0152",
+        "type": "Decision",
+        "content": "短期不给项目AI后端API技能，保持职责分离：Feishu Agent负责黑盒审计和验收，项目AI负责源码修复。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0146",
+        "type": "Fact",
+        "content": "Round5.2审计揭示回测引擎严重问题：position sizing基于initial capital、同一symbol重复开仓、无cash constraint、final equity与trade PnL缺口-674,445、NAV与daily_return自洽但反映的是杠杆放大而非策略表现。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B_round5.2_audit"
+      },
+      {
+        "node_id": "n_0147",
+        "type": "Decision",
+        "content": "基于Round5.2审计结果，暂停进入Round 6止损实验，优先执行Round 5.3回测引擎会计与仓位逻辑定位审计。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0139",
+        "type": "Fact",
+        "content": "TKT-2026-005B Round 5 受限研究执行完成：compile-ir成功，回测完成56笔交易，sanity passed。核心指标：Sharpe 1.4921, Total Return -80.92%, Max Drawdown 98.89%。结论：MA60趋势过滤改善了信号质量但未解决亏损问题。飞书Agent建议不立即扩展样本，先做指标审计。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B_round5_result"
+      },
+      {
+        "node_id": "n_0131",
+        "type": "FileArtifact",
+        "content": "新建工单执行记录文件 TKT-2026-005I-kb-minimum-sanity-check.md",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check.md"
+      },
+      {
+        "node_id": "n_0132",
+        "type": "FileArtifact",
+        "content": "新建验证记录文件 TKT-2026-005I-kb-minimum-sanity-check-validation.md",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005I-kb-minimum-sanity-check-validation.md"
+      },
+      {
+        "node_id": "n_0120",
+        "type": "Fact",
+        "content": "TKT-2026-005F 已完成：call_builder.py 默认端点改为 /compile-ir；SKILL.md 更新；TOOLS.md 新增错误语义表；research_workflow.md 新流程；metrics.py 兼容新旧路径；新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005F"
+      },
+      {
+        "node_id": "n_0121",
+        "type": "FileArtifact",
+        "content": "新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源，同步全部脚本和 prompts。",
+        "priority": "should_include",
+        "entity_ref": "aos/org/skills/strategy_researcher"
+      },
+      {
+        "node_id": "n_0122",
+        "type": "Decision",
+        "content": "弃用 openclaw_skills，以 aos/org/skills 为权威源（手动操作移除）。",
+        "priority": "should_include",
+        "entity_ref": "aos/org/skills"
+      },
+      {
+        "node_id": "n_0124",
+        "type": "Fact",
+        "content": "审计报告关键结论：规则分五类；高风险项已覆盖 4 位小数等；P0 缺口：execution-config 不支持 train_split、compile-ir 无字段完整性检查；P1 缺口：日志、关联策略等。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005G"
+      },
+      {
+        "node_id": "n_0125",
+        "type": "Decision",
+        "content": "优先做 TKT-2026-005H-execution-config-train-split-bridge，打通 train_split 主链路。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005H"
+      },
+      {
+        "node_id": "n_0127",
+        "type": "Fact",
+        "content": "TKT-2026-005H 执行完成：后端 start.py 新增 train_split 字段并返回 train_metrics/test_metrics；call_backtest.py 透传参数；TOOLS.md/research_workflow.md/report_template.md 更新；自动化测试通过。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005H"
+      },
+      {
+        "node_id": "n_0128",
+        "type": "Fact",
+        "content": "后端修改：ExecutionConfigBacktestRequest 新增 train_split；start_backtest_from_execution_config 返回 metrics/train_metrics/test_metrics 等。",
+        "priority": "should_include",
+        "entity_ref": "backend/app/api/endpoints/backtests/start.py"
+      },
+      {
+        "node_id": "n_0115",
+        "type": "Fact",
+        "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授权后才可进入更大样本。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0116",
+        "type": "Fact",
+        "content": "为支持--endpoint参数，修改了openclaw_skills/strategy-researcher/scripts/call_builder.py，硬编码ENDPOINT改为可配置。该修改未随本次commit进入aos_repo（位于.openclaw工作区）。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_builder.py"
+      },
+      {
+        "node_id": "n_0117",
+        "type": "Fact",
+        "content": "GPT5.5评估结论：接受本次smoke结果，但需补充修正：记录call_builder.py修改、说明非2xx请求（404/schema校验）、指定指标口径（以KB口径Sharp 1.1659/total_return -83.84%/max_drawdown 99.86%为准）、改后续计划为70/30切分。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0114",
+        "type": "Fact",
+        "content": "GPT5.5回复：可以执行TKT-2026-005B Round 4受限恢复smoke，并建议在授权中加一句口径修正：'本次满足Round 4受限恢复smoke执行条件；不满足完整研究恢复条件。'",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0111",
+        "type": "Fact",
+        "content": "TKT-2026-005E技术smoke通过：compile-ir → backtest → KB append → kb_query 工具链已闭环验证",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005E"
+      },
+      {
+        "node_id": "n_0110",
+        "type": "Fact",
+        "content": "双接口分流原则：人类交互式构建使用旧接口POST /strategy-builder/invoke（支持pending_user_input、多轮会话），自动研究闭环使用新接口POST /strategy-builder/compile-ir（单次请求、无session、不追问、输入完整IR、返回结构化JSON）。两条链路分别验收，互不影响。同时修复回测异常序列化：全局异常处理器统一返回JSON，禁止直接暴露Python异常对象。",
+        "priority": "should_include",
+        "entity_ref": "aos/services/strategy-builder"
+      },
+      {
+        "node_id": "n_0101",
+        "type": "Decision",
+        "content": "Boss授权受限恢复执行TKT-2026-005B，条件：第一轮smoke run（symbols≤5, years≤1, timeout=90s），通过后最大symbols≤20, years≤3；后端失败/超时/5xx/连接失败一次即暂停，禁止自动重试，禁止231标的回测，禁止将受限阶段结果作为完整研究结论。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0102",
+        "type": "Fact",
+        "content": "TKT-2026-005B工单状态从paused_for_boss_review变为已执行smoke待修正。Worklog已追加修正说明。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0103",
+        "type": "Fact",
+        "content": "TKT-2026-005B Round 4 受限恢复 Smoke — 恢复前检查\n本次实际读取的.md文件：skills/strategy_researcher/SKILL.md, TOOLS.md, prompts/research_workflow.md, tkt-worklog.md, aos_repo/aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md, aos_repo/aos/runtime/research-runs/TKT-2026-005B/README_PAUSE.md, summary.md, memory/2026-05-19-0914.md。未调用任何scripts。最高行为手册为prompts/research_workflow.md。正式执行需遵循Phase 0-6。当前不满足完整研究恢复条件，仅满足受限恢复smoke条件。资源预算：symbols≤5，years≤1，timeout=90s，builder对话≤2轮，Round 4仅此一轮，禁止自动重试。确认必须使用call_builder.py --endpoint /strategy-builder/compile-ir，禁止使用/strategy-builder/invoke，确认从Round 4开始不重跑。总结：本轮是受限恢复smoke ✅ — Round4，仅1轮，约束已全部确认。",
+        "priority": "should_include",
+        "entity_ref": "skills/strategy_researcher/SKILL.md"
+      },
+      {
+        "node_id": "n_0104",
+        "type": "FileArtifact",
+        "content": "TKT-2026-005B工单文件：已更新Round 5.4B-fix1为passed，基线run_id=run-54b-20250101-20251230-d37c696d标记为唯一基线，旧run标记为obsolete，Round 6标记为locked/not_started。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0098",
+        "type": "FileArtifact",
+        "content": "TOOLS.md正式内容（包含超时默认值从600s更新为90s，以及技能契约）",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md"
+      },
+      {
+        "node_id": "n_0099",
+        "type": "Fact",
+        "content": "call_backtest.py已增加硬限制：MAX_SYMBOLS_DEFAULT=20、MAX_YEARS_DEFAULT=3、REQUEST_TIMEOUT_SEC=90；新增_validate_request()函数；超限且无AOS_BOSS_OVERRIDE时抛出BacktestGuardrailError。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_backtest.py"
+      },
+      {
+        "node_id": "n_0100",
+        "type": "Fact",
+        "content": "research_workflow.md已新增§3.7“资源闸(Resource Guard)”条款：单次回测universe≤20标的，时间窗≤3年；后端失败1次即暂停；builder交互≤2轮。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/strategy-researcher/prompts/research_workflow.md"
+      },
+      {
+        "node_id": "n_0096",
+        "type": "Decision",
+        "content": "先实施限制措施止血（第1天），再进行后端架构改造（第1-2周：请求级超时、回测异步化、取消接口、并发隔离），第3周起将硬限制转为软限制。不是二选一，必须两阶段执行。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0097",
+        "type": "OpenTask",
+        "content": "后端回测架构改造：1. 请求级超时（FastAPI handler超时返回408）；2. 回测异步化（job queue，HTTP返回run_id，agent轮询GET /runs/{id}）；3. 取消接口POST /runs/{id}/cancel；4. 并发隔离（单用户/单agent回测worker限并发1-2）。完成后第3周起将agent侧硬限制改为软限制（警告+默认值，可被Boss覆盖）。",
+        "priority": "should_include",
+        "entity_ref": "aos/services/backtest-api"
+      },
+      {
+        "node_id": "n_0093",
+        "type": "Fact",
+        "content": "TKT-2026-005B 执行失败：backend 被大 universe 回测阻塞，agent 发送 231 个标的 × 7 年回测请求，导致后端卡死；builder session corrupted，因子不在注册表中，pending_user_input；重启后端无效，底层回测进程可能仍运行。",
+        "priority": "should_include",
+        "entity_ref": "TKT-2026-005B"
+      },
+      {
+        "node_id": "n_0091",
+        "type": "Fact",
+        "content": "自主激活测试结果：智能体根据工单 TKT-2026-005B-vcp-breakout-entry.md 自行判断并读取了 skills/strategy_researcher/SKILL.md、prompts/research_workflow.md、hypothesis_heuristics.md、report_template.md、TOOLS.md 共6个文件；未读取 quant_assistant 或 duty_reporter 的任何文件；未调用任何 scripts；明确 Phase 0-6 流程；等待确认开始。前置文档准备就绪。",
+        "priority": "should_include",
+        "entity_ref": "ticket_b_pre_execution_check_auto"
+      },
+      {
+        "node_id": "n_0087",
+        "type": "Fact",
+        "content": "智能体身份误报根因：system-prompt.ts第632行硬编码'You are a personal assistant running inside OpenClaw.'，导致模型推断'小爪'身份；IDENTITY.md注入位置靠后（约250+行），影响力被稀释，无法覆盖首行声明。",
+        "priority": "should_include",
+        "entity_ref": "src/agents/system-prompt.ts"
+      },
+      {
+        "node_id": "n_0088",
+        "type": "Fact",
+        "content": "工作区配置确认正确：Ubuntu端.openclaw/openclaw.json中已有agents.defaults.workspace注册，IDENTITY.md已正常加载到Project Context部分。",
+        "priority": "should_include",
+        "entity_ref": "~/.openclaw/openclaw.json"
+      },
+      {
+        "node_id": "n_0089",
+        "type": "Fact",
+        "content": "修复方案：方案A（推荐）修改system-prompt.ts第632行，改为条件性声明；方案B（辅助）确认openclaw.json配置。方案A必须，方案B辅助。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0083",
+        "type": "Fact",
+        "content": "IDENTITY.md已替换：去掉'小爪'人格，岗位由当前激活skill和工单决定，不再主动读取memory，身份原则按优先级服从skill规则。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_workspace/IDENTITY.md"
+      },
+      {
+        "node_id": "n_0084",
+        "type": "Fact",
+        "content": "AGENTS.md已替换：关闭启动时自动读取memory/和MEMORY.md，关闭心跳检查、邮件/日历/社交检查，写入边界限制，明确路由规则。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_workspace/AGENTS.md"
+      },
+      {
+        "node_id": "n_0085",
+        "type": "Fact",
+        "content": "GPT5.5提出的烟测C：身份是否干净。飞书问'你是谁？当前这条消息是否需要激活某个skill？如果需要，说明是哪一个；如果不需要，说明原因。'合格标准：不再说'小爪'、不主动读memory、能说清具体岗位由skill/工单决定。\n实际测试结果：助手回答'我是小爪（Claw），ccxx的个人助手运行在OpenClaw上。'，违反IDENTITY.md'不以小爪等拟人化身份执行任务'、'不伪装成任何数字员工'以及AGENTS.md'Do not assume a role'、'The assistant must not behave as a fixed personal companion.'。测试失败。",
+        "priority": "should_include",
+        "entity_ref": "identity_smoke_c"
+      },
+      {
+        "node_id": "n_0086",
+        "type": "Fact",
+        "content": "GPT5.5提出的烟测D：Ticket B前置检查。发'请只做前置检查，不调用任何scripts。请读取TKT-2026-00X的工单，并判断是否应该由strategy_researcher处理。请列出你读取的.md文件路径。'合格标准：读取根路由文件、读取skills/strategy_researcher/SKILL.md、读取必要prompts如research_workflow.md、不读quant_assistant/TOOLS.md、不调用builder/backtest/order/deploy脚本。",
+        "priority": "should_include",
+        "entity_ref": "pre_ticket_b_check"
+      },
+      {
+        "node_id": "n_0082",
+        "type": "Fact",
+        "content": "P0烟测A和B均通过：烟测A中智能体正确读取skills/quant_assistant/SKILL.md和TOOLS.md并调用脚本查询实例；烟测B中智能体读取根TOOLS.md后未触发量化脚本，给出自然语言市场分析。新根TOOLS.md路由层和quant_assistant本地TOOLS.md已正常工作。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/quant-assistant"
+      },
+      {
+        "node_id": "n_0080",
+        "type": "FileArtifact",
+        "content": "quant_assistant 的本地环境信息 TOOLS.md 文件，包含后端地址、脚本路径、鉴权信息、使用规则等（源自当前 turn 中 Claude 提供的全文）",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/quant_assistant/TOOLS.md"
+      },
+      {
+        "node_id": "n_0081",
+        "type": "FileArtifact",
+        "content": "根 TOOLS.md 将被替换为路由层 TOOLS.md（包含技能地图、分诊规则和全局约束），具体内容参考 Claude 上一轮输出",
+        "priority": "should_include",
+        "entity_ref": "openclaw_root_tools_md"
+      },
+      {
+        "node_id": "n_0077",
+        "type": "Fact",
+        "content": "Claude提出P0具体方案：步骤1将根TOOLS.md搬家到skills/quant_assistant/TOOLS.md（mv或merge），步骤2在工作区根目录新建路由层TOOLS.md，包含技能地图、分诊规则和全局约束。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/quant-assistant"
+      },
+      {
+        "node_id": "n_0078",
+        "type": "Decision",
+        "content": "采纳Claude提出的P0方案（根TOOLS.md搬家+新建路由层）作为n_0073的临时层实施方案。",
+        "priority": "should_include"
+      },
+      {
+        "node_id": "n_0075",
+        "type": "Fact",
+        "content": "Ticket B派发前行为级烟测（替换简单\"你是谁\"测试）：\n1.Agent接收含TKT-*+intent_type=investigation输入后，trace是否出现read_file skills/strategy_researcher/SKILL.md\n2.后续工具调用脚本路径是否落在skills/strategy_researcher/scripts/下\n3.遇到DATA_MISSING_SYNC_REQUIRED时是否按workflow自动剔除重试，而非被根TOOLS.md的\"停止并原样返回\"掐断\n三条全过再派真Ticket B。",
+        "priority": "should_include",
+        "entity_ref": "openclaw_skills/strategy-researcher"
+      },
+      {
+        "node_id": "n_0070",
+        "type": "Fact",
+        "content": "KB写入桥已存在：overview.md确认emit_config触发create_strategy_archive和研究日志写入，research_run.py串起NL编译→回测→归档→索引全链路。",
+        "priority": "should_include",
+        "entity_ref": "quant_backend_kb_bridge"
+      },
+      {
+        "node_id": "n_0073",
+        "type": "OpenTask",
+        "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
+        "priority": "should_include",
+        "entity_ref": "workspace_root_bootstrap_audit"
+      }
+    ],
+    "optional": [],
+    "background": []
+  },
+  "l2_task_state": {
+    "assembler_profile": "phase1_prep_baseline",
+    "active_focus": [
+      "n_0057",
+      "n_0065",
+      "n_0135",
+      "n_0162",
+      "n_0167",
+      "n_0177",
+      "n_0189",
+      "n_0190",
+      "n_0191",
+      "n_0170",
+      "n_0165",
+      "n_0152",
+      "n_0147",
+      "n_0122",
+      "n_0125",
+      "n_0101",
+      "n_0096",
+      "n_0097",
+      "n_0078",
+      "n_0073"
+    ],
+    "immediate_actions": [],
+    "active_node_count": 138,
+    "bundled_node_count": 80
+  },
+  "budget_policy": {
+    "overflow_rule": "never_drop_must_include",
+    "phase": "phase1_prep",
+    "owner": "mechanical-assembler",
+    "budget_profile": "phase1_prep_baseline"
+  },
+  "provenance": []
+}

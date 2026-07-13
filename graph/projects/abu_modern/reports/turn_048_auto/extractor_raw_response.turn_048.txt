@@ -3,42 +3,94 @@
   "turn_id": 48,
   "new_nodes": [
     {
-      "node_id": "n_0110",
+      "node_id": "n_0115",
       "type": "Fact",
-      "content": "Round 4 受限恢复 smoke 完成：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。需修正：call_builder.py 修改记录、非 2xx 请求说明、指标口径来源（以 KB 口径为准）、后续应使用 70/30 时间切分。",
+      "content": "TKT-2026-005B Round 4受限恢复Smoke执行成功：compile-ir→backtest E2E通过，97笔交易，symbols=5，years=1，未出现5xx/timeout/connection failure；最终结果以KB口径为准（Sharpe 1.1659, total_return -83.84%, max_drawdown 99.86%）",
       "entity_ref": "TKT-2026-005B",
       "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0116",
+      "type": "Fact",
+      "content": "call_builder.py已修改以支持--endpoint参数，用于切换/strategy-builder/compile-ir端点",
+      "entity_ref": "openclaw_skills/strategy-researcher/scripts/call_builder.py",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0117",
+      "type": "Decision",
+      "content": "GPT5.5接受TKT-2026-005B Round 4受限恢复Smoke结果，未出现5xx/timeout/connection failure",
+      "entity_ref": "TKT-2026-005B",
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0118",
+      "type": "OpenTask",
+      "content": "补充TKT-2026-005B Worklog修正：记录call_builder.py修改、非2xx请求说明（404/400等）、指标口径来源（以KB口径为准）、70/30时间切分约束",
+      "entity_ref": "TKT-2026-005B",
+      "state": "open",
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0095",
+      "node_id": "n_0104",
       "changes": {
-        "content": "TKT-2026-005B: 受限恢复执行（status=ready_for_limited_resume，smoke run symbols≤5, years≤1, timeout=90s）—— Round 4 smoke 执行通过，Boss 接受结果但要求补充修正说明。",
-        "state": "resolved",
-        "status": "superseded",
-        "priority": "should_include"
+        "content": "TKT-2026-005B工单文件（已追加Round 4 Worklog及执行结果）",
+        "state": "deployed"
       },
-      "reason": "smoke 执行完成且 Boss 审核通过（需补充说明），任务终结"
+      "reason": "工单文件因Round 4执行和Worklog追加而更新"
     }
   ],
-  "superseded_nodes": [
-    {
-      "node_id": "n_0109",
-      "reason": "所描述的可执行状态已被实际 smoke 执行结果替代"
-    }
-  ],
+  "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0110",
-      "target": "n_0095",
+      "source": "n_0115",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0104",
+      "relation": "produces"
+    },
+    {
+      "source": "n_0115",
+      "target": "n_0114",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0116",
+      "target": "n_0058",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0116",
+      "target": "n_0047",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0117",
+      "target": "n_0115",
       "relation": "supports"
     },
     {
-      "source": "n_0110",
-      "target": "n_0109",
-      "relation": "invalidates"
+      "source": "n_0118",
+      "target": "n_0117",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0118",
+      "target": "n_0115",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0118",
+      "target": "n_0104",
+      "relation": "serves"
     }
   ]
 }

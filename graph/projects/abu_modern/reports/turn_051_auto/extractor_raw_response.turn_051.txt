@@ -1,1 +1,154 @@
-Expecting value: line 2 column 1 (char 1)
+{
+  "task_id": "task_default",
+  "turn_id": 51,
+  "new_nodes": [
+    {
+      "node_id": "n_0120",
+      "type": "Fact",
+      "content": "TKT-2026-005F 已完成：call_builder.py 默认端点改为 /compile-ir；SKILL.md 更新；TOOLS.md 新增错误语义表；research_workflow.md 新流程；metrics.py 兼容新旧路径；新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源。",
+      "entity_ref": "TKT-2026-005F",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0121",
+      "type": "FileArtifact",
+      "content": "新建 aos/org/skills/strategy_researcher/ 作为正式技能资产源，同步全部脚本和 prompts。",
+      "entity_ref": "aos/org/skills/strategy_researcher",
+      "state": "deployed",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0122",
+      "type": "Decision",
+      "content": "弃用 openclaw_skills，以 aos/org/skills 为权威源（手动操作移除）。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0123",
+      "type": "OpenTask",
+      "content": "TKT-2026-005G-strategy-researcher-schema-coverage-audit.md：审计 schema.md 规则覆盖，报告分类及缺口。",
+      "entity_ref": "TKT-2026-005G",
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0124",
+      "type": "Fact",
+      "content": "审计报告关键结论：规则分五类；高风险项已覆盖 4 位小数等；P0 缺口：execution-config 不支持 train_split、compile-ir 无字段完整性检查；P1 缺口：日志、关联策略等。",
+      "entity_ref": "TKT-2026-005G",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0125",
+      "type": "Decision",
+      "content": "优先做 TKT-2026-005H-execution-config-train-split-bridge，打通 train_split 主链路。",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0126",
+      "type": "OpenTask",
+      "content": "TKT-2026-005H-execution-config-train-split-bridge：后端和脚本修改，文档更新，自动化测试。已完成。",
+      "entity_ref": "TKT-2026-005H",
+      "state": "resolved",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0127",
+      "type": "Fact",
+      "content": "TKT-2026-005H 执行完成：后端 start.py 新增 train_split 字段并返回 train_metrics/test_metrics；call_backtest.py 透传参数；TOOLS.md/research_workflow.md/report_template.md 更新；自动化测试通过。",
+      "entity_ref": "TKT-2026-005H",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0128",
+      "type": "Fact",
+      "content": "后端修改：ExecutionConfigBacktestRequest 新增 train_split；start_backtest_from_execution_config 返回 metrics/train_metrics/test_metrics 等。",
+      "entity_ref": "backend/app/api/endpoints/backtests/start.py",
+      "state": null,
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0129",
+      "type": "Fact",
+      "content": "GPT5.5 建议下一步顺序：005H-live-smoke → 005I（KB 字段完整性）→ 005B Round 5（受限研究）",
+      "entity_ref": null,
+      "state": null,
+      "priority": "optional"
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0118",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "TKT-2026-005F 已由飞书 Agent 完成执行，变更已提交并推送。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0120",
+      "target": "n_0118",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0121",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0122",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0123",
+      "target": "n_0122",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0124",
+      "target": "n_0123",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0125",
+      "target": "n_0124",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0126",
+      "target": "n_0125",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0127",
+      "target": "n_0126",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0128",
+      "target": "n_0126",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0129",
+      "target": "n_0125",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0129",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

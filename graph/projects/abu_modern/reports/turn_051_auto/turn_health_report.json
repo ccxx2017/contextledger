@@ -6,19 +6,72 @@
     "build_graph_slice": {
       "status": "OK",
       "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\slice_051.json"
+    },
+    "invoke_extractor": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\patch_051.raw.json"
+    },
+    "detect_close_candidates": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\close_candidates.turn_051.json"
+    },
+    "entity_resolver": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\patch_051.resolved.json"
+    },
+    "reconcile_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\reconcile_report.turn_051.json",
+      "retries": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "apply_patch": {
+      "status": "OK",
+      "out": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\graph_state.after_turn_051.json"
+    },
+    "graph_lint": {
+      "status": "OK",
+      "errors": 3,
+      "warnings": 0
+    },
+    "diff_lint_reports": {
+      "status": "OK",
+      "introduced_errors": 0,
+      "introduced_warnings": 0,
+      "overdue_baseline_issues": 0
+    },
+    "build_context_bundle": {
+      "status": "OK",
+      "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\context_bundle.turn_051.json",
+      "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\assembly_report.turn_051.json",
+      "l1_must_include_count": 7,
+      "selected_count": 12
+    },
+    "check_pending_merge_register": {
+      "status": "OK",
+      "overdue_items": 16
+    },
+    "sync_pending_merge_register": {
+      "status": "OK",
+      "report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\turn_051_auto\\pending_merge_register_sync.turn_051.json"
     }
   },
   "summary": {
-    "status": "QUARANTINE",
-    "stage": "invoke_extractor",
-    "reason": "invoke_extractor 阶段脚本异常退出 (code=1)",
-    "quarantine_patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_051_failed_patch.json",
-    "quarantine_meta": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\quarantine\\turn_051_failed.json"
+    "status": "OK"
   },
   "lights": {
-    "critical_status": "RED",
-    "lint_baseline": "RED",
-    "queue_health": "RED",
-    "assembly_integrity": "RED"
+    "critical_status": "GREEN",
+    "lint_baseline": "GREEN",
+    "queue_health": "GREEN",
+    "assembly_integrity": "GREEN"
+  },
+  "committed": {
+    "graph_state": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+    "run_snapshot": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_051.json",
+    "patch": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\patches\\patch_051.json",
+    "pending_merge": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\pending_merge\\pending_merge.turn_051.json",
+    "bundle": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\context_bundle.turn_051.json",
+    "assembly_report": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\assembly_report.turn_051.json"
   }
 }

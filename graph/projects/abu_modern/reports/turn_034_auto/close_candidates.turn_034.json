@@ -9,26 +9,9 @@
   "stats": {
     "graph_turn_counter": 33,
     "open_like_nodes_scanned": 20,
-    "updated_nodes_in_patch": 1,
-    "candidates_found": 1,
-    "score_histogram": {
-      "11": 1
-    }
+    "updated_nodes_in_patch": 0,
+    "candidates_found": 0,
+    "score_histogram": {}
   },
-  "candidates": [
-    {
-      "node_id": "n_0035",
-      "type": "OpenTask",
-      "entity_ref": "TKT-2026-005",
-      "state": "open",
-      "status": "active",
-      "priority": "should_include",
-      "content": "TKT-2026-005: 试运行工单1",
-      "score": 11,
-      "matched_terms": [
-        "TKT-2026-005",
-        "tkt-2026-005"
-      ]
-    }
-  ]
+  "candidates": []
 }

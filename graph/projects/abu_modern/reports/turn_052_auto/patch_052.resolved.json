@@ -3,66 +3,73 @@
   "turn_id": 52,
   "new_nodes": [
     {
-      "node_id": "n_0115",
-      "type": "OpenTask",
-      "content": "TKT-2026-005I: KB最小字段完整性和universe占位值防护。核心实现：knowledge_base.py、strategy_builder.py。已追加工单执行记录到TKT-2026-005I-kb-minimum-sanity-check.md。已完成。",
+      "node_id": "n_0130",
+      "type": "Fact",
+      "content": "TKT-2026-005I 执行完成并通过验收。核心改动：KB archive新增元数据JSON区块；sanity_check_failed/passed机制；compile-ir不再传占位universe；append_backtest_result回填逻辑。测试14 passed。",
       "entity_ref": "TKT-2026-005I",
-      "state": "resolved",
-      "priority": "must_include",
-      "status": "superseded",
-      "_status_sanitized": true
+      "state": null,
+      "priority": "should_include"
     },
     {
-      "node_id": "n_0116",
+      "node_id": "n_0131",
       "type": "Fact",
-      "content": "KB archive新增元数据JSON区块（strategy_id, run_id等），sanity规则检测缺字段和占位universe，回测回填后升级为passed。",
-      "entity_ref": "quant_intelligence/knowledge_base.py",
+      "content": "GPT5.5评估结论：005I合格，建议验收通过。当前已完成005H和005I，下一步推荐恢复TKT-2026-005B Round 5受限研究，先做执行前检查，后做单变量趋势过滤实验。",
+      "entity_ref": "TKT-2026-005B",
       "state": null,
-      "priority": "must_include"
+      "priority": "should_include",
+      "_entity_ref_sanitized": true
+    },
+    {
+      "node_id": "n_0132",
+      "type": "OpenTask",
+      "content": "恢复TKT-2026-005B Round 5受限研究。先做正式执行前检查（读取文件清单、确认最高行为手册、资源预算、train_split=0.7等），确认后执行单变量改动：加入前期趋势过滤。硬限制：symbols≤5, years≤1, timeout=90s, 禁止自动重试等。",
+      "entity_ref": "TKT-2026-005B",
+      "state": "open",
+      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0115",
+      "node_id": "n_0129",
       "changes": {
-        "status": "superseded"
+        "content": "GPT5.5 建议下一步顺序：005H-live-smoke ✅ → 005I ✅ → 005B Round 5（下一步）",
+        "entity_ref": "TKT-2026-005H",
+        "_entity_ref_sanitized": true
       },
-      "reason": "工单已完成，等待Boss验收或已确认通过"
-    },
-    {
-      "node_id": "n_0114",
-      "changes": {
-        "content": "Round 5单变量研究：在Round 4放量突破基线（突破20日高点+volume>volume_ma20）基础上，加入前期趋势过滤，例如MA20>MA60或60日涨幅>X%。硬限制：必须使用/strategy-builder/compile-ir，禁止/invoke，必须使用/backtests/execution-config，train_split=0.7，首轮symbols≤5、years≤1、timeout=90s，后端5xx/timeout/connection failure一次即暂停，禁止自动重试，禁止231标的大回测，不得作为完整研究结论。若archive出现sanity_check_failed且无法通过回测回填转为passed，必须暂停并报告。"
-      },
-      "reason": "根据005I完成后的工具链状态和GPT5.5建议，补充Round 5硬限制和研究细节"
+      "reason": "005H和005I已完成，更新建议顺序以反映当前状态。"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0115",
-      "target": "n_0035",
-      "relation": "refines"
-    },
-    {
-      "source": "n_0116",
-      "target": "n_0115",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0116",
-      "target": "n_0104",
+      "source": "n_0130",
+      "target": "n_0001",
       "relation": "supports"
     },
     {
-      "source": "n_0114",
-      "target": "n_0111",
+      "source": "n_0131",
+      "target": "n_0129",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0131",
+      "target": "n_0132",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0132",
+      "target": "n_0115",
       "relation": "depends_on"
     },
     {
-      "source": "n_0114",
-      "target": "n_0035",
-      "relation": "refines"
+      "source": "n_0132",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0132",
+      "target": "n_0001",
+      "relation": "serves"
     }
   ]
 }

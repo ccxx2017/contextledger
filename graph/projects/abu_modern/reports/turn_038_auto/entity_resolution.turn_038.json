@@ -3,15 +3,24 @@
   "project_id": "abu_modern",
   "turn_id": "turn_038",
   "summary": {
-    "new_nodes": 1,
-    "resolved_exact": 0,
+    "new_nodes": 2,
+    "resolved_exact": 1,
     "resolved_alias": 0,
     "pending_merge": 0,
     "unresolved": 1
   },
   "decisions": [
     {
-      "new_node_id": "n_0098",
+      "new_node_id": "n_0105",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0106",
       "raw_entity_ref": null,
       "resolved_entity_ref": null,
       "match_confidence": 0.0,

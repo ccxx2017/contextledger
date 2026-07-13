@@ -63,14 +63,14 @@
     "source_graph": "graph/projects/abu_modern/graph_state.json"
   },
   "before_report": {
-    "ok": true,
+    "ok": false,
     "summary": {
-      "nodes": 91,
-      "edges": 140,
-      "active_nodes": 79,
-      "active_edges": 140,
-      "superseded_nodes": 12,
-      "errors": 0,
+      "nodes": 97,
+      "edges": 152,
+      "active_nodes": 83,
+      "active_edges": 152,
+      "superseded_nodes": 14,
+      "errors": 2,
       "warnings": 0
     },
     "adjudication_policy": {
@@ -94,7 +94,9 @@
         "n_0052",
         "n_0056",
         "n_0059",
-        "n_0086"
+        "n_0074",
+        "n_0090",
+        "n_0092"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -119,18 +121,51 @@
       "resolved",
       "unknown"
     ],
-    "errors": [],
+    "errors": [
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[144]",
+        "source": "n_0094",
+        "target": "n_0060",
+        "target_status": null,
+        "target_active": null
+      },
+      {
+        "level": "error",
+        "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+        "message": "相同 entity_ref=TKT-2026-005C 下同时存在多个互斥 active state: blocked, open",
+        "entity_ref": "TKT-2026-005C",
+        "states": {
+          "blocked": [
+            "n_0060"
+          ],
+          "open": [
+            "n_0095"
+          ]
+        },
+        "mutually_exclusive_states": [
+          "blocked",
+          "cancelled",
+          "deployed",
+          "implemented",
+          "open",
+          "resolved"
+        ]
+      }
+    ],
     "warnings": []
   },
   "after_report": {
-    "ok": true,
+    "ok": false,
     "summary": {
-      "nodes": 94,
-      "edges": 144,
-      "active_nodes": 81,
-      "active_edges": 144,
-      "superseded_nodes": 13,
-      "errors": 0,
+      "nodes": 100,
+      "edges": 156,
+      "active_nodes": 84,
+      "active_edges": 156,
+      "superseded_nodes": 16,
+      "errors": 1,
       "warnings": 0
     },
     "adjudication_policy": {
@@ -152,10 +187,13 @@
         "n_0034",
         "n_0049",
         "n_0052",
+        "n_0055",
         "n_0056",
         "n_0059",
-        "n_0084",
-        "n_0086"
+        "n_0074",
+        "n_0090",
+        "n_0092",
+        "n_0095"
       ],
       "excluded_due_to_state_node_ids": []
     },
@@ -180,16 +218,32 @@
       "resolved",
       "unknown"
     ],
-    "errors": [],
+    "errors": [
+      {
+        "level": "error",
+        "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+        "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+        "edge_id": "edge[144]",
+        "source": "n_0094",
+        "target": "n_0060",
+        "target_status": null,
+        "target_active": null
+      }
+    ],
     "warnings": []
   },
   "issue_code_histogram": {
     "before": {
-      "errors": {},
+      "errors": {
+        "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF": 1,
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
+      },
       "warnings": {}
     },
     "after": {
-      "errors": {},
+      "errors": {
+        "INVALIDATES_TARGET_NOT_SUPERSEDED": 1
+      },
       "warnings": {}
     },
     "introduced": {
@@ -202,14 +256,14 @@
     }
   },
   "summary": {
-    "before_errors": 0,
-    "after_errors": 0,
+    "before_errors": 2,
+    "after_errors": 1,
     "before_warnings": 0,
     "after_warnings": 0,
     "baseline_errors": 0,
     "baseline_warnings": 0,
     "introduced_errors": 0,
-    "preexisting_errors": 0,
+    "preexisting_errors": 1,
     "introduced_warnings": 0,
     "preexisting_warnings": 0,
     "baseline_matched_errors": 0,
@@ -217,7 +271,18 @@
     "overdue_baseline_issues": 0
   },
   "introduced_errors": [],
-  "preexisting_errors": [],
+  "preexisting_errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": null,
+      "target_active": null
+    }
+  ],
   "introduced_warnings": [],
   "preexisting_warnings": [],
   "baseline_matched_errors": [],

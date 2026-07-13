@@ -1,9 +1,9 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 109,
-    "active_graph_nodes": 89,
-    "new_nodes": 1,
+    "graph_nodes": 114,
+    "active_graph_nodes": 94,
+    "new_nodes": 3,
     "errors": 0,
     "warnings": 0
   },
@@ -13,36 +13,50 @@
   "entity_ref_matches": [
     {
       "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0110",
-      "old_node_id": "n_0085",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0093",
       "new_state": "",
       "old_state": ""
     },
     {
       "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0110",
-      "old_node_id": "n_0089",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0101",
+      "new_state": "",
+      "old_state": "resolved"
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0102",
       "new_state": "",
       "old_state": ""
     },
     {
       "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0110",
-      "old_node_id": "n_0095",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0104",
       "new_state": "",
-      "old_state": "in_progress"
+      "old_state": "deployed"
     },
     {
       "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0110",
-      "old_node_id": "n_0096",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0105",
       "new_state": "",
       "old_state": ""
     },
     {
       "entity_ref": "TKT-2026-005B",
-      "new_node_id": "n_0110",
-      "old_node_id": "n_0109",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0113",
+      "new_state": "",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "TKT-2026-005B",
+      "new_node_id": "n_0115",
+      "old_node_id": "n_0114",
       "new_state": "",
       "old_state": ""
     }

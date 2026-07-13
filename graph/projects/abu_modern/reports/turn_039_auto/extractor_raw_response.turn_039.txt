@@ -3,25 +3,25 @@
   "turn_id": 39,
   "new_nodes": [
     {
-      "node_id": "n_0099",
+      "node_id": "n_0107",
       "type": "OpenTask",
-      "content": "TKT-2026-005D: 修builder/backtest工具契约。要求：backtest返回结构化JSON（code, message, retryable）；builder提供非交互strict IR模式（无pending_user_input，一次提交编译）；暂时关闭auto_backtest。",
+      "content": "TKT-2026-005D-builder-backtest-contract-repair：修backtest 500问题（统一JSON错误结构）、Builder改为非交互式契约（POST /strategy-builder/compile-ir，禁止pending_user_input）、暂时关闭auto_backtest。实施主体为Project AI/Claude Code/后端开发者。",
       "entity_ref": "TKT-2026-005D",
       "state": "open",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0100",
+      "node_id": "n_0108",
       "type": "OpenTask",
-      "content": "TKT-2026-005E: 纯技术端到端smoke验证工具链。用手写最小IR，1-5标的，3-12月窗口，测试builder strict compile→backtest→KB读取，验证8项验收标准，不允许自主研究。",
+      "content": "TKT-2026-005E-technical-e2e-smoke：纯技术端到端smoke，使用手写最小IR测试工具链闭环，不进行VCP研究。验收标准：builder返回strategy_id，无pending_user_input，backtest返回合法JSON，无HTTP 500，KB写入成功，backtest结果追加，无卡死，护栏仍生效。",
       "entity_ref": "TKT-2026-005E",
       "state": "open",
       "priority": "should_include"
     },
     {
-      "node_id": "n_0101",
+      "node_id": "n_0109",
       "type": "Fact",
-      "content": "GPT5.5方案：暂停研究→修工具契约(005D)→技术smoke(005E)→恢复受限研究(005B)→后端异步化(接续005C阶段2)。当前首要修builder/backtest契约，使工具链可稳定调用。",
+      "content": "GPT5.5提出的整体方案：阶段0冻结005B、阶段1开005D修契约、阶段2开005E纯技术smoke、阶段3恢复005B受限研究、阶段4并行后端异步化。工单顺序：005B保持paused→005D→005E→005B恢复→006→异步化。",
       "entity_ref": null,
       "state": null,
       "priority": "background"
@@ -31,29 +31,54 @@
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0099",
+      "source": "n_0107",
       "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0108",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0109",
+      "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0100",
-      "target": "n_0008",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0100",
-      "target": "n_0099",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0095",
-      "target": "n_0100",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0101",
-      "target": "n_0095",
+      "source": "n_0109",
+      "target": "n_0107",
       "relation": "supports"
+    },
+    {
+      "source": "n_0109",
+      "target": "n_0108",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0107",
+      "target": "n_0035",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0108",
+      "target": "n_0035",
+      "relation": "derived_from"
+    },
+    {
+      "source": "n_0097",
+      "target": "n_0107",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0107",
+      "target": "n_0105",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0107",
+      "target": "n_0093",
+      "relation": "invalidates"
     }
   ]
 }

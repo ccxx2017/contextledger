@@ -3,56 +3,65 @@
   "turn_id": 67,
   "new_nodes": [
     {
-      "node_id": "n_0140",
+      "node_id": "n_0172",
       "type": "Fact",
-      "content": "Round 5.4A clean run run-54a-20250509-20250515-5f0e9904 已生成，项目AI自测通过，所有验收项在自测层面满足。但尚未经Feishu Agent独立复核。",
-      "entity_ref": "run-54a-20250509-20250515-5f0e9904",
+      "content": "项目AI自测：Round 5.4A 账本产物生成链修复通过。新 clean run: run-54a-20250509-20250515-5f0e9904。9项验收项满足，包括canonical_fills/canonical_positions_daily/canonical_portfolio_daily存在且一致，派生文件与API端点一致性全部通过。但尚未经Feishu Agent独立审计。",
+      "entity_ref": null,
       "state": null,
       "priority": "should_include"
     },
     {
-      "node_id": "n_0141",
-      "type": "Decision",
-      "content": "Round 5.4A 项目AI自测通过，待Feishu Agent独立复核；继续禁止进入Round 6；下一步：Feishu锁定run-54a-20250509-20250515-5f0e9904做独立审计。",
-      "entity_ref": null,
-      "state": "resolved",
+      "node_id": "n_0173",
+      "type": "OpenTask",
+      "content": "Feishu Agent独立审计Round 5.4A。锁定run_id=run-54a-20250509-20250515-5f0e9904，逐项复核文件存在性、SHA256、schema、派生一致性、API端点、invariant check。在Feishu审计通过前，继续禁止进入Round 6。",
+      "entity_ref": "round_5.4a_feishu_audit",
+      "state": "open",
       "priority": "must_include"
+    },
+    {
+      "node_id": "n_0174",
+      "type": "OpenTask",
+      "content": "Round 5.4B：完整正式区间clean run复核。在Feishu审计通过后，使用同样的canonical链路重新运行正式回测区间（如2024-12-31至2025-12-30），验证修复在长区间上有效。",
+      "entity_ref": "round_5.4b_full_run",
+      "state": "open",
+      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0139",
+      "node_id": "n_0171",
       "changes": {
-        "state": "implemented"
+        "content": "Round 5.4A：账本产物生成链修复。目标：在回测产物生成阶段建立唯一权威链路 canonical_fills.csv -> canonical_positions_daily.csv -> canonical_portfolio_daily.csv -> 所有下游文件（trades.csv/capital.csv/timeseries.csv/positions_daily.csv/metrics.json/API endpoints）。要求新增 canonical_fills.csv、canonical_positions_daily.csv、canonical_portfolio_daily.csv；重构现有文件来源关系；增加 run 级 invariant check；重新生成一个干净 run；通过9项验收标准。项目AI自测已通过（run-54a-20250509-20250515-5f0e9904），但需Feishu Agent独立审计后才能最终通过。在 Round 5.4A 通过前，继续禁止进入 Round 6。",
+        "state": "in_progress"
       },
-      "reason": "项目AI已完成Round5.4A修复并生成新run run-54a-20250509-20250515-5f0e9904，自测通过，待Feishu Agent独立复核。"
+      "reason": "项目AI已完成修复并自测通过，但需Feishu独立审计，任务从open进入in_progress"
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0140",
-      "target": "n_0139",
-      "relation": "derived_from"
-    },
-    {
-      "source": "n_0141",
-      "target": "n_0139",
+      "source": "n_0172",
+      "target": "n_0171",
       "relation": "supports"
     },
     {
-      "source": "n_0141",
+      "source": "n_0173",
+      "target": "n_0172",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0174",
+      "target": "n_0173",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0171",
       "target": "n_0001",
       "relation": "serves"
     },
     {
-      "source": "n_0140",
-      "target": "n_0001",
-      "relation": "serves"
-    },
-    {
-      "source": "n_0141",
-      "target": "n_0136",
+      "source": "n_0173",
+      "target": "n_0170",
       "relation": "supports"
     }
   ]

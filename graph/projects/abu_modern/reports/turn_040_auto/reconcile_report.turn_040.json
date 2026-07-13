@@ -1,8 +1,8 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 101,
-    "active_graph_nodes": 86,
+    "graph_nodes": 109,
+    "active_graph_nodes": 92,
     "new_nodes": 1,
     "errors": 0,
     "warnings": 0
@@ -10,6 +10,14 @@
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "aos/services/backtest-api",
+      "new_node_id": "n_0110",
+      "old_node_id": "n_0097",
+      "new_state": "",
+      "old_state": "open"
+    }
+  ],
   "weak_matches": []
 }

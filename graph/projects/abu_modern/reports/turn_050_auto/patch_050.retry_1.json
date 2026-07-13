@@ -1,0 +1,36 @@
+{
+  "task_id": "task_default",
+  "turn_id": 50,
+  "new_nodes": [
+    {
+      "node_id": "n_0118",
+      "type": "OpenTask",
+      "content": "TKT-2026-005F: 固化工具契约：同步call_builder.py修改、明确TOOLS.md中compile-ir和invoke使用规则、补充research_workflow.md新流程、metrics.py兼容新路径等",
+      "entity_ref": "TKT-2026-005F",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0119",
+      "type": "Fact",
+      "content": "GPT5.5提出下一步推荐顺序：优先完成TKT-2026-005F固化工具契约，然后恢复TKT-2026-005B做受限放大验证（同IR、≤20 symbols、≤3 years），通过后再做Round 5单变量研究（如加入前期趋势过滤）。暂时不要做大回测、完整研究、多agent改造等。",
+      "entity_ref": null,
+      "state": null,
+      "priority": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0118",
+      "target": "n_0008",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0119",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

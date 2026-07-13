@@ -1,41 +1,23 @@
 {
   "task_id": "task_default",
   "turn_id": 49,
-  "new_nodes": [
-    {
-      "node_id": "n_0111",
-      "type": "Decision",
-      "content": "Boss验收通过：TKT-2026-005B Round 4 受限 smoke 已完成，4项修正满足验收口径，不再违反Boss guardrail。同意记录最终状态。解除暂停。",
-      "entity_ref": null,
-      "state": "resolved",
-      "priority": "should_include"
-    }
-  ],
+  "new_nodes": [],
   "updated_nodes": [
     {
-      "node_id": "n_0110",
+      "node_id": "n_0102",
       "changes": {
-        "content": "Round 4 受限恢复 smoke 完成（已通过Boss验收）：使用 /strategy-builder/compile-ir 端点，97 笔交易，后端未出现 5xx/timeout。4项修正已全部完成：call_builder.py修改已记录、非2xx请求已说明、指标口径以KB准、train/test切分70/30。结果仅用于技术恢复验证，不构成完整策略研究结论。下一步需Boss授权后才可进入更大样本或正式研究。"
+        "content": "TKT-2026-005B工单状态从paused_for_boss_review变为已执行smoke待修正。Worklog已追加修正说明。"
       },
-      "reason": "本轮确认修正已完成，满足验收口径，内容更新为最终状态"
-    }
-  ],
-  "superseded_nodes": [
-    {
-      "node_id": "n_0098",
-      "reason": "Boss验收通过，原审核结论（不通过、暂停）不再适用，暂停已解除"
-    }
-  ],
-  "new_edges": [
-    {
-      "source": "n_0111",
-      "target": "n_0110",
-      "relation": "derived_from"
+      "reason": "修正已追加到Worklog（b7b4af3 → origin/main），GPT5.5验收通过"
     },
     {
-      "source": "n_0111",
-      "target": "n_0098",
-      "relation": "invalidates"
+      "node_id": "n_0115",
+      "changes": {
+        "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授权后才可进入更大样本。"
+      },
+      "reason": "GPT5.5验收通过，修正已追加，smoke完成"
     }
-  ]
+  ],
+  "superseded_nodes": [],
+  "new_edges": []
 }

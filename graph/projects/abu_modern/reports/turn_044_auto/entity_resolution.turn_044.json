@@ -4,19 +4,19 @@
   "turn_id": "turn_044",
   "summary": {
     "new_nodes": 1,
-    "resolved_exact": 0,
+    "resolved_exact": 1,
     "resolved_alias": 0,
     "pending_merge": 0,
-    "unresolved": 1
+    "unresolved": 0
   },
   "decisions": [
     {
-      "new_node_id": "n_0104",
-      "raw_entity_ref": null,
-      "resolved_entity_ref": null,
-      "match_confidence": 0.0,
-      "merge_reason": "",
-      "non_merge_reason": "entity_ref_missing",
+      "new_node_id": "n_0111",
+      "raw_entity_ref": "TKT-2026-005E",
+      "resolved_entity_ref": "TKT-2026-005E",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
       "candidate_aliases": []
     }
   ]

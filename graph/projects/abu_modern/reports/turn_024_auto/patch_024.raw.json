@@ -3,39 +3,62 @@
   "turn_id": 24,
   "new_nodes": [
     {
-      "node_id": "n_0078",
-      "type": "Fact",
-      "content": "Claude提出的根TOOLS.md剥离具体步骤：1. 新建~/.openclaw/workspace/skills/quant_assistant/TOOLS.md（原根TOOLS.md内容+顶部定位说明）；2. 替换根TOOLS.md为路由层（技能地图+技能分诊+全局约束）；3. 执行前备份根TOOLS.md。",
-      "entity_ref": null,
-      "state": null,
-      "priority": "must_include"
+      "node_id": "n_0080",
+      "type": "FileArtifact",
+      "content": "quant_assistant 的本地环境信息 TOOLS.md 文件，包含后端地址、脚本路径、鉴权信息、使用规则等（源自当前 turn 中 Claude 提供的全文）",
+      "entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0081",
+      "type": "FileArtifact",
+      "content": "根 TOOLS.md 将被替换为路由层 TOOLS.md（包含技能地图、分诊规则和全局约束），具体内容参考 Claude 上一轮输出",
+      "entity_ref": "openclaw_root_tools_md",
+      "state": "open",
+      "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0076",
+      "node_id": "n_0073",
       "changes": {
-        "content": "根TOOLS.md当前状态是最高危污染源：包含quant_assistant专属规则，需要剥离。本轮暴露根TOOLS.md内容后确认，其内容实质为quant_assistant技能的私有文件（包括后端地址、脚本路径、命令模板等），仅需在顶部增加一行定位说明即可完整迁移至skills/quant_assistant/TOOLS.md，具体剥离步骤已明确。"
+        "state": "in_progress"
       },
-      "reason": "本轮用户暴露根TOOLS.md内容，Claude确认其本质为skill-private文件，细化污染源具体信息和剥离方案。"
+      "reason": "开始实施 P0 方案的具体步骤（新建 quant_assistant/TOOLS.md 并准备替换根 TOOLS.md）"
     }
   ],
-  "superseded_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0074",
+      "reason": "根 TOOLS.md 将被替换为路由层 TOOLS.md，旧内容不再准确"
+    }
+  ],
   "new_edges": [
     {
-      "source": "n_0078",
+      "source": "n_0080",
       "target": "n_0073",
-      "relation": "refines"
+      "relation": "implements"
     },
     {
-      "source": "n_0078",
-      "target": "n_0076",
-      "relation": "supports"
+      "source": "n_0080",
+      "target": "n_0078",
+      "relation": "implements"
     },
     {
-      "source": "n_0078",
-      "target": "n_0075",
-      "relation": "derived_from"
+      "source": "n_0081",
+      "target": "n_0073",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0081",
+      "target": "n_0078",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0081",
+      "target": "n_0074",
+      "relation": "invalidates"
     }
   ]
 }

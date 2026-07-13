@@ -3,52 +3,30 @@
   "turn_id": 83,
   "new_nodes": [
     {
-      "node_id": "n_0162",
+      "node_id": "n_0201",
       "type": "Fact",
-      "content": "Backend defect repair implementation PASSED: 1) strategy_ir.py 新增 _SUPPORTED_CONTEXT_VARS 和 IRExpression.context 校验；2) ir_evaluator.py 注册 position_pnl_pct deprecated alias 到 unrealized_pnl_pct；3) universal_factor.py 改进 KeyError 为 RuntimeError；4) 新增 test_strategy_ir_position_pnl_pct_defect.py 17个测试。共计43/43 passed。未运行真实回测，未创建新run。",
-      "entity_ref": null,
+      "content": "Backend defect repair patch implementation passed: 43/43 tests passed (17 new, 9 M1 regression, 17 M2 generalization). Context registry final supported fields: entry_price, holding_days, unrealized_pnl_pct, max_unrealized_pnl_pct, partial_exit_count, position_pnl_pct (deprecated alias). position_pnl_pct handling: compile-time accepted, evaluator aliases to unrealized_pnl_pct, absolute percent -7 normalized to decimal -0.07. universal_factor.py KeyError now raises RuntimeError.",
+      "entity_ref": "backend_defect_repair_implementation",
       "state": null,
-      "priority": "should_include"
-    },
-    {
-      "node_id": "n_0163",
-      "type": "Decision",
-      "content": "Backend defect repair implemented and unit/regression tests passed. Round 6A remains locked pending clean re-execution. Round 6B locked. Accepted baseline unchanged.",
-      "entity_ref": null,
-      "state": "resolved",
       "priority": "should_include"
     }
   ],
   "updated_nodes": [
     {
-      "node_id": "n_0161",
+      "node_id": "n_0198",
       "changes": {
-        "state": "implemented"
+        "state": "implemented",
+        "status": "superseded"
       },
-      "reason": "Patch implementation 已完成，43/43 测试通过，修复了 position_pnl_pct 幽灵字段、单位归一化等问题"
+      "reason": "Patch implementation completed and all 43 tests passed."
     }
   ],
   "superseded_nodes": [],
   "new_edges": [
     {
-      "source": "n_0162",
-      "target": "n_0161",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0163",
-      "target": "n_0161",
-      "relation": "implements"
-    },
-    {
-      "source": "n_0163",
-      "target": "n_0160",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0162",
-      "target": "n_0159",
-      "relation": "supports"
+      "source": "n_0201",
+      "target": "n_0198",
+      "relation": "derived_from"
     }
   ]
 }

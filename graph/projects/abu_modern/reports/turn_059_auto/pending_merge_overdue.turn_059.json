@@ -3,8 +3,1892 @@
   "register_path": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\pending_merge\\pending_merge_register.json",
   "current_turn": 59,
   "summary": {
-    "tracked_items": 0,
-    "overdue_items": 0
+    "tracked_items": 36,
+    "overdue_items": 28
   },
-  "overdue_items": []
+  "overdue_items": [
+    {
+      "register_key": "turn_020:n_0168:SOUL.md",
+      "source_turn": "turn_020",
+      "source_pending_merge": "pending_merge.turn_020.json",
+      "new_node_id": "n_0168",
+      "raw_entity_ref": "SOUL.md",
+      "canonical_entity_ref": "log.md",
+      "match_confidence": 0.6154,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "log.md",
+          "match_confidence": 0.6154,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0149"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TOOLS.md",
+          "match_confidence": 0.5333,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0076"
+          ]
+        },
+        {
+          "canonical_entity_ref": "AGENTS.md",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0082"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_020 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 20,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 25,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 20,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_020:n_0074:openclaw_root_tools_md",
+      "source_turn": "turn_020",
+      "source_pending_merge": "pending_merge.turn_020.json",
+      "new_node_id": "n_0074",
+      "raw_entity_ref": "openclaw_root_tools_md",
+      "canonical_entity_ref": "openclaw_skills",
+      "match_confidence": 0.5946,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5946,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.5455,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_agent_routing_default",
+          "match_confidence": 0.5385,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0066"
+          ]
+        },
+        {
+          "canonical_entity_ref": "workspace_root_bootstrap_audit",
+          "match_confidence": 0.5385,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0073"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.5306,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_020 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 20,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 25,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 20,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_024:n_0080:openclaw_skills/quant_assistant/TOOLS.md",
+      "source_turn": "turn_024",
+      "source_pending_merge": "pending_merge.turn_024.json",
+      "new_node_id": "n_0080",
+      "raw_entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+      "canonical_entity_ref": "openclaw_skills/quant-assistant",
+      "match_confidence": 0.8451,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/quant-assistant",
+          "match_confidence": 0.8451,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0077"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.75,
+          "evidence": [
+            "path_basename_match"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "skills/quant_assistant/SKILL.md且调用正确脚本",
+          "match_confidence": 0.6923,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0079"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.5952,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.5952,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_024 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 24,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 29,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 24,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_027:n_0083:openclaw_workspace/IDENTITY.md",
+      "source_turn": "turn_027",
+      "source_pending_merge": "pending_merge.turn_027.json",
+      "new_node_id": "n_0083",
+      "raw_entity_ref": "openclaw_workspace/IDENTITY.md",
+      "canonical_entity_ref": "openclaw_workspace_structure",
+      "match_confidence": 0.6552,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_workspace_structure",
+          "match_confidence": 0.6552,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0069"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.6316,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+          "match_confidence": 0.5429,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0080"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/quant-assistant",
+          "match_confidence": 0.5246,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0077",
+            "n_0082"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_agent_routing_default",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0066"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_027 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 27,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 32,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 27,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_027:n_0084:openclaw_workspace/AGENTS.md",
+      "source_turn": "turn_027",
+      "source_pending_merge": "pending_merge.turn_027.json",
+      "new_node_id": "n_0084",
+      "raw_entity_ref": "openclaw_workspace/AGENTS.md",
+      "canonical_entity_ref": "openclaw_workspace_structure",
+      "match_confidence": 0.6786,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_workspace_structure",
+          "match_confidence": 0.6786,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0069"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/quant_assistant/TOOLS.md",
+          "match_confidence": 0.5294,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0080"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_agent_runtime_mechanisms",
+          "match_confidence": 0.5246,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0061"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_root_tools_md",
+          "match_confidence": 0.52,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0081"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_agent_routing_default",
+          "match_confidence": 0.5172,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0066"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_027 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 27,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 32,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 27,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_027:n_0085:identity_smoke_c",
+      "source_turn": "turn_027",
+      "source_pending_merge": "pending_merge.turn_027.json",
+      "new_node_id": "n_0085",
+      "raw_entity_ref": "identity_smoke_c",
+      "canonical_entity_ref": "openclaw_identity_mechanism",
+      "match_confidence": 0.5116,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.5116,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        },
+        {
+          "canonical_entity_ref": "agents/git_sync_protocol",
+          "match_confidence": 0.45,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0043"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_027 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 27,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 32,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 27,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_030:n_0087:src/agents/system-prompt.ts",
+      "source_turn": "turn_030",
+      "source_pending_merge": "pending_merge.turn_030.json",
+      "new_node_id": "n_0087",
+      "raw_entity_ref": "src/agents/system-prompt.ts",
+      "canonical_entity_ref": "agents/git_sync_protocol",
+      "match_confidence": 0.5098,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "agents/git_sync_protocol",
+          "match_confidence": 0.5098,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0043"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_030 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 30,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 35,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 30,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_030:n_0088:~/.openclaw/openclaw.json",
+      "source_turn": "turn_030",
+      "source_pending_merge": "pending_merge.turn_030.json",
+      "new_node_id": "n_0088",
+      "raw_entity_ref": "~/.openclaw/openclaw.json",
+      "canonical_entity_ref": "openclaw_identity_mechanism",
+      "match_confidence": 0.5,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_identity_mechanism",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0062"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0024",
+            "n_0054"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_root_tools_md",
+          "match_confidence": 0.4681,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0081"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/quant-assistant",
+          "match_confidence": 0.4643,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0077",
+            "n_0082"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_workspace/AGENTS.md",
+          "match_confidence": 0.4528,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0084"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_030 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 30,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 35,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 30,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_031:n_0090:aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "source_turn": "turn_031",
+      "source_pending_merge": "pending_merge.turn_031.json",
+      "new_node_id": "n_0090",
+      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
+      "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
+      "match_confidence": 0.9381,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
+          "match_confidence": 0.9381,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0072"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
+          "match_confidence": 0.7344,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0040"
+          ]
+        },
+        {
+          "canonical_entity_ref": "aos/runtime/_frozen_ideas.md",
+          "match_confidence": 0.4545,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0011"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_031 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 31,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 36,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 31,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_032:n_0091:ticket_b_pre_execution_check_auto",
+      "source_turn": "turn_032",
+      "source_pending_merge": "pending_merge.turn_032.json",
+      "new_node_id": "n_0091",
+      "raw_entity_ref": "ticket_b_pre_execution_check_auto",
+      "canonical_entity_ref": "pre_ticket_b_check",
+      "match_confidence": 0.549,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "pre_ticket_b_check",
+          "match_confidence": 0.549,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0086"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_032 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 32,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 37,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 32,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_033:n_0095:TKT-2026-005C",
+      "source_turn": "turn_033",
+      "source_pending_merge": "pending_merge.turn_033.json",
+      "new_node_id": "n_0095",
+      "raw_entity_ref": "TKT-2026-005C",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0092"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_033 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 33,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 38,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 33,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_035:n_0099:openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+      "source_turn": "turn_035",
+      "source_pending_merge": "pending_merge.turn_035.json",
+      "new_node_id": "n_0099",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+      "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+      "match_confidence": 0.835,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.835,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0047",
+            "n_0050",
+            "n_0051"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.7885,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.7692,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.7368,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057",
+            "n_0075"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.7308,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_035 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 35,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 40,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 35,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_035:n_0100:openclaw_skills/strategy-researcher/prompts/research_workflow.md",
+      "source_turn": "turn_035",
+      "source_pending_merge": "pending_merge.turn_035.json",
+      "new_node_id": "n_0100",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/prompts/research_workflow.md",
+      "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+      "match_confidence": 0.7778,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.7778,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/TOOLS.md",
+          "match_confidence": 0.7593,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0055"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.7593,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.7477,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0047",
+            "n_0050",
+            "n_0051"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.7071,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057",
+            "n_0075"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_035 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 35,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 40,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 35,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_039:n_0107:TKT-2026-005D",
+      "source_turn": "turn_039",
+      "source_pending_merge": "pending_merge.turn_039.json",
+      "new_node_id": "n_0107",
+      "raw_entity_ref": "TKT-2026-005D",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0105"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_039 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 39,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 44,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 39,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_039:n_0108:TKT-2026-005E",
+      "source_turn": "turn_039",
+      "source_pending_merge": "pending_merge.turn_039.json",
+      "new_node_id": "n_0108",
+      "raw_entity_ref": "TKT-2026-005E",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0105"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_039 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 39,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 44,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 39,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_045:n_0112:tkt_2026_005b_recovery_patch",
+      "source_turn": "turn_045",
+      "source_pending_merge": "pending_merge.turn_045.json",
+      "new_node_id": "n_0112",
+      "raw_entity_ref": "tkt_2026_005b_recovery_patch",
+      "canonical_entity_ref": "TKT-2026-005B",
+      "match_confidence": 0.5366,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.5366,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0105"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.5366,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.5366,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.5,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.45,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_045 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 45,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 50,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 45,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_048:n_0116:openclaw_skills/strategy-researcher/scripts/call_builder.py",
+      "source_turn": "turn_048",
+      "source_pending_merge": "pending_merge.turn_048.json",
+      "new_node_id": "n_0116",
+      "raw_entity_ref": "openclaw_skills/strategy-researcher/scripts/call_builder.py",
+      "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+      "match_confidence": 0.9076,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts/call_backtest.py",
+          "match_confidence": 0.9076,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0099"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/scripts",
+          "match_confidence": 0.8431,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0047",
+            "n_0050",
+            "n_0051"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher/SKILL.md",
+          "match_confidence": 0.7961,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0039"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.7767,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.7447,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057",
+            "n_0075"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_048 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 48,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 53,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 48,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_050:n_0118:TKT-2026-005F",
+      "source_turn": "turn_050",
+      "source_pending_merge": "pending_merge.turn_050.json",
+      "new_node_id": "n_0118",
+      "raw_entity_ref": "TKT-2026-005F",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-006",
+          "match_confidence": 0.88,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0036",
+            "n_0071"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_050 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 50,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 55,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 50,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0121:aos/org/skills/strategy_researcher",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0121",
+      "raw_entity_ref": "aos/org/skills/strategy_researcher",
+      "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+      "match_confidence": 0.7826,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher",
+          "match_confidence": 0.7826,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0058"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy-researcher",
+          "match_confidence": 0.7536,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0025",
+            "n_0057",
+            "n_0075"
+          ]
+        },
+        {
+          "canonical_entity_ref": "skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.7536,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0103"
+          ]
+        },
+        {
+          "canonical_entity_ref": "openclaw_skills/strategy_researcher/SKILL.md",
+          "match_confidence": 0.6923,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0064"
+          ]
+        },
+        {
+          "canonical_entity_ref": "docs/aos/org/agents/agent-strategy-researcher.md",
+          "match_confidence": 0.6829,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0038"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0123:TKT-2026-005G",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0123",
+      "raw_entity_ref": "TKT-2026-005G",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0124:TKT-2026-005G",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0124",
+      "raw_entity_ref": "TKT-2026-005G",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0126:TKT-2026-005H",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0126",
+      "raw_entity_ref": "TKT-2026-005H",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0127:TKT-2026-005H",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0127",
+      "raw_entity_ref": "TKT-2026-005H",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0118",
+            "n_0119"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_051:n_0128:backend/app/api/endpoints/backtests/start.py",
+      "source_turn": "turn_051",
+      "source_pending_merge": "pending_merge.turn_051.json",
+      "new_node_id": "n_0128",
+      "raw_entity_ref": "backend/app/api/endpoints/backtests/start.py",
+      "canonical_entity_ref": "backend/app/api/endpoints/knowledge.py",
+      "match_confidence": 0.7561,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "backend/app/api/endpoints/knowledge.py",
+          "match_confidence": 0.7561,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0048"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_051 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 51,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 56,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 51,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_052:n_0130:TKT-2026-005I",
+      "source_turn": "turn_052",
+      "source_pending_merge": "pending_merge.turn_052.json",
+      "new_node_id": "n_0130",
+      "raw_entity_ref": "TKT-2026-005I",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0119",
+            "n_0120"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_052 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 52,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 57,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 52,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_052:n_0131:TKT-2026-005I-kb-minimum-sanity-check.md",
+      "source_turn": "turn_052",
+      "source_pending_merge": "pending_merge.turn_052.json",
+      "new_node_id": "n_0131",
+      "raw_entity_ref": "TKT-2026-005I-kb-minimum-sanity-check.md",
+      "canonical_entity_ref": "TKT-2026-005B",
+      "match_confidence": 0.4906,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.4906,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.4906,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.4906,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005H",
+          "match_confidence": 0.4906,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0125",
+            "n_0127"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.4615,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_052 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 52,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 57,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 52,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_052:n_0133:TKT-2026-005I",
+      "source_turn": "turn_052",
+      "source_pending_merge": "pending_merge.turn_052.json",
+      "new_node_id": "n_0133",
+      "raw_entity_ref": "TKT-2026-005I",
+      "canonical_entity_ref": "TKT-2026-005",
+      "match_confidence": 0.96,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.96,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.9231,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0119",
+            "n_0120"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_052 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 52,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 57,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 52,
+      "overdue_at_turn": 59
+    },
+    {
+      "register_key": "turn_054:n_0138:TKT-2026-005B_round5",
+      "source_turn": "turn_054",
+      "source_pending_merge": "pending_merge.turn_054.json",
+      "new_node_id": "n_0138",
+      "raw_entity_ref": "TKT-2026-005B_round5",
+      "canonical_entity_ref": "TKT-2026-005B",
+      "match_confidence": 0.7879,
+      "evidence": [
+        "surface_or_token_similarity"
+      ],
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.7879,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005",
+          "match_confidence": 0.75,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0035"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.7273,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005E",
+          "match_confidence": 0.7273,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0111"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.7273,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0119",
+            "n_0120"
+          ]
+        }
+      ],
+      "requires_evidence": "回看 turn_054 的 raw 原文，裁定该实体是 alias、supersede 还是 coexist。",
+      "blocked_turn": 54,
+      "escalate_after_turns": 5,
+      "escalate_on_or_after_turn": 59,
+      "remediation_status": "tracked",
+      "resolution": null,
+      "last_seen_turn": 54,
+      "overdue_at_turn": 59
+    }
+  ]
 }

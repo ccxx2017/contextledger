@@ -3,15 +3,15 @@
   "project_id": "abu_modern",
   "turn_id": "turn_037",
   "summary": {
-    "new_nodes": 3,
-    "resolved_exact": 2,
+    "new_nodes": 4,
+    "resolved_exact": 3,
     "resolved_alias": 0,
-    "pending_merge": 1,
-    "unresolved": 0
+    "pending_merge": 0,
+    "unresolved": 1
   },
   "decisions": [
     {
-      "new_node_id": "n_0095",
+      "new_node_id": "n_0101",
       "raw_entity_ref": "TKT-2026-005B",
       "resolved_entity_ref": "TKT-2026-005B",
       "match_confidence": 1.0,
@@ -20,7 +20,7 @@
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0096",
+      "new_node_id": "n_0102",
       "raw_entity_ref": "TKT-2026-005B",
       "resolved_entity_ref": "TKT-2026-005B",
       "match_confidence": 1.0,
@@ -29,44 +29,22 @@
       "candidate_aliases": []
     },
     {
-      "new_node_id": "n_0097",
-      "raw_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "resolved_entity_ref": "aos/runtime/tickets/open/TKT-2026-005B-vcp-breakout-entry.md",
-      "match_confidence": 0.9381,
+      "new_node_id": "n_0103",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
       "merge_reason": "",
-      "non_merge_reason": "needs_manual_merge_review",
-      "candidate_aliases": [
-        {
-          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-005-vcp-breakout.md",
-          "match_confidence": 0.9381,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0072"
-          ]
-        },
-        {
-          "canonical_entity_ref": "aos/runtime/tickets/open/TKT-2026-002-charter-strategy-researcher.md",
-          "match_confidence": 0.7344,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0040"
-          ]
-        },
-        {
-          "canonical_entity_ref": "aos/runtime/_frozen_ideas.md",
-          "match_confidence": 0.4545,
-          "evidence": [
-            "surface_or_token_similarity"
-          ],
-          "canonical_node_ids": [
-            "n_0011"
-          ]
-        }
-      ]
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    },
+    {
+      "new_node_id": "n_0104",
+      "raw_entity_ref": "TKT-2026-005B",
+      "resolved_entity_ref": "TKT-2026-005B",
+      "match_confidence": 1.0,
+      "merge_reason": "exact_entity_ref_match",
+      "non_merge_reason": "",
+      "candidate_aliases": []
     }
   ]
 }

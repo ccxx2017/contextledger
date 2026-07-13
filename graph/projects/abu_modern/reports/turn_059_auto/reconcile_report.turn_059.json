@@ -1,8 +1,8 @@
 {
   "ok": true,
   "summary": {
-    "graph_nodes": 122,
-    "active_graph_nodes": 93,
+    "graph_nodes": 152,
+    "active_graph_nodes": 116,
     "new_nodes": 2,
     "errors": 0,
     "warnings": 0
@@ -10,6 +10,21 @@
   "errors": [],
   "warnings": [],
   "resolved_conflicts": [],
-  "entity_ref_matches": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "TKT-2026-005B_round5.3A_audit",
+      "new_node_id": "n_0153",
+      "old_node_id": "n_0149",
+      "new_state": "",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "TKT-2026-005B_round5.3B_fix",
+      "new_node_id": "n_0154",
+      "old_node_id": "n_0150",
+      "new_state": "",
+      "old_state": "open"
+    }
+  ],
   "weak_matches": []
 }

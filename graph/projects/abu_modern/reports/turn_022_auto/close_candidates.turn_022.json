@@ -9,9 +9,40 @@
   "stats": {
     "graph_turn_counter": 21,
     "open_like_nodes_scanned": 20,
-    "updated_nodes_in_patch": 4,
-    "candidates_found": 0,
-    "score_histogram": {}
+    "updated_nodes_in_patch": 3,
+    "candidates_found": 2,
+    "score_histogram": {
+      "11": 2
+    }
   },
-  "candidates": []
+  "candidates": [
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "duty_reporter v0.5: 添加LLM摘要节点，验证LLM调用基础设施",
+      "score": 11,
+      "matched_terms": [
+        "duty_reporter",
+        "duty_reporter"
+      ]
+    },
+    {
+      "node_id": "n_0021",
+      "type": "OpenTask",
+      "entity_ref": "duty_reporter",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "升级duty_reporter v0.6：集成研究进度汇报",
+      "score": 11,
+      "matched_terms": [
+        "duty_reporter",
+        "duty_reporter"
+      ]
+    }
+  ]
 }

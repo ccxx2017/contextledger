@@ -8,14 +8,33 @@
   },
   "stats": {
     "graph_turn_counter": 26,
-    "open_like_nodes_scanned": 18,
+    "open_like_nodes_scanned": 20,
     "updated_nodes_in_patch": 1,
-    "candidates_found": 1,
+    "candidates_found": 3,
     "score_histogram": {
-      "3": 1
+      "6": 1,
+      "3": 2
     }
   },
   "candidates": [
+    {
+      "node_id": "n_0073",
+      "type": "OpenTask",
+      "entity_ref": "workspace_root_bootstrap_audit",
+      "state": "in_progress",
+      "status": "active",
+      "priority": "should_include",
+      "content": "审查并调整工作区根部bootstrap文件以适应路线β。修正后执行计划：\n临时层（今天可做，Ticket B派发前必须完成）：\nP0-根TOOLS.md：剥离quant_assistant专属规则，保留全局安全条款，补技能分诊表。\nP1-IDENTITY.md：去\"小爪\"人格，改为\"岗位由当前激活技能决定\"。\nP1-AGENTS.md：关闭Session Startup强制读memory、关闭Heartbeats、关闭Discord/WhatsApp/voice段、限制写文件路径。\nP2-SOUL.md：仅删Continuity段。\n正式层（Ticket B之后排期，不阻塞Ticket B）：\n-配置agents.list，拆分strategy_researcher和duty_reporter独立agent\n-每agent配skills allowlist\n-飞书bindings路由\n正式层完成后放松临时层prompt压制。",
+      "score": 6,
+      "matched_terms": [
+        "agent",
+        "memory",
+        "strategy_researcher",
+        "ticket",
+        "小爪",
+        "改为"
+      ]
+    },
     {
       "node_id": "n_0065",
       "type": "OpenTask",
@@ -29,6 +48,21 @@
         "prompts",
         "skill.md",
         "ticket"
+      ]
+    },
+    {
+      "node_id": "n_0067",
+      "type": "Decision",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "content": "方案A：维持一个agent，靠技能区分（保持当前设置）。限制：所有任务混在同一对话上下文，LLM自行决定激活哪个SKILL.md，prompts目录需在SKILL.md中显式读取。",
+      "score": 3,
+      "matched_terms": [
+        "agent",
+        "prompts",
+        "skill.md"
       ]
     }
   ]

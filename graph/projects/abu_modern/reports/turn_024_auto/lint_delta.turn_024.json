@@ -65,10 +65,10 @@
   "before_report": {
     "ok": true,
     "summary": {
-      "nodes": 77,
-      "edges": 114,
-      "active_nodes": 66,
-      "active_edges": 114,
+      "nodes": 79,
+      "edges": 113,
+      "active_nodes": 68,
+      "active_edges": 113,
       "superseded_nodes": 11,
       "errors": 0,
       "warnings": 0
@@ -124,11 +124,11 @@
   "after_report": {
     "ok": true,
     "summary": {
-      "nodes": 78,
-      "edges": 117,
-      "active_nodes": 67,
-      "active_edges": 117,
-      "superseded_nodes": 11,
+      "nodes": 81,
+      "edges": 118,
+      "active_nodes": 69,
+      "active_edges": 118,
+      "superseded_nodes": 12,
       "errors": 0,
       "warnings": 0
     },
@@ -152,7 +152,8 @@
         "n_0049",
         "n_0052",
         "n_0056",
-        "n_0059"
+        "n_0059",
+        "n_0074"
       ],
       "excluded_due_to_state_node_ids": []
     },

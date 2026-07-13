@@ -1,0 +1,55 @@
+{
+  "task_id": "task_default",
+  "turn_id": 45,
+  "new_nodes": [
+    {
+      "node_id": "n_0112",
+      "type": "OpenTask",
+      "content": "对TKT-2026-005B做恢复前补丁：修正ticket_id、报告名、移回到open、status改为ready_for_limited_resume、追加Worklog、明确恢复硬约束等，不执行研究",
+      "entity_ref": "tkt_2026_005b_recovery_patch",
+      "state": "open",
+      "priority": "should_include"
+    },
+    {
+      "node_id": "n_0113",
+      "type": "Fact",
+      "content": "GPT5.5建议：项目AI先对TKT-2026-005B做行政恢复补丁，然后Boss确认后通过飞书派发给strategy-researcher执行受限Round 4 smoke；项目AI不应直接执行研究。",
+      "entity_ref": null,
+      "state": null,
+      "priority": null
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0060",
+      "changes": {
+        "state": "open",
+        "status": "active"
+      },
+      "reason": "依赖的补丁工单TKT-2026-005C已完成（资源闸、编译接口、技术E2E smoke通过），阻塞解除"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0112",
+      "target": "n_0101",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0112",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0112",
+      "target": "n_0035",
+      "relation": "refines"
+    },
+    {
+      "source": "n_0113",
+      "target": "n_0073",
+      "relation": "supports"
+    }
+  ]
+}

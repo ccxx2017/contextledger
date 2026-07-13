@@ -3,11 +3,220 @@
   "project_id": "abu_modern",
   "turn_id": "turn_058",
   "summary": {
-    "new_nodes": 0,
+    "new_nodes": 4,
     "resolved_exact": 0,
     "resolved_alias": 0,
-    "pending_merge": 0,
-    "unresolved": 0
+    "pending_merge": 3,
+    "unresolved": 1
   },
-  "decisions": []
+  "decisions": [
+    {
+      "new_node_id": "n_0149",
+      "raw_entity_ref": "TKT-2026-005B_round5.3A_audit",
+      "resolved_entity_ref": "TKT-2026-005B_round5.3A_audit",
+      "match_confidence": 0.9474,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+          "match_confidence": 0.9474,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0146"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.3_engine_audit",
+          "match_confidence": 0.875,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0148"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5_result",
+          "match_confidence": 0.8214,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0139"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.619,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005I",
+          "match_confidence": 0.619,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0137"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0150",
+      "raw_entity_ref": "TKT-2026-005B_round5.3B_fix",
+      "resolved_entity_ref": "TKT-2026-005B_round5.3B_fix",
+      "match_confidence": 0.8364,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+          "match_confidence": 0.8364,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0146"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5_result",
+          "match_confidence": 0.7778,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0139"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.3_engine_audit",
+          "match_confidence": 0.7742,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0148"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.65,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005F",
+          "match_confidence": 0.65,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0119",
+            "n_0120"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0151",
+      "raw_entity_ref": "TKT-2026-005B_round5.3C_verify",
+      "resolved_entity_ref": "TKT-2026-005B_round5.3C_verify",
+      "match_confidence": 0.7931,
+      "merge_reason": "",
+      "non_merge_reason": "needs_manual_merge_review",
+      "candidate_aliases": [
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.2_audit",
+          "match_confidence": 0.7931,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0146"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5_result",
+          "match_confidence": 0.7719,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0139"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B_round5.3_engine_audit",
+          "match_confidence": 0.7692,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0148"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005B",
+          "match_confidence": 0.6047,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0093",
+            "n_0101",
+            "n_0102",
+            "n_0104",
+            "n_0113",
+            "n_0114",
+            "n_0115"
+          ]
+        },
+        {
+          "canonical_entity_ref": "TKT-2026-005C",
+          "match_confidence": 0.6047,
+          "evidence": [
+            "surface_or_token_similarity"
+          ],
+          "canonical_node_ids": [
+            "n_0060"
+          ]
+        }
+      ]
+    },
+    {
+      "new_node_id": "n_0152",
+      "raw_entity_ref": null,
+      "resolved_entity_ref": null,
+      "match_confidence": 0.0,
+      "merge_reason": "",
+      "non_merge_reason": "entity_ref_missing",
+      "candidate_aliases": []
+    }
+  ]
 }
