@@ -1,0 +1,74 @@
+{
+  "title": "Adjudication-Key / Multi-Claim Decision Contract v1",
+  "version": "1",
+  "status": "shadow_side_track",
+  "scope": "Defines rules for observation-to-event transformation, adjudication key assignment, and relation classification within the shadow lifecycle adjudicator. These rules apply only to shadow replay; they do not modify the formal main chain.",
+  "rules": [
+    {
+      "rule_id": "R001",
+      "domain": "input_adapter",
+      "condition": "A benchmark observation contains multiple claims in claim_bundle.",
+      "action": "Each claim becomes its own adjudication event. The adapter must emit one event per claim. All events from the same observation share the same observed_at, effective_at, and source, but carry distinct claim_ids, entity_ref, and lifecycle_ref."
+    },
+    {
+      "rule_id": "R002",
+      "domain": "input_adapter",
+      "condition": "Observation source.provenance is a turn-level identifier (e.g. turn_049#n_0115).",
+      "action": "The adapter must use source.channel (e.g. 'abu_modern_turn', 'probe_log') as the adjudication source instead of source.provenance. This prevents same-chain observations from being classified as provenance conflicts."
+    },
+    {
+      "rule_id": "R003",
+      "domain": "entity_resolution",
+      "condition": "An observation has one or more mentions. For each claim, entity_ref is the primary mention (mentions[0]) unless the claim dimension or value indicates a different identity.",
+      "action": "Fallback: entity_ref = mentions[0] if only one mention exists. For multi-mention observations, the resolver would need to disambiguate. Current shadow adapter uses proves[0].entity_ref = proves[0].lifecycle_ref = mentions[0]. This is a recognized simplification; improvement requires a resolver adapter."
+    },
+    {
+      "rule_id": "R004",
+      "domain": "lifecycle_resolution",
+      "condition": "Two observations of the same entity with sequential relationship should share the same adjudication_key so the mechanical layer performs SUPERCEDES.",
+      "action": "When obs_N and obs_N+1 reference the same base entity (e.g., 'TKT-2026-005B' and 'TKT-2026-005B_round5.3A_audit'), the lifecycle_ref should be the base entity. The adapter cannot yet do this subsumption; improvement requires entity-resolution with lifecycle grouping. For now, observations whose mentions differ produce separate adjudication keys, which is a known limitation for tr_revival_round5x style trajectories."
+    },
+    {
+      "rule_id": "R005",
+      "domain": "adjudication_relation",
+      "condition": "Two events with identical adjudication_key, same source.channel, and same entity shall be classified as SUPERCEDES. Two events with identical adjudication_key but different source.channel shall be classified as CONTESTS.",
+      "action": "The adjudicator compares source (after R002 substitution). Same source = same lifecycle progression = SUPERCEDES. Different source = different provenance = CONTESTS. This preserves the provenance conflict semantics while avoiding false CONTESTS on same-chain observations."
+    },
+    {
+      "rule_id": "R006",
+      "domain": "adjudication_relation",
+      "condition": "A new node with state=cancelled is terminal. It supersedes its predecessor and is itself marked superseded immediately.",
+      "action": "The adjudicator marks a cancelled node as superseded in the same patch, so it does not appear in the active set."
+    },
+    {
+      "rule_id": "R007",
+      "domain": "adjudication_relation",
+      "condition": "A non-terminal event for an entity that previously had a terminal node is a REVIVES signal.",
+      "action": "The adjudicator detects terminal predecessors via entity_ref and state=cancelled. It emits REVIVES edges to the terminal node and derived_from edges to the canonical origin."
+    },
+    {
+      "rule_id": "R008",
+      "domain": "adjudication_relation",
+      "condition": "COEXISTS edges point from the earlier (older) active node to the newer (incoming) node.",
+      "action": "This direction is semantic: the older coexisting node references the newer one, not the reverse. The compiler should not assume direction for active-set derivation; both nodes remain active."
+    },
+    {
+      "rule_id": "R009",
+      "domain": "adjudication_relation",
+      "condition": "A partial invalidation (gold: dropped_claims) means the old claim is superseded by a new claim with the same dimension but different value.",
+      "action": "Each claim is an independent node. When a new claim with the same dimension replaces an old claim: the old claim is superseded. Claims with unchanged dimensions remain active (COEXISTS). The adapter must align claim dimensions across observations to detect replacement."
+    },
+    {
+      "rule_id": "R010",
+      "domain": "observed_effective_time_ordering",
+      "condition": "observed_at drives ledger ordering. effective_at is recorded for audit but does not alter patches already applied.",
+      "action": "Late-arriving events (observed_at > earlier effective_at) do not rewrite history. The current shadow compiler applies patches in event order and does not offer valid_time reinterpretation, which is correct for this stage."
+    },
+    {
+      "rule_id": "R011",
+      "domain": "bundle_assembly",
+      "condition": "The bundle must include all active nodes within the token budget. must_include is the set of active nodes that gold expects.",
+      "action": "If the budget is insufficient for all active nodes, the compiler must include must_include nodes first, then fill remaining budget. The current builder sorts by time and may truncate for budget; this is acceptable for shadow comparison."
+    }
+  ]
+}

@@ -2294,3 +2294,189 @@ adversarial cases 的重点不是平均分，而是触发高风险错误：
 > 每次运行需逐 case、逐 checkpoint 输出 input hash、runtime fingerprint、relation/state/bundle hash、旧新差异、diff 分类、quarantine 变化和 gate decision。  
 >
 > 连续重复运行仅用于证明确定性，不能替代语义正确性、泛化性或主链切换证据。最终仅可提交 Stage04-B evaluation report 和主链候选切换申请包；不得提交主链替换实现。
+
+# 项目AI-KIMI2.7:
+Stage04-B 已按评审 AI 的指令执行完毕。
+
+**已修复的 3 个 fixture**
+- `lc_legacy_migration`、`lc_revival`、`lc_two_lifecycles_no_kill` 现在全部 PASS。
+- 修复点：调整了 `shadow_lifecycle_adjudicator.py` 中 `COEXISTS` 边的方向、把 `cancelled` 视为 terminal 状态、并在 adjudication_key 变化时正确发出跨键 `REVIVES` / `derived_from` 边。
+
+**关键运行结果**
+- 8 个 lifecycle fixture：全部 PASS，两次回放 hash 一致。
+- benchmark split 审计：split integrity OK，blind holdout 与 development 隔离。
+- `development`：BLOCK（1 blocker / 24 regressions）
+- `regression`：BLOCK（2 blockers / 33 regressions）
+- `adversarial`：BLOCK（0 blockers / 3 regressions）
+- `blind_holdout`：**未执行**。按 Stage04-B 规则，regression 未过 gate 前不得启用 sealed holdout，已保留其完整性。
+
+**已生成产物**
+- [graph/projects/abu_modern/shadow_replay/stage04b_evaluation_manifest.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/stage04b_evaluation_manifest.json) — 已填充分解哈希、runtime fingerprint、metrics_version 与各 split 运行结果。
+- [reports/stage04b_report.md](/D:/CCXXLESSON/contextledger/reports/stage04b_report.md) — 完整 Stage04-B 评估报告。
+- [graph/projects/abu_modern/shadow_replay/stage04b_main_chain_candidate_package.json](/D:/CCXXLESSON/contextledger/graph/projects/abu_modern/shadow_replay/stage04b_main_chain_candidate_package.json) — 主链候选切换申请包，状态为 `blocked`。
+
+**隔离校验**
+- 未修改 `reconcile_patch.py`、`apply_patch.py`、`build_context_bundle.py`、正式 `graph_state.json` 等主链文件。
+- 所有 shadow 输出位于 `graph/projects/abu_modern/shadow_replay/runs/`。
+
+**提交情况**
+- 已提交：`afe0dc3` Stage04-B frozen benchmark shadow evaluation
+- 已提交：`a0211a4` 删除临时测试文件
+- 当前 `git status --short` 为空，HEAD 为 `a0211a4`，分支 `phase1-lifecycle-stage02`。
+
+**结论**
+- 主链候选切换 **未批准**：regression 仍未满足安全红线，blind holdout 也未解锁。下一步需要先改进 observation-to-event 适配器（特别是同一实体下多 claim / alias / 非失效场景的 adjudication_key 划分），再重跑 development → regression → sealed holdout。
+
+# GPT-5.6-Terra：
+## 项目AI指令：Stage04-B Blocker 归因与受限修复
+
+确认当前 Stage04-B 结果为 **BLOCK**。不得执行 blind holdout，不得申请主链候选切换，不得修改正式主链、正式 patch ledger、正式 `graph_state.json`、正式 assembler 路径。
+
+### 1. 先冻结失败证据，不立即改代码
+
+将当前失败运行作为不可改写证据冻结，记录：
+
+- `afe0dc3` 与 `a0211a4` 的完整 commit 指纹；
+- 各 split 的输入 hash、runtime fingerprint、shadow state/bundle/diff report hash；
+- 每个 blocker 和 regression 的 case ID、checkpoint、旧链结果、shadow 结果、gold 结果、diff 分类；
+- 当前 fixture、benchmark、gold、metrics、diff spec、shadow kernel 的 hash。
+
+不得通过修改已有 run report、gold、fixture expected output、split 定义或 diff 分类来消除失败。
+
+### 2. 提交 Blocker Triage Report，先证明问题归因
+
+新增旁路报告：
+
+```text
+reports/stage04b_blocker_triage_report.md
+```
+
+逐条分析全部 **3 个 blocker**，以及 regression 中按频率最高的至少 10 个代表性案例。每条必须包含：
+
+```text
+case_id
+checkpoint_id
+raw observation / source event
+old-chain output
+shadow adapter output
+resolved entity_ref
+resolved lifecycle_ref
+adjudication_key
+relation classification
+expected gold state
+actual shadow state
+must_include impact
+quarantine decision
+root-cause layer
+proposed minimal fix
+```
+
+`root-cause layer` 只能从以下枚举中选择：
+
+```text
+input_adapter
+entity_resolution
+lifecycle_resolution
+adjudication_relation
+observed_effective_time_ordering
+shadow_compiler
+bundle_assembly
+gold_or_baseline_defect
+unresolved
+```
+
+不得在没有逐例证据前，将问题笼统归因为“observation-to-event 适配器”。
+
+### 3. 对“同一实体多 claim”建立明确的最小判定规则
+
+在修改 adapter 前，补充一个版本化的旁路契约或 decision table，明确：
+
+- **同一实体的多个 claim**：何时共享 `adjudication_key`，何时必须拆分；
+- **alias**：何时可归并，何时必须 `abstain/quarantine`；
+- **非失效场景**：何时输出 `COEXISTS` 或 `CONTESTS`，不得生成 `SUPERCEDES`；
+- **跨 key revival**：触发条件、目标选择条件、找不到唯一目标时的保守行为；
+- `cancelled` 作为 terminal 状态时，哪些事件可 `REVIVES`，哪些只能创建新 lifecycle；
+- `COEXISTS` 边方向的语义定义，以及 compiler 是否依赖其方向。
+
+该规则必须配套新增最小 fixture；不得只修改现有 8 个 fixture 以适配当前实现。
+
+### 4. 修复范围严格限制为 shadow 旁路
+
+允许修改：
+
+- `shadow_replay` 下的 adapter、resolver adapter、adjudicator、compiler、bundle builder；
+- shadow fixture、fixture runner、shadow report；
+- benchmark 旁路执行脚本；
+- 旁路 contracts/specs。
+
+禁止修改：
+
+```text
+reconcile_patch.py
+apply_patch.py
+build_context_bundle.py
+正式 assembler
+正式 graph_state.json
+正式 raw/patch ledger
+benchmark v1 的 split 定义
+blind_holdout 内容或 gold
+```
+
+任何新增或修改的规则必须在 development 轨迹和新增 fixture 上先被验证，不得先查看或运行 blind holdout。
+
+### 5. 修复后执行顺序
+
+每次候选修复必须使用新的 shadow implementation version / commit，并按以下顺序执行：
+
+1. 重跑全部既有 8 个 fixture；
+2. 运行新增 fixture；
+3. 进行两次确定性回放，比较 relation、state、bundle、diff report hash；
+4. 重跑 development；
+5. 仅当 development 满足以下条件，才允许跑 regression：
+   - 无 blocker；
+   - 无 `unexplained` diff；
+   - `must_include recall` 不低于 D1 且不低于旧链；
+   - 无 critical false invalidation；
+   - quarantine 增量可逐例归因，且不能以大规模 quarantine 换取表面 precision；
+6. regression 同样满足上述条件后，才可申请一次 sealed blind-holdout run；
+7. adversarial 必须在候选切换前无 blocker。
+
+### 6. 关于现有 regressions 的处理要求
+
+不得只报告总数。下一轮必须按根因层输出分布，例如：
+
+```text
+input_adapter: N
+entity_resolution: N
+lifecycle_resolution: N
+adjudication_relation: N
+compiler: N
+baseline/gold defect: N
+unresolved: N
+```
+
+并报告每类对以下指标的影响：
+
+```text
+invalidation precision / recall
+active-set Set-F1
+must_include recall
+critical false invalidation
+quarantine rate
+```
+
+若多数 regression 实际来自旧链与 shadow schema 的合法表达差异，必须保留为 `expected_schema_change` 的逐例证据；不得事后批量重分类。
+
+### 7. 下一轮交付物
+
+下一轮只提交以下内容：
+
+- `stage04b_blocker_triage_report.md`；
+- 最小 adjudication-key / multi-claim decision contract；
+- 新增 fixture 及其语义回放结果；
+- 修复后的 development replay report；
+- 逐 case、逐 checkpoint diff 与根因分布；
+- shadow 隔离证明与 git diff 文件清单；
+- 明确 gate decision：`blocked` 或 `regression_ready`。
+
+在 regression 尚未重新通过前，**禁止执行或查看 sealed blind holdout，禁止进行主链候选切换申请。**

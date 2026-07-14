@@ -1,0 +1,28 @@
+{
+  "fixture_id": "lc_two_lifecycles_no_kill",
+  "category": "lifecycle_identity",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T025829_lc_two_lifecycles_no_kill",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_002",
+      "after_event_id": "evt_002",
+      "graph_state_hash": "4b2657d834222af8e68f76e66a71b8c25a9bc0f394c6d25d39c2b2228f744eb7",
+      "bundle_hash": "932e1b3f2549ec5856e8d45c313048bdec7302314995199b3f68346a0f23f121",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "4b2657d834222af8e68f76e66a71b8c25a9bc0f394c6d25d39c2b2228f744eb7",
+  "final_bundle_hash": "932e1b3f2549ec5856e8d45c313048bdec7302314995199b3f68346a0f23f121",
+  "patch_hash": "51b4d040372ce5a49c334a870fce0c776a87edcd88869a126c7d36b46b694d07",
+  "quarantine": []
+}

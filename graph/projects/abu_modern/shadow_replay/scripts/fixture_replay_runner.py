@@ -44,6 +44,18 @@ CONTRACTS = [
 ]
 
 EXPECTED_NODE_SEMANTICS: dict[str, dict[str, dict[str, Any]]] = {
+    "lc_same_source_progression": {
+        "n_tkt_001_v1": {"entity_ref": "TKT-001", "lifecycle_ref": "lc_tkt_001", "lifecycle_seq": 1, "claim_id": "tkt.001.v1"},
+        "n_tkt_001_v2": {"entity_ref": "TKT-001", "lifecycle_ref": "lc_tkt_001", "lifecycle_seq": 2, "claim_id": "tkt.001.v2"},
+    },
+    "lc_diff_source_conflict": {
+        "n_svc_a_probe": {"entity_ref": "SVC-A", "lifecycle_ref": "lc_svc_a", "lifecycle_seq": 1, "state": "not_ready", "claim_id": "svc.a.probe"},
+        "n_svc_a_user": {"entity_ref": "SVC-A", "lifecycle_ref": "lc_svc_a", "lifecycle_seq": 2, "state": "ready", "claim_id": "svc.a.user"},
+    },
+    "lc_multi_claim_partial": {
+        "n_mc_policy_v1": {"entity_ref": "POL-GW-001", "lifecycle_ref": "lc_pol_gw_001", "lifecycle_seq": 1, "claim_id": "mc.policy.v1"},
+        "n_mc_policy_v2": {"entity_ref": "POL-GW-001", "lifecycle_ref": "lc_pol_gw_001", "lifecycle_seq": 2, "claim_id": "mc.policy.v2"},
+    },
     "lc_two_lifecycles_no_kill": {
         "n_deploy": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_deploy_prod_2026_07", "state": "deployed"},
         "n_ticket_open": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_ticket_005b", "state": "open"},

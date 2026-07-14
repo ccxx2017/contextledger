@@ -1,0 +1,261 @@
+{
+  "recorded_at": "2026-07-14T02:55:00.445272+00:00",
+  "commits": {
+    "stage04b_final": {
+      "hash": "a0211a4",
+      "message": "Remove temporary apply_patch test file"
+    },
+    "stage04b_main": {
+      "hash": "afe0dc3",
+      "message": "Stage04-B frozen benchmark shadow evaluation"
+    },
+    "stage04a": {
+      "hash": "943b3f7",
+      "message": "Stage04-A shadow lifecycle adjudication runner, split audit, and report"
+    },
+    "stage03": {
+      "hash": "683d205",
+      "message": "Stage03 readiness report"
+    },
+    "base_main": {
+      "hash": "890219b",
+      "message": "Finalize Phase 0.5 benchmark and Phase 1 schema design draft"
+    }
+  },
+  "hashes": {
+    "shadow_lifecycle_adjudicator.py": "ee35d693d9b2346ca5929e08dd6e38cad302a35a74a831a2792241b24237182a",
+    "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+    "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+    "fixture_replay_runner.py": "9a0b08b6f3c0e7ae5a5f963138e37e17124efc9c40b84ea2d838535d8db671e7",
+    "benchmark_shadow_runner.py": "48a76671f5cf58cd8279262053aae6f46377cffadff45b07a5f495b660de22b4",
+    "benchmark_split_audit.py": "315d80a28bc9856ac2f6920eb6ddfa0837bf6a352440e5608707fb1b266cdaa6",
+    "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+    "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
+    "benchmark_v1_freeze_manifest.json": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+    "shadow_replay_spec.md": "d1bdae408cfafcf208952fc522a0786742f2c62eb282f065189e29b7236fe498"
+  },
+  "last_run_fingerprints": {
+    "development": {
+      "run_id": "stage04b_20260713T144000_development",
+      "split_gate_decision": "BLOCK",
+      "case_count": 7,
+      "aggregate": {
+        "min_must_include_recall": 0.5,
+        "min_active_set_set_f1": 0.3333,
+        "total_blockers": 1,
+        "total_regressions": 24,
+        "total_unexplained": 0
+      }
+    },
+    "development_per_case": {
+      "tr_full_tkt_005b": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "dfeac3e82d198956",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 14,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.3333
+        }
+      },
+      "tr_syn_partial_policy_clause": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "7cf732b9e74d7b74",
+        "aggregate": {
+          "blocker_count": 1,
+          "regression_count": 4,
+          "unexplained_count": 0,
+          "min_must_include_recall": 0.5,
+          "min_active_set_set_f1": 0.5
+        }
+      },
+      "tr_syn_conditional_region_exception": {
+        "gate_decision": "PASS",
+        "deterministic": true,
+        "final_graph_state_hash": "1f8f979deac61929",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 0,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 1.0
+        }
+      },
+      "tr_syn_revival_feature_flag": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "27f0070a2836eff3",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 5,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.5
+        }
+      },
+      "tr_alias_workspace_identity": {
+        "gate_decision": "PASS",
+        "deterministic": true,
+        "final_graph_state_hash": "c8c26dd0cccff028",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 0,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 1.0
+        }
+      },
+      "tr_syn_non_invalidation_parallel_targets": {
+        "gate_decision": "PASS",
+        "deterministic": true,
+        "final_graph_state_hash": "ea7bbaad3e1dbc61",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 0,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 1.0
+        }
+      },
+      "tr_syn_out_of_order_inventory_present": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "3411748c9edd6bf9",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        }
+      }
+    },
+    "regression": {
+      "run_id": "stage04b_20260713T144013_regression",
+      "split_gate_decision": "BLOCK",
+      "case_count": 6,
+      "aggregate": {
+        "min_must_include_recall": 0.5,
+        "min_active_set_set_f1": 0.3333,
+        "total_blockers": 2,
+        "total_regressions": 33,
+        "total_unexplained": 0
+      }
+    },
+    "regression_per_case": {
+      "tr_full_tkt_006": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "2e6e6b0ac1e98c3d",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 14,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.3333
+        }
+      },
+      "tr_syn_partial_checklist_clause": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "75572aed685dc386",
+        "aggregate": {
+          "blocker_count": 2,
+          "regression_count": 4,
+          "unexplained_count": 0,
+          "min_must_include_recall": 0.5,
+          "min_active_set_set_f1": 0.5
+        }
+      },
+      "tr_syn_conditional_window_exception": {
+        "gate_decision": "PASS",
+        "deterministic": true,
+        "final_graph_state_hash": "7b2d1c6f922eaaa8",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 0,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 1.0
+        }
+      },
+      "tr_revival_round5x": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "75fc2c188ff3b19e",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 14,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.3333
+        }
+      },
+      "tr_alias_quant_tools": {
+        "gate_decision": "PASS",
+        "deterministic": true,
+        "final_graph_state_hash": "6ca86eb133277c76",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 0,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 1.0
+        }
+      },
+      "tr_syn_out_of_order_price_band_present": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "48c4315ec533f438",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        }
+      }
+    },
+    "adversarial": {
+      "run_id": "stage04b_20260713T144011_adversarial",
+      "split_gate_decision": "BLOCK",
+      "case_count": 2,
+      "aggregate": {
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.6667,
+        "total_blockers": 0,
+        "total_regressions": 3,
+        "total_unexplained": 0
+      }
+    },
+    "adversarial_per_case": {
+      "tr_prov_run54b": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "2ee88d2d9b739186",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 2,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        }
+      },
+      "tr_syn_provenance_conflict": {
+        "gate_decision": "BLOCK",
+        "deterministic": true,
+        "final_graph_state_hash": "0f7b96e37d77a284",
+        "aggregate": {
+          "blocker_count": 0,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        }
+      }
+    }
+  }
+}

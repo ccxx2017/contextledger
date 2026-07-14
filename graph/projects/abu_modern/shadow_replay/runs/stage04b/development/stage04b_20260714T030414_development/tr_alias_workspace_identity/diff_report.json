@@ -1,0 +1,102 @@
+{
+  "trajectory_id": "tr_alias_workspace_identity",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260714T030414_development\\tr_alias_workspace_identity",
+  "trajectory_sha256": "f2707ae3643d1ba06f4f0e748d68362bde6e98624a0a1e9dfcac56908cf9b0bb",
+  "gold_sha256": "94c44ea93e4ed26f5d66e1d2cc4d9be41eefe5bb4419fb2c1ec7af9fa38e3586",
+  "checkpoint_count": 3,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_obs01",
+      "after_obs_id": "obs01",
+      "graph_state_hash": "a43960c592bde02428929b0098dd5432b1963b5c79ec72b85300dbf527c75030",
+      "bundle_hash": "8ff097ca1c306d9450ed7b61248ab65f491ea036a85272df81a1936af8ec4fc4",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs02",
+      "after_obs_id": "obs02",
+      "graph_state_hash": "c4e2c1c1188f238c308dd090dcc7626e051e47e996ab4485e087e648e5a00f94",
+      "bundle_hash": "14b98f98ec1894914cf987824002dcf57a36d1dc43d08d7bc62091af2a86c6ed",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs03",
+      "after_obs_id": "obs03",
+      "graph_state_hash": "cfa0ae01006cd5416fc70e8acc50a7f7cd8101dc701970bb98b564430b485678",
+      "bundle_hash": "c52f2a62caf881657b460e184e88a0114a78a89722178888de6d30ccc007fdfb",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 0,
+    "regression_count": 0,
+    "unexplained_count": 0,
+    "min_must_include_recall": 1.0,
+    "min_active_set_set_f1": 1.0
+  },
+  "gate_decision": "PASS",
+  "final_graph_state_hash": "cfa0ae01006cd5416fc70e8acc50a7f7cd8101dc701970bb98b564430b485678",
+  "final_bundle_hash": "c52f2a62caf881657b460e184e88a0114a78a89722178888de6d30ccc007fdfb",
+  "patch_hash": "835d6a87ef5cbcc3f6ef0bcde0b8975a841ff4dd4412c6c46189460edc2b42ab",
+  "quarantine": []
+}

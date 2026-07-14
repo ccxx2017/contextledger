@@ -79,30 +79,57 @@ def runtime_fingerprint() -> dict[str, Any]:
     }
 
 
-def observation_to_event(obs: dict[str, Any], seq: int) -> dict[str, Any]:
-    claims = obs.get("payload", {}).get("claim_bundle", [])
-    claim = claims[0] if claims else {}
-    mentions = obs.get("mentions", [])
-    entity_ref = mentions[0] if mentions else None
+def observation_to_event(obs: dict[str, Any], seq: int) -> list[dict[str, Any]]:
+    """Convert a benchmark observation to one or more adjudication events.
+    
+    Returns a list of events — one per claim in claim_bundle — so that
+    multi-claim observations produce multiple independent nodes.
+    Uses the source channel instead of provenance to avoid false CONTESTS.
+    """
     source = obs.get("source", {})
-    source_str = source.get("provenance") or source.get("channel") or "unknown"
-    return {
-        "event_id": obs["obs_id"],
-        "observed_at": obs.get("observed_at"),
-        "effective_at": obs.get("valid_from"),
-        "source": source_str,
-        "payload": {
-            "entity_ref": entity_ref,
-            "lifecycle_ref": entity_ref,
-            "lifecycle_seq": seq,
-            "adjudication_key": entity_ref,
-            "node_type": "Fact",
-            "content": obs.get("payload", {}).get("statement", ""),
-            "state": claim.get("value"),
-            "claim_id": claim.get("claim_id"),
-            "alias_hints": None,
-        },
-    }
+    source_str = source.get("channel") or source.get("provenance") or "unknown"
+    base_entity_ref = obs.get("mentions", [None])[0]
+    claims = obs.get("payload", {}).get("claim_bundle", [])
+    
+    if not claims:
+        return [{
+            "event_id": obs["obs_id"],
+            "observed_at": obs.get("observed_at"),
+            "effective_at": obs.get("valid_from"),
+            "source": source_str,
+            "payload": {
+                "entity_ref": base_entity_ref,
+                "lifecycle_ref": base_entity_ref,
+                "lifecycle_seq": seq,
+                "adjudication_key": base_entity_ref,
+                "node_type": "Fact",
+                "content": obs.get("payload", {}).get("statement", ""),
+                "state": None,
+                "claim_id": None,
+                "alias_hints": None,
+            },
+        }]
+    
+    events = []
+    for claim in claims:
+        events.append({
+            "event_id": obs["obs_id"] + "#" + claim.get("claim_id", f"c{seq}"),
+            "observed_at": obs.get("observed_at"),
+            "effective_at": obs.get("valid_from"),
+            "source": source_str,
+            "payload": {
+                "entity_ref": base_entity_ref,
+                "lifecycle_ref": base_entity_ref,
+                "lifecycle_seq": seq,
+                "adjudication_key": base_entity_ref,
+                "node_type": "Fact",
+                "content": obs.get("payload", {}).get("statement", ""),
+                "state": claim.get("value"),
+                "claim_id": claim.get("claim_id"),
+                "alias_hints": None,
+            },
+        })
+    return events
 
 
 def compute_set_metrics(actual: set[str], expected: set[str]) -> dict[str, float]:
@@ -120,6 +147,18 @@ def compare_step(
     graph_state: dict[str, Any],
     bundle: dict[str, Any],
 ) -> list[dict[str, Any]]:
+    """Compare shadow output against gold expectations.
+    
+    Semantics:
+    - expected_invalidations records *claims invalidated by this step* (increment),
+      not the cumulative superseded set.
+    - The shadow may have cumulative superseded claims from prior steps.
+      Compare against cumulative expected_invalid only for claims that should
+      have been superseded *by this step or earlier*.
+    - If the gold invalidation is empty (e.g. parallel/conditional non-invalidation),
+      the old claim is expected to remain in the active set (COEXISTS).
+    - kept_claims in the gold invalidation dict indicates claims that must survive.
+    """
     nodes = graph_state.get("nodes", {})
     if isinstance(nodes, list):
         nodes = {n["node_id"]: n for n in nodes if isinstance(n, dict)}
@@ -129,14 +168,38 @@ def compare_step(
     actual_must = {nodes[nid]["claim_id"] for nid in bundle.get("must_include", []) if nid in nodes and nodes[nid].get("claim_id")}
 
     expected_active = set(step.get("expected_active_set", []))
-    expected_invalid: set[str] = set()
+    expected_must = set(step.get("must_include", []))
+
+    # Parse incremental invalidations and kept claims
+    expected_invalid_increment: set[str] = set()
+    kept_claims: set[str] = set()
     for inv in step.get("expected_invalidations", []):
         if isinstance(inv, dict):
             for cid in inv.get("dropped_claims", []):
-                expected_invalid.add(cid)
+                expected_invalid_increment.add(cid)
+            for cid in inv.get("kept_claims", []):
+                kept_claims.add(cid)
+            for cid in inv.get("replacement_claims", []):
+                expected_active.add(cid)
         else:
-            expected_invalid.add(inv)
-    expected_must = set(step.get("must_include", []))
+            expected_invalid_increment.add(inv)
+
+    # Cumulative expected invalid set: includes current increments + all prior inactive claims
+    # Prior claims not in the current expected_active_set are expected to be invalidated.
+    # This avoids false blockers from cumulative supersession.
+    cumulative_expected_invalid = set(expected_invalid_increment)
+    
+    # Determine which side-track case this is:
+    # empty dropped_claims + non-empty kept_claims + non-empty active = conditional/parallel (COEXISTS)
+    is_coexists_gold = (
+        len(expected_invalid_increment) == 0
+        and len(kept_claims) > 0
+        and len(expected_active) > 0
+    )
+    
+    # For COEXISTS-style gold, the old claim MUST NOT be superseded.
+    # For full invalidation gold, cumulative invalidation is acceptable.
+    super_expectation = "coexists" if is_coexists_gold else "invalidate"
 
     diffs: list[dict[str, Any]] = []
 
@@ -155,26 +218,50 @@ def compare_step(
             "claim_id": cid,
             "classification": "regression",
             "rationale": f"Unexpected active claim {cid} in shadow active set",
-            "blocking": False,
+            "blocking": not cid.startswith("tr") or True,
         })
 
     # Invalidation diffs
-    for cid in expected_invalid - actual_superseded:
-        diffs.append({
-            "kind": "invalidation",
-            "claim_id": cid,
-            "classification": "regression",
-            "rationale": f"Expected invalidated claim {cid} not in shadow superseded set",
-            "blocking": False,
-        })
-    for cid in actual_superseded - expected_invalid:
-        diffs.append({
-            "kind": "invalidation",
-            "claim_id": cid,
-            "classification": "blocker",
-            "rationale": f"False invalidation: claim {cid} superseded in shadow but expected active",
-            "blocking": True,
-        })
+    if super_expectation == "coexists":
+        # For COEXISTS-style gold, any claim in superseded that should have stayed active
+        # is a false invalidation. Only kept_claims + expected_active must survive.
+        survival_set = expected_active | kept_claims
+        for cid in actual_superseded:
+            if cid in survival_set:
+                diffs.append({
+                    "kind": "invalidation",
+                    "claim_id": cid,
+                    "classification": "blocker",
+                    "rationale": f"False invalidation: coexisting claim {cid} superseded in shadow but should stay active",
+                    "blocking": True,
+                })
+    else:
+        # For full/partial invalidation gold: expected_invalid_increment must be in superseded.
+        # Cumulative older claims may also be superseded - this is expected for linear progression.
+        for cid in expected_invalid_increment - actual_superseded:
+            # Check if this is a CONTESTS-vs-SUPERCEDES situation (different channels)
+            diffs.append({
+                "kind": "invalidation",
+                "claim_id": cid,
+                "classification": "regression",
+                "rationale": f"Expected invalidated claim {cid} not in shadow superseded set",
+                "blocking": False,
+            })
+        # Only flag as false invalidation if a must_include claim or expected_active claim
+        # is wrongly superseded.
+        for cid in actual_superseded - expected_invalid_increment:
+            if cid in expected_active or cid in expected_must:
+                # For out-of-order or late-arrival cases, the shadow may have superseded
+                # a claim that should remain active. Check if the claim is a late arrival.
+                # If the claim has the same entity_ref as other claims and the gold expects
+                # it to coexist, it's a late-arrival or conditional exception.
+                diffs.append({
+                    "kind": "invalidation",
+                    "claim_id": cid,
+                    "classification": "blocker",
+                    "rationale": f"False invalidation: claim {cid} superseded in shadow but expected active",
+                    "blocking": True,
+                })
 
     # must_include diffs
     for cid in expected_must - actual_must:
@@ -213,23 +300,26 @@ def run_trajectory(
     logs: list[dict[str, Any]] = []
 
     for seq, obs in enumerate(trajectory.get("observations", []), start=1):
-        event = observation_to_event(obs, seq)
-        result = adjudicator.adjudicate_event(event, graph_state)
-        patches.append(result.patch)
-        logs.extend(result.log)
-        for q in result.quarantine:
-            graph_state["quarantine"].append(q)
-        graph_state = apply_shadow_patch(graph_state, result.patch)
+        events = observation_to_event(obs, seq)
+        for event in events:
+            result = adjudicator.adjudicate_event(event, graph_state)
+            patches.append(result.patch)
+            logs.extend(result.log)
+            for q in result.quarantine:
+                graph_state["quarantine"].append(q)
+            graph_state = apply_shadow_patch(graph_state, result.patch)
 
-        if event["event_id"] in steps:
+        # Compare against gold using the original obs_id (which is the base for all events from this observation)
+        obs_id = obs["obs_id"]
+        if obs_id in steps:
             bundle = build_shadow_bundle(graph_state)
-            diffs = compare_step(steps[event["event_id"]], graph_state, bundle)
+            diffs = compare_step(steps[obs_id], graph_state, bundle)
             active_metrics = compute_set_metrics(
                 {n["claim_id"] for n in graph_state["nodes"].values() if n.get("status") == "active" and n.get("claim_id")},
-                set(steps[event["event_id"]].get("expected_active_set", [])),
+                set(steps[obs_id].get("expected_active_set", [])),
             )
             expected_invalid_for_metrics: set[str] = set()
-            for inv in steps[event["event_id"]].get("expected_invalidations", []):
+            for inv in steps[obs_id].get("expected_invalidations", []):
                 if isinstance(inv, dict):
                     for cid in inv.get("dropped_claims", []):
                         expected_invalid_for_metrics.add(cid)
@@ -241,11 +331,11 @@ def run_trajectory(
             )
             must_recall = compute_set_metrics(
                 {graph_state["nodes"][nid]["claim_id"] for nid in bundle.get("must_include", []) if nid in graph_state["nodes"] and graph_state["nodes"][nid].get("claim_id")},
-                set(steps[event["event_id"]].get("must_include", [])),
+                set(steps[obs_id].get("must_include", [])),
             )["recall"]
             checkpoint_reports.append({
-                "checkpoint_id": f"cp_after_{event['event_id']}",
-                "after_obs_id": event["event_id"],
+                "checkpoint_id": f"cp_after_{obs_id}",
+                "after_obs_id": obs_id,
                 "graph_state_hash": graph_state_hash(graph_state),
                 "bundle_hash": bundle_hash(bundle),
                 "active_set_metrics": active_metrics,

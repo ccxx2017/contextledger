@@ -1,0 +1,22 @@
+{
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "d75ca1bb02abe0ac923be72d7c270fc3fac8562786d8ab9f12c3e776081f3842",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "benchmark_shadow_runner.py": "b7e5c8f9e5437e9ed1c78102c247f977de44edf792eb78c1897e3c503bc89f48"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+      "--split",
+      "development"
+    ]
+  },
+  "trajectory_sha256": "f2707ae3643d1ba06f4f0e748d68362bde6e98624a0a1e9dfcac56908cf9b0bb",
+  "gold_sha256": "94c44ea93e4ed26f5d66e1d2cc4d9be41eefe5bb4419fb2c1ec7af9fa38e3586"
+}

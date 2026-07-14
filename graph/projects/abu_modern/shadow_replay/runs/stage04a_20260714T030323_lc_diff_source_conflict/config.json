@@ -1,0 +1,80 @@
+{
+  "run_id": "stage04a_20260714T030323_lc_diff_source_conflict",
+  "generated_at": "2026-07-14T03:03:23.760466+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_diff_source_conflict.json",
+  "fixture_sha256": "912c51cfe61099f5498bf29c8eb6d6541829b927b5420fba7f22009c23441f07",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "d75ca1bb02abe0ac923be72d7c270fc3fac8562786d8ab9f12c3e776081f3842",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "fd298dcd659cc8e54117fe075c3982c1b051bd523be7b868a14c02aa9975afd5"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_diff_source_conflict",
+    "category": "provenance_conflict",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T030323_lc_diff_source_conflict",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ds_02",
+        "after_event_id": "evt_ds_02",
+        "graph_state_hash": "4568767d562da74de96576d7c13db1976b3fb5f9024fd68528c6adfb43567641",
+        "bundle_hash": "39b51bdddae968bf213122b5323d909bd7f7303032ae54fc866d0382b4469939",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "4568767d562da74de96576d7c13db1976b3fb5f9024fd68528c6adfb43567641",
+    "final_bundle_hash": "39b51bdddae968bf213122b5323d909bd7f7303032ae54fc866d0382b4469939",
+    "patch_hash": "5811601cc5857ae4f77fb1f9b03def17b42a39ef8d3b5120ed9a50d742d88f48",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_diff_source_conflict",
+    "category": "provenance_conflict",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T030323_lc_diff_source_conflict",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ds_02",
+        "after_event_id": "evt_ds_02",
+        "graph_state_hash": "4568767d562da74de96576d7c13db1976b3fb5f9024fd68528c6adfb43567641",
+        "bundle_hash": "39b51bdddae968bf213122b5323d909bd7f7303032ae54fc866d0382b4469939",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "4568767d562da74de96576d7c13db1976b3fb5f9024fd68528c6adfb43567641",
+    "final_bundle_hash": "39b51bdddae968bf213122b5323d909bd7f7303032ae54fc866d0382b4469939",
+    "patch_hash": "5811601cc5857ae4f77fb1f9b03def17b42a39ef8d3b5120ed9a50d742d88f48",
+    "quarantine": []
+  },
+  "gate_decision": "PASS"
+}

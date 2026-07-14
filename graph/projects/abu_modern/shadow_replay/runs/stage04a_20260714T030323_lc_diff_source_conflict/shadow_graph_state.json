@@ -1,0 +1,52 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_53937d5e65e0": {
+      "node_id": "n_53937d5e65e0",
+      "entity_ref": "SVC-A",
+      "lifecycle_ref": "lc_svc_a",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_svc_a",
+      "observed_at": "2026-07-01T10:00:00Z",
+      "effective_at": "2026-07-01T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Probe says not ready",
+      "state": "not_ready",
+      "claim_id": "svc.a.probe",
+      "status": "active",
+      "active": true,
+      "source": "probe_log",
+      "_observation_base": "evt_ds_01"
+    },
+    "n_e3ef74d85c48": {
+      "node_id": "n_e3ef74d85c48",
+      "entity_ref": "SVC-A",
+      "lifecycle_ref": "lc_svc_a",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_svc_a",
+      "observed_at": "2026-07-01T10:30:00Z",
+      "effective_at": "2026-07-01T10:30:00Z",
+      "node_type": "Fact",
+      "content": "User says ready",
+      "state": "ready",
+      "claim_id": "svc.a.user",
+      "status": "active",
+      "active": true,
+      "source": "user_note",
+      "_observation_base": "evt_ds_02"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_e3ef74d85c48",
+      "target": "n_53937d5e65e0",
+      "relation": "CONTESTS"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "evt_ds_02"
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "turn_id": "tr03_obs01#tr03.timeout.30s",
+    "new_nodes": [
+      {
+        "node_id": "n_98674f694ba1",
+        "entity_ref": "Order gateway policy",
+        "lifecycle_ref": "Order gateway policy",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "Order gateway policy",
+        "observed_at": "2026-06-03T09:00:00Z",
+        "effective_at": "2026-06-03T09:00:00Z",
+        "node_type": "Fact",
+        "content": "Order gateway policy sets timeout to 30s, retries to 2, and keeps audit logging mandatory.",
+        "state": "30s",
+        "claim_id": "tr03.timeout.30s",
+        "status": "active",
+        "active": true,
+        "source": "policy_doc"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr03_obs01#tr03.retries.2",
+    "new_nodes": [],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr03_obs01#tr03.audit.required",
+    "new_nodes": [],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr03_obs02#tr03.retries.4",
+    "new_nodes": [
+      {
+        "node_id": "n_61660927eb6c",
+        "entity_ref": "Order gateway policy",
+        "lifecycle_ref": "Order gateway policy",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "Order gateway policy",
+        "observed_at": "2026-06-03T10:30:00Z",
+        "effective_at": "2026-06-03T10:30:00Z",
+        "node_type": "Fact",
+        "content": "Only the retry count changes from 2 to 4.",
+        "state": "4",
+        "claim_id": "tr03.retries.4",
+        "status": "active",
+        "active": true,
+        "source": "policy_doc"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [
+      "n_98674f694ba1"
+    ],
+    "new_edges": [
+      {
+        "source": "n_61660927eb6c",
+        "target": "n_98674f694ba1",
+        "relation": "supersedes"
+      }
+    ]
+  }
+]

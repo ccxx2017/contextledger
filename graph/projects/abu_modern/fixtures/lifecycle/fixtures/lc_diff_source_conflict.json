@@ -1,0 +1,70 @@
+{
+  "fixture_id": "lc_diff_source_conflict",
+  "category": "provenance_conflict",
+  "description": "Different channels for same entity must CONTESTS, not SUPERCEDES.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_ds_01",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "probe_log",
+        "payload": {
+          "entity_ref": "SVC-A",
+          "lifecycle_ref": "lc_svc_a",
+          "lifecycle_seq": 1,
+          "adjudication_key": "svc:SVC-A",
+          "node_type": "Fact",
+          "content": "Probe says not ready",
+          "state": "not_ready",
+          "claim_id": "svc.a.probe",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_ds_02",
+        "observed_at": "2026-07-01T10:30:00Z",
+        "effective_at": "2026-07-01T10:30:00Z",
+        "source": "user_note",
+        "payload": {
+          "entity_ref": "SVC-A",
+          "lifecycle_ref": "lc_svc_a",
+          "lifecycle_seq": 2,
+          "adjudication_key": "svc:SVC-A",
+          "node_type": "Fact",
+          "content": "User says ready",
+          "state": "ready",
+          "claim_id": "svc.a.user",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ds_02",
+        "after_event_id": "evt_ds_02",
+        "active_nodes": [
+          "n_svc_a_probe",
+          "n_svc_a_user"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [
+          {
+            "relation_type": "CONTESTS",
+            "source": "n_svc_a_user",
+            "target": "n_svc_a_probe"
+          }
+        ],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_svc_a_probe",
+          "n_svc_a_user"
+        ]
+      }
+    ]
+  }
+}

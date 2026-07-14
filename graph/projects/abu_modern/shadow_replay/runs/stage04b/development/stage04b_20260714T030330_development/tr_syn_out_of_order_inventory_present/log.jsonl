@@ -1,0 +1,13 @@
+[
+  {
+    "event_id": "tr14_obs01#tr14.inventory.10",
+    "action": "create",
+    "node_id": "n_ea24da02819e"
+  },
+  {
+    "event_id": "tr14_obs02#tr14.inventory.0",
+    "action": "supersede",
+    "node_id": "n_e6f69ad6b341",
+    "target": "n_ea24da02819e"
+  }
+]

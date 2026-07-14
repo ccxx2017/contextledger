@@ -1,0 +1,97 @@
+{
+  "trajectory_id": "tr_syn_conditional_region_exception",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260714T025925_development\\tr_syn_conditional_region_exception",
+  "trajectory_sha256": "a4a8c05dc2cc29ad0fbb6c0d8ae7980f5306a3b1a946d4089aa3a3e891e20bcd",
+  "gold_sha256": "f0bf7eb90c9aa19a391dfeb100b4874070221b52a63d292a03bacbf4f43dfd97",
+  "checkpoint_count": 2,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_tr05_obs01",
+      "after_obs_id": "tr05_obs01",
+      "graph_state_hash": "954aa2b5ea1920e1ee64e20239b5639e03ab02e8b3d5f4358945a03e5fb700e3",
+      "bundle_hash": "949bf956057d6bdaeafdb58e8e59a2762eafc2113e6b41061b92e78b57faf3d1",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_tr05_obs02",
+      "after_obs_id": "tr05_obs02",
+      "graph_state_hash": "e7f11eb40a84b82f66d2d2b6591672b5bb89106c6396d88cea0036bb4788cb8f",
+      "bundle_hash": "e8b1edb014ec7e942f6da1447ccf6c96ca10593743bb99ac1ecb04bd801b841f",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 0.5,
+      "diffs": [
+        {
+          "kind": "active_set",
+          "claim_id": "tr05.trading.blocked.global",
+          "classification": "regression",
+          "rationale": "Expected active claim tr05.trading.blocked.global not in shadow active set",
+          "blocking": true
+        },
+        {
+          "kind": "invalidation",
+          "claim_id": "tr05.trading.blocked.global",
+          "classification": "blocker",
+          "rationale": "False invalidation: claim tr05.trading.blocked.global superseded in shadow but expected active",
+          "blocking": true
+        },
+        {
+          "kind": "must_include",
+          "claim_id": "tr05.trading.blocked.global",
+          "classification": "blocker",
+          "rationale": "Expected must_include claim tr05.trading.blocked.global missing from shadow bundle",
+          "blocking": true
+        }
+      ],
+      "diff_counts": {
+        "blocker": 2,
+        "regression": 1,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 3
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 2,
+    "regression_count": 1,
+    "unexplained_count": 0,
+    "min_must_include_recall": 0.5,
+    "min_active_set_set_f1": 0.6667
+  },
+  "gate_decision": "BLOCK",
+  "final_graph_state_hash": "e7f11eb40a84b82f66d2d2b6591672b5bb89106c6396d88cea0036bb4788cb8f",
+  "final_bundle_hash": "e8b1edb014ec7e942f6da1447ccf6c96ca10593743bb99ac1ecb04bd801b841f",
+  "patch_hash": "b21f3933d00fe1a8ff90a6413668d766e8a672504f445382964180e0f463e621",
+  "quarantine": []
+}

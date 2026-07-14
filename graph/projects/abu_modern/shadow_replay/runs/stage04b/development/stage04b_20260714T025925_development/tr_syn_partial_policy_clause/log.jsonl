@@ -1,0 +1,23 @@
+[
+  {
+    "event_id": "tr03_obs01#tr03.timeout.30s",
+    "action": "create",
+    "node_id": "n_98674f694ba1"
+  },
+  {
+    "event_id": "tr03_obs01#tr03.retries.2",
+    "action": "quarantine",
+    "reason": "lifecycle_seq_collision"
+  },
+  {
+    "event_id": "tr03_obs01#tr03.audit.required",
+    "action": "quarantine",
+    "reason": "lifecycle_seq_collision"
+  },
+  {
+    "event_id": "tr03_obs02#tr03.retries.4",
+    "action": "supersede",
+    "node_id": "n_61660927eb6c",
+    "target": "n_98674f694ba1"
+  }
+]

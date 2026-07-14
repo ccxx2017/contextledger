@@ -1,0 +1,60 @@
+[
+  {
+    "turn_id": "tr05_obs01#tr05.trading.blocked.global",
+    "new_nodes": [
+      {
+        "node_id": "n_8672bffe8070",
+        "entity_ref": "Deployment rule",
+        "lifecycle_ref": "Deployment rule",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "Deployment rule",
+        "observed_at": "2026-06-05T08:00:00Z",
+        "effective_at": "2026-06-05T08:00:00Z",
+        "node_type": "Fact",
+        "content": "Trading is blocked for every region.",
+        "state": "blocked_global",
+        "claim_id": "tr05.trading.blocked.global",
+        "status": "active",
+        "active": true,
+        "source": "risk_memo"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "tr05_obs02#tr05.trading.allowed.tokyo_sim",
+    "new_nodes": [
+      {
+        "node_id": "n_e7141e25bd22",
+        "entity_ref": "Deployment rule",
+        "lifecycle_ref": "Deployment rule",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "Deployment rule",
+        "observed_at": "2026-06-05T08:30:00Z",
+        "effective_at": "2026-06-05T08:30:00Z",
+        "node_type": "Fact",
+        "content": "Tokyo desk may trade when running in simulation mode.",
+        "state": "tokyo_simulation_allowed",
+        "claim_id": "tr05.trading.allowed.tokyo_sim",
+        "status": "active",
+        "active": true,
+        "source": "risk_memo"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [
+      "n_8672bffe8070"
+    ],
+    "new_edges": [
+      {
+        "source": "n_e7141e25bd22",
+        "target": "n_8672bffe8070",
+        "relation": "supersedes"
+      }
+    ]
+  }
+]

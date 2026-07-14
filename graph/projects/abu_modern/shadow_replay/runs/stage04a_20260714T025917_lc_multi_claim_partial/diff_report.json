@@ -1,0 +1,28 @@
+{
+  "fixture_id": "lc_multi_claim_partial",
+  "category": "multi_claim",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T025917_lc_multi_claim_partial",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_mc_02",
+      "after_event_id": "evt_mc_02",
+      "graph_state_hash": "7653e05486b0ff56d4da1f82608bd513a9238a78d0ae17c454e6ceb4e13447c1",
+      "bundle_hash": "42ec725a290bcadc63fa0aa06ba4ce09fca42cf75b471a1dbf88811095788fd9",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "7653e05486b0ff56d4da1f82608bd513a9238a78d0ae17c454e6ceb4e13447c1",
+  "final_bundle_hash": "42ec725a290bcadc63fa0aa06ba4ce09fca42cf75b471a1dbf88811095788fd9",
+  "patch_hash": "f3915f4d92d83623664649903d98bd9c8d35eb6f2517fc7ade5bda76723a25dd",
+  "quarantine": []
+}

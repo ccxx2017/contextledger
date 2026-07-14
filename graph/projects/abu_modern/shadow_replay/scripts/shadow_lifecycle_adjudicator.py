@@ -48,7 +48,9 @@ class ShadowLifecycleAdjudicator:
         lifecycle_seq = payload.get("lifecycle_seq")
         adjudication_key = self._compute_adjudication_key(payload)
         alias_hints = payload.get("alias_hints") or []
-        source = event.get("source", "unknown")
+        raw_source = event.get("source", "unknown")
+        # Normalize source to the channel part only (before first #)
+        source = raw_source.split("#")[0] if "#" in raw_source else raw_source
         state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").strip()
 
@@ -76,6 +78,9 @@ class ShadowLifecycleAdjudicator:
                 log.append({"event_id": event["event_id"], "action": "quarantine", "reason": reason})
                 return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
 
+        # Track siblings: claims from the same observation share a base event_id
+        event_base = event["event_id"].split("#")[0] if "#" in event["event_id"] else event["event_id"]
+
         # Build new node
         self._node_counter += 1
         node_id = self._generate_node_id(event, self._node_counter)
@@ -95,6 +100,7 @@ class ShadowLifecycleAdjudicator:
             "status": "active",
             "active": True,
             "source": source,
+            "_observation_base": event_base,
         }
 
         patch: dict[str, Any] = {
@@ -118,6 +124,9 @@ class ShadowLifecycleAdjudicator:
 
         # Find previous active node(s) with same adjudication_key
         prev_active = self._find_active_nodes(graph_state, adjudication_key)
+        
+        # Filter out sibling nodes from the same observation (they COEXIST, not SUPERCEDES)
+        prev_active = [n for n in prev_active if n.get("_observation_base") != event_base]
 
         if not prev_active:
             # Cross-key revival: new lifecycle/adjudication key for an entity
@@ -227,10 +236,16 @@ class ShadowLifecycleAdjudicator:
         new_state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").lower()
 
-        # Provenance conflict: same adj key, different source
+        # Provenance conflict: same adj key, different source channel
+        # Use the channel prefix (text before the first '#' if present) as the
+        # provenance scope. Same channel = same lifecycle progression = SUPERCEDES.
+        # Different channel = different provenance source = CONTESTS.
         if prev_active:
-            prev_source = prev_active[0].get("source", "unknown")
-            if new_source != prev_source:
+            prev_raw = prev_active[0].get("source", "unknown")
+            new_raw = event.get("source", "unknown")
+            prev_channel = prev_raw.split("#")[0] if "#" in prev_raw else prev_raw
+            new_channel = new_raw.split("#")[0] if "#" in new_raw else new_raw
+            if new_channel != prev_channel:
                 return "CONTESTS"
 
         # Revival signal

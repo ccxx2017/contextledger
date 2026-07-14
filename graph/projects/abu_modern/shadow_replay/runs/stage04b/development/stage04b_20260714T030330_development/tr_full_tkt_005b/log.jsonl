@@ -1,0 +1,31 @@
+[
+  {
+    "event_id": "obs01#tr_full_tkt_005b.obs01.active",
+    "action": "create",
+    "node_id": "n_e597420aa3ce"
+  },
+  {
+    "event_id": "obs02#tr_full_tkt_005b.obs02.active",
+    "action": "supersede",
+    "node_id": "n_88b7e68921b8",
+    "target": "n_e597420aa3ce"
+  },
+  {
+    "event_id": "obs03#tr_full_tkt_005b.obs03.active",
+    "action": "supersede",
+    "node_id": "n_10b26fcd9e47",
+    "target": "n_88b7e68921b8"
+  },
+  {
+    "event_id": "obs04#tr_full_tkt_005b.obs04.active",
+    "action": "supersede",
+    "node_id": "n_98d67a75b925",
+    "target": "n_10b26fcd9e47"
+  },
+  {
+    "event_id": "obs05#tr_full_tkt_005b.obs05.active",
+    "action": "supersede",
+    "node_id": "n_07af9ecea39d",
+    "target": "n_98d67a75b925"
+  }
+]

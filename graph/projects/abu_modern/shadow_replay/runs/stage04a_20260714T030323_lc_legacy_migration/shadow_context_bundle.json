@@ -1,0 +1,49 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 23,
+  "included_node_count": 2,
+  "must_include": [
+    "n_cfbfaee2910a",
+    "n_c9ba59dc8fef"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_cfbfaee2910a",
+      "entity_ref": "LEG-001",
+      "lifecycle_ref": null,
+      "lifecycle_seq": null,
+      "lifecycle_stage": null,
+      "adjudication_key": "LEG-001",
+      "observed_at": "2026-06-01T09:00:00Z",
+      "effective_at": "2026-06-01T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Legacy fact imported without lifecycle metadata.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "legacy_import",
+      "_observation_base": "evt_040"
+    },
+    {
+      "node_id": "n_c9ba59dc8fef",
+      "entity_ref": "LEG-001",
+      "lifecycle_ref": "lc_leg_001",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_leg_001",
+      "observed_at": "2026-07-01T09:00:00Z",
+      "effective_at": "2026-07-01T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Updated fact with lifecycle metadata.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "pipeline",
+      "_observation_base": "evt_041"
+    }
+  ]
+}

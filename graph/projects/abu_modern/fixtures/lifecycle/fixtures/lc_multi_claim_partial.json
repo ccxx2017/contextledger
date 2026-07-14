@@ -1,0 +1,70 @@
+{
+  "fixture_id": "lc_multi_claim_partial",
+  "category": "multi_claim",
+  "description": "Same observation carries multiple claims. One claim is replaced in a later observation; others should coexist.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_mc_01",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "policy_team",
+        "payload": {
+          "entity_ref": "POL-GW-001",
+          "lifecycle_ref": "lc_pol_gw_001",
+          "lifecycle_seq": 1,
+          "adjudication_key": "policy:POL-GW-001",
+          "node_type": "Fact",
+          "content": "Initial policy: timeout=30s, retries=2, audit=required",
+          "state": "implemented",
+          "claim_id": "mc.policy.v1",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_mc_02",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "policy_team",
+        "payload": {
+          "entity_ref": "POL-GW-001",
+          "lifecycle_ref": "lc_pol_gw_001",
+          "lifecycle_seq": 2,
+          "adjudication_key": "policy:POL-GW-001",
+          "node_type": "Fact",
+          "content": "Updated policy: retries=4, audit still required",
+          "state": "implemented",
+          "claim_id": "mc.policy.v2",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_mc_02",
+        "after_event_id": "evt_mc_02",
+        "active_nodes": [
+          "n_mc_policy_v2"
+        ],
+        "superseded_nodes": [
+          "n_mc_policy_v1"
+        ],
+        "pending_nodes": [],
+        "relations": [
+          {
+            "relation_type": "supersedes",
+            "source": "n_mc_policy_v2",
+            "target": "n_mc_policy_v1"
+          }
+        ],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_mc_policy_v2"
+        ]
+      }
+    ]
+  }
+}

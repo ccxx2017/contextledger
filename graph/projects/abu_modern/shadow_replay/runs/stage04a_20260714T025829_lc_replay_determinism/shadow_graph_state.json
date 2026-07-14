@@ -1,0 +1,50 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_178737d7d99f": {
+      "node_id": "n_178737d7d99f",
+      "entity_ref": "DET-001",
+      "lifecycle_ref": "lc_det_001",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_det_001",
+      "observed_at": "2026-07-01T10:00:00Z",
+      "effective_at": "2026-07-01T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Determinism test fact A.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "superseded",
+      "active": false,
+      "source": "pipeline"
+    },
+    "n_4b1596aed7ed": {
+      "node_id": "n_4b1596aed7ed",
+      "entity_ref": "DET-001",
+      "lifecycle_ref": "lc_det_001",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_det_001",
+      "observed_at": "2026-07-02T10:00:00Z",
+      "effective_at": "2026-07-02T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Determinism test fact B.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "pipeline"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_4b1596aed7ed",
+      "target": "n_178737d7d99f",
+      "relation": "supersedes"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "evt_071"
+}

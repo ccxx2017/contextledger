@@ -1,0 +1,55 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_4b1ccaad4879": {
+      "node_id": "n_4b1ccaad4879",
+      "entity_ref": "FEAT-2026-007",
+      "lifecycle_ref": "lc_feat_007",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_feat_007",
+      "observed_at": "2026-07-01T10:00:00Z",
+      "effective_at": "2026-07-01T10:00:00Z",
+      "node_type": "Feature",
+      "content": "Feature 007 scoped.",
+      "state": "open",
+      "claim_id": null,
+      "status": "superseded",
+      "active": false,
+      "source": "pipeline"
+    },
+    "n_e43443ca6331": {
+      "node_id": "n_e43443ca6331",
+      "entity_ref": "FEAT-2026-007",
+      "lifecycle_ref": "lc_feat_007",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "lc_feat_007",
+      "observed_at": "2026-07-02T10:00:00Z",
+      "effective_at": "2026-07-02T10:00:00Z",
+      "node_type": "Feature",
+      "content": "Feature 007 implementation started.",
+      "state": "in_progress",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "pipeline"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_e43443ca6331",
+      "target": "n_4b1ccaad4879",
+      "relation": "supersedes"
+    }
+  ],
+  "quarantine": [
+    {
+      "event_id": "evt_062",
+      "reason": "lifecycle_seq_collision"
+    }
+  ],
+  "last_applied_turn_id": "evt_062"
+}

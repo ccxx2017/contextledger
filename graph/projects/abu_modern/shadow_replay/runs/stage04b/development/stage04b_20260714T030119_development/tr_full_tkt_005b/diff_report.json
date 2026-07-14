@@ -1,0 +1,156 @@
+{
+  "trajectory_id": "tr_full_tkt_005b",
+  "case_output_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260714T030119_development\\tr_full_tkt_005b",
+  "trajectory_sha256": "83fd9a0d01f8aa07d63e54fc0ce5c4a2ac7efb63055be5bd17d70d79f700859d",
+  "gold_sha256": "ba7c53ff8ebf8cffac704322e7596d3ae58c1068260067f9a7d1cc0cd5892974",
+  "checkpoint_count": 5,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_obs01",
+      "after_obs_id": "obs01",
+      "graph_state_hash": "bdb2a953e5ee1ec79eb576aa922797a6c9eee9f26abae6b64ba168f28fc068a6",
+      "bundle_hash": "f66fdfd8acaa56d6c4ca85d08e92e1d769712f8c439d8cc18add963b7108307e",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs02",
+      "after_obs_id": "obs02",
+      "graph_state_hash": "e4b0533b51d6e0c63f579a20dfd942471adf853577d6e9464e0ad76e9b97dcc1",
+      "bundle_hash": "92be74630e23a60692601b74855363d4c648bae27db29c7328f1e4b00760c184",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs03",
+      "after_obs_id": "obs03",
+      "graph_state_hash": "6c1647be1fd747f5ca4aebcb34984aab6b7018a2ec467f048f05480c5b5ffb81",
+      "bundle_hash": "7d88bf792b6f767fc67fa77da6edf5d022b232357b907b21e596cbc50514033f",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs04",
+      "after_obs_id": "obs04",
+      "graph_state_hash": "16540dc9f49987411dd45d8ab343f0ca8f6be8a75e3fce4d79613197bec23946",
+      "bundle_hash": "cbc623b1005e3e244967103296f0f86cb3c3254aaeacb2b6b2690848a58cf22a",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    },
+    {
+      "checkpoint_id": "cp_after_obs05",
+      "after_obs_id": "obs05",
+      "graph_state_hash": "843df0b02573135ba446f63384e8cf40200dbefd1d0e2d58aa4e218ee0ee3931",
+      "bundle_hash": "a1d762ac048a22b7937673cefe598d008b817edd964a2b96cd2822461a7ee434",
+      "active_set_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "invalidation_metrics": {
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "must_include_recall": 1.0,
+      "diffs": [],
+      "diff_counts": {
+        "blocker": 0,
+        "regression": 0,
+        "expected_schema_change": 0,
+        "expected_improvement": 0,
+        "unexplained": 0,
+        "manual_adjudication": 0,
+        "total": 0
+      }
+    }
+  ],
+  "aggregate": {
+    "blocker_count": 0,
+    "regression_count": 0,
+    "unexplained_count": 0,
+    "min_must_include_recall": 1.0,
+    "min_active_set_set_f1": 1.0
+  },
+  "gate_decision": "PASS",
+  "final_graph_state_hash": "843df0b02573135ba446f63384e8cf40200dbefd1d0e2d58aa4e218ee0ee3931",
+  "final_bundle_hash": "a1d762ac048a22b7937673cefe598d008b817edd964a2b96cd2822461a7ee434",
+  "patch_hash": "e5930350783f6549eff8836681d349acf35597e8d9eae762b2e31a199c93bf8c",
+  "quarantine": []
+}

@@ -1,0 +1,28 @@
+{
+  "fixture_id": "lc_late_arrival",
+  "category": "late_arrival",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T030323_lc_late_arrival",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_031",
+      "after_event_id": "evt_031",
+      "graph_state_hash": "c7e69a057ad6bfd2a9c5b163bfc6997e982a7edfc3ae01950e67fc4669dd5629",
+      "bundle_hash": "e7e5e26f8e672f08f886aa045b2c8689a27a5c71e541edbcdd590bd82ff7570e",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "c7e69a057ad6bfd2a9c5b163bfc6997e982a7edfc3ae01950e67fc4669dd5629",
+  "final_bundle_hash": "e7e5e26f8e672f08f886aa045b2c8689a27a5c71e541edbcdd590bd82ff7570e",
+  "patch_hash": "f96e2734cc0ac35bcebfa625cc1cbb25129d433a7895b683f2825cbbc7872da4",
+  "quarantine": []
+}
