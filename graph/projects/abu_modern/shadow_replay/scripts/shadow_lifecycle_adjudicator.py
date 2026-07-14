@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Shadow lifecycle adjudication kernel.
 
@@ -46,29 +46,14 @@ class ShadowLifecycleAdjudicator:
         entity_ref = payload.get("entity_ref")
         lifecycle_ref = payload.get("lifecycle_ref")
         lifecycle_seq = payload.get("lifecycle_seq")
-        # Prefer explicit adjudication_key from payload (resolver-provided), fall back to compute
-        adjudication_key = payload.get("adjudication_key") or self._compute_adjudication_key(payload)
+        adjudication_key = self._compute_adjudication_key(payload)
         alias_hints = payload.get("alias_hints") or []
-        raw_source = event.get("source", "unknown")
-        # Normalize source to the channel part only (before first #)
-        source = raw_source.split("#")[0] if "#" in raw_source else raw_source
+        source = event.get("source", "unknown")
         state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").strip()
-        claim_dimension = payload.get("claim_dimension")
-        claim_scope = payload.get("claim_scope")
 
         log: list[dict[str, Any]] = []
         quarantine: list[dict[str, Any]] = []
-        _is_late_arrival = False
-
-        # Late arrival quarantine
-        if _is_late_arrival:
-            reason = "late_arrival_effective_at_before_previous"
-            if not event.get("effective_at"):
-                reason = "late_arrival_missing_effective_at"
-            quarantine.append({"event_id": event["event_id"], "reason": reason})
-            log.append({"event_id": event["event_id"], "action": "quarantine", "reason": reason})
-            return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
 
         # Alias hint resolution
         if alias_hints:
@@ -91,28 +76,6 @@ class ShadowLifecycleAdjudicator:
                 log.append({"event_id": event["event_id"], "action": "quarantine", "reason": reason})
                 return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
 
-        # Late-arrival time-ordering check
-        # If this event has an effective_at earlier than the most recently processed event
-        # for the same entity+dimension+channel, quarantine it as a late arrival.
-        event_effective = event.get("effective_at")
-        event_observed = event.get("observed_at")
-        _is_late_arrival = False
-        if event_effective and event_observed and claim_dimension:
-            # Check if an earlier event with later observed_at exists for the same adjudication_key
-            for _other_node in graph_state.get("nodes", {}).values():
-                if isinstance(_other_node, dict):
-                    other_entity = _other_node.get("entity_ref")
-                    other_dims = _other_node.get("claim_dimension")
-                    other_obs = _other_node.get("observed_at")
-                    other_eff = _other_node.get("effective_at")
-                    if (other_entity == entity_ref and other_obs and other_eff
-                            and event_observed > other_obs and event_effective < other_eff):
-                        _is_late_arrival = True
-                        break
-
-        # Track siblings: claims from the same observation share a base event_id
-        event_base = event["event_id"].split("#")[0] if "#" in event["event_id"] else event["event_id"]
-
         # Build new node
         self._node_counter += 1
         node_id = self._generate_node_id(event, self._node_counter)
@@ -132,7 +95,6 @@ class ShadowLifecycleAdjudicator:
             "status": "active",
             "active": True,
             "source": source,
-            "_observation_base": event_base,
         }
 
         patch: dict[str, Any] = {
@@ -154,11 +116,16 @@ class ShadowLifecycleAdjudicator:
                 })
                 log.append({"event_id": event["event_id"], "action": "coexist", "node_id": node_id, "target": other["node_id"]})
 
+        # Late-arrival check: same channel, effective_at before previous active
+        # This must be checked BEFORE deciding SUPERCEDES/CONTESTS/REVIVES.
+        if self._is_late_arrival(event, graph_state, adjudication_key):
+            reason = "late_arrival_effective_at_before_previous"
+            quarantine.append({"event_id": event["event_id"], "reason": reason})
+            log.append({"event_id": event["event_id"], "action": "quarantine_late", "reason": reason})
+            return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
+
         # Find previous active node(s) with same adjudication_key
         prev_active = self._find_active_nodes(graph_state, adjudication_key)
-        
-        # Filter out sibling nodes from the same observation (they COEXIST, not SUPERCEDES)
-        prev_active = [n for n in prev_active if n.get("_observation_base") != event_base]
 
         if not prev_active:
             # Cross-key revival: new lifecycle/adjudication key for an entity
@@ -210,7 +177,7 @@ class ShadowLifecycleAdjudicator:
         }
 
     def _compute_adjudication_key(self, payload: dict[str, Any]) -> str | None:
-        return payload.get("lifecycle_ref") or payload.get("entity_ref") or None
+        return payload.get("adjudication_key") or payload.get("lifecycle_ref") or payload.get("entity_ref")
 
     def _resolve_alias_hint(
         self,
@@ -268,16 +235,10 @@ class ShadowLifecycleAdjudicator:
         new_state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").lower()
 
-        # Provenance conflict: same adj key, different source channel
-        # Use the channel prefix (text before the first '#' if present) as the
-        # provenance scope. Same channel = same lifecycle progression = SUPERCEDES.
-        # Different channel = different provenance source = CONTESTS.
+        # Provenance conflict: same adj key, different source
         if prev_active:
-            prev_raw = prev_active[0].get("source", "unknown")
-            new_raw = event.get("source", "unknown")
-            prev_channel = prev_raw.split("#")[0] if "#" in prev_raw else prev_raw
-            new_channel = new_raw.split("#")[0] if "#" in new_raw else new_raw
-            if new_channel != prev_channel:
+            prev_source = prev_active[0].get("source", "unknown")
+            if new_source != prev_source:
                 return "CONTESTS"
 
         # Revival signal
@@ -311,6 +272,55 @@ class ShadowLifecycleAdjudicator:
         for node in graph_state.get("nodes", {}).values():
             if node.get("entity_ref") == new_node.get("entity_ref") and node.get("state") in self.TERMINAL_STATES:
                 return True
+        return False
+
+    def _is_late_arrival(
+        self,
+        event: dict[str, Any],
+        graph_state: dict[str, Any],
+        adjudication_key: str | None,
+    ) -> bool:
+        """Detect late-arrival: same channel, effective_at indicates back-dated event.
+
+        A late arrival is when:
+        1. There is already an active node with the same adjudication_key from the same source/channel.
+        2. The new event's effective_at is before the existing active node's observed_at
+           (i.e., the event is reporting something that happened earlier than what we already know).
+        3. OR the new event's effective_at is missing/None (ambiguous timing).
+
+        In these cases, the new event should NOT supersede the current active state.
+        """
+        if adjudication_key is None:
+            return False
+
+        new_source = event.get("source", "unknown")
+        new_effective = event.get("effective_at")
+        new_observed = event.get("observed_at")
+
+        for node in graph_state.get("nodes", {}).values():
+            if node.get("adjudication_key") != adjudication_key:
+                continue
+            if node.get("status") != "active":
+                continue
+            prev_source = node.get("source", "unknown")
+            if new_source != prev_source:
+                continue  # Different source = provenance conflict, not late arrival
+
+            prev_effective = node.get("effective_at")
+            prev_observed = node.get("observed_at")
+
+            # Late arrival: missing effective_at (ambiguous timing)
+            if new_effective is None or new_effective == "":
+                return True
+
+            # Late arrival: effective_at before previous observed_at
+            if prev_effective and new_effective < prev_effective:
+                return True
+            if prev_observed and new_effective < prev_observed:
+                return True
+
+            return False
+
         return False
 
     def _apply_revival_edges(
@@ -349,4 +359,3 @@ class ShadowLifecycleAdjudicator:
             if active["node_id"] != node_id and (lifecycle_ref is None or active.get("lifecycle_ref") == lifecycle_ref):
                 patch["superseded_nodes"].append(active["node_id"])
                 log.append({"event_id": event["event_id"], "action": "supersede", "node_id": node_id, "target": active["node_id"]})
-
