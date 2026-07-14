@@ -1,0 +1,35 @@
+{
+  "title": "Stage04-C Evidence Line Ending Audit",
+  "generated_at": "2026-07-14T16:30:00Z",
+  "files": [
+    {
+      "path": "reports/stage04b2_invalidation_metric_audit.md",
+      "expected_sha256": "39073663dde77910",
+      "actual_worktree_raw_sha256": "39073663dde7791033969fcfb2d849f9f7e837dca61c96854f1d40c7642e3872",
+      "git_blob_sha": "4793f59f7f1dd010c7accd9e1e15227116ec9d8b",
+      "git_blob_content_sha256": "9225a63c7fea64969ff794b967a165e92e9ca8ab32efab24afa628d1e5baa9e4",
+      "worktree_raw_sha256": "39073663dde7791033969fcfb2d849f9f7e837dca61c96854f1d40c7642e3872",
+      "worktree_lf_normalized_sha256": "9225a63c7fea64969ff794b967a165e92e9ca8ab32efab24afa628d1e5baa9e4",
+      "committed_lf_normalized_sha256": "9225a63c7fea64969ff794b967a165e92e9ca8ab32efab24afa628d1e5baa9e4",
+      "semantic_equivalence": true,
+      "diff_after_lf_normalization": "empty",
+      "non_line_ending_difference_count": 0
+    },
+    {
+      "path": "reports/stage04b2_isolation_and_commit_audit.md",
+      "expected_sha256": "3d7305efd0e6bdbc",
+      "actual_worktree_raw_sha256": "3d7305efd0e6bdbc6e0c1edcf2eed7f0b320af058c3396831fa85d42a97a8c55",
+      "git_blob_sha": "9619649c222abf108b37477d6f5dcd429b192ab6",
+      "git_blob_content_sha256": "e2583590446121862fe6785e201cbe39f288f28dfd010f12e903d6b83ba8a2aa",
+      "worktree_raw_sha256": "3d7305efd0e6bdbc6e0c1edcf2eed7f0b320af058c3396831fa85d42a97a8c55",
+      "worktree_lf_normalized_sha256": "e2583590446121862fe6785e201cbe39f288f28dfd010f12e903d6b83ba8a2aa",
+      "committed_lf_normalized_sha256": "e2583590446121862fe6785e201cbe39f288f28dfd010f12e903d6b83ba8a2aa",
+      "semantic_equivalence": true,
+      "diff_after_lf_normalization": "empty",
+      "non_line_ending_difference_count": 0
+    }
+  ],
+  "overall_semantic_equivalence": true,
+  "overall_non_line_diff_zero": true,
+  "conclusion": "PASS - All differences are CRLF/LF only"
+}
