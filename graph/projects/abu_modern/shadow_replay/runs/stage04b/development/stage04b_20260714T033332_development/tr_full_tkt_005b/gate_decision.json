@@ -1,4 +1,0 @@
-{
-  "gate_decision": "PASS",
-  "reason": "All checkpoints match gold; no blocker, regression, or unexplained diffs."
-}
