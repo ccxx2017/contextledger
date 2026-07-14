@@ -1,0 +1,1082 @@
+[
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_latest_summary.json",
+    "git_status": "M",
+    "category": "run_output",
+    "sha256": "5a25eba0ebcbff380078cc1cfc4dc775c24dc2bde1a2e11cae5d16afa404239e",
+    "required_for_regression": "no",
+    "reason": "Stage04A fixture summary index (modified by run)",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+    "git_status": "MM",
+    "category": "source_code",
+    "sha256": "1e85a8c44d81d456aa184f5314c330d1fa469980591a6588179e269e5e106155",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay runner script",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py",
+    "git_status": "MM",
+    "category": "source_code",
+    "sha256": "83156b24455565d955bed89e473d3d41c31f32b15b3afd38de7b2e1dd0657d13",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay runner script",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/scripts/shadow_lifecycle_adjudicator.py",
+    "git_status": "MM",
+    "category": "source_code",
+    "sha256": "00ab2eae993e266168d5b85a748964d0d887ce9fe05ef32f5f34583fab49a0bd",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay runner script",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "pack/projects/contextLedger/context_ledger_design_and_impliment_stage02_compact.md",
+    "git_status": "M",
+    "category": "temporary",
+    "sha256": "4d18a6d5d3dbb505c749b39022b8119a37be4dd65817f77ebb7e865926b203c5",
+    "required_for_regression": "no",
+    "reason": "Design doc compact copy",
+    "recommended_action": "remove_only_if_regenerable"
+  },
+  {
+    "path": "raw/projects/contextLedger/context_ledger_design_and_impliment_stage02.md",
+    "git_status": "M",
+    "category": "source_code",
+    "sha256": "92d325a32aed661c1bdd4d259457fbe09927972f2ccb095cb5a070710d0223e8",
+    "required_for_regression": "no",
+    "reason": "Design document (not formal patch ledger)",
+    "recommended_action": "preserve_untracked"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/contracts/shadow_resolution_adapter_contract.md",
+    "git_status": "??",
+    "category": "contract",
+    "sha256": "61a1a4f56404fcf64e936b77a4912415159cbd7b969909dc08d1c07d99ecf622",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay contract/schema/decision table",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/contracts/shadow_resolution_record_schema_v1.json",
+    "git_status": "??",
+    "category": "contract",
+    "sha256": "9d800fd40380023238d7ef15733ffc0f21f454f58b4c4fefe7545e8b45b25adf",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay contract/schema/decision table",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_alias_abstain",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_conditional_different_scope",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_diff_source_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_late_arrival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_late_arrival_effective_time",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_late_arrival_missing_effective",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_legacy_migration",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_multi_claim_different_predicates",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_multi_claim_partial",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_parallel_target_coexist",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_provenance_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_replay_determinism",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_revival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_same_source_progression",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_sequence_collision",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T045900_lc_two_lifecycles_no_kill",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_alias_abstain",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_conditional_different_scope",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_diff_source_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_late_arrival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_late_arrival_effective_time",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_late_arrival_missing_effective",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_legacy_migration",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_multi_claim_different_predicates",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_multi_claim_partial",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_parallel_target_coexist",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_provenance_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_replay_determinism",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_revival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_same_source_progression",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_sequence_collision",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052729_lc_two_lifecycles_no_kill",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_alias_abstain",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_conditional_different_scope",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_diff_source_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_late_arrival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_late_arrival_effective_time",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_late_arrival_missing_effective",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_legacy_migration",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_multi_claim_different_predicates",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_multi_claim_partial",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_parallel_target_coexist",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_provenance_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_replay_determinism",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_revival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_same_source_progression",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_sequence_collision",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T052736_lc_two_lifecycles_no_kill",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_alias_abstain",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_conditional_different_scope",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_diff_source_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_late_arrival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_late_arrival_effective_time",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_late_arrival_missing_effective",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_legacy_migration",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_multi_claim_different_predicates",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_multi_claim_partial",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055147_lc_parallel_target_coexist",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_provenance_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_replay_determinism",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_revival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_same_source_progression",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_sequence_collision",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055148_lc_two_lifecycles_no_kill",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055935_lc_alias_abstain",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055935_lc_conditional_different_scope",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_diff_source_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_late_arrival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_late_arrival_effective_time",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_late_arrival_missing_effective",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_legacy_migration",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_multi_claim_different_predicates",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_multi_claim_partial",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_parallel_target_coexist",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_provenance_conflict",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_replay_determinism",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_revival",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_same_source_progression",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_sequence_collision",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_20260714T055936_lc_two_lifecycles_no_kill",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T035334_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T053749_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T053917_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054001_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054138_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054315_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054406_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054703_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054827_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054916_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T054947_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T055036_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T055157_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060138_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060323_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060335_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060357_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060728_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T061455_development",
+    "git_status": "??",
+    "category": "run_output",
+    "sha256": "",
+    "required_for_regression": "no",
+    "reason": "Shadow replay run output",
+    "recommended_action": "archive"
+  },
+  {
+    "path": "graph/projects/abu_modern/shadow_replay/scripts/shadow_resolution_adapter.py",
+    "git_status": "??",
+    "category": "source_code",
+    "sha256": "9c65408b28ceacc113afdde5411d3c45858a9e5b76d39c67418be99bbf68994f",
+    "required_for_regression": "yes",
+    "reason": "Shadow replay runner script",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/revival_feature_flag_adjudication_record.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "abe2b78fdc4f372663ebb10e10cc2d84768b9b44f6ca78094804f14b0db01a4b",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_canonical_comparator_baseline.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "c92719b270d9cad19399e6e9af748ba8b384ea4e37520b116ba7d1141a151ad2",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_canonical_comparator_baseline_v2.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "9553419c9cd3b9cdfbb0cae55329eddcb2bb1bdce27166f6f4cbca7212a22d36",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_canonical_comparator_comparison.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "b8a33934de034592b1a6df9e0bc7b8fc1b4da6848b8ac4868e1482621409a1b5",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_fixture_determinism_check.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "ed2ee08b363762b14e2d87495ae71a9ab64b7283c1b55019dbc355fc14a391f5",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_fixture_inventory_and_replay.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "e128cc990e99f1cecc0122e525e12c1b627a22a4ce312620e9f1dcb833736274",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_gate_decision_report.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "05364d7034a4ceeb66e1dd95b1110e56d77acd9b5a1d7cebe6c3362255257602",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_invalidation_metric_audit.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "39073663dde7791033969fcfb2d849f9f7e837dca61c96854f1d40c7642e3872",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_isolation_and_commit_audit.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "3d7305efd0e6bdbc6e0c1edcf2eed7f0b320af058c3396831fa85d42a97a8c55",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_manual_adjudication_disposition.md",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "e4c854a7e8f5cbb30a8c7153d17063e62b52298e7f8d6ecbfe6b6f814ef8be7d",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_regression_ready_evidence_index.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "f3b261b92133870f73151ce176909b9933819f0e146347b3534488b2d3aaa757",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  },
+  {
+    "path": "reports/stage04b2_resolution_record_audit.json",
+    "git_status": "??",
+    "category": "report",
+    "sha256": "8aa95fe2523e72ab9b3e270ea902f9b2a2b507ce65784f9dd841fff323336450",
+    "required_for_regression": "yes",
+    "reason": "Stage04-B2 evidence/report - audit prerequisite for Stage04-C",
+    "recommended_action": "commit"
+  }
+]

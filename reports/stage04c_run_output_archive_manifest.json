@@ -1,0 +1,1083 @@
+[
+  {
+    "run_id": "stage04a_20260713T132548_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T132548_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T132548_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T133653_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T133653_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T134132_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T134132_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142036_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142036_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T142037_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T142037_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143610_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143610_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260713T143950_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260713T143950_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025829_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025829_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T025917_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T025917_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030203_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030203_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030229_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030229_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T030323_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T030323_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033057_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033057_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033140_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033140_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033208_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033208_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033248_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033248_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T033249_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T033249_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T045900_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T045900_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T050042_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T050042_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052628_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052628_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052729_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052729_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T052736_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T052736_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055147_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055147_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055148_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055148_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055935_lc_alias_abstain",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055935_lc_alias_abstain",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055935_lc_conditional_different_scope",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055935_lc_conditional_different_scope",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_diff_source_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_diff_source_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_late_arrival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_late_arrival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_late_arrival_effective_time",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_late_arrival_effective_time",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_late_arrival_missing_effective",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_late_arrival_missing_effective",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_legacy_migration",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_legacy_migration",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_multi_claim_different_predicates",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_multi_claim_different_predicates",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_multi_claim_partial",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_multi_claim_partial",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_parallel_target_coexist",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_parallel_target_coexist",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_provenance_conflict",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_provenance_conflict",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_replay_determinism",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_replay_determinism",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_revival",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_revival",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_same_source_progression",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_same_source_progression",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_sequence_collision",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_sequence_collision",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_20260714T055936_lc_two_lifecycles_no_kill",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_20260714T055936_lc_two_lifecycles_no_kill",
+    "type": "directory"
+  },
+  {
+    "run_id": "stage04a_latest_summary.json",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04a_latest_summary.json",
+    "type": "file",
+    "sha256_prefix": "5a25eba0ebcbff38"
+  },
+  {
+    "run_id": "stage04b",
+    "path": "graph\\projects\\abu_modern\\shadow_replay\\runs_archive\\stage04b",
+    "type": "directory"
+  }
+]
