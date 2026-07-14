@@ -1,0 +1,140 @@
+{
+  "title": "Stage04-B2 Regression Ready Evidence Index",
+  "generated_at": "2026-07-14T06:00:00Z",
+  "branch": "phase1-lifecycle-stage02",
+  "runner_commit": "d7d681e + uncommitted shadow fixes",
+  "candidate_commit": "d7d681e + uncommitted shadow fixes",
+  "metrics_version": "phase05_v3_shadow_v2",
+  "diff_spec_hash": "d1bdae408cfafcf2",
+  "comparator_hash": "58365858a2f2383d",
+  "conditions": [
+    {
+      "gate_condition": "16 fixtures all PASS",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_fixture_inventory_and_replay.json",
+      "evidence_hash": "e128cc990e99f1ce",
+      "case_ids": [
+        "lc_alias_abstain",
+        "lc_conditional_different_scope",
+        "lc_diff_source_conflict",
+        "lc_late_arrival",
+        "lc_late_arrival_effective_time",
+        "lc_late_arrival_missing_effective",
+        "lc_legacy_migration",
+        "lc_multi_claim_different_predicates",
+        "lc_multi_claim_partial",
+        "lc_parallel_target_coexist",
+        "lc_provenance_conflict",
+        "lc_replay_determinism",
+        "lc_revival",
+        "lc_same_source_progression",
+        "lc_sequence_collision",
+        "lc_two_lifecycles_no_kill"
+      ],
+      "checkpoint_ids": "per-fixture: 1-3 checkpoints each, total 28"
+    },
+    {
+      "gate_condition": "All 16 fixtures deterministic (two replay hashes match)",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_fixture_determinism_check.json",
+      "evidence_hash": "ed2ee08b363762b1",
+      "case_ids": [
+        "all 16 fixtures"
+      ],
+      "checkpoint_ids": "per-fixture: full state+bundle hash comparison"
+    },
+    {
+      "gate_condition": "Full bidirectional invalidation comparison (not narrowed)",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_invalidation_metric_audit.md",
+      "evidence_hash": "39073663dde77910",
+      "case_ids": [
+        "tr_full_tkt_005b",
+        "tr_syn_partial_policy_clause",
+        "tr_syn_conditional_region_exception",
+        "tr_syn_revival_feature_flag",
+        "tr_alias_workspace_identity",
+        "tr_syn_non_invalidation_parallel_targets",
+        "tr_syn_out_of_order_inventory_present"
+      ],
+      "checkpoint_ids": "all development checkpoints (15 total across 7 cases)"
+    },
+    {
+      "gate_condition": "Canonical comparator baseline (pre-fix vs post-fix via same comparator)",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_canonical_comparator_baseline.json + comparison.md",
+      "evidence_hash": "c92719b270d9cad1",
+      "case_ids": [
+        "tr_full_tkt_005b",
+        "tr_syn_partial_policy_clause",
+        "tr_syn_conditional_region_exception",
+        "tr_syn_revival_feature_flag",
+        "tr_alias_workspace_identity",
+        "tr_syn_non_invalidation_parallel_targets",
+        "tr_syn_out_of_order_inventory_present"
+      ],
+      "checkpoint_ids": "all development checkpoints, pre-fix vs post-fix"
+    },
+    {
+      "gate_condition": "development blockers = 0",
+      "status": "PASS",
+      "evidence_file": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060728_development/split_summary.json",
+      "evidence_hash": "4f1c203496a4a3dd",
+      "case_ids": [
+        "all 7 development cases"
+      ],
+      "checkpoint_ids": "all"
+    },
+    {
+      "gate_condition": "development unexplained = 0",
+      "status": "PASS",
+      "evidence_file": "same as condition 5 split_summary.json",
+      "evidence_hash": "",
+      "case_ids": [
+        "all 7 development cases"
+      ],
+      "checkpoint_ids": "all"
+    },
+    {
+      "gate_condition": "must_include recall >= D1 (1.0) and >= old chain (0.5)",
+      "status": "PASS",
+      "evidence_file": "same split_summary.json",
+      "evidence_hash": "",
+      "case_ids": [
+        "all 7 development cases"
+      ],
+      "checkpoint_ids": "all",
+      "value": "1.0 (D1=1.0, old=0.5)"
+    },
+    {
+      "gate_condition": "critical false invalidation = 0",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_invalidation_metric_audit.md",
+      "evidence_hash": "",
+      "case_ids": [
+        "all 7 development cases + 16 fixtures"
+      ],
+      "checkpoint_ids": "all"
+    },
+    {
+      "gate_condition": "Resolution record audit: no unversioned heuristic",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_resolution_record_audit.json + shadow_resolution_record_schema_v1.json + shadow_resolution_adapter_contract.md",
+      "evidence_hash": "8aa95fe2523e72ab",
+      "case_ids": [
+        "all 7 development trajectories"
+      ],
+      "checkpoint_ids": "all events"
+    },
+    {
+      "gate_condition": "Shadow output isolated; no formal main chain modification",
+      "status": "PASS",
+      "evidence_file": "reports/stage04b2_isolation_and_commit_audit.md",
+      "evidence_hash": "3d7305efd0e6bdbc",
+      "case_ids": [
+        "all"
+      ],
+      "checkpoint_ids": "all"
+    }
+  ]
+}

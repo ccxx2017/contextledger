@@ -1,0 +1,186 @@
+{
+  "comparator_commit": "d7d681e",
+  "comparator_hash": "58365858a2f2383d",
+  "metrics_version": "phase05_v3_shadow_v2",
+  "diff_spec_hash": "d1bdae408cfafcf2",
+  "pre_fix": {
+    "candidate_commit": "afe0dc3",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development",
+    "per_case": {
+      "tr_full_tkt_005b": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 20,
+          "regression_count": 24,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.3333
+        },
+        "checkpoint_count": 5
+      },
+      "tr_syn_partial_policy_clause": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 3,
+          "regression_count": 5,
+          "unexplained_count": 0,
+          "min_must_include_recall": 0.5,
+          "min_active_set_set_f1": 0.4
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_conditional_region_exception": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 1,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_revival_feature_flag": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 6,
+          "regression_count": 8,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.5
+        },
+        "checkpoint_count": 3
+      },
+      "tr_alias_workspace_identity": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 3,
+          "regression_count": 3,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.5
+        },
+        "checkpoint_count": 3
+      },
+      "tr_syn_non_invalidation_parallel_targets": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 1,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_out_of_order_inventory_present": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 2,
+          "regression_count": 2,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      }
+    },
+    "aggregate": {
+      "total_blockers": 36,
+      "total_regressions": 44,
+      "total_unexplained": 0,
+      "min_must_include_recall": 0.5,
+      "min_active_set_set_f1": 0.3333
+    }
+  },
+  "post_fix": {
+    "candidate_commit": "d7d681e-dirty",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260714T033332_development",
+    "per_case": {
+      "tr_full_tkt_005b": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 16,
+          "regression_count": 8,
+          "unexplained_count": 0,
+          "min_must_include_recall": 0.0,
+          "min_active_set_set_f1": 0.0
+        },
+        "checkpoint_count": 5
+      },
+      "tr_syn_partial_policy_clause": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 2,
+          "regression_count": 3,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.8571
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_conditional_region_exception": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 1,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_revival_feature_flag": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 7,
+          "regression_count": 6,
+          "unexplained_count": 0,
+          "min_must_include_recall": 0.0,
+          "min_active_set_set_f1": 0.0
+        },
+        "checkpoint_count": 3
+      },
+      "tr_alias_workspace_identity": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 3,
+          "regression_count": 3,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.5
+        },
+        "checkpoint_count": 3
+      },
+      "tr_syn_non_invalidation_parallel_targets": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 1,
+          "regression_count": 1,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      },
+      "tr_syn_out_of_order_inventory_present": {
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "blocker_count": 2,
+          "regression_count": 2,
+          "unexplained_count": 0,
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667
+        },
+        "checkpoint_count": 2
+      }
+    },
+    "aggregate": {
+      "total_blockers": 32,
+      "total_regressions": 24,
+      "total_unexplained": 0,
+      "min_must_include_recall": 0.0,
+      "min_active_set_set_f1": 0.0
+    }
+  }
+}
