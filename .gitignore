@@ -66,3 +66,6 @@ temp/archive_runs.ps1
 
 # Archived run outputs (Stage04-A/B/C)
 graph/projects/abu_modern/shadow_replay/runs_archive/
+
+# Clean worktree for Stage04-C verification
+clean_worktree_stage04c/
