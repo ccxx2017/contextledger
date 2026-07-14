@@ -1,0 +1,68 @@
+{
+  "fixture_id": "lc_multi_claim_different_predicates",
+  "category": "multi_claim",
+  "description": "Two claims from different observations of the same entity, different predicates. Should COEXIST.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_mp1",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "policy_team",
+        "payload": {
+          "entity_ref": "SVC-B",
+          "lifecycle_ref": "lc_svc_b",
+          "lifecycle_seq": 1,
+          "adjudication_key": "SVC-B:latency:_default_",
+          "node_type": "Fact",
+          "content": "Latency SLA set to 200ms",
+          "state": "implemented",
+          "claim_id": "svc.b.latency.200",
+          "claim_dimension": "latency",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_mp2",
+        "observed_at": "2026-07-01T11:00:00Z",
+        "effective_at": "2026-07-01T11:00:00Z",
+        "source": "policy_team",
+        "payload": {
+          "entity_ref": "SVC-B",
+          "lifecycle_ref": "lc_svc_b",
+          "lifecycle_seq": 2,
+          "adjudication_key": "SVC-B:throughput:_default_",
+          "node_type": "Fact",
+          "content": "Throughput quota set to 1000rps",
+          "state": "implemented",
+          "claim_id": "svc.b.throughput.1000",
+          "claim_dimension": "throughput",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_mp2",
+        "after_event_id": "evt_mp2",
+        "active_nodes": [
+          "n_svc_b_latency_200",
+          "n_svc_b_throughput_1000"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_svc_b_latency_200",
+          "n_svc_b_throughput_1000"
+        ]
+      }
+    ]
+  }
+}

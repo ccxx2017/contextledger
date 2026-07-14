@@ -1,0 +1,30 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 13,
+  "included_node_count": 1,
+  "must_include": [
+    "n_e383a8cac535"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_e383a8cac535",
+      "entity_ref": "POL-GW-001",
+      "lifecycle_ref": "lc_pol_gw_001",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "policy:POL-GW-001",
+      "observed_at": "2026-07-02T10:00:00Z",
+      "effective_at": "2026-07-02T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Updated policy: retries=4, audit still required",
+      "state": "implemented",
+      "claim_id": "mc.policy.v2",
+      "status": "active",
+      "active": true,
+      "source": "policy_team",
+      "_observation_base": "evt_mc_02"
+    }
+  ]
+}

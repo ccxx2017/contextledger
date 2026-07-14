@@ -1,0 +1,68 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 4,
+  "budget": 8192,
+  "tokens_used": 59,
+  "included_node_count": 3,
+  "must_include": [
+    "n_541d39af869f",
+    "n_98674f694ba1",
+    "n_9884830343ac"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_541d39af869f",
+      "entity_ref": "Order gateway policy",
+      "lifecycle_ref": "Order gateway policy:audit_logging",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Order gateway policy:audit_logging:_default_",
+      "observed_at": "2026-06-03T09:00:00Z",
+      "effective_at": "2026-06-03T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Order gateway policy sets timeout to 30s, retries to 2, and keeps audit logging mandatory.",
+      "state": "required",
+      "claim_id": "tr03.audit.required",
+      "status": "active",
+      "active": true,
+      "source": "policy_doc",
+      "_observation_base": "tr03_obs01"
+    },
+    {
+      "node_id": "n_98674f694ba1",
+      "entity_ref": "Order gateway policy",
+      "lifecycle_ref": "Order gateway policy:timeout",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Order gateway policy:timeout:_default_",
+      "observed_at": "2026-06-03T09:00:00Z",
+      "effective_at": "2026-06-03T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Order gateway policy sets timeout to 30s, retries to 2, and keeps audit logging mandatory.",
+      "state": "30s",
+      "claim_id": "tr03.timeout.30s",
+      "status": "active",
+      "active": true,
+      "source": "policy_doc",
+      "_observation_base": "tr03_obs01"
+    },
+    {
+      "node_id": "n_9884830343ac",
+      "entity_ref": "Order gateway policy",
+      "lifecycle_ref": "Order gateway policy:retries",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Order gateway policy:retries:_default_",
+      "observed_at": "2026-06-03T10:30:00Z",
+      "effective_at": "2026-06-03T10:30:00Z",
+      "node_type": "Fact",
+      "content": "Only the retry count changes from 2 to 4.",
+      "state": "4",
+      "claim_id": "tr03.retries.4",
+      "status": "active",
+      "active": true,
+      "source": "policy_doc",
+      "_observation_base": "tr03_obs02"
+    }
+  ]
+}

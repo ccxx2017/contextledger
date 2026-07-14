@@ -1,0 +1,33 @@
+{
+  "fixture_id": "lc_sequence_collision",
+  "category": "sequence_collision",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033140_lc_sequence_collision",
+  "event_count": 3,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_062",
+      "after_event_id": "evt_062",
+      "graph_state_hash": "1f159dd8c622b604263e21c793c742094465febafe7864e92b38ed8ae82f592b",
+      "bundle_hash": "a409aeeb3fc9d14e528f21724bf49c987c975a7c5a6dbcb8c0fd9cedbe56d541",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "1f159dd8c622b604263e21c793c742094465febafe7864e92b38ed8ae82f592b",
+  "final_bundle_hash": "a409aeeb3fc9d14e528f21724bf49c987c975a7c5a6dbcb8c0fd9cedbe56d541",
+  "patch_hash": "e86d031d8bfbfaa936c56d5b221c8f63c8dab74db8bcbeedb66c9c216651f6e5",
+  "quarantine": [
+    {
+      "event_id": "evt_062",
+      "reason": "lifecycle_seq_collision"
+    }
+  ]
+}

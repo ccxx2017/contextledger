@@ -1,0 +1,49 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 17,
+  "included_node_count": 2,
+  "must_include": [
+    "n_6f7374838822",
+    "n_4c4ed46b86f9"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_6f7374838822",
+      "entity_ref": "DEPLOY-LIST",
+      "lifecycle_ref": "lc_deploy_list",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "DEPLOY-LIST:target:staging",
+      "observed_at": "2026-07-01T10:00:00Z",
+      "effective_at": "2026-07-01T10:00:00Z",
+      "node_type": "Fact",
+      "content": "Staging environment allowed",
+      "state": "allowed",
+      "claim_id": "deploy.list.staging",
+      "status": "active",
+      "active": true,
+      "source": "release_team",
+      "_observation_base": "evt_pt1"
+    },
+    {
+      "node_id": "n_4c4ed46b86f9",
+      "entity_ref": "DEPLOY-LIST",
+      "lifecycle_ref": "lc_deploy_list",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "DEPLOY-LIST:target:canary",
+      "observed_at": "2026-07-01T11:00:00Z",
+      "effective_at": "2026-07-01T11:00:00Z",
+      "node_type": "Fact",
+      "content": "Canary environment also allowed",
+      "state": "allowed",
+      "claim_id": "deploy.list.canary",
+      "status": "active",
+      "active": true,
+      "source": "release_team",
+      "_observation_base": "evt_pt2"
+    }
+  ]
+}

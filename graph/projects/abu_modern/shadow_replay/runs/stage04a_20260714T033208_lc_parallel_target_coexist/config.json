@@ -1,0 +1,106 @@
+{
+  "run_id": "stage04a_20260714T033208_lc_parallel_target_coexist",
+  "generated_at": "2026-07-14T03:32:08.472576+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_parallel_target_coexist.json",
+  "fixture_sha256": "73e48d0c834d6e1b2257c9b27f8c0c95a7def31e465450887f3fc81e55a43319",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "b93ac86eb5d4a6504c7aef161d06126087f337f6e5f1c3285b09e5ec55db462d",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "ea4a0ecb3b5fca78e5555346f4207eeccd64cb80500c5a6b59b67ccc2f5fdcc2"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_parallel_target_coexist",
+    "category": "parallel",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033208_lc_parallel_target_coexist",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_pt2",
+        "after_event_id": "evt_pt2",
+        "graph_state_hash": "079a5f44f7bf379f20357a8ea318c368da7ed017d8ad4d29b79d48d7f04aafc0",
+        "bundle_hash": "4a195b2c3b7117ee1397703e6e1f5a2f0dbb3b84250e8b3ccf09f17f3cd9ef87",
+        "diffs": [
+          {
+            "kind": "relation",
+            "expected": {
+              "relation_type": "COEXISTS",
+              "source": "n_deploy_list_staging",
+              "target": "n_deploy_list_canary"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected relation COEXISTS from n_deploy_list_staging to n_deploy_list_canary",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 1,
+          "unexplained": 0,
+          "blocker": 1,
+          "total": 1
+        }
+      }
+    ],
+    "final_graph_state_hash": "079a5f44f7bf379f20357a8ea318c368da7ed017d8ad4d29b79d48d7f04aafc0",
+    "final_bundle_hash": "4a195b2c3b7117ee1397703e6e1f5a2f0dbb3b84250e8b3ccf09f17f3cd9ef87",
+    "patch_hash": "a3e3c3cfcea36474f477b1b7d9f8cd0f5e610e05efc264d05a5249fc33b0b6df",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_parallel_target_coexist",
+    "category": "parallel",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033208_lc_parallel_target_coexist",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_pt2",
+        "after_event_id": "evt_pt2",
+        "graph_state_hash": "079a5f44f7bf379f20357a8ea318c368da7ed017d8ad4d29b79d48d7f04aafc0",
+        "bundle_hash": "4a195b2c3b7117ee1397703e6e1f5a2f0dbb3b84250e8b3ccf09f17f3cd9ef87",
+        "diffs": [
+          {
+            "kind": "relation",
+            "expected": {
+              "relation_type": "COEXISTS",
+              "source": "n_deploy_list_staging",
+              "target": "n_deploy_list_canary"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected relation COEXISTS from n_deploy_list_staging to n_deploy_list_canary",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 1,
+          "unexplained": 0,
+          "blocker": 1,
+          "total": 1
+        }
+      }
+    ],
+    "final_graph_state_hash": "079a5f44f7bf379f20357a8ea318c368da7ed017d8ad4d29b79d48d7f04aafc0",
+    "final_bundle_hash": "4a195b2c3b7117ee1397703e6e1f5a2f0dbb3b84250e8b3ccf09f17f3cd9ef87",
+    "patch_hash": "a3e3c3cfcea36474f477b1b7d9f8cd0f5e610e05efc264d05a5249fc33b0b6df",
+    "quarantine": []
+  },
+  "gate_decision": "BLOCK"
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "event_id": "evt_ds_01",
+    "action": "create",
+    "node_id": "n_53937d5e65e0"
+  },
+  {
+    "event_id": "evt_ds_02",
+    "action": "contest",
+    "node_id": "n_e3ef74d85c48",
+    "target": "n_53937d5e65e0"
+  }
+]

@@ -1,0 +1,150 @@
+{
+  "run_id": "stage04a_20260714T033140_lc_late_arrival_effective_time",
+  "generated_at": "2026-07-14T03:31:40.800854+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_late_arrival_effective_time.json",
+  "fixture_sha256": "391361966b72a613a37436e6891ab0e2d43a1c842c3e8d6e9383c903f168a6d0",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "fdd2fbc082fcc83960b0d29d95d31f318e37e5b80b618ae494d7e810fa54baa4",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "ea4a0ecb3b5fca78e5555346f4207eeccd64cb80500c5a6b59b67ccc2f5fdcc2"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_late_arrival_effective_time",
+    "category": "late_arrival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033140_lc_late_arrival_effective_time",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_le2",
+        "after_event_id": "evt_le2",
+        "graph_state_hash": "29e2b13c70171083d6aa603cad5892eaf66fb37450c2603e8769f2f90d7ae550",
+        "bundle_hash": "e82878b895c0a129034135643cf261163afbde20231dffdb71d08268d0a0efac",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_inv_001_count_ten",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_inv_001_count_ten' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_2f6b979f9244",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_2f6b979f9244",
+            "blocking": false
+          },
+          {
+            "kind": "quarantine",
+            "expected": {
+              "evt_le2": "late_arrival_effective_at_before_previous"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected quarantine for evt_le2 missing",
+            "blocking": true
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_inv_001_count_ten",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_inv_001_count_ten' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 2,
+          "unexplained": 0,
+          "blocker": 4,
+          "total": 4
+        }
+      }
+    ],
+    "final_graph_state_hash": "29e2b13c70171083d6aa603cad5892eaf66fb37450c2603e8769f2f90d7ae550",
+    "final_bundle_hash": "e82878b895c0a129034135643cf261163afbde20231dffdb71d08268d0a0efac",
+    "patch_hash": "fd7361ef817b3dc1c6f2e7718e51fd8a7987a52cdfcbac7f85dcbde0fb228e74",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_late_arrival_effective_time",
+    "category": "late_arrival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033140_lc_late_arrival_effective_time",
+    "event_count": 2,
+    "checkpoint_count": 1,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_le2",
+        "after_event_id": "evt_le2",
+        "graph_state_hash": "29e2b13c70171083d6aa603cad5892eaf66fb37450c2603e8769f2f90d7ae550",
+        "bundle_hash": "e82878b895c0a129034135643cf261163afbde20231dffdb71d08268d0a0efac",
+        "diffs": [
+          {
+            "kind": "active_set",
+            "expected": "n_inv_001_count_ten",
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected active node 'n_inv_001_count_ten' not found",
+            "blocking": true
+          },
+          {
+            "kind": "active_set",
+            "expected": null,
+            "actual": "n_2f6b979f9244",
+            "classification": "expected_schema_change",
+            "rationale": "Unexpected active node n_2f6b979f9244",
+            "blocking": false
+          },
+          {
+            "kind": "quarantine",
+            "expected": {
+              "evt_le2": "late_arrival_effective_at_before_previous"
+            },
+            "actual": null,
+            "classification": "regression",
+            "rationale": "Expected quarantine for evt_le2 missing",
+            "blocking": true
+          },
+          {
+            "kind": "must_include",
+            "expected": "n_inv_001_count_ten",
+            "actual": null,
+            "classification": "blocker",
+            "rationale": "Expected must_include 'n_inv_001_count_ten' missing from bundle",
+            "blocking": true
+          }
+        ],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 1,
+          "regression": 2,
+          "unexplained": 0,
+          "blocker": 4,
+          "total": 4
+        }
+      }
+    ],
+    "final_graph_state_hash": "29e2b13c70171083d6aa603cad5892eaf66fb37450c2603e8769f2f90d7ae550",
+    "final_bundle_hash": "e82878b895c0a129034135643cf261163afbde20231dffdb71d08268d0a0efac",
+    "patch_hash": "fd7361ef817b3dc1c6f2e7718e51fd8a7987a52cdfcbac7f85dcbde0fb228e74",
+    "quarantine": []
+  },
+  "gate_decision": "BLOCK"
+}

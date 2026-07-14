@@ -1,0 +1,25 @@
+[
+  {
+    "event_id": "tr07_obs01#tr07.feature.enabled.v1",
+    "action": "create",
+    "node_id": "n_1deb08d7a012"
+  },
+  {
+    "event_id": "tr07_obs02#tr07.feature.disabled",
+    "action": "contest",
+    "node_id": "n_6a38d5b327e7",
+    "target": "n_1deb08d7a012"
+  },
+  {
+    "event_id": "tr07_obs03#tr07.feature.enabled.v2",
+    "action": "supersede",
+    "node_id": "n_09950a31e47d",
+    "target": "n_1deb08d7a012"
+  },
+  {
+    "event_id": "tr07_obs03#tr07.feature.enabled.v2",
+    "action": "supersede",
+    "node_id": "n_09950a31e47d",
+    "target": "n_6a38d5b327e7"
+  }
+]

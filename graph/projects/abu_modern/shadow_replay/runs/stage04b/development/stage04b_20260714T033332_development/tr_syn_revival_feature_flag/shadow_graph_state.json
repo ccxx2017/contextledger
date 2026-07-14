@@ -1,0 +1,70 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_1deb08d7a012": {
+      "node_id": "n_1deb08d7a012",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature:feature_flag",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature:feature_flag:enabled",
+      "observed_at": "2026-06-07T08:00:00Z",
+      "effective_at": "2026-06-07T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled.",
+      "state": "enabled",
+      "claim_id": "tr07.feature.enabled.v1",
+      "status": "superseded",
+      "active": false,
+      "source": "release_note",
+      "_observation_base": "tr07_obs01"
+    },
+    "n_6a38d5b327e7": {
+      "node_id": "n_6a38d5b327e7",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature:feature_flag",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature:feature_flag:disabled",
+      "observed_at": "2026-06-07T09:00:00Z",
+      "effective_at": "2026-06-07T09:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is disabled because of instability.",
+      "state": "disabled",
+      "claim_id": "tr07.feature.disabled",
+      "status": "active",
+      "active": true,
+      "source": "incident_note",
+      "_observation_base": "tr07_obs02"
+    },
+    "n_09950a31e47d": {
+      "node_id": "n_09950a31e47d",
+      "entity_ref": "Alpha feature",
+      "lifecycle_ref": "Alpha feature:feature_flag",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "Alpha feature:feature_flag:enabled",
+      "observed_at": "2026-06-07T13:00:00Z",
+      "effective_at": "2026-06-07T13:00:00Z",
+      "node_type": "Fact",
+      "content": "Alpha feature is enabled again after rollback fixes.",
+      "state": "enabled_again",
+      "claim_id": "tr07.feature.enabled.v2",
+      "status": "active",
+      "active": true,
+      "source": "release_note",
+      "_observation_base": "tr07_obs03"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_09950a31e47d",
+      "target": "n_1deb08d7a012",
+      "relation": "supersedes"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "tr07_obs03#tr07.feature.enabled.v2"
+}

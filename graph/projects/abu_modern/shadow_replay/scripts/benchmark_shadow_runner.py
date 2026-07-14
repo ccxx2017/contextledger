@@ -79,57 +79,140 @@ def runtime_fingerprint() -> dict[str, Any]:
     }
 
 
-def observation_to_event(obs: dict[str, Any], seq: int) -> list[dict[str, Any]]:
-    """Convert a benchmark observation to one or more adjudication events.
-    
-    Returns a list of events — one per claim in claim_bundle — so that
-    multi-claim observations produce multiple independent nodes.
-    Uses the source channel instead of provenance to avoid false CONTESTS.
+class ShadowResolutionAdapter:
+    """Shadow-side resolver that transforms benchmark observations into
+    adjudicator-ready events with dimension/scope-aware adjudication keys.
     """
-    source = obs.get("source", {})
-    source_str = source.get("channel") or source.get("provenance") or "unknown"
-    base_entity_ref = obs.get("mentions", [None])[0]
-    claims = obs.get("payload", {}).get("claim_bundle", [])
-    
-    if not claims:
-        return [{
-            "event_id": obs["obs_id"],
+
+    def resolve_observation(
+        self,
+        obs: dict[str, Any],
+        sequence: int,
+    ) -> list[dict[str, Any]]:
+        claims = obs.get("payload", {}).get("claim_bundle", [])
+        if not claims:
+            return [self._build_fallback_event(obs, None, sequence)]
+        
+        events = []
+        for claim in claims:
+            resolution = self._resolve_claim(obs, claim, sequence)
+            event = self._build_event(obs, claim, resolution, sequence)
+            events.append(event)
+        return events
+
+    def _resolve_claim(self, obs, claim, sequence):
+        claim_id = claim.get("claim_id", f"c{sequence}")
+        surface_entity = self._extract_surface_entity(obs)
+        dimension = self._extract_dimension(claim)
+        scope = self._extract_scope(obs, claim)
+        channel = self._extract_channel(obs)
+
+        canonical_entity = surface_entity
+        lifecycle_ref = canonical_entity + ":" + dimension if dimension else canonical_entity
+        adjudication_key = canonical_entity + ":" + (dimension or "_nodim_") + ":" + (scope or "_default_")
+
+        return {
+            "claim_id": claim_id,
+            "surface_entity": surface_entity,
+            "canonical_entity": canonical_entity,
+            "claim_dimension": dimension,
+            "scope": scope,
+            "channel": channel,
+            "adjudication_key": adjudication_key,
+            "lifecycle_ref": lifecycle_ref,
+            "confidence": "high",
+        }
+
+    def _build_event(self, obs, claim, resolution, sequence):
+        channel = self._extract_channel(obs)
+        return {
+            "event_id": obs["obs_id"] + "#" + claim.get("claim_id", f"c{sequence}"),
             "observed_at": obs.get("observed_at"),
             "effective_at": obs.get("valid_from"),
-            "source": source_str,
+            "source": channel,
             "payload": {
-                "entity_ref": base_entity_ref,
-                "lifecycle_ref": base_entity_ref,
-                "lifecycle_seq": seq,
-                "adjudication_key": base_entity_ref,
-                "node_type": "Fact",
-                "content": obs.get("payload", {}).get("statement", ""),
-                "state": None,
-                "claim_id": None,
-                "alias_hints": None,
-            },
-        }]
-    
-    events = []
-    for claim in claims:
-        events.append({
-            "event_id": obs["obs_id"] + "#" + claim.get("claim_id", f"c{seq}"),
-            "observed_at": obs.get("observed_at"),
-            "effective_at": obs.get("valid_from"),
-            "source": source_str,
-            "payload": {
-                "entity_ref": base_entity_ref,
-                "lifecycle_ref": base_entity_ref,
-                "lifecycle_seq": seq,
-                "adjudication_key": base_entity_ref,
+                "entity_ref": resolution["canonical_entity"],
+                "lifecycle_ref": resolution["lifecycle_ref"],
+                "lifecycle_seq": sequence,
+                "adjudication_key": resolution["adjudication_key"],
                 "node_type": "Fact",
                 "content": obs.get("payload", {}).get("statement", ""),
                 "state": claim.get("value"),
                 "claim_id": claim.get("claim_id"),
+                "claim_dimension": resolution["claim_dimension"],
+                "claim_scope": resolution["scope"],
                 "alias_hints": None,
             },
-        })
-    return events
+            "resolution_record": resolution,
+        }
+
+    def _build_fallback_event(self, obs, claim, sequence):
+        entity = self._extract_surface_entity(obs)
+        channel = self._extract_channel(obs)
+        cid = claim.get("claim_id") if claim else None
+        value = claim.get("value") if claim else None
+        return {
+            "event_id": obs["obs_id"],
+            "observed_at": obs.get("observed_at"),
+            "effective_at": obs.get("valid_from"),
+            "source": channel,
+            "payload": {
+                "entity_ref": entity,
+                "lifecycle_ref": entity,
+                "lifecycle_seq": sequence,
+                "adjudication_key": entity,
+                "node_type": "Fact",
+                "content": obs.get("payload", {}).get("statement", ""),
+                "state": value,
+                "claim_id": cid,
+                "claim_dimension": None,
+                "claim_scope": None,
+                "alias_hints": None,
+            },
+            "resolution_record": {},
+        }
+
+    def _extract_surface_entity(self, obs):
+        mentions = obs.get("mentions", [])
+        return mentions[0] if mentions else "unknown"
+
+    def _extract_dimension(self, claim):
+        dim = claim.get("dimension")
+        if dim:
+            return str(dim)
+        cid = claim.get("claim_id", "")
+        parts = [p for p in cid.split(".") if p]
+        # For benchmark gold, claim_ids are like:
+        # tr12.target.staging.allowed -> dimension=target, not full
+        if len(parts) >= 2:
+            return parts[1]
+        return cid
+
+    def _extract_scope(self, obs, claim):
+        source = obs.get("source", {})
+        claim_scope = claim.get("claim_scope") or obs.get("claim_scope")
+        if claim_scope:
+            return str(claim_scope)
+        # Try to infer scope from claim_id third segment
+        cid = claim.get("claim_id", "")
+        parts = [p for p in cid.split(".") if p]
+        # E.g. "tr12.target.staging.allowed" -> scope="staging"
+        #      "tr12.target.canary.allowed" -> scope="canary"
+        #      "tr_full_tkt_005b.obs01.active" -> no scope
+        if len(parts) >= 3 and not parts[1].startswith("obs"):
+            return parts[2]
+        return None
+
+    def _extract_channel(self, obs):
+        source = obs.get("source", {})
+        raw = source.get("channel") or source.get("provenance") or "unknown"
+        return raw.split("#")[0] if "#" in raw else raw
+
+
+def observation_to_event(obs: dict[str, Any], seq: int) -> list[dict[str, Any]]:
+    """Convert a benchmark observation to adjudication events via the resolver adapter."""
+    adapter = ShadowResolutionAdapter()
+    return adapter.resolve_observation(obs, seq)
 
 
 def compute_set_metrics(actual: set[str], expected: set[str]) -> dict[str, float]:

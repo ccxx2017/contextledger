@@ -1,0 +1,80 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 3,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_24d52faa09a5": {
+      "node_id": "n_24d52faa09a5",
+      "entity_ref": "exp_quant_models",
+      "lifecycle_ref": "lc_quant_research",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "research:exp_quant_models:v1",
+      "observed_at": "2026-07-01T09:00:00Z",
+      "effective_at": "2026-07-01T09:00:00Z",
+      "node_type": "Experiment",
+      "content": "Quant model experiment active.",
+      "state": "in_progress",
+      "claim_id": null,
+      "status": "superseded",
+      "active": false,
+      "source": "research",
+      "_observation_base": "evt_010"
+    },
+    "n_8f3589814bdc": {
+      "node_id": "n_8f3589814bdc",
+      "entity_ref": "exp_quant_models",
+      "lifecycle_ref": "lc_quant_research",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "research:exp_quant_models:v1",
+      "observed_at": "2026-07-05T09:00:00Z",
+      "effective_at": "2026-07-05T09:00:00Z",
+      "node_type": "Experiment",
+      "content": "Quant model experiment deprecated.",
+      "state": "cancelled",
+      "claim_id": null,
+      "status": "superseded",
+      "active": false,
+      "source": "research",
+      "_observation_base": "evt_011"
+    },
+    "n_275f4835e389": {
+      "node_id": "n_275f4835e389",
+      "entity_ref": "exp_quant_models",
+      "lifecycle_ref": "lc_quant_research",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "research:exp_quant_models:v2",
+      "observed_at": "2026-07-10T09:00:00Z",
+      "effective_at": "2026-07-10T09:00:00Z",
+      "node_type": "Experiment",
+      "content": "Quant model experiment revived under v2.",
+      "state": "in_progress",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "research",
+      "_observation_base": "evt_012"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_8f3589814bdc",
+      "target": "n_24d52faa09a5",
+      "relation": "supersedes"
+    },
+    {
+      "source": "n_275f4835e389",
+      "target": "n_8f3589814bdc",
+      "relation": "REVIVES"
+    },
+    {
+      "source": "n_275f4835e389",
+      "target": "n_24d52faa09a5",
+      "relation": "derived_from"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "evt_012"
+}

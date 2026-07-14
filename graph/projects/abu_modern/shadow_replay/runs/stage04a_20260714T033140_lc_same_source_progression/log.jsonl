@@ -1,0 +1,13 @@
+[
+  {
+    "event_id": "evt_ss_01",
+    "action": "create",
+    "node_id": "n_15c94bd40c62"
+  },
+  {
+    "event_id": "evt_ss_02",
+    "action": "supersede",
+    "node_id": "n_340b6bb466e5",
+    "target": "n_15c94bd40c62"
+  }
+]

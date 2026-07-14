@@ -56,6 +56,24 @@ EXPECTED_NODE_SEMANTICS: dict[str, dict[str, dict[str, Any]]] = {
         "n_mc_policy_v1": {"entity_ref": "POL-GW-001", "lifecycle_ref": "lc_pol_gw_001", "lifecycle_seq": 1, "claim_id": "mc.policy.v1"},
         "n_mc_policy_v2": {"entity_ref": "POL-GW-001", "lifecycle_ref": "lc_pol_gw_001", "lifecycle_seq": 2, "claim_id": "mc.policy.v2"},
     },
+    "lc_multi_claim_different_predicates": {
+        "n_svc_b_latency_200": {"entity_ref": "SVC-B", "lifecycle_ref": "lc_svc_b", "lifecycle_seq": 1, "claim_id": "svc.b.latency.200"},
+        "n_svc_b_throughput_1000": {"entity_ref": "SVC-B", "lifecycle_ref": "lc_svc_b", "lifecycle_seq": 2, "claim_id": "svc.b.throughput.1000"},
+    },
+    "lc_conditional_different_scope": {
+        "n_rule_x_trading_blocked": {"entity_ref": "RULE-X", "lifecycle_ref": "lc_rule_x", "lifecycle_seq": 1, "state": "blocked", "claim_id": "rule.x.trading.blocked"},
+        "n_rule_x_trading_tokyo_allowed": {"entity_ref": "RULE-X", "lifecycle_ref": "lc_rule_x", "lifecycle_seq": 2, "state": "allowed", "claim_id": "rule.x.trading.tokyo_allowed"},
+    },
+    "lc_parallel_target_coexist": {
+        "n_deploy_list_staging": {"entity_ref": "DEPLOY-LIST", "lifecycle_ref": "lc_deploy_list", "lifecycle_seq": 1, "state": "allowed", "claim_id": "deploy.list.staging"},
+        "n_deploy_list_canary": {"entity_ref": "DEPLOY-LIST", "lifecycle_ref": "lc_deploy_list", "lifecycle_seq": 2, "state": "allowed", "claim_id": "deploy.list.canary"},
+    },
+    "lc_late_arrival_effective_time": {
+        "n_inv_001_count_ten": {"entity_ref": "INV-001", "lifecycle_ref": "lc_inv_001", "lifecycle_seq": 1, "state": "10", "claim_id": "inv.001.count.ten"},
+    },
+    "lc_late_arrival_missing_effective": {
+        "n_inv_002_count_five": {"entity_ref": "INV-002", "lifecycle_ref": "lc_inv_002", "lifecycle_seq": 1, "state": "5", "claim_id": "inv.002.count.five"},
+    },
     "lc_two_lifecycles_no_kill": {
         "n_deploy": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_deploy_prod_2026_07", "state": "deployed"},
         "n_ticket_open": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_ticket_005b", "state": "open"},

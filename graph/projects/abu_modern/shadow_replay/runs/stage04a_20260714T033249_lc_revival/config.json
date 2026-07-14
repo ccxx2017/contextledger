@@ -1,0 +1,110 @@
+{
+  "run_id": "stage04a_20260714T033249_lc_revival",
+  "generated_at": "2026-07-14T03:32:49.317397+00:00",
+  "fixture_path": "graph\\projects\\abu_modern\\fixtures\\lifecycle\\fixtures\\lc_revival.json",
+  "fixture_sha256": "afa54857bc64c716afbdc175ea4503affebc36887f9d5cedbd029648f74be8fe",
+  "runtime_fingerprint": {
+    "shadow_scripts": {
+      "shadow_lifecycle_adjudicator.py": "b93ac86eb5d4a6504c7aef161d06126087f337f6e5f1c3285b09e5ec55db462d",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "ea4a0ecb3b5fca78e5555346f4207eeccd64cb80500c5a6b59b67ccc2f5fdcc2"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": [
+      "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py"
+    ]
+  },
+  "deterministic": true,
+  "run1": {
+    "fixture_id": "lc_revival",
+    "category": "revival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033249_lc_revival",
+    "event_count": 3,
+    "checkpoint_count": 2,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_011",
+        "after_event_id": "evt_011",
+        "graph_state_hash": "2fcf3287879ea7c5e1f929b6c24f5e8fed3ab40c1dd59f97eff163d4cb3c7b7a",
+        "bundle_hash": "640da145b05db3e21390c49597185e35985b9b054fb6bd0104e295eec8ddba40",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      },
+      {
+        "checkpoint_id": "cp_after_012",
+        "after_event_id": "evt_012",
+        "graph_state_hash": "c6c6f7d210efdf0ca82fbb97ac52c623d245768889db59586bd2bf170437b500",
+        "bundle_hash": "054900fc271156a6c72e1ef92bac1738c04b0ee4efa4b5dc8865b977bc5f9924",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "c6c6f7d210efdf0ca82fbb97ac52c623d245768889db59586bd2bf170437b500",
+    "final_bundle_hash": "054900fc271156a6c72e1ef92bac1738c04b0ee4efa4b5dc8865b977bc5f9924",
+    "patch_hash": "576ddb797179f96749ad79bf876ae1b940ec6c4e16270e45a84beefb21d8f545",
+    "quarantine": []
+  },
+  "run2": {
+    "fixture_id": "lc_revival",
+    "category": "revival",
+    "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033249_lc_revival",
+    "event_count": 3,
+    "checkpoint_count": 2,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_011",
+        "after_event_id": "evt_011",
+        "graph_state_hash": "2fcf3287879ea7c5e1f929b6c24f5e8fed3ab40c1dd59f97eff163d4cb3c7b7a",
+        "bundle_hash": "640da145b05db3e21390c49597185e35985b9b054fb6bd0104e295eec8ddba40",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      },
+      {
+        "checkpoint_id": "cp_after_012",
+        "after_event_id": "evt_012",
+        "graph_state_hash": "c6c6f7d210efdf0ca82fbb97ac52c623d245768889db59586bd2bf170437b500",
+        "bundle_hash": "054900fc271156a6c72e1ef92bac1738c04b0ee4efa4b5dc8865b977bc5f9924",
+        "diffs": [],
+        "diff_counts": {
+          "expected_improvement": 0,
+          "expected_schema_change": 0,
+          "regression": 0,
+          "unexplained": 0,
+          "blocker": 0,
+          "total": 0
+        }
+      }
+    ],
+    "final_graph_state_hash": "c6c6f7d210efdf0ca82fbb97ac52c623d245768889db59586bd2bf170437b500",
+    "final_bundle_hash": "054900fc271156a6c72e1ef92bac1738c04b0ee4efa4b5dc8865b977bc5f9924",
+    "patch_hash": "576ddb797179f96749ad79bf876ae1b940ec6c4e16270e45a84beefb21d8f545",
+    "quarantine": []
+  },
+  "gate_decision": "PASS"
+}

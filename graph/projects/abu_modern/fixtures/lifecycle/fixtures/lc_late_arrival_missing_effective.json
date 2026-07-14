@@ -1,0 +1,71 @@
+{
+  "fixture_id": "lc_late_arrival_missing_effective",
+  "category": "late_arrival",
+  "description": "Same-channel late arrival with missing effective_at should not replace.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_lm1",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "INV-002",
+          "lifecycle_ref": "lc_inv_002",
+          "lifecycle_seq": 1,
+          "adjudication_key": "INV-002:count:_default_",
+          "node_type": "Fact",
+          "content": "Counted 5 units",
+          "state": "5",
+          "claim_id": "inv.002.count.five",
+          "claim_dimension": "count",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_lm2",
+        "observed_at": "2026-07-03T10:00:00Z",
+        "effective_at": null,
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "INV-002",
+          "lifecycle_ref": "lc_inv_002",
+          "lifecycle_seq": 2,
+          "adjudication_key": "INV-002:count:_default_",
+          "node_type": "Fact",
+          "content": "Late report, unknown effective period",
+          "state": "8",
+          "claim_id": "inv.002.count.eight",
+          "claim_dimension": "count",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_lm2",
+        "after_event_id": "evt_lm2",
+        "active_nodes": [
+          "n_inv_002_count_five"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [
+          {
+            "event_id": "evt_lm2",
+            "reason": "late_arrival_missing_effective_at"
+          }
+        ],
+        "assembler_must_include": [
+          "n_inv_002_count_five"
+        ]
+      }
+    ]
+  }
+}

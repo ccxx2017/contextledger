@@ -1,0 +1,49 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 24,
+  "included_node_count": 2,
+  "must_include": [
+    "n_78ec55c9e2c1",
+    "n_636bb6603aae"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_78ec55c9e2c1",
+      "entity_ref": "Deployment rule",
+      "lifecycle_ref": "Deployment rule:trade_permission",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Deployment rule:trade_permission:_default_",
+      "observed_at": "2026-06-05T08:00:00Z",
+      "effective_at": "2026-06-05T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Trading is blocked for every region.",
+      "state": "blocked_global",
+      "claim_id": "tr05.trading.blocked.global",
+      "status": "active",
+      "active": true,
+      "source": "risk_memo",
+      "_observation_base": "tr05_obs01"
+    },
+    {
+      "node_id": "n_636bb6603aae",
+      "entity_ref": "Deployment rule",
+      "lifecycle_ref": "Deployment rule:trade_permission_exception",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Deployment rule:trade_permission_exception:_default_",
+      "observed_at": "2026-06-05T08:30:00Z",
+      "effective_at": "2026-06-05T08:30:00Z",
+      "node_type": "Fact",
+      "content": "Tokyo desk may trade when running in simulation mode.",
+      "state": "tokyo_simulation_allowed",
+      "claim_id": "tr05.trading.allowed.tokyo_sim",
+      "status": "active",
+      "active": true,
+      "source": "risk_memo",
+      "_observation_base": "tr05_obs02"
+    }
+  ]
+}

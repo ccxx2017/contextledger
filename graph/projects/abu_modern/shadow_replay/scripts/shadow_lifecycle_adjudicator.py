@@ -46,16 +46,29 @@ class ShadowLifecycleAdjudicator:
         entity_ref = payload.get("entity_ref")
         lifecycle_ref = payload.get("lifecycle_ref")
         lifecycle_seq = payload.get("lifecycle_seq")
-        adjudication_key = self._compute_adjudication_key(payload)
+        # Prefer explicit adjudication_key from payload (resolver-provided), fall back to compute
+        adjudication_key = payload.get("adjudication_key") or self._compute_adjudication_key(payload)
         alias_hints = payload.get("alias_hints") or []
         raw_source = event.get("source", "unknown")
         # Normalize source to the channel part only (before first #)
         source = raw_source.split("#")[0] if "#" in raw_source else raw_source
         state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").strip()
+        claim_dimension = payload.get("claim_dimension")
+        claim_scope = payload.get("claim_scope")
 
         log: list[dict[str, Any]] = []
         quarantine: list[dict[str, Any]] = []
+        _is_late_arrival = False
+
+        # Late arrival quarantine
+        if _is_late_arrival:
+            reason = "late_arrival_effective_at_before_previous"
+            if not event.get("effective_at"):
+                reason = "late_arrival_missing_effective_at"
+            quarantine.append({"event_id": event["event_id"], "reason": reason})
+            log.append({"event_id": event["event_id"], "action": "quarantine", "reason": reason})
+            return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
 
         # Alias hint resolution
         if alias_hints:
@@ -77,6 +90,25 @@ class ShadowLifecycleAdjudicator:
                 quarantine.append({"event_id": event["event_id"], "reason": reason})
                 log.append({"event_id": event["event_id"], "action": "quarantine", "reason": reason})
                 return AdjudicationResult(patch=self._empty_patch(event), quarantine=quarantine, log=log)
+
+        # Late-arrival time-ordering check
+        # If this event has an effective_at earlier than the most recently processed event
+        # for the same entity+dimension+channel, quarantine it as a late arrival.
+        event_effective = event.get("effective_at")
+        event_observed = event.get("observed_at")
+        _is_late_arrival = False
+        if event_effective and event_observed and claim_dimension:
+            # Check if an earlier event with later observed_at exists for the same adjudication_key
+            for _other_node in graph_state.get("nodes", {}).values():
+                if isinstance(_other_node, dict):
+                    other_entity = _other_node.get("entity_ref")
+                    other_dims = _other_node.get("claim_dimension")
+                    other_obs = _other_node.get("observed_at")
+                    other_eff = _other_node.get("effective_at")
+                    if (other_entity == entity_ref and other_obs and other_eff
+                            and event_observed > other_obs and event_effective < other_eff):
+                        _is_late_arrival = True
+                        break
 
         # Track siblings: claims from the same observation share a base event_id
         event_base = event["event_id"].split("#")[0] if "#" in event["event_id"] else event["event_id"]
@@ -178,7 +210,7 @@ class ShadowLifecycleAdjudicator:
         }
 
     def _compute_adjudication_key(self, payload: dict[str, Any]) -> str | None:
-        return payload.get("lifecycle_ref") or payload.get("entity_ref")
+        return payload.get("lifecycle_ref") or payload.get("entity_ref") or None
 
     def _resolve_alias_hint(
         self,

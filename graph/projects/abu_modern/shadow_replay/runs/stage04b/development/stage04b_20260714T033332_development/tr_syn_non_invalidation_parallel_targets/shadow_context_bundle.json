@@ -1,0 +1,49 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 25,
+  "included_node_count": 2,
+  "must_include": [
+    "n_47b688df4360",
+    "n_cd8a2110d2b3"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_47b688df4360",
+      "entity_ref": "Deployment allow-list",
+      "lifecycle_ref": "Deployment allow-list:allowed_targets",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "Deployment allow-list:allowed_targets:staging",
+      "observed_at": "2026-06-12T08:00:00Z",
+      "effective_at": "2026-06-12T08:00:00Z",
+      "node_type": "Fact",
+      "content": "Staging is allowed as a deployment target.",
+      "state": "staging",
+      "claim_id": "tr12.target.staging.allowed",
+      "status": "active",
+      "active": true,
+      "source": "release_sheet",
+      "_observation_base": "tr12_obs01"
+    },
+    {
+      "node_id": "n_cd8a2110d2b3",
+      "entity_ref": "Deployment allow-list",
+      "lifecycle_ref": "Deployment allow-list:allowed_targets",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "Deployment allow-list:allowed_targets:canary",
+      "observed_at": "2026-06-12T08:05:00Z",
+      "effective_at": "2026-06-12T08:05:00Z",
+      "node_type": "Fact",
+      "content": "Canary is also allowed as a deployment target.",
+      "state": "canary",
+      "claim_id": "tr12.target.canary.allowed",
+      "status": "active",
+      "active": true,
+      "source": "release_sheet",
+      "_observation_base": "tr12_obs02"
+    }
+  ]
+}

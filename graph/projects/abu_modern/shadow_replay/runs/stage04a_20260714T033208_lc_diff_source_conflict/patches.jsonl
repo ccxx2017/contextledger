@@ -1,0 +1,60 @@
+[
+  {
+    "turn_id": "evt_ds_01",
+    "new_nodes": [
+      {
+        "node_id": "n_53937d5e65e0",
+        "entity_ref": "SVC-A",
+        "lifecycle_ref": "lc_svc_a",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "svc:SVC-A",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "node_type": "Fact",
+        "content": "Probe says not ready",
+        "state": "not_ready",
+        "claim_id": "svc.a.probe",
+        "status": "active",
+        "active": true,
+        "source": "probe_log",
+        "_observation_base": "evt_ds_01"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "evt_ds_02",
+    "new_nodes": [
+      {
+        "node_id": "n_e3ef74d85c48",
+        "entity_ref": "SVC-A",
+        "lifecycle_ref": "lc_svc_a",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "svc:SVC-A",
+        "observed_at": "2026-07-01T10:30:00Z",
+        "effective_at": "2026-07-01T10:30:00Z",
+        "node_type": "Fact",
+        "content": "User says ready",
+        "state": "ready",
+        "claim_id": "svc.a.user",
+        "status": "active",
+        "active": true,
+        "source": "user_note",
+        "_observation_base": "evt_ds_02"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": [
+      {
+        "source": "n_e3ef74d85c48",
+        "target": "n_53937d5e65e0",
+        "relation": "CONTESTS"
+      }
+    ]
+  }
+]

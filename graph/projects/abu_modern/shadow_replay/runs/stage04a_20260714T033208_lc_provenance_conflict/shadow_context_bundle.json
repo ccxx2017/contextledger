@@ -1,0 +1,49 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 2,
+  "budget": 8192,
+  "tokens_used": 22,
+  "included_node_count": 2,
+  "must_include": [
+    "n_7764415170aa",
+    "n_795634b6dc88"
+  ],
+  "nodes": [
+    {
+      "node_id": "n_7764415170aa",
+      "entity_ref": "POL-2026-003",
+      "lifecycle_ref": "lc_policy_003",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "policy:POL-2026-003",
+      "observed_at": "2026-07-01T12:00:00Z",
+      "effective_at": "2026-07-01T12:00:00Z",
+      "node_type": "Policy",
+      "content": "Policy requires two-person review.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "policy_team",
+      "_observation_base": "evt_020"
+    },
+    {
+      "node_id": "n_795634b6dc88",
+      "entity_ref": "POL-2026-003",
+      "lifecycle_ref": "lc_policy_003",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "policy:POL-2026-003",
+      "observed_at": "2026-07-02T12:00:00Z",
+      "effective_at": "2026-07-02T12:00:00Z",
+      "node_type": "Policy",
+      "content": "Probe reports policy waived for region X.",
+      "state": "implemented",
+      "claim_id": null,
+      "status": "active",
+      "active": true,
+      "source": "audit_probe",
+      "_observation_base": "evt_021"
+    }
+  ]
+}

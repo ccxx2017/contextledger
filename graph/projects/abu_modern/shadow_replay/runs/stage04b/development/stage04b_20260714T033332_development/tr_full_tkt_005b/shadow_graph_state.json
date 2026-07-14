@@ -1,0 +1,121 @@
+{
+  "project_id": "abu_modern",
+  "turn_counter": 5,
+  "schema_version": "lifecycle_v1_shadow",
+  "nodes": {
+    "n_7a0649792d74": {
+      "node_id": "n_7a0649792d74",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B:ticket_state",
+      "lifecycle_seq": 1,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B:ticket_state:_default_",
+      "observed_at": "2026-01-02T16:00:00Z",
+      "effective_at": "2026-01-02T16:00:00Z",
+      "node_type": "Fact",
+      "content": "GPT5.5判定自主激活测试通过，确认正式执行条件满足，可以进入正式执行 TKT-2026-005B-vcp-breakout-entry.md。建议用户回复'确认开始'并执行。",
+      "state": "resolved",
+      "claim_id": "tr_full_tkt_005b.obs01.active",
+      "status": "superseded",
+      "active": false,
+      "source": "abu_modern_turn",
+      "_observation_base": "obs01"
+    },
+    "n_239829a4617c": {
+      "node_id": "n_239829a4617c",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B:ticket_state",
+      "lifecycle_seq": 2,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B:ticket_state:_default_",
+      "observed_at": "2026-01-03T09:00:00Z",
+      "effective_at": "2026-01-03T09:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs02.active",
+      "status": "superseded",
+      "active": false,
+      "source": "abu_modern_turn",
+      "_observation_base": "obs02"
+    },
+    "n_cdec578f68b0": {
+      "node_id": "n_cdec578f68b0",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B:ticket_state",
+      "lifecycle_seq": 3,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B:ticket_state:_default_",
+      "observed_at": "2026-01-03T18:00:00Z",
+      "effective_at": "2026-01-03T18:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs03.active",
+      "status": "superseded",
+      "active": false,
+      "source": "abu_modern_turn",
+      "_observation_base": "obs03"
+    },
+    "n_7aadb54f5f00": {
+      "node_id": "n_7aadb54f5f00",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B:ticket_state",
+      "lifecycle_seq": 4,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B:ticket_state:_default_",
+      "observed_at": "2026-01-04T03:00:00Z",
+      "effective_at": "2026-01-04T03:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs04.active",
+      "status": "superseded",
+      "active": false,
+      "source": "abu_modern_turn",
+      "_observation_base": "obs04"
+    },
+    "n_ab67dcc38826": {
+      "node_id": "n_ab67dcc38826",
+      "entity_ref": "TKT-2026-005B",
+      "lifecycle_ref": "TKT-2026-005B:ticket_state",
+      "lifecycle_seq": 5,
+      "lifecycle_stage": null,
+      "adjudication_key": "TKT-2026-005B:ticket_state:_default_",
+      "observed_at": "2026-01-04T20:00:00Z",
+      "effective_at": "2026-01-04T20:00:00Z",
+      "node_type": "Fact",
+      "content": "TKT-2026-005B Round 4受限恢复smoke执行完成：使用/strategy-builder/compile-ir端点，5 symbols×1年，后端无5xx，compile-ir→KB归档→execution-config backtest路径跑通，97笔交易，Round 1的0笔交易问题修复。但基线信号亏损严重（Sharpe约1.1659，累计收益-83.84%），非完整研究结论。最终结论：Round 4 受限 smoke 已完成，可接受b7b4af3修正，下一步需Boss授",
+      "state": "open",
+      "claim_id": "tr_full_tkt_005b.obs05.active",
+      "status": "active",
+      "active": true,
+      "source": "abu_modern_turn",
+      "_observation_base": "obs05"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_239829a4617c",
+      "target": "n_7a0649792d74",
+      "relation": "supersedes"
+    },
+    {
+      "source": "n_cdec578f68b0",
+      "target": "n_239829a4617c",
+      "relation": "supersedes"
+    },
+    {
+      "source": "n_7aadb54f5f00",
+      "target": "n_cdec578f68b0",
+      "relation": "supersedes"
+    },
+    {
+      "source": "n_ab67dcc38826",
+      "target": "n_7aadb54f5f00",
+      "relation": "supersedes"
+    }
+  ],
+  "quarantine": [],
+  "last_applied_turn_id": "obs05#tr_full_tkt_005b.obs05.active"
+}

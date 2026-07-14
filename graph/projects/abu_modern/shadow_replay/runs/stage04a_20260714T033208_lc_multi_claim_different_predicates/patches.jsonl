@@ -1,0 +1,54 @@
+[
+  {
+    "turn_id": "evt_mp1",
+    "new_nodes": [
+      {
+        "node_id": "n_1e7216a005b2",
+        "entity_ref": "SVC-B",
+        "lifecycle_ref": "lc_svc_b",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "SVC-B:latency:_default_",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "node_type": "Fact",
+        "content": "Latency SLA set to 200ms",
+        "state": "implemented",
+        "claim_id": "svc.b.latency.200",
+        "status": "active",
+        "active": true,
+        "source": "policy_team",
+        "_observation_base": "evt_mp1"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "evt_mp2",
+    "new_nodes": [
+      {
+        "node_id": "n_3b2a861c1823",
+        "entity_ref": "SVC-B",
+        "lifecycle_ref": "lc_svc_b",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "SVC-B:throughput:_default_",
+        "observed_at": "2026-07-01T11:00:00Z",
+        "effective_at": "2026-07-01T11:00:00Z",
+        "node_type": "Fact",
+        "content": "Throughput quota set to 1000rps",
+        "state": "implemented",
+        "claim_id": "svc.b.throughput.1000",
+        "status": "active",
+        "active": true,
+        "source": "policy_team",
+        "_observation_base": "evt_mp2"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  }
+]

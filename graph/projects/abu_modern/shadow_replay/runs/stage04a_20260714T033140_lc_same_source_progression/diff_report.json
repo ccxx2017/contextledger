@@ -1,0 +1,28 @@
+{
+  "fixture_id": "lc_same_source_progression",
+  "category": "input_adapter",
+  "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260714T033140_lc_same_source_progression",
+  "event_count": 2,
+  "checkpoint_count": 1,
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_ss_02",
+      "after_event_id": "evt_ss_02",
+      "graph_state_hash": "25b524336c9d49646aa3c0e3560098a8a42b6ee94ef5d89c7a4cd291a795b8ce",
+      "bundle_hash": "c3c4606a800b167b348f9f3e79ca94b02b2a66a342d248c4b25fd8c8f8f583ca",
+      "diffs": [],
+      "diff_counts": {
+        "expected_improvement": 0,
+        "expected_schema_change": 0,
+        "regression": 0,
+        "unexplained": 0,
+        "blocker": 0,
+        "total": 0
+      }
+    }
+  ],
+  "final_graph_state_hash": "25b524336c9d49646aa3c0e3560098a8a42b6ee94ef5d89c7a4cd291a795b8ce",
+  "final_bundle_hash": "c3c4606a800b167b348f9f3e79ca94b02b2a66a342d248c4b25fd8c8f8f583ca",
+  "patch_hash": "e525f575d21d0b2a6003215211d75ea895663b36ba4cd700779a95ee1b0b8085",
+  "quarantine": []
+}

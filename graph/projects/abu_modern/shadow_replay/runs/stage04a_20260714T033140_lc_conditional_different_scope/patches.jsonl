@@ -1,0 +1,62 @@
+[
+  {
+    "turn_id": "evt_cs1",
+    "new_nodes": [
+      {
+        "node_id": "n_c83904dab344",
+        "entity_ref": "RULE-X",
+        "lifecycle_ref": "lc_rule_x",
+        "lifecycle_seq": 1,
+        "lifecycle_stage": null,
+        "adjudication_key": "lc_rule_x",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "node_type": "Fact",
+        "content": "Global trading blocked",
+        "state": "blocked",
+        "claim_id": "rule.x.trading.blocked",
+        "status": "active",
+        "active": true,
+        "source": "risk_team",
+        "_observation_base": "evt_cs1"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [],
+    "new_edges": []
+  },
+  {
+    "turn_id": "evt_cs2",
+    "new_nodes": [
+      {
+        "node_id": "n_68ed6986e1be",
+        "entity_ref": "RULE-X",
+        "lifecycle_ref": "lc_rule_x",
+        "lifecycle_seq": 2,
+        "lifecycle_stage": null,
+        "adjudication_key": "lc_rule_x",
+        "observed_at": "2026-07-01T11:00:00Z",
+        "effective_at": "2026-07-01T11:00:00Z",
+        "node_type": "Fact",
+        "content": "Tokyo simulation exception added",
+        "state": "allowed",
+        "claim_id": "rule.x.trading.tokyo_allowed",
+        "status": "active",
+        "active": true,
+        "source": "risk_team",
+        "_observation_base": "evt_cs2"
+      }
+    ],
+    "updated_nodes": [],
+    "superseded_nodes": [
+      "n_c83904dab344"
+    ],
+    "new_edges": [
+      {
+        "source": "n_68ed6986e1be",
+        "target": "n_c83904dab344",
+        "relation": "supersedes"
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "event_id": "tr05_obs01#tr05.trading.blocked.global",
+    "action": "create",
+    "node_id": "n_78ec55c9e2c1"
+  },
+  {
+    "event_id": "tr05_obs02#tr05.trading.allowed.tokyo_sim",
+    "action": "coexist",
+    "node_id": "n_636bb6603aae",
+    "target": "n_78ec55c9e2c1"
+  },
+  {
+    "event_id": "tr05_obs02#tr05.trading.allowed.tokyo_sim",
+    "action": "create",
+    "node_id": "n_636bb6603aae"
+  }
+]
