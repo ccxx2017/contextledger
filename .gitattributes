@@ -1,0 +1,8 @@
+# Force LF line endings for reports (avoid CRLF hash mismatch)
+reports/*.md text eol=lf
+reports/*.json text eol=lf
+contracts/*.md text eol=lf
+contracts/*.json text eol=lf
+graph/projects/abu_modern/shadow_replay/contracts/*.md text eol=lf
+graph/projects/abu_modern/shadow_replay/contracts/*.json text eol=lf
+graph/projects/abu_modern/shadow_replay/scripts/*.py text eol=lf
