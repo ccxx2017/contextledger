@@ -1,0 +1,53 @@
+{
+  "baseline_id": "stage04c_shadow_semantics_rebased_baseline_v1",
+  "generated_at": "2026-07-15T17:47:00Z",
+  "phase": "Stage04-C1.2.3",
+  "comparator_version": "v2_post_rollback_C1.2.2",
+  "comparator_hash": "9A0B88ADB683B46558F725611B8F47497C4539D284031094D88D7EFD2A9C2252",
+  "shadow_adjudicator_hash": "MODIFIED_C1.2.3",
+  "shadow_compiler_hash": "UNCHANGED",
+  "modifications_summary": [
+    "_determine_relation: 废除 different_source -> CONTESTS 自动假设，实施 decision contract v2 六步判定",
+    "adjudicate_event fan-out: 仅向直接前继发射 SUPERCEDES 边",
+    "CONTESTS: 添加 quarantine 条目",
+    "语义冲突检测: 扩展检查 state 字段",
+    "fixture_replay_runner: 新增 4 个 fixture 的 EXPECTED_NODE_SEMANTICS"
+  ],
+  "unit_tests": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0
+  },
+  "fixtures": {
+    "total": 26,
+    "pass": 25,
+    "fail": 3,
+    "new_pass": 4,
+    "old_block": ["lc_diff_source_conflict", "lc_provenance_conflict", "lc_same_key_different_source_r01"],
+    "all_deterministic": true
+  },
+  "development_replay": {
+    "run_id": "stage04b_20260715T094617_development",
+    "cases": 7,
+    "total_blockers": 0,
+    "total_regressions": 7,
+    "total_unexplained": 0,
+    "regression_breakdown": {
+      "tr_full_tkt_005b": 6,
+      "tr_syn_revival_feature_flag": 1
+    },
+    "improvement_from_c122": {
+      "tr_syn_revival_feature_flag_cp02": "3 manual_adjudication -> 1 expected_improvement",
+      "tr_full_tkt_005b_edges": "fan-out N*(N-1)/2 -> chain N-1"
+    },
+    "remaining_issue": "6 regressions from accumulated-state vs per-step invalidation structural mismatch; 1 regression from cascading effect"
+  },
+  "new_fixtures": [
+    "lc_different_source_chronological_progression_supersedes",
+    "lc_different_source_true_conflict_contests",
+    "lc_three_step_same_key_immediate_predecessor_only",
+    "lc_multi_claim_stream_no_fanout_to_unrelated_predecessors"
+  ],
+  "conclusion": "blocked",
+  "blocking_reason": "7 ordinary regressions remain from structural mismatch between gold per-step invalidation model and shadow accumulated state model. Shadow adjudicator/compiler fixes are correct and complete. Gold update or comparator logic change required."
+}

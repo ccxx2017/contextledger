@@ -1,0 +1,69 @@
+{
+  "fixture_id": "lc_state_value_vs_real_scope_ambiguity",
+  "category": "scope_normalization",
+  "description": "Same entity+dimension but one claim has state-value third segment (enabled) and the other has real-scope third segment (staging). The state-value claim should get scope=_default_, the real-scope should keep its scope. Different adj_keys → COEXISTS.",
+  "rationale": "Validates the scope normalization mapping correctly distinguishes state values from real scope values.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_am_1",
+        "observed_at": "2026-07-01T08:00:00Z",
+        "effective_at": "2026-07-01T08:00:00Z",
+        "source": "ops_team",
+        "payload": {
+          "entity_ref": "Feature-X",
+          "lifecycle_ref": "lc_feature_x",
+          "lifecycle_seq": 1,
+          "adjudication_key": "Feature-X:feature:_default_",
+          "node_type": "Fact",
+          "content": "Feature enabled.",
+          "state": "enabled",
+          "claim_id": "feature.x.enabled",
+          "claim_dimension": "feature",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_am_2",
+        "observed_at": "2026-07-01T08:05:00Z",
+        "effective_at": "2026-07-01T08:05:00Z",
+        "source": "ops_team",
+        "payload": {
+          "entity_ref": "Feature-X",
+          "lifecycle_ref": "lc_feature_x",
+          "lifecycle_seq": 2,
+          "adjudication_key": "Feature-X:feature:staging",
+          "node_type": "Fact",
+          "content": "Staging config deployed.",
+          "state": "deployed",
+          "claim_id": "feature.x.staging",
+          "claim_dimension": "feature",
+          "claim_scope": "staging",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_am_2",
+        "after_event_id": "evt_am_2",
+        "active_nodes": [
+          "n_feature_x_enabled",
+          "n_feature_x_staging"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_feature_x_enabled",
+          "n_feature_x_staging"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "fixture_id": "lc_partial_same_dimension_different_atomic_claims_coexist",
+  "category": "partial_update",
+  "description": "Two claims on same entity, same dimension, but different atomic predicates (different claim_id root): tr04.slippage_report.required=[required] and tr05.compliance_check.required=[required]. Different original claim roots should COEXIST even when normalized scope is identical.",
+  "rationale": "Claims with different entity:dimension roots but same normalized scope should COEXIST. The fixture tests that partial claims on different original dimensions co-exist when they are truly different predicates.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_pd1",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "ops_runbook",
+        "payload": {
+          "entity_ref": "Replay-checklist",
+          "lifecycle_ref": "lc_replay_checklist",
+          "lifecycle_seq": 1,
+          "adjudication_key": "Replay-checklist:slippage_report:_default_",
+          "node_type": "Fact",
+          "content": "Slippage report is required.",
+          "state": "required",
+          "claim_id": "tr04.slippage_report.required",
+          "claim_dimension": "slippage_report",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_pd2",
+        "observed_at": "2026-07-01T11:00:00Z",
+        "effective_at": "2026-07-01T11:00:00Z",
+        "source": "ops_runbook",
+        "payload": {
+          "entity_ref": "Replay-checklist",
+          "lifecycle_ref": "lc_replay_checklist",
+          "lifecycle_seq": 2,
+          "adjudication_key": "Replay-checklist:compliance_check:_default_",
+          "node_type": "Fact",
+          "content": "Compliance check is required.",
+          "state": "required",
+          "claim_id": "tr05.compliance_check.required",
+          "claim_dimension": "compliance_check",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_pd2",
+        "after_event_id": "evt_pd2",
+        "active_nodes": [
+          "n_slippage_report_required",
+          "n_compliance_check_required"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_slippage_report_required",
+          "n_compliance_check_required"
+        ]
+      }
+    ]
+  }
+}

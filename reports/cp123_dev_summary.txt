@@ -1,0 +1,32 @@
+CASE: tr_full_tkt_005b
+  gate: BLOCK
+  aggregate: {'blocker_count': 0, 'regression_count': 6, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+  CP cp_after_obs03 reg=1 blk=0 total=2
+    invalidation: tr_full_tkt_005b.obs01.active -> regression
+  CP cp_after_obs04 reg=2 blk=0 total=3
+    invalidation: tr_full_tkt_005b.obs01.active -> regression
+    invalidation: tr_full_tkt_005b.obs02.active -> regression
+  CP cp_after_obs05 reg=3 blk=0 total=4
+    invalidation: tr_full_tkt_005b.obs01.active -> regression
+    invalidation: tr_full_tkt_005b.obs02.active -> regression
+    invalidation: tr_full_tkt_005b.obs03.active -> regression
+CASE: tr_syn_partial_policy_clause
+  gate: PASS
+  aggregate: {'blocker_count': 0, 'regression_count': 0, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+CASE: tr_syn_conditional_region_exception
+  gate: PASS
+  aggregate: {'blocker_count': 0, 'regression_count': 0, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+CASE: tr_syn_revival_feature_flag
+  gate: BLOCK
+  aggregate: {'blocker_count': 0, 'regression_count': 1, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+  CP cp_after_tr07_obs03 reg=1 blk=0 total=2
+    invalidation: tr07.feature.enabled.v1 -> regression
+CASE: tr_alias_workspace_identity
+  gate: PASS
+  aggregate: {'blocker_count': 0, 'regression_count': 0, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+CASE: tr_syn_non_invalidation_parallel_targets
+  gate: PASS
+  aggregate: {'blocker_count': 0, 'regression_count': 0, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}
+CASE: tr_syn_out_of_order_inventory_present
+  gate: PASS
+  aggregate: {'blocker_count': 0, 'regression_count': 0, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Fixture semantic replay runner.
 
@@ -125,7 +125,51 @@ EXPECTED_NODE_SEMANTICS: dict[str, dict[str, dict[str, Any]]] = {
     "lc_same_source_progression": {
         "n_tkt_001_v1": {"entity_ref": "TKT-001", "lifecycle_ref": "lc_tkt_001", "state": "open", "claim_id": "tkt.001.v1"},
         "n_tkt_001_v2": {"entity_ref": "TKT-001", "lifecycle_ref": "lc_tkt_001", "state": "in_progress", "claim_id": "tkt.001.v2"},
-    },}
+    },
+    "lc_partial_same_dimension_same_scope_supersedes": {
+        "n_backtest_required": {"entity_ref": "Replay-checklist", "lifecycle_ref": "lc_replay_checklist", "state": "required", "claim_id": "tr04.backtest.required"},
+        "n_backtest_not_required": {"entity_ref": "Replay-checklist", "lifecycle_ref": "lc_replay_checklist", "state": "not_required", "claim_id": "tr04.backtest.not_required"},
+    },
+    "lc_partial_same_dimension_different_atomic_claims_coexist": {
+        "n_slippage_report_required": {"entity_ref": "Replay-checklist", "lifecycle_ref": "lc_replay_checklist", "state": "required", "claim_id": "tr04.slippage_report.required"},
+        "n_compliance_check_required": {"entity_ref": "Replay-checklist", "lifecycle_ref": "lc_replay_checklist", "state": "required", "claim_id": "tr05.compliance_check.required"},
+    },
+    "lc_late_arrival_price_band_same_scope_vs_different_scope": {
+        "n_price_band_wide": {"entity_ref": "Price-band", "lifecycle_ref": "lc_price_band", "state": "wide", "claim_id": "tr22.price_band.wide"},
+        "n_price_band_narrow": {"entity_ref": "Price-band", "lifecycle_ref": "lc_price_band", "state": "narrow", "claim_id": "tr22.price_band.narrow"},
+    },
+"lc_same_key_different_source_r01": {
+        "n_svc_x_ready": {"entity_ref": "SVC-X", "lifecycle_ref": "lc_svc_x", "lifecycle_seq": 1, "state": "ready", "claim_id": "svc.x.status.ready"},
+        "n_svc_x_degraded": {"entity_ref": "SVC-X", "lifecycle_ref": "lc_svc_x", "lifecycle_seq": 2, "state": "degraded", "claim_id": "svc.x.status.degraded"},
+    },
+    "lc_parallel_targets_same_dimension_must_coexist": {
+        "n_deploy_staging_allowed": {"entity_ref": "Deploy-list", "lifecycle_ref": "lc_deploy_list", "lifecycle_seq": 1, "state": "allowed", "claim_id": "deploy.list.staging.allowed"},
+        "n_deploy_canary_allowed": {"entity_ref": "Deploy-list", "lifecycle_ref": "lc_deploy_list", "lifecycle_seq": 2, "state": "allowed", "claim_id": "deploy.list.canary.allowed"},
+    },
+    "lc_state_value_vs_real_scope_ambiguity": {
+        "n_feature_x_enabled": {"entity_ref": "Feature-X", "lifecycle_ref": "lc_feature_x", "lifecycle_seq": 1, "state": "enabled", "claim_id": "feature.x.enabled"},
+        "n_feature_x_staging": {"entity_ref": "Feature-X", "lifecycle_ref": "lc_feature_x", "lifecycle_seq": 2, "state": "deployed", "claim_id": "feature.x.staging"},
+    },
+    "lc_different_source_chronological_progression_supersedes": {
+        "n_alpha_enabled_v1": {"entity_ref": "Alpha-feature", "lifecycle_ref": "lc_alpha_feature", "state": "enabled", "claim_id": "alpha.feature.enabled.v1"},
+        "n_alpha_disabled": {"entity_ref": "Alpha-feature", "lifecycle_ref": "lc_alpha_feature", "state": "disabled", "claim_id": "alpha.feature.disabled"},
+    },
+    "lc_different_source_true_conflict_contests": {
+        "n_engine_nominal": {"entity_ref": "Engine-001", "lifecycle_ref": "lc_engine_001_health", "state": "nominal", "claim_id": "engine.001.temp.nominal"},
+        "n_engine_critical": {"entity_ref": "Engine-001", "lifecycle_ref": "lc_engine_001_health", "state": "critical", "claim_id": "engine.001.temp.critical"},
+    },
+    "lc_three_step_same_key_immediate_predecessor_only": {
+        "n_order_initialized": {"entity_ref": "Order-Stream", "lifecycle_ref": "lc_order_processing", "state": "initialized", "claim_id": "order.stream.initialized"},
+        "n_order_started": {"entity_ref": "Order-Stream", "lifecycle_ref": "lc_order_processing", "state": "started", "claim_id": "order.stream.started"},
+        "n_order_completed": {"entity_ref": "Order-Stream", "lifecycle_ref": "lc_order_processing", "state": "completed", "claim_id": "order.stream.completed"},
+    },
+    "lc_multi_claim_stream_no_fanout_to_unrelated_predecessors": {
+        "n_platform_operational": {"entity_ref": "Platform-X", "lifecycle_ref": "lc_platform_x_status", "state": "operational", "claim_id": "platform.x.operational"},
+        "n_platform_degraded": {"entity_ref": "Platform-X", "lifecycle_ref": "lc_platform_x_status", "state": "degraded", "claim_id": "platform.x.degraded"},
+        "n_platform_recovered": {"entity_ref": "Platform-X", "lifecycle_ref": "lc_platform_x_status", "state": "recovered", "claim_id": "platform.x.recovered"},
+    },
+}
+
 
 
 

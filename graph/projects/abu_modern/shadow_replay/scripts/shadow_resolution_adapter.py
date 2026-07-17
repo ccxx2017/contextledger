@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Shadow resolution adapter — separates observation_to_event from benchmark runner.
+"""Shadow resolution adapter 鈥?separates observation_to_event from benchmark runner.
 
 Transforms raw benchmark observations (with claim_bundle) into structured
 resolution records and adjudicator-ready events, with explicit, versioned
@@ -10,6 +10,33 @@ Schema: shadow_resolution_record_v1
 Contract: shadow_resolution_adapter_contract.md
 """
 from __future__ import annotations
+
+# Versioned scope normalization mapping (loaded at runtime).
+# See contracts/shadow_scope_normalization_mapping_v1.json for the authoritative rule definitions.
+_SCOPE_MAPPING = None
+
+def _load_scope_mapping():
+    """Load the versioned scope normalization mapping from contract."""
+    global _SCOPE_MAPPING
+    if _SCOPE_MAPPING is None:
+        import json
+        from pathlib import Path
+        mapping_path = Path(__file__).resolve().parent.parent / "contracts" / "shadow_scope_normalization_mapping_v1.json"
+        if mapping_path.exists():
+            with open(mapping_path, "r", encoding="utf-8") as f:
+                _SCOPE_MAPPING = json.load(f)
+        else:
+            _SCOPE_MAPPING = []
+    return _SCOPE_MAPPING
+
+
+def _is_state_value_token(seg):
+    """Check if a segment is a known state value via the versioned mapping."""
+    mapping = _load_scope_mapping()
+    for entry in mapping:
+        if entry.get("token") == seg and entry.get("semantic_role") == "state_value":
+            return True, entry.get("rule_id", "S000_mapped")
+    return False, None
 
 import hashlib
 from typing import Any
@@ -41,9 +68,9 @@ def _extract_scope_v2(claim, obs):
 
     Priority:
       1. claim.scope or obs.claim_scope (explicit)
-      2. claim_id third segment — used as scope only when it looks semantic
+      2. claim_id third segment 鈥?used as scope only when it looks semantic
          (multi-char, not purely numeric, not a timestamp, not version-like)
-      3. _default_ — sequential progression scope
+      3. _default_ 鈥?sequential progression scope
     """
     raw = claim.get("claim_scope") or obs.get("claim_scope")
     if raw:
@@ -53,13 +80,26 @@ def _extract_scope_v2(claim, obs):
     parts = [p for p in cid.split(".") if p]
     if len(parts) >= 3:
         seg = parts[2]
-        # Heuristic: numeric-like segments (digits, digits+s, version numbers)
-        # are values not scopes. Semantic scopes are alphanumeric words.
-        is_numeric = all(c.isdigit() or c in ".-" for c in seg)
-        is_version_like = seg.replace(".","").isdigit() or (len(seg) <= 3 and seg.isdigit())
-        is_value_like = is_numeric or is_version_like or seg.endswith("s")
-        if not is_value_like and not seg.startswith("obs") and not seg.startswith("cp"):
-            return seg, "claim_id.heuristic.third_segment.v1", "R006_legacy_v1", True
+
+        # State-value detection via versioned mapping (v1).
+        # When the third segment is a known state-like value (past participle,
+        # descriptive adjective, or matches claim.value), it is NOT a scope.
+        # Uses the authoritative shadow_scope_normalization_mapping_v1.json.
+        seg_is_state_value, _state_rule_id = _is_state_value_token(seg)
+        # NOTE: We do NOT use seg == claim.value as a shortcut because claim.value
+        # can legitimately equal the third segment when that segment IS a real scope
+        # (e.g. tr12.target.staging.allowed where value=staging, seg=staging).
+        # Only the versioned STATE_VALUE_TOKENS mapping is authoritative.
+        pass  # exact-value match intentionally disabled (see above)
+
+        if not seg_is_state_value:
+            # Heuristic: numeric-like segments (digits, digits+s, version numbers)
+            # are values not scopes. Semantic scopes are alphanumeric words.
+            is_numeric = all(c.isdigit() or c in ".-" for c in seg)
+            is_version_like = seg.replace(".","").isdigit() or (len(seg) <= 3 and seg.isdigit())
+            is_value_like = is_numeric or is_version_like or seg.endswith("s")
+            if not is_value_like and not seg.startswith("obs") and not seg.startswith("cp"):
+                return seg, "claim_id.heuristic.third_segment.v1", "R006_legacy_v1", True
 
     return "_default_", "inferred_default", "R006_default", False
 
@@ -121,6 +161,10 @@ def observation_to_event(obs, seq):
             "canonical_entity": surface_entity,
             "claim_dimension": dimension,
             "scope": scope,
+            "scope_raw_value": scope,
+            "scope_normalization_rule_id": scope_rule,
+            "state_value_token_match": scope_rule in {"S001_state_value_whitelist", "S002_dimension_state_value", "S003_lifecycle_state_value", "S004_terminal_state_value", "S005_review_state_value"},
+            "mapping_version": "v1" if "S00" in (scope_rule or "") else None,
             "channel": source_str,
             "adjudication_key": adj_key,
             "lifecycle_ref": lifecycle_ref,
@@ -147,3 +191,6 @@ def observation_to_event(obs, seq):
             "resolution_record": rec,
         })
     return events
+
+
+

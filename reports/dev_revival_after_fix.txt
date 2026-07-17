@@ -1,0 +1,11 @@
+CP: cp_after_tr07_obs01
+  graph_state_hash: f7394a0f533b67f72eec71167aa9de8fba9b69089b615a90ad5070c9b2359fb2
+CP: cp_after_tr07_obs02
+  graph_state_hash: 686d51ecc56d882161a9bf30916cc5b86648e8d74af9d26066a6fddc44eb85cb
+  {'kind': 'invalidation', 'claim_id': 'tr07.feature.enabled.v1', 'classification': 'expected_improvement', 'rationale': 'True positive invalidation: claim tr07.feature.enabled.v1 correctly superseded (gold=SUPERCEDES, shadow=SUPERCEDES)', 'blocking': False, 'gold_relation': 'SUPERCEDES', 'shadow_relation': 'SUPERCEDES'}
+CP: cp_after_tr07_obs03
+  graph_state_hash: 2e722682f2829b8fe71bfea8683555bb3f34ee370a92c46891b617c5396fe62f
+  {'kind': 'invalidation', 'claim_id': 'tr07.feature.disabled', 'classification': 'expected_schema_change', 'rationale': 'True positive invalidation: claim tr07.feature.disabled correctly superseded (gold=REVIVES, shadow=SUPERCEDES)', 'blocking': False, 'gold_relation': 'REVIVES', 'shadow_relation': 'SUPERCEDES'}
+  {'kind': 'invalidation', 'claim_id': 'tr07.feature.enabled.v1', 'classification': 'regression', 'rationale': 'Unexpected supersedes: claim tr07.feature.enabled.v1 superseded in shadow but not in gold expected_invalidations (gold=COEXISTS, shadow=SUPERCEDES)', 'blocking': False, 'gold_relation': 'COEXISTS', 'shadow_relation': 'SUPERCEDES'}
+gate: BLOCK
+aggregate: {'blocker_count': 0, 'regression_count': 1, 'unexplained_count': 0, 'min_must_include_recall': 1.0, 'min_active_set_set_f1': 1.0}

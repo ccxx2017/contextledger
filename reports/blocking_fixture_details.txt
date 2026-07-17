@@ -1,0 +1,14 @@
+FIXTURE: lc_diff_source_conflict CPs: 1
+  CP cp_after_ds_02 diffs: 3
+    active_set None -> regression
+    relation None -> regression
+    must_include None -> blocker
+FIXTURE: lc_provenance_conflict CPs: 1
+  CP cp_after_021 diffs: 3
+    active_set None -> regression
+    relation None -> regression
+    must_include None -> blocker
+FIXTURE: lc_same_key_different_source_r01 CPs: 1
+  CP cp_after_r01_2 diffs: 2
+    active_set None -> regression
+    must_include None -> blocker

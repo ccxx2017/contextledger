@@ -1,0 +1,66 @@
+{
+  "baseline_id": "stage04c_comparator_rebased_baseline_v1",
+  "generated_at": "2026-07-15T16:08:00Z",
+  "comparator_version": "v2_post_rollback_C1.2.2",
+  "comparator_hash": "9A0B88ADB683B46558F725611B8F47497C4539D284031094D88D7EFD2A9C2252",
+  "previous_version": "v2_pre_rollback_C1.2.1",
+  "previous_hash": "8B208146D46315605B6A6E8453196A8FB9D02A4B90D12BA42869887BF0CAFEE3",
+  "change_summary": "SUPERCEDES+CONTESTS: manual_adjudication -> ordinary_regression; added safety_disposition and manual_review_metadata for CONTESTS diffs",
+  "unit_tests": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0,
+    "tests": [
+      "test_cmp_supersedes_matches_supersedes",
+      "test_cmp_coexists_matches_coexists",
+      "test_cmp_gold_supersedes_shadow_contests_is_regression_even_if_r01_safe",
+      "test_cmp_gold_contests_shadow_supersedes_is_regression",
+      "test_cmp_r01_safety_metadata_does_not_override_relation_scoring",
+      "test_cmp_coexists_vs_supersedes_detects_unexpected_invalidation",
+      "test_cmp_unexpected_shadow_supersedes_remains_bidirectional_false_positive",
+      "test_cmp_contests_bundle_safety_is_checked_separately_from_relation_score"
+    ]
+  },
+  "fixtures": {
+    "total": 22,
+    "pass": 22,
+    "fail": 0,
+    "all_deterministic": true
+  },
+  "development_replay": {
+    "run_id": "stage04b_20260715T081541_development",
+    "cases": 7,
+    "total_blockers": 0,
+    "total_regressions": 7,
+    "total_manual_adjudication": 1,
+    "total_expected_schema_change": 3,
+    "regression_breakdown": {
+      "tr_full_tkt_005b": 6,
+      "tr_syn_revival_feature_flag": 1
+    },
+    "manual_adjudication_breakdown": {
+      "tr_syn_revival_feature_flag": 1
+    },
+    "all_deterministic": true
+  },
+  "regression_rerun_ready_criteria": {
+    "unauthorized_downgrade_removed": true,
+    "r01_safety_separated_from_relation_scoring": true,
+    "comparator_only_tests_pass": true,
+    "bidirectional_invalidation_intact": true,
+    "active_state_checks_intact": true,
+    "unexpected_supersede_quarantine_checks_intact": true,
+    "tr_syn_revival_feature_flag_relation_mismatch_scored_correctly": true,
+    "tr_full_tkt_005b_6_regressions_triaged": true,
+    "all_22_fixtures_pass_deterministic": true,
+    "development_zero_blockers": true,
+    "development_zero_unexplained": false,
+    "development_zero_ordinary_regressions": false,
+    "must_include_recall_min_1_0": true,
+    "critical_false_invalidation_zero": true,
+    "r01_not_expanded": true,
+    "regression_adversarial_blind_holdout_not_run": true
+  },
+  "conclusion": "blocked",
+  "blocking_reason": "development replay has 7 ordinary regressions (6 from tr_full_tkt_005b shadow_compiler fan-out, 1 from tr_syn_revival_feature_flag cascading). These are shadow adjudicator/compiler defects, not comparator defects. The comparator correctly identifies and classifies them."
+}

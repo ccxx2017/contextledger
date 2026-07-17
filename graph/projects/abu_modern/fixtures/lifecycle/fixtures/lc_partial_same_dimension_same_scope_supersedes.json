@@ -1,0 +1,75 @@
+{
+  "fixture_id": "lc_partial_same_dimension_same_scope_supersedes",
+  "category": "partial_update",
+  "description": "Two claims on same entity, same dimension, same scope: first claim tr04.backtest.required=[required], second claim tr04.backtest.not_required=[not_required]. The second claim should SUPERCEDES the first (same dimension, same scope, state lifecycle update).",
+  "rationale": "Required/not_required are state values, not scope values. scope_normalization must not treat them as different scopes.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_ps1",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "ops_runbook",
+        "payload": {
+          "entity_ref": "Replay-checklist",
+          "lifecycle_ref": "lc_replay_checklist",
+          "lifecycle_seq": 1,
+          "adjudication_key": "Replay-checklist:backtest:_default_",
+          "node_type": "Fact",
+          "content": "Backtest is required.",
+          "state": "required",
+          "claim_id": "tr04.backtest.required",
+          "claim_dimension": "backtest",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_ps2",
+        "observed_at": "2026-07-01T10:30:00Z",
+        "effective_at": "2026-07-01T10:30:00Z",
+        "source": "ops_runbook",
+        "payload": {
+          "entity_ref": "Replay-checklist",
+          "lifecycle_ref": "lc_replay_checklist",
+          "lifecycle_seq": 2,
+          "adjudication_key": "Replay-checklist:backtest:_default_",
+          "node_type": "Fact",
+          "content": "Backtest is no longer required.",
+          "state": "not_required",
+          "claim_id": "tr04.backtest.not_required",
+          "claim_dimension": "backtest",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ps2",
+        "after_event_id": "evt_ps2",
+        "active_nodes": [
+          "n_backtest_not_required"
+        ],
+        "superseded_nodes": [
+          "n_backtest_required"
+        ],
+        "pending_nodes": [],
+        "relations": [
+          {
+            "source": "n_backtest_not_required",
+            "target": "n_backtest_required",
+            "relation_type": "supersedes"
+          }
+        ],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_backtest_not_required"
+        ]
+      }
+    ]
+  }
+}

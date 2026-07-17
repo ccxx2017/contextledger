@@ -1,0 +1,69 @@
+{
+  "manifest_title": "Stage04-C Regression Run Manifest",
+  "generated_at": "2026-07-14T08:58:04Z",
+  "candidate_source_commit": "2d24e01",
+  "execution_commit": "fa57dfd",
+  "evidence_policy_commit": "fa57dfd",
+  "base_commit": "d7d681e",
+  "evidence_freeze_commit": "e4dfcbf",
+  "canonical_hash_policy": "canonical_lf_v1",
+  "canonical_evidence_index_hash": "e4e70511978abbc5",
+  "canonical_evidence_verifier_hash": "de7106c93d7aec3a",
+  "benchmark_v1_freeze_manifest_hash": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+  "regression_case_ids": [
+    "tr_full_tkt_006",
+    "tr_syn_partial_checklist_clause",
+    "tr_syn_conditional_window_exception",
+    "tr_revival_round5x",
+    "tr_alias_quant_tools",
+    "tr_syn_out_of_order_price_band_present"
+  ],
+  "regression_input_hashes": {
+    "tr_full_tkt_006": {
+      "trajectory_sha256": "1a64ba59bdcad659e7016a19a7a9e1e54fabc39360e6f57e56b2d192989b691d",
+      "gold_sha256": "ff77a7eeedc38985e7967362f2f50927043a6c87321fb4ad9c765dc1f2c53306"
+    },
+    "tr_syn_partial_checklist_clause": {
+      "trajectory_sha256": "eb6d25006d7d459b32f4d2303574a693555afe4d18efb199e194b2d0bbe46d74",
+      "gold_sha256": "ab735dae7a765e5bff55e625a4fbddc47e0f80552a15d8b35a9326d8eb0b2a56"
+    },
+    "tr_syn_conditional_window_exception": {
+      "trajectory_sha256": "b752859f80bc7afdca06edafd3c2eadbd30e781b8d606832fbc31e2e63364267",
+      "gold_sha256": "e96c2a70f5055a07a3e0e5bf2298ba55efbfbc60692674adfda014a961fb5265"
+    },
+    "tr_revival_round5x": {
+      "trajectory_sha256": "905c9ec55dc0776982469fe9cc4d5cfa6b8fd25940e6d8a2948befc7938ac986",
+      "gold_sha256": "fc266b87fce1996bc109c1ec72930a6cc0d790c12ec15e9aed119b001633a628"
+    },
+    "tr_alias_quant_tools": {
+      "trajectory_sha256": "22379ad41222e6022b9ea26ae7f4accdd80187faa1f6edd5817258cbc0e8651a",
+      "gold_sha256": "9f0ed44baea8141cabd8a474bb64333a89d8a26e3db0e76701a0102832fd89c5"
+    },
+    "tr_syn_out_of_order_price_band_present": {
+      "trajectory_sha256": "44be9f5861d2a0be35b8f037d60a29a3cbacd816746f2a7bb967c78c41c950b2",
+      "gold_sha256": "31a972c47bd4909dbe9e2dc72a0e13a33129350cab9a58aeebd8b53f34b4e359"
+    }
+  },
+  "gold_hash": "502d6a445a4cd5a61d3d46c1bd3bbcda830ea5c84b89b25e64c49bf286fb249e",
+  "metrics_version": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_score_report.json",
+  "metrics_script_hash": "94f0f626bebc92f55996faaa72992461e2ce90522ec920bd8277a0d386ec0373",
+  "R01_rule_hash": "fb6b610c38723f379e92f3774d85fef36c21606f6e35476188661a6d0e24ca40",
+  "decision_table_hash": "15eed6149b2edf63c4721f4ec1e38bc87e711b46d177aa8fbc1d3146c98a0d06",
+  "resolution_adapter_hash": "7598aff78d802d3385a428ef71f162884fee5254d449aee71d42d54d2d0ce09c",
+  "shadow_adjudicator_hash": "cd0bab99000cd11dc92e5485ee0407af304cb93883712f346f088bc420ab943b",
+  "shadow_compiler_hash": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+  "shadow_bundle_builder_hash": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+  "full_fixture_inventory_hash": "62c16f49c0419c5cb6e89d7f9dde658c925db10c628b01c21f5c8d99d3ac74f6",
+  "runtime_fingerprint": {
+    "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+    "cwd": "D:\\CCXXLESSON\\contextledger\\clean_worktree_stage04c"
+  },
+  "deterministic_config": {
+    "seed": null,
+    "timeout_per_trajectory_seconds": 120
+  },
+  "exact_run_command": "python benchmark_shadow_runner.py --split regression",
+  "run_id": "stage04c_regression_20260714T085804",
+  "output_directory": "graph/projects/abu_modern/shadow_replay/runs/stage04c_regression_20260714T085804/",
+  "timestamp": "2026-07-14T08:58:04Z"
+}

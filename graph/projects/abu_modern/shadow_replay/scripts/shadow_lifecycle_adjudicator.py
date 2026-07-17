@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass, field
+from datetime import datetime
 from typing import Any
 
 
@@ -148,6 +149,7 @@ class ShadowLifecycleAdjudicator:
                 "relation": "CONTESTS",
             })
             log.append({"event_id": event["event_id"], "action": "contest", "node_id": node_id, "target": target_id})
+            quarantine.append({"event_id": event["event_id"], "reason": "temporal_overlap_mutual_exclusion_no_resolver"})
         elif relation == "REVIVES":
             target_id = prev_active[0]["node_id"]
             patch["superseded_nodes"].append(target_id)
@@ -155,12 +157,44 @@ class ShadowLifecycleAdjudicator:
             log.append({"event_id": event["event_id"], "action": "revive", "node_id": node_id, "target": target_id})
         else:
             # Default: SUPERCEDES / normal progression / COEXISTS already handled
+            # FIXED (C1.2.3): Only select the IMMEDIATE temporal predecessor,
+            # not all prev_active (fan-out fix).
             is_terminal = state in self.TERMINAL_STATES
+
+            # Predecessor selection: find the single most recent active node
+            # with the same lifecycle_ref, ordered by observed_at/effective_at
+            selected_prev = None
+            candidate_ids = []
             for prev in prev_active:
                 if prev.get("lifecycle_ref") == lifecycle_ref:
-                    patch["superseded_nodes"].append(prev["node_id"])
-                    patch["new_edges"].append({"source": node_id, "target": prev["node_id"], "relation": "supersedes"})
-                    log.append({"event_id": event["event_id"], "action": "supersede", "node_id": node_id, "target": prev["node_id"]})
+                    candidate_ids.append(prev.get("node_id"))
+                    if selected_prev is None:
+                        selected_prev = prev
+                    else:
+                        # Compare observed_at to pick the most recent
+                        sel_obs = selected_prev.get("observed_at", "") or ""
+                        prev_obs = prev.get("observed_at", "") or ""
+                        if prev_obs > sel_obs:
+                            selected_prev = prev
+
+            if selected_prev is not None:
+                patch["superseded_nodes"].append(selected_prev["node_id"])
+                patch["new_edges"].append({
+                    "source": node_id,
+                    "target": selected_prev["node_id"],
+                    "relation": "supersedes",
+                    "edge_id": f"edge_{event['event_id']}_{selected_prev['node_id']}",
+                    "predecessor_selection_rule_id": "immediate_temporal_predecessor",
+                    "candidate_predecessor_ids": candidate_ids,
+                    "selected_predecessor_id": selected_prev["node_id"],
+                    "selection_evidence": f"observed_at: new={event.get('observed_at', 'N/A')} > target={selected_prev.get('observed_at', 'N/A')}",
+                })
+                log.append({"event_id": event["event_id"], "action": "supersede", "node_id": node_id, "target": selected_prev["node_id"]})
+                # Other candidates remain active (COEXISTS, not superseded)
+            else:
+                # No matching predecessor with same lifecycle_ref — COEXISTS already handled above
+                pass
+
             if is_terminal:
                 patch["superseded_nodes"].append(node_id)
                 log.append({"event_id": event["event_id"], "action": "terminal", "node_id": node_id})
@@ -230,23 +264,78 @@ class ShadowLifecycleAdjudicator:
         new_node: dict[str, Any],
         prev_active: list[dict[str, Any]],
     ) -> str:
+        """Decision contract v2: six-step relation determination.
+
+        Replaces the old 'different source -> CONTESTS' default assumption.
+        """
+        from datetime import datetime
+
         payload = event.get("payload", {})
         new_source = event.get("source", "unknown")
         new_state = (payload.get("state") or "").strip().lower()
         content = (payload.get("content") or "").lower()
+        new_observed_at = event.get("observed_at", "")
+        new_effective_at = event.get("effective_at", "")
 
-        # Provenance conflict: same adj key, different source
-        if prev_active:
-            prev_source = prev_active[0].get("source", "unknown")
-            if new_source != prev_source:
-                return "CONTESTS"
-
-        # Revival signal
+        # Step 0: Revival signal check FIRST (before relation determination)
         if "reviv" in content or (new_state in ("in_progress", "open", "implemented", "deployed") and any(
             n.get("state") in ("cancelled", "superseded") for n in prev_active
         )):
             return "REVIVES"
 
+        if not prev_active:
+            return "SUPERCEDES"
+
+        prev = prev_active[0]
+        prev_source = prev.get("source", "unknown")
+        prev_observed_at = prev.get("observed_at", "")
+        prev_effective_at = prev.get("effective_at", "")
+
+        # Step 1: Same atomic claim, same scope?
+        same_adjudication_key = (
+            prev.get("adjudication_key") == new_node.get("adjudication_key")
+        )
+        same_entity = prev.get("entity_ref") == new_node.get("entity_ref")
+
+        # Step 2: Is there sufficient evidence for state progression?
+        # New observed_at is unambiguously later than previous -> supports SUPERCEDES
+        time_progression = False
+        if new_observed_at and prev_observed_at:
+            try:
+                new_dt = datetime.fromisoformat(str(new_observed_at).replace("Z", "+00:00"))
+                prev_dt = datetime.fromisoformat(str(prev_observed_at).replace("Z", "+00:00"))
+                time_progression = new_dt > prev_dt
+            except (ValueError, TypeError):
+                pass
+
+        # Step 3: Semantic conflict? (same time window, mutually exclusive values)
+        semantic_conflict = False
+        if time_progression is False and same_entity and same_adjudication_key:
+            # Check both 'value' and 'state' fields for conflict
+            new_val = (payload.get("value") or payload.get("state") or "").strip().lower()
+            prev_val = (prev.get("state") or "").strip().lower()
+            if new_val and prev_val and new_val != prev_val:
+                semantic_conflict = True
+
+        # Step 4: Source authority/trustworthiness insufficient to decide?
+        source_authority_questionable = False
+        if new_source != prev_source:
+            # Different source does NOT automatically mean CONTESTS.
+            # It only matters if there's a semantic conflict AND no clear time ordering.
+            if semantic_conflict and time_progression is False:
+                source_authority_questionable = True
+
+        # Step 5: Unresolvable specific conflict?
+        if source_authority_questionable and semantic_conflict and not time_progression:
+            return "CONTESTS"
+
+        # Step 6: Safe default -> time progression with different source = SUPERCEDES
+        # The new claim supersedes the old one because it's temporally later
+        # and represents state evolution, not a provenance conflict.
+        if time_progression:
+            return "SUPERCEDES"
+
+        # No clear time ordering and no semantic conflict -> SUPERCEDES (progression)
         return "SUPERCEDES"
 
     def _generate_node_id(self, event: dict[str, Any], counter: int) -> str:

@@ -1,0 +1,89 @@
+{
+  "fixture_id": "lc_three_step_same_key_immediate_predecessor_only",
+  "category": "shadow_semantics_predecessor_selection",
+  "description": "同一 adjudication_key 下三步连续推进，每一步只向直接前驱发射 SUPERCEDES 边，不 fan-out 到历史节点。",
+  "rationale": "验证 predecessor selection contract v1。obs03 应该只 SUPERCEDES obs02（直接前驱），不 SUPERCEDES obs01。gold 期望每步只无效化一个直接前驱。",
+  "rfc_reference": "reports/stage04c_predecessor_selection_contract_v1.md",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "ts_001",
+        "observed_at": "2026-06-01T08:00:00Z",
+        "effective_at": "2026-06-01T08:00:00Z",
+        "source": "system_a",
+        "payload": {
+          "entity_ref": "Order-Stream",
+          "lifecycle_ref": "lc_order_processing",
+          "lifecycle_seq": 1,
+          "adjudication_key": "process:Order-Stream",
+          "node_type": "Fact",
+          "content": "Order processing initialized.",
+          "state": "initialized",
+          "claim_id": "order.stream.initialized"
+        }
+      },
+      {
+        "event_id": "ts_002",
+        "observed_at": "2026-06-01T09:00:00Z",
+        "effective_at": "2026-06-01T09:00:00Z",
+        "source": "system_a",
+        "payload": {
+          "entity_ref": "Order-Stream",
+          "lifecycle_ref": "lc_order_processing",
+          "lifecycle_seq": 2,
+          "adjudication_key": "process:Order-Stream",
+          "node_type": "Fact",
+          "content": "Order processing started.",
+          "state": "started",
+          "claim_id": "order.stream.started"
+        }
+      },
+      {
+        "event_id": "ts_003",
+        "observed_at": "2026-06-01T10:00:00Z",
+        "effective_at": "2026-06-01T10:00:00Z",
+        "source": "system_a",
+        "payload": {
+          "entity_ref": "Order-Stream",
+          "lifecycle_ref": "lc_order_processing",
+          "lifecycle_seq": 3,
+          "adjudication_key": "process:Order-Stream",
+          "node_type": "Fact",
+          "content": "Order processing completed.",
+          "state": "completed",
+          "claim_id": "order.stream.completed"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ts_002",
+        "after_event_id": "ts_002",
+        "active_nodes": ["n_order_started"],
+        "superseded_nodes": ["n_order_initialized"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_order_started", "target": "n_order_initialized" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_order_started"]
+      },
+      {
+        "checkpoint_id": "cp_after_ts_003",
+        "after_event_id": "ts_003",
+        "active_nodes": ["n_order_completed"],
+        "superseded_nodes": ["n_order_started"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_order_started", "target": "n_order_initialized" },
+          { "relation_type": "supersedes", "source": "n_order_completed", "target": "n_order_started" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_order_completed"]
+      }
+    ]
+  }
+}

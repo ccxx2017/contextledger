@@ -1,0 +1,6 @@
+NODES:
+  n_7b4793f5ab1c claim=engine.001.temp.critical status=active
+  n_966f333508ac claim=engine.001.temp.nominal status=superseded
+EDGES:
+  n_7b4793f5ab1c->n_966f333508ac supersedes
+QUARANTINE: []

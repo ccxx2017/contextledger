@@ -1,0 +1,62 @@
+{
+  "fixture_id": "lc_different_source_true_conflict_contests",
+  "category": "shadow_semantics_true_conflict",
+  "description": "同一时间点、同一 scope、互斥值、不同来源且无法通过时间顺序消解 → CONTESTS + quarantine。",
+  "rationale": "验证 decision contract v2 的步骤 3-5。当两个不同来源在同一时间窗口断言互斥值且无时间推进证据时，应判定为 CONTESTS。",
+  "rfc_reference": "reports/stage04c_adjudication_relation_contract_v2.md#step-5",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "dc_001",
+        "observed_at": "2026-06-01T10:00:00Z",
+        "effective_at": "2026-06-01T10:00:00Z",
+        "source": "sensor_A",
+        "payload": {
+          "entity_ref": "Engine-001",
+          "lifecycle_ref": "lc_engine_001_health",
+          "lifecycle_seq": 1,
+          "adjudication_key": "health:Engine-001",
+          "node_type": "Sensor",
+          "content": "Engine-001 temperature nominal at 10:00.",
+          "state": "nominal",
+          "claim_id": "engine.001.temp.nominal"
+        }
+      },
+      {
+        "event_id": "dc_002",
+        "observed_at": "2026-06-01T10:00:00Z",
+        "effective_at": "2026-06-01T10:00:00Z",
+        "source": "sensor_B",
+        "payload": {
+          "entity_ref": "Engine-001",
+          "lifecycle_ref": "lc_engine_001_health",
+          "lifecycle_seq": 2,
+          "adjudication_key": "health:Engine-001",
+          "node_type": "Sensor",
+          "content": "Engine-001 temperature CRITICAL at 10:00.",
+          "state": "critical",
+          "claim_id": "engine.001.temp.critical"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_dc_002",
+        "after_event_id": "dc_002",
+        "active_nodes": ["n_engine_nominal", "n_engine_critical"],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "CONTESTS", "source": "n_engine_critical", "target": "n_engine_nominal" }
+        ],
+        "quarantine": [
+          { "event_id": "dc_002", "reason": "temporal_overlap_mutual_exclusion_no_resolver" }
+        ],
+        "assembler_must_include": ["n_engine_nominal"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,398 @@
+[
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs02",
+    "claim_id": "tr_full_tkt_006.obs01.active",
+    "classification": "expected_improvement",
+    "rationale": "True positive invalidation: claim tr_full_tkt_006.obs01.active correctly superseded",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_full_tkt_006.obs02.active",
+    "classification": "expected_improvement",
+    "rationale": "True positive invalidation: claim tr_full_tkt_006.obs02.active correctly superseded",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_full_tkt_006.obs01.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs01.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_full_tkt_006.obs03.active",
+    "classification": "expected_improvement",
+    "rationale": "True positive invalidation: claim tr_full_tkt_006.obs03.active correctly superseded",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_full_tkt_006.obs02.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs02.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_full_tkt_006.obs01.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs01.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_full_tkt_006.obs04.active",
+    "classification": "expected_improvement",
+    "rationale": "True positive invalidation: claim tr_full_tkt_006.obs04.active correctly superseded",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_full_tkt_006.obs03.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs03.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_full_tkt_006.obs02.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs02.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_full_tkt_006",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_full_tkt_006.obs01.active",
+    "classification": "unexpected_supersedes",
+    "rationale": "Unexpected supersedes: claim tr_full_tkt_006.obs01.active superseded in shadow but not in gold expected_invalidations for this step",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_partial_checklist_clause",
+    "checkpoint_id": "cp_after_tr04_obs01",
+    "claim_id": "tr04.slippage_report.required",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr04.slippage_report.required",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_partial_checklist_clause",
+    "checkpoint_id": "cp_after_tr04_obs02",
+    "claim_id": "tr04.slippage_report.required",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr04.slippage_report.required in shadow active set",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_partial_checklist_clause",
+    "checkpoint_id": "cp_after_tr04_obs02",
+    "claim_id": "tr04.slippage_report.required",
+    "classification": "regression",
+    "rationale": "False negative invalidation: expected invalidated claim tr04.slippage_report.required not in shadow superseded set",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_partial_checklist_clause",
+    "checkpoint_id": "cp_after_tr04_obs02",
+    "claim_id": "tr04.slippage_report.not_required",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr04.slippage_report.not_required",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_partial_checklist_clause",
+    "checkpoint_id": "cp_after_tr04_obs02",
+    "claim_id": "tr04.slippage_report.required",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr04.slippage_report.required",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs02",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs01.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs02",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "regression",
+    "rationale": "False negative invalidation: expected invalidated claim tr_revival_round5x.obs01.active not in shadow superseded set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs02",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs01.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs01.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs02.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "regression",
+    "rationale": "False negative invalidation: expected invalidated claim tr_revival_round5x.obs02.active not in shadow superseded set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs01.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs02.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs01.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs02.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs03.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs03.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs03.active",
+    "classification": "regression",
+    "rationale": "False negative invalidation: expected invalidated claim tr_revival_round5x.obs03.active not in shadow superseded set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs01.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs02.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs04",
+    "claim_id": "tr_revival_round5x.obs03.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs03.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs01.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs02.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs03.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs03.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs04.active",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr_revival_round5x.obs04.active in shadow active set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs04.active",
+    "classification": "regression",
+    "rationale": "False negative invalidation: expected invalidated claim tr_revival_round5x.obs04.active not in shadow superseded set",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs01.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs01.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs02.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs02.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs03.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs03.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_revival_round5x",
+    "checkpoint_id": "cp_after_obs05",
+    "claim_id": "tr_revival_round5x.obs04.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_revival_round5x.obs04.active",
+    "root_cause_layer": "adjudication_key_scope",
+    "r01_applicable": true
+  },
+  {
+    "case_id": "tr_alias_quant_tools",
+    "checkpoint_id": "cp_after_obs02",
+    "claim_id": "tr_alias_quant_tools.obs02.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs02.active",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_alias_quant_tools",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_alias_quant_tools.obs03.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs03.active",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_alias_quant_tools",
+    "checkpoint_id": "cp_after_obs03",
+    "claim_id": "tr_alias_quant_tools.obs02.active",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr_alias_quant_tools.obs02.active",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_out_of_order_price_band_present",
+    "checkpoint_id": "cp_after_tr22_obs02",
+    "claim_id": "tr22.price_band.narrow",
+    "classification": "regression",
+    "rationale": "Unexpected active claim tr22.price_band.narrow in shadow active set",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  },
+  {
+    "case_id": "tr_syn_out_of_order_price_band_present",
+    "checkpoint_id": "cp_after_tr22_obs02",
+    "claim_id": "tr22.price_band.narrow",
+    "classification": "expected_schema_change",
+    "rationale": "Shadow bundle includes additional claim tr22.price_band.narrow",
+    "root_cause_layer": "comparison_logic",
+    "r01_applicable": false
+  }
+]

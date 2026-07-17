@@ -1,0 +1,72 @@
+{
+  "fixture_id": "lc_late_arrival_price_band_same_scope_vs_different_scope",
+  "category": "late_arrival",
+  "description": "Late-arrival price band: wide (observed_at=T10:05, effective_at=T10:05) arrives first, then narrow (observed_at=T10:01, effective_at=T10:01) arrives late. Both have same dimension (price_band) but different state values (wide vs narrow). The late arrival with earlier effective_at should NOT replace the current active state. Both should COEXIST since they are same dimension but different state values (contending alternatives).",
+  "rationale": "When same-channel late arrival has effective_at before the previous observed_at, it should be quarantined, not supersede. The state values wide/narrow are not different scopes.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_lp1",
+        "observed_at": "2026-07-01T10:05:00Z",
+        "effective_at": "2026-07-01T10:05:00Z",
+        "source": "warehouse_feed",
+        "payload": {
+          "entity_ref": "Price-band",
+          "lifecycle_ref": "lc_price_band",
+          "lifecycle_seq": 1,
+          "adjudication_key": "Price-band:price_band:_default_",
+          "node_type": "Fact",
+          "content": "Price band is set to wide.",
+          "state": "wide",
+          "claim_id": "tr22.price_band.wide",
+          "claim_dimension": "price_band",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_lp2",
+        "observed_at": "2026-07-01T10:01:00Z",
+        "effective_at": "2026-07-01T10:01:00Z",
+        "source": "warehouse_feed",
+        "payload": {
+          "entity_ref": "Price-band",
+          "lifecycle_ref": "lc_price_band",
+          "lifecycle_seq": 2,
+          "adjudication_key": "Price-band:price_band:_default_",
+          "node_type": "Fact",
+          "content": "Price band is set to narrow.",
+          "state": "narrow",
+          "claim_id": "tr22.price_band.narrow",
+          "claim_dimension": "price_band",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_lp2",
+        "after_event_id": "evt_lp2",
+        "active_nodes": [
+          "n_price_band_wide"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [
+          {
+            "event_id": "evt_lp2",
+            "reason": "late_arrival_effective_at_before_previous"
+          }
+        ],
+        "assembler_must_include": [
+          "n_price_band_wide"
+        ]
+      }
+    ]
+  }
+}
