@@ -1,0 +1,6 @@
+NODES:
+  n_53937d5e65e0 claim=svc.a.probe status=superseded source=probe_log
+  n_e3ef74d85c48 claim=svc.a.user status=active source=user_note
+EDGES:
+  n_e3ef74d85c48->n_53937d5e65e0 supersedes
+QUARANTINE: []

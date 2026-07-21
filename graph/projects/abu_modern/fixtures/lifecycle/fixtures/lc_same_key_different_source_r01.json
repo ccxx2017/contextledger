@@ -1,0 +1,69 @@
+{
+  "fixture_id": "lc_same_key_different_source_r01",
+  "category": "provenance_conflict",
+  "description": "Same entity, same dimension, same scope, two claims from different sources. Different sources on same lifecycle should trigger CONTESTS (not SUPERCEDES). R01 should not suppress the conflict marker.",
+  "rationale": "Tests provenance conflict detection: same adjudication_key, different source → CONTESTS, both active, both must_include.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_r01_1",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "ops_team",
+        "payload": {
+          "entity_ref": "SVC-X",
+          "lifecycle_ref": "lc_svc_x",
+          "lifecycle_seq": 1,
+          "adjudication_key": "SVC-X:status:_default_",
+          "node_type": "Fact",
+          "content": "Service status: ready.",
+          "state": "ready",
+          "claim_id": "svc.x.status.ready",
+          "claim_dimension": "status",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_r01_2",
+        "observed_at": "2026-07-01T10:30:00Z",
+        "effective_at": "2026-07-01T10:30:00Z",
+        "source": "audit_probe",
+        "payload": {
+          "entity_ref": "SVC-X",
+          "lifecycle_ref": "lc_svc_x",
+          "lifecycle_seq": 2,
+          "adjudication_key": "SVC-X:status:_default_",
+          "node_type": "Fact",
+          "content": "Service status: degraded.",
+          "state": "degraded",
+          "claim_id": "svc.x.status.degraded",
+          "claim_dimension": "status",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_r01_2",
+        "after_event_id": "evt_r01_2",
+        "active_nodes": [
+          "n_svc_x_ready",
+          "n_svc_x_degraded"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_svc_x_ready",
+          "n_svc_x_degraded"
+        ]
+      }
+    ]
+  }
+}

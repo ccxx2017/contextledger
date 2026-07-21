@@ -1,0 +1,60 @@
+{
+  "fixture_id": "lc_legacy_migration",
+  "category": "legacy_migration",
+  "description": "Legacy nodes without lifecycle_ref must remain compatible and receive an adjudication_key fallback.",
+  "rationale": "Phase 1 cannot require a full backfill of legacy patches; fallback must be versioned and non-destructive.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#legacy-compatibility",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_040",
+        "observed_at": "2026-06-01T09:00:00Z",
+        "effective_at": "2026-06-01T09:00:00Z",
+        "source": "legacy_import",
+        "payload": {
+          "entity_ref": "LEG-001",
+          "lifecycle_ref": null,
+          "lifecycle_seq": null,
+          "adjudication_key": null,
+          "node_type": "Fact",
+          "content": "Legacy fact imported without lifecycle metadata.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_041",
+        "observed_at": "2026-07-01T09:00:00Z",
+        "effective_at": "2026-07-01T09:00:00Z",
+        "source": "pipeline",
+        "payload": {
+          "entity_ref": "LEG-001",
+          "lifecycle_ref": "lc_leg_001",
+          "lifecycle_seq": 1,
+          "adjudication_key": "entity:LEG-001:v1",
+          "node_type": "Fact",
+          "content": "Updated fact with lifecycle metadata.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_041",
+        "after_event_id": "evt_041",
+        "active_nodes": ["n_legacy_fact", "n_updated_fact"],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "COEXISTS", "source": "n_legacy_fact", "target": "n_updated_fact" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_legacy_fact", "n_updated_fact"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "fixture_id": "lc_late_arrival_effective_time",
+  "category": "late_arrival",
+  "description": "Same-channel late arrival with effective_at before the previous event should not replace.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_le1",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "INV-001",
+          "lifecycle_ref": "lc_inv_001",
+          "lifecycle_seq": 1,
+          "adjudication_key": "INV-001:count:_default_",
+          "node_type": "Fact",
+          "content": "Counted 10 units",
+          "state": "10",
+          "claim_id": "inv.001.count.ten",
+          "claim_dimension": "count",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_le2",
+        "observed_at": "2026-07-03T10:00:00Z",
+        "effective_at": "2026-07-01T09:00:00Z",
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "INV-001",
+          "lifecycle_ref": "lc_inv_001",
+          "lifecycle_seq": 2,
+          "adjudication_key": "INV-001:count:_default_",
+          "node_type": "Fact",
+          "content": "Inventory was actually 0 on July 1",
+          "state": "0",
+          "claim_id": "inv.001.count.zero",
+          "claim_dimension": "count",
+          "claim_scope": null,
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_le2",
+        "after_event_id": "evt_le2",
+        "active_nodes": [
+          "n_inv_001_count_ten"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [
+          {
+            "event_id": "evt_le2",
+            "reason": "late_arrival_effective_at_before_previous"
+          }
+        ],
+        "assembler_must_include": [
+          "n_inv_001_count_ten"
+        ]
+      }
+    ]
+  }
+}

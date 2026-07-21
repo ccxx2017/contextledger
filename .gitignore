@@ -1,7 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
+*.class
 *.so
 .Python
 build/
@@ -57,6 +57,16 @@ temp.md
 
 /course-design
 
+# Local nested working copies / clean worktrees
 **/CCXXLESSON/
-**/clean_worktree_stage04c/
-**/graph/projects/abu_modern/shadow_replay/
+clean_worktree_stage04c/
+
+# Shadow replay run outputs (regenerable, archived in runs_archive/)
+graph/projects/abu_modern/shadow_replay/runs/*
+!graph/projects/abu_modern/shadow_replay/runs/.gitkeep
+
+# Stage04-C preflight working files
+temp/archive_runs.ps1
+
+# Archived run outputs (Stage04-A/B/C)
+graph/projects/abu_modern/shadow_replay/runs_archive/

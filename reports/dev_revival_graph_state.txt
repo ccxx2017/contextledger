@@ -1,0 +1,7 @@
+NODES:
+  n_09950a31e47d claim=tr07.feature.enabled.v2 status=active source=release_note
+  n_1deb08d7a012 claim=tr07.feature.enabled.v1 status=superseded source=release_note
+  n_6a38d5b327e7 claim=tr07.feature.disabled status=superseded source=incident_note
+EDGES:
+  n_6a38d5b327e7->n_1deb08d7a012 supersedes
+  n_09950a31e47d->n_6a38d5b327e7 supersedes

@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextLedger Lifecycle Fixture Schema",
+  "description": "Self-contained mechanism-level fixture for lifecycle schema behavior. Fixtures are specifications, not necessarily executable against the current main-chain implementation until shadow replay is wired.",
+  "type": "object",
+  "required": ["fixture_id", "category", "description", "rfc_reference", "input", "expected"],
+  "properties": {
+    "fixture_id": {
+      "type": "string",
+      "pattern": "^lc_[a-z_]+$"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "lifecycle_identity",
+        "revival",
+        "provenance_conflict",
+        "late_arrival",
+        "legacy_migration",
+        "alias_abstain",
+        "sequence_collision",
+        "replay_determinism"
+      ]
+    },
+    "description": { "type": "string" },
+    "rationale": { "type": "string" },
+    "rfc_reference": { "type": "string" },
+    "input": {
+      "type": "object",
+      "required": ["event_stream"],
+      "properties": {
+        "event_stream": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["event_id", "observed_at", "payload"],
+            "properties": {
+              "event_id": { "type": "string" },
+              "observed_at": { "type": "string" },
+              "effective_at": { "type": ["string", "null"] },
+              "source": { "type": ["string", "null"] },
+              "payload": {
+                "type": "object",
+                "required": ["entity_ref", "node_type", "content"],
+                "properties": {
+                  "entity_ref": { "type": "string" },
+                  "lifecycle_ref": { "type": ["string", "null"] },
+                  "lifecycle_seq": { "type": ["integer", "null"] },
+                  "adjudication_key": { "type": ["string", "null"] },
+                  "node_type": { "type": "string" },
+                  "content": { "type": "string" },
+                  "state": { "type": ["string", "null"] },
+                  "alias_hints": {
+                    "type": ["array", "null"],
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "required": ["checkpoints"],
+      "properties": {
+        "deterministic": { "type": "boolean" },
+        "checkpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["checkpoint_id", "active_nodes", "superseded_nodes", "pending_nodes"],
+            "properties": {
+              "checkpoint_id": { "type": "string" },
+              "after_event_id": { "type": "string" },
+              "active_nodes": { "type": "array", "items": { "type": "string" } },
+              "superseded_nodes": { "type": "array", "items": { "type": "string" } },
+              "pending_nodes": { "type": "array", "items": { "type": "string" } },
+              "relations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["relation_type", "source", "target"],
+                  "properties": {
+                    "relation_type": { "type": "string" },
+                    "source": { "type": "string" },
+                    "target": { "type": "string" }
+                  }
+                }
+              },
+              "quarantine": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["event_id", "reason"],
+                  "properties": {
+                    "event_id": { "type": "string" },
+                    "reason": { "type": "string" }
+                  }
+                }
+              },
+              "assembler_must_include": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

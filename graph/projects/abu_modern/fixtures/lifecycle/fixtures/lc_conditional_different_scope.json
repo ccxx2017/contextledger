@@ -1,0 +1,68 @@
+{
+  "fixture_id": "lc_conditional_different_scope",
+  "category": "conditional",
+  "description": "Two claims with same predicate but different scope. Should COEXIST.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_cs1",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "risk_team",
+        "payload": {
+          "entity_ref": "RULE-X",
+          "lifecycle_ref": "lc_rule_x",
+          "lifecycle_seq": 1,
+          "adjudication_key": "RULE-X:trading:global",
+          "node_type": "Fact",
+          "content": "Global trading blocked",
+          "state": "blocked",
+          "claim_id": "rule.x.trading.blocked",
+          "claim_dimension": "trading",
+          "claim_scope": "global",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_cs2",
+        "observed_at": "2026-07-01T11:00:00Z",
+        "effective_at": "2026-07-01T11:00:00Z",
+        "source": "risk_team",
+        "payload": {
+          "entity_ref": "RULE-X",
+          "lifecycle_ref": "lc_rule_x",
+          "lifecycle_seq": 2,
+          "adjudication_key": "RULE-X:trading:tokyo_sim",
+          "node_type": "Fact",
+          "content": "Tokyo simulation exception added",
+          "state": "allowed",
+          "claim_id": "rule.x.trading.tokyo_allowed",
+          "claim_dimension": "trading",
+          "claim_scope": "tokyo_sim",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_cs2",
+        "after_event_id": "evt_cs2",
+        "active_nodes": [
+          "n_rule_x_trading_blocked",
+          "n_rule_x_trading_tokyo_allowed"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_rule_x_trading_blocked",
+          "n_rule_x_trading_tokyo_allowed"
+        ]
+      }
+    ]
+  }
+}

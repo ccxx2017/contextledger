@@ -1,0 +1,116 @@
+{
+  "freeze_id": "stage04c_shadow_semantics_failure_freeze_v1",
+  "frozen_at": "2026-07-15T16:43:00Z",
+  "frozen_by": "stage04c123_execution",
+  "purpose": "Freeze C1.2.2 failure evidence before shadow adjudicator/compiler modifications",
+  "current_commit": {
+    "branch": "side-track-stage04c",
+    "description": "Comparator v2 post-rollback; shadow adjudicator/compiler unmodified"
+  },
+  "benchmark_shadow_runner_py": {
+    "sha256": "9A0B88ADB683B46558F725611B8F47497C4539D284031094D88D7EFD2A9C2252",
+    "version": "v2_post_rollback_C1.2.2"
+  },
+  "shadow_lifecycle_adjudicator_py": {
+    "sha256": "C529CB60ED1F2022EA30011C45E0FA3DAA5603C8E3E06A0346B054280588B194",
+    "known_defects": [
+      "_determine_relation: different source → CONTESTS (over-match, ignores time ordering and state progression)"
+    ]
+  },
+  "shadow_compiler_py": {
+    "sha256": "2DB7D947B8D5EC08088896A472B2136d9b9d31c37b770660E137226D7F19E908",
+    "known_defects": [
+      "apply_shadow_patch: fan-out SUPERCEDES edges to ALL active predecessors on same adjudication_key instead of immediate predecessor only"
+    ]
+  },
+  "decision_table_hash": "frozen in stage04c_comparator_classification_deviation_freeze.json",
+  "R01_hash": "unchanged since C1.2.1; R01 scope not modified",
+  "fixture_inventory_hash": {
+    "total": 22,
+    "all_pass": true,
+    "all_deterministic": true
+  },
+  "development_input_gold_hashes": {
+    "tr_full_tkt_005b_gold": "ba7c53ff8ebf8cffac704322e7596d3ae58c1068260067f9a7d1cc0cd5892974",
+    "tr_syn_revival_feature_flag_gold": "f79ea4ec0f16d612f2c5694ac283b2a01ba3645a7d825963395e9726ad77dc40"
+  },
+  "development_run_reference": {
+    "last_run_id": "stage04b_20260715T081541_development",
+    "total_regressions": 7,
+    "total_blockers": 0,
+    "total_unexplained": 0
+  },
+  "seven_ordinary_regression_diff_ids": [
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs03",
+      "claim": "tr_full_tkt_005b.obs01.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs01.active superseded by obs03 but gold only expects obs02.active invalidated"
+    },
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs04",
+      "claim": "tr_full_tkt_005b.obs01.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs01.active superseded by obs04 (cascading fan-out)"
+    },
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs04",
+      "claim": "tr_full_tkt_005b.obs02.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs02.active superseded by obs04 (cascading fan-out)"
+    },
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs05",
+      "claim": "tr_full_tkt_005b.obs01.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs01.active superseded by obs05 (cascading fan-out)"
+    },
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs05",
+      "claim": "tr_full_tkt_005b.obs03.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs03.active superseded by obs05 (cascading fan-out)"
+    },
+    {
+      "case": "tr_full_tkt_005b",
+      "checkpoint": "cp_after_obs05",
+      "claim": "tr_full_tkt_005b.obs02.active",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "obs02.active superseded by obs05 (cascading fan-out)"
+    },
+    {
+      "case": "tr_syn_revival_feature_flag",
+      "checkpoint": "cp_after_tr07_obs03",
+      "claim": "tr07.feature.enabled.v1",
+      "gold_relation": "COEXISTS",
+      "shadow_relation": "SUPERCEDES",
+      "classification": "regression",
+      "description": "enabled.v1 superseded at cp03 but gold only expects disabled invalidated (cascading from cp02 CONTESTS)"
+    }
+  ],
+  "metrics_diff_spec_hash": "standard compute_set_metrics: TP/FP/FN precision/recall/F1",
+  "non_modified_since_c122": [
+    "benchmark v1 gold",
+    "benchmark split manifest",
+    "R01 scope",
+    "formal reconcile/apply/assembler pipeline",
+    "formal raw/patch ledger/graph_state/bundle"
+  ]
+}

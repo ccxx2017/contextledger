@@ -1,0 +1,283 @@
+[
+  {
+    "test_id": "cmp_supersedes_matches_supersedes",
+    "description": "Gold expects SUPERCEDES, shadow has SUPERCEDES and active-state consistent. Should be expected_improvement.",
+    "gold": {
+      "expected_active_set": [
+        "c2"
+      ],
+      "expected_invalidations": [
+        {
+          "dropped_claims": [
+            "c1"
+          ],
+          "replacement_claims": [
+            "c2"
+          ]
+        }
+      ],
+      "must_include": [
+        "c2"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "superseded"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [
+        {
+          "source": "n2",
+          "target": "n1",
+          "relation": "supersedes"
+        }
+      ],
+      "bundle": {
+        "must_include": [
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": 0,
+      "invalidation": "expected_improvement",
+      "must_include": 0
+    }
+  },
+  {
+    "test_id": "cmp_coexists_matches_coexists",
+    "description": "Gold expects coexistence, shadow has two active nodes with no SUPERCEDES. Should PASS.",
+    "gold": {
+      "expected_active_set": [
+        "c1",
+        "c2"
+      ],
+      "expected_invalidations": [],
+      "must_include": [
+        "c1",
+        "c2"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "active"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [],
+      "bundle": {
+        "must_include": [
+          "n1",
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": 0,
+      "invalidation": 0,
+      "must_include": 0
+    }
+  },
+  {
+    "test_id": "cmp_contests_requires_r01_safe_behavior",
+    "description": "Gold expects SUPERCEDES, shadow has CONTESTS. Should be manual_adjudication, not regression or PASS.",
+    "gold": {
+      "expected_active_set": [
+        "c2"
+      ],
+      "expected_invalidations": [
+        {
+          "dropped_claims": [
+            "c1"
+          ],
+          "replacement_claims": [
+            "c2"
+          ]
+        }
+      ],
+      "must_include": [
+        "c2"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "active"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [
+        {
+          "source": "n2",
+          "target": "n1",
+          "relation": "CONTESTS"
+        }
+      ],
+      "bundle": {
+        "must_include": [
+          "n1",
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": "manual_adjudication",
+      "invalidation": "manual_adjudication",
+      "must_include": "manual_adjudication"
+    }
+  },
+  {
+    "test_id": "cmp_gold_supersedes_shadow_contests_is_not_auto_pass",
+    "description": "Gold expects SUPERCEDES with specific invalidation, shadow has CONTESTS that gold does NOT expect. Must still flag as discrepancy.",
+    "gold": {
+      "expected_active_set": [
+        "c2"
+      ],
+      "expected_invalidations": [
+        {
+          "dropped_claims": [
+            "c1"
+          ],
+          "replacement_claims": [
+            "c2"
+          ]
+        }
+      ],
+      "must_include": [
+        "c2"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "active"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [
+        {
+          "source": "n2",
+          "target": "n1",
+          "relation": "CONTESTS"
+        }
+      ],
+      "bundle": {
+        "must_include": [
+          "n1",
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": "manual_adjudication",
+      "invalidation": "manual_adjudication",
+      "must_include": "manual_adjudication"
+    }
+  },
+  {
+    "test_id": "cmp_shadow_unexpected_supersedes_is_detected",
+    "description": "Shadow supersedes a claim that gold expects to remain active. Must be unexpected_supersedes.",
+    "gold": {
+      "expected_active_set": [
+        "c1",
+        "c2"
+      ],
+      "expected_invalidations": [],
+      "must_include": [
+        "c1",
+        "c2"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "superseded"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [
+        {
+          "source": "n2",
+          "target": "n1",
+          "relation": "supersedes"
+        }
+      ],
+      "bundle": {
+        "must_include": [
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": "regression",
+      "invalidation": "unexpected_supersedes",
+      "must_include": "blocker"
+    }
+  },
+  {
+    "test_id": "cmp_contests_does_not_silently_change_active_set",
+    "description": "CONTESTS causes extra active claim. Must be manual_adjudication, not silently ignored.",
+    "gold": {
+      "expected_active_set": [
+        "c1"
+      ],
+      "expected_invalidations": [],
+      "must_include": [
+        "c1"
+      ]
+    },
+    "shadow": {
+      "nodes": {
+        "n1": {
+          "claim_id": "c1",
+          "status": "active"
+        },
+        "n2": {
+          "claim_id": "c2",
+          "status": "active"
+        }
+      },
+      "edges": [
+        {
+          "source": "n2",
+          "target": "n1",
+          "relation": "CONTESTS"
+        }
+      ],
+      "bundle": {
+        "must_include": [
+          "n1",
+          "n2"
+        ]
+      }
+    },
+    "expected_classifications": {
+      "active_set": "manual_adjudication",
+      "invalidation": 0,
+      "must_include": "manual_adjudication"
+    }
+  }
+]

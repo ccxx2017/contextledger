@@ -1,0 +1,60 @@
+{
+  "fixture_id": "lc_late_arrival",
+  "category": "late_arrival",
+  "description": "An event that arrives late but reports an earlier effective_at must not rewrite already-compiled history.",
+  "rationale": "observed_at drives ledger ordering; effective_at is recorded for audit but cannot alter patches already applied.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#bitemporal-boundaries",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_030",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "SKU-2026-A",
+          "lifecycle_ref": "lc_sku_a",
+          "lifecycle_seq": 1,
+          "adjudication_key": "inventory:SKU-2026-A",
+          "node_type": "Fact",
+          "content": "Price band A published.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_031",
+        "observed_at": "2026-07-03T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "inventory",
+        "payload": {
+          "entity_ref": "SKU-2026-A",
+          "lifecycle_ref": "lc_sku_a",
+          "lifecycle_seq": 2,
+          "adjudication_key": "inventory:SKU-2026-A",
+          "node_type": "Fact",
+          "content": "Price band B should have been effective 2026-07-02.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_031",
+        "after_event_id": "evt_031",
+        "active_nodes": ["n_price_band_b"],
+        "superseded_nodes": ["n_price_band_a"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_price_band_b", "target": "n_price_band_a" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_price_band_b"]
+      }
+    ]
+  }
+}

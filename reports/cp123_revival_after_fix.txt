@@ -1,0 +1,9 @@
+CP: cp_after_tr07_obs01
+  diff_counts: {'blocker': 0, 'regression': 0, 'expected_schema_change': 0, 'expected_improvement': 0, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 0}
+CP: cp_after_tr07_obs02
+  diff_counts: {'blocker': 0, 'regression': 0, 'expected_schema_change': 0, 'expected_improvement': 1, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 1}
+  invalidation: tr07.feature.enabled.v1 -> expected_improvement
+CP: cp_after_tr07_obs03
+  diff_counts: {'blocker': 0, 'regression': 1, 'expected_schema_change': 1, 'expected_improvement': 0, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 2}
+  invalidation: tr07.feature.disabled -> expected_schema_change
+  invalidation: tr07.feature.enabled.v1 -> regression

@@ -1,0 +1,198 @@
+{
+  "stage": "Stage04-B",
+  "description": "Frozen Benchmark Shadow Evaluation: run phase05_v3 benchmark splits through the shadow lifecycle adjudication chain under isolation.",
+  "candidate_commit": "943b3f7908c830a8ab683938c0196ee85c8d7d64-dirty",
+  "branch": "phase1-lifecycle-stage02",
+  "base_main_commit": "890219b2e2fab2a4aecbdf4f6c070d2e20b2d044",
+  "generated_at": "2026-07-13T14:41:58.248115+00:00",
+  "benchmark": {
+    "version": "phase05_v3",
+    "freeze_manifest_path": "graph/projects/abu_modern/benchmark/v1_freeze/benchmark_v1_freeze_manifest.json",
+    "freeze_manifest_sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+    "gold_schema_version": "schema_neutral_v1",
+    "gold_dir": "graph/projects/abu_modern/benchmark/phase05_v3/gold",
+    "trajectory_dir": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories"
+  },
+  "old_chain_baseline": {
+    "source": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_score_report.json",
+    "phase0_current": {
+      "invalidation_precision": 0.6086956521739131,
+      "invalidation_recall": 0.7368421052631579,
+      "active_set_set_f1": 0.8979591836734694,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d1": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8213799805636537,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d2": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "valid_time_adjudication_accuracy": 0.0
+    }
+  },
+  "shadow_candidate": {
+    "scripts": {
+      "shadow_lifecycle_adjudicator.py": "ee35d693d9b2346ca5929e08dd6e38cad302a35a74a831a2792241b24237182a",
+      "shadow_compiler.py": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "shadow_bundle_builder.py": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "fixture_replay_runner.py": "9a0b08b6f3c0e7ae5a5f963138e37e17124efc9c40b84ea2d838535d8db671e7",
+      "benchmark_shadow_runner.py": "48a76671f5cf58cd8279262053aae6f46377cffadff45b07a5f495b660de22b4"
+    },
+    "contracts": {
+      "03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246"
+    },
+    "diff_spec_path": "graph/projects/abu_modern/shadow_replay/shadow_replay_spec.md",
+    "diff_spec_sha256": "d1bdae408cfafcf208952fc522a0786742f2c62eb282f065189e29b7236fe498"
+  },
+  "runtime_fingerprint": {
+    "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+    "cwd": "D:\\CCXXLESSON\\contextledger",
+    "argv": "python graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py --split <split>"
+  },
+  "metrics_version": "phase05_v3_shadow_v2",
+  "gate_rules": {
+    "blocker_conditions": [
+      "must_include_recall < old_chain_baseline.phase0_current.must_include_recall (1.0)",
+      "critical false invalidation: active node in gold expected_active_set is silently superseded",
+      "CONTESTS auto-collapses to SUPERCEDES",
+      "low-confidence forced alias merge",
+      "shadow output leaks into formal main graph",
+      "determinism check fails"
+    ],
+    "regression_conditions": [
+      "active_set_set_f1 < old_chain_baseline.phase0_current.active_set_set_f1 (0.8979)",
+      "invalidation_recall < old_chain_baseline.phase0_current.invalidation_recall (0.7368)",
+      "unexpected quarantine increase"
+    ],
+    "pass_conditions": [
+      "no blocker or unexplained diffs",
+      "must_include_recall >= D1 (1.0)",
+      "critical constraints have no false invalidation"
+    ]
+  },
+  "run_command": "python graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py --split <development|regression|blind_holdout|adversarial>",
+  "deterministic_config": {
+    "fixed_candidate": true,
+    "fixed_input": true,
+    "no_llm_call": true,
+    "replay_twice": true,
+    "hash_algorithm": "sha256"
+  },
+  "execution_order": [
+    "1. Fix candidate, rerun 8 fixtures",
+    "2. Run development split (diagnostic only)",
+    "3. If rule changes, bump version and rerun fixtures/development",
+    "4. Freeze final candidate, run regression split",
+    "5. After regression passes gate, run one sealed blind-holdout run",
+    "6. Run adversarial safety evaluation"
+  ],
+  "output_root": "graph/projects/abu_modern/shadow_replay/runs/stage04b",
+  "isolation_rule": "All outputs are written under the run-scoped shadow directory; no write to reconcile_patch.py, apply_patch.py, assembler default path, formal patch ledger, formal graph_state.json, or formal bundle.",
+  "run_results": {
+    "fixtures": {
+      "summary_path": "graph/projects/abu_modern/shadow_replay/runs/stage04a_latest_summary.json",
+      "gate_decision": "PASS",
+      "case_count": 8,
+      "per_fixture": [
+        {
+          "fixture_id": "lc_alias_abstain",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_alias_abstain"
+        },
+        {
+          "fixture_id": "lc_late_arrival",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_late_arrival"
+        },
+        {
+          "fixture_id": "lc_legacy_migration",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_legacy_migration"
+        },
+        {
+          "fixture_id": "lc_provenance_conflict",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_provenance_conflict"
+        },
+        {
+          "fixture_id": "lc_replay_determinism",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_replay_determinism"
+        },
+        {
+          "fixture_id": "lc_revival",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_revival"
+        },
+        {
+          "fixture_id": "lc_sequence_collision",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_sequence_collision"
+        },
+        {
+          "fixture_id": "lc_two_lifecycles_no_kill",
+          "gate_decision": "PASS",
+          "deterministic": true,
+          "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04a_20260713T143950_lc_two_lifecycles_no_kill"
+        }
+      ]
+    },
+    "splits": {
+      "development": {
+        "run_id": "stage04b_20260713T144000_development",
+        "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260713T144000_development",
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "min_must_include_recall": 0.5,
+          "min_active_set_set_f1": 0.3333,
+          "total_blockers": 1,
+          "total_regressions": 24,
+          "total_unexplained": 0
+        }
+      },
+      "regression": {
+        "run_id": "stage04b_20260713T144013_regression",
+        "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\regression\\stage04b_20260713T144013_regression",
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "min_must_include_recall": 0.5,
+          "min_active_set_set_f1": 0.3333,
+          "total_blockers": 2,
+          "total_regressions": 33,
+          "total_unexplained": 0
+        }
+      },
+      "adversarial": {
+        "run_id": "stage04b_20260713T144011_adversarial",
+        "run_dir": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\adversarial\\stage04b_20260713T144011_adversarial",
+        "gate_decision": "BLOCK",
+        "aggregate": {
+          "min_must_include_recall": 1.0,
+          "min_active_set_set_f1": 0.6667,
+          "total_blockers": 0,
+          "total_regressions": 3,
+          "total_unexplained": 0
+        }
+      }
+    },
+    "blind_holdout": {
+      "status": "not_run",
+      "reason": "Sealed run withheld because regression split did not pass gate rules."
+    }
+  }
+}

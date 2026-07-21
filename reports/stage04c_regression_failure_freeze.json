@@ -1,0 +1,70 @@
+{
+  "title": "Stage04-C Regression Failure Freeze",
+  "generated_at": "2026-07-14T09:30:00Z",
+  "candidate_source_commit": "2d24e01",
+  "execution_commit": "fa57dfd",
+  "run_manifest_hash": "a616aefa5ed5d2378413c1e5601ad92bd26cb16df7eedbfa91d74afaeea974e9",
+  "run_manifest_path": "graph/projects/abu_modern/shadow_replay/stage04c_regression_run_manifest.json",
+  "run_directory": "graph/projects/abu_modern/shadow_replay/runs/stage04b/regression/stage04b_20260714T090005_regression/",
+  "input_hashes": {
+    "benchmark_v1_freeze_manifest": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+    "regression_trajectories": {
+      "tr_full_tkt_006": "1a64ba59bdcad659e7016a19a7a9e1e54fabc39360e6f57e56b2d192989b691d",
+      "tr_syn_partial_checklist_clause": "eb6d25006d7d459b32f4d2303574a693555afe4d18efb199e194b2d0bbe46d74",
+      "tr_syn_conditional_window_exception": "b752859f80bc7afdca06edafd3c2eadbd30e781b8d606832fbc31e2e63364267",
+      "tr_revival_round5x": "905c9ec55dc0776982469fe9cc4d5cfa6b8fd25940e6d8a2948befc7938ac986",
+      "tr_alias_quant_tools": "22379ad41222e6022b9ea26ae7f4accdd80187faa1f6edd5817258cbc0e8651a",
+      "tr_syn_out_of_order_price_band_present": "44be9f5861d2a0be35b8f037d60a29a3cbacd816746f2a7bb967c78c41c950b2"
+    },
+    "regression_gold": {
+      "tr_full_tkt_006": "ff77a7eeedc38985e7967362f2f50927043a6c87321fb4ad9c765dc1f2c53306",
+      "tr_syn_partial_checklist_clause": "ab735dae7a765e5bff55e625a4fbddc47e0f80552a15d8b35a9326d8eb0b2a56",
+      "tr_syn_conditional_window_exception": "e96c2a70f5055a07a3e0e5bf2298ba55efbfbc60692674adfda014a961fb5265",
+      "tr_revival_round5x": "fc266b87fce1996bc109c1ec72930a6cc0d790c12ec15e9aed119b001633a628",
+      "tr_alias_quant_tools": "9f0ed44baea8141cabd8a474bb64333a89d8a26e3db0e76701a0102832fd89c5",
+      "tr_syn_out_of_order_price_band_present": "31a972c47bd4909dbe9e2dc72a0e13a33129350cab9a58aeebd8b53f34b4e359"
+    }
+  },
+  "metrics_comparator_hashes": {
+    "metrics_script": "94f0f626bebc92f55996faaa72992461e2ce90522ec920bd8277a0d386ec0373"
+  },
+  "rule_hashes": {
+    "R01_rule": "fb6b610c38723f379e92f3774d85fef36c21606f6e35476188661a6d0e24ca40",
+    "decision_table": "15eed6149b2edf63c4721f4ec1e38bc87e711b46d177aa8fbc1d3146c98a0d06",
+    "resolution_adapter": "7598aff78d802d3385a428ef71f162884fee5254d449aee71d42d54d2d0ce09c",
+    "shadow_adjudicator": "cd0bab99000cd11dc92e5485ee0407af304cb93883712f346f088bc420ab943b",
+    "shadow_compiler": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+    "shadow_bundle_builder": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0"
+  },
+  "report_hashes": {
+    "stage04c_regression_evaluation_report.md": "aab937e278092947b41ce3c731fb81a2a32d5b052af6d6b2100aaa4d3a4941ac",
+    "stage04c_regression_split_summary.json": "9fa9886d76f1ef30c5f1b4353a12e42f9736f4b35caeccf52c3450d058efcb17",
+    "stage04c_regression_diff_inventory.json": "a9932f257bc2d136241feeb8369b5ba7c89477c6828eeb8505cc920b9d5832c0",
+    "stage04c_regression_isolation_audit.md": "bb3243486bdbff355030688b1cef675e45a441dd76f5fc0507e5890cd3e0856e",
+    "stage04c_regression_r01_runtime_audit.md": "669e64488aa7cd99641d537a71e54723efd4b887b091ec4641fad0dcf8b5f07f",
+    "stage04c_regression_run_manifest.json": "a616aefa5ed5d2378413c1e5601ad92bd26cb16df7eedbfa91d74afaeea974e9"
+  },
+  "ordinary_regressions": [
+    {
+      "case_id": "tr_syn_partial_checklist_clause",
+      "checkpoint_id": "cp_after_tr04_obs02",
+      "claim_id": "tr04.slippage_report.required",
+      "classification": "regression"
+    },
+    {
+      "case_id": "tr_syn_partial_checklist_clause",
+      "checkpoint_id": "cp_after_tr04_obs02",
+      "claim_id": "tr04.slippage_report.required",
+      "classification": "regression"
+    },
+    {
+      "case_id": "tr_syn_out_of_order_price_band_present",
+      "checkpoint_id": "cp_after_tr22_obs02",
+      "claim_id": "tr22.price_band.narrow",
+      "classification": "regression"
+    }
+  ],
+  "diff_inventory_count": 44,
+  "adversarial_accessed": false,
+  "sealed_blind_holdout_accessed": false
+}

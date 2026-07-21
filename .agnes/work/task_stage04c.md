@@ -1,0 +1,15 @@
+- [x] Task: Stage04-C1.2.1 Relation-Aware Comparator Minimal Fix & Baseline Rebuild
+  - [x] 1. Root-cause audit submitted (stage04c_revival_comparator_root_cause_audit.md)
+  - [x] 2. Implemented relation-aware comparator truth table in compare_step
+  - [x] 3. Created 6 comparator-only unit test cases — all PASS
+  - [x] 4. Comparator unit tests: 6/6 PASS
+  - [x] 5. Impact analysis report written (stage04c_comparator_change_impact_analysis.md)
+  - [x] 6. Development replay run (stage04b_20260715T073403_development)
+  - [x] 7. Comparator fix applied and verified
+  - [x] 8. Canonical rebased baseline written (stage04c_comparator_rebased_baseline.json)
+  - [x] 9. Full 22 fixtures replay: 22/22 PASS, all deterministic
+  - [x] 10. Development: 0 blockers, 0 unexplained, 7 regressions (shadow defects, not comparator)
+  - [x] 11. tr_syn_revival_feature_flag CONTESTS correctly evaluated as manual_adjudication (not auto-passed)
+  - [x] 12. must_include recall = 1.0 (>= D1), critical false invalidation = 0
+  - [x] 13. Comparison report written (stage04c_comparator_rebased_comparison.md)
+  - [ ] Next: Fix shadow adjudicator CONTESTS over-match (outside Stage04-C scope)

@@ -1,0 +1,142 @@
+{
+  "title": "Stage04-C Candidate Dependency Manifest",
+  "generated_at": "2026-07-14T14:20:00Z",
+  "branch": "phase1-lifecycle-stage02",
+  "base_commit": "d7d681e",
+  "dependencies": {
+    "runner_script": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\benchmark_shadow_runner.py",
+      "sha256": "1e85a8c44d81d456aa184f5314c330d1fa469980591a6588179e269e5e106155",
+      "tracked": true,
+      "must_commit": true
+    },
+    "shadow_adjudicator": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\shadow_lifecycle_adjudicator.py",
+      "sha256": "00ab2eae993e266168d5b85a748964d0d887ce9fe05ef32f5f34583fab49a0bd",
+      "tracked": true,
+      "must_commit": true
+    },
+    "shadow_compiler": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\shadow_compiler.py",
+      "sha256": "2db7d947b8d5ec08088896a472b2136d9b9d31c37b770660e137226d7f19e908",
+      "tracked": true,
+      "must_commit": false
+    },
+    "shadow_bundle_builder": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\shadow_bundle_builder.py",
+      "sha256": "96e3d0fc5e1f24b52d122e8ed96abb6148a15747ff782058ca588c99d55bb3c0",
+      "tracked": true,
+      "must_commit": false
+    },
+    "shadow_resolution_adapter": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\shadow_resolution_adapter.py",
+      "sha256": "9c65408b28ceacc113afdde5411d3c45858a9e5b76d39c67418be99bbf68994f",
+      "tracked": false,
+      "must_commit": true
+    },
+    "fixture_runner": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\scripts\\fixture_replay_runner.py",
+      "sha256": "83156b24455565d955bed89e473d3d41c31f32b15b3afd38de7b2e1dd0657d13",
+      "tracked": true,
+      "must_commit": true
+    },
+    "decision_table_v2": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\contracts\\shadow_adjudication_decision_table_v2.json",
+      "sha256": "0c9b0e9da2f80f148046837f491e3a92c5896be5b9b6c244c16d14d72db8d372",
+      "tracked": true,
+      "must_commit": false
+    },
+    "decision_table_v1": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\contracts\\shadow_adjudication_decision_table_v1.json",
+      "sha256": "d4ff95a6f237fa525fd40c32de473214f09ce0a9156063350b0a6b4b3d27fa8f",
+      "tracked": true,
+      "must_commit": false
+    },
+    "decision_table_coverage": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\contracts\\decision_table_v2_coverage.md",
+      "sha256": "71af5893b60c9ec9958a0ea4823f92d0bbe332dcada27e268e3717e9b3664df6",
+      "tracked": true,
+      "must_commit": false
+    },
+    "resolution_schema": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\contracts\\shadow_resolution_record_schema_v1.json",
+      "sha256": "9d800fd40380023238d7ef15733ffc0f21f454f58b4c4fefe7545e8b45b25adf",
+      "tracked": false,
+      "must_commit": true
+    },
+    "resolution_adapter_contract": {
+      "path": "graph\\projects\\abu_modern\\shadow_replay\\contracts\\shadow_resolution_adapter_contract.md",
+      "sha256": "61a1a4f56404fcf64e936b77a4912415159cbd7b969909dc08d1c07d99ecf622",
+      "tracked": false,
+      "must_commit": true
+    },
+    "r01_rule": {
+      "path": "reports\\stage04b2_manual_adjudication_disposition.md",
+      "sha256": "e4c854a7e8f5cbb30a8c7153d17063e62b52298e7f8d6ecbfe6b6f814ef8be7d",
+      "tracked": false,
+      "must_commit": true
+    },
+    "metrics_script": {
+      "path": "graph\\scripts\\score_phase05.py",
+      "sha256": "bb381b45416fcf38c4278e99ac403bcea9f486e1311e44941dbcd48c5298ed58",
+      "tracked": true,
+      "must_commit": false
+    },
+    "benchmark_freeze_manifest": {
+      "path": "graph\\projects\\abu_modern\\benchmark\\v1_freeze\\benchmark_v1_freeze_manifest.json",
+      "sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0",
+      "tracked": true,
+      "must_commit": false
+    },
+    "graph_schema_contract": {
+      "path": "contracts\\03_graph_schema.md",
+      "sha256": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "tracked": true,
+      "must_commit": false
+    },
+    "lifecycle_schema_contract": {
+      "path": "contracts\\05_phase1_lifecycle_schema.md",
+      "sha256": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
+      "tracked": true,
+      "must_commit": false
+    },
+    "turn_runtime_contract": {
+      "path": "contracts\\07_turn_runtime.md",
+      "sha256": "61e49c5f98ddc2849c9d4dd23fa7f1098ebbe3c36bfc89ebe2a44b4738e2d1e8",
+      "tracked": true,
+      "must_commit": false
+    },
+    "evidence_index": {
+      "path": "reports\\stage04b2_regression_ready_evidence_index.json",
+      "sha256": "f3b261b92133870f73151ce176909b9933819f0e146347b3534488b2d3aaa757",
+      "tracked": false,
+      "must_commit": true
+    },
+    "gate_decision_report": {
+      "path": "reports\\stage04b2_gate_decision_report.md",
+      "sha256": "05364d7034a4ceeb66e1dd95b1110e56d77acd9b5a1d7cebe6c3362255257602",
+      "tracked": false,
+      "must_commit": true
+    },
+    "isolation_audit_report": {
+      "path": "reports\\stage04b2_isolation_and_commit_audit.md",
+      "sha256": "3d7305efd0e6bdbc6e0c1edcf2eed7f0b320af058c3396831fa85d42a97a8c55",
+      "tracked": false,
+      "must_commit": true
+    }
+  },
+  "regression_input_config": {
+    "split_name": "regression",
+    "case_ids": [
+      "tr_full_tkt_006",
+      "tr_syn_partial_checklist_clause",
+      "tr_syn_conditional_window_exception",
+      "tr_revival_round5x",
+      "tr_alias_quant_tools",
+      "tr_syn_out_of_order_price_band_present"
+    ],
+    "trajectory_dir": "graph/projects/abu_modern/benchmark/phase05_v3/trajectories/",
+    "gold_dir": "graph/projects/abu_modern/benchmark/phase05_v3/gold/",
+    "freeze_manifest_sha256": "8ec639a99546c9bb98df175c54495a9c43c69d9560999e2d24ee5c51ccb932c0"
+  }
+}

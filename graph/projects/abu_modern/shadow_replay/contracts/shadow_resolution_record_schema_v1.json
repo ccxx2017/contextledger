@@ -1,0 +1,127 @@
+﻿{
+  "schema_name": "shadow_resolution_record_v1",
+  "version": "1.1",
+  "description": "Structured record produced by the shadow resolution adapter for each claim. v1.1 adds legacy_mapping_version and explicit normalization_priority references.",
+  "fields": {
+    "claim_id": {
+      "type": "string",
+      "required": true,
+      "source": "observation.claim_bundle[i].claim_id"
+    },
+    "source_field_for_dimension": {
+      "type": "string",
+      "required": true,
+      "enum": ["claim.dimension", "claim_id.heuristic.second_segment.v1", "nil"],
+      "description": "Which field was used to derive claim_dimension. See normalization_priority."
+    },
+    "source_field_for_scope": {
+      "type": "string",
+      "required": true,
+      "enum": ["claim.scope", "claim_id.heuristic.third_segment.v1", "inferred_default", "nil"],
+      "description": "Which field was used to derive scope. See normalization_priority."
+    },
+    "normalization_rule_id": {
+      "type": "string",
+      "required": true,
+      "description": "Rule ID from normalization priority table that produced this resolution. E.g. R003_explicit, R003_legacy_v1, R003_abstain, R006_explicit, R006_legacy_v1, R006_default."
+    },
+    "legacy_mapping_version": {
+      "type": "string|nil",
+      "required": true,
+      "description": "Version tag of the legacy mapping rule when fallback_used is true (e.g. 'v1', 'v2'). Nil when no fallback used."
+    },
+    "fallback_used": {
+      "type": "boolean",
+      "required": true,
+      "description": "True if a fallback (heuristic) was used instead of explicit field."
+    },
+    "abstain_reason": {
+      "type": "string|nil",
+      "required": true,
+      "description": "None if resolved, string reason if quarantined (e.g. 'no_claims', 'ambiguous_dimension')."
+    },
+    "entity_resolution_confidence": {
+      "type": "string",
+      "required": true,
+      "enum": ["high", "medium", "low", "unknown"]
+    },
+    "lifecycle_resolution_confidence": {
+      "type": "string",
+      "required": true,
+      "enum": ["high", "medium", "low", "unknown"]
+    },
+    "surface_entity": {
+      "type": "string",
+      "required": true,
+      "source": "obs.mentions[0] or obs.source.channel"
+    },
+    "canonical_entity": {
+      "type": "string",
+      "required": true,
+      "description": "Currently mirrors surface_entity. Future: entity-resolution pipeline."
+    },
+    "claim_dimension": {
+      "type": "string|nil",
+      "required": true,
+      "description": "Normalized dimension. See dimension normalization priority."
+    },
+    "scope": {
+      "type": "string|nil",
+      "required": false,
+      "description": "Normalized scope. See scope normalization priority."
+    },
+    "channel": {
+      "type": "string",
+      "required": true,
+      "source": "obs.source.channel or obs.source.provenance"
+    },
+    "adjudication_key": {
+      "type": "string",
+      "required": true,
+      "description": "Composite key: {canonical_entity}:{claim_dimension}:{scope|_default_}. Used by ShadowLifecycleAdjudicator for relationship determination."
+    },
+    "lifecycle_ref": {
+      "type": "string|nil",
+      "required": true,
+      "description": "surface_entity:dimension combination used as lifecycle identifier."
+    },
+    "normalization_priority_version": {
+      "type": "string",
+      "required": true,
+      "enum": ["v1"],
+      "description": "Version of the normalization priority rules used."
+    },
+    "dimension_normalization_steps": {
+      "type": "array",
+      "required": false,
+      "description": "Trace of normalization steps applied, in priority order.",
+      "items": {"type": "string"}
+    },
+    "scope_normalization_steps": {
+      "type": "array",
+      "required": false,
+      "description": "Trace of normalization steps applied, in priority order.",
+      "items": {"type": "string"}
+    }
+  },
+  "normalization_priorities": {
+    "dimension": {
+      "version": "1.0",
+      "priority": [
+        {"rank": 1, "rule_id": "R003_explicit", "description": "claim.dimension explicit field", "behavior": "Use directly"},
+        {"rank": 2, "rule_id": "R003_explicit_predicate", "description": "claim type/predicate field (not yet in phase05_v3)", "behavior": "Use directly"},
+        {"rank": 3, "rule_id": "R003_legacy_v1", "description": "claim_id second segment heuristic", "behavior": "Use with fallback_used=true, legacy_mapping_version=v1. Only when no explicit field. versioned audit trail only."},
+        {"rank": 4, "rule_id": "R003_abstain", "description": "No dimension determined", "behavior": "abstain/quarantine"}
+      ]
+    },
+    "scope": {
+      "version": "1.0",
+      "priority": [
+        {"rank": 1, "rule_id": "R006_explicit", "description": "claim.scope or obs.claim_scope explicit field", "behavior": "Use directly"},
+        {"rank": 2, "rule_id": "R006_legacy_v1", "description": "claim_id third segment heuristic, only when segment is semantic (non-numeric, non-version-like)", "behavior": "Use with fallback_used=true, legacy_mapping_version=v1. Numeric/version-like segments (digits, digits+s, version strings) fall through to R006_default."},
+        {"rank": 3, "rule_id": "R006_default", "description": "_default_ for sequential progression or absence of semantic scope", "behavior": "Use _default_. Safe for single-track lifecycle progression."},
+        {"rank": 4, "rule_id": "R006_abstain", "description": "Ambiguous scope", "behavior": "abstain/quarantine"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "fixture_count": 16,
+  "all_pass": true,
+  "fixtures": [
+    {
+      "fixture_id": "lc_alias_abstain",
+      "fixture_hash": "6ef51ef36214e87b",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "f188b067c5a9",
+      "bundle_hash": "608832751f22"
+    },
+    {
+      "fixture_id": "lc_conditional_different_scope",
+      "fixture_hash": "2cf692f66a743f63",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "1a473a27ec3a",
+      "bundle_hash": "cd6c6c97e195"
+    },
+    {
+      "fixture_id": "lc_diff_source_conflict",
+      "fixture_hash": "912c51cfe61099f5",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "14e494b4790c",
+      "bundle_hash": "ad25f000797a"
+    },
+    {
+      "fixture_id": "lc_late_arrival",
+      "fixture_hash": "972621a2d9e2c868",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "40daaf52086e",
+      "bundle_hash": "a3fb9bab7949"
+    },
+    {
+      "fixture_id": "lc_late_arrival_effective_time",
+      "fixture_hash": "391361966b72a613",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "bd0b2eaf16a4",
+      "bundle_hash": "bdde1173769a"
+    },
+    {
+      "fixture_id": "lc_late_arrival_missing_effective",
+      "fixture_hash": "944ddfe7adb4bb7b",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "40daaf52086e",
+      "bundle_hash": "a3fb9bab7949"
+    },
+    {
+      "fixture_id": "lc_legacy_migration",
+      "fixture_hash": "075ba8d67eaf28f7",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "9fa825c9ad17",
+      "bundle_hash": "c4d70924eeb1"
+    },
+    {
+      "fixture_id": "lc_multi_claim_different_predicates",
+      "fixture_hash": "9e1a7d7c4c99716d",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "eab8e0a4a3b8",
+      "bundle_hash": "f4189dbedec8"
+    },
+    {
+      "fixture_id": "lc_multi_claim_partial",
+      "fixture_hash": "6b8143e509006c1b",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "e53bc54e650a",
+      "bundle_hash": "3b53759c3a53"
+    },
+    {
+      "fixture_id": "lc_parallel_target_coexist",
+      "fixture_hash": "b6c875b733334947",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "476042f5efc0",
+      "bundle_hash": "9207a71ba402"
+    },
+    {
+      "fixture_id": "lc_provenance_conflict",
+      "fixture_hash": "86b31998d3e62ca8",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "6ca45b38f3ee",
+      "bundle_hash": "4b133e40c624"
+    },
+    {
+      "fixture_id": "lc_replay_determinism",
+      "fixture_hash": "6dfe08d205595ead",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "cf0f83c47a21",
+      "bundle_hash": "8bd46f7088a3"
+    },
+    {
+      "fixture_id": "lc_revival",
+      "fixture_hash": "afa54857bc64c716",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "58e1b3a13db6",
+      "bundle_hash": "4337f772c3b5"
+    },
+    {
+      "fixture_id": "lc_same_source_progression",
+      "fixture_hash": "de39e226a51d2d13",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "814a5e40fbe2",
+      "bundle_hash": "bbb34f1a152b"
+    },
+    {
+      "fixture_id": "lc_sequence_collision",
+      "fixture_hash": "3b46dfe81136fa34",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "54834f642a37",
+      "bundle_hash": "ffcdd5ffdb15"
+    },
+    {
+      "fixture_id": "lc_two_lifecycles_no_kill",
+      "fixture_hash": "72a1b99c9ef4fdcd",
+      "actual_gate": "PASS",
+      "deterministic": "N/A",
+      "state_hash": "9dc056f108e6",
+      "bundle_hash": "6f1215fc9faf"
+    }
+  ]
+}

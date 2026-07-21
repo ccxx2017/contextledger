@@ -1,0 +1,75 @@
+{
+  "title": "Stage04-C Canonical Evidence Index v1",
+  "generated_at": "2026-07-14T16:30:00Z",
+  "hash_policy": "canonical_lf_v1",
+  "hash_policy_doc": "reports/stage04c_evidence_hash_policy_v1.md",
+  "source_evidence_index": "reports/stage04b2_regression_ready_evidence_index.json",
+  "candidate_commit_for_verification": "2d24e01",
+  "entries": [
+    {
+      "gate_condition": "16 fixtures all PASS",
+      "legacy_evidence_hash": "e128cc990e99f1ce",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_fixture_inventory_and_replay.json",
+      "git_blob_sha": "cccaa99dd06c1a7960d41d6828c59d6e2f22a882",
+      "canonical_content_sha256": "62c16f49c0419c5cb6e89d7f9dde658c925db10c628b01c21f5c8d99d3ac74f6",
+      "raw_byte_sha256_at_generation": "e128cc990e99f1cecc0122e525e12c1b627a22a4ce312620e9f1dcb833736274"
+    },
+    {
+      "gate_condition": "All 16 fixtures deterministic (two replay hashes match)",
+      "legacy_evidence_hash": "ed2ee08b363762b1",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_fixture_determinism_check.json",
+      "git_blob_sha": "54c9bdca5079a6838202ac7127d13a2cdf18dbc2",
+      "canonical_content_sha256": "5a24b67940ebe05ecd11bd3ba011b3e04112c70a866462c3c92289ff08b617e7",
+      "raw_byte_sha256_at_generation": "ed2ee08b363762b14e2d87495ae71a9ab64b7283c1b55019dbc355fc14a391f5"
+    },
+    {
+      "gate_condition": "Full bidirectional invalidation comparison (not narrowed)",
+      "legacy_evidence_hash": "39073663dde77910",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_invalidation_metric_audit.md",
+      "git_blob_sha": "4793f59f7f1dd010c7accd9e1e15227116ec9d8b",
+      "canonical_content_sha256": "9225a63c7fea64969ff794b967a165e92e9ca8ab32efab24afa628d1e5baa9e4",
+      "raw_byte_sha256_at_generation": "39073663dde7791033969fcfb2d849f9f7e837dca61c96854f1d40c7642e3872"
+    },
+    {
+      "gate_condition": "Canonical comparator baseline (pre-fix vs post-fix via same ",
+      "legacy_evidence_hash": "c92719b270d9cad1",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_canonical_comparator_baseline.json",
+      "git_blob_sha": "2bce0aee14b24184b2543aa843d376d549433794",
+      "canonical_content_sha256": "d7e4d71a414284c37d989487034eafe31168191dd925dea0343a335f7dd5bb34",
+      "raw_byte_sha256_at_generation": "c92719b270d9cad19399e6e9af748ba8b384ea4e37520b116ba7d1141a151ad2",
+      "combined_canonical_sha256": "48582206813edc907d9f5e13deaa65803401d15561bff5fbea8d48a1ef399736",
+      "note": "combined hash of baseline.json + comparison.md"
+    },
+    {
+      "gate_condition": "development blockers = 0",
+      "legacy_evidence_hash": "4f1c203496a4a3dd",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T060728_development/split_summary.json",
+      "canonical_content_sha256": "77387bd36a445a33f3f4304a665e783a3a4941436c228799cbe7403743efdf40",
+      "raw_byte_sha256_at_generation": "4f1c203496a4a3dd351a9e55372d3a627004793996b5192dc0603ed13d480f1b",
+      "note": "archived to runs_archive/"
+    },
+    {
+      "gate_condition": "Resolution record audit: no unversioned heuristic",
+      "legacy_evidence_hash": "8aa95fe2523e72ab",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_resolution_record_audit.json",
+      "git_blob_sha": "1fddc785826a8ebcf2200cdb85a8f67421c9ef86",
+      "canonical_content_sha256": "767c32cfee089e5bc75dc69111316188ae1ca2b7b2999973600b312a466fdecb",
+      "raw_byte_sha256_at_generation": "8aa95fe2523e72ab9b3e270ea902f9b2a2b507ce65784f9dd841fff323336450"
+    },
+    {
+      "gate_condition": "Shadow output isolated; no formal main chain modification",
+      "legacy_evidence_hash": "3d7305efd0e6bdbc",
+      "hash_policy_version": "canonical_lf_v1",
+      "path": "reports/stage04b2_isolation_and_commit_audit.md",
+      "git_blob_sha": "9619649c222abf108b37477d6f5dcd429b192ab6",
+      "canonical_content_sha256": "e2583590446121862fe6785e201cbe39f288f28dfd010f12e903d6b83ba8a2aa",
+      "raw_byte_sha256_at_generation": "3d7305efd0e6bdbc6e0c1edcf2eed7f0b320af058c3396831fa85d42a97a8c55"
+    }
+  ]
+}

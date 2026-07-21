@@ -1,0 +1,16 @@
+{
+  "freeze_id": "stage04c_revival_comparator_failure_freeze_v1",
+  "generated_at": "2026-07-14T11:06:00Z",
+  "candidate_commit": "fa57dfd3e2ba802b",
+  "affected_case": "tr_syn_revival_feature_flag",
+  "regression_count": 2,
+  "affected_checkpoints": [
+    "cp_after_tr07_obs02",
+    "cp_after_tr07_obs03"
+  ],
+  "root_cause": "compare_step in benchmark_shadow_runner.py does not account for CONTESTS relation. When shadow produces CONTESTS (two claims from different sources, same adj_key), comparator treats the older claim as supressed and reports false-negative invalidation and unexpected-active-set regressions.",
+  "resolution_adapter_hash": "60d0ee194aa0b0ba",
+  "scope_normalization_mapping_hash": "...",
+  "development_run_dir": "runs/stage04b/development/<latest>",
+  "freeze_boundary": "不得修改当前 run 输出、gold、R01、scope mapping 或历史报告来消除该问题"
+}

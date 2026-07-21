@@ -1,0 +1,69 @@
+{
+  "fixture_id": "lc_parallel_targets_same_dimension_must_coexist",
+  "category": "parallel",
+  "description": "Two deployment targets (staging, canary) on same dimension (allowed_targets) from same source. Different scope values (staging vs canary) should COEXIST — not supersede each other.",
+  "rationale": "Staging and canary are real scope values (not state values). They should produce different adjudication_keys and COEXIST. This is the parallel_targets case from tr_syn_non_invalidation_parallel_targets.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_pt_1",
+        "observed_at": "2026-07-01T08:00:00Z",
+        "effective_at": "2026-07-01T08:00:00Z",
+        "source": "release_sheet",
+        "payload": {
+          "entity_ref": "Deploy-list",
+          "lifecycle_ref": "lc_deploy_list",
+          "lifecycle_seq": 1,
+          "adjudication_key": "Deploy-list:allowed_targets:staging",
+          "node_type": "Fact",
+          "content": "Staging allowed.",
+          "state": "allowed",
+          "claim_id": "deploy.list.staging.allowed",
+          "claim_dimension": "allowed_targets",
+          "claim_scope": "staging",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_pt_2",
+        "observed_at": "2026-07-01T08:05:00Z",
+        "effective_at": "2026-07-01T08:05:00Z",
+        "source": "release_sheet",
+        "payload": {
+          "entity_ref": "Deploy-list",
+          "lifecycle_ref": "lc_deploy_list",
+          "lifecycle_seq": 2,
+          "adjudication_key": "Deploy-list:allowed_targets:canary",
+          "node_type": "Fact",
+          "content": "Canary allowed.",
+          "state": "allowed",
+          "claim_id": "deploy.list.canary.allowed",
+          "claim_dimension": "allowed_targets",
+          "claim_scope": "canary",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_pt_2",
+        "after_event_id": "evt_pt_2",
+        "active_nodes": [
+          "n_deploy_staging_allowed",
+          "n_deploy_canary_allowed"
+        ],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_deploy_staging_allowed",
+          "n_deploy_canary_allowed"
+        ]
+      }
+    ]
+  }
+}

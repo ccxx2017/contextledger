@@ -1,0 +1,144 @@
+{
+  "freeze_id": "stage04c_scope_normalization_failure_freeze_v1",
+  "generated_at": "2026-07-14T10:30:07Z",
+  "candidate_commit": "fa57dfd3e2ba802b30c3605125aaacd09da9b387",
+  "candidate_commit_short": "fa57dfd",
+  "base_commit": "d7d681e",
+  "execution_commit": "fa57dfd3e2ba802b30c3605125aaacd09da9b387",
+  "evidence_freeze_commit": "e4dfcbf",
+  "changed_file_count": 2,
+  "changed_file_hashes": {
+    "graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py": "ed5debd51a16e8b9",
+    "graph/projects/abu_modern/shadow_replay/scripts/shadow_resolution_adapter.py": "60d0ee194aa0b0ba"
+  },
+  "fixtures": {
+    "old_16_count": 16,
+    "new_3_count": 3,
+    "total": 19,
+    "old_16_hashes": {
+      "lc_alias_abstain.json": "6ef51ef36214e87b",
+      "lc_conditional_different_scope.json": "2cf692f66a743f63",
+      "lc_diff_source_conflict.json": "912c51cfe61099f5",
+      "lc_late_arrival.json": "972621a2d9e2c868",
+      "lc_late_arrival_effective_time.json": "391361966b72a613",
+      "lc_late_arrival_missing_effective.json": "944ddfe7adb4bb7b",
+      "lc_legacy_migration.json": "075ba8d67eaf28f7",
+      "lc_multi_claim_different_predicates.json": "9e1a7d7c4c99716d",
+      "lc_multi_claim_partial.json": "6b8143e509006c1b",
+      "lc_parallel_target_coexist.json": "b6c875b733334947",
+      "lc_provenance_conflict.json": "86b31998d3e62ca8",
+      "lc_replay_determinism.json": "6dfe08d205595ead",
+      "lc_revival.json": "afa54857bc64c716",
+      "lc_same_source_progression.json": "de39e226a51d2d13",
+      "lc_sequence_collision.json": "3b46dfe81136fa34",
+      "lc_two_lifecycles_no_kill.json": "72a1b99c9ef4fdcd"
+    },
+    "new_3_hashes": {
+      "lc_late_arrival_price_band_same_scope_vs_different_scope.json": "2923a186c640ec08",
+      "lc_partial_same_dimension_different_atomic_claims_coexist.json": "c18dabd950ca0b97",
+      "lc_partial_same_dimension_same_scope_supersedes.json": "cdb15d25857baadf"
+    }
+  },
+  "development_input_gold_hashes": {
+    "tr_full_tkt_005b": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_syn_partial_policy_clause": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_syn_conditional_region_exception": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_syn_revival_feature_flag": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_alias_workspace_identity": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_syn_non_invalidation_parallel_targets": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    },
+    "tr_syn_out_of_order_inventory_present": {
+      "trajectory": "FILE_NOT_FOUND",
+      "gold": "FILE_NOT_FOUND"
+    }
+  },
+  "script_hashes": {
+    "shadow_resolution_adapter.py": "6ed3e76da39e2acf",
+    "shadow_lifecycle_adjudicator.py": "31e315f2f655ab1c",
+    "fixture_replay_runner.py": "ed5debd51a16e8b9",
+    "benchmark_shadow_runner.py": "076710a3e43bae9c",
+    "shadow_compiler.py": "2db7d947b8d5ec08",
+    "shadow_bundle_builder.py": "96e3d0fc5e1f24b5"
+  },
+  "contract_hashes": {
+    "R01_rule": "FILE_NOT_FOUND",
+    "decision_table_v2": "0c9b0e9da2f80f14"
+  },
+  "development_run": {
+    "latest_run_id": "stage04b_20260714T104008_development",
+    "run_dir": "graph/projects/abu_modern/shadow_replay/runs/stage04b/development/stage04b_20260714T104008_development",
+    "per_case_gates": {
+      "tr_full_tkt_005b": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      },
+      "tr_syn_partial_policy_clause": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      },
+      "tr_syn_conditional_region_exception": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      },
+      "tr_syn_revival_feature_flag": {
+        "gate": "BLOCK",
+        "blockers": 0,
+        "regressions": 2
+      },
+      "tr_alias_workspace_identity": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      },
+      "tr_syn_non_invalidation_parallel_targets": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      },
+      "tr_syn_out_of_order_inventory_present": {
+        "gate": "PASS",
+        "blockers": 0,
+        "regressions": 0
+      }
+    }
+  },
+  "three_original_regressions": {
+    "pre_fix_status": "ordinary_regression",
+    "post_fix_verification": "resolved",
+    "evidence_report": "reports/stage04c_three_ordinary_regressions_resolution_audit.md"
+  },
+  "freeze_boundary": "不得改写本轮运行输出、fixture expected 结果、development gold 或 diff 分类",
+  "scope_normalization_mapping": {
+    "file": "contracts/shadow_scope_normalization_mapping_v1.json",
+    "hash": "312d1521cf038d5d",
+    "token_count": 20,
+    "rule_categories": [
+      "S001_state_value_whitelist",
+      "S002_dimension_state_value",
+      "S003_lifecycle_state_value",
+      "S004_terminal_state_value",
+      "S005_review_state_value"
+    ]
+  },
+  "updated_at": "2026-07-14T10:45:00Z"
+}

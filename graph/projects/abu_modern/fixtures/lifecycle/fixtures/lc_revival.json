@@ -1,0 +1,89 @@
+{
+  "fixture_id": "lc_revival",
+  "category": "revival",
+  "description": "A previously superseded capability can be revived as a new active node without rewriting history.",
+  "rationale": "Revival is expressed as a new event with a REVIVES relation to the superseded node.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#revival",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_010",
+        "observed_at": "2026-07-01T09:00:00Z",
+        "effective_at": "2026-07-01T09:00:00Z",
+        "source": "research",
+        "payload": {
+          "entity_ref": "exp_quant_models",
+          "lifecycle_ref": "lc_quant_research",
+          "lifecycle_seq": 1,
+          "adjudication_key": "research:exp_quant_models:v1",
+          "node_type": "Experiment",
+          "content": "Quant model experiment active.",
+          "state": "in_progress",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_011",
+        "observed_at": "2026-07-05T09:00:00Z",
+        "effective_at": "2026-07-05T09:00:00Z",
+        "source": "research",
+        "payload": {
+          "entity_ref": "exp_quant_models",
+          "lifecycle_ref": "lc_quant_research",
+          "lifecycle_seq": 2,
+          "adjudication_key": "research:exp_quant_models:v1",
+          "node_type": "Experiment",
+          "content": "Quant model experiment deprecated.",
+          "state": "cancelled",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_012",
+        "observed_at": "2026-07-10T09:00:00Z",
+        "effective_at": "2026-07-10T09:00:00Z",
+        "source": "research",
+        "payload": {
+          "entity_ref": "exp_quant_models",
+          "lifecycle_ref": "lc_quant_research",
+          "lifecycle_seq": 3,
+          "adjudication_key": "research:exp_quant_models:v2",
+          "node_type": "Experiment",
+          "content": "Quant model experiment revived under v2.",
+          "state": "in_progress",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_011",
+        "after_event_id": "evt_011",
+        "active_nodes": [],
+        "superseded_nodes": ["n_exp_v1_active", "n_exp_v1_cancelled"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_exp_v1_cancelled", "target": "n_exp_v1_active" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": []
+      },
+      {
+        "checkpoint_id": "cp_after_012",
+        "after_event_id": "evt_012",
+        "active_nodes": ["n_exp_v2_revived"],
+        "superseded_nodes": ["n_exp_v1_active", "n_exp_v1_cancelled"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "REVIVES", "source": "n_exp_v2_revived", "target": "n_exp_v1_cancelled" },
+          { "relation_type": "derived_from", "source": "n_exp_v2_revived", "target": "n_exp_v1_active" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_exp_v2_revived"]
+      }
+    ]
+  }
+}

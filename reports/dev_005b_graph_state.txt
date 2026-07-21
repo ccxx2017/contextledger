@@ -1,0 +1,12 @@
+NODES:
+  n_239829a4617c claim=tr_full_tkt_005b.obs02.active status=superseded source=abu_modern_turn
+  n_7a0649792d74 claim=tr_full_tkt_005b.obs01.active status=superseded source=abu_modern_turn
+  n_7aadb54f5f00 claim=tr_full_tkt_005b.obs04.active status=superseded source=abu_modern_turn
+  n_ab67dcc38826 claim=tr_full_tkt_005b.obs05.active status=active source=abu_modern_turn
+  n_cdec578f68b0 claim=tr_full_tkt_005b.obs03.active status=superseded source=abu_modern_turn
+EDGES:
+  n_239829a4617c->n_7a0649792d74 supersedes
+  n_cdec578f68b0->n_239829a4617c supersedes
+  n_7aadb54f5f00->n_cdec578f68b0 supersedes
+  n_ab67dcc38826->n_7aadb54f5f00 supersedes
+SUPPRESSED NODES:

@@ -1,0 +1,142 @@
+{
+  "freeze_id": "stage04c_classification_deviation_freeze_v1",
+  "frozen_at": "2026-07-15T16:03:00Z",
+  "frozen_by": "stage04c122_execution",
+  "purpose": "Freeze all comparator evidence from Stage04-C1.2.1 before rollback to Stage04-C1.2.2",
+  "current_commit": {
+    "branch": "side-track-stage04c",
+    "description": "Comparator v2 with manual_adjudication downgrade for SUPERCEDES->CONTESTS"
+  },
+  "benchmark_shadow_runner_py": {
+    "sha256": "8B208146D46315605B6A6E8453196A8FB9D02A4B90D12BA42869887BF0CAFEE3",
+    "functions": {
+      "_extract_gold_relations": "extracts gold expected relation per dropped claim from expected_invalidations[].kind",
+      "_extract_shadow_relations": "extracts shadow relations per node pair from edges, normalizes SUPERSEDES->SUPERCEDES",
+      "_classify_relation_diff": "truth-table classifier: gold vs shadow relation -> classification string",
+      "compare_step": "full bidirectional comparator: active-set, invalidation, must_include diffs"
+    },
+    "problematic_branches": [
+      {
+        "location": "_classify_relation_diff",
+        "code": "if gold_relation == 'SUPERCEDES' and shadow_relation == 'CONTESTS': return 'manual_adjudication'",
+        "line_description": "Lines where gold=SUPERCEDES + shadow=CONTESTS is classified as manual_adjudication instead of ordinary_regression/blocker",
+        "violation": "Weakens relation scoring; allows SUPERCEDES->CONTESTS mismatch to escape ordinary regression counting"
+      }
+    ]
+  },
+  "unit_test_definitions": [
+    {
+      "test_name": "test_cmp_supersedes_matches_supersedes",
+      "sha256": "test_cmp_gold_supersedes_shadow_supersedes_match",
+      "expected_classification": "expected_improvement",
+      "assertion": "SUPERCEDES vs SUPERCEDES -> match, no regression"
+    },
+    {
+      "test_name": "test_cmp_coexists_matches_coexists",
+      "sha256": "test_cmp_coexists_match",
+      "expected_classification": "no diffs",
+      "assertion": "COEXISTS vs COEXISTS -> match"
+    },
+    {
+      "test_name": "test_cmp_contests_requires_r01_safe_behavior",
+      "sha256": "test_cmp_contests_r01_safe",
+      "expected_classification": "manual_adjudication (NOT expected_improvement)",
+      "assertion": "SUPERCEDES gold + CONTESTS shadow -> manual_adjudication"
+    },
+    {
+      "test_name": "test_cmp_gold_supersedes_shadow_contests_is_not_auto_pass",
+      "sha256": "test_cmp_gold_supersedes_shadow_contests_no_autopass",
+      "expected_classification": "NOT expected_improvement",
+      "assertion": "SUPERCEDES gold + CONTESTS shadow -> must NOT be auto-passed"
+    },
+    {
+      "test_name": "test_cmp_shadow_unexpected_supersedes_is_detected",
+      "sha256": "test_cmp_unexpected_supersedes",
+      "expected_classification": "regression / unexpected_supersedes",
+      "assertion": "COEXISTS gold + SUPERCEDES shadow -> detected as regression"
+    },
+    {
+      "test_name": "test_cmp_contests_does_not_silently_change_active_set",
+      "sha256": "test_cmp_contests_no_silent_change",
+      "expected_classification": "no active_set diffs, no blockers",
+      "assertion": "CONTESTS claims both active when gold expects both active"
+    }
+  ],
+  "unit_test_expected_classifications": {
+    "test_cmp_supersedes_matches_supersedes": "expected_improvement, 0 regressions, 0 blockers",
+    "test_cmp_coexists_matches_coexists": "no diffs",
+    "test_cmp_contests_requires_r01_safe_behavior": "manual_adjudication (not expected_improvement)",
+    "test_cmp_gold_supersedes_shadow_contests_is_not_auto_pass": "NOT expected_improvement for any diff",
+    "test_cmp_shadow_unexpected_supersedes_is_detected": "regression or unexpected_supersedes",
+    "test_cmp_contests_does_not_silently_change_active_set": "no active_set diffs, no blockers"
+  },
+  "development_run": {
+    "run_id": "stage04b_20260715T073403_development",
+    "directory": "graph\\projects\\abu_modern\\shadow_replay\\runs\\stage04b\\development\\stage04b_20260715T073403_development",
+    "case_count": 7,
+    "total_regressions": 7,
+    "total_blockers": 0,
+    "total_unexplained": 0,
+    "regression_cases": [
+      {
+        "case_id": "tr_full_tkt_005b",
+        "regression_count": 6,
+        "regression_pattern": "cascading unexpected supersedes: obs01.active, obs02.active, obs03.active superseded beyond gold expected_invalidations"
+      },
+      {
+        "case_id": "tr_syn_revival_feature_flag",
+        "regression_count": 1,
+        "regression_pattern": "cp03: tr07.feature.enabled.v1 superseded but not in gold expected_invalidations (cascading from cp02 CONTESTS)"
+      }
+    ]
+  },
+  "fixture_inventory": {
+    "total_fixtures": 22,
+    "all_pass": true,
+    "all_deterministic": true
+  },
+  "development_input_gold_hashes": {
+    "tr_full_tkt_005b_gold": "ba7c53ff8ebf8cffac704322e7596d3ae58c1068260067f9a7d1cc0cd5892974",
+    "tr_syn_revival_feature_flag_gold": "f79ea4ec0f16d612f2c5694ac283b2a01ba3645a7d825963395e9726ad77dc40"
+  },
+  "metrics_diff_spec_hashes": {
+    "compute_set_metrics": "standard TP/FP/FN precision/recall/F1",
+    "runtime_fingerprint": "includes all shadow scripts, contracts, cwd, argv"
+  },
+  "R01_bundle_safety_audit": {
+    "hash": "R01 designed for provenance/revival conflicts, applies to specific manual-adjudication cases",
+    "constraint": "R01 does NOT auto-change benchmark relation scoring; CONTESTS does NOT auto-pass gold SUPERCEDES"
+  },
+  "post_rollback_comparator_hash": {
+    "sha256": "9A0B88ADB683B46558F725611B8F47497C4539D284031094D88D7EFD2A9C2252",
+    "changed_at": "2026-07-15T16:06:00Z",
+    "changes": [
+      "_classify_relation_diff: SUPERCEDES+CONTESTS → ordinary_regression (was manual_adjudication)",
+      "compare_step active_set diffs: adds safety_disposition and manual_review_metadata for CONTESTS",
+      "compare_step invalidation diffs: adds safety_disposition and manual_review_metadata for CONTESTS",
+      "compare_step must_include diffs: preserves manual_adjudication for CONTESTS with safety metadata",
+      "unit tests: replaced 6 weak tests with 6 strong tests + 2 positive-baseline tests (8 total)"
+    ]
+  }
+    "frozen_truth_table": {
+      "SUPERCEDES_gold_CONTESTS_shadow": "manual_adjudication (CURRENT - VIOLATION: should be ordinary_regression/blocker)",
+      "COEXISTS_gold_SUPERCEDES_shadow": "regression (false invalidation)",
+      "CONTESTS_gold_SUPERCEDES_shadow": "blocker or ordinary_regression",
+      "SUPERCEDES_gold_UNRELATED_shadow": "regression",
+      "unspecified_gold_SUPERCEDES_shadow": "unexpected supersede / false positive"
+    },
+    "required_truth_table": {
+      "SUPERCEDES_gold_CONTESTS_shadow": "ordinary_regression or blocker; MUST NOT be only manual_adjudication",
+      "CONTESTS_gold_SUPERCEDES_shadow": "ordinary_regression or blocker",
+      "COEXISTS_gold_SUPERCEDES_shadow": "unexpected invalidation / ordinary_regression",
+      "SUPERCEDES_gold_COEXISTS_shadow": "false-negative invalidation / ordinary_regression",
+      "CONTESTS_gold_CONTESTS_shadow": "manual_safe ONLY when gold/lifecycle allows AND R01 actually safe; does NOT override relation scoring",
+      "unspecified_gold_SUPERCEDES_shadow": "unexpected supersede / false positive invalidation"
+    }
+  },
+  "non_override_rules": [
+    "safety_disposition MUST NOT override relation_classification",
+    "manual_adjudication MUST NOT replace ordinary_regression",
+    "CONTESTS vs SUPERCEDES mismatch MUST remain regression/blocker regardless of R01 safety"
+  ]
+}

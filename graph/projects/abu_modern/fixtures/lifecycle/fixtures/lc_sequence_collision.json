@@ -1,0 +1,78 @@
+{
+  "fixture_id": "lc_sequence_collision",
+  "category": "sequence_collision",
+  "description": "Two events claiming the same lifecycle_seq for the same lifecycle_ref must be handled conservatively.",
+  "rationale": "lifecycle_seq is allocated by the mechanical layer; collisions indicate duplicate, out-of-order, or conflicting ingestion.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#lifecycle-seq-allocation",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_060",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "pipeline",
+        "payload": {
+          "entity_ref": "FEAT-2026-007",
+          "lifecycle_ref": "lc_feat_007",
+          "lifecycle_seq": 1,
+          "adjudication_key": "feature:FEAT-2026-007",
+          "node_type": "Feature",
+          "content": "Feature 007 scoped.",
+          "state": "open",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_061",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "pipeline",
+        "payload": {
+          "entity_ref": "FEAT-2026-007",
+          "lifecycle_ref": "lc_feat_007",
+          "lifecycle_seq": 2,
+          "adjudication_key": "feature:FEAT-2026-007",
+          "node_type": "Feature",
+          "content": "Feature 007 implementation started.",
+          "state": "in_progress",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_062",
+        "observed_at": "2026-07-03T10:00:00Z",
+        "effective_at": "2026-07-03T10:00:00Z",
+        "source": "pipeline_duplicate",
+        "payload": {
+          "entity_ref": "FEAT-2026-007",
+          "lifecycle_ref": "lc_feat_007",
+          "lifecycle_seq": 2,
+          "adjudication_key": "feature:FEAT-2026-007",
+          "node_type": "Feature",
+          "content": "Duplicate start event with colliding seq.",
+          "state": "in_progress",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_062",
+        "after_event_id": "evt_062",
+        "active_nodes": ["n_feat_started"],
+        "superseded_nodes": ["n_feat_scoped"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_feat_started", "target": "n_feat_scoped" }
+        ],
+        "quarantine": [
+          { "event_id": "evt_062", "reason": "lifecycle_seq_collision" }
+        ],
+        "assembler_must_include": ["n_feat_started"]
+      }
+    ]
+  }
+}

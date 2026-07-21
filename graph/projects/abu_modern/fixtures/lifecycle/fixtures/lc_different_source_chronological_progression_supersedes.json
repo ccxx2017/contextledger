@@ -1,0 +1,60 @@
+{
+  "fixture_id": "lc_different_source_chronological_progression_supersedes",
+  "category": "shadow_semantics_different_source",
+  "description": "同一 adjudication_key 下，不同来源但时间递增的声明应判定为 SUPERCEDES，而非 CONTESTS。",
+  "rationale": "验证 decision contract v2 的步骤 2（时间推进证据）和步骤 6（默认 SUPERCEDES）。release_note 和 incident_note 对同一 feature flag 的不同时间点报道是正常的时间推进。",
+  "rfc_reference": "reports/stage04c_adjudication_relation_contract_v2.md",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "ds_001",
+        "observed_at": "2026-06-01T08:00:00Z",
+        "effective_at": "2026-06-01T08:00:00Z",
+        "source": "release_note",
+        "payload": {
+          "entity_ref": "Alpha-feature",
+          "lifecycle_ref": "lc_alpha_feature",
+          "lifecycle_seq": 1,
+          "adjudication_key": "feature:Alpha-feature:state",
+          "node_type": "Fact",
+          "content": "Alpha feature enabled for pilot users.",
+          "state": "enabled",
+          "claim_id": "alpha.feature.enabled.v1"
+        }
+      },
+      {
+        "event_id": "ds_002",
+        "observed_at": "2026-06-01T10:00:00Z",
+        "effective_at": "2026-06-01T10:00:00Z",
+        "source": "incident_note",
+        "payload": {
+          "entity_ref": "Alpha-feature",
+          "lifecycle_ref": "lc_alpha_feature",
+          "lifecycle_seq": 2,
+          "adjudication_key": "feature:Alpha-feature:state",
+          "node_type": "Fact",
+          "content": "Alpha feature disabled due to performance regression.",
+          "state": "disabled",
+          "claim_id": "alpha.feature.disabled"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ds_002",
+        "after_event_id": "ds_002",
+        "active_nodes": ["n_alpha_disabled"],
+        "superseded_nodes": ["n_alpha_enabled_v1"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_alpha_disabled", "target": "n_alpha_enabled_v1" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_alpha_disabled"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "fixture_id": "lc_replay_determinism",
+  "category": "replay_determinism",
+  "description": "Replaying the same event stream with the same contracts and scripts must produce identical graph state and context bundle.",
+  "rationale": "Determinism is a prerequisite for shadow replay; non-determinism makes diff attribution impossible.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#determinism-invariant",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_070",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "pipeline",
+        "payload": {
+          "entity_ref": "DET-001",
+          "lifecycle_ref": "lc_det_001",
+          "lifecycle_seq": 1,
+          "adjudication_key": "entity:DET-001:v1",
+          "node_type": "Fact",
+          "content": "Determinism test fact A.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_071",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "pipeline",
+        "payload": {
+          "entity_ref": "DET-001",
+          "lifecycle_ref": "lc_det_001",
+          "lifecycle_seq": 2,
+          "adjudication_key": "entity:DET-001:v1",
+          "node_type": "Fact",
+          "content": "Determinism test fact B.",
+          "state": "implemented",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_run_1",
+        "after_event_id": "evt_071",
+        "active_nodes": ["n_det_b"],
+        "superseded_nodes": ["n_det_a"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_det_b", "target": "n_det_a" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_det_b"]
+      },
+      {
+        "checkpoint_id": "cp_run_2_identical",
+        "after_event_id": "evt_071",
+        "active_nodes": ["n_det_b"],
+        "superseded_nodes": ["n_det_a"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_det_b", "target": "n_det_a" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_det_b"],
+        "invariants": [
+          "graph_state_sha256 == cp_run_1.graph_state_sha256",
+          "context_bundle_sha256 == cp_run_1.context_bundle_sha256"
+        ]
+      }
+    ]
+  }
+}

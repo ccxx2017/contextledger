@@ -1,0 +1,146 @@
+{
+  "title": "Shadow Adjudication Decision Table v2",
+  "version": "2",
+  "status": "shadow_side_track",
+  "scope": "Executable rules for adjudication key composition, time-ordering, and multi-claim coexistence.",
+  "rules": [
+    {
+      "rule_id": "R001",
+      "domain": "adjudication_key",
+      "condition": "The adjudication_key MUST be derived from (canonical_entity, claim_dimension, scope).",
+      "action": "Format: {canonical_entity}:{claim_dimension}:{scope|_default_}. Two claims with the same key are candidates for SUPERCEDES. Different keys COEXIST.",
+      "covers": [
+        "lc_multi_claim_partial",
+        "tr_syn_partial_policy_clause"
+      ]
+    },
+    {
+      "rule_id": "R002",
+      "domain": "adjudication_key",
+      "condition": "canonical_entity defaults to mentions[0] when no resolver identity chain is available.",
+      "action": "The shadow adapter uses mentions[0] as entity_ref. In future, a resolver would resolve aliases to a stable canonical ID.",
+      "covers": [
+        "tr_alias_workspace_identity",
+        "tr_alias_quant_tools"
+      ]
+    },
+    {
+      "rule_id": "R003",
+      "domain": "adjudication_key",
+      "condition": "claim_dimension is extracted from claim.dimension if available, else inferred from claim_id prefix.",
+      "action": "For gold trajectories without explicit dimension: tr03.timeout.30s -> dimension='timeout', tr03.retries.2 -> dimension='retries'. The claim_id heuristics use the second segment after the first dot.",
+      "covers": [
+        "tr_syn_partial_policy_clause",
+        "tr_syn_partial_checklist_clause"
+      ]
+    },
+    {
+      "rule_id": "R004",
+      "domain": "adjudication_key",
+      "condition": "When claim_dimension is the same AND adjudication_key is identical, the later event SUPERCEDES the earlier one (same channel, same entity, same dimension, same scope).",
+      "action": "This is the normal lifecycle progression case. E.g., tr_full_tkt_005b: all claims have dimension='ticket_state' (or inferred from 'active' in claim_id) -> same key -> SUPERCEDES.",
+      "covers": [
+        "tr_full_tkt_005b",
+        "tr_full_tkt_006",
+        "tr_revival_round5x"
+      ]
+    },
+    {
+      "rule_id": "R005",
+      "domain": "adjudication_key",
+      "condition": "When claim_dimension differs but canonical_entity is the same, the claims COEXIST.",
+      "action": "Different dimensions (timeout vs retries vs audit) under the same entity must not SUPERCEDE each other. The adjudication keys differ, so the adjudicator produces COEXISTS edges.",
+      "covers": [
+        "lc_multi_claim_partial",
+        "tr_syn_partial_policy_clause"
+      ]
+    },
+    {
+      "rule_id": "R006",
+      "domain": "adjudication_key",
+      "condition": "When scope differs but canonical_entity and dimension are the same, and the gold annotation indicates conditional/parallel exception, the claims COEXIST.",
+      "action": "Example: tr_syn_conditional_region_exception: same entity='Deployment rule', same dimension='trading' but scope differs (global vs tokyo_sim). The adapter should inject scope from the observation source or statement content. In v2, scope is null (needs resolver extension).",
+      "covers": [
+        "tr_syn_conditional_region_exception",
+        "tr_syn_non_invalidation_parallel_targets"
+      ]
+    },
+    {
+      "rule_id": "R007",
+      "domain": "relation",
+      "condition": "COEXISTS edges point from older node to newer node.",
+      "action": "If node A was created before node B, the edge is A -> B with relation=COEXISTS. Both remain active.",
+      "covers": [
+        "lc_two_lifecycles_no_kill",
+        "lc_legacy_migration"
+      ]
+    },
+    {
+      "rule_id": "R008",
+      "domain": "relation",
+      "condition": "Different source channels for the same adjudication_key produce CONTESTS (provenance conflict).",
+      "action": "Same channel + same key = SUPERCEDES. Different channel + same key = CONTESTS. Neither party is superseded; both remain active.",
+      "covers": [
+        "lc_diff_source_conflict",
+        "tr_syn_revival_feature_flag",
+        "tr_syn_provenance_conflict",
+        "tr_prov_run54b"
+      ]
+    },
+    {
+      "rule_id": "R009",
+      "domain": "time_ordering",
+      "condition": "observed_at is the ledger ordering key. Events are adjudicated in observed_at order.",
+      "action": "If event B has observed_at > event A, B is processed after A regardless of effective_at ordering.",
+      "covers": [
+        "lc_late_arrival",
+        "tr_syn_out_of_order_inventory_present"
+      ]
+    },
+    {
+      "rule_id": "R010",
+      "domain": "time_ordering",
+      "condition": "If event B has effective_at < event A, and B arrives after A (observed_at_B > observed_at_A), B must NOT SUPERCEDE A.",
+      "action": "This is the late-arrival rule. The adjudicator should check effective_at comparison: if B's effective_at < A's effective_at, and B is processed after A, B should not replace A. Instead, B and A should coexist (B's statement is about an earlier period). If effective_at is missing or equal, late-arriving event COEXISTS unless the gold explicitly expects it to SUPERCEDE.",
+      "covers": [
+        "tr_syn_out_of_order_inventory_present"
+      ]
+    },
+    {
+      "rule_id": "R011",
+      "domain": "time_ordering",
+      "condition": "When effective_at is missing, the event is processed as arriving at observed_at. Late arrivals without effective_at default to COEXISTS with the current active node of the same dimension.",
+      "action": "Conservative default: do not allow late-arriving events (without effective_at) to replace existing active nodes.",
+      "covers": [
+        "lc_late_arrival"
+      ]
+    },
+    {
+      "rule_id": "R012",
+      "domain": "terminal_state",
+      "condition": "A new node with state='cancelled' is terminal. It supersedes its predecessor and is itself marked superseded immediately.",
+      "action": "The adjudicator marks a cancelled node as superseded in the same patch, so it does not appear in the active set.",
+      "covers": [
+        "lc_revival"
+      ]
+    },
+    {
+      "rule_id": "R013",
+      "domain": "revival",
+      "condition": "A non-terminal event for an entity that previously had a terminal node (state='cancelled') is a REVIVES signal.",
+      "action": "The adjudicator detects terminal predecessors via entity_ref + state='cancelled'. It emits REVIVES edges to the terminal node and derived_from edges to the canonical origin.",
+      "covers": [
+        "lc_revival"
+      ]
+    },
+    {
+      "rule_id": "R014",
+      "domain": "alias",
+      "condition": "When alias_hints are present and none match existing lifecycle_refs for the entity, the resolution MUST abstain and quarantine the event.",
+      "action": "False merge is more dangerous than missed merge. Low-confidence alias resolution must quarantine.",
+      "covers": [
+        "lc_alias_abstain"
+      ]
+    }
+  ]
+}

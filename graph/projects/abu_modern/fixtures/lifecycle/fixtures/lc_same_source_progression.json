@@ -1,0 +1,70 @@
+{
+  "fixture_id": "lc_same_source_progression",
+  "category": "input_adapter",
+  "description": "Same channel (abu_modern_turn) observations for same entity must SUPERCEDES, not CONTESTS.",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_ss_01",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "abu_modern_turn",
+        "payload": {
+          "entity_ref": "TKT-001",
+          "lifecycle_ref": "lc_tkt_001",
+          "lifecycle_seq": 1,
+          "adjudication_key": "tkt:TKT-001",
+          "node_type": "Fact",
+          "content": "Ticket opened",
+          "state": "open",
+          "claim_id": "tkt.001.v1",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_ss_02",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "abu_modern_turn",
+        "payload": {
+          "entity_ref": "TKT-001",
+          "lifecycle_ref": "lc_tkt_001",
+          "lifecycle_seq": 2,
+          "adjudication_key": "tkt:TKT-001",
+          "node_type": "Fact",
+          "content": "Ticket updated",
+          "state": "in_progress",
+          "claim_id": "tkt.001.v2",
+          "alias_hints": null
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_ss_02",
+        "after_event_id": "evt_ss_02",
+        "active_nodes": [
+          "n_tkt_001_v2"
+        ],
+        "superseded_nodes": [
+          "n_tkt_001_v1"
+        ],
+        "pending_nodes": [],
+        "relations": [
+          {
+            "relation_type": "supersedes",
+            "source": "n_tkt_001_v2",
+            "target": "n_tkt_001_v1"
+          }
+        ],
+        "quarantine": [],
+        "assembler_must_include": [
+          "n_tkt_001_v2"
+        ]
+      }
+    ]
+  }
+}

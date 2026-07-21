@@ -1,0 +1,182 @@
+[
+  {
+    "token": "required",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S001_state_value_whitelist",
+    "evidence_source": "tr_syn_partial_checklist_clause claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "not_required",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S001_state_value_whitelist",
+    "evidence_source": "tr_syn_partial_checklist_clause claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "wide",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S002_dimension_state_value",
+    "evidence_source": "tr_syn_out_of_order_price_band_present claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "narrow",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S002_dimension_state_value",
+    "evidence_source": "tr_syn_out_of_order_price_band_present claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "active",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S003_lifecycle_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "inactive",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S003_lifecycle_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "open",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S003_lifecycle_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "closed",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S003_lifecycle_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "implemented",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "deployed",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "cancelled",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "abandoned",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "blocked",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "allowed",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "enabled",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "tr_syn_revival_feature_flag claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "disabled",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S004_terminal_state_value",
+    "evidence_source": "tr_syn_revival_feature_flag claim.value==segment",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "approved",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S005_review_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "rejected",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S005_review_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "pending",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S005_review_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  },
+  {
+    "token": "resolved",
+    "semantic_role": "state_value",
+    "applicable_claim_schema": "phase05_v2+",
+    "normalization_outcome": "_default_",
+    "rule_id": "S005_review_state_value",
+    "evidence_source": "general_state_value_pattern",
+    "fallback_behavior": "abstain_with_quarantine"
+  }
+]

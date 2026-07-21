@@ -1,0 +1,60 @@
+{
+  "fixture_id": "lc_alias_abstain",
+  "category": "alias_abstain",
+  "description": "When an alias hint points to the wrong lifecycle, the resolver must abstain and the event must be quarantined or marked provisional.",
+  "rationale": "Low-confidence resolution must not silently merge nodes into the wrong lifecycle.",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md#resolver-abstain",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_050",
+        "observed_at": "2026-07-01T10:00:00Z",
+        "effective_at": "2026-07-01T10:00:00Z",
+        "source": "ticketing",
+        "payload": {
+          "entity_ref": "TKT-2026-005B",
+          "lifecycle_ref": "lc_tkt_005b_prod",
+          "lifecycle_seq": 1,
+          "adjudication_key": "ticket:TKT-2026-005B:prod",
+          "node_type": "Issue",
+          "content": "Production ticket 005B opened.",
+          "state": "open",
+          "alias_hints": null
+        }
+      },
+      {
+        "event_id": "evt_051",
+        "observed_at": "2026-07-02T10:00:00Z",
+        "effective_at": "2026-07-02T10:00:00Z",
+        "source": "ticketing",
+        "payload": {
+          "entity_ref": "TKT-2026-005B",
+          "lifecycle_ref": null,
+          "lifecycle_seq": null,
+          "adjudication_key": null,
+          "node_type": "Issue",
+          "content": "Abbreviated 005B report arrives with alias hint pointing to staging lifecycle.",
+          "state": "open",
+          "alias_hints": ["005B-staging"]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_051",
+        "after_event_id": "evt_051",
+        "active_nodes": ["n_tkt_005b_prod"],
+        "superseded_nodes": [],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [
+          { "event_id": "evt_051", "reason": "resolver_abstain_alias_mismatch" }
+        ],
+        "assembler_must_include": ["n_tkt_005b_prod"]
+      }
+    ]
+  }
+}

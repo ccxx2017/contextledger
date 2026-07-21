@@ -1,0 +1,20 @@
+CP: cp_after_obs01
+  diff_counts: {'blocker': 0, 'regression': 0, 'expected_schema_change': 0, 'expected_improvement': 0, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 0}
+CP: cp_after_obs02
+  invalidation: tr_full_tkt_005b.obs01.active -> expected_improvement
+  diff_counts: {'blocker': 0, 'regression': 0, 'expected_schema_change': 0, 'expected_improvement': 1, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 1}
+CP: cp_after_obs03
+  invalidation: tr_full_tkt_005b.obs02.active -> expected_improvement
+  invalidation: tr_full_tkt_005b.obs01.active -> regression
+  diff_counts: {'blocker': 0, 'regression': 1, 'expected_schema_change': 0, 'expected_improvement': 1, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 2}
+CP: cp_after_obs04
+  invalidation: tr_full_tkt_005b.obs03.active -> expected_improvement
+  invalidation: tr_full_tkt_005b.obs02.active -> regression
+  invalidation: tr_full_tkt_005b.obs01.active -> regression
+  diff_counts: {'blocker': 0, 'regression': 2, 'expected_schema_change': 0, 'expected_improvement': 1, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 3}
+CP: cp_after_obs05
+  invalidation: tr_full_tkt_005b.obs04.active -> expected_improvement
+  invalidation: tr_full_tkt_005b.obs03.active -> regression
+  invalidation: tr_full_tkt_005b.obs02.active -> regression
+  invalidation: tr_full_tkt_005b.obs01.active -> regression
+  diff_counts: {'blocker': 0, 'regression': 3, 'expected_schema_change': 0, 'expected_improvement': 1, 'unexplained': 0, 'manual_adjudication': 0, 'unexpected_supersedes': 0, 'total': 4}

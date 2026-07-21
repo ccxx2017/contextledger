@@ -1,0 +1,61 @@
+{
+  "run_id": "shadow_2026-07-13_lc_provenance_conflict",
+  "generated_at": "2026-07-13T10:45:00Z",
+  "inputs": {
+    "fixture_id": "lc_provenance_conflict",
+    "event_stream_hash": "abc123...",
+    "contract_hashes": {
+      "03_graph_schema.md": "4fe2a220...",
+      "05_phase1_lifecycle_schema.md": "3f176f5f..."
+    }
+  },
+  "checkpoints": [
+    {
+      "checkpoint_id": "cp_after_021",
+      "old_state_hash": "old_deadbeef...",
+      "shadow_state_hash": "shadow_cafebabe...",
+      "diffs": [
+        {
+          "kind": "node_status",
+          "node_id": "n_policy_waived",
+          "old_value": "superseded",
+          "shadow_value": "active",
+          "classification": "expected_improvement",
+          "rationale": "Old chain incorrectly collapsed provenance conflict to invalidation; shadow preserves both nodes as CONTESTS per RFC.",
+          "blocking": false
+        },
+        {
+          "kind": "relation",
+          "node_id": "n_policy_waived",
+          "old_value": "invalidates -> n_policy_two_person",
+          "shadow_value": "CONTESTS -> n_policy_two_person",
+          "classification": "expected_schema_change",
+          "rationale": "CONTESTS relation is new schema surface for provenance conflict.",
+          "blocking": false
+        },
+        {
+          "kind": "must_include",
+          "node_id": "n_policy_waived",
+          "old_value": false,
+          "shadow_value": true,
+          "classification": "expected_improvement",
+          "rationale": "Preserving conflict node improves recall of policy context.",
+          "blocking": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_diffs": 3,
+    "expected_improvement_count": 2,
+    "expected_schema_change_count": 1,
+    "regression_count": 0,
+    "unexplained_count": 0,
+    "blocking_count": 0,
+    "gate_decision": "PASS",
+    "notes": [
+      "All diffs are explained by RFC 05 schema changes.",
+      "must_include_recall unchanged."
+    ]
+  }
+}

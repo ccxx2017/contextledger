@@ -1,0 +1,89 @@
+{
+  "fixture_id": "lc_multi_claim_stream_no_fanout_to_unrelated_predecessors",
+  "category": "shadow_semantics_no_fanout",
+  "description": "多声明流场景：新声明只 SUPERCEDES 直接前驱，不 fan-out 到无关的历史节点。",
+  "rationale": "验证 predecessor selection 规则：candidate_predecessors 筛选后，只有 selected_predecessor 收到 SUPERCEDES 边。其他候选前驱保持 COEXISTS。",
+  "rfc_reference": "reports/stage04c_predecessor_selection_contract_v1.md#step-3",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "mf_001",
+        "observed_at": "2026-06-01T08:00:00Z",
+        "effective_at": "2026-06-01T08:00:00Z",
+        "source": "team_alpha",
+        "payload": {
+          "entity_ref": "Platform-X",
+          "lifecycle_ref": "lc_platform_x_status",
+          "lifecycle_seq": 1,
+          "adjudication_key": "status:Platform-X",
+          "node_type": "Fact",
+          "content": "Platform-X status: operational.",
+          "state": "operational",
+          "claim_id": "platform.x.operational"
+        }
+      },
+      {
+        "event_id": "mf_002",
+        "observed_at": "2026-06-01T09:00:00Z",
+        "effective_at": "2026-06-01T09:00:00Z",
+        "source": "team_beta",
+        "payload": {
+          "entity_ref": "Platform-X",
+          "lifecycle_ref": "lc_platform_x_status",
+          "lifecycle_seq": 2,
+          "adjudication_key": "status:Platform-X",
+          "node_type": "Fact",
+          "content": "Platform-X status: degraded.",
+          "state": "degraded",
+          "claim_id": "platform.x.degraded"
+        }
+      },
+      {
+        "event_id": "mf_003",
+        "observed_at": "2026-06-01T10:00:00Z",
+        "effective_at": "2026-06-01T10:00:00Z",
+        "source": "team_alpha",
+        "payload": {
+          "entity_ref": "Platform-X",
+          "lifecycle_ref": "lc_platform_x_status",
+          "lifecycle_seq": 3,
+          "adjudication_key": "status:Platform-X",
+          "node_type": "Fact",
+          "content": "Platform-X status: recovered.",
+          "state": "recovered",
+          "claim_id": "platform.x.recovered"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_mf_002",
+        "after_event_id": "mf_002",
+        "active_nodes": ["n_platform_degraded"],
+        "superseded_nodes": ["n_platform_operational"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_platform_degraded", "target": "n_platform_operational" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_platform_degraded"]
+      },
+      {
+        "checkpoint_id": "cp_after_mf_003",
+        "after_event_id": "mf_003",
+        "active_nodes": ["n_platform_recovered"],
+        "superseded_nodes": ["n_platform_degraded"],
+        "pending_nodes": [],
+        "relations": [
+          { "relation_type": "supersedes", "source": "n_platform_degraded", "target": "n_platform_operational" },
+          { "relation_type": "supersedes", "source": "n_platform_recovered", "target": "n_platform_degraded" }
+        ],
+        "quarantine": [],
+        "assembler_must_include": ["n_platform_recovered"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "determinism_all_pass": true,
+  "results": [
+    {
+      "fixture_id": "lc_alias_abstain",
+      "deterministic": true,
+      "state_hash": "f188b067c5a97f97",
+      "bundle_hash": "608832751f221030"
+    },
+    {
+      "fixture_id": "lc_conditional_different_scope",
+      "deterministic": true,
+      "state_hash": "1a473a27ec3a3bd1",
+      "bundle_hash": "cd6c6c97e1952fa0"
+    },
+    {
+      "fixture_id": "lc_diff_source_conflict",
+      "deterministic": true,
+      "state_hash": "14e494b4790c12bd",
+      "bundle_hash": "ad25f000797a8650"
+    },
+    {
+      "fixture_id": "lc_late_arrival",
+      "deterministic": true,
+      "state_hash": "c11b82a0ce73d1f1",
+      "bundle_hash": "5e13927efb4dc7e7"
+    },
+    {
+      "fixture_id": "lc_late_arrival_effective_time",
+      "deterministic": true,
+      "state_hash": "bd0b2eaf16a491f3",
+      "bundle_hash": "bdde1173769a90ca"
+    },
+    {
+      "fixture_id": "lc_late_arrival_missing_effective",
+      "deterministic": true,
+      "state_hash": "40daaf52086e2a99",
+      "bundle_hash": "a3fb9bab7949ff65"
+    },
+    {
+      "fixture_id": "lc_legacy_migration",
+      "deterministic": true,
+      "state_hash": "9fa825c9ad17dc42",
+      "bundle_hash": "c4d70924eeb12f80"
+    },
+    {
+      "fixture_id": "lc_multi_claim_different_predicates",
+      "deterministic": true,
+      "state_hash": "eab8e0a4a3b82967",
+      "bundle_hash": "f4189dbedec87f17"
+    },
+    {
+      "fixture_id": "lc_multi_claim_partial",
+      "deterministic": true,
+      "state_hash": "e53bc54e650a18e9",
+      "bundle_hash": "3b53759c3a53f5f3"
+    },
+    {
+      "fixture_id": "lc_parallel_target_coexist",
+      "deterministic": true,
+      "state_hash": "476042f5efc03ae0",
+      "bundle_hash": "9207a71ba4024ab9"
+    },
+    {
+      "fixture_id": "lc_provenance_conflict",
+      "deterministic": true,
+      "state_hash": "6ca45b38f3ee632b",
+      "bundle_hash": "4b133e40c624e57e"
+    },
+    {
+      "fixture_id": "lc_replay_determinism",
+      "deterministic": true,
+      "state_hash": "cf0f83c47a21e5bc",
+      "bundle_hash": "8bd46f7088a37be3"
+    },
+    {
+      "fixture_id": "lc_revival",
+      "deterministic": true,
+      "state_hash": "58e1b3a13db65833",
+      "bundle_hash": "4337f772c3b5d96a"
+    },
+    {
+      "fixture_id": "lc_same_source_progression",
+      "deterministic": true,
+      "state_hash": "814a5e40fbe2d31b",
+      "bundle_hash": "bbb34f1a152bab5d"
+    },
+    {
+      "fixture_id": "lc_sequence_collision",
+      "deterministic": true,
+      "state_hash": "54834f642a3796a6",
+      "bundle_hash": "ffcdd5ffdb154fde"
+    },
+    {
+      "fixture_id": "lc_two_lifecycles_no_kill",
+      "deterministic": true,
+      "state_hash": "9dc056f108e68132",
+      "bundle_hash": "6f1215fc9faf31b0"
+    }
+  ]
+}
