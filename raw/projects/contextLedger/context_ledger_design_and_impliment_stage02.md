@@ -3846,7 +3846,7 @@ A1 已完成后，暂不启动完整 G1、A2 或 H1。
 
     你的 config.toml 中已配置项目 contextledger，workspace 为：
 
-     1 D:/CCXXLESSON/contextledger/raw/projects/context_capture
+     1 D:/CCXXLESSON/contextledger/raw/projects/contextLedger
 
     该目录当前为空。assemble 命令会自动创建所需子目录。
 
