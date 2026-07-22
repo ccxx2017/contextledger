@@ -613,5 +613,19 @@ DeepSeek-v4-flash确认该思路是唯一正解：若仅做跨平台剪贴板工
 **第二，G1不得阻塞A1。** 方案将G1（工作台打磨）排于A1之前，但真正验收节点是A1——即“下次交接是否用脚本生成bundle”。若时间只够做一件事，应优先A1；G1仅按日常使用中实际阻塞点按需修补，不必作为前置里程碑完整实现。ADR增量批准方式正确，可避免每次方向微调都重新冻结大架构。
 
 按此执行即可。
+## A1最小Assembler完成，G1工作台打磨按需处理
+
+项目AI-Qwen-3.8-Max-Preview已完成A1（最小Assemble CLI）交付：新增`assembler`模块、CLI子命令、workspace路径管理，总计6个代码文件、29个测试（190通过/3失败，均为已有缺陷与本次无关）、3份文档（ADR-003、README更新、implementation_status更新）。使用方式为`context-capture assemble --project <project> --task "任务"`，可选项排除二级压缩或自定义输出路径，用户维护的`must_include.md`与`deprecated.md`会被自动读取，输出版本化Markdown至`bundles/bundle_YYYYMMDD_NNN.md`。后续A2（装配加入GUI）和H1（OpenClaw Injector Plugin）均为条件触发，仅在A1实际使用暴露需求或验证有效后才启动。
+
+G1（桌面工作台长期使用打磨）尚未开始，且按Claude-Fable-5裁决已被明确降级——G1不得阻塞A1，仅在日常使用遇到实际阻塞点时按需修补，不必作为前置里程碑完整实现。当前已完成仅A1，G1原规划的多标签页常驻工作台等内容未动。项目AI询问：是先规划G1具体内容，还是先在实际使用A1后再决定——此问题需用户决策，取决于当前采集与压缩流程是否已被实际阻塞。
+## A1最小Assembler完成并通过自用验收准备，开发暂停等待真实使用反馈
+
+军师AI在A1（最小Assemble CLI）完成后明确指示暂不启动完整G1（桌面工作台打磨）、A2（装配加入GUI）或H1（OpenClaw插件），而是先完成A1自用验收准备。具体要求包括：列出当前3个失败测试的名称、失败原因及首次出现commit，确认是否影响A1关键路径；确认A1新增测试全部通过；提供最小真实验收指南，涵盖must_include.md和deprecated.md的位置与格式、assemble命令用法、实际读取的一级/二级压缩范围、bundle输出路径及来源版本检查；禁止新增GUI、TaskGraph、MemoryPack、OpenClaw集成或复杂语义功能；完成后停止开发，等待用户使用A1完成真实项目交接并反馈，后续仅由使用中重复出现的阻塞点触发。
+
+项目AI（qwen3.8-max-preview）已完成全部准备工作并提交报告。三个失败测试分别涉及doctor诊断命令（FileNotFoundError未捕获）、list-projects工具命令（同样异常处理问题）和level2文件命名测试（硬编码日期导致今天日期不匹配），经分析均不影响采集、一级压缩、二级压缩、must_include/deprecated读取或assemble输出；A1新增的29个测试（source_reader 13个、assembler 8个、assemble_command 5个、集成测试3个）全部通过，无需修复。
+
+验收指南明确：项目workspace位于`D:/CCXXLESSON/contextledger/raw/projects/context_capture`，用户需先通过`clipboard`或`file`命令采集素材生成一级压缩（可选触发二级压缩），再在workspace根目录手动创建`must_include.md`（必含条目）和`deprecated.md`（废弃条目），格式均为自由Markdown。assemble命令为`context-capture assemble --project contextledger --task "任务描述"`，支持`--no-level1`、`--no-level2`、`--no-must-include`、`--no-deprecated`等排除选项，以及`--output`自定义路径。实际读取范围包括：task参数写入Current Task区块，must_include.md写入Must Follow，level1.md全部内容写入Current State，最新二级压缩文件写入Relevant Background，deprecated.md写入Do Not Resume，从level1中自动提取“未决事项”写入Open Questions，所有来源汇总至Sources区块并附带Capture ID。输出为版本化Markdown（`bundles/bundle_YYYYMMDD_NNN.md`），不覆盖已有文件，空区块自动跳过。验收标准为：下次需要让另一个AI接手时，直接使用assemble生成Bundle发给新AI，而非手工重写背景包。
+
+项目AI确认本次不再新增GUI、TaskGraph、MemoryPack、OpenClaw集成或复杂语义功能，开发已停止，等待用户完成一次真实项目交接后根据反馈决定后续步骤。
 # [/COMPAT]
 

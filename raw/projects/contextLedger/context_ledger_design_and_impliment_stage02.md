@@ -3680,3 +3680,322 @@ docs/architecture_v0.2.md
 ADR 的处理方式（不推翻 v0.1 文档、增量批准）我也赞同，这避免了每次方向微调都重新冻结一份大架构的老问题。
 
 按此执行即可。
+
+# 项目AI-Qwen-3.8-Max-Preview:
+A1 最小 Assembler 已完成
+
+    验证结果
+    ┌────────┬───────────────────────────────────────────────────┐
+    │ 检查   │ 结果                                              │
+    ├────────┼───────────────────────────────────────────────────┤
+    │ pytest │ 190 通过 / 3 失败（均为已有缺陷，与本次变更无关） │
+    ├────────┼───────────────────────────────────────────────────┤
+    │ ruff   │ ✅ 全部通过                                       │
+    ├────────┼───────────────────────────────────────────────────┤
+    │ mypy   │ ✅ 44 个源文件无问题                              │
+    └────────┴───────────────────────────────────────────────────┘
+
+    新增内容
+
+    代码（6 个文件）：
+     - src/context_capture/assembler/ — 新模块（models、source_reader、assembler）
+     - src/context_capture/commands/assemble.py — CLI 子命令
+     - cli.py — 注册 assemble 命令
+     - workspace.py — 新增 must_include、deprecated、bundles_directory 路径
+
+    测试（4 个文件，29 个测试）：
+     - test_source_reader.py（13）、test_assembler.py（8）、test_assemble_command.py（5）、test_assemble_e2e.py（3）
+
+    文档（3 个文件）：
+     - ADR-003-context-bundle-assembler.md、README 更新、implementation_status 更新
+
+    使用方式
+
+     1 # 基本用法
+     2 context-capture assemble --project contextledger --task "继续开发 Assembler"
+     3
+     4 # 排除某些来源
+     5 context-capture assemble -p contextledger -t "任务" --no-level2
+     6
+     7 # 自定义输出路径
+     8 context-capture assemble -p contextledger -t "任务" -o D:\output\bundle.md
+
+    用户可在 workspace 中维护 must_include.md（必含条目）和 deprecated.md（废弃条目），assemble 时自动读取。输出为版本化 Markdown 文件
+    bundles/bundle_YYYYMMDD_NNN.md。
+
+    后续路线（条件触发，当前不承诺）
+
+     - A2：将装配加入 GUI（仅在 A1 实际使用暴露需求后）
+     - H1：OpenClaw Injector Plugin（仅在 A1 验证有效后）
+     - 3 个已有测试失败待后续修复
+
+# 用户：
+G1完成了吗？
+# qwen3.8-max-preview：
+没有。G1（桌面工作台打磨）尚未开始，且按照架构讨论中的裁决，它被明确降级了：
+
+     │ Claude-Fable-5 裁决：「G1 不得阻塞 A1。若时间只够做一件事，应优先 A1；G1
+       仅按日常使用中实际阻塞点按需修补，不必作为前置里程碑完整实现。」
+
+    当前完成的是 A1（最小 Assembler CLI）。路线图中各步的状态：
+
+
+    ┌──────┬──────────────────────────┬─────────────────────────────────────┐
+    │ 步骤 │ 内容                     │ 状态                                │
+    ├──────┼──────────────────────────┼─────────────────────────────────────┤
+    │ A1   │ 最小 Assemble CLI        │ ✅ 已完成                           │
+    ├──────┼──────────────────────────┼─────────────────────────────────────┤
+    │ G1   │ 桌面工作台长期使用打磨   │ ❌ 未开始（按需修补，非前置里程碑） │
+    ├──────┼──────────────────────────┼─────────────────────────────────────┤
+    │ A2   │ 装配加入 GUI             │ ⏸ 条件触发（A1 使用暴露需求后）    │
+    ├──────┼──────────────────────────┼─────────────────────────────────────┤
+    │ H1   │ OpenClaw Injector Plugin │ ⏸ 条件触发                         │
+    └──────┴──────────────────────────┴─────────────────────────────────────┘
+
+
+    G1  originally 指的是将现有 tkinter 确认弹窗升级为多标签页常驻工作台（采集配置、二
+    级压缩、历史重试、设置等）。但讨论结论是：不应为 G1
+    单独投入一个完整里程碑，而是在日常使用中遇到实际阻塞点时按需修补。
+
+    需要我现在规划 G1 的具体内容，还是先在实际使用 A1 后再决定？
+
+# 军师AI-GPT-5.6-Sol:
+A1 已完成后，暂不启动完整 G1、A2 或 H1。
+
+请先完成 A1 自用验收准备：
+
+1. 列出当前3个失败测试的名称、失败原因、首次出现的commit，
+   并说明是否影响采集、一级压缩、二级压缩、must_include、
+   deprecated读取或assemble输出。
+2. 确认A1新增测试全部通过；若失败影响A1关键路径，先修复。
+3. 提供一个最小真实验收指南，包括：
+   - must_include.md位置和格式；
+   - deprecated.md位置和格式；
+   - assemble命令；
+   - 实际读取的一级/二级压缩范围；
+   - bundle输出路径；
+   - 如何检查来源和版本。
+4. 不新增GUI、TaskGraph、MemoryPack、OpenClaw集成或复杂语义功能。
+5. 完成后停止开发，等待用户使用A1完成真实项目交接并反馈。
+
+后续功能只能由真实使用中重复出现的阻塞点触发。
+
+# 项目AI-qwen3.8-max-preview:
+◆ 全部信息收集完毕。以下是完整报告。
+
+    ---
+
+    1. 三个失败测试分析
+
+
+    #: 1
+    测试: test_doctor.py::TestDoctor::test_doctor_missing_config
+    首次出现: a414912（M3/M4 里程碑）
+    失败原因: doctor.py 的 try/except 只捕获 ConfigurationError，不捕获
+    FileNotFoundError。测试 mock load_config 抛出
+    FileNotFoundError，但因项目根目录存在真实 config.toml，Path.exists()
+    检查通过，进入调用 load_config 的分支，异常未被捕获。
+    影响 A1？: 否
+    ────────────────────────────────────────
+    #: 2
+    测试: test_list_projects.py::TestListProjects::test_list_projects_missing_config
+    首次出现: a414912（M3/M4 里程碑）
+    失败原因: 同上模式。list_projects.py 只捕获 ConfigurationError，mock 抛出的
+    FileNotFoundError 穿透。
+    影响 A1？: 否
+    ────────────────────────────────────────
+    #: 3
+    测试: test_level2_service.py::TestBuildOutputPath::test_incremental_naming
+    首次出现: 2541b17（M5/M6 里程碑）
+    失败原因: 测试硬编码期望 level2_20260720_002.md，但 build_output_path() 使用
+    datetime.now() 生成当天日期（今天是 20260722）。是测试写法错误，不是生产代码 bug。
+    影响 A1？: 否
+
+
+    结论：三个失败均不影响采集、一级压缩、二级压缩、must_include/deprecated 读取或
+    assemble 输出。 它们分别涉及 doctor 诊断命令、list-projects 工具命令和 level2
+    文件命名测试——全部在 A1 关键路径之外。
+
+    ---
+
+    2. A1 新增测试确认
+
+     1 29 passed in 0.34s
+
+
+    ┌────────────────────────────────────────┬──────┬─────────────┐
+    │ 测试文件                               │ 数量 │ 状态        │
+    ├────────────────────────────────────────┼──────┼─────────────┤
+    │ tests/unit/test_source_reader.py       │ 13   │ ✅ 全部通过 │
+    ├────────────────────────────────────────┼──────┼─────────────┤
+    │ tests/unit/test_assembler.py           │ 8    │ ✅ 全部通过 │
+    ├────────────────────────────────────────┼──────┼─────────────┤
+    │ tests/unit/test_assemble_command.py    │ 5    │ ✅ 全部通过 │
+    ├────────────────────────────────────────┼──────┼─────────────┤
+    │ tests/integration/test_assemble_e2e.py │ 3    │ ✅ 全部通过 │
+    └────────────────────────────────────────┴──────┴─────────────┘
+
+
+    无需修复。
+
+    ---
+
+    3. 最小真实验收指南
+
+    3.1 前置条件
+
+    你的 config.toml 中已配置项目 contextledger，workspace 为：
+
+     1 D:/CCXXLESSON/contextledger/raw/projects/context_capture
+
+    该目录当前为空。assemble 命令会自动创建所需子目录。
+
+    3.2 第一步：先积累素材（如果还没有）
+
+    assemble 从已有的一级/二级压缩中读取内容。如果 workspace
+    中还没有数据，先做一次采集：
+
+     1 # 从剪贴板采集（复制一段对话后运行）
+     2 .venv\Scripts\python -m context_capture clipboard -p contextledger
+
+     4 # 或从文件采集
+     5 .venv\Scripts\python -m context_capture file -f "D:\path\to\conversation.md" -p
+       contextledger
+
+    采集后 workspace 中会生成：
+     - raw/captures.md — 原始内容
+     - compressed/level1.md — 一级压缩（assemble 的主要来源）
+
+    可选：触发二级压缩：
+     1 .venv\Scripts\python -m context_capture compress-level2 -p contextledger -i
+       "按主题分类总结"
+    生成 compressed/level2/level2_YYYYMMDD_001.md。
+
+    3.3 第二步：创建 must_include.md 和 deprecated.md
+
+    在 workspace 根目录手动创建这两个文件（可选，不存在时 assemble 会跳过对应区块）：
+
+    位置：
+     1 D:\CCXXLESSON\contextledger\raw\projects\context_capture\must_include.md
+     2 D:\CCXXLESSON\contextledger\raw\projects\context_capture\deprecated.md
+
+    格式：自由 Markdown，无强制结构。 示例：
+
+    must_include.md：
+
+     1 - 原始对话只追加不覆盖，任何处理不得修改 raw/ 目录
+     2 - API 密钥仅存于环境变量 CONTEXT_CAPTURE_API_KEY
+     3 - 所有摘要可重新生成，派生产物不是权威源
+     4 - 项目定位为个人自用工具，不做商品化架构
+
+    deprecated.md：
+
+     1 - Chrome 扩展 + Native Messaging 方案已取消（ADR-001 后确认）
+     2 - 复杂 lifecycle 语义工程已冻结，不恢复
+     3 - TaskGraph 不作为使用前提，仅为可选高级处理器
+     4 - 不做定量 benchmark 评测，价值由使用体验判断
+
+    3.4 第三步：运行 assemble
+
+     1 .venv\Scripts\python -m context_capture assemble ^
+     2   --project contextledger ^
+     3   --task "向新AI交接 Context Capture Workbench
+       项目，需要理解架构现状和下一步方向"
+
+    参数说明：
+
+
+    ┌───────────────────┬────────────────────────────────────────────────────────┐
+    │ 参数              │ 作用                                                   │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --project / -p    │ 项目 ID（对应 config.toml 中的 [projects.xxx]）        │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --task / -t       │ 当前任务描述（必填，写入 Bundle 的 Current Task 区块） │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --no-level1       │ 排除一级压缩来源                                       │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --no-level2       │ 排除二级压缩来源                                       │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --no-must-include │ 排除 must_include.md                                   │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --no-deprecated   │ 排除 deprecated.md                                     │
+    ├───────────────────┼────────────────────────────────────────────────────────┤
+    │ --output / -o     │ 自定义输出路径（默认写入 workspace/bundles/）          │
+    └───────────────────┴────────────────────────────────────────────────────────┘
+
+
+    3.5 实际读取范围
+
+
+    ┌────────────────────────┬────────────────────────────────────┬─────────────┐
+    │ 来源                   │ 读取内容                           │ 写入区块    │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ --task 参数            │ 用户输入的任务描述                 │ Current     │
+    │                        │                                    │ Task        │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ must_include.md        │ 整个文件内容                       │ Must Follow │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ compressed/level1.md   │ 整个文件（所有已积累的一级压缩）   │ Current     │
+    │                        │                                    │ State       │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ compressed/level2/*.md │ 仅最新一个 level2                  │ Relevant    │
+    │                        │ 文件（按文件名排序取最大）         │ Background  │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ deprecated.md          │ 整个文件内容                       │ Do Not      │
+    │                        │                                    │ Resume      │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ level1 中的 ###        │ 自动提取所有未决条目               │ Open        │
+    │ 未决事项               │                                    │ Questions   │
+    ├────────────────────────┼────────────────────────────────────┼─────────────┤
+    │ 以上所有来源           │ 自动汇总文件路径和 Capture ID      │ Sources     │
+    └────────────────────────┴────────────────────────────────────┴─────────────┘
+
+
+    空区块自动跳过——如果某个来源文件不存在或为空，对应区块不会出现在输出中。
+
+    3.6 Bundle 输出路径
+
+     1 D:\CCXXLESSON\contextledger\raw\projects\context_capture\bundles\bundle_20260722
+       _001.md
+
+     - 版本化命名：bundle_YYYYMMDD_NNN.md
+     - 同一天多次运行递增编号（_001、_002、…）
+     - 不覆盖已有文件
+
+    3.7 检查来源和版本
+
+    打开生成的 Bundle 文件，末尾的 Sources 区块列出：
+
+     1 ## Sources
+     2
+     3 **来源文件：**
+
+     5 - `D:\...\compressed\level1.md`
+     6 - `D:\...\compressed\level2\level2_20260722_001.md`
+     7 - `D:\...\must_include.md`
+     8 - `D:\...\deprecated.md`
+
+     10 **引用的 Capture ID：**
+     11
+     12 - `cap001aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
+     13 - `cap002bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`
+
+    每个 Capture ID 可回溯到 raw/captures.md 和 raw/captures.jsonl 中的原始记录。
+
+    3.8 验收标准
+
+     │ 下次需要让另一个 AI 接手项目时，运行 `assemble` 命令生成 Bundle，将 Bundle
+       内容发给新 AI，而不是手工重新编写背景包。
+
+    如果生成的 Bundle 结构合理、来源可追溯、确实省去了手工整理的时间，则 A1 验收通过。
+
+    ---
+
+    4. 确认不做
+
+    不新增 GUI、TaskGraph、MemoryPack、OpenClaw 集成或复杂语义功能。
+
+    5. 开发停止
+
+    A1 自用验收准备完成。等待你使用 assemble
+    完成一次真实项目交接后反馈。后续功能仅由真实使用中重复出现的阻塞点触发。
