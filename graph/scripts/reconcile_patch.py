@@ -22,6 +22,8 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
+import lifecycle_fields as lifecycle_fields_mod
+
 
 SOURCE_KEYS = (
     "source",
@@ -536,6 +538,19 @@ def reconcile(
                 new_node_id=new_id,
             )
         seen_new_ids.add(new_id)
+
+        # lifecycle 字段机械校验（RFC §4.2/§13）：只约束携带 lifecycle 语义的节点，
+        # legacy 节点零干预。
+        lifecycle_problems = lifecycle_fields_mod.validate_lifecycle_fields(new)
+        for problem in lifecycle_problems:
+            add_issue(
+                report,
+                "error",
+                "LIFECYCLE_FIELD_INVALID",
+                f"新节点 {new_id} 的 lifecycle 字段不合法：{problem}",
+                new_node_id=new_id,
+                problem=problem,
+            )
 
         if new_id in old_by_id:
             add_issue(

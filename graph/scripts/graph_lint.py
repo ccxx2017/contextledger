@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import lifecycle_lint_rules
+
 
 REQUIRED_RELATIONS = {
     "refines",
@@ -921,6 +923,9 @@ def lint_graph(graph_state: dict[str, Any]) -> dict[str, Any]:
                 node_type=node.get("type"),
                 evidence=evidence,
             )
+
+    # 8. lifecycle 规则（RFC §14 的 8 条；纯 legacy 图零干预，见 lifecycle_lint_rules）
+    lifecycle_lint_rules.run_lifecycle_lint(graph_state, report, add_issue)
 
     report["summary"]["errors"] = len(report["errors"])
     report["summary"]["warnings"] = len(report["warnings"])

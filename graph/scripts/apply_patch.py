@@ -145,6 +145,11 @@ def apply_patch(graph: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
             nodes[nid]["_superseded_reason"] = s["reason"]
 
     # 3. 添加 new_nodes
+    existing_event_ids = {
+        str(n.get("_event_id"))
+        for n in nodes.values()
+        if isinstance(n, dict) and n.get("_event_id")
+    }
     for n in patch.get("new_nodes", []):
         if not isinstance(n, dict):
             continue
@@ -154,6 +159,12 @@ def apply_patch(graph: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         if nid in nodes:
             raise ValueError(f"new_node node_id 已存在: {nid}")
         item = dict(n)
+        # lifecycle 幂等：同一 event_id 不重复落图（adjudicator duplicate_noop 的兜底闸）
+        event_id = item.get("_event_id")
+        if event_id and str(event_id) in existing_event_ids:
+            continue
+        if event_id:
+            existing_event_ids.add(str(event_id))
         if patch_turn is not None:
             item.setdefault("created_turn", patch_turn)
         nodes[nid] = item

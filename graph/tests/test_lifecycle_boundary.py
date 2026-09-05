@@ -244,15 +244,15 @@ class LifecycleBoundaryTest(unittest.TestCase):
         )
 
     def test_provenance_conflict_yields_contests_not_silent_overwrite(self):
-        """provenance 冲突：同 key 同槽位、来源冲突时 CONTESTS，不得静默取代。"""
+        """provenance 冲突：同 key 同槽位、来源冲突且语义互斥、无明确时间推进时 CONTESTS。"""
         graph = make_graph([
             make_node("n_0001", "price-band", "区间 50-60", lifecycle_ref="lc-price",
-                      state_slot="band", source="tool:pricing-api"),
+                      state_slot="band", state="band-50-60", source="tool:pricing-api"),
         ])
         event = make_event(
             "ev_002", "2026-09-05T10:00:00Z", "price-band", "区间 55-65",
             lifecycle_ref="lc-price", state_slot="band", lifecycle_seq=2,
-            source="tool:market-feed",
+            state="band-55-65", source="tool:market-feed",
         )
         new_graph, decision = run_decision(graph, event, next_node_id="n_0002")
 

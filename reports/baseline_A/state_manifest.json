@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T13:46:30.206190+00:00",
-  "generated_at_utc": "2026-09-05T13:46:30Z",
+  "generated_at": "2026-09-05T14:19:36.979839+00:00",
+  "generated_at_utc": "2026-09-05T14:19:36Z",
   "project_id": "abu_modern",
   "manifest_generation": {
     "script_path": "graph/scripts/generate_state_manifest.py",
@@ -13,11 +13,11 @@
     ]
   },
   "git": {
-    "branch": "main",
-    "commit": "4d81873d72bb98e3f39151b5eab5749e1bd11ae4",
-    "base_commit_on_main": "4d81873d72bb98e3f39151b5eab5749e1bd11ae4",
+    "branch": "phase1-lifecycle-mainchain",
+    "commit": "8c6144efa52cf6347370608dc01dff14c869921a",
+    "base_commit_on_main": "1ccb733d0d18c13bcd7523bfc83c212835615e23",
     "working_tree_clean_at_generation": false,
-    "status_short_at_generation": "M contracts/07_turn_runtime.md\n M graph/projects/abu_modern/benchmark/v1_freeze/benchmark_v1_freeze_manifest.json\nA  graph/projects/abu_modern/phase0_manual/README.md\nA  graph/projects/abu_modern/phase0_manual/graph_state.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_001.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_002.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_003.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/assembly_rejection_budget2_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_002_budget2_reject.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_004_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_001.legacy_manual.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_004_budget4.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/phase0_execution_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_004_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_004_budget4.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/turn_002_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_002_preconditions.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_003_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_004_candidate_pending_semantics.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_004_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_005_execution_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/turn_005_seal_report.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_001.rerun.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_004.json\n M graph/projects/abu_modern/reports/lint_baseline.json\n M graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py\n M graph/scripts/execute_commands.md\n M graph/scripts/generate_benchmark_v1_freeze.py\n M graph/scripts/generate_state_manifest.py\n M graph/scripts/invoke_extractor.py\n M graph/scripts/replay_phase0_seal.py\n M graph/scripts/run_auto_turn.py\n M graph/scripts/smoke_test_commands.md\n M graph/scripts/verify_canonical_evidence_hashes.py\n M graph/tests/smoke/taskgraph_contract/graph_state.after_001.json\n M reports/current_graph_lint_report.json\n?? graph/projects/abu_modern/host_integration/\n?? graph/projects/abu_modern/phase05_replay/\n?? graph/projects/abu_modern/quarantine/quarantine_register.json\n?? graph/scripts/quarantine_register.py\n?? graph/scripts/replay_and_eval.py\n?? reports/quarantine_register_check.json\n?? runbook/baseline_replay.md"
+    "status_short_at_generation": "M graph/scripts/apply_patch.py\n M graph/scripts/graph_lint.py\n M graph/scripts/reconcile_patch.py\n?? graph/scripts/lifecycle_adjudicator.py\n?? graph/scripts/lifecycle_fields.py\n?? graph/scripts/lifecycle_lint_rules.py\n?? reports/lifecycle_B/"
   },
   "schema": {
     "current_contract": "contracts/03_graph_schema.md",
@@ -53,6 +53,11 @@
       "status": "PROVISIONAL"
     },
     {
+      "file": "05_phase1_lifecycle_schema.md",
+      "content": "lifecycle_ref / adjudication_key / 时序权威 / REVIVES / resolver abstain / 遗留兼容",
+      "status": "PROVISIONAL"
+    },
+    {
       "file": "06_extractor_runtime.md",
       "content": "Extractor 调用 contract、env、输入输出与落盘约定",
       "status": "PROVISIONAL"
@@ -64,18 +69,18 @@
     }
   ],
   "runtime_components": {
-    "scripts_dir_sha256": "34de7625e8a213ef15d8849927fb4d458053b8a0dc1852fbf1831b4e1db56308",
+    "scripts_dir_sha256": "f8fd608a6c7a2424dd893273069f4c4bc91557c21c052e708b44ef5a62d1a589",
     "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
-    "contracts_dir_sha256": "bf5fcaa7add206c2082455c694bf76b4060f7e234218341c5d40a1d926a2b941",
+    "contracts_dir_sha256": "7287be0fefa92475bf15e47f78cbe42b239cb6132e978ec0d262057b71e746ad",
     "key_files": {
       "contracts/03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
       "contracts/05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
       "contracts/06_extractor_runtime.md": "a9b3b4df951e49a20d6abe55af86fa188446ea94a8dbc86e2525015cbe1e0ff0",
       "contracts/07_turn_runtime.md": "b6459bbc523af3f9d0d53c5d8421accbdba4431d8c4364b7dcbfb070db9a2460",
       "graph/scripts/entity_resolver.py": "652cbe8d715795e2512985bddc0cf5ec8e845c84a8687abac01a18f747d2b6a2",
-      "graph/scripts/reconcile_patch.py": "d721394f3de31c84914d21f0050c6c3fe79488d40648d08c39f49e1eb70f6aba",
-      "graph/scripts/apply_patch.py": "6b16436c311b4c85731162d0381ec5b62490e91030fb06134bcc51603199a359",
-      "graph/scripts/graph_lint.py": "4f94d8904dd4cf1a3a06dfcf78b796f0316be8975ac9f554076dce96b4b44499",
+      "graph/scripts/reconcile_patch.py": "1e2cae8b7ccac1267e2cd665f872292e0c5c0fc094517cff5a2d8ff6de028e4d",
+      "graph/scripts/apply_patch.py": "cb4a61d72d7b13e5b4b58e8f6283c00d0a5c6bad8c4346d5f4904144650ec90c",
+      "graph/scripts/graph_lint.py": "77352bad6278cbe1d9e6e704bfb9a7cd98abb87c11c8a6e9de591fac4c348ab9",
       "graph/prompts/extractor_system.md": "8b60483a8d0605c3d28c4e106412c4cf9aef7bb3cbaf8a8dd0f7cafacc735fa5"
     }
   },

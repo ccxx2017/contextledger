@@ -575,26 +575,6 @@
     {
       "level": "error",
       "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
-      "edge_id": "edge[173]",
-      "source": "n_0107",
-      "target": "n_0093",
-      "target_status": null,
-      "target_active": null
-    },
-    {
-      "level": "error",
-      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-      "message": "invalidates 边 edge[259] 指向的节点 n_0156 未标记为 superseded。",
-      "edge_id": "edge[259]",
-      "source": "n_0160",
-      "target": "n_0156",
-      "target_status": null,
-      "target_active": null
-    },
-    {
-      "level": "error",
-      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
       "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
       "edge_id": "edge[144]",
       "source": "n_0094",
@@ -633,6 +613,26 @@
         "open",
         "resolved"
       ]
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[259] 指向的节点 n_0156 未标记为 superseded。",
+      "edge_id": "edge[259]",
+      "source": "n_0160",
+      "target": "n_0156",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null
     }
   ],
   "introduced_warnings": [],
@@ -652,26 +652,6 @@
     {
       "level": "error",
       "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
-      "edge_id": "edge[173]",
-      "source": "n_0107",
-      "target": "n_0093",
-      "target_status": null,
-      "target_active": null
-    },
-    {
-      "level": "error",
-      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
-      "message": "invalidates 边 edge[259] 指向的节点 n_0156 未标记为 superseded。",
-      "edge_id": "edge[259]",
-      "source": "n_0160",
-      "target": "n_0156",
-      "target_status": null,
-      "target_active": null
-    },
-    {
-      "level": "error",
-      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
       "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
       "edge_id": "edge[144]",
       "source": "n_0094",
@@ -710,6 +690,26 @@
         "open",
         "resolved"
       ]
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[259] 指向的节点 n_0156 未标记为 superseded。",
+      "edge_id": "edge[259]",
+      "source": "n_0160",
+      "target": "n_0156",
+      "target_status": null,
+      "target_active": null
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null
     }
   ],
   "baseline_matched_warnings": [
