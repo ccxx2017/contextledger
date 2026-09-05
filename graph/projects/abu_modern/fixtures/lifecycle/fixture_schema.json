@@ -19,7 +19,17 @@
         "legacy_migration",
         "alias_abstain",
         "sequence_collision",
-        "replay_determinism"
+        "replay_determinism",
+        "conditional",
+        "multi_claim",
+        "parallel",
+        "partial_update",
+        "input_adapter",
+        "scope_normalization",
+        "shadow_semantics_different_source",
+        "shadow_semantics_no_fanout",
+        "shadow_semantics_predecessor_selection",
+        "shadow_semantics_true_conflict"
       ]
     },
     "description": { "type": "string" },

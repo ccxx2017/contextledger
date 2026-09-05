@@ -71,5 +71,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §9 (状态转移规则)"
 }

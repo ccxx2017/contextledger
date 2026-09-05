@@ -67,5 +67,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §7.2 (late arrival 处理)"
 }

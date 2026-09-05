@@ -64,5 +64,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §4.1 (三个键的职责拆分)"
 }

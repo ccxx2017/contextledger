@@ -18,6 +18,7 @@ graph 与 pack 之间的单一契约真源。
 | `03_graph_schema.md` | 图节点/边/失效语义 | PROVISIONAL |
 | `04_assembly.md` | Phase 1 Assembler v1 装配契约 | PROVISIONAL |
 | `05_entity_naming.md` | entity_ref 命名规范与最小 resolver / pending_merge 约定 | PROVISIONAL |
+| `05_phase1_lifecycle_schema.md` | lifecycle_ref / adjudication_key / 时序权威 / REVIVES / resolver abstain / 遗留兼容 | PROVISIONAL |
 | `06_extractor_runtime.md` | Extractor 调用 contract、env、输入输出与落盘约定 | PROVISIONAL |
 | `07_turn_runtime.md` | turn checkpoint、retry、目录约定、[L1]/[L2] 责任归属判定 | PROVISIONAL |
 

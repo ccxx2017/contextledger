@@ -66,5 +66,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §6.2 (Resolver 允许做的事)"
 }

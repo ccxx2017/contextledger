@@ -66,5 +66,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §8 (裁决关系类型)"
 }

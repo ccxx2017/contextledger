@@ -1,5 +1,5 @@
 {
-  "fixture_id": "lc_same_key_different_source_r01",
+  "fixture_id": "lc_same_key_different_source",
   "category": "provenance_conflict",
   "description": "Same entity, same dimension, same scope, two claims from different sources. Different sources on same lifecycle should trigger CONTESTS (not SUPERCEDES). R01 should not suppress the conflict marker.",
   "rationale": "Tests provenance conflict detection: same adjudication_key, different source → CONTESTS, both active, both must_include.",
@@ -65,5 +65,6 @@
         ]
       }
     ]
-  }
+  },
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §8 (CONTESTS)"
 }
