@@ -1,0 +1,42 @@
+{
+  "task_id": "abu_modern_phase0_manual",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0010",
+      "type": "Decision",
+      "content": "决策 3 已确认：阶段 1 的 Strategy Research Agent 采用 AOS-native 路线。",
+      "entity_ref": "strategy_research_agent.implementation_mode",
+      "state": null,
+      "status": "active",
+      "priority": "must_include",
+      "created_turn": 2,
+      "source": {
+        "raw_id": "abu_modern/s001/0002",
+        "span": [
+          12,
+          118
+        ]
+      }
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0009",
+      "reason": "turn_002 明确确认实现方式为 AOS-native，旧的待确认决策退出当前态。"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0010",
+      "target": "n_0009",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0010",
+      "target": "n_0003",
+      "relation": "supports"
+    }
+  ]
+}

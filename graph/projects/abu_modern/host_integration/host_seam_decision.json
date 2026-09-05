@@ -1,0 +1,125 @@
+{
+  "record_type": "host_seam_decision.v1",
+  "created_at": "2026-09-05",
+  "context": "按 GPT-6 评审工作包 D 要求，对当前实际锁定的宿主源码重新研判装配接缝；明确不沿用 pack/projects/contextLedger/context_ledger_secendary_ajustment.md 与 context_ledger_design_and_impliment_stage02_compact.md 中的任何旧结论。",
+  "method": "对本地源码 checkout 逐符号核实 hook 面，每项结论附 file:line 证据；缺版本钉扎的结论一律作废。",
+  "hosts": [
+    {
+      "host_name": "opencode",
+      "local_path": "D:/CCXXLESSON/opencode",
+      "repo_url": "git@github.com:anomalyco/opencode.git",
+      "branch": "dev",
+      "pinned_commit_sha": "dfeb1b5051a05b359bd4af711b204d2c0342c5f4",
+      "pinned_commit_date": "2026-06-27T22:25:40-04:00",
+      "workspace_version": "1.17.11",
+      "installed_runtime_version": "1.18.29 (npm opencode-ai, 与 checkout 存在版本偏移)",
+      "changelog": "仓库内无 CHANGELOG；github-v* 与 vX.Y.Z 为两条发布通道，本地无 1.18.29 对应标签",
+      "architecture": "终端编码 Agent（bun/turbo monorepo，session 循环 session/prompt.ts → LLM.Service → LLM.run → LLMRequestPrep.prepare）",
+      "qa": {
+        "Q1_llm_pre_call_hook_with_structured_payload": {
+          "verdict": "yes",
+          "evidence": [
+            "packages/plugin/src/index.ts: chat.params —— 插件级『Modify parameters sent to LLM』",
+            "packages/opencode/src/session/llm/request.ts:70 + packages/opencode/src/agent/agent.ts:381: experimental.chat.system.transform",
+            "packages/opencode/src/session/llm.ts:85 LLM.run → request.ts:56 LLMRequestPrep.prepare（prepare 位于 run 内部，llm.ts:106）"
+          ]
+        },
+        "Q2_inject_without_fork": {
+          "verdict": "yes",
+          "evidence": [
+            "chat.params / experimental.chat.messages.transform / experimental.chat.system.transform 均为插件 hook，无需 fork",
+            "注：LLM.run/LLMRequestPrep 本身是 core Service 内部 Effect.fn，只能改源码触及，插件路径靠 chat.params 覆盖注入需求"
+          ]
+        },
+        "Q3_pre_tool_call_block_or_rewrite": {
+          "verdict": "yes",
+          "evidence": [
+            "packages/plugin/src/index.ts: permission.ask —— output.status ∈ ask|deny|allow，可阻断",
+            "packages/plugin/src/index.ts:266 tool.execute.before —— output.args 可改写（不可阻断）"
+          ]
+        },
+        "Q4_stable_across_recent_releases": {
+          "verdict": "unknown",
+          "evidence": [
+            "无 CHANGELOG 可考；两个最有用的 seam 以 experimental. 前缀命名（官方自declared不稳定）",
+            "版本偏移未消除前不得视为已验证"
+          ]
+        }
+      },
+      "score_Q1_Q4": 3,
+      "notes": [
+        "旧结论一（secendary_ajustment L1916-2011）对 OpenCode 的 seam 名全部属实，但错误地把 before_prompt_build/before_tool_call 也归给 OpenCode —— 这两个属于 OpenClaw，OpenCode 源码 0 命中"
+      ]
+    },
+    {
+      "host_name": "openclaw",
+      "local_path": "D:/CCXXLESSON/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw.git",
+      "branch": "main",
+      "pinned_commit_sha": "c5b3f00d1173ad0131cf9faa45e893b15a333f7c",
+      "pinned_commit_date": "2026-04-15T12:14:34+01:00",
+      "workspace_version": "2026.4.14",
+      "installed_runtime_version": "无（本机未安装运行时）",
+      "changelog": "CHANGELOG.md 存在（1.1MB）；ContextEngine 插件槽为近期新增且持续破坏性变更（#50848/#44779 兼容 shim；#47437/#61718/#62179 持续加参）",
+      "architecture": "多通道消息网关（Telegram/Discord/Slack/iMessage/Feishu/QQ），agent 跑在内嵌 pi runner —— 不是终端编码 Agent",
+      "qa": {
+        "Q1_llm_pre_call_hook_with_structured_payload": {
+          "verdict": "yes",
+          "evidence": [
+            "src/plugins/hook-types.ts:57,88,129 before_prompt_build；注入点 src/agents/pi-embedded-runner/run/attempt.ts:1673",
+            "src/context-engine/types.ts:195 ingest / :240 assemble / :260 compact；ContextEngine 接口 :166"
+          ]
+        },
+        "Q2_inject_without_fork": {
+          "verdict": "yes",
+          "evidence": [
+            "before_prompt_build 暴露 prependSystemContext / appendSystemContext / systemPrompt / prompt",
+            "ContextEngine.assemble 可整体接管上下文供给"
+          ]
+        },
+        "Q3_pre_tool_call_block_or_rewrite": {
+          "verdict": "yes",
+          "evidence": [
+            "src/plugins/hook-types.ts:70,101,630 before_tool_call；阻断执行 src/agents/pi-tools.before-tool-call.ts:189,370；改写证据 src/gateway/tools-invoke-http.test.ts:499",
+            "默认 fail-closed：src/plugins/hook-runner-global.ts:44"
+          ]
+        },
+        "Q4_stable_across_recent_releases": {
+          "verdict": "partial",
+          "evidence": [
+            "before_prompt_build/before_tool_call 相对稳定；before_agent_start 正被 before_model_resolve/before_prompt_build 迁移取代（src/plugins/status.ts:119）",
+            "ContextEngine 三件套是全部被测面中最不稳定的（签名反复破坏，仓库自带运行时兼容 shim）"
+          ]
+        }
+      },
+      "score_Q1_Q4": 3,
+      "notes": [
+        "旧结论二（stage02_compact ~L580）中 before_agent_run 在 OpenClaw 源码 0 命中（实名 before_agent_start/before_agent_reply）；Context Engine 归属正确但被放在了错误的目标语境里",
+        "架构性否决点：消息网关的 chat-reply 管线不对应长程编码任务的 session/tool 循环"
+      ]
+    }
+  ],
+  "scoring_rule": "Q1-Q4 各 0/1 分，≥3 分入选；平手取 Q2+Q3 双是者；全部 <3 分则 decision=log_tail_adapter_only 降级为仅影子模式。",
+  "decision": "opencode_primary",
+  "decision_status": "provisional_pending_version_pin",
+  "decision_rationale": [
+    "两宿主 Q1-Q4 均 ≥3 分，平手依据 Q2+Q3 双是进入架构裁决",
+    "评审工作包 D 的首个场景是长程编码任务（方案取消/任务改派/旧工具结果晚到/任务恢复），需要的是编码 Agent 的 session 循环与工具调用面；OpenCode 是终端编码 Agent，OpenClaw 是消息网关，其管线不承载编码任务的工具循环",
+    "OpenCode 的插件面（chat.params 注入 + permission.ask 阻断 + tool.execute.before 改写）构成无 fork 的完整接缝"
+  ],
+  "preconditions_before_final": [
+    "消除版本偏移：checkout 停在 1.17.11+128 commits (dfeb1b50, 2026-06-27)，而实际运行的二进制是 1.18.29；须 checkout 到运行版本对应 tag（本地无该标签，需 fetch）或把 npm 包对齐到 checkout 版本",
+    "在钉扎后的 sha 上复核 chat.params 与 experimental.chat.messages/system.transform 的签名与调用点（load-bearing hooks 带 experimental. 前缀，无 CHANGELOG 可考）"
+  ],
+  "rejected_prior_conclusions": [
+    {
+      "source": "pack/projects/contextLedger/context_ledger_secendary_ajustment.md L1916-2011",
+      "rejected_because": "把 before_prompt_build/before_tool_call 归给 OpenCode（实为 OpenClaw hook，OpenCode 源码 0 命中）；LLM.run 接缝结论本身与源码相符但依赖内部 Effect.fn，插件化路径应以 chat.params 为准"
+    },
+    {
+      "source": "pack/projects/contextLedger/context_ledger_design_and_impliment_stage02_compact.md ~L580",
+      "rejected_because": "before_agent_run 在 OpenClaw 源码 0 命中（实名 before_agent_start，且正在被迁移废弃）；OpenClaw 消息网关架构与长程编码场景错配"
+    }
+  ],
+  "fallback": "若前置条件无法满足（版本对齐失败或 experimental seam 变动），回退 decision=log_tail_adapter_only，D 降级为仅影子模式，不硬做成对运行。"
+}

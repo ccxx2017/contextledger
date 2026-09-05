@@ -1,0 +1,599 @@
+{
+  "generated_at": "2026-09-05T13:46:30.206190+00:00",
+  "generated_at_utc": "2026-09-05T13:46:30Z",
+  "project_id": "abu_modern",
+  "manifest_generation": {
+    "script_path": "graph/scripts/generate_state_manifest.py",
+    "script_sha256": "3d8050b5b8593a592cc1efecce14bfab8d354950644461213d7f9724f5293c09",
+    "invocation_cwd": "D:\\CCXXLESSON\\contextledger",
+    "invocation_argv": [
+      "graph/scripts/generate_state_manifest.py",
+      "--out",
+      "reports/baseline_A/state_manifest.json"
+    ]
+  },
+  "git": {
+    "branch": "main",
+    "commit": "4d81873d72bb98e3f39151b5eab5749e1bd11ae4",
+    "base_commit_on_main": "4d81873d72bb98e3f39151b5eab5749e1bd11ae4",
+    "working_tree_clean_at_generation": false,
+    "status_short_at_generation": "M contracts/07_turn_runtime.md\n M graph/projects/abu_modern/benchmark/v1_freeze/benchmark_v1_freeze_manifest.json\nA  graph/projects/abu_modern/phase0_manual/README.md\nA  graph/projects/abu_modern/phase0_manual/graph_state.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_001.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_002.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_003.json\nA  graph/projects/abu_modern/phase0_manual/patches/patch_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/assembly_rejection_budget2_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_002_budget2_reject.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/assembly_report.turn_004_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_001.legacy_manual.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/context_bundle.turn_004_budget4.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/reports/lint_report.turn_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/phase0_execution_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/assembly_report.turn_004_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_001.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_002.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_003.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_003_pre_adjudication_budget4.json\nAM graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/reports/context_bundle.turn_004_budget4.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/reports/replay_turn_005/run/graph_state.turn_004.json\nA  graph/projects/abu_modern/phase0_manual/reports/turn_002_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_002_preconditions.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_003_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_004_candidate_pending_semantics.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_004_execution_report.md\nA  graph/projects/abu_modern/phase0_manual/reports/turn_005_execution_report.md\nAM graph/projects/abu_modern/phase0_manual/reports/turn_005_seal_report.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_001.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_001.rerun.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_002.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_003.json\nA  graph/projects/abu_modern/phase0_manual/run/graph_state.turn_004.json\n M graph/projects/abu_modern/reports/lint_baseline.json\n M graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py\n M graph/scripts/execute_commands.md\n M graph/scripts/generate_benchmark_v1_freeze.py\n M graph/scripts/generate_state_manifest.py\n M graph/scripts/invoke_extractor.py\n M graph/scripts/replay_phase0_seal.py\n M graph/scripts/run_auto_turn.py\n M graph/scripts/smoke_test_commands.md\n M graph/scripts/verify_canonical_evidence_hashes.py\n M graph/tests/smoke/taskgraph_contract/graph_state.after_001.json\n M reports/current_graph_lint_report.json\n?? graph/projects/abu_modern/host_integration/\n?? graph/projects/abu_modern/phase05_replay/\n?? graph/projects/abu_modern/quarantine/quarantine_register.json\n?? graph/scripts/quarantine_register.py\n?? graph/scripts/replay_and_eval.py\n?? reports/quarantine_register_check.json\n?? runbook/baseline_replay.md"
+  },
+  "schema": {
+    "current_contract": "contracts/03_graph_schema.md",
+    "current_contract_status": "PROVISIONAL",
+    "lifecycle_rfc": "contracts/05_phase1_lifecycle_schema.md",
+    "lifecycle_rfc_status": "RFC Draft",
+    "compatibility_mode": "legacy_entity_ref_fallback"
+  },
+  "contract_index": [
+    {
+      "file": "01_raw_anchors.md",
+      "content": "raw ID 与反向指针（脊柱）格式",
+      "status": "STABLE"
+    },
+    {
+      "file": "02_ownership.md",
+      "content": "任一知识正文的唯一归属",
+      "status": "STABLE"
+    },
+    {
+      "file": "03_graph_schema.md",
+      "content": "图节点/边/失效语义",
+      "status": "PROVISIONAL"
+    },
+    {
+      "file": "04_assembly.md",
+      "content": "Phase 1 Assembler v1 装配契约",
+      "status": "PROVISIONAL"
+    },
+    {
+      "file": "05_entity_naming.md",
+      "content": "entity_ref 命名规范与最小 resolver / pending_merge 约定",
+      "status": "PROVISIONAL"
+    },
+    {
+      "file": "06_extractor_runtime.md",
+      "content": "Extractor 调用 contract、env、输入输出与落盘约定",
+      "status": "PROVISIONAL"
+    },
+    {
+      "file": "07_turn_runtime.md",
+      "content": "turn checkpoint、retry、目录约定、[L1]/[L2] 责任归属判定",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "runtime_components": {
+    "scripts_dir_sha256": "34de7625e8a213ef15d8849927fb4d458053b8a0dc1852fbf1831b4e1db56308",
+    "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
+    "contracts_dir_sha256": "bf5fcaa7add206c2082455c694bf76b4060f7e234218341c5d40a1d926a2b941",
+    "key_files": {
+      "contracts/03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
+      "contracts/05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
+      "contracts/06_extractor_runtime.md": "a9b3b4df951e49a20d6abe55af86fa188446ea94a8dbc86e2525015cbe1e0ff0",
+      "contracts/07_turn_runtime.md": "b6459bbc523af3f9d0d53c5d8421accbdba4431d8c4364b7dcbfb070db9a2460",
+      "graph/scripts/entity_resolver.py": "652cbe8d715795e2512985bddc0cf5ec8e845c84a8687abac01a18f747d2b6a2",
+      "graph/scripts/reconcile_patch.py": "d721394f3de31c84914d21f0050c6c3fe79488d40648d08c39f49e1eb70f6aba",
+      "graph/scripts/apply_patch.py": "6b16436c311b4c85731162d0381ec5b62490e91030fb06134bcc51603199a359",
+      "graph/scripts/graph_lint.py": "4f94d8904dd4cf1a3a06dfcf78b796f0316be8975ac9f554076dce96b4b44499",
+      "graph/prompts/extractor_system.md": "8b60483a8d0605c3d28c4e106412c4cf9aef7bb3cbaf8a8dd0f7cafacc735fa5"
+    }
+  },
+  "patch_chain": {
+    "path": "graph/projects/abu_modern/patches",
+    "patch_count": 84,
+    "chain_sha256": "41abe86c213bd7e4cceb63d9702a742ce49cde657a98f24727783ef78fa02ad0",
+    "patches": [
+      {
+        "file": "patch_001.json",
+        "turn_id": 1,
+        "sha256": "b761023f7bf512b0327d2163f06490d2a4b9ce0bcc9c4984dcdf8efbf4982aed"
+      },
+      {
+        "file": "patch_002.json",
+        "turn_id": 2,
+        "sha256": "67ba6e35853a9ead69020e087318b91bf95e8b831fcad24e5aba0a65d4e83280"
+      },
+      {
+        "file": "patch_003.json",
+        "turn_id": 3,
+        "sha256": "1665cc1d1d7b8915f12d1b0c44e7c57949ed9aef4951fd9662fa195a5e189ac3"
+      },
+      {
+        "file": "patch_004.json",
+        "turn_id": 4,
+        "sha256": "3c3b1a603b261588966bad2711342917cdd8f2fce3cf6c06d2b67cbbfc2bc33a"
+      },
+      {
+        "file": "patch_005.json",
+        "turn_id": 5,
+        "sha256": "34b2a52f719bf2c0f0ca2fa5cef081c711217577ad51e01c8760de1e9e7471de"
+      },
+      {
+        "file": "patch_006.json",
+        "turn_id": 6,
+        "sha256": "ad28da084785ff1aa78dd6a6f26c002d0ecfd4ff2566a7db6f420101a918e483"
+      },
+      {
+        "file": "patch_007.json",
+        "turn_id": 7,
+        "sha256": "ff7acfc5e948881044e4b1e6d06e8b1e6955e4a9d4283963f19655e08556ea7a"
+      },
+      {
+        "file": "patch_008.json",
+        "turn_id": 8,
+        "sha256": "166c4a70d0c3b10ee1f2b1d49725912e3565a6b3b0f17462116a45a5c121a4e7"
+      },
+      {
+        "file": "patch_009.json",
+        "turn_id": 9,
+        "sha256": "e78f00a4460269284b20b94185c014cc783f96df8dcab408313ac5b16184025b"
+      },
+      {
+        "file": "patch_010.json",
+        "turn_id": 10,
+        "sha256": "663bb4fb8f08f03815e25c87e9cabcae9d3a1aa77a1389b8a1d616d83c75d05b"
+      },
+      {
+        "file": "patch_011.json",
+        "turn_id": 11,
+        "sha256": "65fbe1eddfbdc6bfc163bbca4001c2e87d4b66883fdcc671a48502fd21a7b61b"
+      },
+      {
+        "file": "patch_012.json",
+        "turn_id": 12,
+        "sha256": "3ec1b60c1f35391524de35ba8f4cc9e34cc96790d70b5df3ea1e2165cb6338b8"
+      },
+      {
+        "file": "patch_013.json",
+        "turn_id": 13,
+        "sha256": "af6e2b65fd6e290f84ce9b908b7f2c72c3a31814dafc39f912165c9dc54c347c"
+      },
+      {
+        "file": "patch_014.json",
+        "turn_id": 14,
+        "sha256": "02ae62cf5a0a18226379b3de97c03318304e246a23809a8071f7aa6ef0f74aef"
+      },
+      {
+        "file": "patch_015.json",
+        "turn_id": 15,
+        "sha256": "c3096ec5c25afff644bbb4734eec6c28885d973e7a7475f4acd6f2f044f11f61"
+      },
+      {
+        "file": "patch_016.json",
+        "turn_id": 16,
+        "sha256": "4984fbfe1190d314a36fb348669c1e798495db5dc71f7a628d3b6d325cdce35b"
+      },
+      {
+        "file": "patch_017.json",
+        "turn_id": 17,
+        "sha256": "a44bddd4749c95ac45d8d8cee07958235afeb39b70c872ec953dde724a74457a"
+      },
+      {
+        "file": "patch_018.json",
+        "turn_id": 18,
+        "sha256": "812e519a16ad226f179230b18dab220f046678edd2c06849491167d6abe1f738"
+      },
+      {
+        "file": "patch_019.json",
+        "turn_id": 19,
+        "sha256": "0be54b770e6bdd26c736dd1f82b75ffbbde03817c44b8681ceb21528bb2b350a"
+      },
+      {
+        "file": "patch_020.json",
+        "turn_id": 20,
+        "sha256": "2b7d884c7c809e380c83da9ff36a3c55124eaf9b3d3b385f89e9421210515037"
+      },
+      {
+        "file": "patch_021.json",
+        "turn_id": 21,
+        "sha256": "901c8649477a903b675e6c7154814f053ec973ba980abacc360f8781bd5605d4"
+      },
+      {
+        "file": "patch_022.json",
+        "turn_id": 22,
+        "sha256": "58739584b0f540546406fa03c5bcbfb5e416e2f5ab3d743b4d3fc5f81c6cce74"
+      },
+      {
+        "file": "patch_023.json",
+        "turn_id": 23,
+        "sha256": "daf098e6053f9f555ed8feaa89ce2c2f7f32e788c6de415c6badd28fdea7c855"
+      },
+      {
+        "file": "patch_024.json",
+        "turn_id": 24,
+        "sha256": "3c5bbeda5a940acaa300f6121ffd78bffef34f4e3ae83e0d578a53e80c3557cb"
+      },
+      {
+        "file": "patch_025.json",
+        "turn_id": 25,
+        "sha256": "bee92f0dc256cca5b6d2e2f52d110ababe406ef0f956415584ef3498062478cb"
+      },
+      {
+        "file": "patch_026.json",
+        "turn_id": 26,
+        "sha256": "0e414c67b51f5c976f4f8af5724f6aefd52427f8471cc7060f46a2158f65165f"
+      },
+      {
+        "file": "patch_027.json",
+        "turn_id": 27,
+        "sha256": "e043bcb3ab83d70ef2e3d7ca5eaa47bd565003f03d8a8550ce3bac07c5e14a1f"
+      },
+      {
+        "file": "patch_028.json",
+        "turn_id": 28,
+        "sha256": "371db58a0960144b2c121346883eaf1f16cbed18ef2ff1733ab11f6ef1b9cfd6"
+      },
+      {
+        "file": "patch_029.json",
+        "turn_id": 29,
+        "sha256": "3c1d39be7cdf873465e8e07ba29803e095e624f2ceee75ac15d478d0f11e1c2d"
+      },
+      {
+        "file": "patch_030.json",
+        "turn_id": 30,
+        "sha256": "5375b8ff4ba029d448a44df6eb7fd47f8e5ea668ef643926348a81c8d4ac0e55"
+      },
+      {
+        "file": "patch_031.json",
+        "turn_id": 31,
+        "sha256": "1ffd5ae192716bdbd8002abc2eb439177ce34df44eca4dd96f15da28c85e9e27"
+      },
+      {
+        "file": "patch_032.json",
+        "turn_id": 32,
+        "sha256": "7fa3a849c49938d260f497efa9cbd65db3933ffd4e6f722a2233fa856dc1992e"
+      },
+      {
+        "file": "patch_033.json",
+        "turn_id": 33,
+        "sha256": "0c3b14c86e175a6a39fc0822c5c9b6eff8bd5b0e76e88516d13e4bbcb973aafa"
+      },
+      {
+        "file": "patch_034.json",
+        "turn_id": 34,
+        "sha256": "b2e2218f384802da69da3ae8200e0153627bc3bb488943cc05e390e17ad4efa3"
+      },
+      {
+        "file": "patch_035.json",
+        "turn_id": 35,
+        "sha256": "5e5ffc404fe85872991dd24fd64d6cab10bae2dbf6deb02640e52990d643876e"
+      },
+      {
+        "file": "patch_036.json",
+        "turn_id": 36,
+        "sha256": "aac1e4ffa864129b0fb35721be2146b2f2590550f42eed5d98e65638379dda2d"
+      },
+      {
+        "file": "patch_037.json",
+        "turn_id": 37,
+        "sha256": "8d7690032149ec2d91c47c1f11097e30cdb7a75ed1820165de96d04ed31ded10"
+      },
+      {
+        "file": "patch_038.json",
+        "turn_id": 38,
+        "sha256": "79bbb4c3f77673bd1d90b23d0e3dfcd2e3719827b21b99a41692282a95eba41c"
+      },
+      {
+        "file": "patch_039.json",
+        "turn_id": 39,
+        "sha256": "4042f46ab6f08fc91e65f1d9dff046997cf7310e98a529ccde5dd76ec12515c0"
+      },
+      {
+        "file": "patch_040.json",
+        "turn_id": 40,
+        "sha256": "95402165efe691d93b521a084196ce0085182dd90faa706f3695856f98aa6055"
+      },
+      {
+        "file": "patch_041.json",
+        "turn_id": 41,
+        "sha256": "a3ea7d9aad4852bb41e1b82dffd22d7745f09082dca4d3b6eaf7853bf06c003c"
+      },
+      {
+        "file": "patch_042.json",
+        "turn_id": 42,
+        "sha256": "29945b4c59789fa881979dd6c3e7e991355a7363cfbf881d1ff40258989ff42e"
+      },
+      {
+        "file": "patch_043.json",
+        "turn_id": 43,
+        "sha256": "edd1d5f3384f0936526fc036b959f75948927b2071975605d3af1ea4dd96f3cd"
+      },
+      {
+        "file": "patch_044.json",
+        "turn_id": 44,
+        "sha256": "2189d64f5361823c6974177711e46bbdd06564852d06a759742c15bad856fe3a"
+      },
+      {
+        "file": "patch_045.json",
+        "turn_id": 45,
+        "sha256": "9713fa05fe3b5346b9bac637e4d40673bc1efd41becbce2e1ff8a18cfb314c39"
+      },
+      {
+        "file": "patch_046.json",
+        "turn_id": 46,
+        "sha256": "f434c6438d767ee92e569a08033f74e4704ade84ec9db7d6ca0b044804d46784"
+      },
+      {
+        "file": "patch_047.json",
+        "turn_id": 47,
+        "sha256": "b3a5bb217cbd03d5da6ce1667b7ce9b92e491865227a405fcab3f8c7db946883"
+      },
+      {
+        "file": "patch_048.json",
+        "turn_id": 48,
+        "sha256": "7e7d6485ba64e1dad7a17f03bf89f93712bf6dd61f6b51370af4a2283fc5a918"
+      },
+      {
+        "file": "patch_049.json",
+        "turn_id": 49,
+        "sha256": "d85785eae98ffbc5dce96fafdef0f04467fcf66271e3245057c7ba0e69c87c79"
+      },
+      {
+        "file": "patch_050.json",
+        "turn_id": 50,
+        "sha256": "51041a3a9d8e5d506e6ebc153297ac88ecd8b3a6f8438cd323ef5c6c7ec9215c"
+      },
+      {
+        "file": "patch_051.json",
+        "turn_id": 51,
+        "sha256": "c3e4e1043e7b9c7eca1db90d49ce420242aef918e71b1929a284254a6438edab"
+      },
+      {
+        "file": "patch_052.json",
+        "turn_id": 52,
+        "sha256": "f12d7f9dbd80b068872ec93c833f80429387742fb3ec2eb0eb24f5eb2f93b6a6"
+      },
+      {
+        "file": "patch_053.json",
+        "turn_id": 53,
+        "sha256": "204b202fd2e22baae406799a3e6d3f3a49c95e2f8c0113956d133732b374e93a"
+      },
+      {
+        "file": "patch_054.json",
+        "turn_id": 54,
+        "sha256": "7faebbf5f015e2ec66b9b5e12b94d738281425166ce0a1c3d9d3a252fbfade64"
+      },
+      {
+        "file": "patch_055.json",
+        "turn_id": 55,
+        "sha256": "60fda6a25ae4e80708a394aaf7656ea7ffb62288dde5750e5288dd58f7fbc566"
+      },
+      {
+        "file": "patch_056.json",
+        "turn_id": 56,
+        "sha256": "4ceb60665e3fb8286a97deee2582020a11f49b6967ca1adc3f1752a1b48a033a"
+      },
+      {
+        "file": "patch_057.json",
+        "turn_id": 57,
+        "sha256": "772f29244e6549bbe638ef3e954e352e28fa16aec6ae09c705fbb9be12a6a321"
+      },
+      {
+        "file": "patch_058.json",
+        "turn_id": 58,
+        "sha256": "0a11c4dd7afaa72ef9112f73ade74e9a681e991cfc242cbc9333870515422653"
+      },
+      {
+        "file": "patch_059.json",
+        "turn_id": 59,
+        "sha256": "89b26b9745626eabc68a205916d4ff8123d1631a8208577956114963a25054cf"
+      },
+      {
+        "file": "patch_060.json",
+        "turn_id": 60,
+        "sha256": "cfa6d4fa243ca0bf70461ce5301e7c62896c4819aee38b6696d4fd4208c35095"
+      },
+      {
+        "file": "patch_061.json",
+        "turn_id": 61,
+        "sha256": "a725328b9ae2e6dd5c493bf7f3e638eb9871017cfabfbafe7189adad9d2c5d79"
+      },
+      {
+        "file": "patch_062.json",
+        "turn_id": 62,
+        "sha256": "eded2e80f7ecea683ae330dafc4e6a1a989d96f62a57ae6ecbd4c07515f50c9e"
+      },
+      {
+        "file": "patch_063.json",
+        "turn_id": 63,
+        "sha256": "3351a38d576cad145b5dc4050df05601132e6a579439d0349ea521f6707e3950"
+      },
+      {
+        "file": "patch_064.json",
+        "turn_id": 64,
+        "sha256": "3499f6ce31050ca71bae67e893ebea4532d41519ca761469aa23b93f0db1e5f9"
+      },
+      {
+        "file": "patch_065.json",
+        "turn_id": 65,
+        "sha256": "e5ca22d10d8b49825922cee411ee5492cd13df6ca0b25b1003af3056523dff3f"
+      },
+      {
+        "file": "patch_066.json",
+        "turn_id": 66,
+        "sha256": "f462efda9772c6623cd1c87837730b9e217440caf6f2d3aa0268b7a414860fa9"
+      },
+      {
+        "file": "patch_067.json",
+        "turn_id": 67,
+        "sha256": "3a40b353a59d38a136ef91f3be5b6cf19be91dcfacb727e487983a880c82bfe7"
+      },
+      {
+        "file": "patch_068.json",
+        "turn_id": 68,
+        "sha256": "b55906008a97a435b71ade4e4de8f77a3ee9e710fd8d619e99fbcf77105407b9"
+      },
+      {
+        "file": "patch_069.json",
+        "turn_id": 69,
+        "sha256": "be4e57fb118c834777eb8c115f3107efc99870560cc5f59323fbf1ff90c570c9"
+      },
+      {
+        "file": "patch_070.json",
+        "turn_id": 70,
+        "sha256": "4820758ed9c7271c3f4488b513ebaf99bd2f1b78b6c4ab526314ef8f2a5fc81f"
+      },
+      {
+        "file": "patch_071.json",
+        "turn_id": 71,
+        "sha256": "0250aab0747149580e6c851360c5f8ef461e02ff1d1ae6ebfb71c843b1e08082"
+      },
+      {
+        "file": "patch_072.json",
+        "turn_id": 72,
+        "sha256": "c557cbbf5b12699277da91a411cd30d3f43d9643b4d05aafd070884cc0bbdd77"
+      },
+      {
+        "file": "patch_073.json",
+        "turn_id": 73,
+        "sha256": "5d92eb26cd56694f1a9811fa5f9243536a57eee44bad4249880534ede13d4520"
+      },
+      {
+        "file": "patch_074.json",
+        "turn_id": 74,
+        "sha256": "a33ee4896a7e723f518d366b8e187aa8ada69bd4d55c1c2b3f077aa34580d1c8"
+      },
+      {
+        "file": "patch_075.json",
+        "turn_id": 75,
+        "sha256": "ec253a7a67f0b79ffe76aadd4295006e2035f9f14b7827fc2f6f4274d21aed10"
+      },
+      {
+        "file": "patch_076.json",
+        "turn_id": 76,
+        "sha256": "2a24e0d81c0d31ba4239469fd21ce4a85ca8a393e0fe2695e1251898040962c9"
+      },
+      {
+        "file": "patch_077.json",
+        "turn_id": 77,
+        "sha256": "67d6e08111cf683a60bdd46dda7db93b46c9ccd359cfa490d1fdb8637478d76f"
+      },
+      {
+        "file": "patch_078.json",
+        "turn_id": 78,
+        "sha256": "bea31a70796e2181a6f696fe38dbdcca33670453120f48c99b2bf970f9d4154d"
+      },
+      {
+        "file": "patch_079.json",
+        "turn_id": 79,
+        "sha256": "6e070ccb9625934d750398e606536e481feaed04ecad930d261e2a5dc13027cd"
+      },
+      {
+        "file": "patch_080.json",
+        "turn_id": 80,
+        "sha256": "dff65f48e8706b992d570beb3030086f8a6053af181cd69f0d04790a187e00a2"
+      },
+      {
+        "file": "patch_081.json",
+        "turn_id": 81,
+        "sha256": "bbb8fd2ba24dfe516ecb3f3967c6dc36308a1be5893b16acfff884f9703fbd5a"
+      },
+      {
+        "file": "patch_082.json",
+        "turn_id": 82,
+        "sha256": "e4c9fb4ef5b61b39590f76ebcb35ba606b3ec1a9e995cfec726ffba6fbf449d9"
+      },
+      {
+        "file": "patch_083.json",
+        "turn_id": 83,
+        "sha256": "6dcca4569d3d57d225c4093df660e73fec3c1588c5ffd9fef26c0a16682edbe7"
+      },
+      {
+        "file": "patch_084.json",
+        "turn_id": 84,
+        "sha256": "44947552a4fd46bcf5c0a08a48f989eefa21ca10a0dc856fc0596b64945ca2b4"
+      }
+    ]
+  },
+  "graph_state": {
+    "path": "graph/projects/abu_modern/graph_state.json",
+    "sha256": "b8ac9dafc4b9ea103c4b2092fe257417f53a0f2c815452dd28bdadeb7bce3c88",
+    "latest_applied_turn": 84,
+    "turn_counter": 84,
+    "node_count": 204,
+    "edge_count": 340,
+    "status_distribution": {
+      "__missing__": 140,
+      "superseded": 61,
+      "active": 3
+    },
+    "state_distribution": {
+      "null": 104,
+      "open": 20,
+      "in_progress": 2,
+      "resolved": 66,
+      "deployed": 8,
+      "blocked": 1,
+      "cancelled": 1,
+      "implemented": 2
+    },
+    "quarantine_count_in_graph_state": 0
+  },
+  "quarantine": {
+    "total_files": 7,
+    "reason_distribution": {
+      "unknown": 1,
+      "apply_patch 阶段脚本异常退出 (code=1)": 5,
+      "invoke_extractor 阶段脚本异常退出 (code=1)": 1
+    },
+    "latest_quarantined_turn": 51
+  },
+  "latest_turn_health": {
+    "path": "graph/projects/abu_modern/reports/turn_084_auto/turn_health_report.json",
+    "note": "exists if turn_084_auto report was materialized; otherwise null",
+    "graph_lint": null
+  },
+  "benchmark": {
+    "current_version": "phase05_v3",
+    "score_report_path": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_score_report.json",
+    "score_report_sha256": "2487739105da14c71207875140410f6eeb2dca3f55df0055ef73e866f5401c98",
+    "vs_flat_rag_report_path": "graph/projects/abu_modern/benchmark/phase05_v3/reports/phase05_v3_vs_flat_rag.md",
+    "vs_flat_rag_report_sha256": "a4988a11c2f8966baa77005e213a5243edb2c463d65eac60e154cd61476e561c",
+    "dir_sha256": "a9e4a4ebb2ce31c37ad97fb2baf61e23a3c430113ae8e10849454801f4e5bd79",
+    "current_metrics": {
+      "invalidation_precision": 0.6086956521739131,
+      "invalidation_recall": 0.7368421052631579,
+      "active_set_set_f1": 0.8979591836734694,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d1_metrics": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8213799805636537,
+      "must_include_recall": 1.0,
+      "valid_time_adjudication_accuracy": 0.0
+    },
+    "flat_rag_d2_metrics": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "valid_time_adjudication_accuracy": 0.0
+    }
+  },
+  "lint_baseline": {
+    "report_path": "reports/current_graph_lint_report.json",
+    "report_sha256": "0d4da07cccfc94d798ec33a971f02222cbe28588929e600000cb1a45e7c6a872",
+    "exists": true,
+    "nodes": 204,
+    "edges": 340,
+    "active_nodes": 143,
+    "active_edges": 340,
+    "superseded_nodes": 61,
+    "errors": 5,
+    "warnings": 1
+  },
+  "stage02_baseline_conclusions": {
+    "p4_harness_missing_resolver": "confirmed and already fixed in phase05_v3 benchmark harness",
+    "resolver_net_gain_vs_d2": "positive",
+    "must_include_redline": "fixed to 1.0 under phase05_v3",
+    "high_confidence_round5_candidates": "resolved before Stage02 branch start"
+  },
+  "notes": [
+    "this manifest is the authoritative machine-readable baseline for Stage02 experiments on branch phase1_lifecycle_stage02",
+    "all graph_state counts and hashes are measured from the file at manifest generation time, not historical narrative",
+    "future Stage02 experiments should cite this manifest instead of historical narrative documents"
+  ]
+}

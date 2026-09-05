@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "freeze_version": "v1",
+  "freeze_version": "v1.1",
   "based_on_benchmark_version": "phase05_v3",
   "project_id": "abu_modern",
-  "generated_at": "2026-07-13T10:41:05.282674+00:00",
-  "generated_at_utc": "2026-07-13T10:41:05Z",
+  "generated_at": "2026-09-05T12:56:07.364377+00:00",
+  "generated_at_utc": "2026-09-05T12:56:07Z",
   "source_path": "graph/projects/abu_modern/benchmark/phase05_v3",
   "source_dir_sha256": "a9e4a4ebb2ce31c37ad97fb2baf61e23a3c430113ae8e10849454801f4e5bd79",
   "metric_script_path": "graph/scripts/score_phase05.py",
@@ -14,6 +14,9 @@
   "gold_annotation_schema_version": "phase05_v3",
   "d1_baseline_definition": "Flat RAG with static context window, no invalidation tracking",
   "d2_baseline_definition": "Flat RAG with injected chronological summary, no explicit lifecycle adjudication",
+  "d1_implementation_ref": "graph/scripts/score_phase05.py::run_flat_rag_d1 (full_history_dump)",
+  "d2_implementation_ref": "graph/scripts/score_phase05.py::run_flat_rag_d2 (exact_surface_last_write_wins)",
+  "decoder_identity_note": "D1/D2 身份以 d*_implementation_ref 指向的代码为准；d*_baseline_definition 为历史 prose，仅作冻结痕迹保留，不得作为实现依据。同口径说明见 phase05_v2/reports/phase05_flat_rag_baseline_definition.md。",
   "splits": [
     {
       "name": "development",
@@ -254,6 +257,7 @@
   },
   "notes": [
     "This freeze separates mechanism correctness (fixtures) from generalization (blind_holdout).",
-    "The blind_holdout split must remain uninspected until lifecycle implementation is finalized."
+    "The blind_holdout split must remain uninspected until lifecycle implementation is finalized.",
+    "v1.1 (PATCH, metadata fix): 修正 D1/D2 decoder 身份漂移 —— 新增 d*_implementation_ref 权威指向代码实现；原 prose 定义未改动，仅标注以实现引用为准。split 与用例无任何变化。"
   ]
 }

@@ -1,0 +1,259 @@
+{
+  "kind": "baseline_summary.v1",
+  "project_id": "abu_modern",
+  "generated_at": "2026-09-05T13:46:30.145191+00:00",
+  "git": {
+    "branch": "main",
+    "commit": "4d81873d72bb98e3f39151b5eab5749e1bd11ae4",
+    "dirty": true
+  },
+  "turn_counter": 84,
+  "steps": [
+    {
+      "step": "generate_state_manifest",
+      "cmd": [
+        "graph/scripts/generate_state_manifest.py",
+        "--out",
+        "reports/baseline_A/state_manifest.json"
+      ],
+      "returncode": 0,
+      "ok": true
+    },
+    {
+      "step": "replay_phase0_seal",
+      "cmd": [
+        "graph/scripts/replay_phase0_seal.py",
+        "--project-id",
+        "abu_modern"
+      ],
+      "returncode": 0,
+      "ok": true
+    },
+    {
+      "step": "graph_lint",
+      "cmd": [
+        "graph/scripts/graph_lint.py",
+        "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+        "--out",
+        "reports/current_graph_lint_report.json"
+      ],
+      "returncode": 1,
+      "ok": false,
+      "stderr_tail": ""
+    },
+    {
+      "step": "diff_lint_reports_vs_baseline",
+      "cmd": [
+        "graph/scripts/diff_lint_reports.py",
+        "--before-graph",
+        "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\run\\graph_state.turn_083.json",
+        "--after-graph",
+        "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\graph_state.json",
+        "--expected-turn",
+        "turn_084",
+        "--baseline",
+        "D:\\CCXXLESSON\\contextledger\\graph\\projects\\abu_modern\\reports\\lint_baseline.json",
+        "--out",
+        "reports/baseline_A/lint_delta_vs_baseline.json"
+      ],
+      "returncode": 0,
+      "ok": true
+    },
+    {
+      "step": "shadow_eval:development",
+      "cmd": [
+        "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+        "--split",
+        "development"
+      ],
+      "returncode": 1,
+      "ok": false,
+      "stderr_tail": ""
+    },
+    {
+      "step": "shadow_eval:regression",
+      "cmd": [
+        "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+        "--split",
+        "regression"
+      ],
+      "returncode": 1,
+      "ok": false,
+      "stderr_tail": ""
+    },
+    {
+      "step": "shadow_eval:adversarial",
+      "cmd": [
+        "graph/projects/abu_modern/shadow_replay/scripts/benchmark_shadow_runner.py",
+        "--split",
+        "adversarial"
+      ],
+      "returncode": 1,
+      "ok": false,
+      "stderr_tail": ""
+    },
+    {
+      "step": "score_phase05",
+      "cmd": [
+        "graph/scripts/score_phase05.py",
+        "--project-dir",
+        "graph/projects/abu_modern/benchmark/phase05_v3"
+      ],
+      "returncode": 0,
+      "ok": true
+    },
+    {
+      "step": "quarantine_register_check",
+      "cmd": [
+        "graph/scripts/quarantine_register.py",
+        "check",
+        "--project-id",
+        "abu_modern",
+        "--current-turn",
+        "84",
+        "--out",
+        "reports/quarantine_register_check.json"
+      ],
+      "returncode": 0,
+      "ok": true
+    }
+  ],
+  "benchmark_metrics": {
+    "phase0_current": {
+      "invalidation_precision": 0.6086956521739131,
+      "invalidation_recall": 0.7368421052631579,
+      "active_set_set_f1": 0.8979591836734694,
+      "must_include_recall": 1.0,
+      "invalidation_events": {
+        "true_positive_count": 14,
+        "false_positive_count": 9,
+        "false_negative_count": 5,
+        "predicted_count": 23,
+        "gold_count": 19,
+        "precision": 0.6086956521739131,
+        "recall": 0.7368421052631579
+      },
+      "provenance": "this_run_reproducible"
+    },
+    "flat_rag_d1": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8213799805636537,
+      "must_include_recall": 1.0,
+      "invalidation_events": {
+        "true_positive_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 19,
+        "predicted_count": 0,
+        "gold_count": 19,
+        "precision": 0.0,
+        "recall": 0.0
+      },
+      "provenance": "this_run_reproducible"
+    },
+    "flat_rag_d2": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "invalidation_events": {
+        "true_positive_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 19,
+        "predicted_count": 0,
+        "gold_count": 19,
+        "precision": 0.0,
+        "recall": 0.0
+      },
+      "provenance": "this_run_reproducible"
+    },
+    "flat_rag": {
+      "invalidation_precision": 0.0,
+      "invalidation_recall": 0.0,
+      "active_set_set_f1": 0.8482993197278912,
+      "must_include_recall": 0.8775510204081632,
+      "invalidation_events": {
+        "true_positive_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 19,
+        "predicted_count": 0,
+        "gold_count": 19,
+        "precision": 0.0,
+        "recall": 0.0
+      },
+      "provenance": "this_run_reproducible"
+    }
+  },
+  "shadow_splits": {
+    "development": {
+      "run_id": "stage04b_20260905T134630_development",
+      "gate": "BLOCK",
+      "aggregate": {
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 1.0,
+        "total_blockers": 0,
+        "total_regressions": 7,
+        "total_unexplained": 0,
+        "total_event_count": 21,
+        "total_quarantine_event_count": 1,
+        "submission_coverage": 0.9524
+      },
+      "provenance": "this_run_reproducible"
+    },
+    "regression": {
+      "run_id": "stage04b_20260905T134630_regression",
+      "gate": "BLOCK",
+      "aggregate": {
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.3333,
+        "total_blockers": 0,
+        "total_regressions": 20,
+        "total_unexplained": 0,
+        "total_event_count": 21,
+        "total_quarantine_event_count": 1,
+        "submission_coverage": 0.9524
+      },
+      "provenance": "this_run_reproducible"
+    },
+    "adversarial": {
+      "run_id": "stage04b_20260905T134631_adversarial",
+      "gate": "BLOCK",
+      "aggregate": {
+        "min_must_include_recall": 1.0,
+        "min_active_set_set_f1": 0.6667,
+        "total_blockers": 0,
+        "total_regressions": 3,
+        "total_unexplained": 0,
+        "total_event_count": 4,
+        "total_quarantine_event_count": 0,
+        "submission_coverage": 1.0
+      },
+      "provenance": "this_run_reproducible"
+    }
+  },
+  "external_unreproducible": {
+    "invalidation_precision_before": {
+      "value": 0.55,
+      "source": "pack/projects/contextLedger/ContextLedger 项目背景包（新AI接手用）.md (改动前叙事值)"
+    },
+    "invalidation_recall_before": {
+      "value": 0.579,
+      "source": "同上"
+    },
+    "active_set_set_f1_before": {
+      "value": 0.856,
+      "source": "同上"
+    },
+    "historical_quarantine_rate": {
+      "value": "15/72 ≈ 20.8%",
+      "source": "背景包 turn_012-084 批次叙事；该批次的隔离工件不在仓库内"
+    }
+  },
+  "fatal": [],
+  "baseline_status": "FROZEN",
+  "notes": [
+    "本文件是工作包 A 的比较起点登记：后续 B/C 的重放必须与本基线字节可比。",
+    "external_unreproducible 中的叙事数字只作历史引用，禁止再当作可比较基线。",
+    "shadow gate 为 BLOCK 表示该 split 存在已知回归（stage04c123 封存的状态），不阻止基线登记，但必须如实带入门禁结论。"
+  ]
+}

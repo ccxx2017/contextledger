@@ -1,0 +1,76 @@
+{
+  "task_id": "abu_modern_phase0_manual",
+  "turn_id": 3,
+  "new_nodes": [
+    {
+      "node_id": "n_0011",
+      "type": "Decision",
+      "content": "决策：在 OpenClaw 框架下，strategy-researcher 的 SKILL/TOOLS/scripts 目录应放在 openclaw_skills/strategy-researcher/，而不是代码仓内。",
+      "entity_ref": "strategy_research_agent.skill_layout",
+      "state": null,
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          1277,
+          2362
+        ]
+      }
+    },
+    {
+      "node_id": "n_0012",
+      "type": "Decision",
+      "content": "决策：data/knowledge/ 保持原地不动，strategy-researcher 的策略入库目录为 data/knowledge/strategies/，并遵守现有 schema。",
+      "entity_ref": "strategy_research_agent.archive_path",
+      "state": null,
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          2363,
+          3163
+        ]
+      }
+    },
+    {
+      "node_id": "n_0013",
+      "type": "OpenTask",
+      "content": "待定：strategy-researcher 与 quant_assistant 的关系仍需最终裁定；当前推荐关系 A，即由 strategy-researcher 调用 quant_assistant 作为工具底座。",
+      "entity_ref": "strategy_research_agent.quant_assistant_relationship",
+      "state": "open",
+      "status": "active",
+      "priority": "should_include",
+      "created_turn": 3,
+      "source": {
+        "raw_id": "abu_modern/s001/0003",
+        "span": [
+          3164,
+          4121
+        ]
+      }
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0011",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0012",
+      "target": "n_0003",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0013",
+      "target": "n_0003",
+      "relation": "implements"
+    }
+  ]
+}

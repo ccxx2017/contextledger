@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 import sys
 import unittest
 from datetime import datetime, timezone
@@ -704,15 +705,24 @@ def run_trajectory(
     checkpoint_reports: list[dict[str, Any]] = []
     patches: list[dict[str, Any]] = []
     logs: list[dict[str, Any]] = []
+    # 双分母记账：被隔离/弃权事件的 claim 永不进入 superseded 预测集，
+    # 只看已提交预测会高估 precision（评审 §四.1）。这里逐事件累计隔离 claim，
+    # 每个检查点同时给 submitted_only（现有语义）与 all_inputs 两个视角。
+    quarantined_claim_ids: set[str] = set()
+    total_event_count = 0
 
     for seq, obs in enumerate(trajectory.get("observations", []), start=1):
         events = observation_to_event(obs, seq)
         for event in events:
+            total_event_count += 1
             result = adjudicator.adjudicate_event(event, graph_state)
             patches.append(result.patch)
             logs.extend(result.log)
             for q in result.quarantine:
                 graph_state["quarantine"].append(q)
+                claim_id = event.get("payload", {}).get("claim_id")
+                if claim_id:
+                    quarantined_claim_ids.add(str(claim_id))
             graph_state = apply_shadow_patch(graph_state, result.patch)
 
             cp_event_id = event["event_id"]
@@ -734,6 +744,11 @@ def run_trajectory(
                     {n["claim_id"] for n in graph_state["nodes"].values() if n.get("status") == "superseded" and n.get("claim_id")},
                     expected_invalid_for_metrics,
                 )
+                superseded_ids = {n["claim_id"] for n in graph_state["nodes"].values() if n.get("status") == "superseded" and n.get("claim_id")}
+                invalid_metrics_all_inputs = compute_set_metrics(
+                    superseded_ids | quarantined_claim_ids,
+                    expected_invalid_for_metrics,
+                )
                 must_recall = compute_set_metrics(
                     {graph_state["nodes"][nid]["claim_id"] for nid in bundle.get("must_include", []) if nid in graph_state["nodes"] and graph_state["nodes"][nid].get("claim_id")},
                     set(steps[cp_event_id].get("must_include", [])),
@@ -744,7 +759,11 @@ def run_trajectory(
                     "graph_state_hash": graph_state_hash(graph_state),
                     "bundle_hash": bundle_hash(bundle),
                     "active_set_metrics": active_metrics,
+                    # submitted_only：仅统计已提交（未被隔离）的裁定 —— 与历史报告同口径
                     "invalidation_metrics": invalid_metrics,
+                    # all_inputs：把被隔离 claim 计入预测侧（视为未裁定成功），防隔离换 precision
+                    "invalidation_metrics_all_inputs": invalid_metrics_all_inputs,
+                    "quarantined_claim_count": len(quarantined_claim_ids),
                     "must_include_recall": must_recall,
                     "diffs": diffs,
                     "diff_counts": _count_diffs(diffs),
@@ -769,6 +788,11 @@ def run_trajectory(
                 {n["claim_id"] for n in graph_state["nodes"].values() if n.get("status") == "superseded" and n.get("claim_id")},
                 expected_invalid_obs,
             )
+            superseded_ids_obs = {n["claim_id"] for n in graph_state["nodes"].values() if n.get("status") == "superseded" and n.get("claim_id")}
+            invalid_metrics_obs_all_inputs = compute_set_metrics(
+                superseded_ids_obs | quarantined_claim_ids,
+                expected_invalid_obs,
+            )
             must_recall_obs = compute_set_metrics(
                 {graph_state["nodes"][nid]["claim_id"] for nid in bundle_obs.get("must_include", []) if nid in graph_state["nodes"] and graph_state["nodes"][nid].get("claim_id")},
                 set(steps[obs["obs_id"]].get("must_include", [])),
@@ -779,7 +803,11 @@ def run_trajectory(
                 "graph_state_hash": graph_state_hash(graph_state),
                 "bundle_hash": bundle_hash(bundle_obs),
                 "active_set_metrics": active_metrics_obs,
+                # submitted_only：仅统计已提交（未被隔离）的裁定 —— 与历史报告同口径
                 "invalidation_metrics": invalid_metrics_obs,
+                # all_inputs：把被隔离 claim 计入预测侧（视为未裁定成功），防隔离换 precision
+                "invalidation_metrics_all_inputs": invalid_metrics_obs_all_inputs,
+                "quarantined_claim_count": len(quarantined_claim_ids),
                 "must_include_recall": must_recall_obs,
                 "diffs": diffs_obs,
                 "diff_counts": _count_diffs(diffs_obs),
@@ -791,6 +819,10 @@ def run_trajectory(
     unexplained_count = sum(cp["diff_counts"].get("unexplained", 0) for cp in checkpoint_reports)
     must_include_recall = min((cp["must_include_recall"] for cp in checkpoint_reports), default=1.0)
     active_set_f1 = min((cp["active_set_metrics"]["f1"] for cp in checkpoint_reports), default=1.0)
+    # 提交覆盖率：1 - 隔离事件占比。隔离率高时，submitted_only 指标不能单独作为结论。
+    submission_coverage = 1.0 if total_event_count == 0 else round(
+        1.0 - len(graph_state["quarantine"]) / total_event_count, 4
+    )
 
     if blocker_count > 0 or regression_count > 0 or unexplained_count > 0:
         gate = "BLOCK"
@@ -810,6 +842,13 @@ def run_trajectory(
             "unexplained_count": unexplained_count,
             "min_must_include_recall": must_include_recall,
             "min_active_set_set_f1": active_set_f1,
+            "total_event_count": total_event_count,
+            "quarantine_event_count": len(graph_state["quarantine"]),
+            "submission_coverage": submission_coverage,
+            "min_invalidation_set_f1_all_inputs": min(
+                (cp["invalidation_metrics_all_inputs"]["f1"] for cp in checkpoint_reports),
+                default=1.0,
+            ),
         },
         "gate_decision": gate,
         "final_graph_state_hash": graph_state_hash(graph_state),
@@ -884,6 +923,8 @@ def run_split(split_name: str) -> dict[str, Any]:
     any_det_fail = any(not r.get("deterministic", True) for r in case_reports)
     min_must_include = min(r["aggregate"]["min_must_include_recall"] for r in case_reports)
     min_active_f1 = min(r["aggregate"]["min_active_set_set_f1"] for r in case_reports)
+    total_events = sum(r["aggregate"]["total_event_count"] for r in case_reports)
+    total_quarantined = sum(r["aggregate"]["quarantine_event_count"] for r in case_reports)
 
     summary = {
         "split": split_name,
@@ -899,6 +940,9 @@ def run_split(split_name: str) -> dict[str, Any]:
             "total_blockers": sum(r["aggregate"]["blocker_count"] for r in case_reports),
             "total_regressions": sum(r["aggregate"]["regression_count"] for r in case_reports),
             "total_unexplained": sum(r["aggregate"]["unexplained_count"] for r in case_reports),
+            "total_event_count": total_events,
+            "total_quarantine_event_count": total_quarantined,
+            "submission_coverage": 1.0 if total_events == 0 else round(1.0 - total_quarantined / total_events, 4),
         },
         "freeze_manifest_sha256": sha256_file(FREEZE_MANIFEST_PATH),
         "runtime_fingerprint": runtime_fingerprint(),
@@ -916,6 +960,11 @@ def main() -> int:
     group.add_argument("--split", choices=["development", "regression", "blind_holdout", "adversarial"],
                        help="Run shadow evaluation for a specific split")
     group.add_argument("--unit-tests", action="store_true", help="Run comparator unit tests only")
+    parser.add_argument(
+        "--i-understand-this-consumes-blind-holdout",
+        action="store_true",
+        help="blind_holdout 为一次性封存集：执行即消耗，必须显式确认并登记",
+    )
     args = parser.parse_args()
 
     if args.unit_tests:
@@ -925,6 +974,37 @@ def main() -> int:
         runner = unittest.TextTestRunner(verbosity=2)
         result = runner.run(suite)
         return 0 if result.wasSuccessful() else 1
+
+    if args.split == "blind_holdout":
+        if not args.i_understand_this_consumes_blind_holdout:
+            print(
+                "REFUSED: blind_holdout 是封存的通用性验收集（见 benchmark_v1_freeze_manifest.json "
+                "usage_rules.blind_holdout），一旦运行即被消耗。如确要消耗，加 "
+                "--i-understand-this-consumes-blind-holdout 显式确认。"
+            )
+            return 2
+        # 消耗登记：一次性使用必须留痕（谁、何时、哪个 commit）
+        consumption_record = {
+            "consumed_at": datetime.now(timezone.utc).isoformat(),
+            "split": "blind_holdout",
+            "git_commit": subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True, text=True, encoding="utf-8"
+            ).stdout.strip(),
+            "runtime_fingerprint": runtime_fingerprint(),
+        }
+        consumption_path = REPO_ROOT / "reports" / "blind_holdout_consumption.json"
+        history = []
+        if consumption_path.exists():
+            try:
+                history = load_json(consumption_path)
+            except Exception:
+                history = []
+        history.append(consumption_record)
+        consumption_path.parent.mkdir(parents=True, exist_ok=True)
+        consumption_path.write_text(
+            json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        print("WARNING: blind_holdout 已被消耗并登记到 reports/blind_holdout_consumption.json。此次运行后该集即失效。")
 
     print(f"Running Stage04-B shadow evaluation for split: {args.split}")
     summary = run_split(args.split)

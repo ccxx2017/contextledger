@@ -1,0 +1,77 @@
+{
+  "kind": "quarantine_register.v1",
+  "project_id": "abu_modern",
+  "disposition_vocabulary": [
+    "unreviewed",
+    "accepted_loss",
+    "requeued",
+    "superseded"
+  ],
+  "items": [
+    {
+      "register_key": "turn_014_failed",
+      "source_turn": 14,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_014_failed.json",
+      "stage": "apply_patch",
+      "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_014.json），机械归为 requeued。",
+      "escalate_after_turns": 5
+    },
+    {
+      "register_key": "turn_015_failed",
+      "source_turn": 15,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_015_failed.json",
+      "stage": "apply_patch",
+      "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_015.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 15
+    },
+    {
+      "register_key": "turn_016_failed",
+      "source_turn": 16,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_016_failed.json",
+      "stage": "apply_patch",
+      "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_016.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 16
+    },
+    {
+      "register_key": "turn_017_failed",
+      "source_turn": 17,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_017_failed.json",
+      "stage": "apply_patch",
+      "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_017.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 17
+    },
+    {
+      "register_key": "turn_018_failed",
+      "source_turn": 18,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_018_failed.json",
+      "stage": "apply_patch",
+      "reason": "apply_patch 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_018.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 18
+    },
+    {
+      "register_key": "turn_051_failed",
+      "source_turn": 51,
+      "source_file": "graph/projects/abu_modern/quarantine/turn_051_failed.json",
+      "stage": "invoke_extractor",
+      "reason": "invoke_extractor 阶段脚本异常退出 (code=1)",
+      "disposition": "requeued",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_051.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 51
+    }
+  ]
+}

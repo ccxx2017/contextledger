@@ -70,3 +70,6 @@ temp/archive_runs.ps1
 
 # Archived run outputs (Stage04-A/B/C)
 graph/projects/abu_modern/shadow_replay/runs_archive/
+
+# phase05 seed 沙箱：由 seed_phase05_replay.py 再生成，不入库
+graph/projects/abu_modern/phase05_replay/

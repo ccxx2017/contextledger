@@ -122,6 +122,29 @@ def ensure_turn001_legacy_backup(reports_dir: Path) -> str | None:
     return str(legacy)
 
 
+def reseed_canonical_graph_chain(
+    *,
+    seed_path: Path,
+    patch_paths: list[Path],
+    canonical_run_dir: Path,
+) -> list[str]:
+    """用当前 apply_patch 从 seed+patch 链重建 canonical run/ 快照。
+
+    场景：构建器的节点产物结构演进（如新增 created_turn 字段）后，旧封存
+    快照与新重放永远无法字节一致。--reseed 以当前工具链重建封存快照，
+    seed 与 patch 链不变、语义不变；re-seal 事实记录进 seal report。
+    """
+    graph = apply_mod.load_json(seed_path)
+    written: list[str] = []
+    for index, patch_path in enumerate(patch_paths, start=1):
+        patch = apply_mod.load_json(patch_path)
+        graph = apply_mod.apply_patch(graph, patch)
+        out = canonical_run_dir / f"graph_state.turn_{index:03d}.json"
+        write_json(out, graph)
+        written.append(str(out))
+    return written
+
+
 def replay_graph_chain(
     *,
     seed_path: Path,
@@ -177,6 +200,9 @@ def build_and_write_bundle(
         turn_id=spec.turn_id,
         max_nodes=spec.max_nodes,
         budget_profile=spec.budget_profile,
+        # canonical 与 replay 两侧都必须产出字节一致的报告，因此以快照名
+        # （而非各侧完整路径）作为 source_graph 标签。
+        source_graph=spec.graph_snapshot_name,
     )
     bundle_mod.write_json(bundle_path, bundle)
     bundle_mod.write_json(report_path, report)
@@ -237,6 +263,11 @@ def replay_and_compare_bundles(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Seal Phase 0 by replaying patch chain and regenerating canonical bundles.")
     parser.add_argument("--project-id", default="abu_modern")
+    parser.add_argument(
+        "--reseed",
+        action="store_true",
+        help="先用当前 apply_patch 重建 canonical run/ 快照（工具链演进后 re-seal 用）",
+    )
     args = parser.parse_args()
 
     root = repo_root()
@@ -255,6 +286,14 @@ def main() -> int:
 
     seed_path = root / "graph" / "graph_state.seed.json"
     patch_paths = [patches_dir / f"patch_{i:03d}.json" for i in range(1, 5)]
+    reseeded: list[str] | None = None
+    if args.reseed:
+        reseeded = reseed_canonical_graph_chain(
+            seed_path=seed_path,
+            patch_paths=patch_paths,
+            canonical_run_dir=canonical_run_dir,
+        )
+        print(f"Reseeded {len(reseeded)} canonical snapshots with the current apply_patch.")
     graph_results = replay_graph_chain(
         seed_path=seed_path,
         patch_paths=patch_paths,
@@ -287,6 +326,7 @@ def main() -> int:
         "seed_path": str(seed_path),
         "patch_chain": [str(path) for path in patch_paths],
         "turn001_legacy_backup": legacy_backup,
+        "reseeded_canonical_snapshots": reseeded,
         "graph_replay": graph_results,
         "bundle_replay": bundle_results,
     }

@@ -65,10 +65,82 @@ def main():
 
     if all_match:
         print(f'\nAll {len(index["entries"])} canonical evidence hashes match.')
-        sys.exit(0)
     else:
         print(f'\nFAILURE: Some canonical evidence hashes do not match.')
         sys.exit(1)
+
+    all_match = verify_evidence_chains()
+    if all_match:
+        print('All evidence chains verified.')
+        sys.exit(0)
+    else:
+        print('FAILURE: Some evidence chain entries do not match.')
+        sys.exit(1)
+
+
+def collect_chain_entries(chain_path, chain):
+    """Pull every {path, sha256} entry out of an evidence_chain.v1 document."""
+    sections = [('hashes', chain.get('hashes', {})),
+                ('component_versions', chain.get('component_versions', {})),
+                ('contract_versions', chain.get('contract_versions', {}))]
+    for section_name, section in sections:
+        if not isinstance(section, dict):
+            print(f'SKIP: {chain_path} .{section_name} (not an object)')
+            continue
+        for label, entry in section.items():
+            if isinstance(entry, dict) and 'path' in entry and 'sha256' in entry:
+                yield section_name, label, entry
+
+
+def verify_evidence_chains():
+    """Verify published evidence chains (graph/projects/*/run/evidence_chain.*.json).
+
+    Every recorded hash must still match the referenced file; a mismatch means the
+    artifact was modified after the chain was written (tamper or drift).
+    """
+    projects_dir = os.path.join(REPO_ROOT, 'graph', 'projects')
+    chain_paths = []
+    if os.path.isdir(projects_dir):
+        for project in sorted(os.listdir(projects_dir)):
+            run_dir = os.path.join(projects_dir, project, 'run')
+            if not os.path.isdir(run_dir):
+                continue
+            for name in sorted(os.listdir(run_dir)):
+                if name.startswith('evidence_chain.') and name.endswith('.json'):
+                    chain_paths.append(os.path.join(run_dir, name))
+
+    if not chain_paths:
+        print('No published evidence chains found (nothing to verify).')
+        return True
+
+    all_match = True
+    checked = 0
+    for chain_path in chain_paths:
+        rel_chain = os.path.relpath(chain_path, REPO_ROOT)
+        try:
+            with open(chain_path, encoding='utf-8') as f:
+                chain = json.load(f)
+        except Exception as exc:
+            print(f'  [FAIL] {rel_chain}: unparseable ({exc})')
+            all_match = False
+            continue
+
+        for section_name, label, entry in collect_chain_entries(rel_chain, chain):
+            checked += 1
+            artifact = os.path.join(REPO_ROOT, entry['path'])
+            if not os.path.exists(artifact):
+                print(f'  [FAIL] {rel_chain} .{section_name}.{label}: missing artifact {entry["path"]}')
+                all_match = False
+                continue
+            actual = canonical_hash(artifact)
+            if actual != entry['sha256']:
+                print(f'  [FAIL] {rel_chain} .{section_name}.{label}: {entry["path"]}')
+                print(f'           expected canonical: {entry["sha256"][:16]}')
+                print(f'           actual canonical:   {actual[:16]}')
+                all_match = False
+
+    print(f'Verified {checked} hashed entries across {len(chain_paths)} evidence chain(s).')
+    return all_match
 
 
 if __name__ == '__main__':

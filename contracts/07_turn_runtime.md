@@ -229,3 +229,23 @@ dry-run 目标：
 
 参考脚本：
 - `graph/scripts/check_pending_merge_register.py`
+
+## 12. quarantine 登记簿（隔离 ≠ 处理完毕，禁止静默搁置）
+
+目标：
+- `quarantine/` 与 `pending_merge/` 同构：进入隔离不等于被处理，每条隔离写入必须有去向
+- 区分两种安全：**主图未被错误写入**（隔离达成）与**主图足以支撑当前行动**（登记 + 消化才达成）
+
+登记约定：
+- 每个项目的 `quarantine/quarantine_register.json`（`kind: quarantine_register.v1`）逐条登记 `turn_*_failed.json`
+- 登记条目必须包含：`source_turn`、`stage`、`reason`、`disposition`、`requires_evidence`
+- `disposition` 封闭词表：`unreviewed` / `accepted_loss` / `requeued` / `superseded`
+- 机械判定规则：主链已存在同轮号 `patches/patch_NNN.json` → `requeued`；否则 → `unreviewed`（等待人工裁定）
+- 已定案条目（`accepted_loss`/`superseded`/`requeued`）sync 不得覆盖
+
+检查约定：
+- `quarantine_register.py check` 在存在 `unreviewed` 且 `age_turns >= escalate_after_turns`（默认 5）时退出码 1，构成提交闸门之一
+- 未裁定条目必须被 Assembler 的完整性声明显式暴露（见 `contracts/04_assembly.md` action-readiness 的 `QUARANTINE_NONEMPTY`），不得静默
+
+参考脚本：
+- `graph/scripts/quarantine_register.py`（sync / check）

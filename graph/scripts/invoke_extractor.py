@@ -12,6 +12,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -227,6 +228,7 @@ def main() -> int:
     parser.add_argument("--out", help="patch.json 输出路径")
     parser.add_argument("--raw-response-out", help="原始模型响应输出路径")
     parser.add_argument("--prompt-out", help="prompt 快照输出路径")
+    parser.add_argument("--meta-out", help="本次调用元数据输出路径（模型配置等，不含密钥）")
     args = parser.parse_args()
 
     env_path = choose_env_file(args.env_file)
@@ -333,6 +335,24 @@ def main() -> int:
 
     ensure_parent(raw_response_out)
     raw_response_out.write_text(raw_text, encoding="utf-8")
+
+    if args.meta_out:
+        # 证据链用：记录本次调用真实生效的模型配置。绝不写 API key。
+        meta = {
+            "base_url": base_url,
+            "model": model,
+            "env_file": str(env_path),
+            "api_key_present": True,
+            "timeout_seconds": timeout_seconds,
+            "max_attempts": max_attempts,
+            "retry_backoff_seconds": retry_backoff_seconds,
+            "system_prompt_path": str(Path(args.system)),
+            "finished_at": datetime.now(timezone.utc).isoformat(),
+        }
+        meta_out = Path(args.meta_out)
+        ensure_parent(meta_out)
+        meta_out.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"Wrote extractor meta: {meta_out}")
 
     try:
         patch = parse_patch_response(raw_text)

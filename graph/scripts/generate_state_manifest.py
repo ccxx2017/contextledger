@@ -8,6 +8,7 @@ Run it from the repository root (D:\CCXXLESSON\contextledger).
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -62,8 +63,26 @@ def git_capture(args: list[str]) -> str:
     return result.stdout.strip()
 
 
-def git_status_short() -> str:
-    return git_capture(["status", "--short"])
+def git_status_short(exclude: Path | None = None) -> str:
+    """Git status, optionally hiding dirt caused by the manifest's own output.
+
+    Without this, writing the manifest makes the tree dirty, so the next run
+    would record a different status than the first: self-referential noise.
+    """
+    raw = git_capture(["status", "--short"])
+    if exclude is None:
+        return raw
+    try:
+        rel = exclude.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return raw
+    kept: list[str] = []
+    for line in raw.splitlines():
+        path_part = line[3:].strip().strip('"') if len(line) > 3 else ""
+        if path_part == rel or (path_part.endswith("/") and rel.startswith(path_part)):
+            continue
+        kept.append(line)
+    return "\n".join(kept)
 
 
 def load_json(path: Path) -> Any:
@@ -185,6 +204,59 @@ def load_benchmark_metrics() -> dict[str, Any]:
     }
 
 
+def read_patch_chain_summary() -> dict[str, Any]:
+    """Summarize the committed patch chain: one entry per patch with its sha256."""
+    patches_dir = REPO_ROOT / "graph" / "projects" / PROJECT / "patches"
+    if not patches_dir.exists():
+        return {
+            "path": None,
+            "patch_count": 0,
+            "chain_sha256": "",
+            "patches": [],
+        }
+    patches: list[dict[str, Any]] = []
+    chain_hash = hashlib.sha256()
+    for p in sorted(patches_dir.glob("patch_*.json")):
+        digest = sha256_file(p)
+        turn_id = None
+        try:
+            turn_id = load_json(p).get("turn_id")
+        except Exception:
+            pass
+        patches.append({"file": p.name, "turn_id": turn_id, "sha256": digest})
+        chain_hash.update(p.name.encode("utf-8"))
+        chain_hash.update(digest.encode("utf-8"))
+    return {
+        "path": patches_dir.relative_to(REPO_ROOT).as_posix(),
+        "patch_count": len(patches),
+        "chain_sha256": chain_hash.hexdigest(),
+        "patches": patches,
+    }
+
+
+def read_contract_index() -> list[dict[str, str]]:
+    """Parse the contract file index table from contracts/README.md."""
+    readme = REPO_ROOT / "contracts" / "README.md"
+    entries: list[dict[str, str]] = []
+    if not readme.exists():
+        return entries
+    for line in readme.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("| `"):
+            continue
+        cells = [c.strip() for c in stripped.strip("|").split("|")]
+        if len(cells) < 3:
+            continue
+        entries.append(
+            {
+                "file": cells[0].strip("`"),
+                "content": cells[1],
+                "status": cells[2],
+            }
+        )
+    return entries
+
+
 def runtime_component_fingerprints() -> dict[str, Any]:
     """Hash the mechanical files that participate in turn execution."""
     scripts_dir = REPO_ROOT / "graph" / "scripts"
@@ -208,12 +280,12 @@ def runtime_component_fingerprints() -> dict[str, Any]:
     }
 
 
-def build_manifest() -> dict[str, Any]:
+def build_manifest(out_path: Path) -> dict[str, Any]:
     now = datetime.now(timezone.utc)
     branch = git_capture(["branch", "--show-current"])
     head = git_capture(["rev-parse", "HEAD"])
     base_main = git_capture(["merge-base", "main", branch or "HEAD"])
-    working_tree_clean = git_status_short() == ""
+    working_tree_clean = git_status_short(exclude=out_path) == ""
     return {
         "generated_at": now.isoformat(),
         "generated_at_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -229,7 +301,7 @@ def build_manifest() -> dict[str, Any]:
             "commit": head,
             "base_commit_on_main": base_main,
             "working_tree_clean_at_generation": working_tree_clean,
-            "status_short_at_generation": git_status_short(),
+            "status_short_at_generation": git_status_short(exclude=out_path),
         },
         "schema": {
             "current_contract": "contracts/03_graph_schema.md",
@@ -238,7 +310,9 @@ def build_manifest() -> dict[str, Any]:
             "lifecycle_rfc_status": "RFC Draft",
             "compatibility_mode": "legacy_entity_ref_fallback",
         },
+        "contract_index": read_contract_index(),
         "runtime_components": runtime_component_fingerprints(),
+        "patch_chain": read_patch_chain_summary(),
         "graph_state": compute_graph_state_stats(),
         "quarantine": read_quarantine_distribution(),
         "latest_turn_health": {
@@ -263,15 +337,25 @@ def build_manifest() -> dict[str, Any]:
 
 
 def main() -> int:
-    manifest = build_manifest()
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--out",
+        default=str(MANIFEST_PATH),
+        help="output manifest path (default: reports/current_state_manifest.json)",
+    )
+    args = parser.parse_args()
+
+    manifest = build_manifest(out_path=Path(args.out))
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"Wrote {MANIFEST_PATH}")
+    print(f"Wrote {out_path}")
     print(f"  branch: {manifest['git']['branch']}")
     print(f"  commit: {manifest['git']['commit']}")
     print(f"  graph_state sha256: {manifest['graph_state']['sha256']}")
+    print(f"  patch_count: {manifest['patch_chain']['patch_count']}")
     print(f"  working_tree_clean: {manifest['git']['working_tree_clean_at_generation']}")
     return 0
 

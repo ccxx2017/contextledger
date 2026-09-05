@@ -1,0 +1,11 @@
+{
+  "kind": "quarantine_register_check_report.v1",
+  "project_id": "abu_modern",
+  "current_turn": 84,
+  "summary": {
+    "tracked_items": 6,
+    "unreviewed_items": 0,
+    "blocking_items": 0
+  },
+  "blocking_items": []
+}

@@ -16,7 +16,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 PROJECT = "abu_modern"
 BENCHMARK_VERSION = "phase05_v3"
-FREEZE_VERSION = "v1"
+FREEZE_VERSION = "v1.1"
 FREEZE_DIR = REPO_ROOT / "graph" / "projects" / PROJECT / "benchmark" / "v1_freeze"
 MANIFEST_PATH = FREEZE_DIR / "benchmark_v1_freeze_manifest.json"
 BENCHMARK_DIR = REPO_ROOT / "graph" / "projects" / PROJECT / "benchmark" / BENCHMARK_VERSION
@@ -144,6 +144,16 @@ def build_manifest() -> dict[str, Any]:
         "gold_annotation_schema_version": "phase05_v3",
         "d1_baseline_definition": "Flat RAG with static context window, no invalidation tracking",
         "d2_baseline_definition": "Flat RAG with injected chronological summary, no explicit lifecycle adjudication",
+        # v1.1 修订：上面两条 prose 是 v1 冻结时的历史描述，与代码实现不一致
+        # （正是 GPT-6 评审 §二.2 指出的"decoder 身份漂移"）。按 freeze update_policy
+        # 的 PATCH 规则补齐权威实现引用；prose 原样保留，以 implementation_ref 为准。
+        "d1_implementation_ref": "graph/scripts/score_phase05.py::run_flat_rag_d1 (full_history_dump)",
+        "d2_implementation_ref": "graph/scripts/score_phase05.py::run_flat_rag_d2 (exact_surface_last_write_wins)",
+        "decoder_identity_note": (
+            "D1/D2 身份以 d*_implementation_ref 指向的代码为准；"
+            "d*_baseline_definition 为历史 prose，仅作冻结痕迹保留，不得作为实现依据。"
+            "同口径说明见 phase05_v2/reports/phase05_flat_rag_baseline_definition.md。"
+        ),
         "splits": [build_split_manifest(name, case_ids) for name, case_ids in SPLITS.items()],
         "total_cases": len(all_case_ids),
         "all_case_ids": all_case_ids,
@@ -172,6 +182,7 @@ def build_manifest() -> dict[str, Any]:
         "notes": [
             "This freeze separates mechanism correctness (fixtures) from generalization (blind_holdout).",
             "The blind_holdout split must remain uninspected until lifecycle implementation is finalized.",
+            "v1.1 (PATCH, metadata fix): 修正 D1/D2 decoder 身份漂移 —— 新增 d*_implementation_ref 权威指向代码实现；原 prose 定义未改动，仅标注以实现引用为准。split 与用例无任何变化。",
         ],
     }
 

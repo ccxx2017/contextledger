@@ -50,9 +50,103 @@
     "resolved",
     "unknown"
   ],
-  "errors": [],
-  "warnings": [],
+  "errors": [
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[144] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[144]",
+      "source": "n_0094",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null,
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[173] 指向的节点 n_0093 未标记为 superseded。",
+      "edge_id": "edge[173]",
+      "source": "n_0107",
+      "target": "n_0093",
+      "target_status": null,
+      "target_active": null,
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[212] 指向的节点 n_0060 未标记为 superseded。",
+      "edge_id": "edge[212]",
+      "source": "n_0135",
+      "target": "n_0060",
+      "target_status": "active",
+      "target_active": null,
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    },
+    {
+      "level": "error",
+      "code": "INVALIDATES_TARGET_NOT_SUPERSEDED",
+      "message": "invalidates 边 edge[259] 指向的节点 n_0156 未标记为 superseded。",
+      "edge_id": "edge[259]",
+      "source": "n_0160",
+      "target": "n_0156",
+      "target_status": null,
+      "target_active": null,
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    },
+    {
+      "level": "error",
+      "code": "CONFLICTING_ACTIVE_STATES_FOR_ENTITY_REF",
+      "message": "相同 entity_ref=TKT-2026-005B 下同时存在多个互斥 active state: deployed, resolved",
+      "entity_ref": "TKT-2026-005B",
+      "states": {
+        "deployed": [
+          "n_0104"
+        ],
+        "resolved": [
+          "n_0101"
+        ]
+      },
+      "mutually_exclusive_states": [
+        "blocked",
+        "cancelled",
+        "deployed",
+        "implemented",
+        "open",
+        "resolved"
+      ],
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    }
+  ],
+  "warnings": [
+    {
+      "level": "warning",
+      "code": "MISSING_ENTITY_REF_FOR_IDENTIFIABLE_CONTENT",
+      "message": "节点 n_0169 类型为 Fact，内容中包含可识别实体线索，但缺少 entity_ref。",
+      "node_id": "n_0169",
+      "node_type": "Fact",
+      "evidence": [
+        "file_path"
+      ],
+      "remediation_status": "tracked",
+      "escalate_on_or_after_turn": 90,
+      "note": "工作包A基线冻结时登记的存量违例（turn_084 提交态）。禁止手改图修复；须经正常管线出 patch 修复或重新裁定后销账。"
+    }
+  ],
   "kind": "lint_baseline.phase1_prep.v1",
   "project_id": "abu_modern",
-  "source_graph": "graph/projects/abu_modern/graph_state.json"
+  "source_graph": "graph/projects/abu_modern/graph_state.json",
+  "updated_at": "2026-09-05",
+  "update_reason": "baseline freeze (工作包A): 登记主图上未跟踪的存量 lint 违例，修复期限 turn_090"
 }

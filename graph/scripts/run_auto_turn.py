@@ -23,10 +23,12 @@ run_auto_turn.py
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -38,6 +40,81 @@ CONTRACTS_DIR = PROJECT_ROOT / "contracts"
 DEFAULT_SYSTEM_PROMPT = GRAPH_DIR / "prompts" / "extractor_system.md"
 ALIAS_CONTRACT = CONTRACTS_DIR / "05_entity_naming.md"
 MAX_RECONCILE_RETRIES = 3
+
+# 证据链记录的管线参与脚本（cleaner/resolver/reconcile 的版本 = 其内容哈希）
+CLEANER_SCRIPT = GRAPH_DIR / "scripts" / "sanitize_patch_entity_refs.py"
+RESOLVER_SCRIPT = GRAPH_DIR / "scripts" / "entity_resolver.py"
+RECONCILE_SCRIPT = GRAPH_DIR / "scripts" / "reconcile_patch.py"
+EVIDENCE_CONTRACTS = (
+    "03_graph_schema.md",
+    "05_entity_naming.md",
+    "06_extractor_runtime.md",
+    "07_turn_runtime.md",
+)
+
+
+def canonical_sha256(path: Path) -> str:
+    """内容哈希（CRLF/CR 归一为 LF），与 verify_canonical_evidence_hashes.py 同口径。"""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        h.update(f.read().replace(b"\r\n", b"\n").replace(b"\r", b"\n"))
+    return h.hexdigest()
+
+
+def build_evidence_chain(
+    *,
+    project_id: str,
+    turn_id: str,
+    attempts: int,
+    raw_turn_path: Path,
+    prompt_path: Path,
+    raw_response_path: Path,
+    meta_path: Path | None,
+    current_patch: Path,
+) -> dict[str, Any]:
+    """形成 patch 的完整证据链（评审 §二.2：不能只有最终 patch、没有形成它的证据）。
+
+    所有关卡文件记录 {path, sha256}；模型配置来自 invoke_extractor 的 meta 快照，
+    绝不包含 API key。
+    """
+    model_config: dict[str, Any] = {}
+    if meta_path is not None and meta_path.exists():
+        try:
+            model_config = load_json(meta_path)
+        except Exception:
+            model_config = {"error": "meta 快照不可解析"}
+
+    def entry(path: Path) -> dict[str, Any]:
+        return {"path": path.relative_to(PROJECT_ROOT).as_posix(), "sha256": canonical_sha256(path)}
+
+    hashes: dict[str, Any] = {"raw": entry(raw_turn_path)}
+    if prompt_path.exists():
+        hashes["prompt"] = entry(prompt_path)
+    if raw_response_path.exists():
+        hashes["extractor_output"] = entry(raw_response_path)
+    if meta_path is not None and meta_path.exists():
+        hashes["extractor_meta"] = entry(meta_path)
+    if current_patch.exists():
+        hashes["patch"] = entry(current_patch)
+
+    evidence: dict[str, Any] = {
+        "schema": "evidence_chain.v1",
+        "project_id": project_id,
+        "turn_id": turn_id,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "extractor_attempts": attempts,
+        "model_config": model_config,
+        "hashes": hashes,
+        "component_versions": {
+            "cleaner": entry(CLEANER_SCRIPT),
+            "resolver": entry(RESOLVER_SCRIPT),
+            "reconcile": entry(RECONCILE_SCRIPT),
+        },
+        "contract_versions": {
+            name: entry(CONTRACTS_DIR / name) for name in EVIDENCE_CONTRACTS
+        },
+    }
+    return evidence
 
 
 def run(
@@ -182,6 +259,21 @@ def quarantine_turn(
     }
     write_json(quarantine_meta, meta)
 
+    # 隔离必须同时有隔离策略与登记（评审 §二.3）：新隔离条目立即入登记簿。
+    # 登记失败不影响隔离本身（隔离已落盘，登记可事后补跑 sync）。
+    try:
+        subprocess.run(
+            [sys.executable, "graph/scripts/quarantine_register.py", "sync",
+             "--project-id", project_dir.name],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            check=False,
+        )
+    except Exception as exc:  # pragma: no cover - 防御性
+        print(f"[{turn_id}] quarantine register sync 失败（可事后补跑）: {exc}", file=sys.stderr)
+
     return {
         "status": "QUARANTINE",
         "stage": stage,
@@ -312,9 +404,13 @@ def main() -> int:
         ])
         health["stages"]["build_graph_slice"] = {"status": "OK", "out": str(slice_path)}
 
-        # 2. invoke_extractor（同时生成 prompt snapshot）
+        # 2. invoke_extractor（同时生成 prompt snapshot 与调用元数据）
         current_stage = "invoke_extractor"
         print(f"[{turn_id}] 2/9 invoke_extractor ...")
+        extractor_meta_path = work_dir / f"extractor_meta.{turn_id}.json"
+        final_prompt_path = prompt_path
+        final_response_path = raw_response_path
+        final_meta_path = extractor_meta_path
         run([
             "graph/scripts/invoke_extractor.py",
             "--system", str(DEFAULT_SYSTEM_PROMPT),
@@ -325,6 +421,7 @@ def main() -> int:
             "--out", str(raw_patch_path),
             "--raw-response-out", str(raw_response_path),
             "--prompt-out", str(prompt_path),
+            "--meta-out", str(extractor_meta_path),
         ])
         health["stages"]["invoke_extractor"] = {"status": "OK", "out": str(raw_patch_path)}
 
@@ -389,9 +486,12 @@ def main() -> int:
                 if attempt > args.max_retry:
                     break
                 print(f"[{turn_id}] reconcile fail, retry extractor ({attempt}/{args.max_retry}) ...")
-                # 重新调用 extractor，输出带 retry 标记的 patch
+                # 重新调用 extractor，输出带 retry 标记的 patch；prompt/meta 同样留痕，
+                # 证据链必须指向真正形成最终 patch 的那次调用。
                 retry_patch = work_dir / f"patch_{turn_num:03d}.retry_{attempt}.json"
                 retry_response = work_dir / f"extractor_raw_response.{turn_id}.retry_{attempt}.txt"
+                retry_prompt = work_dir / f"extractor_prompt.{turn_id}.retry_{attempt}.json"
+                retry_meta = work_dir / f"extractor_meta.{turn_id}.retry_{attempt}.json"
                 run([
                     "graph/scripts/invoke_extractor.py",
                     "--system", str(DEFAULT_SYSTEM_PROMPT),
@@ -401,7 +501,12 @@ def main() -> int:
                     "--turn-id", turn_id,
                     "--out", str(retry_patch),
                     "--raw-response-out", str(retry_response),
+                    "--prompt-out", str(retry_prompt),
+                    "--meta-out", str(retry_meta),
                 ])
+                final_prompt_path = retry_prompt
+                final_response_path = retry_response
+                final_meta_path = retry_meta
                 # resolver 也需要重跑
                 retry_resolved = work_dir / f"patch_{turn_num:03d}.resolved.retry_{attempt}.json"
                 run([
@@ -452,6 +557,23 @@ def main() -> int:
             "errors": reconcile_report.get("summary", {}).get("errors", 0),
             "warnings": reconcile_report.get("summary", {}).get("warnings", 0),
         }
+
+        # 证据链：把形成本 patch 的 raw/prompt/模型配置/清洗器/契约全部登记。
+        evidence_chain_path = work_dir / f"evidence_chain.{turn_id}.json"
+        write_json(
+            evidence_chain_path,
+            build_evidence_chain(
+                project_id=project_id,
+                turn_id=turn_id,
+                attempts=attempt,
+                raw_turn_path=raw_turn_path,
+                prompt_path=final_prompt_path,
+                raw_response_path=final_response_path,
+                meta_path=final_meta_path,
+                current_patch=current_patch,
+            ),
+        )
+        health["stages"]["evidence_chain"] = {"status": "OK", "out": str(evidence_chain_path)}
 
             # 6. apply_patch
         current_stage = "apply_patch"
@@ -625,6 +747,8 @@ def main() -> int:
             shutil.copy2(pending_merge_turn_path, published_pending_merge_path)
             shutil.copy2(bundle_path, published_bundle_path)
             shutil.copy2(assembly_report_path, published_assembly_report_path)
+            published_evidence_path = project_dir / "run" / f"evidence_chain.{turn_id}.json"
+            shutil.copy2(evidence_chain_path, published_evidence_path)
             health["committed"] = {
                 "graph_state": str(graph_state_path),
                 "run_snapshot": str(project_dir / "run" / f"graph_state.turn_{turn_num:03d}.json"),
@@ -632,6 +756,7 @@ def main() -> int:
                 "pending_merge": str(published_pending_merge_path),
                 "bundle": str(published_bundle_path),
                 "assembly_report": str(published_assembly_report_path),
+                "evidence_chain": str(published_evidence_path),
             }
         elif args.dry_run:
             health["committed"] = {"dry_run": True}
