@@ -1,0 +1,29 @@
+{
+  "task_id": "cancel_injection",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0002",
+      "entity_ref": "alpha",
+      "content": "用户取消 alpha 相关工作",
+      "node_type": "Decision",
+      "state": "cancelled",
+      "status": "superseded",
+      "created_turn": 2
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0001",
+      "reason": "方案取消：alpha 不再有效"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "invalidates"
+    }
+  ],
+  "updated_nodes": []
+}

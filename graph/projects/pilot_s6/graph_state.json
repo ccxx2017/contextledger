@@ -1,0 +1,15 @@
+{
+  "turn_counter": 1,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "entity_ref": "demo-task",
+      "content": "演示任务",
+      "node_type": "OpenTask",
+      "state": "open",
+      "status": "active",
+      "created_turn": 1
+    }
+  },
+  "edges": []
+}

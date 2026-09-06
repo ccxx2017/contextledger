@@ -1,0 +1,16 @@
+{
+  "kind": "quarantine_register.v1",
+  "project_id": "pilot_s6",
+  "items": [
+    {
+      "register_key": "turn_002_failed",
+      "source_turn": 2,
+      "stage": "reconcile_patch",
+      "disposition": "requeued",
+      "reason": "reconcile 失败且重试 3 次后仍无法通过",
+      "requires_evidence": "回看 turn_002 raw 裁定重试或放弃",
+      "adjudicated_at": "2026-09-06",
+      "adjudication_note": "人工裁定：回看 turn_002 raw 后决定重试（模拟）"
+    }
+  ]
+}

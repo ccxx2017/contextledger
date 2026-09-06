@@ -1,0 +1,6 @@
+{
+  "turn_id": "turn_002",
+  "stage": "reconcile_patch",
+  "reason": "reconcile 失败且重试 3 次后仍无法通过",
+  "quarantine_patch": ""
+}

@@ -1,0 +1,15 @@
+{
+  "turn_counter": 1,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "entity_ref": "alpha",
+      "content": "alpha 处于 open 状态（依据 r1 的工作基础）",
+      "node_type": "Fact",
+      "state": "open",
+      "status": "active",
+      "created_turn": 1
+    }
+  },
+  "edges": []
+}
