@@ -101,7 +101,20 @@
   ],
   "scoring_rule": "Q1-Q4 各 0/1 分，≥3 分入选；平手取 Q2+Q3 双是者；全部 <3 分则 decision=log_tail_adapter_only 降级为仅影子模式。",
   "decision": "opencode_primary",
-  "decision_status": "provisional_pending_version_pin",
+  "decision_status": "pinned_sdk_pending_smoke",
+  "pinning_update_2026_09_06": {
+    "method": "SDK 精确版本钉扎（等效验证）",
+    "evidence": "@opencode-ai/plugin@1.18.29（与运行版本一致）类型定义逐签名复核，快照存 contextledger-host/opencode/sdk-1.18.29/index.d.ts；指纹见 contextledger-host/opencode/RUNTIME_FINGERPRINT.json (v2)",
+    "corrections": [
+      "chat.params 在 1.18.29 的 output 不含 messages（只有采样参数）——早期『chat.params 可注入上下文』的表述错误；上下文观察/注入唯一边界 = experimental.chat.messages.transform（仍带 experimental. 前缀）",
+      "阻断面 permission.ask（ask|deny|allow）与改写面 tool.execute.before（args）在该版本确认"
+    ],
+    "preconditions": {
+      "签名复核": "已完成（SDK 1.18.29 级）",
+      "版本对齐": "源码级开放（GitHub 不可达：443 超时/SSH 无公钥/无代理，证据见指纹 v2）；SDK 精确版本钉扎作为等效验证"
+    },
+    "remaining_gate": "冒烟清单 S1-S6（reports/review_round2/pilot_design.md）；S3 最终输入可核验 + S5 过期动作实际阻断 完成前不宣称接管/阻断验证"
+  },
   "decision_rationale": [
     "两宿主 Q1-Q4 均 ≥3 分，平手依据 Q2+Q3 双是进入架构裁决",
     "评审工作包 D 的首个场景是长程编码任务（方案取消/任务改派/旧工具结果晚到/任务恢复），需要的是编码 Agent 的 session 循环与工具调用面；OpenCode 是终端编码 Agent，OpenClaw 是消息网关，其管线不承载编码任务的工具循环",
