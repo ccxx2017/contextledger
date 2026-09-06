@@ -312,6 +312,24 @@ class LifecycleBoundaryTest(unittest.TestCase):
         self.assertEqual(node_status(new_graph, "n_0001"), "active", "弃权不得改变当前态")
         self.assertNotIn("n_0002", new_graph["nodes"], "弃权不落新节点")
 
+    def test_no_temporal_credential_does_not_overwrite_semantic_change(self):
+        """缺时间凭据的语义变更：晚收到不等于业务上更新，仅凭接收顺序不得覆盖。"""
+        graph = make_graph([
+            make_node("n_0001", "config-flag", "功能开关当前值", lifecycle_ref="lc-cfg",
+                      state_slot="value", state="enabled",
+                      observed_at="2026-09-05T10:00:00Z"),
+        ])
+        late_receipt = make_event(
+            "ev_late_receipt", "2026-09-05T12:00:00Z", "config-flag", "更晚收到但无任何时序凭据的旧观测",
+            lifecycle_ref="lc-cfg", state_slot="value", lifecycle_seq=None,
+            state="disabled",
+        )
+        new_graph, decision = run_decision(graph, late_receipt, next_node_id="n_0002")
+
+        self.assertEqual(decision.action, "abstain", "缺 seq 与 effective_at 的语义变更必须弃权")
+        self.assertEqual(node_status(new_graph, "n_0001"), "active", "关键状态不得被接收顺序覆盖")
+        self.assertNotIn("n_0002", new_graph["nodes"], "弃权不落新节点")
+
 
 if __name__ == "__main__":
     unittest.main()

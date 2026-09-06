@@ -1,10 +1,10 @@
 {
   "kind": "baseline_summary.v1",
   "project_id": "abu_modern",
-  "generated_at": "2026-09-06T01:59:50.545164+00:00",
+  "generated_at": "2026-09-06T06:53:27.582526+00:00",
   "git": {
     "branch": "phase1-lifecycle-mainchain",
-    "commit": "fe6ef5253fcdf0a579ea6d0b16a426debea78f2d",
+    "commit": "ade9eeaa6297f37905fc635fff003e3636267e22",
     "dirty": true
   },
   "turn_counter": 84,
@@ -186,7 +186,7 @@
   },
   "shadow_splits": {
     "development": {
-      "run_id": "stage04b_20260906T015951_development",
+      "run_id": "stage04b_20260906T065332_development",
       "gate": "BLOCK",
       "aggregate": {
         "min_must_include_recall": 1.0,
@@ -201,7 +201,7 @@
       "provenance": "this_run_reproducible"
     },
     "regression": {
-      "run_id": "stage04b_20260906T015951_regression",
+      "run_id": "stage04b_20260906T065332_regression",
       "gate": "BLOCK",
       "aggregate": {
         "min_must_include_recall": 1.0,
@@ -216,7 +216,7 @@
       "provenance": "this_run_reproducible"
     },
     "adversarial": {
-      "run_id": "stage04b_20260906T015951_adversarial",
+      "run_id": "stage04b_20260906T065333_adversarial",
       "gate": "BLOCK",
       "aggregate": {
         "min_must_include_recall": 1.0,

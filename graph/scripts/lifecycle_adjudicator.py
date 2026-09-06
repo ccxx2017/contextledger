@@ -303,14 +303,34 @@ def adjudicate_event(event: dict[str, Any], graph: dict[str, Any]) -> Decision:
             reason="observed_at 与既有节点打平且缺 lifecycle_seq，顺序无法判定，保守弃权",
         )
 
+    prev_state = str(active.get("state") or "").strip().lower()
+    event_state = str(payload.get("state") or "").strip().lower()
+    semantic_conflict = bool(prev_state and event_state and prev_state != event_state)
+
+    # 5d'. 缺时间凭据的语义状态变更不得自动覆盖（评审 §五）：
+    # "晚收到"不等于"业务上更新"。observed_at 只是账本接收顺序；
+    # 当事件既无 lifecycle_seq（可信顺序凭据）也无 effective_at（业务时点声明），
+    # 却要改变关键状态的值时，仅凭接收顺序推进不足以裁定，保守弃权。
+    # （有任一凭据时不受此限：seq 提供顺序权威，effective_at 提供业务时点。）
+    if (
+        time_cmp == 1
+        and event_seq is None
+        and not event.get("effective_at")
+        and semantic_conflict
+    ):
+        return Decision(
+            action=ABSTAIN,
+            reason=(
+                f"缺时间凭据的语义变更（{prev_state} -> {event_state}）："
+                "事件缺 lifecycle_seq 与 effective_at，仅凭接收顺序不得自动覆盖关键状态，保守弃权"
+            ),
+        )
+
     # 5e. provenance（v2 决策契约 C1.2.3）：不同来源本身不构成 CONTESTS。
     # CONTESTS = 来源不同 + 语义冲突（state 互斥）+ 无明确时间推进；
     # 时间推进明确时，即使来源不同也按演进 SUPERSEDES（§8 禁止把
     # provenance conflict 默认折叠成 full invalidation）。
     prev_source = active.get("source")
-    prev_state = str(active.get("state") or "").strip().lower()
-    event_state = str(payload.get("state") or "").strip().lower()
-    semantic_conflict = bool(prev_state and event_state and prev_state != event_state)
     source_diff = bool(source and prev_source and str(source) != str(prev_source))
     if source_diff and semantic_conflict and time_cmp != 1:
         return Decision(

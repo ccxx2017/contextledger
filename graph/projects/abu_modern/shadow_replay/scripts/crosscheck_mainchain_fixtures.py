@@ -52,9 +52,12 @@ DOCUMENTED_DIVERGENCES: dict[str, dict[str, str]] = {
     "lc_late_arrival_missing_effective": {
         "class": "deliberate",
         "reason": (
-            "shadow 对『同源状态变更但缺 effective_at』硬隔离；主链不移植该条——"
-            "RFC §7.2 v1 明确『不要求完整 valid_time 求值』，缺字段交由 Assembler "
-            "完整性声明（工作包 C）降级暴露。"
+            "shadow 对『同源状态变更但缺 effective_at』硬隔离；主链按评审 §五细化后的规则处理："
+            "缺 effective_at 本身不硬隔离（RFC §7.2 v1 不要求完整 valid_time 求值），"
+            "但语义状态变更若同时缺 lifecycle_seq 与 effective_at 则弃权"
+            "（test_no_temporal_credential_does_not_overwrite_semantic_change）——"
+            "本 fixture 事件带 seq（可信顺序凭据），按顺序权威推进属非无条件覆盖。"
+            "缺字段风险另由 Assembler 完整性声明（工作包 C）降级暴露。"
         ),
     },
     "lc_conditional_different_scope": {

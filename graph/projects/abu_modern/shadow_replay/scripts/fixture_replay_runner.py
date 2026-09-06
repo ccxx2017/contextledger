@@ -49,6 +49,10 @@ EXPECTED_NODE_SEMANTICS: dict[str, dict[str, dict[str, Any]]] = {
         "n_deploy": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_deploy_prod_2026_07", "state": "deployed"},
         "n_ticket_open": {"entity_ref": "svc_abu_payment", "lifecycle_ref": "lc_ticket_005b", "state": "open"},
     },
+    "lc_reassignment_late_tool_result": {
+        "n_owner_a": {"entity_ref": "quant-reviewer-impl", "lifecycle_ref": "lc_impl_stream", "lifecycle_seq": 1, "state": "agent-wang"},
+        "n_owner_b": {"entity_ref": "quant-reviewer-impl", "lifecycle_ref": "lc_impl_stream", "lifecycle_seq": 2, "state": "agent-liu"},
+    },
     "lc_revival": {
         "n_exp_v1_active": {"entity_ref": "exp_quant_models", "lifecycle_ref": "lc_quant_research", "lifecycle_seq": 1, "state": "in_progress"},
         "n_exp_v1_cancelled": {"entity_ref": "exp_quant_models", "lifecycle_ref": "lc_quant_research", "lifecycle_seq": 2, "state": "cancelled"},

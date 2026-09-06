@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-06T01:59:50.603165+00:00",
-  "generated_at_utc": "2026-09-06T01:59:50Z",
+  "generated_at": "2026-09-06T06:53:27.665554+00:00",
+  "generated_at_utc": "2026-09-06T06:53:27Z",
   "project_id": "abu_modern",
   "manifest_generation": {
     "script_path": "graph/scripts/generate_state_manifest.py",
@@ -14,10 +14,10 @@
   },
   "git": {
     "branch": "phase1-lifecycle-mainchain",
-    "commit": "fe6ef5253fcdf0a579ea6d0b16a426debea78f2d",
+    "commit": "ade9eeaa6297f37905fc635fff003e3636267e22",
     "base_commit_on_main": "1ccb733d0d18c13bcd7523bfc83c212835615e23",
-    "working_tree_clean_at_generation": true,
-    "status_short_at_generation": ""
+    "working_tree_clean_at_generation": false,
+    "status_short_at_generation": "M graph/projects/abu_modern/benchmark/validate_v2/README.md\n M graph/projects/abu_modern/shadow_replay/scripts/crosscheck_mainchain_fixtures.py\n M graph/projects/abu_modern/shadow_replay/scripts/fixture_replay_runner.py\n M graph/scripts/lifecycle_adjudicator.py\n M graph/tests/test_lifecycle_boundary.py\n M \"raw/projects/contextLedger/GPT-6-\\351\\241\\271\\347\\233\\256\\350\\257\\204\\345\\256\\241\\345\\273\\272\\350\\256\\256.md\"\n M reports/lifecycle_B/mainchain_fixture_crosscheck.json\n M reports/lifecycle_B/test_first_evidence.json\n?? reports/review_round2/"
   },
   "schema": {
     "current_contract": "contracts/03_graph_schema.md",
@@ -69,7 +69,7 @@
     }
   ],
   "runtime_components": {
-    "scripts_dir_sha256": "be3dc48f2f8b40d1273f073bf23f6cf92d82477a0a3dae3643f361f1e04f5a72",
+    "scripts_dir_sha256": "22e8b6272b1de1a92e9fa3f7d1ad7fc8b534bdc987de203a2a2a63b36671c56a",
     "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
     "contracts_dir_sha256": "6c4c740e9d47c3fc9b854ede82d678f09bcebe2270d632d1f64557a42844d6b8",
     "key_files": {
