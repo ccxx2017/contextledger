@@ -1,0 +1,85 @@
+{
+  "task_id": "task_default",
+  "turn_id": 1,
+  "new_nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "Decision",
+      "content": "决定取消重构方案A，后续按方案B推进",
+      "entity_ref": null,
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-refactor-plan",
+      "state_slot": "approval_status",
+      "observed_at": "2026-09-06T10:30:00Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0002",
+      "type": "ToolResult",
+      "content": "方案A 测试集 pytest 全量测试通过，39 passed",
+      "entity_ref": "plan_a_test_suite",
+      "state": "resolved",
+      "priority": "optional",
+      "lifecycle_ref": "lc-refactor-plan",
+      "state_slot": "build_status",
+      "observed_at": "2026-09-06T10:30:00Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0003",
+      "type": "Decision",
+      "content": "quant-reviewer 模块实现负责人从 agent-wang 变更为 agent-liu",
+      "entity_ref": "quant_reviewer_module",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-quant-reviewer-impl",
+      "state_slot": "owner",
+      "observed_at": "2026-09-06T10:30:00Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0004",
+      "type": "Constraint",
+      "content": "策略研究 agent 的周报任务本周继续由 duty_reporter 执行，不要变动",
+      "entity_ref": "strategy_research_weekly_report",
+      "state": null,
+      "priority": "should_include",
+      "lifecycle_ref": "lc-weekly-report-2026-w36",
+      "state_slot": "owner",
+      "observed_at": "2026-09-06T10:30:00Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0005",
+      "type": "OpenTask",
+      "content": "策略研究 agent 的周报任务本周执行（由 duty_reporter 负责）",
+      "entity_ref": "strategy_research_weekly_report",
+      "state": "in_progress",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-weekly-report-2026-w36",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-06T10:30:00Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0005",
+      "relation": "refines"
+    }
+  ]
+}

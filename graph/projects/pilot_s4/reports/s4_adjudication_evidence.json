@@ -1,0 +1,46 @@
+{
+  "kind": "s4_adjudication_evidence.v1",
+  "note": "真实抽取 patch 的节点转事件后驱动主链裁定器（S4：新裁定路径在真实数据上触发）",
+  "decisions": [
+    {
+      "event_id": "evt_n_0001",
+      "entity": "决定取消重构方案A，后续按方案B推进",
+      "lifecycle_ref": "lc-refactor-plan",
+      "state_slot": "approval_status",
+      "action": "append",
+      "reason": "同键 lc-refactor-plan 无活跃节点，新增当前态节点"
+    },
+    {
+      "event_id": "evt_n_0002",
+      "entity": "plan_a_test_suite",
+      "lifecycle_ref": "lc-refactor-plan",
+      "state_slot": "build_status",
+      "action": "append",
+      "reason": "同键 lc-refactor-plan 无活跃节点，新增当前态节点"
+    },
+    {
+      "event_id": "evt_n_0003",
+      "entity": "quant_reviewer_module",
+      "lifecycle_ref": "lc-quant-reviewer-impl",
+      "state_slot": "owner",
+      "action": "append",
+      "reason": "同键 lc-quant-reviewer-impl 无活跃节点，新增当前态节点"
+    },
+    {
+      "event_id": "evt_n_0004",
+      "entity": "strategy_research_weekly_report",
+      "lifecycle_ref": "lc-weekly-report-2026-w36",
+      "state_slot": "owner",
+      "action": "append",
+      "reason": "同键 lc-weekly-report-2026-w36 无活跃节点，新增当前态节点"
+    },
+    {
+      "event_id": "evt_n_0005",
+      "entity": "strategy_research_weekly_report",
+      "lifecycle_ref": "lc-weekly-report-2026-w36",
+      "state_slot": "execution_status",
+      "action": "append",
+      "reason": "同键 lc-weekly-report-2026-w36 无活跃节点，新增当前态节点"
+    }
+  ]
+}
