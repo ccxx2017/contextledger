@@ -1,10 +1,10 @@
 {
   "kind": "mainchain_fixture_crosscheck.v2",
-  "generated_at": "2026-09-06T01:26:14.628956+00:00",
-  "fixture_count": 26,
+  "generated_at": "2026-09-06T02:00:08.026112+00:00",
+  "fixture_count": 27,
   "verdict_counts": {
     "consistent": 15,
-    "fixture_spec_divergence": 7,
+    "fixture_spec_divergence": 8,
     "documented_divergence": 4,
     "mainchain_gap": 0
   },
@@ -540,6 +540,66 @@
             "source": "mc_0002",
             "target": "mc_0001"
           }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_reassignment_late_tool_result",
+      "category": "reassignment",
+      "checkpoints_checked": 2,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_impl_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_impl_002",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_impl_003",
+          "mainchain": "quarantine",
+          "shadow": "quarantine_late",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 5,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_reassign",
+          "expected": "n_owner_b"
+        },
+        {
+          "kind": "superseded_missing",
+          "checkpoint_id": "cp_after_reassign",
+          "expected": "n_owner_a"
+        },
+        {
+          "kind": "relation_endpoint_unmatched",
+          "checkpoint_id": "cp_after_reassign",
+          "expected": {
+            "relation_type": "supersedes",
+            "source": "n_owner_b",
+            "target": "n_owner_a"
+          }
+        },
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_late_result",
+          "expected": "n_owner_b"
+        },
+        {
+          "kind": "superseded_missing",
+          "checkpoint_id": "cp_after_late_result",
+          "expected": "n_owner_a"
         }
       ],
       "divergence_annotation": null,

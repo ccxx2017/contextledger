@@ -1,6 +1,6 @@
 {
   "kind": "test_first_evidence.v1",
-  "generated_at": "2026-09-06T01:18:30.574007+00:00",
+  "generated_at": "2026-09-06T02:00:07.314114+00:00",
   "test_commit": "8c6144efa52cf6347370608dc01dff14c869921a",
   "impl_commits": {
     "graph/scripts/lifecycle_fields.py": "b52685077af59ec7476eca2435eb1c7494d89218",
@@ -9,7 +9,7 @@
   "test_file_sha256_at_commit": "bf1509ce555674fd10bf66f3542f28d6bd0c275c6347b870ea595a5f8f659cf7",
   "test_file_sha256_at_head": "66a29d61a0442943b5aeb33dc58a25cbddd7026e077236a840a6f191160c9449",
   "failed_at_test_commit": true,
-  "unittest_output_tail_at_test_commit": "E\n======================================================================\nERROR: test_lifecycle_boundary (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_lifecycle_boundary\nTraceback (most recent call last):\n  File \"C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python39\\lib\\unittest\\loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpamwoze64\\wt\\graph\\tests\\test_lifecycle_boundary.py\", line 28, in <module>\n    from lifecycle_adjudicator import adjudicate_event, decision_to_patch  # noqa: E402\nModuleNotFoundError: No module named 'lifecycle_adjudicator'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+  "unittest_output_tail_at_test_commit": "E\n======================================================================\nERROR: test_lifecycle_boundary (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_lifecycle_boundary\nTraceback (most recent call last):\n  File \"C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python39\\lib\\unittest\\loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpqbvl16qq\\wt\\graph\\tests\\test_lifecycle_boundary.py\", line 28, in <module>\n    from lifecycle_adjudicator import adjudicate_event, decision_to_patch  # noqa: E402\nModuleNotFoundError: No module named 'lifecycle_adjudicator'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
   "findings": [
     "顺序 OK：测试提交 8c6144efa5 早于 graph/scripts/lifecycle_fields.py 提交 b52685077a",
     "顺序 OK：测试提交 8c6144efa5 早于 graph/scripts/lifecycle_adjudicator.py 提交 b52685077a",

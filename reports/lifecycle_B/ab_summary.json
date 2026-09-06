@@ -1,9 +1,9 @@
 {
   "kind": "lifecycle_ab_summary.v1",
-  "generated_at": "2026-09-06T01:26:57.943680+00:00",
+  "generated_at": "2026-09-06T02:00:07.580112+00:00",
   "git": {
     "branch": "phase1-lifecycle-mainchain",
-    "commit": "b52685077af59ec7476eca2435eb1c7494d89218"
+    "commit": "fe6ef5253fcdf0a579ea6d0b16a426debea78f2d"
   },
   "legacy_replay": {
     "patch_count": 84,
