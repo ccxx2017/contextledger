@@ -19,6 +19,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+import assembler_manifest
+
 
 PRIORITY_ORDER = {
     "must_include": 0,
@@ -481,6 +483,19 @@ def main() -> int:
     require_expected_turn(graph_state, args.turn_id, source_graph=str(graph_path))
     if args.newer_than:
         require_newer_than(graph_path, args.newer_than, role="build_context_bundle")
+
+    manifest_out_path = report_out_path.parent / f"assembler_manifest.{args.turn_id}.json"
+
+    def _write_manifest(*, rejected: bool) -> None:
+        manifest = assembler_manifest.build_manifest(
+            project_id=args.project_id,
+            turn_id=args.turn_id,
+            graph_state_path=graph_path,
+            rejected=rejected,
+        )
+        write_json(manifest_out_path, manifest)
+        print(f"Wrote assembler manifest: {manifest_out_path} (readiness={manifest['readiness']})")
+
     try:
         bundle, report = build_bundle(
             graph_state=graph_state,
@@ -492,12 +507,14 @@ def main() -> int:
         )
     except AssemblyRejectedError as exc:
         write_json(report_out_path, exc.report)
+        _write_manifest(rejected=True)
         print(exc)
         print(f"Wrote rejection report: {report_out_path}")
         return 2
 
     write_json(out_path, bundle)
     write_json(report_out_path, report)
+    _write_manifest(rejected=False)
     print(f"Wrote bundle: {out_path}")
     print(f"Wrote assembly report: {report_out_path}")
     return 0

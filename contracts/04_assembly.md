@@ -96,7 +96,61 @@
 - `rejection.message`
 - `rejection.active_must_include_node_ids`
 
-## 7. 实施脚本
+## 7. action-readiness 行动就绪度声明（GPT-6 评审工作包 C）
+
+> 关键区分（评审 §二.3）：**主图未被错误写入** ≠ **主图足够完整、可以支撑当前行动**。
+> quarantine 成功只证明前者。Assembler 必须显式声明后者，禁止在存在未裁定事件时
+> 悄悄返回"正常当前态"。
+
+### 7.1 readiness manifest
+
+每次装配除 `context_bundle` 与 `assembly_report` 外，必须产出
+`assembler_manifest.json`（`kind: assembler_manifest.v1`），至少包含：
+
+| 字段 | 语义 |
+|---|---|
+| `state_revision` | `f"{committed_turn:04d}:{graph_state_sha256[:12]}"`，行动前核验的唯一版本凭据 |
+| `readiness` | `ready` / `degraded` / `blocked` 三态（封闭枚举） |
+| `reason_codes` | 触发降级/阻塞的原因代码（封闭词表，见 7.2） |
+| `unresolved_event_ids` | 已知未裁定事件的标识（quarantine 登记簿中 unreviewed 条目等） |
+| `integrity_risks` | 结构化的完整性风险说明（自由文本 + 关联 reason_code） |
+
+三态语义：
+- `ready`：无未裁定事件、预算无溢出、装配输入与权威图一致
+- `degraded`：存在非阻断风险（如 lint warning、quarantine 有已裁定条目），当前态可用但须知情
+- `blocked`：存在不得基于当前态行动的情形（must_include 溢出、未裁定隔离条目、
+  绕过闸门发布等），宿主不得消费该装配结果
+
+### 7.2 reason_codes 封闭词表（初版）
+
+- `MUST_INCLUDE_OVER_BUDGET`：active must_include 超预算，装配被拒绝（已实现，§4）
+- `QUARANTINE_NONEMPTY`：quarantine 登记簿存在 `unreviewed` 条目（未裁定隔离写入）
+- `LINT_WARNING_PRESENT`：当前图存在未登记的 lint warning
+- `STATE_REVISION_STALE`：行动前核验发现 state_revision 已过期
+- `PREMISE_VIOLATED`：行动前提核验失败（见 7.4）
+- `PENDING_MERGE_OVERDUE`：pending_merge 登记簿存在超期未消化条目
+- `PUBLISHED_WITH_BYPASS`：本轮经 `--unsafe-rebuild-mode` 绕过闸门发布
+
+### 7.3 宿主消费规则
+
+- 宿主（或任何行动方）在基于装配结果行动前，必须读取 `assembler_manifest.json`
+- `readiness: blocked` → 禁止行动
+- `readiness: degraded` → 允许行动，但 reason_codes 必须随行动上下文透传
+- `state_revision` 是行动前提的一部分（见 7.4）
+
+### 7.4 行动前版本/前提核验接口
+
+宿主在关键动作执行前，通过只读接口核验装配前提是否仍然成立：
+
+- 脚本：`graph/scripts/verify_preaction.py`
+- 输入：`--project-id`、`--state-revision`（行动时依据的版本）、`--must-include` 清单、可选 `--premise k=v`
+- 判定：当前权威图的 state_revision 与所依据版本一致，且前提仍成立 → 退出码 `0`
+- 任一不成立 → 退出码 `2`，stdout 输出 `{"reason_codes": [...], "detail": ...}`
+- 退出码 `2` 时宿主必须重新装配、重新决策，不得沿用旧依据执行
+
+> 该接口只回答"依据是否过期"，不保证模型理解、遵守或执行正确（评审 §二.4）。
+
+## 8. 实施脚本
 
 Phase 1-prep 的参考实现脚本为：
 - `graph/scripts/build_context_bundle.py`

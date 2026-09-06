@@ -126,6 +126,17 @@
 3. `diff_lint_reports.py --before-graph run/graph_state.turn_004.json --after-graph run/graph_state.turn_005.json --expected-turn turn_005 --after-newer-than patches/patch_005.json`
 4. `build_context_bundle.py --graph run/graph_state.turn_005.json --turn-id turn_005 --newer-than patches/patch_005.json`
 
+发布边界（与 `run_auto_turn.py` 的自动运行器一致，权威约定）：
+- 自动运行器中，apply 产物只落在 **scratch 候选态**（`reports/<turn_id>_auto/graph_state.after_<turn_id>.json`），
+  lint / diff / 红绿灯全部对候选态判定；
+- **仅当所有机械闸门全绿时**，才把候选态 copy 为权威 `graph_state.json` 与 `run/` 快照
+  （见 `graph/scripts/run_auto_turn.py` 的"只有所有机械闸门通过，才允许把 scratch
+  产物发布为项目权威产物"发布块）；
+- 手工分步路径（上方推荐顺序 1-4）是 apply-then-lint 加失败回滚，仅供人工排障；
+  由此产生的权威产物发布同样必须以全绿为前提；
+- 绕过闸门的发布必须使用 `--unsafe-rebuild-mode` 门控的显式 flag，并在
+  turn_health_report 中记录 `published_with_bypass: true`（contracts/04_assembly.md §7.2 `PUBLISHED_WITH_BYPASS`）。
+
 说明：
 - 以上规则能机械拦住三类错误：
   - 写入前上一态错误

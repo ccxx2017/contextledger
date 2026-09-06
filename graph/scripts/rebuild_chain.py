@@ -62,6 +62,7 @@ def main() -> int:
                 turn_id,
                 "--session", session,
                 "--max-nodes", "80",
+                "--unsafe-rebuild-mode",
                 "--warnings-non-blocking",
                 "--pending-merge-non-blocking",
                 "--lint-errors-non-blocking",

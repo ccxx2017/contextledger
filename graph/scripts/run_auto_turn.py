@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -40,6 +41,10 @@ CONTRACTS_DIR = PROJECT_ROOT / "contracts"
 DEFAULT_SYSTEM_PROMPT = GRAPH_DIR / "prompts" / "extractor_system.md"
 ALIAS_CONTRACT = CONTRACTS_DIR / "05_entity_naming.md"
 MAX_RECONCILE_RETRIES = 3
+
+# 测试接缝（工作包 C4）：发布边界测试用桩脚本替代真实 Extractor 调用。
+# 生产环境不设置该环境变量，行为不变。
+EXTRACTOR_SCRIPT = os.environ.get("CL_EXTRACTOR_SCRIPT", "graph/scripts/invoke_extractor.py")
 
 # 证据链记录的管线参与脚本（cleaner/resolver/reconcile 的版本 = 其内容哈希）
 CLEANER_SCRIPT = GRAPH_DIR / "scripts" / "sanitize_patch_entity_refs.py"
@@ -297,7 +302,29 @@ def main() -> int:
     parser.add_argument("--pending-merge-non-blocking", action="store_true", help="pending_merge 超期不阻塞提交")
     parser.add_argument("--lint-errors-non-blocking", action="store_true", help="lint error 不阻塞提交（重建历史链时临时使用）")
     parser.add_argument("--reconcile-errors-non-blocking", action="store_true", help="reconcile error 不阻塞提交（重建历史链时临时使用）")
+    parser.add_argument(
+        "--unsafe-rebuild-mode",
+        action="store_true",
+        help="绕过闸门发布的主开关：任何 non-blocking flag 必须与本 flag 同时使用（工作包 C1c）",
+    )
     args = parser.parse_args()
+
+    # C1c：绕过闸门必须显式、可见、留痕。任何 non-blocking flag 单独出现即拒绝。
+    bypass_flags_in_use = [
+        name
+        for name, used in (
+            ("--warnings-non-blocking", args.warnings_non_blocking),
+            ("--pending-merge-non-blocking", args.pending_merge_non_blocking),
+            ("--lint-errors-non-blocking", args.lint_errors_non_blocking),
+            ("--reconcile-errors-non-blocking", args.reconcile_errors_non_blocking),
+        )
+        if used
+    ]
+    if bypass_flags_in_use and not args.unsafe_rebuild_mode:
+        parser.error(
+            f"{'、'.join(bypass_flags_in_use)} 属于闸门绕过，必须与 --unsafe-rebuild-mode "
+            "同时使用（发布将被标记 published_with_bypass=true，readiness=blocked）"
+        )
 
     project_id = args.project_id
     turn_id = args.turn_id
@@ -412,7 +439,7 @@ def main() -> int:
         final_response_path = raw_response_path
         final_meta_path = extractor_meta_path
         run([
-            "graph/scripts/invoke_extractor.py",
+            EXTRACTOR_SCRIPT,
             "--system", str(DEFAULT_SYSTEM_PROMPT),
             "--slice", str(slice_path),
             "--turn", str(raw_turn_path),
@@ -493,7 +520,7 @@ def main() -> int:
                 retry_prompt = work_dir / f"extractor_prompt.{turn_id}.retry_{attempt}.json"
                 retry_meta = work_dir / f"extractor_meta.{turn_id}.retry_{attempt}.json"
                 run([
-                    "graph/scripts/invoke_extractor.py",
+                    EXTRACTOR_SCRIPT,
                     "--system", str(DEFAULT_SYSTEM_PROMPT),
                     "--slice", str(slice_path),
                     "--turn", str(raw_turn_path),
@@ -749,6 +776,10 @@ def main() -> int:
             shutil.copy2(assembly_report_path, published_assembly_report_path)
             published_evidence_path = project_dir / "run" / f"evidence_chain.{turn_id}.json"
             shutil.copy2(evidence_chain_path, published_evidence_path)
+            published_manifest_path = project_dir / "run" / f"assembler_manifest.{turn_id}.json"
+            manifest_scratch = work_dir / f"assembler_manifest.{turn_id}.json"
+            if manifest_scratch.exists():
+                shutil.copy2(manifest_scratch, published_manifest_path)
             health["committed"] = {
                 "graph_state": str(graph_state_path),
                 "run_snapshot": str(project_dir / "run" / f"graph_state.turn_{turn_num:03d}.json"),
@@ -757,7 +788,23 @@ def main() -> int:
                 "bundle": str(published_bundle_path),
                 "assembly_report": str(published_assembly_report_path),
                 "evidence_chain": str(published_evidence_path),
+                "assembler_manifest": str(published_manifest_path),
             }
+            if bypass_flags_in_use:
+                # C1c：绕过闸门的发布必须留痕，并让宿主侧 readiness 判为 blocked。
+                health["published_with_bypass"] = True
+                health["summary"]["bypass_flags"] = bypass_flags_in_use
+                if manifest_scratch.exists():
+                    try:
+                        manifest = load_json(manifest_scratch)
+                        codes = set(manifest.get("reason_codes") or [])
+                        codes.add("PUBLISHED_WITH_BYPASS")
+                        manifest["reason_codes"] = sorted(codes)
+                        manifest["readiness"] = "blocked"
+                        write_json(manifest_scratch, manifest)
+                        shutil.copy2(manifest_scratch, published_manifest_path)
+                    except Exception as exc:
+                        print(f"[{turn_id}] manifest bypass 标记失败: {exc}", file=sys.stderr)
         elif args.dry_run:
             health["committed"] = {"dry_run": True}
         else:

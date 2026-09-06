@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-06T01:26:59.651818+00:00",
-  "generated_at_utc": "2026-09-06T01:26:59Z",
+  "generated_at": "2026-09-06T01:45:03.272857+00:00",
+  "generated_at_utc": "2026-09-06T01:45:03Z",
   "project_id": "abu_modern",
   "manifest_generation": {
     "script_path": "graph/scripts/generate_state_manifest.py",
@@ -14,10 +14,10 @@
   },
   "git": {
     "branch": "phase1-lifecycle-mainchain",
-    "commit": "b52685077af59ec7476eca2435eb1c7494d89218",
+    "commit": "9b2a942c4e4a4925c8a1b463ad0ea99aba8b1f09",
     "base_commit_on_main": "1ccb733d0d18c13bcd7523bfc83c212835615e23",
     "working_tree_clean_at_generation": false,
-    "status_short_at_generation": "M graph/scripts/lifecycle_adjudicator.py\n M reports/lifecycle_B/test_first_evidence.json\n?? graph/projects/abu_modern/shadow_replay/scripts/crosscheck_mainchain_fixtures.py\n?? graph/scripts/explain_invalidation_diff.py\n?? graph/scripts/run_lifecycle_ab.py\n?? reports/lifecycle_B/ab_summary.json\n?? reports/lifecycle_B/invalidation_diff.json\n?? reports/lifecycle_B/mainchain_fixture_crosscheck.json"
+    "status_short_at_generation": "M contracts/04_assembly.md\n M contracts/07_turn_runtime.md\n M graph/scripts/build_context_bundle.py\n M graph/scripts/rebuild_chain.py\n M graph/scripts/run_auto_turn.py\n M runbook/process_turn.md\n?? graph/projects/abu_modern/reports/assembler_manifest.turn_084.json\n?? graph/scripts/assembler_manifest.py\n?? graph/scripts/verify_preaction.py\n?? graph/tests/test_assembler_manifest.py\n?? graph/tests/test_publish_boundary.py\n?? raw/projects/_dbg_pub/"
   },
   "schema": {
     "current_contract": "contracts/03_graph_schema.md",
@@ -69,14 +69,14 @@
     }
   ],
   "runtime_components": {
-    "scripts_dir_sha256": "46d29052d5b4ef49ea95ceb089888141cee9dd83fbd71b27f1e86188b80261d0",
+    "scripts_dir_sha256": "bb4a8e62a3ee845582367af18914a768f61ff99c1d76b865885f35f4b2080009",
     "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
-    "contracts_dir_sha256": "7287be0fefa92475bf15e47f78cbe42b239cb6132e978ec0d262057b71e746ad",
+    "contracts_dir_sha256": "6c4c740e9d47c3fc9b854ede82d678f09bcebe2270d632d1f64557a42844d6b8",
     "key_files": {
       "contracts/03_graph_schema.md": "4fe2a220f837c8141d0b0896f26843eaa73e1d9be2906349bda8ddf53847479f",
       "contracts/05_phase1_lifecycle_schema.md": "3f176f5f88e7d668ce7afe271d4b3d70cd9714130e17aec2a87a8c521969c246",
       "contracts/06_extractor_runtime.md": "a9b3b4df951e49a20d6abe55af86fa188446ea94a8dbc86e2525015cbe1e0ff0",
-      "contracts/07_turn_runtime.md": "b6459bbc523af3f9d0d53c5d8421accbdba4431d8c4364b7dcbfb070db9a2460",
+      "contracts/07_turn_runtime.md": "ce1ec0500f4073e4631743441d6345bef89786cbf5e4f7f1ae00275710aeb21b",
       "graph/scripts/entity_resolver.py": "652cbe8d715795e2512985bddc0cf5ec8e845c84a8687abac01a18f747d2b6a2",
       "graph/scripts/reconcile_patch.py": "1e2cae8b7ccac1267e2cd665f872292e0c5c0fc094517cff5a2d8ff6de028e4d",
       "graph/scripts/apply_patch.py": "cb4a61d72d7b13e5b4b58e8f6283c00d0a5c6bad8c4346d5f4904144650ec90c",

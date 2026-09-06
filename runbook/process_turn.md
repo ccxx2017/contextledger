@@ -208,18 +208,22 @@ STEP 4 — 复核 patch(应用之前的机械关卡,对应 P4)
            移交评审员(见 STEP 7 的失败移交)。
 
 STEP 5 — 应用 patch
-  动作: apply patch → 生成新的 graph_state.json
+  动作: apply patch → 生成【候选态】(scratch)
   前置: 必须已通过 STEP 4。
+  发布边界(权威约定,与 run_auto_turn.py 自动运行器一致):
+    候选态不是权威产物。只有 STEP 6 全部机械闸门通过后,才允许把候选态
+    发布为权威 graph_state.json(runbook 手工路径 apply→lint→失败回滚,
+    自动路径 scratch→全绿→copy 发布;两者都以全绿为发布前提)。
 
-STEP 6 — 整图校验(应用之后的全局不变量,对应 P5)
-  调: graph_lint.py(新的 graph_state.json)
+STEP 6 — 整图校验(对候选态的全局不变量,对应 P5)
+  调: graph_lint.py(候选态 graph_state)
   读: 脚本返回 pass | fail(fail 时列出违反的不变量)
   分支:
-    ┌─ pass → 进 STEP 7(成功移交)
+    ┌─ pass → 发布候选态为权威产物,进 STEP 7(成功移交)
     └─ fail → 责任归属分流:
 
       [L1] 本轮引入: 该违例在应用本轮 patch 之前不存在(对比应用前后)。
-           → 视为本轮缺陷。回滚到应用前的 STATE,把 lint error 当作
+           → 视为本轮缺陷。【候选态不得发布】,把 lint error 当作
              结构化反馈进 [R] 重试回路(或达上限后失败移交)。
 
       [L2] 存量问题: 该违例在应用本轮 patch 之前就已存在。
