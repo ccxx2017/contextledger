@@ -1,0 +1,85 @@
+{
+  "fixture_id": "lc_reassignment_late_tool_result",
+  "category": "reassignment",
+  "description": "编码 Agent 场景：实现任务由 agent-wang 改派给 agent-liu 后，agent-wang 的旧工具结果晚到（effective_at 早于改派）。晚到旧结果不得覆盖改派后的当前归属。",
+  "rationale": "GPT-6 评审工作包 D 首场景四事件之一（任务改派）在既有 fixture 中完全缺失；本 fixture 以编码 Agent 视角补齐，并叠加晚到语义（§7.2）。",
+  "rfc_reference": "contracts/05_phase1_lifecycle_schema.md §7.2 (late arrival 处理) + §9 (状态转移规则)",
+  "input": {
+    "event_stream": [
+      {
+        "event_id": "evt_impl_001",
+        "observed_at": "2026-09-05T09:00:00Z",
+        "effective_at": "2026-09-05T09:00:00Z",
+        "source": "coding_host",
+        "payload": {
+          "entity_ref": "quant-reviewer-impl",
+          "lifecycle_ref": "lc_impl_stream",
+          "lifecycle_seq": 1,
+          "state_slot": "owner",
+          "node_type": "Task",
+          "content": "quant-reviewer 实现由 agent-wang 负责，开始改造",
+          "state": "agent-wang"
+        }
+      },
+      {
+        "event_id": "evt_impl_002",
+        "observed_at": "2026-09-05T10:40:00Z",
+        "effective_at": "2026-09-05T10:40:00Z",
+        "source": "coding_host",
+        "payload": {
+          "entity_ref": "quant-reviewer-impl",
+          "lifecycle_ref": "lc_impl_stream",
+          "lifecycle_seq": 2,
+          "state_slot": "owner",
+          "node_type": "Task",
+          "content": "任务改派：实现负责人变更为 agent-liu",
+          "state": "agent-liu"
+        }
+      },
+      {
+        "event_id": "evt_impl_003",
+        "observed_at": "2026-09-05T11:10:00Z",
+        "effective_at": "2026-09-05T09:50:00Z",
+        "source": "coding_host",
+        "payload": {
+          "entity_ref": "quant-reviewer-impl",
+          "lifecycle_ref": "lc_impl_stream",
+          "lifecycle_seq": 3,
+          "state_slot": "owner",
+          "node_type": "Task",
+          "content": "agent-wang 的测试完成通知晚到（声称改派前已实现完成）",
+          "state": "agent-wang"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "deterministic": true,
+    "checkpoints": [
+      {
+        "checkpoint_id": "cp_after_reassign",
+        "after_event_id": "evt_impl_002",
+        "active_nodes": ["n_owner_b"],
+        "superseded_nodes": ["n_owner_a"],
+        "pending_nodes": [],
+        "relations": [
+          {"relation_type": "supersedes", "source": "n_owner_b", "target": "n_owner_a"}
+        ],
+        "quarantine": [],
+        "assembler_must_include": []
+      },
+      {
+        "checkpoint_id": "cp_after_late_result",
+        "after_event_id": "evt_impl_003",
+        "active_nodes": ["n_owner_b"],
+        "superseded_nodes": ["n_owner_a"],
+        "pending_nodes": [],
+        "relations": [],
+        "quarantine": [
+          {"event_id": "evt_impl_003", "reason": "backdated_late_arrival"}
+        ],
+        "assembler_must_include": []
+      }
+    ]
+  }
+}

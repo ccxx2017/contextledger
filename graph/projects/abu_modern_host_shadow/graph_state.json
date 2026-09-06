@@ -1,0 +1,156 @@
+{
+  "turn_counter": 0,
+  "nodes": {
+    "sh_0001": {
+      "node_id": "sh_0001",
+      "entity_ref": "refactor-plan-a",
+      "content": "方案A 采纳",
+      "node_type": "Fact",
+      "status": "superseded",
+      "state": "adopted",
+      "lifecycle_ref": "lc-plan-a",
+      "state_slot": "approval_status",
+      "lifecycle_seq": 1,
+      "observed_at": "2026-09-05T09:10:00Z",
+      "effective_at": "2026-09-05T09:10:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_plan_001",
+      "_superseded_reason": "同键同槽位合法单流推进（seq 1 -> 2）"
+    },
+    "sh_0002": {
+      "node_id": "sh_0002",
+      "entity_ref": "impl-owner",
+      "content": "实现负责人 agent-wang",
+      "node_type": "Fact",
+      "status": "superseded",
+      "state": "agent-wang",
+      "lifecycle_ref": "lc-impl-owner",
+      "state_slot": "assignment",
+      "lifecycle_seq": 1,
+      "observed_at": "2026-09-05T09:20:00Z",
+      "effective_at": "2026-09-05T09:20:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_owner_001",
+      "_superseded_reason": "同键同槽位合法单流推进（seq 1 -> 2）"
+    },
+    "sh_0003": {
+      "node_id": "sh_0003",
+      "entity_ref": "backtest-module",
+      "content": "回测模块改造中",
+      "node_type": "Fact",
+      "status": "superseded",
+      "state": "refactoring",
+      "lifecycle_ref": "lc-backtest",
+      "state_slot": "build_status",
+      "lifecycle_seq": 1,
+      "observed_at": "2026-09-05T09:30:00Z",
+      "effective_at": "2026-09-05T09:30:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_bt_001",
+      "_superseded_reason": "同键同槽位合法单流推进（seq 1 -> 2）"
+    },
+    "sh_0004": {
+      "node_id": "sh_0004",
+      "entity_ref": "backtest-module",
+      "content": "全量测试发起（异步）",
+      "node_type": "Fact",
+      "status": "active",
+      "state": "full_test_running",
+      "lifecycle_ref": "lc-backtest",
+      "state_slot": "build_status",
+      "lifecycle_seq": 2,
+      "observed_at": "2026-09-05T10:00:00Z",
+      "effective_at": "2026-09-05T10:00:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_bt_002"
+    },
+    "sh_0005": {
+      "node_id": "sh_0005",
+      "entity_ref": "refactor-plan-a",
+      "content": "用户取消方案A",
+      "node_type": "Fact",
+      "status": "superseded",
+      "_terminal_state": "cancelled",
+      "state": "cancelled",
+      "lifecycle_ref": "lc-plan-a",
+      "state_slot": "approval_status",
+      "lifecycle_seq": 2,
+      "observed_at": "2026-09-05T10:10:00Z",
+      "effective_at": "2026-09-05T10:10:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_plan_002"
+    },
+    "sh_0006": {
+      "node_id": "sh_0006",
+      "entity_ref": "impl-owner",
+      "content": "任务改派 agent-liu",
+      "node_type": "Fact",
+      "status": "active",
+      "state": "agent-liu",
+      "lifecycle_ref": "lc-impl-owner",
+      "state_slot": "assignment",
+      "lifecycle_seq": 2,
+      "observed_at": "2026-09-05T10:40:00Z",
+      "effective_at": "2026-09-05T10:40:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_owner_002"
+    },
+    "sh_0008": {
+      "node_id": "sh_0008",
+      "entity_ref": "refactor-plan-a",
+      "content": "恢复方案A（新决策）",
+      "node_type": "Fact",
+      "status": "active",
+      "state": "adopted",
+      "lifecycle_ref": "lc-plan-a",
+      "state_slot": "approval_status",
+      "lifecycle_seq": 3,
+      "observed_at": "2026-09-05T11:40:00Z",
+      "effective_at": "2026-09-05T11:40:00Z",
+      "source": "coding_host",
+      "_event_id": "evt_plan_003"
+    }
+  },
+  "edges": [
+    {
+      "source": "sh_0004",
+      "target": "sh_0003",
+      "relation": "invalidates"
+    },
+    {
+      "source": "sh_0005",
+      "target": "sh_0001",
+      "relation": "invalidates"
+    },
+    {
+      "source": "sh_0006",
+      "target": "sh_0002",
+      "relation": "invalidates"
+    },
+    {
+      "source": "sh_0008",
+      "target": "sh_0005",
+      "relation": "REVIVES"
+    },
+    {
+      "source": "sh_0008",
+      "target": "sh_0001",
+      "relation": "derived_from"
+    }
+  ],
+  "shadow_provenance": {
+    "scenario": "D:\\CCXXLESSON\\contextledger-host\\scenarios\\reassignment_recovery.json",
+    "built_at": "2026-09-06T01:57:02.182043+00:00",
+    "event_actions": {
+      "evt_plan_001": "append",
+      "evt_owner_001": "append",
+      "evt_bt_001": "append",
+      "evt_bt_002": "supersede",
+      "evt_plan_002": "supersede",
+      "evt_owner_002": "supersede",
+      "evt_bt_003": "quarantine",
+      "evt_plan_003": "revives"
+    },
+    "note": "机械构建（主链裁定器，无 LLM）；仅供影子对比，不参与主链"
+  }
+}

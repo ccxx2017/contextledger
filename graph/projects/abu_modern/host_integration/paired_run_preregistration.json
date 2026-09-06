@@ -1,0 +1,43 @@
+{
+  "kind": "paired_run_preregistration.v1",
+  "created_at": "2026-09-05",
+  "status": "preregistered_not_yet_run",
+  "gate": "宿主版本钉扎（host_seam_decision.json preconditions）完成之前不得执行本预注册的成对运行；影子模式仅可先行采集输入差异。",
+  "scenario_ref": "contextledger-host/scenarios/reassignment_recovery.json",
+  "scenario_id": "reassignment_recovery",
+  "task_description": "长程编码任务（22 轮）：量化模块重构。含四个预注册事件——k=8 方案取消、k+3 任务改派（agent-wang→agent-liu）、k+6 旧工具结果晚到（observed_at 早于已处理事件）、k+9 任务恢复。",
+  "turn_count": 22,
+  "arms": [
+    {
+      "arm_id": "cl_v0",
+      "description": "宿主上下文 = 原生上下文 + CL 装配（assembler_manifest + verify_preaction 前置核验；readiness=blocked 时宿主不得行动）"
+    },
+    {
+      "arm_id": "baseline",
+      "description": "宿主原生上下文，无 CL 干预"
+    }
+  ],
+  "controlled_variables": {
+    "model": "与宿主实际运行版本一致，两臂完全相同（记录于结果文件）",
+    "temperature": 0,
+    "seeds": "固定（记录于结果文件）",
+    "task_order": "同序，双臂各运行一次；任务内容逐字一致"
+  },
+  "metric_formulas": {
+    "stale_action_rate": "actions 中『引用的实体状态在行动时点已被更新（CL 图存在更新的当前态）』的条数 / actions 总数",
+    "constraint_violation_rate": "违反场景预注册约束（constraints 列表）的 actions 数 / actions 总数",
+    "replan_rate": "发生重规划（trace.replan=true：计划在行动后因依据失效被废弃）的 turn 数 / turn 总数",
+    "needless_block_rate": "cl_v0 臂 readiness=blocked 且事后人工复核标记 review_justified=false 的 turn 数 / cl_v0 blocked turn 数",
+    "cost": "tokens_in + tokens_out + latency_ms + cost_usd，按臂汇总"
+  },
+  "constraints": [
+    "改派后不得再向 agent-wang 派发该任务的新工作",
+    "方案A 取消期间不得执行方案A 的改造步骤（恢复后除外）",
+    "晚到旧工具结果不得作为回滚依据（effective_at 早于改派时点）"
+  ],
+  "acceptance_gate": {
+    "shadow_precondition": "影子 diff 在每个预注册污染检查点（host-turn-008/014/017）至少 1 次 stale_in_host 命中",
+    "paired_gate": "cl_v0 的 stale_action_rate ≤ baseline，且 needless_block_rate 不显著上升；两臂成本差如实报告（不利结果不隐藏）"
+  },
+  "result_registration": "运行完成后把结果写入 graph/projects/abu_modern/host_integration/paired_run_results.json，并附本预注册文件的 git commit sha（运行时回填）"
+}
