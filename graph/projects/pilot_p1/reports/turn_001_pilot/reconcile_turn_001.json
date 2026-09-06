@@ -1,0 +1,228 @@
+{
+  "ok": false,
+  "summary": {
+    "graph_nodes": 4,
+    "active_graph_nodes": 4,
+    "new_nodes": 4,
+    "errors": 12,
+    "warnings": 3
+  },
+  "errors": [
+    {
+      "level": "error",
+      "code": "NODE_ID_COLLISION_WITH_GRAPH",
+      "message": "新节点 n_0001 的 node_id 已存在于 graph_state.json。",
+      "new_node_id": "n_0001"
+    },
+    {
+      "level": "error",
+      "code": "EXACT_ACTIVE_DUPLICATE",
+      "message": "新节点 n_0001 与 active 旧节点 n_0001 内容、type、state 完全重复。",
+      "new_node_id": "n_0001",
+      "old_node_id": "n_0001"
+    },
+    {
+      "level": "error",
+      "code": "NODE_ID_COLLISION_WITH_GRAPH",
+      "message": "新节点 n_0002 的 node_id 已存在于 graph_state.json。",
+      "new_node_id": "n_0002"
+    },
+    {
+      "level": "error",
+      "code": "EXACT_ACTIVE_DUPLICATE",
+      "message": "新节点 n_0002 与 active 旧节点 n_0002 内容、type、state 完全重复。",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0002"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0002 与旧节点 n_0003 指向同一 entity_ref=calc.py，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0003 的声明。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0003",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0002 与旧节点 n_0003 指向同一 entity_ref=calc.py，但 state 冲突：new=resolved, old=open；patch 缺少 n_0002 invalidates n_0003。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0003",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "NODE_ID_COLLISION_WITH_GRAPH",
+      "message": "新节点 n_0003 的 node_id 已存在于 graph_state.json。",
+      "new_node_id": "n_0003"
+    },
+    {
+      "level": "error",
+      "code": "EXACT_ACTIVE_DUPLICATE",
+      "message": "新节点 n_0003 与 active 旧节点 n_0003 内容、type、state 完全重复。",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0003"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0003 与旧节点 n_0002 指向同一 entity_ref=calc.py，但 state 冲突：new=open, old=resolved；patch 缺少 superseded_nodes 对 n_0002 的声明。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0002",
+      "new_state": "open",
+      "old_state": "resolved"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_INVALIDATES",
+      "message": "新节点 n_0003 与旧节点 n_0002 指向同一 entity_ref=calc.py，但 state 冲突：new=open, old=resolved；patch 缺少 n_0003 invalidates n_0002。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0002",
+      "new_state": "open",
+      "old_state": "resolved"
+    },
+    {
+      "level": "error",
+      "code": "NODE_ID_COLLISION_WITH_GRAPH",
+      "message": "新节点 n_0004 的 node_id 已存在于 graph_state.json。",
+      "new_node_id": "n_0004"
+    },
+    {
+      "level": "error",
+      "code": "EXACT_ACTIVE_DUPLICATE",
+      "message": "新节点 n_0004 与 active 旧节点 n_0004 内容、type、state 完全重复。",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0004"
+    }
+  ],
+  "warnings": [
+    {
+      "level": "warning",
+      "code": "WEAK_POTENTIAL_DUPLICATE_NO_ENTITY_REF",
+      "message": "新节点 n_0001 没有 entity_ref，但与 active 旧节点 n_0001 存在弱匹配；该判断只作为 warning，不作为强保证。",
+      "new_node_id": "n_0001",
+      "old_node_id": "n_0001",
+      "new_state": "open",
+      "old_state": "open",
+      "weak_match": {
+        "old_node_id": "n_0001",
+        "score": 1.0,
+        "content_similarity": 1.0,
+        "keyword_score": 1.0,
+        "embedding_similarity": null,
+        "methods": [
+          "content_similarity",
+          "keyword_match"
+        ],
+        "old_state": "open"
+      }
+    },
+    {
+      "level": "warning",
+      "code": "SAME_ENTITY_SAME_STATE_POTENTIAL_DUPLICATE",
+      "message": "新节点 n_0002 与旧节点 n_0002 指向同一 entity_ref=calc.py，且 state 相同、内容高度相似，可能是重复写入。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0002",
+      "state": "resolved",
+      "content_similarity": 1.0
+    },
+    {
+      "level": "warning",
+      "code": "SAME_ENTITY_SAME_STATE_POTENTIAL_DUPLICATE",
+      "message": "新节点 n_0003 与旧节点 n_0003 指向同一 entity_ref=calc.py，且 state 相同、内容高度相似，可能是重复写入。",
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0003",
+      "state": "open",
+      "content_similarity": 1.0
+    }
+  ],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0002",
+      "new_state": "resolved",
+      "old_state": "resolved"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0003",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0002",
+      "old_node_id": "n_0004",
+      "new_state": "resolved",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0002",
+      "new_state": "open",
+      "old_state": "resolved"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0003",
+      "new_state": "open",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0003",
+      "old_node_id": "n_0004",
+      "new_state": "open",
+      "old_state": ""
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0002",
+      "new_state": "",
+      "old_state": "resolved"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0003",
+      "new_state": "",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "calc.py",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0004",
+      "new_state": "",
+      "old_state": ""
+    }
+  ],
+  "weak_matches": [
+    {
+      "new_node_id": "n_0001",
+      "old_node_id": "n_0001",
+      "score": 1.0,
+      "content_similarity": 1.0,
+      "keyword_score": 1.0,
+      "embedding_similarity": null,
+      "methods": [
+        "content_similarity",
+        "keyword_match"
+      ],
+      "old_state": "open"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "task_id": "task_default",
+  "turn_id": 1,
+  "new_nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "重构本目录 calc.py 的阶乘实现，改用 functools.lru_cache 缓存",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-calc-refactor",
+      "state_slot": null,
+      "observed_at": "2026-09-06T14:02:12Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0002",
+      "type": "Decision",
+      "content": "采用方案A：为 calc.py 的阶乘计算添加 functools.lru_cache 缓存",
+      "entity_ref": "calc.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-calc-refactor",
+      "state_slot": "approval_status",
+      "observed_at": "2026-09-06T14:02:12Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "按方案A修改 calc.py，为阶乘计算加入 functools.lru_cache 缓存，完成后汇报",
+      "entity_ref": "calc.py",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-calc-refactor",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-06T14:02:12Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0004",
+      "type": "Fact",
+      "content": "calc.py 当前使用循环计算阶乘，尚未使用缓存",
+      "entity_ref": "calc.py",
+      "state": null,
+      "priority": "background",
+      "lifecycle_ref": "lc-calc-refactor",
+      "state_slot": null,
+      "observed_at": "2026-09-06T14:02:12Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0002",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0002",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}
