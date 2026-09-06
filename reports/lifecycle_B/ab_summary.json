@@ -1,0 +1,52 @@
+{
+  "kind": "lifecycle_ab_summary.v1",
+  "generated_at": "2026-09-06T01:26:57.943680+00:00",
+  "git": {
+    "branch": "phase1-lifecycle-mainchain",
+    "commit": "b52685077af59ec7476eca2435eb1c7494d89218"
+  },
+  "legacy_replay": {
+    "patch_count": 84,
+    "byte_identical_to_frozen_baseline": true,
+    "meaning": "无 lifecycle 字段的旧行为不回归（B 门第 2 条）"
+  },
+  "invalidation_diff": {
+    "path": "reports\\lifecycle_B\\invalidation_diff.json",
+    "summary": {
+      "before_edge_count": 28,
+      "after_edge_count": 28,
+      "added": 0,
+      "removed": 0,
+      "unattributed": 0
+    },
+    "all_attributed": true,
+    "meaning": "新增/消失失效逐条归因（B 门第 4 条）；空差异=本轮为零行为改变的能力新增"
+  },
+  "shadow_comparison": {
+    "split": "development",
+    "gate": "BLOCK",
+    "aggregate": {
+      "min_must_include_recall": 1.0,
+      "min_active_set_set_f1": 1.0,
+      "total_blockers": 0,
+      "total_regressions": 7,
+      "total_unexplained": 0,
+      "total_event_count": 21,
+      "total_quarantine_event_count": 1,
+      "submission_coverage": 0.9524
+    },
+    "note": "lifecycle 语义在 shadow 评测链中激活；已知 BLOCK 见 stage04c123 封存报告"
+  },
+  "mainchain_fixture_crosscheck": {
+    "path": "reports\\lifecycle_B\\mainchain_fixture_crosscheck.json",
+    "verdict_counts": {
+      "consistent": 15,
+      "fixture_spec_divergence": 7,
+      "documented_divergence": 4,
+      "mainchain_gap": 0
+    },
+    "note": "无注记缺口(mainchain_gap)=0 即 B 门通过；规格分歧与文档化偏离逐条带 reason"
+  },
+  "fatal": [],
+  "ab_gate": "PASS"
+}

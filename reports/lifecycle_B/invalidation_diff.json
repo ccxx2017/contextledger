@@ -1,0 +1,13 @@
+{
+  "kind": "invalidation_diff.v1",
+  "summary": {
+    "before_edge_count": 28,
+    "after_edge_count": 28,
+    "added": 0,
+    "removed": 0,
+    "unattributed": 0
+  },
+  "added": [],
+  "removed": [],
+  "all_attributed": true
+}

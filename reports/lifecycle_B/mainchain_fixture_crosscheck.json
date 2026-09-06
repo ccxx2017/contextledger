@@ -1,0 +1,796 @@
+{
+  "kind": "mainchain_fixture_crosscheck.v2",
+  "generated_at": "2026-09-06T01:26:14.628956+00:00",
+  "fixture_count": 26,
+  "verdict_counts": {
+    "consistent": 15,
+    "fixture_spec_divergence": 7,
+    "documented_divergence": 4,
+    "mainchain_gap": 0
+  },
+  "results": [
+    {
+      "fixture_id": "lc_alias_abstain",
+      "category": "alias_abstain",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_050",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_051",
+          "mainchain": "quarantine",
+          "shadow": "abstain",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_conditional_different_scope",
+      "category": "conditional",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_cs1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_cs2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_cs2",
+          "expected": "n_rule_x_trading_blocked"
+        }
+      ],
+      "divergence_annotation": {
+        "class": "deferred",
+        "reason": "shadow 按 claim_scope 差异化裁决键实现共存；本轮 B 范围为『可靠归属+状态槽位的单流推进』，claim_scope 机制延后至后续轮次。"
+      },
+      "verdict": "documented_divergence"
+    },
+    {
+      "fixture_id": "lc_diff_source_conflict",
+      "category": "provenance_conflict",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_ds_01",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_ds_02",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 2,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_ds_02",
+          "expected": "n_svc_a_probe"
+        },
+        {
+          "kind": "relation_missing",
+          "checkpoint_id": "cp_after_ds_02",
+          "expected": {
+            "relation": "contests",
+            "source": "mc_0002",
+            "target": "mc_0001"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_different_source_chronological_progression_supersedes",
+      "category": "shadow_semantics_different_source",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "ds_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "ds_002",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_different_source_true_conflict_contests",
+      "category": "shadow_semantics_true_conflict",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "dc_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "dc_002",
+          "mainchain": "contests",
+          "shadow": "contest",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 2,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_dc_002",
+          "expected": "n_engine_critical"
+        },
+        {
+          "kind": "relation_endpoint_unmatched",
+          "checkpoint_id": "cp_after_dc_002",
+          "expected": {
+            "relation_type": "CONTESTS",
+            "source": "n_engine_critical",
+            "target": "n_engine_nominal"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_late_arrival",
+      "category": "late_arrival",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_030",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_031",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_late_arrival_effective_time",
+      "category": "late_arrival",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_le1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_le2",
+          "mainchain": "quarantine",
+          "shadow": "quarantine_late",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_late_arrival_missing_effective",
+      "category": "late_arrival",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_lm1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_lm2",
+          "mainchain": "supersede",
+          "shadow": "quarantine_late",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 2,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_lm2",
+          "expected": "n_inv_002_count_five"
+        },
+        {
+          "kind": "quarantine_missing",
+          "checkpoint_id": "cp_after_lm2",
+          "expected_event": "evt_lm2",
+          "actual_action": "supersede"
+        }
+      ],
+      "divergence_annotation": {
+        "class": "deliberate",
+        "reason": "shadow 对『同源状态变更但缺 effective_at』硬隔离；主链不移植该条——RFC §7.2 v1 明确『不要求完整 valid_time 求值』，缺字段交由 Assembler 完整性声明（工作包 C）降级暴露。"
+      },
+      "verdict": "documented_divergence"
+    },
+    {
+      "fixture_id": "lc_late_arrival_price_band_same_scope_vs_different_scope",
+      "category": "late_arrival",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_lp1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_lp2",
+          "mainchain": "quarantine",
+          "shadow": "quarantine_late",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_legacy_migration",
+      "category": "legacy_migration",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_040",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_041",
+          "mainchain": "append",
+          "shadow": "coexist",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "relation_missing",
+          "checkpoint_id": "cp_after_041",
+          "expected": {
+            "relation": "coexists",
+            "source": "mc_0001",
+            "target": "mc_0002"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_multi_claim_different_predicates",
+      "category": "multi_claim",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_mp1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_mp2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_multi_claim_partial",
+      "category": "multi_claim",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_mc_01",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_mc_02",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "relation_missing",
+          "checkpoint_id": "cp_after_mc_02",
+          "expected": {
+            "relation": "invalidates",
+            "source": "mc_0001",
+            "target": "mc_0001"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_multi_claim_stream_no_fanout_to_unrelated_predecessors",
+      "category": "shadow_semantics_no_fanout",
+      "checkpoints_checked": 2,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "mf_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "mf_002",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        },
+        {
+          "event_id": "mf_003",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_parallel_target_coexist",
+      "category": "parallel",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_pt1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_pt2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_parallel_targets_same_dimension_must_coexist",
+      "category": "parallel",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_pt_1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_pt_2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_pt_2",
+          "expected": "n_deploy_staging_allowed"
+        }
+      ],
+      "divergence_annotation": {
+        "class": "deferred",
+        "reason": "同上：claim_scope 机制延后（scope 维度与 state_slot 维度的合并策略留待后续 RFC 修订）。"
+      },
+      "verdict": "documented_divergence"
+    },
+    {
+      "fixture_id": "lc_partial_same_dimension_different_atomic_claims_coexist",
+      "category": "partial_update",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_pd1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_pd2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_partial_same_dimension_same_scope_supersedes",
+      "category": "partial_update",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_ps1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_ps2",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_provenance_conflict",
+      "category": "provenance_conflict",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_020",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_021",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 2,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_021",
+          "expected": "n_policy_two_person"
+        },
+        {
+          "kind": "relation_missing",
+          "checkpoint_id": "cp_after_021",
+          "expected": {
+            "relation": "contests",
+            "source": "mc_0002",
+            "target": "mc_0001"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_replay_determinism",
+      "category": "replay_determinism",
+      "checkpoints_checked": 2,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_070",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_071",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_revival",
+      "category": "revival",
+      "checkpoints_checked": 2,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_010",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_011",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_012",
+          "mainchain": "revives",
+          "shadow": "revive",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_same_key_different_source",
+      "category": "provenance_conflict",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_r01_1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_r01_2",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 2,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_r01_2",
+          "expected": "n_svc_x_ready"
+        },
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_r01_2",
+          "expected": "n_svc_x_degraded"
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    },
+    {
+      "fixture_id": "lc_same_source_progression",
+      "category": "input_adapter",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_ss_01",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_ss_02",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_sequence_collision",
+      "category": "sequence_collision",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_060",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_061",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_062",
+          "mainchain": "quarantine",
+          "shadow": "quarantine",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_state_value_vs_real_scope_ambiguity",
+      "category": "scope_normalization",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "mismatch",
+      "action_comparison": [
+        {
+          "event_id": "evt_am_1",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_am_2",
+          "mainchain": "supersede",
+          "shadow": "create",
+          "class_match": false
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "active_missing",
+          "checkpoint_id": "cp_after_am_2",
+          "expected": "n_feature_x_enabled"
+        }
+      ],
+      "divergence_annotation": {
+        "class": "deferred",
+        "reason": "同上：claim_scope 与 state 值的歧义裁定延后（正是评审指出的『字段看起来全面』陷阱，宁缺毋滥）。"
+      },
+      "verdict": "documented_divergence"
+    },
+    {
+      "fixture_id": "lc_three_step_same_key_immediate_predecessor_only",
+      "category": "shadow_semantics_predecessor_selection",
+      "checkpoints_checked": 2,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "ts_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "ts_002",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        },
+        {
+          "event_id": "ts_003",
+          "mainchain": "supersede",
+          "shadow": "supersede",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 0,
+      "spec_divergences": [],
+      "divergence_annotation": null,
+      "verdict": "consistent"
+    },
+    {
+      "fixture_id": "lc_two_lifecycles_no_kill",
+      "category": "lifecycle_identity",
+      "checkpoints_checked": 1,
+      "mainchain_vs_shadow": "match",
+      "action_comparison": [
+        {
+          "event_id": "evt_001",
+          "mainchain": "append",
+          "shadow": "create",
+          "class_match": true
+        },
+        {
+          "event_id": "evt_002",
+          "mainchain": "append",
+          "shadow": "coexist",
+          "class_match": true
+        }
+      ],
+      "spec_divergence_count": 1,
+      "spec_divergences": [
+        {
+          "kind": "relation_missing",
+          "checkpoint_id": "cp_after_002",
+          "expected": {
+            "relation": "coexists",
+            "source": "mc_0001",
+            "target": "mc_0002"
+          }
+        }
+      ],
+      "divergence_annotation": null,
+      "verdict": "fixture_spec_divergence"
+    }
+  ],
+  "verdict_semantics": {
+    "consistent": "主链行为与 fixture 规格期望一致",
+    "fixture_spec_divergence": "主链与 shadow oracle 行为一致，但 fixture 规格期望不同——上游规格与 oracle 的分歧，记录不静默解决，不属本轮 B 范围",
+    "documented_divergence": "主链与 oracle 的偏离已有文档化裁定（deliberate=范围注记 / deferred=延后机制），逐条带 reason",
+    "mainchain_gap": "无注记的移植缺口——B 门不通过项"
+  },
+  "note": "分歧记录不静默解决：四类裁定分离『移植缺口』『规格 vs oracle 分歧』与『有文档裁定的偏离』"
+}

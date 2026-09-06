@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T14:19:36.979839+00:00",
-  "generated_at_utc": "2026-09-05T14:19:36Z",
+  "generated_at": "2026-09-06T01:26:59.651818+00:00",
+  "generated_at_utc": "2026-09-06T01:26:59Z",
   "project_id": "abu_modern",
   "manifest_generation": {
     "script_path": "graph/scripts/generate_state_manifest.py",
@@ -14,10 +14,10 @@
   },
   "git": {
     "branch": "phase1-lifecycle-mainchain",
-    "commit": "8c6144efa52cf6347370608dc01dff14c869921a",
+    "commit": "b52685077af59ec7476eca2435eb1c7494d89218",
     "base_commit_on_main": "1ccb733d0d18c13bcd7523bfc83c212835615e23",
     "working_tree_clean_at_generation": false,
-    "status_short_at_generation": "M graph/scripts/apply_patch.py\n M graph/scripts/graph_lint.py\n M graph/scripts/reconcile_patch.py\n?? graph/scripts/lifecycle_adjudicator.py\n?? graph/scripts/lifecycle_fields.py\n?? graph/scripts/lifecycle_lint_rules.py\n?? reports/lifecycle_B/"
+    "status_short_at_generation": "M graph/scripts/lifecycle_adjudicator.py\n M reports/lifecycle_B/test_first_evidence.json\n?? graph/projects/abu_modern/shadow_replay/scripts/crosscheck_mainchain_fixtures.py\n?? graph/scripts/explain_invalidation_diff.py\n?? graph/scripts/run_lifecycle_ab.py\n?? reports/lifecycle_B/ab_summary.json\n?? reports/lifecycle_B/invalidation_diff.json\n?? reports/lifecycle_B/mainchain_fixture_crosscheck.json"
   },
   "schema": {
     "current_contract": "contracts/03_graph_schema.md",
@@ -69,7 +69,7 @@
     }
   ],
   "runtime_components": {
-    "scripts_dir_sha256": "f8fd608a6c7a2424dd893273069f4c4bc91557c21c052e708b44ef5a62d1a589",
+    "scripts_dir_sha256": "46d29052d5b4ef49ea95ceb089888141cee9dd83fbd71b27f1e86188b80261d0",
     "prompts_dir_sha256": "5db0485eb0d2a36aed32882aa2a10d6dbed4c9bc7c9fb4c99b7b6d78baafa110",
     "contracts_dir_sha256": "7287be0fefa92475bf15e47f78cbe42b239cb6132e978ec0d262057b71e746ad",
     "key_files": {
