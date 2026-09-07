@@ -1,0 +1,27 @@
+{
+  "task_id": "task_default",
+  "turn_id": 6,
+  "new_nodes": [
+    {
+      "node_id": "n_0006",
+      "type": "ToolResult",
+      "content": "方案A 测试记录：39 passed，全部通过（取消之前的旧测试记录，时间 09:50）",
+      "entity_ref": null,
+      "state": null,
+      "priority": "background",
+      "lifecycle_ref": "lc-plan-a",
+      "state_slot": null,
+      "observed_at": "2026-09-07T00:08:57Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "supports"
+    }
+  ]
+}

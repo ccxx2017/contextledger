@@ -132,24 +132,40 @@ def main() -> int:
              "--graph", str(base_graph), "--turn", str(raw_path),
              "--turn-id", str(args.turn_num), "--out", str(slice_path)])
 
-        run(["graph/scripts/invoke_extractor.py",
-             "--project-id", args.cl_project, "--turn-id", turn_id,
-             "--slice", str(slice_path), "--turn", str(raw_path),
-             "--system", str(V2_PROMPT),
-             "--env-file", args.env_file,
-             "--out", str(patch_path),
-             "--raw-response-out", str(work_dir / f"extractor_raw.{turn_id}.txt"),
-             "--prompt-out", str(work_dir / f"prompt.{turn_id}.json"),
-             "--meta-out", str(work_dir / f"extractor_meta.{turn_id}.json")])
-
-        run(["graph/scripts/sanitize_patch_entity_refs.py",
-             "--patch", str(patch_path), "--graph", str(base_graph), "--out", str(patch_path)])
-
-        run(["graph/scripts/reconcile_patch.py", str(base_graph), str(patch_path),
-             "--out", str(work_dir / f"reconcile_{turn_id}.json")])
-        report = load_json(work_dir / f"reconcile_{turn_id}.json")
-        if not report.get("ok"):
-            print(f"[{turn_id}] reconcile FAIL：{report['errors'][:3]}")
+        # P4 重试回路（镜像 run_auto_turn）：reconcile 失败 → 重新采样，最多 3 次
+        MAX_RETRY = 3
+        report = None
+        patch_path = None
+        for attempt in range(1, MAX_RETRY + 1):
+            retry_tag = "" if attempt == 1 else f".retry_{attempt - 1}"
+            patch_path = project_dir / "patches" / f"patch_{args.turn_num:03d}{retry_tag}.json"
+            run(["graph/scripts/invoke_extractor.py",
+                 "--project-id", args.cl_project, "--turn-id", turn_id,
+                 "--slice", str(slice_path), "--turn", str(raw_path),
+                 "--system", str(V2_PROMPT),
+                 "--env-file", args.env_file,
+                 "--out", str(patch_path),
+                 "--raw-response-out", str(work_dir / f"extractor_raw.{turn_id}{retry_tag}.txt"),
+                 "--prompt-out", str(work_dir / f"prompt.{turn_id}{retry_tag}.json"),
+                 "--meta-out", str(work_dir / f"extractor_meta.{turn_id}{retry_tag}.json")])
+            run(["graph/scripts/sanitize_patch_entity_refs.py",
+                 "--patch", str(patch_path), "--graph", str(base_graph), "--out", str(patch_path)])
+            run(["graph/scripts/reconcile_patch.py", str(base_graph), str(patch_path),
+                 "--out", str(work_dir / f"reconcile_{turn_id}.json")], check=False)
+            report = load_json(work_dir / f"reconcile_{turn_id}.json")
+            if report.get("ok"):
+                break
+            print(f"[{turn_id}] reconcile FAIL（第 {attempt}/{MAX_RETRY} 次采样）：{len(report['errors'])} errors")
+        else:
+            # 重试耗尽：隔离语义（不推进主图），登记后返回
+            quarantine_dir = project_dir / "quarantine"
+            quarantine_dir.mkdir(exist_ok=True)
+            write_json(quarantine_dir / f"{turn_id}_failed.json", {
+                "turn_id": turn_id, "stage": "reconcile_patch",
+                "reason": f"reconcile 失败且重试 {MAX_RETRY} 次后仍无法通过",
+                "errors": (report or {}).get("errors", [])[:10],
+            })
+            print(f"[{turn_id}] QUARANTINE：本轮未裁定，主图未推进")
             return 1
 
         run(["graph/scripts/apply_patch.py",
@@ -172,10 +188,13 @@ def main() -> int:
     current_states: dict[str, str] = {}
     for node in graph_data.get("nodes", {}).values():
         if node.get("status") == "active" and node.get("entity_ref"):
+            state = node.get("state")
+            if not state or str(state).strip().lower() in {"unknown", "null"}:
+                continue  # 无状态声明的节点（如 Fact）不构成状态断言
             entity = str(node["entity_ref"])
             slot = node.get("state_slot")
             key = f"{entity}@{slot}" if slot else entity
-            current_states[key] = node.get("state") or "unknown"
+            current_states[key] = str(state)
     states_path = project_dir / "run" / "current_states.json"
     write_json(states_path, {
         "kind": "current_states.v1",

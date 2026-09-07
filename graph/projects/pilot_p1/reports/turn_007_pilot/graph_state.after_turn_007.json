@@ -1,5 +1,5 @@
 {
-  "turn_counter": 8,
+  "turn_counter": 7,
   "nodes": {
     "n_0001": {
       "node_id": "n_0001",
@@ -99,22 +99,7 @@
       "state_slot": null,
       "observed_at": "2026-09-07T00:10:59Z",
       "effective_at": null,
-      "created_turn": 7,
-      "status": "active"
-    },
-    "n_0008": {
-      "node_id": "n_0008",
-      "type": "FileArtifact",
-      "content": "在当前目录写 SUMMARY.md，内容为当前任务的真实状态总结",
-      "entity_ref": "SUMMARY.md",
-      "state": "open",
-      "priority": "should_include",
-      "lifecycle_ref": null,
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:13:34Z",
-      "effective_at": null,
-      "created_turn": 8,
-      "status": "active"
+      "created_turn": 7
     }
   },
   "edges": [
@@ -157,11 +142,6 @@
       "source": "n_0007",
       "target": "n_0006",
       "relation": "depends_on"
-    },
-    {
-      "source": "n_0008",
-      "target": "n_0001",
-      "relation": "supports"
     }
   ]
 }

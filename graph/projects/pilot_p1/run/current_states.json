@@ -1,9 +1,7 @@
 {
   "kind": "current_states.v1",
-  "as_of_turn": "turn_001",
+  "as_of_turn": "turn_008",
   "states": {
-    "calc.py@approval_status": "resolved",
-    "calc.py@execution_status": "open",
-    "calc.py": "unknown"
+    "SUMMARY.md": "open"
   }
 }

@@ -1,0 +1,107 @@
+{
+  "task_id": "task_default",
+  "turn_id": 2,
+  "nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "重构本目录 calc.py 的阶乘实现，改用 functools.lru_cache 缓存",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "按方案A修改 calc.py，为阶乘计算加入 functools.lru_cache 缓存，完成后汇报",
+      "entity_ref": "calc.py",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0004",
+      "type": "Fact",
+      "content": "calc.py 当前使用循环计算阶乘，尚未使用缓存",
+      "entity_ref": "calc.py",
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0002",
+      "type": "Decision",
+      "content": "采用方案A：为 calc.py 的阶乘计算添加 functools.lru_cache 缓存",
+      "entity_ref": "calc.py",
+      "state": "resolved",
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [
+      "n_0001"
+    ],
+    "standing_constraints": [],
+    "active_open_tasks": [
+      "n_0003"
+    ],
+    "recent_nodes": [
+      "n_0004",
+      "n_0003",
+      "n_0002",
+      "n_0001"
+    ],
+    "symbol_hits": [
+      "n_0004",
+      "n_0003",
+      "n_0002",
+      "n_0001"
+    ],
+    "conflict_candidates": [
+      "n_0004",
+      "n_0003",
+      "n_0002"
+    ]
+  },
+  "recent_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0002",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0002",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [
+      "calc.py",
+      "test_calc.py"
+    ],
+    "turn_state_signals": [],
+    "total_nodes": 4,
+    "active_nodes": 4,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0002",
+      "n_0003",
+      "n_0004"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0005",
+    "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\pilot_p1\\graph_state.json",
+    "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\pilot_p1\\s001\\turn_002.md"
+  }
+}

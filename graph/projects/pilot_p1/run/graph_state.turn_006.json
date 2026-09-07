@@ -1,5 +1,5 @@
 {
-  "turn_counter": 8,
+  "turn_counter": 6,
   "nodes": {
     "n_0001": {
       "node_id": "n_0001",
@@ -64,15 +64,15 @@
       "type": "OpenTask",
       "content": "编写 test_calc.py，验证重构后 factorial(5) == 120",
       "entity_ref": "test_calc.py",
-      "state": "resolved",
+      "state": "in_progress",
       "priority": "should_include",
       "lifecycle_ref": "lc-refactor-calc",
       "state_slot": "execution_status",
       "observed_at": "2026-09-06T23:46:43Z",
       "effective_at": null,
       "created_turn": 2,
-      "status": "superseded",
-      "_update_reason": "用户确认方案A测试全部通过（39 passed），test_calc.py 验证 factorial(5)==120 的目标已达成，编写测试任务完成"
+      "status": "active",
+      "_update_reason": "本轮回合用户指示执行 test_calc.py 以验证重构结果，验证尚未完成、结果尚未汇报，原 OpenTask 从 open 推进为 in_progress。"
     },
     "n_0006": {
       "node_id": "n_0006",
@@ -86,34 +86,6 @@
       "observed_at": "2026-09-07T00:08:57Z",
       "effective_at": null,
       "created_turn": 6,
-      "status": "active"
-    },
-    "n_0007": {
-      "node_id": "n_0007",
-      "type": "Decision",
-      "content": "是否将方案A 捡回来继续？用户征求明确建议并说明理由",
-      "entity_ref": null,
-      "state": "open",
-      "priority": "should_include",
-      "lifecycle_ref": null,
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:10:59Z",
-      "effective_at": null,
-      "created_turn": 7,
-      "status": "active"
-    },
-    "n_0008": {
-      "node_id": "n_0008",
-      "type": "FileArtifact",
-      "content": "在当前目录写 SUMMARY.md，内容为当前任务的真实状态总结",
-      "entity_ref": "SUMMARY.md",
-      "state": "open",
-      "priority": "should_include",
-      "lifecycle_ref": null,
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:13:34Z",
-      "effective_at": null,
-      "created_turn": 8,
       "status": "active"
     }
   },
@@ -151,16 +123,6 @@
     {
       "source": "n_0006",
       "target": "n_0005",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0007",
-      "target": "n_0006",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0008",
-      "target": "n_0001",
       "relation": "supports"
     }
   ]

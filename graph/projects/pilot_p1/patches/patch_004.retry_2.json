@@ -1,0 +1,17 @@
+{
+  "task_id": "task_default",
+  "turn_id": 4,
+  "new_nodes": [],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0002",
+      "reason": "缓存方案与现有 API 的调用方式不兼容，方案A 已决定放弃"
+    },
+    {
+      "node_id": "n_0003",
+      "reason": "方案A 已取消，calc.py 的改动冻结，禁止继续方案A 工作"
+    }
+  ],
+  "new_edges": []
+}

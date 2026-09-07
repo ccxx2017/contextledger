@@ -1,0 +1,36 @@
+{
+  "task_id": "task_default",
+  "turn_id": 7,
+  "new_nodes": [
+    {
+      "node_id": "n_0007",
+      "type": "Decision",
+      "content": "是否将方案A 捡回来继续？用户征求明确建议并说明理由",
+      "entity_ref": null,
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": null,
+      "state_slot": null,
+      "observed_at": "2026-09-07T00:10:59Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0005",
+      "changes": {
+        "state": "resolved",
+        "status": "superseded"
+      },
+      "reason": "用户确认方案A测试全部通过（39 passed），test_calc.py 验证 factorial(5)==120 的目标已达成，编写测试任务完成"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0007",
+      "target": "n_0006",
+      "relation": "depends_on"
+    }
+  ]
+}

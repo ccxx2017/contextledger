@@ -1,0 +1,85 @@
+{
+  "task_id": "task_default",
+  "turn_id": 7,
+  "nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "重构本目录 calc.py 的阶乘实现，改用 functools.lru_cache 缓存",
+      "entity_ref": null,
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0005",
+      "type": "OpenTask",
+      "content": "编写 test_calc.py，验证重构后 factorial(5) == 120",
+      "entity_ref": "test_calc.py",
+      "state": "in_progress",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0006",
+      "type": "ToolResult",
+      "content": "方案A 测试记录：39 passed，全部通过（取消之前的旧测试记录，时间 09:50）",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0004",
+      "type": "Fact",
+      "content": "calc.py 当前使用循环计算阶乘，尚未使用缓存",
+      "entity_ref": "calc.py",
+      "state": null,
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [
+      "n_0001"
+    ],
+    "standing_constraints": [],
+    "active_open_tasks": [
+      "n_0005"
+    ],
+    "recent_nodes": [
+      "n_0006",
+      "n_0005",
+      "n_0004",
+      "n_0001"
+    ],
+    "symbol_hits": [],
+    "conflict_candidates": []
+  },
+  "recent_edges": [
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "supports"
+    }
+  ],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [],
+    "turn_state_signals": [],
+    "total_nodes": 6,
+    "active_nodes": 4,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0004",
+      "n_0005",
+      "n_0006"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0007",
+    "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\pilot_p1\\graph_state.json",
+    "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\pilot_p1\\s001\\turn_007.md"
+  }
+}

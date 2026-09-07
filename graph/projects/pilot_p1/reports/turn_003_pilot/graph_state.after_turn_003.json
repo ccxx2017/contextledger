@@ -1,5 +1,5 @@
 {
-  "turn_counter": 8,
+  "turn_counter": 3,
   "nodes": {
     "n_0001": {
       "node_id": "n_0001",
@@ -27,8 +27,7 @@
       "observed_at": "2026-09-06T14:02:12Z",
       "effective_at": null,
       "created_turn": 1,
-      "status": "superseded",
-      "_superseded_reason": "缓存方案与现有 API 的调用方式不兼容，方案A 已决定放弃"
+      "status": "active"
     },
     "n_0003": {
       "node_id": "n_0003",
@@ -42,8 +41,7 @@
       "observed_at": "2026-09-06T14:02:12Z",
       "effective_at": null,
       "created_turn": 1,
-      "status": "superseded",
-      "_superseded_reason": "方案A 已取消，calc.py 的改动冻结，禁止继续方案A 工作"
+      "status": "active"
     },
     "n_0004": {
       "node_id": "n_0004",
@@ -64,57 +62,15 @@
       "type": "OpenTask",
       "content": "编写 test_calc.py，验证重构后 factorial(5) == 120",
       "entity_ref": "test_calc.py",
-      "state": "resolved",
+      "state": "in_progress",
       "priority": "should_include",
       "lifecycle_ref": "lc-refactor-calc",
       "state_slot": "execution_status",
       "observed_at": "2026-09-06T23:46:43Z",
       "effective_at": null,
       "created_turn": 2,
-      "status": "superseded",
-      "_update_reason": "用户确认方案A测试全部通过（39 passed），test_calc.py 验证 factorial(5)==120 的目标已达成，编写测试任务完成"
-    },
-    "n_0006": {
-      "node_id": "n_0006",
-      "type": "ToolResult",
-      "content": "方案A 测试记录：39 passed，全部通过（取消之前的旧测试记录，时间 09:50）",
-      "entity_ref": null,
-      "state": null,
-      "priority": "background",
-      "lifecycle_ref": "lc-plan-a",
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:08:57Z",
-      "effective_at": null,
-      "created_turn": 6,
-      "status": "active"
-    },
-    "n_0007": {
-      "node_id": "n_0007",
-      "type": "Decision",
-      "content": "是否将方案A 捡回来继续？用户征求明确建议并说明理由",
-      "entity_ref": null,
-      "state": "open",
-      "priority": "should_include",
-      "lifecycle_ref": null,
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:10:59Z",
-      "effective_at": null,
-      "created_turn": 7,
-      "status": "active"
-    },
-    "n_0008": {
-      "node_id": "n_0008",
-      "type": "FileArtifact",
-      "content": "在当前目录写 SUMMARY.md，内容为当前任务的真实状态总结",
-      "entity_ref": "SUMMARY.md",
-      "state": "open",
-      "priority": "should_include",
-      "lifecycle_ref": null,
-      "state_slot": null,
-      "observed_at": "2026-09-07T00:13:34Z",
-      "effective_at": null,
-      "created_turn": 8,
-      "status": "active"
+      "status": "active",
+      "_update_reason": "本轮回合用户指示执行 test_calc.py 以验证重构结果，验证尚未完成、结果尚未汇报，原 OpenTask 从 open 推进为 in_progress。"
     }
   },
   "edges": [
@@ -147,21 +103,6 @@
       "source": "n_0005",
       "target": "n_0003",
       "relation": "depends_on"
-    },
-    {
-      "source": "n_0006",
-      "target": "n_0005",
-      "relation": "supports"
-    },
-    {
-      "source": "n_0007",
-      "target": "n_0006",
-      "relation": "depends_on"
-    },
-    {
-      "source": "n_0008",
-      "target": "n_0001",
-      "relation": "supports"
     }
   ]
 }

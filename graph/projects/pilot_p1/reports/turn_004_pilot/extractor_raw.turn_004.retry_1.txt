@@ -1,0 +1,72 @@
+{
+  "task_id": "task_default",
+  "turn_id": 4,
+  "new_nodes": [
+    {
+      "node_id": "n_0006",
+      "type": "Decision",
+      "content": "用户已决定放弃方案A：lru_cache 缓存方案与现有 API 调用方式不兼容；冻结 calc.py 当前改动，不继续方案A的任何工作",
+      "entity_ref": "calc.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-plan-a",
+      "state_slot": "approval_status",
+      "observed_at": "2026-09-06T23:54:52Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0001",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "用户取消方案A并放弃 lru_cache 重构，原重构目标不再执行"
+    },
+    {
+      "node_id": "n_0003",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "用户明确停止方案A工作，不再按方案A修改 calc.py"
+    },
+    {
+      "node_id": "n_0005",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "test_calc.py 任务是验证方案A重构结果；方案A已取消，测试任务一并终止"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0002",
+      "reason": "采用方案A的旧决策被新决策 n_0006 取代"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0006",
+      "target": "n_0002",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0001",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0003",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "invalidates"
+    }
+  ]
+}
