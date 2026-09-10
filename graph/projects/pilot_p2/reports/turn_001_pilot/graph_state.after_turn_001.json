@@ -1,0 +1,61 @@
+{
+  "turn_counter": 1,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "任务启动：api_client.py 按规范 v1 实现重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": null,
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1
+    },
+    "n_0002": {
+      "node_id": "n_0002",
+      "type": "Constraint",
+      "content": "重试逻辑须按规范 v1 实现：3 次指数退避。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": null,
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1
+    },
+    "n_0003": {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "实现 api_client.py 的重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1
+    }
+  },
+  "edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0002",
+      "relation": "depends_on"
+    }
+  ]
+}

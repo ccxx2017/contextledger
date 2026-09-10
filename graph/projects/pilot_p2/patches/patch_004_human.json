@@ -1,0 +1,50 @@
+{
+  "task_id": "human_adjudication",
+  "turn_id": 4,
+  "new_nodes": [
+    {
+      "node_id": "n_0005",
+      "type": "Decision",
+      "content": "改派裁定：api_client.py 模块改派给 platform-team，本侧实现冻结（turn_003 隔离的人工补救轮）",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client",
+      "state_slot": "owner",
+      "observed_at": "2026-09-07T08:00:00Z",
+      "effective_at": "2026-09-06T11:00:00Z"
+    }
+  ],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0001",
+      "reason": "改派冻结：根目标 由 platform-team 接手，本侧不再推进"
+    },
+    {
+      "node_id": "n_0003",
+      "reason": "改派冻结：execution_status 由 platform-team 接手，本侧不再推进"
+    },
+    {
+      "node_id": "n_0004",
+      "reason": "改派冻结：build_status 由 platform-team 接手，本侧不再推进"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0003",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0004",
+      "relation": "invalidates"
+    }
+  ],
+  "updated_nodes": []
+}

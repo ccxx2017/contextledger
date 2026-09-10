@@ -1,0 +1,15 @@
+{
+  "kind": "assembler_manifest.v1",
+  "project_id": "pilot_p2",
+  "turn_id": "turn_008",
+  "generated_at": "2026-09-10T11:20:55.749860+00:00",
+  "state_revision": "0008:3ff2abd62462",
+  "readiness": "degraded",
+  "reason_codes": [
+    "LINT_WARNING_PRESENT"
+  ],
+  "unresolved_event_ids": [],
+  "integrity_risks": [
+    "当前图存在 1 条未登记 lint warning。"
+  ]
+}

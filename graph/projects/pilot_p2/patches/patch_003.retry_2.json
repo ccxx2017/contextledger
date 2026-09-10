@@ -1,0 +1,79 @@
+{
+  "task_id": "task_default",
+  "turn_id": 3,
+  "new_nodes": [
+    {
+      "node_id": "n_0005",
+      "type": "Decision",
+      "content": "api_client.py 模块改派给 platform-team，当前执行者不再负责该模块。",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "priority": "must_include",
+      "lifecycle_ref": "lc-reassign-api-client",
+      "state_slot": "owner",
+      "observed_at": "2026-09-10T08:02:09Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0006",
+      "type": "Constraint",
+      "content": "停止对 api_client.py 的一切实现工作，代码保持现状冻结。",
+      "entity_ref": "api_client.py",
+      "state": null,
+      "priority": "must_include",
+      "lifecycle_ref": "lc-reassign-api-client",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T08:02:09Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [
+    {
+      "node_id": "n_0001",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "模块改派给 platform-team，原用户目标不再由当前执行者推进，该任务取消。"
+    },
+    {
+      "node_id": "n_0003",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "改派通知要求停止本模块一切实现工作并冻结代码，实现任务取消。"
+    },
+    {
+      "node_id": "n_0004",
+      "changes": {
+        "state": "cancelled",
+        "status": "superseded"
+      },
+      "reason": "改派通知要求停止本模块一切实现工作并冻结代码，自测任务取消。"
+    }
+  ],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0003",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0004",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "derived_from"
+    }
+  ]
+}

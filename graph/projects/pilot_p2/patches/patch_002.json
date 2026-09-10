@@ -1,0 +1,32 @@
+{
+  "task_id": "task_default",
+  "turn_id": 2,
+  "new_nodes": [
+    {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "content": "自测 api_client.py 重试逻辑：模拟两次失败后成功，并报告测试结果。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": "build_status",
+      "observed_at": "2026-09-10T07:56:20Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [],
+  "new_edges": [
+    {
+      "source": "n_0004",
+      "target": "n_0003",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ]
+}

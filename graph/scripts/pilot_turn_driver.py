@@ -39,12 +39,13 @@ V2_PROMPT = PROJECT_ROOT / "graph" / "prompts" / "extractor_system_lifecycle_v2.
 
 def run(cmd: list[str], *, check: bool = True) -> subprocess.CompletedProcess:
     result = subprocess.run(
-        [sys.executable, *cmd], cwd=PROJECT_ROOT, capture_output=True, text=True, encoding="utf-8"
+        [sys.executable, *cmd], cwd=PROJECT_ROOT, capture_output=True,
+        text=True, encoding="utf-8", errors="replace",
     )
     if check and result.returncode != 0:
-        raise RuntimeError(
-            f"步骤失败: {' '.join(cmd)}\nstdout_tail={result.stdout[-800:]}\nstderr_tail={result.stderr[-800:]}"
-        )
+        stdout_tail = (result.stdout or "")[-800:]
+        stderr_tail = (result.stderr or "")[-800:]
+        raise RuntimeError(f"步骤失败(rc={result.returncode}): {' '.join(cmd)}\nstdout_tail={stdout_tail}\nstderr_tail={stderr_tail}")
     return result
 
 
@@ -155,17 +156,44 @@ def main() -> int:
             report = load_json(work_dir / f"reconcile_{turn_id}.json")
             if report.get("ok"):
                 break
-            print(f"[{turn_id}] reconcile FAIL（第 {attempt}/{MAX_RETRY} 次采样）：{len(report['errors'])} errors")
+            print(f"[{turn_id}] reconcile FAIL（第 {attempt}/{MAX_RETRY} 次采样）：{len(report.get('errors') or [])} errors")
         else:
-            # 重试耗尽：隔离语义（不推进主图），登记后返回
+            # 重试耗尽：隔离语义（不推进主图），登记 + AGENTS.md 带警告刷新 + manifest 重生成
             quarantine_dir = project_dir / "quarantine"
             quarantine_dir.mkdir(exist_ok=True)
             write_json(quarantine_dir / f"{turn_id}_failed.json", {
                 "turn_id": turn_id, "stage": "reconcile_patch",
                 "reason": f"reconcile 失败且重试 {MAX_RETRY} 次后仍无法通过",
-                "errors": (report or {}).get("errors", [])[:10],
+                "errors": ((report or {}).get("errors") or [])[:10],
             })
-            print(f"[{turn_id}] QUARANTINE：本轮未裁定，主图未推进")
+            run(["graph/scripts/quarantine_register.py", "sync", "--project-id", args.cl_project])
+            # 隔离时主图未推进：以 base_graph 重建上一轮的当前态
+            current_states = {}
+            try:
+                base_data = load_json(base_graph)
+                for node in base_data.get("nodes", {}).values():
+                    if (node.get("status") or "active") == "active" and node.get("entity_ref"):
+                        state = node.get("state")
+                        if state and str(state).strip().lower() not in {"unknown", "null"}:
+                            key = f"{node['entity_ref']}@{node['state_slot']}" if node.get("state_slot") else str(node["entity_ref"])
+                            current_states[key] = str(state)
+            except Exception:
+                pass
+            if args.agents_md:
+                agent_lines = ["# CL-PILOT-STATE", ""]
+                for key, st in current_states.items():
+                    agent_lines.append(f"{key} = {st}")
+                agent_lines += [
+                    "",
+                    f"【CL 警告】{turn_id} 未通过机械裁定（隔离中）：上述当前态可能缺失本轮变更，请勿据其断言本轮事件。",
+                    f"【CL 就绪度】blocked（QUARANTINE_NONEMPTY）",
+                    f"【CL 版本】{revision_of(state_path) if state_path.exists() else 'unknown'}",
+                ]
+                Path(args.agents_md).write_text("\n".join(agent_lines) + "\n", encoding="utf-8")
+            run(["graph/scripts/assembler_manifest.py",
+                 "--project-id", args.cl_project, "--turn-id", turn_id,
+                 "--out", str(project_dir / "run" / f"assembler_manifest.{turn_id}.json")])
+            print(f"[{turn_id}] QUARANTINE：本轮未裁定，主图未推进；AGENTS.md 已带警告刷新，manifest=blocked")
             return 1
 
         run(["graph/scripts/apply_patch.py",

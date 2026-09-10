@@ -1,0 +1,9 @@
+{
+  "kind": "current_states.v1",
+  "as_of_turn": "turn_008",
+  "states": {
+    "api_client.py@owner": "resolved",
+    "api_client.py@execution_status": "in_progress",
+    "SUMMARY.md@execution_status": "open"
+  }
+}

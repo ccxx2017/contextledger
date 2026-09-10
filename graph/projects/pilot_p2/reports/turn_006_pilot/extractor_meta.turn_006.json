@@ -1,0 +1,11 @@
+{
+  "base_url": "https://api.deepseek.com/v1/chat/completions",
+  "model": "deepseek-v4-flash",
+  "env_file": "graph\\projects\\pilot_p2\\pilot_p2.env",
+  "api_key_present": true,
+  "timeout_seconds": 420,
+  "max_attempts": 3,
+  "retry_backoff_seconds": 2,
+  "system_prompt_path": "D:\\CCXXLESSON\\contextledger\\graph\\prompts\\extractor_system_lifecycle_v2.md",
+  "finished_at": "2026-09-10T11:14:33.325662+00:00"
+}

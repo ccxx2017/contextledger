@@ -1,0 +1,58 @@
+{
+  "task_id": "task_default",
+  "turn_id": 6,
+  "nodes": [
+    {
+      "node_id": "n_0002",
+      "type": "Constraint",
+      "content": "重试逻辑须按规范 v1 实现：3 次指数退避。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0005",
+      "type": "Decision",
+      "content": "改派裁定：api_client.py 模块改派给 platform-team，本侧实现冻结（turn_003 隔离的人工补救轮）",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [],
+    "standing_constraints": [
+      "n_0002"
+    ],
+    "active_open_tasks": [],
+    "recent_nodes": [
+      "n_0005",
+      "n_0002"
+    ],
+    "symbol_hits": [
+      "n_0005"
+    ],
+    "conflict_candidates": [
+      "n_0005"
+    ]
+  },
+  "recent_edges": [],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [
+      "api_client.py"
+    ],
+    "turn_state_signals": [],
+    "total_nodes": 5,
+    "active_nodes": 2,
+    "selected_node_ids": [
+      "n_0002",
+      "n_0005"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0006",
+    "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\pilot_p2\\graph_state.json",
+    "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\pilot_p2\\s001\\turn_006.md"
+  }
+}

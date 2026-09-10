@@ -1,0 +1,54 @@
+{
+  "task_id": "task_default",
+  "turn_id": 6,
+  "new_nodes": [
+    {
+      "node_id": "n_0006",
+      "type": "Decision",
+      "content": "改派恢复裁定：api_client.py 归属回到本侧，platform-team 改派撤销，本侧实现冻结解除",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api_client-retry",
+      "state_slot": "owner",
+      "observed_at": "2026-09-10T11:14:17Z",
+      "effective_at": null
+    },
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "继续完成 api_client.py 的重试逻辑（按规范 v1：3 次指数退避）并收尾",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api_client-retry",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T11:14:17Z",
+      "effective_at": null
+    }
+  ],
+  "updated_nodes": [],
+  "superseded_nodes": [
+    {
+      "node_id": "n_0005",
+      "reason": "同一实体 api_client.py 的归属状态从『改派给 platform-team、本侧冻结』变为『改派撤销、回到本侧继续实现』，原改派裁定不再成立"
+    }
+  ],
+  "new_edges": [
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0006",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0002",
+      "relation": "implements"
+    }
+  ]
+}

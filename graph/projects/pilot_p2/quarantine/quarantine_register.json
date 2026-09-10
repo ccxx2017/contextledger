@@ -1,0 +1,26 @@
+{
+  "kind": "quarantine_register.v1",
+  "project_id": "pilot_p2",
+  "disposition_vocabulary": [
+    "unreviewed",
+    "accepted_loss",
+    "requeued",
+    "superseded"
+  ],
+  "items": [
+    {
+      "register_key": "turn_003_failed",
+      "source_turn": 3,
+      "source_file": "graph/projects/pilot_p2/quarantine/turn_003_failed.json",
+      "stage": "reconcile_patch",
+      "reason": "reconcile 失败且重试 3 次后仍无法通过",
+      "disposition": "superseded",
+      "requires_evidence": "该隔离条目已有同轮号 patch 入主链（patches/patch_003.json），机械归为 requeued。",
+      "escalate_after_turns": 5,
+      "last_seen_turn": 3,
+      "correction_note": "撤销早前机械误判 requeued（patches/ 下存在未合并样本被误判为已入库）；恢复真实状态 unreviewed",
+      "adjudicated_at": "2026-09-07",
+      "adjudication_note": "turn_003 隔离由人工补救轮 patch_004_human（turn_004）取代入库，全闸门通过"
+    }
+  ]
+}

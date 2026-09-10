@@ -1,0 +1,37 @@
+{
+  "turn_id": "turn_003",
+  "stage": "reconcile_patch",
+  "reason": "reconcile 失败且重试 3 次后仍无法通过",
+  "errors": [
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0005 与旧节点 n_0001 指向同一 entity_ref=api_client.py，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0001 的声明。",
+      "entity_ref": "api_client.py",
+      "new_node_id": "n_0005",
+      "old_node_id": "n_0001",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0005 与旧节点 n_0003 指向同一 entity_ref=api_client.py，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0003 的声明。",
+      "entity_ref": "api_client.py",
+      "new_node_id": "n_0005",
+      "old_node_id": "n_0003",
+      "new_state": "resolved",
+      "old_state": "open"
+    },
+    {
+      "level": "error",
+      "code": "STATE_CONFLICT_MISSING_SUPERSEDE",
+      "message": "新节点 n_0005 与旧节点 n_0004 指向同一 entity_ref=api_client.py，但 state 冲突：new=resolved, old=open；patch 缺少 superseded_nodes 对 n_0004 的声明。",
+      "entity_ref": "api_client.py",
+      "new_node_id": "n_0005",
+      "old_node_id": "n_0004",
+      "new_state": "resolved",
+      "old_state": "open"
+    }
+  ]
+}

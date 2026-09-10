@@ -1,0 +1,113 @@
+{
+  "task_id": "task_default",
+  "turn_id": 3,
+  "nodes": [
+    {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "任务启动：api_client.py 按规范 v1 实现重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0002",
+      "type": "Constraint",
+      "content": "重试逻辑须按规范 v1 实现：3 次指数退避。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "content": "自测 api_client.py 重试逻辑：模拟两次失败后成功，并报告测试结果。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "实现 api_client.py 的重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [
+      "n_0001"
+    ],
+    "standing_constraints": [
+      "n_0002"
+    ],
+    "active_open_tasks": [
+      "n_0004",
+      "n_0003"
+    ],
+    "recent_nodes": [
+      "n_0004",
+      "n_0003",
+      "n_0002",
+      "n_0001"
+    ],
+    "symbol_hits": [
+      "n_0004",
+      "n_0003",
+      "n_0001"
+    ],
+    "conflict_candidates": [
+      "n_0004",
+      "n_0003",
+      "n_0001"
+    ]
+  },
+  "recent_edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0002",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0003",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "serves"
+    }
+  ],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [
+      "api_client.py"
+    ],
+    "turn_state_signals": [],
+    "total_nodes": 4,
+    "active_nodes": 4,
+    "selected_node_ids": [
+      "n_0001",
+      "n_0002",
+      "n_0003",
+      "n_0004"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0005",
+    "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\pilot_p2\\graph_state.json",
+    "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\pilot_p2\\s001\\turn_003.md"
+  }
+}

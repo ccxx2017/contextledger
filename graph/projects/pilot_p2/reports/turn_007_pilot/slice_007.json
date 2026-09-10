@@ -1,0 +1,75 @@
+{
+  "task_id": "task_default",
+  "turn_id": 7,
+  "nodes": [
+    {
+      "node_id": "n_0002",
+      "type": "Constraint",
+      "content": "重试逻辑须按规范 v1 实现：3 次指数退避。",
+      "entity_ref": null,
+      "state": null,
+      "status": "active"
+    },
+    {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "继续完成 api_client.py 的重试逻辑（按规范 v1：3 次指数退避）并收尾",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "status": "active"
+    },
+    {
+      "node_id": "n_0006",
+      "type": "Decision",
+      "content": "改派恢复裁定：api_client.py 归属回到本侧，platform-team 改派撤销，本侧实现冻结解除",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "status": "active"
+    }
+  ],
+  "group_node_ids": {
+    "root_goals": [],
+    "standing_constraints": [
+      "n_0002"
+    ],
+    "active_open_tasks": [
+      "n_0007"
+    ],
+    "recent_nodes": [
+      "n_0007",
+      "n_0006",
+      "n_0002"
+    ],
+    "symbol_hits": [],
+    "conflict_candidates": []
+  },
+  "recent_edges": [
+    {
+      "source": "n_0007",
+      "target": "n_0006",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0002",
+      "relation": "implements"
+    }
+  ],
+  "retrieval_trace": {
+    "explicit_node_ids": [],
+    "mentioned_symbols": [],
+    "turn_state_signals": [],
+    "total_nodes": 7,
+    "active_nodes": 3,
+    "selected_node_ids": [
+      "n_0002",
+      "n_0006",
+      "n_0007"
+    ]
+  },
+  "_runtime": {
+    "next_node_id": "n_0008",
+    "source_graph": "D:\\CCXXLESSON\\contextledger\\graph\\projects\\pilot_p2\\graph_state.json",
+    "source_turn": "D:\\CCXXLESSON\\contextledger\\raw\\projects\\pilot_p2\\s001\\turn_007.md"
+  }
+}

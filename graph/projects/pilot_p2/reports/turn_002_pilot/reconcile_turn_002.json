@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "summary": {
+    "graph_nodes": 3,
+    "active_graph_nodes": 3,
+    "new_nodes": 1,
+    "errors": 0,
+    "warnings": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "resolved_conflicts": [],
+  "entity_ref_matches": [
+    {
+      "entity_ref": "api_client.py",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0001",
+      "new_state": "open",
+      "old_state": "open"
+    },
+    {
+      "entity_ref": "api_client.py",
+      "new_node_id": "n_0004",
+      "old_node_id": "n_0003",
+      "new_state": "open",
+      "old_state": "open"
+    }
+  ],
+  "weak_matches": []
+}

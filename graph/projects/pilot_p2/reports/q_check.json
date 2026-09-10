@@ -1,0 +1,11 @@
+{
+  "kind": "quarantine_register_check_report.v1",
+  "project_id": "pilot_p2",
+  "current_turn": 3,
+  "summary": {
+    "tracked_items": 1,
+    "unreviewed_items": 0,
+    "blocking_items": 0
+  },
+  "blocking_items": []
+}

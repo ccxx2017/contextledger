@@ -1,0 +1,189 @@
+{
+  "turn_counter": 8,
+  "nodes": {
+    "n_0001": {
+      "node_id": "n_0001",
+      "type": "UserGoal",
+      "content": "任务启动：api_client.py 按规范 v1 实现重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": null,
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1,
+      "status": "superseded",
+      "_superseded_reason": "改派冻结：根目标 由 platform-team 接手，本侧不再推进"
+    },
+    "n_0002": {
+      "node_id": "n_0002",
+      "type": "Constraint",
+      "content": "重试逻辑须按规范 v1 实现：3 次指数退避。",
+      "entity_ref": null,
+      "state": null,
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": null,
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1,
+      "status": "active"
+    },
+    "n_0003": {
+      "node_id": "n_0003",
+      "type": "OpenTask",
+      "content": "实现 api_client.py 的重试逻辑（3 次指数退避）。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T07:55:04Z",
+      "effective_at": null,
+      "created_turn": 1,
+      "status": "superseded",
+      "_superseded_reason": "改派冻结：execution_status 由 platform-team 接手，本侧不再推进"
+    },
+    "n_0004": {
+      "node_id": "n_0004",
+      "type": "OpenTask",
+      "content": "自测 api_client.py 重试逻辑：模拟两次失败后成功，并报告测试结果。",
+      "entity_ref": "api_client.py",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client-retry",
+      "state_slot": "build_status",
+      "observed_at": "2026-09-10T07:56:20Z",
+      "effective_at": null,
+      "created_turn": 2,
+      "status": "superseded",
+      "_superseded_reason": "改派冻结：build_status 由 platform-team 接手，本侧不再推进"
+    },
+    "n_0005": {
+      "node_id": "n_0005",
+      "type": "Decision",
+      "content": "改派裁定：api_client.py 模块改派给 platform-team，本侧实现冻结（turn_003 隔离的人工补救轮）",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api-client",
+      "state_slot": "owner",
+      "observed_at": "2026-09-07T08:00:00Z",
+      "effective_at": "2026-09-06T11:00:00Z",
+      "created_turn": 4,
+      "status": "superseded",
+      "_superseded_reason": "同一实体 api_client.py 的归属状态从『改派给 platform-team、本侧冻结』变为『改派撤销、回到本侧继续实现』，原改派裁定不再成立"
+    },
+    "n_0006": {
+      "node_id": "n_0006",
+      "type": "Decision",
+      "content": "改派恢复裁定：api_client.py 归属回到本侧，platform-team 改派撤销，本侧实现冻结解除",
+      "entity_ref": "api_client.py",
+      "state": "resolved",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-api_client-retry",
+      "state_slot": "owner",
+      "observed_at": "2026-09-10T11:14:17Z",
+      "effective_at": null,
+      "created_turn": 6,
+      "status": "active"
+    },
+    "n_0007": {
+      "node_id": "n_0007",
+      "type": "OpenTask",
+      "content": "继续完成 api_client.py 的重试逻辑（按规范 v1：3 次指数退避）：收尾完善，跑一遍自测，确认可用",
+      "entity_ref": "api_client.py",
+      "state": "in_progress",
+      "priority": "must_include",
+      "lifecycle_ref": "lc-api_client-retry",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T11:14:17Z",
+      "effective_at": null,
+      "created_turn": 6,
+      "status": "active",
+      "_update_reason": "本轮用户指令将同一 OpenTask（api_client.py 重试逻辑）从待办推进为进行中，并补充了自测与可用性确认这一收尾要求，属同实体更多细节，不新建节点。"
+    },
+    "n_0008": {
+      "node_id": "n_0008",
+      "type": "OpenTask",
+      "content": "编写 SUMMARY.md，总结任务全程，含改派与恢复的时间线",
+      "entity_ref": "SUMMARY.md",
+      "state": "open",
+      "priority": "should_include",
+      "lifecycle_ref": "lc-summary-008",
+      "state_slot": "execution_status",
+      "observed_at": "2026-09-10T11:20:42Z",
+      "effective_at": null,
+      "created_turn": 8,
+      "status": "active"
+    }
+  },
+  "edges": [
+    {
+      "source": "n_0002",
+      "target": "n_0001",
+      "relation": "supports"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0003",
+      "target": "n_0002",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0003",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0004",
+      "target": "n_0001",
+      "relation": "serves"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0001",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0003",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0005",
+      "target": "n_0004",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0006",
+      "target": "n_0005",
+      "relation": "invalidates"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0006",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0007",
+      "target": "n_0002",
+      "relation": "implements"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0007",
+      "relation": "depends_on"
+    },
+    {
+      "source": "n_0008",
+      "target": "n_0006",
+      "relation": "derived_from"
+    }
+  ]
+}
