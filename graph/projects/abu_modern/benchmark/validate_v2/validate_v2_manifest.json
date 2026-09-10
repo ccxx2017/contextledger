@@ -1,0 +1,81 @@
+{
+  "kind": "validate_v2_manifest.v1",
+  "schema_version": "1.0",
+  "freeze_version": "v2.0",
+  "project_id": "abu_modern",
+  "generated_at": "2026-09-10T11:49:50.491429+00:00",
+  "source_rule": "全部 6 条轨迹来自 raw/projects/abu_modern/s001 未开采轮次（v1/v2/v3 已覆盖 20 个轮次，已排除：turns 20,23,24,27,32,33,35,36,39,49,52,54,58,59,60,67,68,69,70,84）；无模板派生；按整条轨迹划分",
+  "usage_rules": {
+    "validate_v2": "仅在正式成对运行阶段运行一次；不得用于插件/评分器/驱动调试（调试用 pilot 冒烟与 P1/P2 开发轨迹）",
+    "after_run": "运行一次后转为历史结果，不再作为泛化证据"
+  },
+  "coverage": {
+    "provenance_conflict": [
+      "tr_vv2_01_runid_confusion",
+      "tr_vv2_03_abort_handover"
+    ],
+    "full": [
+      "tr_vv2_02_cachepollution_reject",
+      "tr_vv2_04_rootcause_update"
+    ],
+    "non_invalidation_decoy": [
+      "全部 6 条均含负样本声明"
+    ],
+    "memory_pressure": [
+      "tr_vv2_06_compaction_pressure（压缩稿 source-of-record）"
+    ],
+    "handover": [
+      "tr_vv2_03_abort_handover（obs04 责任移交项目 AI）"
+    ]
+  },
+  "known_limitations": [
+    "改派/恢复/晚到形态在未开采区间未找到可独立成轨迹的真实段（Round 5/6 回测弧主导该区间）；run_id 混淆（vv2_01）与责任移交（vv2_03.obs04）部分覆盖该语义",
+    "缺 lifecycle 激活案例：本集合走 score_phase05 离线评测；lifecycle 激活已由 pilot_s4 链路单独证明",
+    "n=6 且来源集中于 Round 5/6 弧段：结果仅代表该弧段的泛化，不外推"
+  ],
+  "entries": [
+    {
+      "case_id": "tr_vv2_01_runid_confusion",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_01_runid_confusion.json",
+      "trajectory_sha256": "14781f0ae863b00e6f22a57f06c6808547677e58ae8022c0f3c00054ef7bf737",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_01_runid_confusion.gold.json",
+      "gold_sha256": "3a9121ed392f855f7162fd881184304b6d6fca8709c6c0d53af974e5efbc7239"
+    },
+    {
+      "case_id": "tr_vv2_02_cachepollution_reject",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_02_cachepollution_reject.json",
+      "trajectory_sha256": "3ee933b0fd649e7152b631d2ef3e88360db8f53b6a55debf6166074f3ff751cd",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_02_cachepollution_reject.gold.json",
+      "gold_sha256": "1e513d2660d0f90d3bf2add40ffccd750bc74daf5d526091639974ba04ac71e5"
+    },
+    {
+      "case_id": "tr_vv2_03_abort_handover",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_03_abort_handover.json",
+      "trajectory_sha256": "483fd61fc5f55782b85f511137b4a50e9866622e81778ffd67fc95d1e707c2fa",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_03_abort_handover.gold.json",
+      "gold_sha256": "e5ec3edc6615d98489eff0288625f95a0a175ed9a34c2ed54f543266fd6e9d56"
+    },
+    {
+      "case_id": "tr_vv2_04_rootcause_update",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_04_rootcause_update.json",
+      "trajectory_sha256": "2e233f62f533e96b36f4a626d6c13f3ab0efd0dc1e65535fe7752b7721bcb372",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_04_rootcause_update.gold.json",
+      "gold_sha256": "452936eff990c40239a5992f13525f7adcbe8288bca29cc40f77ffcad0895d07"
+    },
+    {
+      "case_id": "tr_vv2_05_version_history_negative",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_05_version_history_negative.json",
+      "trajectory_sha256": "8e10b8598bb262a7a0fec6add2258425c2b7a9eb009dc2a294df38684e58853f",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_05_version_history_negative.gold.json",
+      "gold_sha256": "a157e2bb30fd8b329b79ecb94b69dd776317269a0cb3e35c25b10d20a7c69c31"
+    },
+    {
+      "case_id": "tr_vv2_06_compaction_pressure",
+      "trajectory_path": "graph/projects/abu_modern/benchmark/validate_v2/trajectories/tr_vv2_06_compaction_pressure.json",
+      "trajectory_sha256": "3d352ebfd922fd4d1e5a8828087cb9ba21a5ba63ec580dd050654e28cb2e7f27",
+      "gold_path": "graph/projects/abu_modern/benchmark/validate_v2/gold/tr_vv2_06_compaction_pressure.gold.json",
+      "gold_sha256": "7f6469a58103d92cb13700155557287e518c6ae6a96ffaf9fcdf6dab8387167e"
+    }
+  ],
+  "total_cases": 6
+}

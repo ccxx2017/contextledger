@@ -1,0 +1,131 @@
+{
+  "trajectory_id": "tr_vv2_02_cachepollution_reject",
+  "title": "缓存污染拒绝与负样本 decoy（turn_077）",
+  "coverage_tags": [
+    "full",
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "ir_92c31feee6bd",
+        "Round 6A"
+      ],
+      "payload": {
+        "statement": "Round 6A 首次执行完成：strategy ir_92c31feee6bd（VCP breakout + time_stop 20天 + stop_loss -7%）产出 run，结果 trade_count=0。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_02_cachepollution_reject.obs01.active",
+            "dimension": "run_result",
+            "value": "completed_zero_trades",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "Round 6A"
+      ],
+      "payload": {
+        "statement": "判定：执行-config 命中污染缓存（trade_data_source=missing），该结果不可用/不可比较，Round 6A 暂停。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_02_cachepollution_reject.obs02.active",
+            "dimension": "run_result",
+            "value": "rejected",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "run-e92b485b-820b8995"
+      ],
+      "payload": {
+        "statement": "对比用 run-e92b485b-20250101-20251230-820b8995 被标记为 diagnostic-only / forbidden / not comparable，不得作为 baseline。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_02_cachepollution_reject.obs03.active",
+            "dimension": "comparability",
+            "value": "forbidden",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "run-54b-20250101-20251230-d37c696d"
+      ],
+      "payload": {
+        "statement": "正式 baseline 维持为 run-54b-20250101-20251230-d37c696d（不失效）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_02_cachepollution_reject.obs04.active",
+            "dimension": "baseline_status",
+            "value": "accepted",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs05",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "Round 6A"
+      ],
+      "payload": {
+        "statement": "决策 B：授权一次 cache-bypass re-execution，仅允许修改非执行语义字段（meta.cache_buster/nonce），stop_loss -7% 与 time_stop 逻辑必须完全不变；禁止进入 Round 6B。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_02_cachepollution_reject.obs05.active",
+            "dimension": "next_action",
+            "value": "one_time_cache_bypass",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

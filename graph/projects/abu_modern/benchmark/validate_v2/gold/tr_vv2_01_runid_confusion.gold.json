@@ -1,0 +1,96 @@
+{
+  "trajectory_id": "tr_vv2_01_runid_confusion",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "obs01",
+      "expected_active_set": [
+        "tr_vv2_01_runid_confusion.obs01.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "run-e92b485b"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_vv2_01_runid_confusion.obs01.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs02",
+      "expected_active_set": [
+        "tr_vv2_01_runid_confusion.obs01.active",
+        "tr_vv2_01_runid_confusion.obs02.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "run-e92b485b"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_vv2_01_runid_confusion.obs02.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs03",
+      "expected_active_set": [
+        "tr_vv2_01_runid_confusion.obs01.active",
+        "tr_vv2_01_runid_confusion.obs02.active",
+        "tr_vv2_01_runid_confusion.obs03.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "run-e92b485b"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_vv2_01_runid_confusion.obs03.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs04",
+      "expected_active_set": [
+        "tr_vv2_01_runid_confusion.obs01.active",
+        "tr_vv2_01_runid_confusion.obs02.active",
+        "tr_vv2_01_runid_confusion.obs03.active",
+        "tr_vv2_01_runid_confusion.obs04.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "run-e92b485b"
+          ]
+        }
+      ],
+      "must_include": [
+        "tr_vv2_01_runid_confusion.obs04.active"
+      ],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "trajectory_id": "tr_vv2_01_runid_confusion",
+  "title": "run_id 混淆与对账结论作废（turn_066）",
+  "coverage_tags": [
+    "provenance_conflict",
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_066"
+      },
+      "mentions": [
+        "run-e92b485b",
+        "Round 5.3F"
+      ],
+      "payload": {
+        "statement": "Round 5.3F 判定未通过：Feishu Agent 与项目 AI 之前对账用的不是同一个 run_id，此前把两者混在一起的结论无效。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_01_runid_confusion.obs01.active",
+            "dimension": "reconciliation_verdict",
+            "value": "invalidated",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_066"
+      },
+      "mentions": [
+        "run-e92b485b-20241231"
+      ],
+      "payload": {
+        "statement": "锁定审计对象为 run-e92b485b-20241231-20251230-0e74ffa7（Feishu Agent 实际使用的 run）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_01_runid_confusion.obs02.active",
+            "dimension": "audit_target",
+            "value": "locked",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_066"
+      },
+      "mentions": [
+        "run-e92b485b-20250101"
+      ],
+      "payload": {
+        "statement": "确认 run-e92b485b-20250101-20251230-0e74ffa7 是另一个 run：start_date、manifest createdAt、trades/positions rowCount 均不同。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_01_runid_confusion.obs03.active",
+            "dimension": "run_identity",
+            "value": "distinct",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_066"
+      },
+      "mentions": [
+        "Round 6"
+      ],
+      "payload": {
+        "statement": "两个 artifact pack 均无单一权威账本，当前不能进入 Round 6。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_01_runid_confusion.obs04.active",
+            "dimension": "round6_admission",
+            "value": "denied",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

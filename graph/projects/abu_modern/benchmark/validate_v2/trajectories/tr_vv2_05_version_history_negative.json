@@ -1,0 +1,57 @@
+{
+  "trajectory_id": "tr_vv2_05_version_history_negative",
+  "title": "版本历史引用不构成失效（turn_003 负样本）",
+  "coverage_tags": [
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-19T15:05:44Z",
+      "valid_from": "2026-06-19T15:05:44Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_003"
+      },
+      "mentions": [
+        "实验版本"
+      ],
+      "payload": {
+        "statement": "讨论中引用『之前所有版本』的实验版本历史（作为背景参照）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_05_version_history_negative.obs01.active",
+            "dimension": "version_reference",
+            "value": "historical",
+            "importance": "background"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-19T15:05:44Z",
+      "valid_from": "2026-06-19T15:05:44Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_003"
+      },
+      "mentions": [
+        "实验版本"
+      ],
+      "payload": {
+        "statement": "历史版本记录保持可解释：引用不构成对任何旧版本的失效判定。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_05_version_history_negative.obs02.active",
+            "dimension": "invalidation",
+            "value": "none",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

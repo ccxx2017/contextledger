@@ -1,0 +1,106 @@
+{
+  "trajectory_id": "tr_vv2_03_abort_handover",
+  "title": "Round 6A 中止与责任移交（turn_081）",
+  "coverage_tags": [
+    "provenance_conflict",
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_081"
+      },
+      "mentions": [
+        "ir_8001383b352d"
+      ],
+      "payload": {
+        "statement": "第三次相同异常：新 strategy_id ir_8001383b352d 仍 0 trades、trade_data_source=missing，怀疑数据同步问题。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_03_abort_handover.obs01.active",
+            "dimension": "diagnosis",
+            "value": "data_sync_suspected",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_081"
+      },
+      "mentions": [
+        "Round 6A"
+      ],
+      "payload": {
+        "statement": "Round 6A 正式中止（aborted/blocked）：后端执行链路无法为 position_pnl_pct transition 产出有效 artifacts，非策略失败。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_03_abort_handover.obs02.active",
+            "dimension": "round_status",
+            "value": "aborted",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_081"
+      },
+      "mentions": [
+        "run-e92b485b-820b8995"
+      ],
+      "payload": {
+        "statement": "Feishu 声称 run-e92b485b-820b8995 可跑出 18 笔，与项目 AI 早前 trades.csv 为空的记录冲突 → 该 run 维持 quarantined/forbidden（负样本：不因新说法解禁）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_03_abort_handover.obs03.active",
+            "dimension": "comparability",
+            "value": "still_forbidden",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_081"
+      },
+      "mentions": [
+        "Project AI"
+      ],
+      "payload": {
+        "statement": "责任移交：后端 defect 诊断交给项目 AI；Feishu Agent 停止一切替代尝试。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_03_abort_handover.obs04.active",
+            "dimension": "owner",
+            "value": "project_ai",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

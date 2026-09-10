@@ -1,0 +1,81 @@
+{
+  "trajectory_id": "tr_vv2_06_compaction_pressure",
+  "title": "压缩稿承载的路线图状态（记忆压力 + 负样本）",
+  "coverage_tags": [
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-20T04:25:30Z",
+      "valid_from": "2026-06-20T04:25:30Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_compression",
+        "provenance": "raw_2026-06-12_compression.md"
+      },
+      "mentions": [
+        "路线图"
+      ],
+      "payload": {
+        "statement": "压缩稿（source-of-record）：P01 路线图——回归量化主线，以 AOS 反哺核心使命；阶段 0 duty_reporter 维稳。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_06_compaction_pressure.obs01.active",
+            "dimension": "roadmap",
+            "value": "p01_active",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-20T04:25:30Z",
+      "valid_from": "2026-06-20T04:25:30Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_compression",
+        "provenance": "raw_2026-06-12_compression.md"
+      },
+      "mentions": [
+        "路线图"
+      ],
+      "payload": {
+        "statement": "压缩稿：P02 阶段 1 攻坚方案——五条成功标准、风险分层与 AOS-native 路线落地设计。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_06_compaction_pressure.obs02.active",
+            "dimension": "roadmap",
+            "value": "p02_active",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-06-20T04:25:30Z",
+      "valid_from": "2026-06-20T04:25:30Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_compression",
+        "provenance": "raw_2026-06-12_compression.md"
+      },
+      "mentions": [
+        "路线图"
+      ],
+      "payload": {
+        "statement": "压缩折叠为合法折叠：被折叠的早期细节由压缩稿承载，不构成对活跃声明的失效。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_06_compaction_pressure.obs03.active",
+            "dimension": "folding",
+            "value": "non_invalidation",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

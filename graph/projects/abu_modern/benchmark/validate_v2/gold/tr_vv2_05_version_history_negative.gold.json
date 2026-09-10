@@ -1,0 +1,45 @@
+{
+  "trajectory_id": "tr_vv2_05_version_history_negative",
+  "schema_neutral": true,
+  "steps": [
+    {
+      "after_obs_id": "obs01",
+      "expected_active_set": [
+        "tr_vv2_05_version_history_negative.obs01.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "实验版本"
+          ]
+        }
+      ],
+      "must_include": [],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    },
+    {
+      "after_obs_id": "obs02",
+      "expected_active_set": [
+        "tr_vv2_05_version_history_negative.obs01.active",
+        "tr_vv2_05_version_history_negative.obs02.active"
+      ],
+      "expected_invalidations": [],
+      "entity_clusters": [
+        {
+          "cluster_id": "entity_01",
+          "mentions": [
+            "实验版本"
+          ]
+        }
+      ],
+      "must_include": [],
+      "valid_time_adjudication": {
+        "adjudication_targets": []
+      }
+    }
+  ]
+}

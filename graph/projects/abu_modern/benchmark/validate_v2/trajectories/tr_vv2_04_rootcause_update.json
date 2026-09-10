@@ -1,0 +1,106 @@
+{
+  "trajectory_id": "tr_vv2_04_rootcause_update",
+  "title": "根因更新：幽灵字段诊断取代缓存污染解释（turn_077→082）",
+  "coverage_tags": [
+    "full",
+    "non_invalidation_decoy"
+  ],
+  "observations": [
+    {
+      "obs_id": "obs01",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_077"
+      },
+      "mentions": [
+        "Round 6A"
+      ],
+      "payload": {
+        "statement": "早前诊断：Round 6A 失败归因于缓存污染与数据同步问题。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_04_rootcause_update.obs01.active",
+            "dimension": "root_cause",
+            "value": "cache_pollution",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs02",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_082"
+      },
+      "mentions": [
+        "position_pnl_pct"
+      ],
+      "payload": {
+        "statement": "诊断完成：根因是 position_pnl_pct 为未注册幽灵字段——CONTEXT_REGISTRY 不存在该键，evaluator 未实现；trade_data_source=missing 源自零交易。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_04_rootcause_update.obs02.active",
+            "dimension": "root_cause",
+            "value": "unimplemented_evaluator",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs03",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_082"
+      },
+      "mentions": [
+        "position_pnl_pct"
+      ],
+      "payload": {
+        "statement": "单位陷阱：IR 使用 -7（百分比绝对值），系统内部 unrealized_pnl_pct 为小数制（-0.07），-0.07 <= -7 永远为 False。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_04_rootcause_update.obs03.active",
+            "dimension": "unit_trap",
+            "value": "confirmed",
+            "importance": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "obs_id": "obs04",
+      "observed_at": "2026-06-04T01:36:05Z",
+      "valid_from": "2026-06-04T01:36:05Z",
+      "valid_to": null,
+      "source": {
+        "channel": "abu_modern_turn",
+        "provenance": "turn_082"
+      },
+      "mentions": [
+        "position_pnl_pct"
+      ],
+      "payload": {
+        "statement": "负样本：仅将 context 改名映射到 unrealized_pnl_pct 的修复方案被判定无效（该 transition 本就不会被注册执行）。",
+        "claim_bundle": [
+          {
+            "claim_id": "tr_vv2_04_rootcause_update.obs04.active",
+            "dimension": "rename_fix",
+            "value": "invalid",
+            "importance": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}
